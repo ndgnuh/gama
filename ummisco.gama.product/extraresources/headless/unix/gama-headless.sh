@@ -21,25 +21,34 @@
 # 
 ##
 
+#
+#	Set variables
+#
+
+# External var
 outputFile=""
 inputFile=""
 
+# Internal var
+PARAM=$@
 memory=4096m
 console=false
 tunneling=false
+xml=false
 
 # Letter w/o ":" is for flags
-# Letter w/  ":" is w/ arguments
+# Letter w/  ":" is w/ arguments (option) -> eg m:
 # Set every flag's first letter 
-while getopts 'pcm:hvstfx' option; do
+while getopts 'phvstfxcm:' option; do
 	case "${option}" in
-
-		# w/ arguments
-		m) memory=${OPTARG};;
 
 		# flags
 	    p) tunneling=true ;;
 		c) console=true ;;
+		x) xml=true;; #only the first letter will match the -xml flag
+
+		# options
+		m) memory=${OPTARG};;
 
 		# escape other
 		*) shift;;
