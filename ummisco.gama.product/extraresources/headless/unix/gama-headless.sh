@@ -34,11 +34,14 @@ tunneling=false
 while getopts 'pcm:hvstfx' option; do
 	case "${option}" in
 
+		# w/ arguments
 		m) memory=${OPTARG};;
 
+		# flags
 	    p) tunneling=true ;;
 		c) console=true ;;
 
+		# escape other
 		*) shift;;
 
 		#failed) echo "Failed is an undefined parameter";;
