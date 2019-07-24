@@ -28,62 +28,110 @@ memory=4096m
 console=false
 tunneling=false
 
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-help"
-then
-help="yes"
-i=$i+1000
-fi
+#i=0
+#echo ${!i}
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-m"
+#then
+#i=$i+1
+#memory=${!i}
+#i=$i+100
+#fi
+#done
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-c"
+#then
+#console="yes"
+#PARAM=$PARAM\ -c
+#i=$i+100
+#fi
+#done
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-help"
+#then
+#help="yes"
+#i=$i+1000
+#fi
+#done
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-hpc"
+#then
+#i=$i+1
+#export PARAM=$PARAM\ -hpc\ ${!i}
+#hpc="yes"
+#i=$i+1000
+#fi
+#done
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-p"
+#then
+#i=$i+1
+#export PARAM=$PARAM\ -p
+#tunneling="yes"
+#i=$i+1000
+#fi
+#done
+#
+#for ((i=1;i<=$#;i=$i+1))
+#do
+#if test ${!i} = "-v"
+#then
+#i=$i+1
+#export PARAM=$PARAM\ -v
+#verbose="yes"
+#i=$i+100
+#fi
+#done
+#
+#if [ $console = 'no' ] && [ $tunneling = 'no' ] ; then
+#i=$#
+#i=$i-1
+#inputFile=${!i}
+#fi
+#
+#if [ $tunneling = 'no' ] ; then
+#i=$#
+#i=$i
+#outputFile=${!i}
+#fi
+
+# Letter w/o ":" is for flags
+# Letter w/  ":" is w/ arguments
+# Set every flag's first letter 
+while getopts 'pcm:hvstfx' option; do
+	case "${option}" in
+
+		m) memory=${OPTARG};;
+
+	    p) tunneling=true ;;
+		c) console=true ;;
+
+		*) shift;;
+
+		#failed) echo "Failed is an undefined parameter";;
+		#check) echo "check is an undefined parameter";;
+	
+	esac
 done
 
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-hpc"
-then
-i=$i+1
-export PARAM=$PARAM\ -hpc\ ${!i}
-hpc="yes"
-i=$i+1000
-fi
-done
+echo $@
 
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-p"
-then
-i=$i+1
-export PARAM=$PARAM\ -p
-tunneling="yes"
-i=$i+1000
-fi
-done
+inputFile="${@: -2: 1}"
+outputFile="${@: -1: 1}"
 
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-v"
-then
-i=$i+1
-export PARAM=$PARAM\ -v
-verbose="yes"
-i=$i+100
-fi
-done
+exit 1
 
-if [ $console = 'no' ] && [ $tunneling = 'no' ] ; then
-i=$#
-i=$i-1
-inputFile=${!i}
-fi
-
-if [ $tunneling = 'no' ] ; then
-i=$#
-i=$i
-outputFile=${!i}
-fi
-
-
-
+# Beautiful header	=> Can be removed if already set in the .jar
 echo "******************************************************************"
 echo "* GAMA version 1.8                                               *"
 echo "* http://gama-platform.org                                       *"
