@@ -121,13 +121,16 @@ DUMPLIST=$(ls  $gamaDirectory/*.jar )
 for fic in $DUMPLIST; do
 	GAMA=$GAMA:$fic
 done
-passWork=/tmp/.work
-if [ $console = 'no' ] && [ $tunneling = 'no' ] ; then
-mP=$( cd $(dirname $inputFile) && pwd -P )
-mF=$(basename $inputFile)
-mfull=$mP/$mF
-passWork=$outputFile/.work
-fi
+
+# Create Headless workspace
+# Use TimeStamp to have a unique folder name
+workingDir=/tmp/work$(date +%s) 
+
+
+#
+#	Launching it in GAMA
+#
+
 echo "GAMA is starting..."
 #exec
 #GAMA=Gamaq
