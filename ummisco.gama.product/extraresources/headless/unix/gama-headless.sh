@@ -88,6 +88,10 @@ echo "* http://gama-platform.org                                       *"
 echo "* (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners                *"
 echo "******************************************************************"
 
+#
+#	Verification input/output
+#
+
 # Verification input file / output directory
 if [ ! -f "$inputFile" ] && [ $console = false ] && [ $tunneling = false ] ;  then
 	echo "The input or output file are not specied. Please check the path of your files and output file."
@@ -105,12 +109,17 @@ if [ $tunneling = false ] && [ -d "$outputFile" ]   ; then
 	exit 1
 fi
 
-# assuming this file is within the gama deployment
-GAMAHOME=$(cd $(dirname $0)/.. && pwd -P)
+#
+#	Preparing ressources for headless run
+#
+
+# Get jar files for java command
+GAMAHOME=$(cd $(dirname $0)/.. && pwd -P) # Path assuming this script is within the gama release tree
 gamaDirectory=$(cd $GAMAHOME/plugins && pwd)
 DUMPLIST=$(ls  $gamaDirectory/*.jar )
+# Concat jar files into a string
 for fic in $DUMPLIST; do
-GAMA=$GAMA:$fic
+	GAMA=$GAMA:$fic
 done
 passWork=/tmp/.work
 if [ $console = 'no' ] && [ $tunneling = 'no' ] ; then
