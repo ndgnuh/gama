@@ -1,37 +1,32 @@
 #!/bin/bash
-memory=4096m
+
+##
+# Copyright 2019 Arthur Brugiere <contact@arthurbrugiere.fr>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+#
+# This script aim to be a helper to use the GAMA's headless
+# 
+##
+
 outputFile=""
 inputFile=""
-declare -i i
-declare -i j
-console="no"
-tunneling="no"
-hpc="no"
-verbose="no"
-help="no"
 
-i=0
-echo ${!i}
-
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-m"
-then
-i=$i+1
-memory=${!i}
-i=$i+100
-fi
-done
-
-for ((i=1;i<=$#;i=$i+1))
-do
-if test ${!i} = "-c"
-then
-console="yes"
-PARAM=$PARAM\ -c
-i=$i+100
-fi
-done
+memory=4096m
+console=false
+tunneling=false
 
 for ((i=1;i<=$#;i=$i+1))
 do
