@@ -58,16 +58,16 @@ public class Application implements IApplication {
 
 	final public static String HELP_PARAMETER = "-help";
 	final public static String GAMA_VERSION = "-version";
-	//	-m [mem]	=> Script work
 	final public static String CONSOLE_PARAMETER = "-c";
 	final public static String VERBOSE_PARAMETER = "-v";
-	final public static String THREAD_PARAMETER = "-hpc";
-	final public static String SOCKET_PARAMETER = "-socket";
 	final public static String TUNNELING_PARAMETER = "-p";
-	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
-	final public static String TEST_LIBRARY_PARAMETER = "-test";
 	//	-failed		=> Undefine
 	final public static String BUILD_XML_PARAMETER = "-xml";
+	//	-m [mem]	=> Script work
+	final public static String THREAD_PARAMETER = "-hpc";
+	final public static String SOCKET_PARAMETER = "-socket";
+	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
+	final public static String TEST_LIBRARY_PARAMETER = "-test";
 
 	// Undefine parameter
 	final public static String CHECK_MODEL_PARAMETER = "-check";
@@ -83,21 +83,22 @@ public class Application implements IApplication {
 	private static String showHelp() {
 		final String res = " Welcome to Gama-platform.org version "+GAMA.VERSION
 				+ "\n"
-				+ "sh ./gama-headless.sh [Options] [XML Input] [output directory]\n"
-				+ "\nList of available options:"
+				+ "sh ./gama-headless.sh [Flags] [Options] [XML Input] [output directory]\n"
+				+ "\nList of available flags:"
 				+ "\n      -help     				 	-- get the help of the command line"
 				+ "\n      -version     				-- get the the version of gama"
-				+ "\n      -m [mem]    					-- allocate memory (ex 2048m)"
 				+ "\n      -c        					-- start the console to write xml parameter file"
 				+ "\n      -v 							-- verbose mode"
-				+ "\n      -hpc [core] 					-- set the number of core available for experimentation"
-				+ "\n      -socket [socketPort] 		-- start socket pipeline to interact with another framework" + "\n"
 				+ "\n      -p        					-- start pipeline to interact with another framework" + "\n"
-				+ "\n      -validate [directory]    	-- invokes GAMA to validate the models present in the directory passed as argument"
-				+ "\n      -test [directory]		   	-- invokes GAMA to execute the tests present in the directory and display their results"
 				+ "\n      -failed		   				-- only display the failed and aborted test results"
 				+ "\n      -xml	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- only display the failed and aborted test results"
 				+ "\n" + " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile\n"
+				+ "\nList of available options:"
+				+ "\n      -m [mem]    					-- allocate memory (ex 2048m)"
+				+ "\n      -hpc [core] 					-- set the number of core available for experimentation"
+				+ "\n      -socket [socketPort] 		-- start socket pipeline to interact with another framework" + "\n"
+				+ "\n      -validate [directory]    	-- invokes GAMA to validate the models present in the directory passed as argument"
+				+ "\n      -test [directory]		   	-- invokes GAMA to execute the tests present in the directory and display their results"
 				+ "\n      build an xml parameter file from a model" + "\n" + "\n";
 		
 		return res;
