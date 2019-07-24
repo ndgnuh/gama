@@ -56,17 +56,21 @@ import ummisco.gama.dev.utils.DEBUG;
 public class Application implements IApplication {
 
 
-	final public static String CONSOLE_PARAMETER = "-c";
+	final public static String HELP_PARAMETER = "-help";
 	final public static String GAMA_VERSION = "-version";
-	final public static String TUNNELING_PARAMETER = "-p";
+	//	-m [mem]	=> Script work
+	final public static String CONSOLE_PARAMETER = "-c";
+	final public static String VERBOSE_PARAMETER = "-v";
 	final public static String THREAD_PARAMETER = "-hpc";
 	final public static String SOCKET_PARAMETER = "-socket";
-	final public static String VERBOSE_PARAMETER = "-v";
-	final public static String HELP_PARAMETER = "-help";
-	final public static String BUILD_XML_PARAMETER = "-xml";
-	final public static String CHECK_MODEL_PARAMETER = "-check";
+	final public static String TUNNELING_PARAMETER = "-p";
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
+	//	-failed		=> Undefine
+	final public static String BUILD_XML_PARAMETER = "-xml";
+
+	// Undefine parameter
+	final public static String CHECK_MODEL_PARAMETER = "-check";
 
 	public static boolean headLessSimulation = false;
 	public int numberOfThread = -1;
