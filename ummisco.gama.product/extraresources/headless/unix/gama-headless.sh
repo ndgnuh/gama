@@ -59,12 +59,27 @@ while getopts 'phvstfxcm:' option; do
 	esac
 done
 
-echo $@
+# if !$xml => running headless experiment
+# 	So we shoudl remove input/output files from parameters
+# else => Generating XML from gaml file
+# 	So we should leave experimentName/modelFile.gaml/xmlOutputFile.xml as parameters
+if [ $xml = false ]; then
 
-inputFile="${@: -2: 1}"
-outputFile="${@: -1: 1}"
+	# Set input / output relative path
+	inputFile="${@: -2: 1}"
+	outputFile="${@: -1: 1}"
 
-exit 1
+	# Remove input/output from param
+	#	expr will calculate following elements
+	#	-2 stand for spaces between elements (args_input_output)
+	#	${#_var_} count char from char
+	#	SUM => total char to remove starting by the end of PARAM string
+	PARAM="${PARAM::$(expr -2 - ${#inputFile} - ${#outputFile})}"
+
+	# Set input / output absolute path
+	inputFile="$(readlink -f $inputFile)"
+	outputFile="$(readlink -f $outputFile)"
+fi
 
 # Beautiful header	=> Can be removed if already set in the .jar
 echo "******************************************************************"
