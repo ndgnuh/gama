@@ -85,27 +85,6 @@ echo "* (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners                *"
 echo "******************************************************************"
 
 #
-#	Verification input/output
-#
-
-# Verification input file / output directory
-if [ ! -f "$inputFile" ] && [ $console = false ] && [ $tunneling = false ] ;  then
-	echo "The input or output file are not specied. Please check the path of your files and output file."
-	echo "Use the help for more information: ./gama-headless -help"
-	exit 1
-fi
-if   [ -d "$inputFile" ] && [ $console = false ] && [ $tunneling = false ] ; then
-    echo "The defined input is not an XML parameter file" 
-    echo "Use the help for more information: ./gama-headless -help"
-    exit 1
-fi
-if [ $tunneling = false ] && [ -d "$outputFile" ]   ; then
-	echo "The output directory already exist. Please check the path of your output directory" 
-	echo "Use the help for more information: ./gama-headless -help"
-	exit 1
-fi
-
-#
 #	Preparing ressources for headless run
 #
 
