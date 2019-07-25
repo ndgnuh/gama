@@ -28,18 +28,12 @@
 # Internal var
 PARAM=$@
 memory=4096m
-console=false
-tunneling=false
 
 # Letter w/o ":" is for flags
 # Letter w/  ":" is w/ arguments (option) -> eg m:
 # Set every flag's first letter 
 while getopts 'phvstfxcm:' option; do
 	case "${option}" in
-
-		# flags
-		p) tunneling=true ;;
-		c) console=true ;;
 
 		# options
 		m) memory=${OPTARG};;
