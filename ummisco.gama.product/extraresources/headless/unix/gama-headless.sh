@@ -56,11 +56,12 @@ while getopts 'phvstfxcm:' option; do
 done
 
 # Beautiful header	=> Can be removed if already set in the .jar
-echo "******************************************************************"
-echo "* GAMA version 1.8                                               *"
-echo "* http://gama-platform.org                                       *"
-echo "* (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners                *"
-echo "******************************************************************"
+echo "*******************************************************************"
+echo "* Headless helper (Linux)                                         *"
+echo "*   for GAMA version 1.8                                          *"
+echo "* http://gama-platform.org                                        *"
+echo "* (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners                 *"
+echo "*******************************************************************"
 
 #
 #	Preparing ressources for headless run
