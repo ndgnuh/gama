@@ -33,9 +33,6 @@ global {
 		write "Message at cycle " + cycle ;
 	}
 	
-	reflex stop when: cycle>100 {
-		do halt();
-	}
 }
 
 species generic_species {
@@ -101,7 +98,7 @@ grid vegetation_cell width: 50 height: 50 neighbors: 4 {
 	list<vegetation_cell> neighbours  <- (self neighbors_at 2); 
 }
 
-experiment prey_predatorExp type: gui {
+experiment prey_predatorExp type: gui until:cycle=100 {
 	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 category: "Prey" ;
 	parameter "Prey max energy: " var: prey_max_energy category: "Prey" ;
 	parameter "Prey max transfert: " var: prey_max_transfert  category: "Prey" ;
