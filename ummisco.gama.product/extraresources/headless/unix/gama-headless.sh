@@ -30,7 +30,6 @@ PARAM=$@
 memory=4096m
 console=false
 tunneling=false
-xml=false
 
 # Letter w/o ":" is for flags
 # Letter w/  ":" is w/ arguments (option) -> eg m:
@@ -39,9 +38,8 @@ while getopts 'phvstfxcm:' option; do
 	case "${option}" in
 
 		# flags
-	    p) tunneling=true ;;
+		p) tunneling=true ;;
 		c) console=true ;;
-		x) xml=true;; #only the first letter will match the -xml flag
 
 		# options
 		m) memory=${OPTARG};;
@@ -51,7 +49,6 @@ while getopts 'phvstfxcm:' option; do
 
 		#failed) echo "Failed is an undefined parameter";;
 		#check) echo "check is an undefined parameter";;
-	
 	esac
 done
 
@@ -70,7 +67,7 @@ echo "*******************************************************************"
 # Get jar files for java command
 GAMAHOME=$(cd $(dirname $0)/.. && pwd -P) # Path assuming this script is within the gama release tree
 gamaDirectory=$(cd $GAMAHOME/plugins && pwd)
-DUMPLIST=$(ls  $gamaDirectory/*.jar )
+DUMPLIST=$(ls $gamaDirectory/*.jar)
 # Concat jar files into a string
 for fic in $DUMPLIST; do
 	GAMA=$GAMA:$fic
@@ -79,7 +76,6 @@ done
 # Create Headless workspace
 # Use TimeStamp to have a unique folder name
 workingDir=/tmp/work$(date +%s) 
-
 
 #
 #	Launching it in GAMA
