@@ -18,11 +18,13 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -188,32 +190,53 @@ public class Application implements IApplication {
 //		Logger.getRootLogger().setLevel(Level.WARN); 
 		SystemLogger.removeDisplay();
 		
+		//final Map<String, String[]> mm = context.getArguments();
+		final List<String> args = Arrays.asList((String[])context.getArguments().get(IApplicationContext.APPLICATION_ARGS));
 		
-		final Map<String, String[]> mm = context.getArguments();
-		final List<String> args = Arrays.asList(mm.get("application.args"));
-		if(args.contains(GAMA_VERSION)) {
-			System.out.println("GAMA " + GAMA.VERSION + "\n(c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
-		} else if (args.contains(HELP_PARAMETER)) {
-			//DEBUG.LOG(showHelp());
-			SystemLogger.activeDisplay();
-			System.out.println(showHelp());
-			SystemLogger.removeDisplay();
-			
-			DEBUG.LOG(showHelp());
-		} else if (args.contains(VALIDATE_LIBRARY_PARAMETER)) {
-			return ModelLibraryValidator.getInstance().start(args);
-		} else if (args.contains(TEST_LIBRARY_PARAMETER)) {
-			return ModelLibraryTester.getInstance().start(args);
-		} else if (args.contains(CHECK_MODEL_PARAMETER)) {
-			ModelLibraryGenerator.start(this, args);
-		} else if (args.contains(BUILD_XML_PARAMETER)) {
-			buildXML(args);
-		} else {
-			runSimulation(args);
+		List<String> flags = args.stream().filter(f -> f.startsWith("-")).collect(Collectors.toList());
+		
+		// TODO : do we have to use THashMap or not in the headless ?
+		Map<String, List<String>> options = new HashMap<>();
+		for(String flag : flags) {
+			int next_f = flags.get(flags.size()-1)==flag? args.size()-1 : args.indexOf(flags.get(flags.indexOf(flag)+1));
+			options.put(flag,flags.subList(args.indexOf(flag),next_f));
 		}
+		
+		for(String k : options.keySet()) {
+			switch (k) {
+			case GAMA_VERSION:
+				System.out.println("GAMA " + GAMA.VERSION + "\n(c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
+				return null;
+			case HELP_PARAMETER:
+				SystemLogger.activeDisplay();
+				System.out.println(showHelp());
+				SystemLogger.removeDisplay();
+				
+				DEBUG.LOG(showHelp());
+				return null;
+			case VERBOSE_PARAMETER:
+				verbose = true;
+			case VALIDATE_LIBRARY_PARAMETER:
+				return ModelLibraryValidator.getInstance().start(args);
+			case TEST_LIBRARY_PARAMETER:
+				return ModelLibraryTester.getInstance().start(args);
+			case CHECK_MODEL_PARAMETER:
+				ModelLibraryGenerator.start(this, args);
+				break;
+			case BUILD_XML_PARAMETER:
+				buildXML(args);
+				break; // FIXME do not stop there ! should be able to build xml and launch exp with it
+			default:
+				runSimulation(args);
+			}
+		}
+		
 		return null;
 	}
 
+	/*
+	 * Find the next argument of the bash script
+	 */
 	public String after(final List<String> args, final String arg) {
 		if (args == null || args.size() < 2) { return null; }
 		for (int i = 0; i < args.size() - 1; i++) {
@@ -222,9 +245,19 @@ public class Application implements IApplication {
 		return null;
 	}
 
+	/**
+	 * 
+	 * Build the xml file that represent an experiment plan
+	 * 
+	 * @param arg
+	 * @throws ParserConfigurationException
+	 * @throws TransformerException
+	 * @throws IOException
+	 * @throws GamaHeadlessException
+	 */
 	public void buildXML(final List<String> arg)
 			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
-		verbose = arg.contains(VERBOSE_PARAMETER);
+		
 		if (this.verbose) {
 			SystemLogger.activeDisplay();
 			System.out.println("active display");
@@ -262,6 +295,9 @@ public class Application implements IApplication {
 		DEBUG.LOG("Parameter file saved at: " + output.getAbsolutePath());
 	}
 
+	/*
+	 * TODO : document the method plz
+	 */
 	public void buildXMLForModelLibrary(final ArrayList<File> modelPaths, final String outputPath)
 			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
 		// "arg[]" are the paths to the different models
@@ -309,7 +345,6 @@ public class Application implements IApplication {
 			System.exit(-1);
 		}
 
-		verbose = args.contains(VERBOSE_PARAMETER);
 		if (verbose) {
 			SystemLogger.activeDisplay();
 			
