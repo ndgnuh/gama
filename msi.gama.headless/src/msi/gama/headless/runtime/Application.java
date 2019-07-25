@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,8 +34,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.w3c.dom.Document;
-
-import com.vividsolutions.jts.util.Debug;
 
 import msi.gama.headless.batch.documentation.ModelLibraryGenerator;
 import msi.gama.headless.batch.test.ModelLibraryTester;
@@ -68,9 +64,10 @@ public class Application implements IApplication {
 	//	-m [mem]	=> Script work
 	final public static String THREAD_PARAMETER = "-hpc";
 	final public static String SOCKET_PARAMETER = "-socket";
+	
+	
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
-
 	// Undefine parameter
 	final public static String CHECK_MODEL_PARAMETER = "-check";
 
@@ -85,23 +82,27 @@ public class Application implements IApplication {
 	private static String showHelp() {
 		final String res = " Welcome to Gama-platform.org version "+GAMA.VERSION
 				+ "\n"
-				+ "sh ./gama-headless.sh [Flags] [Options] [XML Input] [output directory]\n"
+				+ "sh ./gama-headless.sh [Flags] [Options] [XML Input] [output directory]"
+				+ "\n"
 				+ "\nList of available flags:"
-				+ "\n      -help                        -- get the help of the command line"
-				+ "\n      -version                     -- get the the version of gama"
-				+ "\n      -c                           -- start the console to write xml parameter file"
-				+ "\n      -v                           -- verbose mode"
-				+ "\n      -p                           -- start pipeline to interact with another framework" + "\n"
-				+ "\n      -failed                      -- only display the failed and aborted test results"
-				+ "\n      -xml	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- only display the failed and aborted test results"
-				+ "\n" + " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile\n"
+				+ "\n      "+HELP_PARAMETER+"                        -- get the help of the command line"
+				+ "\n      "+GAMA_VERSION+"                     -- get the the version of gama"
+				+ "\n      "+CONSOLE_PARAMETER+"                           -- start the console to write xml parameter file"
+				+ "\n      "+VERBOSE_PARAMETER+"                           -- verbose mode"
+				+ "\n      "+TUNNELING_PARAMETER+"                           -- start pipeline to interact with another framework" + "\n"
+				+ "\n      "+ModelLibraryTester.FAILED_PARAMETER+"                      -- only display the failed and aborted test results"
+				+ "\n      "+BUILD_XML_PARAMETER+"	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- build an xml parameter file from a model"
+				+ "\n" 
+				+ " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile"
+				+ "\n"
 				+ "\nList of available options:"
 				+ "\n      -m [mem]                     -- allocate memory (ex 2048m)"
-				+ "\n      -hpc [core]                  -- set the number of core available for experimentation"
-				+ "\n      -socket [socketPort]         -- start socket pipeline to interact with another framework" + "\n"
-				+ "\n      -validate [directory]        -- invokes GAMA to validate the models present in the directory passed as argument"
-				+ "\n      -test [directory]            -- invokes GAMA to execute the tests present in the directory and display their results"
-				+ "\n      build an xml parameter file from a model" + "\n" + "\n";
+				+ "\n      "+THREAD_PARAMETER+" [core]                  -- set the number of core available for experimentation"
+				+ "\n      "+SOCKET_PARAMETER+" [socketPort]         -- start socket pipeline to interact with another framework" + "\n"
+				+ "\n      "+VALIDATE_LIBRARY_PARAMETER+" [directory]        -- invokes GAMA to validate the models present in the directory passed as argument"
+				+ "\n      "+TEST_LIBRARY_PARAMETER+" [directory]            -- invokes GAMA to execute the tests present in the directory and display their results"
+				+ "\n"
+				+ "\n";
 		
 		return res;
 	}
@@ -323,6 +324,9 @@ public class Application implements IApplication {
 		DEBUG.LOG("Parameter file saved at: " + output.getAbsolutePath());
 	}
 
+	/*
+	 * TODO : document the method plz
+	 */
 	public void runXMLForModelLibrary(final String xmlPath) throws FileNotFoundException {
 
 		processorQueue = new LocalSimulationRuntime();

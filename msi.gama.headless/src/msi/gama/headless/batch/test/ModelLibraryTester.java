@@ -33,7 +33,7 @@ import msi.gaml.statements.test.TestState;
 public class ModelLibraryTester extends AbstractModelLibraryRunner {
 
 	private static ModelLibraryTester instance;
-	private final static String FAILED_PARAMETER = "-failed";
+	public final static String FAILED_PARAMETER = "-failed";
 	// public static final Logger LOGGER = Logger.getLogger(ModelLibraryTester.class.getName());;
 
 	PrintStream original;
