@@ -25,10 +25,6 @@
 #	Set variables
 #
 
-# External var
-outputFile=""
-inputFile=""
-
 # Internal var
 PARAM=$@
 memory=4096m
@@ -133,4 +129,4 @@ workingDir=/tmp/work$(date +%s)
 
 echo "GAMA is starting..."
  
-exec java -cp $GAMA -Xms512m -Xmx$memory -Djava.awt.headless=true org.eclipse.core.launcher.Main -application msi.gama.headless.id4 -data $workingDir $PARAM $inputFile $outputFile
+exec java -cp $GAMA -Xms512m -Xmx$memory -Djava.awt.headless=true org.eclipse.core.launcher.Main -application msi.gama.headless.id4 -data $workingDir $PARAM
