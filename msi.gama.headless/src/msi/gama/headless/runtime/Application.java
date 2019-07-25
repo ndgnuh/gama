@@ -192,7 +192,7 @@ public class Application implements IApplication {
 		final Map<String, String[]> mm = context.getArguments();
 		final List<String> args = Arrays.asList(mm.get("application.args"));
 		if(args.contains(GAMA_VERSION)) {
-			
+			System.out.println("GAMA " + GAMA.VERSION + "\n(c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
 		} else if (args.contains(HELP_PARAMETER)) {
 			//DEBUG.LOG(showHelp());
 			SystemLogger.activeDisplay();
