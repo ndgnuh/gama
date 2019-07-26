@@ -8,10 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import msi.gama.common.interfaces.IKeyword;
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
+import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.ModelDescription;
@@ -74,7 +75,7 @@ public class JobPlan {
 
 	public JobPlanExperimentID[] loadModelAndCompileJob(final String modelPath)
 			throws IOException, GamaHeadlessException {
-		model = HeadlessSimulationLoader.loadModel(new File(modelPath));
+		model = HeadlessSimulationLoader.loadModel(new File(modelPath), new ArrayList<>());
 		final List<IExperimentJob> jobs = JobPlan.loadAndBuildJobs(model);
 		final JobPlanExperimentID[] res = new JobPlanExperimentID[jobs.size()];
 		final int i = 0;
@@ -146,14 +147,28 @@ public class JobPlan {
 		@SuppressWarnings ("unchecked") final Collection<ExperimentDescription> experiments =
 				(Collection<ExperimentDescription>) modelDescription.getExperiments();
 
-		for (final ExperimentDescription expD : experiments) {
-			if (!expD.getLitteral(IKeyword.TYPE).equals(IKeyword.BATCH)) {
-				final IExperimentJob tj = ExperimentJob.loadAndBuildJob(expD, model.getFilePath(), model);
-				tj.setSeed(12);
-				res.add(tj);
-			}
+		for (final ExperimentDescription expD : experiments) { 
+			final IExperimentJob tj = ExperimentJob.loadAndBuildJob(expD, model.getFilePath(), model);
+			tj.setSeed(12);
+			res.add(tj);
 		}
+		
 		return res;
 	}
+	
+	/**
+	 * 
+	 * Return all the {@link IExperimentPlan} of a Gama model as define in Gama core, i.e. a collection of {@link IExperimentJob} for headless
+	 * 
+	 * @param model
+	 * @return List<IExperimentPlan>
+	 */
+	private static List<IExperimentPlan> loadAndBuildGamaExperiments(final IModel model) {
+		
+		Collection<? extends ExperimentDescription> xpDescription = model.getDescription().getModelDescription().getExperiments();
+		return xpDescription.stream().map(xp -> model.getExperiment(xp.getName())).collect(Collectors.toList());
+		
+	}
+
 
 }

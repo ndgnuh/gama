@@ -101,6 +101,11 @@ grid vegetation_cell width: 50 height: 50 neighbors: 4 {
 	list<vegetation_cell> neighbours  <- (self neighbors_at 2); 
 }
 
+experiment ppBatch type: batch until:cycle=100 {
+	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 step:100;
+	parameter "Nb predators: " var: nb_predators_init  min: 0 max: 200 step:20;
+}
+
 experiment prey_predatorExp type: gui {
 	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 category: "Prey" ;
 	parameter "Prey max energy: " var: prey_max_energy category: "Prey" ;
@@ -120,11 +125,6 @@ experiment prey_predatorExp type: gui {
 		monitor "Number of preys" value: nb_preys;
 		monitor "Number of predators" value: nb_predators;
 	}
-}
-
-experiment ppBatch type: batch until:cycle=100 {
-	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 step:100;
-	parameter "Nb predators: " var: nb_predators_init  min: 0 max: 200 step:20;
 }
  
 

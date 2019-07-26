@@ -248,7 +248,8 @@ public class Application implements IApplication {
 	 * 
 	 * Build the xml file that represent an experiment plan
 	 * 
-	 * @param arg
+	 * @param arg = List<String>[experiment name, gaml path, xml path]
+	 * 
 	 * @throws ParserConfigurationException
 	 * @throws TransformerException
 	 * @throws IOException
@@ -274,20 +275,16 @@ public class Application implements IApplication {
 		}
 		
 		HeadlessSimulationLoader.preloadGAMA();
-		final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(arg.get(arg.size() - 2));
-		final ArrayList<IExperimentJob> selectedJob = new ArrayList<>();
-		for (final IExperimentJob j : jb) {
-			if (j.getExperimentName().equals(arg.get(arg.size() - 3))) {
-				selectedJob.add(j);
-				break;
-			}
-		}
-
-		final Document dd = ExperimentationPlanFactory.buildXmlDocument(selectedJob);
+		final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(arg.get(1));
+		
+		final Document dd = ExperimentationPlanFactory.buildXmlDocument(jb.stream()
+				.filter(j -> j.getExperimentName().equals(arg.get(0)))
+				.collect(Collectors.toList()));
+		
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		final Transformer transformer = transformerFactory.newTransformer();
 		final DOMSource source = new DOMSource(dd);
-		final File output = new File(arg.get(arg.size() - 1));
+		final File output = new File(arg.get(2));
 		final StreamResult result = new StreamResult(output);
 		transformer.transform(source, result);
 		

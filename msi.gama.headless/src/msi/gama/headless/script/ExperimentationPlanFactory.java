@@ -125,6 +125,7 @@ public class ExperimentationPlanFactory {
 	}
 
 	public static Document buildXmlDocument(final List<IExperimentJob> jobs) throws ParserConfigurationException {
+		
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 		final Document doc = docBuilder.newDocument();

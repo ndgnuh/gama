@@ -22,6 +22,7 @@ public class Parameter {
 	private String name;
 	private String var;
 	private Object value;
+	
 	private final DataType type;
 
 	public Parameter(final Parameter p) {
@@ -36,6 +37,7 @@ public class Parameter {
 	}
 
 	public static Parameter loadAndBuildParameter(final IDescription paramDesc, final IModel model) {
+		
 		final String name = paramDesc.getLitteral(IKeyword.NAME);
 		final String varName = paramDesc.getLitteral(IKeyword.VAR);
 		final IExpression exp = paramDesc.getFacetExpr(IKeyword.INIT);
