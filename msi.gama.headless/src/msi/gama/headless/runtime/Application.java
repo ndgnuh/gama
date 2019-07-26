@@ -266,8 +266,8 @@ public class Application implements IApplication {
 		if (arg.size() < 3) {
 			SystemLogger.activeDisplay();
 			System.out.println("You do not have enter the proper number of parameter: ");
-			System.out.println("Experiment : "+ (arg.size() > 1) ? arg.get(0) : "undefined" );
-			System.out.println("Gaml file : "+ (arg.size() > 2) ? arg.get(1) : "undefined" );
+			System.out.println("Experiment : "+ (arg.size() > 1 ? arg.get(0) : "undefined") );
+			System.out.println("Gaml file : "+ (arg.size() > 2 ? arg.get(1) : "undefined") );
 			System.out.println("XML output : undefined");
 			System.out.println(showHelp());
 			SystemLogger.removeDisplay();
