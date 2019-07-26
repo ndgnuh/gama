@@ -121,5 +121,10 @@ experiment prey_predatorExp type: gui {
 		monitor "Number of predators" value: nb_predators;
 	}
 }
+
+experiment ppBatch type: batch until:cycle=100 {
+	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 step:100;
+	parameter "Nb predators: " var: nb_predators_init  min: 0 max: 200 step:20;
+}
  
 

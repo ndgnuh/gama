@@ -59,16 +59,14 @@ public class Application implements IApplication {
 	final public static String CONSOLE_PARAMETER = "-c";
 	final public static String VERBOSE_PARAMETER = "-v";
 	final public static String TUNNELING_PARAMETER = "-p";
-	//	-failed		=> Undefine
 	final public static String BUILD_XML_PARAMETER = "-xml";
-	//	-m [mem]	=> Script work
 	final public static String THREAD_PARAMETER = "-hpc";
 	final public static String SOCKET_PARAMETER = "-socket";
 	
-	
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
-	// Undefine parameter
+	
+	// TODO : do we keep it or not (by the way it is not functional)
 	final public static String CHECK_MODEL_PARAMETER = "-check";
 
 	public static boolean headLessSimulation = false;
@@ -89,7 +87,7 @@ public class Application implements IApplication {
 				+ "\n      "+GAMA_VERSION+"                     -- get the the version of gama"
 				+ "\n      "+CONSOLE_PARAMETER+"                           -- start the console to write xml parameter file"
 				+ "\n      "+VERBOSE_PARAMETER+"                           -- verbose mode"
-				+ "\n      "+TUNNELING_PARAMETER+"                           -- start pipeline to interact with another framework" + "\n"
+				+ "\n      "+TUNNELING_PARAMETER+"                           -- start pipeline to interact with another framework"
 				+ "\n      "+ModelLibraryTester.FAILED_PARAMETER+"                      -- only display the failed and aborted test results"
 				+ "\n      "+BUILD_XML_PARAMETER+"	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- build an xml parameter file from a model"
 				+ "\n" 
@@ -99,8 +97,8 @@ public class Application implements IApplication {
 				+ "\n      -m [mem]                     -- allocate memory (ex 2048m)"
 				+ "\n      "+THREAD_PARAMETER+" [core]                  -- set the number of core available for experimentation"
 				+ "\n      "+SOCKET_PARAMETER+" [socketPort]         -- start socket pipeline to interact with another framework" + "\n"
-				+ "\n      "+VALIDATE_LIBRARY_PARAMETER+" [directory]        -- invokes GAMA to validate the models present in the directory passed as argument"
-				+ "\n      "+TEST_LIBRARY_PARAMETER+" [directory]            -- invokes GAMA to execute the tests present in the directory and display their results"
+				+ "\n      "+VALIDATE_LIBRARY_PARAMETER+" [directory] ["+ModelLibraryTester.FAILED_PARAMETER+"]        -- invokes GAMA to validate the models present in the directory passed as argument"
+				+ "\n      "+TEST_LIBRARY_PARAMETER+" [directory] ["+ModelLibraryTester.FAILED_PARAMETER+"]           -- invokes GAMA to execute the tests present in the directory and display their results"
 				+ "\n"
 				+ "\n";
 		
@@ -187,45 +185,45 @@ public class Application implements IApplication {
 
 	@Override
 	public Object start(final IApplicationContext context) throws Exception {
-
-//		Logger.getRootLogger().setLevel(Level.WARN); 
-		SystemLogger.removeDisplay();
 		
-		//final Map<String, String[]> mm = context.getArguments();
 		final List<String> args = Arrays.asList((String[])context.getArguments().get(IApplicationContext.APPLICATION_ARGS));
 		
 		List<String> flags = args.stream().filter(f -> f.startsWith("-")).collect(Collectors.toList());
 		
 		// TODO : do we have to use THashMap or not in the headless ?
 		Map<String, List<String>> options = new HashMap<>();
+		
 		for(String flag : flags) {
-			int next_f = flags.get(flags.size()-1)==flag? args.size()-1 : args.indexOf(flags.get(flags.indexOf(flag)+1));
-			options.put(flag,flags.subList(args.indexOf(flag),next_f));
+			int next_f = flags.get(flags.size()-1)==flag ? args.size()-1 : args.indexOf(flags.get(flags.indexOf(flag)+1));
+			options.put(flag,args.subList(args.indexOf(flag)+1,next_f+1));
 		}
+		
+		
+			SystemLogger.activeDisplay();
+			System.out.println(options.entrySet().stream().map(e -> e.toString()).collect(Collectors.joining("; ")));
 		
 		for(String k : options.keySet()) {
 			switch (k) {
+			case VERBOSE_PARAMETER:
+				verbose = true;
 			case GAMA_VERSION:
-				System.out.println("GAMA " + GAMA.VERSION + "\n(c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
-				return null;
+				System.out.println(GAMA.VERSION + " (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
+				break;
 			case HELP_PARAMETER:
 				SystemLogger.activeDisplay();
 				System.out.println(showHelp());
 				SystemLogger.removeDisplay();
-				
-				DEBUG.LOG(showHelp());
 				return null;
-			case VERBOSE_PARAMETER:
-				verbose = true;
 			case VALIDATE_LIBRARY_PARAMETER:
 				return ModelLibraryValidator.getInstance().start(args);
 			case TEST_LIBRARY_PARAMETER:
 				return ModelLibraryTester.getInstance().start(args);
 			case CHECK_MODEL_PARAMETER:
+				// TODO : to remove
 				ModelLibraryGenerator.start(this, args);
-				break;
+				return null;
 			case BUILD_XML_PARAMETER:
-				buildXML(args);
+				buildXML(options.get(BUILD_XML_PARAMETER));
 				break; // FIXME do not stop there ! should be able to build xml and launch exp with it
 			default:
 				runSimulation(args);
@@ -259,21 +257,22 @@ public class Application implements IApplication {
 	public void buildXML(final List<String> arg)
 			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
 		
-		if (this.verbose) {
+		if (this.verbose) { 
 			SystemLogger.activeDisplay();
-			System.out.println("active display");
+			System.out.println("Start to build an xml file for experiment "+arg.get(0));
 		}
 
 		if (arg.size() < 3) {
 			SystemLogger.activeDisplay();
-
-			System.out.println("Check your parameters!");
+			System.out.println("You do not have enter the proper number of parameter: ");
+			System.out.println("Experiment : "+arg.get(0));
+			System.out.println("Gaml file : "+arg.get(1));
+			System.out.println("XML output : undefined");
 			System.out.println(showHelp());
-
-			DEBUG.ERR("Check your parameters!");
-			DEBUG.ERR(showHelp());
-			return;
+			SystemLogger.removeDisplay();
+			System.exit(1);
 		}
+		
 		HeadlessSimulationLoader.preloadGAMA();
 		final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(arg.get(arg.size() - 2));
 		final ArrayList<IExperimentJob> selectedJob = new ArrayList<>();
@@ -291,9 +290,12 @@ public class Application implements IApplication {
 		final File output = new File(arg.get(arg.size() - 1));
 		final StreamResult result = new StreamResult(output);
 		transformer.transform(source, result);
-		SystemLogger.activeDisplay();
-		System.out.println("Parameter file saved at: " + output.getAbsolutePath());
-		DEBUG.LOG("Parameter file saved at: " + output.getAbsolutePath());
+		
+		if(verbose) {
+			System.out.println("Parameter file saved at: " + output.getAbsolutePath());
+			SystemLogger.removeDisplay();
+		}
+		
 	}
 
 	/*
