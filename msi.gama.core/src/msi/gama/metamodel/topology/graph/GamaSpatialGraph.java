@@ -277,6 +277,11 @@ public class GamaSpatialGraph extends GamaGraph<IShape, IShape> implements ISpat
 	}
 
 	protected void buildByEdgeWithNode(final IScope scope, final IContainer edges, final IContainer vertices) {
+		
+		for (final Object ag : vertices.iterable(scope)) {
+			super.addVertex(ag);
+		}
+		
 		final IMap<ILocation, IAgent> nodes = GamaMapFactory.create(Types.POINT, getGamlType().getKeyType());
 		for (final Object ag : vertices.iterable(scope)) {
 			nodes.put(((IAgent) ag).getLocation(), (IAgent) ag);
@@ -333,18 +338,22 @@ public class GamaSpatialGraph extends GamaGraph<IShape, IShape> implements ISpat
 	}
 
 	/**
-	 * Method getSpecies()
+	 * Method getSpecies(): returns the species of the edges if any.
 	 *
 	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#getSpecies()
 	 */
 	@Override
 	public ISpecies getSpecies() {
-		return null; // See if we can identify the species of edges / vertices
+		if (edgeSpecies != null) { return edgeSpecies; }
+		final IType contents = getGamlType().getContentType();
+		return getScope().getModel().getSpecies(contents.getSpeciesName());
+		// return null; // See if we can identify the species of edges / vertices
 	}
 
 	@Override
 	public IPopulation<? extends IAgent> getPopulation(final IScope scope) {
-		return null;// See if we can identify the populations of edges / vertices
+		return getScope().getSimulation().getPopulationFor(getSpecies());
+		// return null;// See if we can identify the populations of edges / vertices
 	}
 
 	/**

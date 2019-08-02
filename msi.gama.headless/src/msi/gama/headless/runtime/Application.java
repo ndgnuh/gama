@@ -37,6 +37,7 @@ import org.w3c.dom.Document;
 
 import msi.gama.headless.batch.documentation.ModelLibraryGenerator;
 import msi.gama.headless.batch.test.ModelLibraryTester;
+import msi.gama.headless.batch.validation.ModelLibraryRunner;
 import msi.gama.headless.batch.validation.ModelLibraryValidator;
 import msi.gama.headless.common.Globals;
 import msi.gama.headless.common.HeadLessErrors;
@@ -64,6 +65,7 @@ public class Application implements IApplication {
 	final public static String SOCKET_PARAMETER = "-socket";
 	
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
+	final public static String RUN_LIBRARY_PARAMETER = "-runLibrary";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
 	
 	// TODO : do we keep it or not (by the way it is not functional)

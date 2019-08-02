@@ -32,7 +32,10 @@ global {
 	reflex aff {
 		write "Message at cycle " + cycle ;
 	}
-
+	
+	reflex stop when: cycle>100 {
+		do pause();
+	}
 }
 
 species generic_species {

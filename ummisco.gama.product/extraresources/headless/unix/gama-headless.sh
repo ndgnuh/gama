@@ -64,3 +64,6 @@ workingDir=/tmp/work$(date +%s)
 echo "GAMA is starting..."
  
 exec java -cp $GAMA -Xms512m -Xmx$memory -Djava.awt.headless=true org.eclipse.core.launcher.Main -application msi.gama.headless.id4 -data $workingDir $PARAM
+
+java -cp ../plugins/org.eclipse.equinox.launcher*.jar -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork $PARAM $mfull $outputFile
+rm -rf $passWork
