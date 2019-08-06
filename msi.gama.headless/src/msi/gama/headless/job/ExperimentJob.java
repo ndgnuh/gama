@@ -290,6 +290,7 @@ public class ExperimentJob implements IExperimentJob {
 
 	@Override
 	public void play() {
+		
 		if (this.outputFile != null) {
 			this.outputFile.writeSimulationHeader(this);
 		}
@@ -511,6 +512,10 @@ public class ExperimentJob implements IExperimentJob {
 		final Iterable<IDescription> parameters = expD.getChildrenWithKeyword(IKeyword.PARAMETER);
 		for (final IDescription para : parameters) {
 			expJob.addParameter(Parameter.loadAndBuildParameter(para));
+		}
+		
+		if(expD.hasFacet(IKeyword.UNTIL)) {
+			expJob.untilCond = expD.getFacet(IKeyword.UNTIL).toString();
 		}
 
 		return expJob;

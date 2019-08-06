@@ -106,7 +106,7 @@ experiment ppBatch type: batch until:cycle=100 {
 	parameter "Nb predators: " var: nb_predators_init  min: 0 max: 200 step:20;
 }
 
-experiment prey_predatorExp type: gui {
+experiment prey_predatorExp type: gui until:cycle=100 {
 	parameter "Nb Preys: " var: nb_preys_init  min: 0 max: 1000 category: "Prey" ;
 	parameter "Prey max energy: " var: prey_max_energy category: "Prey" ;
 	parameter "Prey max transfert: " var: prey_max_transfert  category: "Prey" ;

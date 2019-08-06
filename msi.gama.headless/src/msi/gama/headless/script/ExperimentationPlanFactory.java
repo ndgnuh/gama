@@ -35,12 +35,9 @@ import msi.gama.headless.job.ExperimentJob;
 import msi.gama.headless.job.IExperimentJob;
 import msi.gama.headless.job.JobPlan;
 import msi.gama.headless.job.Output;
-import msi.gama.headless.job.Parameter;
 import msi.gama.headless.util.WorkspaceManager;
 import msi.gama.headless.xml.XmlTAG;
-import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.experiment.ExperimentParameter;
-import msi.gama.kernel.experiment.ExperimentPlan;
 import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.experiment.IParameter;
 import msi.gama.kernel.experiment.ParametersSet;
@@ -202,8 +199,8 @@ public class ExperimentationPlanFactory {
 	/**
 	 * Build XML headless representation of an {@link IExperimentPlan}. It is a biased representation of
 	 * experiment plan, because it does not take into account the exploration method, but only keep the
-	 * exhaustive form of parameter space: it means there is one headless simulation per point in the 
-	 * parameter space defined by the {@link IParameter.Batch}
+	 * exhaustive form of parameter space: it means there is one headless simulation (as it is encoded
+	 * in the xml file) per point in the parameter space defined by the {@link IParameter}
 	 * 
 	 * @param plan
 	 * @return An XML document that describe the experiment

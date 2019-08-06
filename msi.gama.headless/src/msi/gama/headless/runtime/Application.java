@@ -16,6 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -57,6 +59,17 @@ import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.GamlCompilationError;
 import ummisco.gama.dev.utils.DEBUG;
 
+/**
+ * 
+ * The main entry for GAMA Headless mode
+ *  <p><ul>
+ * <li> list and process bash script arguments
+ * <li> launch various applications: xml builder, validation of model library or headless simulations
+ * <li> 
+ * </ul><p>
+ * 
+ *
+ */
 public class Application implements IApplication {
 
 
@@ -99,7 +112,11 @@ public class Application implements IApplication {
 				+ "\n      "+VERBOSE_PARAMETER+"                           -- verbose mode"
 				+ "\n      "+TUNNELING_PARAMETER+"                           -- start pipeline to interact with another framework"
 				+ "\n      "+ModelLibraryTester.FAILED_PARAMETER+"                      -- only display the failed and aborted test results"
+				+ "\n      "+RICH_XML_PARAMETER+"                           -- in combination with -xml, build an exhaustive parameter file from a batch model"
 				+ "\n      "+BUILD_XML_PARAMETER+"	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- build an xml parameter file from a model"
+				+ "\n" 
+				+ " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile"
+				+ "\n      "+GAMLESS_MODE+"	[absolutePathTo/Model.gaml] [experimentName] [finalStep] [outputFolder]	-- launch a gaml experiment (still experimental)"
 				+ "\n" 
 				+ " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile"
 				+ "\n"
@@ -185,6 +202,7 @@ public class Application implements IApplication {
 	}
 
 	private static boolean showError(final int errorCode, final String path) {
+		
 		SystemLogger.activeDisplay();
 		System.out.println(HeadLessErrors.getError(errorCode, path));
 		DEBUG.ERR(HeadLessErrors.getError(errorCode, path));
@@ -271,7 +289,7 @@ public class Application implements IApplication {
 	}
 	
 	/**
-	 * Util method to read socket from application arguments, providing consistant default behavior
+	 * Util method to read socket options from application flag {@value Application#SOCKET_PARAMETER}
 	 * 
 	 * @param options : translated args into a map key::flag value::options
 	 * @return
@@ -287,6 +305,12 @@ public class Application implements IApplication {
 		}
 	}
 	
+	/**
+	 * Util method to read thread options from application flag {@value Application#THREAD_PARAMETER}
+	 * 
+	 * @param options
+	 * @return
+	 */
 	private int getThread(Map<String, List<String>> options) {
 		try {
 			return options.containsKey(THREAD_PARAMETER) ? 
@@ -455,6 +479,71 @@ public class Application implements IApplication {
 
 		System.exit(0);
 	}
+	
+	/**
+	 * Run a GAMA model experiment without xml - so called Gamless mode
+	 * <p>
+	 * The basic principle is to rely only on gaml statement in the experiment to define: parameter values, output and stop condition 
+	 * 
+	 * TODO : add the ability to launch and carry on batch method of exploration
+	 * 
+	 * @param options : index 0 = model path | index 1 = experiment name | index 2 = final step | index 3 = output folder 
+	 * @param socket : the socket number
+	 * @param thread : the number of thread
+	 * @param tunneling : ???
+	 * @param console : if Gamless print out directly in console
+	 * 
+	 * @throws IOException
+	 * @throws GamaHeadlessException
+	 * @throws InterruptedException
+	 */
+	public void runSimulationWithoutXML(List<String> options, int socket, int thread, boolean tunneling, boolean console) 
+			throws IOException, GamaHeadlessException, InterruptedException {
+		
+		if(options.size() < 4) {
+			throw new RuntimeException("Options available are : "+options.stream().collect(Collectors.joining("; "))
+					+"\nOptions required : {model Path, experiment name, final step, output folder}");
+		}
+		
+		HeadlessSimulationLoader.preloadGAMA();
+		this.tunnelingMode = tunneling;
+		this.consoleMode = console;
+		this.socket = socket;
+		this.numberOfThread = thread;
+		this.processorQueue = new LocalSimulationRuntime(this.numberOfThread);
+		
+		// Input files: model and experiment
+		String modelPath = options.get(0);
+		String experimentName = options.get(1);
+		if(!modelPath.endsWith(".gaml")) {
+			throw new RuntimeException("The model file does not end with .gaml : "+modelPath);
+		}
+		// Output files
+		Globals.OUTPUT_PATH = options.get(3);
+		Globals.IMAGES_PATH = Globals.OUTPUT_PATH + "/snapshot";
+		Path output = Paths.get(Globals.OUTPUT_PATH);
+		if (!Files.exists(output) || !Files.isDirectory(output)) { output.toFile().mkdir(); }
+		Path images = Paths.get(Globals.IMAGES_PATH);
+		if (!Files.exists(images)) { images.toFile().mkdir(); }
+		
+		// Load model
+		IModel model = HeadlessSimulationLoader.loadModel(Paths.get(modelPath).toFile(), new ArrayList<GamlCompilationError>());
+		IExperimentPlan plan = model.getExperiment(experimentName);
+		
+		// Load simulation
+		// TODO : load all possible simulation if batch type experiment
+		ExperimentJob job = ExperimentJob.loadAndBuildJob(plan.getDescription(), plan.getModel().getFilePath());
+		job.setFinalStep(Integer.parseInt(options.get(2)));
+		
+		// Run simulation
+		this.buildAndRunSimulation(Arrays.asList(job));
+		while (processorQueue.isPerformingSimulation()) {
+			Thread.sleep(1000);
+		}
+		
+		System.exit(0);
+		
+	}
 
 	public void buildAndRunSimulation(final Collection<ExperimentJob> sims) {
 		final Iterator<ExperimentJob> it = sims.iterator();
@@ -476,36 +565,6 @@ public class Application implements IApplication {
 				System.exit(-1);
 			}
 		}
-	}
-	
-	public void runSimulationWithoutXML(List<String> options, int socket, int thread, boolean tunneling, boolean console) 
-			throws IOException, GamaHeadlessException, InterruptedException {
-		
-		HeadlessSimulationLoader.preloadGAMA();
-		this.tunnelingMode = tunneling;
-		this.consoleMode = console;
-		this.socket = socket;
-		this.numberOfThread = thread;
-		this.processorQueue = new LocalSimulationRuntime(this.numberOfThread);
-		
-		String modelPath = options.get(0);
-		String experimentName = options.get(1);
-		if(!modelPath.endsWith(".gaml")) {
-			throw new RuntimeException("The model file does not end with .gaml : "+modelPath);
-		}
-		
-		IModel model = HeadlessSimulationLoader.loadModel(Paths.get(modelPath).toFile(), new ArrayList<GamlCompilationError>());
-		IExperimentPlan plan = model.getExperiment(experimentName);
-		
-		ExperimentJob job = ExperimentJob.loadAndBuildJob(plan.getDescription(), plan.getModel().getFilePath());
-		
-		this.buildAndRunSimulation(Arrays.asList(job));
-		while (processorQueue.isPerformingSimulation()) {
-			Thread.sleep(1000);
-		}
-		
-		System.exit(0);
-		
 	}
 
 	@Override
