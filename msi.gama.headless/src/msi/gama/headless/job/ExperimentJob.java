@@ -484,8 +484,7 @@ public class ExperimentJob implements IExperimentJob {
 		return simulation;
 	}
 
-	public static ExperimentJob loadAndBuildJob(final ExperimentDescription expD, final String path,
-			final IModel model) {
+	public static ExperimentJob loadAndBuildJob(final ExperimentDescription expD, final String path) {
 		final String expName = expD.getName();
 		final IExpressionDescription seedDescription = expD.getFacet(IKeyword.SEED);
 		double mseed = 0.0;
@@ -511,7 +510,7 @@ public class ExperimentJob implements IExperimentJob {
 
 		final Iterable<IDescription> parameters = expD.getChildrenWithKeyword(IKeyword.PARAMETER);
 		for (final IDescription para : parameters) {
-			expJob.addParameter(Parameter.loadAndBuildParameter(para, model));
+			expJob.addParameter(Parameter.loadAndBuildParameter(para));
 		}
 
 		return expJob;

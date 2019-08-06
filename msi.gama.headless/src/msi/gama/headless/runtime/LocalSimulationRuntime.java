@@ -114,11 +114,15 @@ public class LocalSimulationRuntime extends Observable implements SimulationRunt
 		/**
 		 * TODO AD BUG: ATTENTION !! queue contient des FakeApplication, pas des ExperimentJob
 		 */
-		if (started.contains(tmp)) { return SimulationState.STARTED; }
+		// if (started.contains(tmp)) { return SimulationState.STARTED; }
+		if(started.stream().anyMatch(fake -> fake.getExperimentJob().equals(tmp)))
+			return SimulationState.STARTED;
 		/**
 		 * TODO AD BUG: ATTENTION !! queue contient des FakeApplication, pas des ExperimentJob
 		 */
-		if (queue.contains(tmp)) { return SimulationState.ENQUEUED; }
+		//if (queue.contains(tmp)) { return SimulationState.ENQUEUED; }
+		if(queue.stream().anyMatch(fake -> fake.getExperimentJob().equals(tmp)))
+			return SimulationState.ENQUEUED;
 		return SimulationState.ACHIEVED;
 	}
 
@@ -160,7 +164,7 @@ public class LocalSimulationRuntime extends Observable implements SimulationRunt
 			loadedModels.put(key, new ArrayList<IModel>());
 		}
 		if (arr.size() == 0) {
-			mdl = HeadlessSimulationLoader.loadModel(fl);
+			mdl = HeadlessSimulationLoader.loadModel(fl,new ArrayList<>());
 			loadedModels.get(key).add(mdl);
 		} else {
 			mdl = arr.get(0);

@@ -8,11 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
-import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.ModelDescription;
@@ -148,26 +146,12 @@ public class JobPlan {
 				(Collection<ExperimentDescription>) modelDescription.getExperiments();
 
 		for (final ExperimentDescription expD : experiments) { 
-			final IExperimentJob tj = ExperimentJob.loadAndBuildJob(expD, model.getFilePath(), model);
+			final IExperimentJob tj = ExperimentJob.loadAndBuildJob(expD, model.getFilePath());
 			tj.setSeed(12);
 			res.add(tj);
 		}
 		
 		return res;
-	}
-	
-	/**
-	 * 
-	 * Return all the {@link IExperimentPlan} of a Gama model as define in Gama core, i.e. a collection of {@link IExperimentJob} for headless
-	 * 
-	 * @param model
-	 * @return List<IExperimentPlan>
-	 */
-	private static List<IExperimentPlan> loadAndBuildGamaExperiments(final IModel model) {
-		
-		Collection<? extends ExperimentDescription> xpDescription = model.getDescription().getModelDescription().getExperiments();
-		return xpDescription.stream().map(xp -> model.getExperiment(xp.getName())).collect(Collectors.toList());
-		
 	}
 
 

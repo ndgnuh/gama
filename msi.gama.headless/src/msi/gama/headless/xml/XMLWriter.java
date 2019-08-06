@@ -11,8 +11,11 @@
  **********************************************************************************************/
 package msi.gama.headless.xml;
 
-import java.io.*;
-import msi.gama.headless.core.*;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import msi.gama.headless.job.ExperimentJob;
 import msi.gama.headless.job.ExperimentJob.ListenedVariable;
 
@@ -76,5 +79,5 @@ public class XMLWriter implements Writer {
 		}
 
 	}
-
+	
 }

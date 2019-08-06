@@ -15,6 +15,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -37,7 +40,6 @@ import org.w3c.dom.Document;
 
 import msi.gama.headless.batch.documentation.ModelLibraryGenerator;
 import msi.gama.headless.batch.test.ModelLibraryTester;
-import msi.gama.headless.batch.validation.ModelLibraryRunner;
 import msi.gama.headless.batch.validation.ModelLibraryValidator;
 import msi.gama.headless.common.Globals;
 import msi.gama.headless.common.HeadLessErrors;
@@ -49,7 +51,10 @@ import msi.gama.headless.script.ExperimentationPlanFactory;
 import msi.gama.headless.xml.ConsoleReader;
 import msi.gama.headless.xml.Reader;
 import msi.gama.headless.xml.XMLWriter;
+import msi.gama.kernel.experiment.IExperimentPlan;
+import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.GAMA;
+import msi.gaml.compilation.GamlCompilationError;
 import ummisco.gama.dev.utils.DEBUG;
 
 public class Application implements IApplication {
@@ -67,6 +72,9 @@ public class Application implements IApplication {
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
 	final public static String RUN_LIBRARY_PARAMETER = "-runLibrary";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
+	
+	final public static String GAMLESS_MODE = "-gaml";
+	final public static String RICH_XML_PARAMETER = "-rich";
 	
 	// TODO : do we keep it or not (by the way it is not functional)
 	final public static String CHECK_MODEL_PARAMETER = "-check";
@@ -197,41 +205,57 @@ public class Application implements IApplication {
 		
 		for(String flag : flags) {
 			int next_f = flags.get(flags.size()-1)==flag ? args.size()-1 : args.indexOf(flags.get(flags.indexOf(flag)+1));
-			options.put(flag,args.subList(args.indexOf(flag)+1,next_f+1));
+			List<String> opts = args.subList(args.indexOf(flag)+1,next_f+1);
+			options.put(flag,opts.stream().filter(o -> !o.startsWith("-")).collect(Collectors.toList()));
 		}
 		
-		
+		// Set verbose mode on
+		if(flags.contains(VERBOSE_PARAMETER)) {
+			verbose = true;
 			SystemLogger.activeDisplay();
-			System.out.println(options.entrySet().stream().map(e -> e.toString()).collect(Collectors.joining("; ")));
-		
-		for(String k : options.keySet()) {
-			switch (k) {
-			case VERBOSE_PARAMETER:
-				verbose = true;
-			case GAMA_VERSION:
-				System.out.println(GAMA.VERSION + " (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
-				break;
-			case HELP_PARAMETER:
-				SystemLogger.activeDisplay();
-				System.out.println(showHelp());
-				SystemLogger.removeDisplay();
-				return null;
-			case VALIDATE_LIBRARY_PARAMETER:
-				return ModelLibraryValidator.getInstance().start(args);
-			case TEST_LIBRARY_PARAMETER:
-				return ModelLibraryTester.getInstance().start(args);
-			case CHECK_MODEL_PARAMETER:
-				// TODO : to remove
-				ModelLibraryGenerator.start(this, args);
-				return null;
-			case BUILD_XML_PARAMETER:
-				buildXML(options.get(BUILD_XML_PARAMETER));
-				break; // FIXME do not stop there ! should be able to build xml and launch exp with it
-			default:
-				runSimulation(args);
-			}
 		}
 		
+		// Display the Gama credential
+		if(flags.contains(GAMA_VERSION)) {
+			SystemLogger.activeDisplay();
+			System.out.println(GAMA.VERSION + " (c) 2007-2019 UMI 209 UMMISCO IRD/SU & Partners");
+			SystemLogger.removeDisplay();
+		}
+		
+		// Exit with helper
+		if(flags.contains(HELP_PARAMETER)) {
+			SystemLogger.activeDisplay();
+			System.out.println(showHelp());
+			SystemLogger.removeDisplay();
+			return null;
+		}
+		
+		// Build an xml parameter
+		if(flags.contains(BUILD_XML_PARAMETER)) {
+			if(verbose) {System.out.println("Enter build xml method");}
+			buildXML(options.get(BUILD_XML_PARAMETER), flags.contains(RICH_XML_PARAMETER));
+			// TODO : turn this into a non terminal operation
+			// e.g. run the simulation you just build the xml for
+			return null;
+		}
+		
+		// Proceed to one of the headless applications
+		if(flags.contains(VALIDATE_LIBRARY_PARAMETER)) {
+			return ModelLibraryValidator.getInstance().start(args);
+		} else if(flags.contains(TEST_LIBRARY_PARAMETER)) {
+			return ModelLibraryTester.getInstance().start(args);
+		} else if(flags.contains(CHECK_MODEL_PARAMETER)) {
+			// FIXME : crash
+			ModelLibraryGenerator.start(this, args);
+			return null;
+		} else if(flags.contains(GAMLESS_MODE)) {
+			runSimulationWithoutXML(options.get(GAMLESS_MODE), getSocket(options), getThread(options),
+					flags.contains(TUNNELING_PARAMETER),flags.contains(CONSOLE_PARAMETER));
+		} else {
+			runSimulation(args);
+		}
+		
+		if(verbose) {SystemLogger.removeDisplay();}
 		return null;
 	}
 
@@ -245,6 +269,35 @@ public class Application implements IApplication {
 		}
 		return null;
 	}
+	
+	/**
+	 * Util method to read socket from application arguments, providing consistant default behavior
+	 * 
+	 * @param options : translated args into a map key::flag value::options
+	 * @return
+	 */
+	private int getSocket(Map<String, List<String>> options) {
+		try {
+			return options.containsKey(SOCKET_PARAMETER) ? Integer.parseInt(options.get(SOCKET_PARAMETER).get(0)) : -1;
+		} catch (NumberFormatException e) {
+			SystemLogger.activeDisplay();
+			System.out.println("Socket value have not been entered correctly and cannot be translated to a number: "+options.get(SOCKET_PARAMETER).get(0));
+			SystemLogger.removeDisplay();
+			return -1;
+		}
+	}
+	
+	private int getThread(Map<String, List<String>> options) {
+		try {
+			return options.containsKey(THREAD_PARAMETER) ? 
+					Integer.parseInt(options.get(THREAD_PARAMETER).get(0)) : SimulationRuntime.UNDEFINED_QUEUE_SIZE; 
+		} catch (NumberFormatException e) {
+			SystemLogger.activeDisplay();
+			System.out.println("Thread number have not been entered correctly: "+options.get(THREAD_PARAMETER).get(0));
+			SystemLogger.removeDisplay();
+			return SimulationRuntime.UNDEFINED_QUEUE_SIZE;
+		}
+	}
 
 	/**
 	 * 
@@ -257,7 +310,7 @@ public class Application implements IApplication {
 	 * @throws IOException
 	 * @throws GamaHeadlessException
 	 */
-	public void buildXML(final List<String> arg)
+	public void buildXML(final List<String> arg, boolean richXML)
 			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
 		
 		if (this.verbose) { 
@@ -276,17 +329,29 @@ public class Application implements IApplication {
 			System.exit(1);
 		}
 		
-		HeadlessSimulationLoader.preloadGAMA();
-		final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(arg.get(1));
 		
-		final Document dd = ExperimentationPlanFactory.buildXmlDocument(jb.stream()
-				.filter(j -> j.getExperimentName().equals(arg.get(0)))
-				.collect(Collectors.toList()));
+		
+		HeadlessSimulationLoader.preloadGAMA();
+		Document dd = null;
+		
+		if(this.verbose) {System.out.println("Gama preloading is ok");}
+		
+		if(richXML) {
+			IModel model = HeadlessSimulationLoader.loadModel(Paths.get(arg.get(1)).toFile(), new ArrayList<GamlCompilationError>());
+			dd = ExperimentationPlanFactory.buildRichXmlDocument(model.getExperiment(arg.get(0)));
+			if(this.verbose) { System.out.println("Experiment "+arg.get(0)+" have been loaded"); }
+		} else {
+			final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(arg.get(1));
+			dd = ExperimentationPlanFactory.buildXmlDocument(jb.stream()
+					.filter(j -> j.getExperimentName().equals(arg.get(0)))
+					.collect(Collectors.toList()));
+		}
 		
 		final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		final Transformer transformer = transformerFactory.newTransformer();
 		final DOMSource source = new DOMSource(dd);
-		final File output = new File(arg.get(2));
+		final File output = Paths.get(arg.get(2)).toFile();
+		if(output.exists()) {FileChannel.open(Paths.get(arg.get(2)), StandardOpenOption.WRITE).truncate(0).close();}
 		final StreamResult result = new StreamResult(output);
 		transformer.transform(source, result);
 		
@@ -411,6 +476,36 @@ public class Application implements IApplication {
 				System.exit(-1);
 			}
 		}
+	}
+	
+	public void runSimulationWithoutXML(List<String> options, int socket, int thread, boolean tunneling, boolean console) 
+			throws IOException, GamaHeadlessException, InterruptedException {
+		
+		HeadlessSimulationLoader.preloadGAMA();
+		this.tunnelingMode = tunneling;
+		this.consoleMode = console;
+		this.socket = socket;
+		this.numberOfThread = thread;
+		this.processorQueue = new LocalSimulationRuntime(this.numberOfThread);
+		
+		String modelPath = options.get(0);
+		String experimentName = options.get(1);
+		if(!modelPath.endsWith(".gaml")) {
+			throw new RuntimeException("The model file does not end with .gaml : "+modelPath);
+		}
+		
+		IModel model = HeadlessSimulationLoader.loadModel(Paths.get(modelPath).toFile(), new ArrayList<GamlCompilationError>());
+		IExperimentPlan plan = model.getExperiment(experimentName);
+		
+		ExperimentJob job = ExperimentJob.loadAndBuildJob(plan.getDescription(), plan.getModel().getFilePath());
+		
+		this.buildAndRunSimulation(Arrays.asList(job));
+		while (processorQueue.isPerformingSimulation()) {
+			Thread.sleep(1000);
+		}
+		
+		System.exit(0);
+		
 	}
 
 	@Override

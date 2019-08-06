@@ -25,7 +25,7 @@ import msi.gaml.species.ISpecies;
 /**
  * Written by drogoul Modified on 31 mai 2011
  *
- * @todo Description
+ * TODO Description
  *
  */
 public interface IExperimentPlan extends ISpecies {

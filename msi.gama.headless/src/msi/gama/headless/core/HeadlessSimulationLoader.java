@@ -12,6 +12,7 @@ package msi.gama.headless.core;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -105,7 +106,8 @@ public class HeadlessSimulationLoader {
 		if (myFile == null) { throw new IOException("Model file is null"); }
 		final String fileName = myFile.getAbsolutePath();
 		if (!myFile.exists()) { throw new IOException("Model file does not exist: " + fileName); }
-		DEBUG.LOG(fileName + " model is being compiled...");
+		DEBUG.LOG(Arrays.asList(fileName.split(File.separator)).stream().reduce((f, s) -> s).orElse(null) 
+				+ " model is being compiled...");
 
 		final IModel model = GamlModelBuilder.getDefaultInstance().compile(URI.createFileURI(fileName), errors);
 		if (model == null) {
