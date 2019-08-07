@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -86,7 +87,6 @@ public class Application implements IApplication {
 	final public static String RUN_LIBRARY_PARAMETER = "-runLibrary";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
 	
-	final public static String GAMLESS_MODE = "-gaml";
 	final public static String RICH_XML_PARAMETER = "-rich";
 	
 	// TODO : do we keep it or not (by the way it is not functional)
@@ -103,7 +103,10 @@ public class Application implements IApplication {
 	private static String showHelp() {
 		final String res = " Welcome to Gama-platform.org version "+GAMA.VERSION
 				+ "\n"
-				+ "sh ./gama-headless.sh [Flags] [Options] [XML Input] [output directory]"
+				+ "\n Headless can be launch using xml description of simulations: \n"
+				+ "sh ./gama-headless.sh [Flags] [Options] [.xml Input] [output directory]"
+				+ "\nOr alternatively using an experiment in a .gaml file: \n"
+				+ "sh ./gama-headless.sh [Flags] [Options] [.gaml Input] [experiment name] [final step] [output directory]"
 				+ "\n"
 				+ "\nList of available flags:"
 				+ "\n      "+HELP_PARAMETER+"                        -- get the help of the command line"
@@ -114,9 +117,6 @@ public class Application implements IApplication {
 				+ "\n      "+ModelLibraryTester.FAILED_PARAMETER+"                      -- only display the failed and aborted test results"
 				+ "\n      "+RICH_XML_PARAMETER+"                           -- in combination with -xml, build an exhaustive parameter file from a batch model"
 				+ "\n      "+BUILD_XML_PARAMETER+"	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- build an xml parameter file from a model"
-				+ "\n" 
-				+ " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile"
-				+ "\n      "+GAMLESS_MODE+"	[absolutePathTo/Model.gaml] [experimentName] [finalStep] [outputFolder]	-- launch a gaml experiment (still experimental)"
 				+ "\n" 
 				+ " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile"
 				+ "\n"
@@ -227,6 +227,8 @@ public class Application implements IApplication {
 			options.put(flag,opts.stream().filter(o -> !o.startsWith("-")).collect(Collectors.toList()));
 		}
 		
+		List<String> appOptions = flags.isEmpty() ? args : getAppOptions(options);
+		
 		// Set verbose mode on
 		if(flags.contains(VERBOSE_PARAMETER)) {
 			verbose = true;
@@ -266,11 +268,13 @@ public class Application implements IApplication {
 			// FIXME : crash
 			ModelLibraryGenerator.start(this, args);
 			return null;
-		} else if(flags.contains(GAMLESS_MODE)) {
-			runSimulationWithoutXML(options.get(GAMLESS_MODE), getSocket(options), getThread(options),
-					flags.contains(TUNNELING_PARAMETER),flags.contains(CONSOLE_PARAMETER));
 		} else {
-			runSimulation(args);
+			if(appOptions.size() == 4 && appOptions.get(0).endsWith(".gaml")) {
+				runSimulationWithoutXML(appOptions, getSocket(options), getThread(options),
+						flags.contains(TUNNELING_PARAMETER),flags.contains(CONSOLE_PARAMETER));
+			} else {
+				runSimulation(args);
+			}
 		}
 		
 		if(verbose) {SystemLogger.removeDisplay();}
@@ -321,6 +325,36 @@ public class Application implements IApplication {
 			SystemLogger.removeDisplay();
 			return SimulationRuntime.UNDEFINED_QUEUE_SIZE;
 		}
+	}
+	
+	/**
+	 * Retrieve headless App options from App flags and options
+	 * 
+	 * @param flagsAndOptions
+	 * @return
+	 */
+	private List<String> getAppOptions(Map<String, List<String>> flagsAndOptions){
+		List<String> result = new ArrayList<>();
+		for (String flag : flagsAndOptions.keySet()) {
+			if(flagsAndOptions.get(flag).size() < 3) {continue;}
+			else {
+				List<String> tmp = flagsAndOptions.get(flag);
+				List<String> gamlOptions = tmp.stream().filter(op -> op.endsWith(".gaml")).collect(Collectors.toList());
+				
+				if(gamlOptions.isEmpty()) { // test for xml headless launcher
+					List<String> xmlOptions = tmp.stream().filter(op -> op.endsWith(".xml")).collect(Collectors.toList());
+					if(xmlOptions.isEmpty()) {continue;}
+					
+					tmp = tmp.subList(tmp.indexOf(xmlOptions.get(xmlOptions.size()-1)), tmp.size());
+					if(tmp.size() == 2) {result = tmp; break;}
+				} else { // Test for gaml headless launcher
+					tmp = tmp.subList(tmp.indexOf(gamlOptions.get(gamlOptions.size()-1)), tmp.size());
+					try {Integer.parseInt(tmp.get(2));} catch (NumberFormatException e) {continue;} // Raise exception for user
+					if(tmp.size() == 4) {result = tmp; break;}
+				}
+			}
+		}
+		return result;
 	}
 
 	/**
