@@ -9,6 +9,7 @@
  **********************************************************************************************/
 package ummisco.gama.ui.utils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
@@ -21,6 +22,7 @@ import org.eclipse.core.commands.NotHandledException;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
@@ -42,6 +44,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.internal.WorkbenchWindow;
@@ -51,8 +54,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
 import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.util.FileUtils;
 import one.util.streamex.StreamEx;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.views.IGamlEditor;
@@ -72,11 +75,11 @@ public class WorkbenchHelper {
 				}
 			});
 
-	public final static String GAMA_NATURE = WorkspaceModelsManager.GAMA_NATURE; // NO_UCD (unused code)
-	public final static String XTEXT_NATURE = WorkspaceModelsManager.XTEXT_NATURE; // NO_UCD (unused code)
-	public final static String PLUGIN_NATURE = WorkspaceModelsManager.PLUGIN_NATURE;
-	public final static String TEST_NATURE = WorkspaceModelsManager.TEST_NATURE;
-	public final static String BUILTIN_NATURE = WorkspaceModelsManager.BUILTIN_NATURE;
+	public final static String GAMA_NATURE = FileUtils.GAMA_NATURE; // NO_UCD (unused code)
+	public final static String XTEXT_NATURE = FileUtils.XTEXT_NATURE; // NO_UCD (unused code)
+	public final static String PLUGIN_NATURE = FileUtils.PLUGIN_NATURE;
+	public final static String TEST_NATURE = FileUtils.TEST_NATURE;
+	public final static String BUILTIN_NATURE = FileUtils.BUILTIN_NATURE;
 
 	private static Clipboard CLIPBOARD;
 	private final static Transfer[] TRANSFERS = new Transfer[] { TextTransfer.getInstance() };
@@ -354,6 +357,45 @@ public class WorkbenchHelper {
 
 		};
 		job.schedule(scheduleTime);
+	}
+
+	public static void runInWorkspace(final Consumer<IProgressMonitor> run) {
+		final WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
+
+			@Override
+			protected void execute(final IProgressMonitor monitor) {
+				run.accept(monitor);
+
+			}
+		};
+		try {
+			operation.run(new NullProgressMonitor());
+		} catch (InvocationTargetException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	static volatile boolean isRequesting;
+
+	public static void requestUserAttention(final IGamaView part, final String tempMessage) {
+		if (isRequesting) { return; }
+		// rate at which the title will change in milliseconds
+		final int rateOfChange = 200;
+		final int numberOfTimes = 2;
+
+		// flash n times and thats it
+		final String orgText = part.getPartName();
+
+		for (int x = 0; x < numberOfTimes; x++) {
+			getDisplay().timerExec(2 * rateOfChange * x - rateOfChange, () -> {
+				isRequesting = true;
+				part.setName(tempMessage);
+			});
+			getDisplay().timerExec(2 * rateOfChange * x, () -> {
+				part.setName(orgText);
+				isRequesting = false;
+			});
+		}
 	}
 
 }

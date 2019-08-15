@@ -49,6 +49,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
+import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.GamaNavigator;
@@ -252,7 +253,7 @@ public class RefreshAction extends WorkspaceAction {
 
 				@Override
 				public IStatus runInWorkspace(final IProgressMonitor monitor) throws CoreException {
-					final IRefreshHandler refresh = WorkbenchHelper.getService(IRefreshHandler.class);
+					final IRefreshHandler refresh = GAMA.getGui().getUIService(IRefreshHandler.class);
 					if (refresh != null) {
 						refresh.completeRefresh(resources);
 					}

@@ -28,6 +28,7 @@ import msi.gama.common.UserStatusMessage;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.IStatusMessage;
 import msi.gama.common.interfaces.IUpdaterTarget;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.experiment.IExperimentAgent;
 import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.experiment.ITopLevelAgent;
@@ -297,20 +298,21 @@ public class StatusControlContribution extends WorkbenchWindowControlContributio
 	private String getClockMessage() {
 		final ITopLevelAgent agent = getStatusAgent();
 		if (agent == null) { return ""; }
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append(agent.getClock().getInfo());
-		final IExperimentAgent exp = agent.getExperiment();
-		final int nbThreads = exp.getSimulationPopulation().getNumberOfActiveThreads();
-		if (agent.getScope().isOnUserHold()) {
-			sb.append(" (waiting)");
-		} else if (nbThreads > 1) {
-			sb.append(" (" + nbThreads + " threads)");
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(agent.getClock().getInfo());
+			final IExperimentAgent exp = agent.getExperiment();
+			final int nbThreads = exp.getSimulationPopulation().getNumberOfActiveThreads();
+			if (agent.getScope().isOnUserHold()) {
+				sb.append(" (waiting)");
+			} else if (nbThreads > 1) {
+				sb.append(" (" + nbThreads + " threads)");
+			}
+			final IExperimentPlan plan = exp.getSpecies();
+			if (plan.shouldBeBenchmarked()) {
+				sb.append(" [benchmarking]");
+			}
+			return sb.toString();
 		}
-		final IExperimentPlan plan = exp.getSpecies();
-		if (plan.shouldBeBenchmarked()) {
-			sb.append(" [benchmarking]");
-		}
-		return sb.toString();
 	}
 
 	@Override

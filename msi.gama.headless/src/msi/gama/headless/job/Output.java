@@ -1,16 +1,14 @@
 /*********************************************************************************************
- * 
  *
- * 'Output.java', in plugin 'msi.gama.headless', is part of the source code of the 
- * GAMA modeling and simulation platform.
- * (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
- * 
+ *
+ * 'Output.java', in plugin 'msi.gama.headless', is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
+ *
  * Visit https://code.google.com/p/gama-platform/ for license information and developers contact.
- * 
- * 
+ *
+ *
  **********************************************************************************************/
 package msi.gama.headless.job;
-
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gaml.descriptions.IDescription;
@@ -20,7 +18,7 @@ public class Output {
 	public static final int DEFAULT_HEIGHT = 500;
 	public static final int DEFAULT_FRAME_RATE = 1;
 
-	private static int OUTPUT_ID = 0;
+	private static Integer OUTPUT_ID = 0;
 	public String name;
 	public int width;
 	public int height;
@@ -29,7 +27,7 @@ public class Output {
 	public String path;
 
 	public Output(final Output o) {
-		this.id = new Integer(Output.generateID()).toString();
+		this.id = Output.generateID().toString();
 		this.width = o.width;
 		this.height = o.height;
 		this.frameRate = o.frameRate;
@@ -40,17 +38,19 @@ public class Output {
 		return new Output(o);
 	}
 
-	public static int generateID() {
+	public static Integer generateID() {
 		return OUTPUT_ID++;
 	}
 
 	public static Output loadAndBuildOutput(final IDescription exp) {
 		final String name = exp.getLitteral(IKeyword.NAME);
-		final Output res = new Output(name, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_FRAME_RATE, new Integer(OUTPUT_ID).toString(), null);
+		final Output res =
+				new Output(name, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_FRAME_RATE, OUTPUT_ID.toString(), null);
 		return res;
 	}
 
-	public Output(final String name, final int width, final int height, final int frameRate, final String id, final String path) {
+	public Output(final String name, final int width, final int height, final int frameRate, final String id,
+			final String path) {
 		super();
 		this.name = name;
 		this.width = width;
@@ -84,7 +84,7 @@ public class Output {
 		this.height = h;
 	}
 
-	public int getFrameRate() {
+	public Integer getFrameRate() {
 		return frameRate;
 	}
 

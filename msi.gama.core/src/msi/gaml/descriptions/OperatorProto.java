@@ -13,6 +13,7 @@ package msi.gaml.descriptions;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +30,6 @@ import msi.gama.precompiler.ISymbolKind;
 import msi.gama.precompiler.ITypeProvider;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.compilation.GamaGetter;
 import msi.gaml.compilation.IValidator;
 import msi.gaml.compilation.annotations.depends_on;
@@ -289,7 +289,7 @@ public class OperatorProto extends AbstractProto {
 		return new OperatorProto(this, gamaType);
 	}
 
-	public void collectImplicitVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectImplicitVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		if (depends_on == null) { return; }
 		for (final String s : depends_on) {
 			if (species.hasAttribute(s)) {

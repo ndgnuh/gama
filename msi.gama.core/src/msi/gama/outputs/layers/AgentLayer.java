@@ -104,7 +104,7 @@ public class AgentLayer extends AbstractLayer {
 
 	@Override
 	public Set<IAgent> collectAgentsAt(final int x, final int y, final IDisplaySurface g) {
-		try (final Collector.AsSet<IAgent> selectedAgents = Collector.getSet()) {
+		try (final Collector.AsSet<IAgent> selectedAgents = Collector.newSet()) {
 			final Rectangle2D selection = new Rectangle2D.Double();
 			selection.setFrameFromCenter(x, y, x + IDisplaySurface.SELECTION_SIZE / 2,
 					y + IDisplaySurface.SELECTION_SIZE / 2);

@@ -10,11 +10,24 @@
  ********************************************************************************************************/
 package ummisco.gama.ui.utils;
 
+import static java.lang.System.setProperty;
+
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -26,10 +39,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.util.PrefUtil;
 import org.eclipse.ui.services.ISourceProviderService;
 
-import msi.gama.application.workbench.PerspectiveHelper;
-import msi.gama.application.workbench.PerspectiveHelper.SimulationPerspectiveDescriptor;
 import msi.gama.common.interfaces.IConsoleDisplayer;
 import msi.gama.common.interfaces.IDisplayCreator.DisplayDescription;
 import msi.gama.common.interfaces.IDisplaySurface;
@@ -49,7 +63,7 @@ import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.ExperimentOutputManager;
 import msi.gama.outputs.IDisplayOutput;
@@ -65,12 +79,12 @@ import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.compilation.Symbol;
 import msi.gaml.statements.test.CompoundSummary;
-import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.types.IType;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.ui.ApplicationWorkbenchAdvisor;
+import ummisco.gama.ui.PickWorkspaceDialog;
 import ummisco.gama.ui.dialogs.Messages;
 import ummisco.gama.ui.interfaces.IDisplayLayoutManager;
-import ummisco.gama.ui.interfaces.IModelRunner;
 import ummisco.gama.ui.interfaces.IOpenGLInitializer;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.interfaces.ISpeedDisplayer;
@@ -85,40 +99,35 @@ import ummisco.gama.ui.parameters.EditorsDialog;
  */
 public class SwtGui implements IGui {
 
-	static {
-		DEBUG.ON();
-	}
-
 	public volatile static boolean ALL_TESTS_RUNNING;
+	public static final String CLEAR_WORKSPACE = "clearWorkspace";
 
 	private IAgent highlightedAgent;
-	private ILocation mouseLocationInModel;
+	private GamaPoint mouseLocationInModel;
 
-	static {
-		// GamaFonts.setLabelFont(PreferencesHelper.BASE_BUTTON_FONT.getValue());
-		PreferencesHelper.initialize();
-	}
-
-	public SwtGui() {
-		updateExperimentState(null, NONE);
-	}
+	public SwtGui() {}
 
 	@Override
 	public boolean confirmClose(final IExperimentPlan exp) {
 		if (exp == null || !GamaPreferences.Runtime.CORE_ASK_CLOSING.getValue()) { return true; }
-		PerspectiveHelper.switchToSimulationPerspective();
+		getUIService(IPerspectiveHelper.class).switchToSimulationPerspective();
 		return Messages.question("Close simulation confirmation", "Do you want to close experiment '" + exp.getName()
 				+ "' of model '" + exp.getModel().getName() + "' ?");
 	}
 
 	@Override
-	public void tell(final String msg) {
-		Messages.tell(msg);
+	public void tell(final String title, final String msg) {
+		Messages.tell(title, msg);
 	}
 
 	@Override
 	public void error(final String err) {
 		Messages.error(err);
+	}
+
+	@Override
+	public boolean confirm(final String title, final String msg) {
+		return Messages.confirm(title, msg);
 	}
 
 	@Override
@@ -169,7 +178,7 @@ public class SwtGui implements IGui {
 		if (v != null) {
 			v.finishTestSequence();
 		}
-		WorkbenchHelper.getService(IRefreshHandler.class).refreshNavigator();
+		getUIService(IRefreshHandler.class).refreshNavigator();
 	}
 
 	@Override
@@ -242,7 +251,7 @@ public class SwtGui implements IGui {
 
 	@Override
 	public final boolean openSimulationPerspective(final IModel model, final String experimentName) {
-		return PerspectiveHelper.openSimulationPerspective(model, experimentName);
+		return getUIService(IPerspectiveHelper.class).openSimulationPerspective(model, experimentName);
 	}
 
 	@Override
@@ -267,7 +276,7 @@ public class SwtGui implements IGui {
 	@Override
 	public Map<String, Object> openUserInputDialog(final IScope scope, final String title,
 			final Map<String, Object> initialValues, final Map<String, IType<?>> types) {
-		final IMap<String, Object> result = GamaMapFactory.createUnordered();
+		final IMap<String, Object> result = GamaMapFactory.createUnordered(initialValues.size());
 		WorkbenchHelper.run(() -> {
 			final EditorsDialog dialog =
 					new EditorsDialog(scope, WorkbenchHelper.getShell(), initialValues, types, title);
@@ -298,7 +307,7 @@ public class SwtGui implements IGui {
 	public void closeDialogs(final IScope scope) {
 
 		WorkbenchHelper.run(() -> {
-			final IUserDialogFactory userDialogFactory = WorkbenchHelper.getService(IUserDialogFactory.class);
+			final IUserDialogFactory userDialogFactory = getUIService(IUserDialogFactory.class);
 			if (userDialogFactory != null) {
 				userDialogFactory.closeUserDialog();
 			}
@@ -318,22 +327,35 @@ public class SwtGui implements IGui {
 		highlightedAgent = a;
 	}
 
-	private IModelRunner getModelRunner() {
-		return WorkbenchHelper.getService(IModelRunner.class);
+	private void editModelInternal(final Object object) {
+		if (object instanceof URI) {
+			final URI uri = (URI) object;
+			final IModelEditor opener = getUIService(IModelEditor.class);
+			opener.open(uri, true);
+		} else if (object instanceof EObject) {
+			editModelInternal(EcoreUtil.getURI((EObject) object));
+		} else if (object instanceof String) {
+			final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			final IFile file = workspace.getRoot().getFile(new Path((String) object));
+			editModelInternal(file);
+		} else if (object instanceof IFile) {
+			final IFile file = (IFile) object;
+			if (!file.exists()) {
+				DEBUG.LOG("File " + file.getFullPath().toString() + " does not exist in the workspace");
+				return;
+			}
+			try {
+				IDE.openEditor(WorkbenchHelper.getPage(), (IFile) object);
+			} catch (final PartInitException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	@Override
-	public void editModel(final IScope scope, final Object eObject) {
-		final IModelRunner modelRunner = getModelRunner();
-		if (modelRunner == null) { return; }
-		modelRunner.editModel(eObject);
-	}
-
-	@Override
-	public List<TestExperimentSummary> runHeadlessTests(final Object model) {
-		final IModelRunner modelRunner = getModelRunner();
-		if (modelRunner == null) { return null; }
-		return modelRunner.runHeadlessTests(model);
+	public void editModel(final Object eObject) {
+		GAMA.getGui().run("Opening editor", () -> editModelInternal(eObject), true);
 	}
 
 	@Override
@@ -390,7 +412,7 @@ public class SwtGui implements IGui {
 	public void prepareForExperiment(final IScope scope, final IExperimentPlan exp) {
 		if (exp.isGui()) {
 			// hideScreen();
-			final IOpenGLInitializer initializer = WorkbenchHelper.getService(IOpenGLInitializer.class);
+			final IOpenGLInitializer initializer = getUIService(IOpenGLInitializer.class);
 			if (initializer != null && !initializer.isDone()) {
 				initializer.run();
 			}
@@ -434,20 +456,27 @@ public class SwtGui implements IGui {
 					WorkbenchHelper.getWindow().setCoolBarVisible(showControls);
 				}
 				if (keepTray != null) {
-					PerspectiveHelper.showBottomTray(WorkbenchHelper.getWindow(), keepTray);
+					getUIService(IPerspectiveHelper.class).showBottomTray(keepTray);
 				}
 
-				final SimulationPerspectiveDescriptor sd = PerspectiveHelper.getActiveSimulationPerspective();
-				if (sd != null) {
-					sd.keepTabs(keepTabs);
-					sd.keepToolbars(keepToolbars);
-					sd.keepControls(showControls);
-					sd.keepTray(keepTray);
-				}
+				getUIService(IPerspectiveHelper.class).initCurrentSimulationPerspective(keepTabs, keepToolbars,
+						showControls, keepTray);
+
 			});
 
 		}
 
+	}
+
+	@Override
+	public IPath openSelectContainerDialog(final String title, final String msg) {
+		final ContainerSelectionDialog dialog = new ContainerSelectionDialog(WorkbenchHelper.getShell(), null, false,
+				"Select a parent project or cancel to create a new project:");
+		dialog.setTitle(title);
+		dialog.showClosedProjects(false);
+		final int result = dialog.open();
+		if (result == MessageDialog.CANCEL) { return null; }
+		return (IPath) dialog.getResult()[0];
 	}
 
 	/**
@@ -469,14 +498,7 @@ public class SwtGui implements IGui {
 	}
 
 	private IRuntimeExceptionHandler getRuntimeExceptionHandler() {
-		return WorkbenchHelper.getService(IRuntimeExceptionHandler.class);
-	}
-
-	@Override
-	public void runModel(final Object object, final String exp) {
-		final IModelRunner modelRunner = getModelRunner();
-		if (modelRunner == null) { return; }
-		modelRunner.runModel(object, exp);
+		return getUIService(IRuntimeExceptionHandler.class);
 	}
 
 	public static List<IDisplaySurface> allDisplaySurfaces() {
@@ -498,7 +520,7 @@ public class SwtGui implements IGui {
 	 */
 	@Override
 	public void updateSpeedDisplay(final IScope scope, final Double d, final boolean notify) {
-		final ISpeedDisplayer speedStatus = WorkbenchHelper.getService(ISpeedDisplayer.class);
+		final ISpeedDisplayer speedStatus = getUIService(ISpeedDisplayer.class);
 		if (speedStatus != null) {
 			WorkbenchHelper.asyncRun(() -> speedStatus.setInit(d, notify));
 
@@ -512,12 +534,12 @@ public class SwtGui implements IGui {
 	 */
 	@Override
 	public IFileMetaDataProvider getMetaDataProvider() {
-		return WorkbenchHelper.getService(IFileMetaDataProvider.class);
+		return getUIService(IFileMetaDataProvider.class);
 	}
 
 	@Override
 	public IGamlLabelProvider getGamlLabelProvider() {
-		return WorkbenchHelper.getService(IGamlLabelProvider.class);
+		return getUIService(IGamlLabelProvider.class);
 	}
 
 	@Override
@@ -537,8 +559,8 @@ public class SwtGui implements IGui {
 			if (openModelingPerspective) {
 				DEBUG.OUT("Deleting simulation perspective and opening immediately the modeling perspective = "
 						+ immediately);
-				PerspectiveHelper.deleteCurrentSimulationPerspective();
-				PerspectiveHelper.openModelingPerspective(immediately, false);
+				getUIService(IPerspectiveHelper.class).deleteCurrentSimulationPerspective();
+				getUIService(IPerspectiveHelper.class).openModelingPerspective(immediately, false);
 			}
 
 			getStatus(scope).neutralStatus("No simulation running");
@@ -558,7 +580,7 @@ public class SwtGui implements IGui {
 	@Override
 	public void updateExperimentState(final IScope scope, final String forcedState) {
 		// DEBUG.OUT("STATE: " + forcedState);
-		final ISourceProviderService service = WorkbenchHelper.getService(ISourceProviderService.class);
+		final ISourceProviderService service = getUIService(ISourceProviderService.class);
 		final ISimulationStateProvider stateProvider = (ISimulationStateProvider) service
 				.getSourceProvider("ummisco.gama.ui.experiment.SimulationRunningState");
 		if (stateProvider != null) {
@@ -591,12 +613,12 @@ public class SwtGui implements IGui {
 
 	@Override
 	public IStatusDisplayer getStatus(final IScope scope) {
-		return WorkbenchHelper.getService(IStatusDisplayer.class);
+		return getUIService(IStatusDisplayer.class);
 	}
 
 	@Override
 	public IConsoleDisplayer getConsole() {
-		return WorkbenchHelper.getService(IConsoleDisplayer.class);
+		return getUIService(IConsoleDisplayer.class);
 	}
 
 	@Override
@@ -610,6 +632,11 @@ public class SwtGui implements IGui {
 	}
 
 	@Override
+	public void runInWorkspace(final Consumer<IProgressMonitor> r) {
+		WorkbenchHelper.runInWorkspace(r);
+	}
+
+	@Override
 	public void setFocusOn(final IShape shape) {
 		for (final IDisplaySurface surface : this.allDisplaySurfaces()) {
 			surface.focusOn(shape);
@@ -619,25 +646,29 @@ public class SwtGui implements IGui {
 
 	@Override
 	public void applyLayout(final IScope scope, final Object layout) {
-		final IDisplayLayoutManager manager = WorkbenchHelper.getService(IDisplayLayoutManager.class);
+		final IDisplayLayoutManager manager = getUIService(IDisplayLayoutManager.class);
 		if (manager != null) {
 			manager.applyLayout(layout);
 		}
 	}
 
 	@Override
-	public ILocation getMouseLocationInModel() {
+	public GamaPoint getMouseLocationInModel() {
 		return mouseLocationInModel;
 	}
 
 	@Override
-	public void setMouseLocationInModel(final ILocation location) {
+	public void setMouseLocationInModel(final GamaPoint location) {
 		mouseLocationInModel = location;
 	}
 
 	@Override
 	public void exit() {
-		WorkbenchHelper.asyncRun(() -> PlatformUI.getWorkbench().close());
+		WorkbenchHelper.asyncRun(() -> {
+			if (PlatformUI.isWorkbenchRunning()) {
+				PlatformUI.getWorkbench().close();
+			}
+		});
 
 	}
 
@@ -659,7 +690,7 @@ public class SwtGui implements IGui {
 
 	@Override
 	public void refreshNavigator() {
-		final IRefreshHandler refresh = WorkbenchHelper.getService(IRefreshHandler.class);
+		final IRefreshHandler refresh = getUIService(IRefreshHandler.class);
 		if (refresh != null) {
 			refresh.completeRefresh(null);
 		}
@@ -669,6 +700,46 @@ public class SwtGui implements IGui {
 	@Override
 	public boolean isInDisplayThread() {
 		return EventQueue.isDispatchThread() || Display.getCurrent() != null;
+	}
+
+	@Override
+	public <T> T getUIService(final Class<T> clazz) {
+		return WorkbenchHelper.getService(clazz);
+	}
+
+	@Override
+	public int runUI() {
+
+		final boolean removeWorkbenchXMI = PrefUtil.getInternalPreferenceStore().getBoolean(CLEAR_WORKSPACE);
+		if (removeWorkbenchXMI) {
+			setProperty(org.eclipse.e4.ui.workbench.IWorkbench.CLEAR_PERSISTED_STATE, "true");
+			clearInitialLayout(false);
+		}
+		final Display display = Display.getDefault();
+		final int result = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
+		if (display != null) {
+			display.dispose();
+		}
+		return result;
+	}
+
+	@Override
+	public void failureExit(final String msg) {
+		/* If we dont or cant remember and the location is set, we cant do anything as we need a workspace */
+		error(msg);
+		exit();
+		System.exit(0);
+	}
+
+	@Override
+	public void clearInitialLayout(final boolean clear) {
+		PrefUtil.getInternalPreferenceStore().setValue(CLEAR_WORKSPACE, Boolean.valueOf(clear).toString());
+		PrefUtil.saveInternalPrefs();
+	}
+
+	@Override
+	public int openPickWorkspaceDialog() {
+		return new PickWorkspaceDialog().open();
 	}
 
 }

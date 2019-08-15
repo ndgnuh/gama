@@ -204,7 +204,7 @@ public class GeneticAlgorithm extends ParamSpaceExploAlgorithm {
 		List<Chromosome> population = initPop.initializePop(scope, variables, this);
 		int nbGen = 1;
 		while (nbGen <= maxGenerations) {
-			try (ICollector<Chromosome> children = Collector.getSet()) {
+			try (ICollector<Chromosome> children = Collector.newSet()) {
 				for (final Chromosome chromosome : population) {
 					if (scope.getRandom().next() < crossoverProb && !variables.isEmpty()) {
 						children.addAll(crossOverOp.crossOver(scope, chromosome,
@@ -214,7 +214,7 @@ public class GeneticAlgorithm extends ParamSpaceExploAlgorithm {
 				population.addAll(children.items());
 			}
 
-			try (ICollector<Chromosome> mutatePop = Collector.getSet()) {
+			try (ICollector<Chromosome> mutatePop = Collector.newSet()) {
 				for (final Chromosome chromosome : population) {
 					if (scope.getRandom().next() < mutationProb && !variables.isEmpty()) {
 						mutatePop.add(mutationOp.mutate(scope, chromosome, variables));

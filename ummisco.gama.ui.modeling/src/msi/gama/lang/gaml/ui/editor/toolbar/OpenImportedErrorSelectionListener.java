@@ -4,7 +4,7 @@
  * modeling and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editor.toolbar;
@@ -35,7 +35,7 @@ public class OpenImportedErrorSelectionListener implements Selector {
 	GamlEditorState state;
 
 	/**
-	 * 
+	 *
 	 */
 	public OpenImportedErrorSelectionListener(final GamlEditor editor, final GamlEditorState state,
 			final Control toolbar) {
@@ -60,7 +60,7 @@ public class OpenImportedErrorSelectionListener implements Selector {
 
 							@Override
 							public void widgetSelected(final SelectionEvent e1) {
-								GAMA.getGui().editModel(null, msgs.get(s));
+								GAMA.getGui().editModel(msgs.get(s));
 							}
 
 						}, null);

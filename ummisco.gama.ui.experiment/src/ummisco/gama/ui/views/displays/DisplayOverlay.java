@@ -61,10 +61,6 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  */
 public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 
-	static {
-		DEBUG.OFF();
-	}
-
 	Label coord, zoom, left, center, right;
 	StringBuilder text = new StringBuilder();
 	Canvas scalebar;

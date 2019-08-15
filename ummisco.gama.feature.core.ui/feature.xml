@@ -2,7 +2,7 @@
 <feature
       id="ummisco.gama.feature.core.ui"
       label="Common UI Components of GAMA"
-      version="1.7.0.qualifier"
+      version="1.9.0.qualifier"
       provider-name="UMMISCO">
 
    <description url="http://gama-platform.org">
@@ -20,12 +20,6 @@
    <url>
       <update label="Gama 1.7.x Update Site" url="http://updates.gama-platform.org"/>
    </url>
-
-   <plugin
-         id="msi.gama.application"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
 
    <plugin
          id="ummisco.gama.ui.shared"

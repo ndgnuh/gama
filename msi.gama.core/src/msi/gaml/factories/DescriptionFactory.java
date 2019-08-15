@@ -51,10 +51,6 @@ import msi.gaml.types.IType;
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class DescriptionFactory {
 
-	static {
-		// DEBUG.ON();
-	}
-
 	static Map<Integer, SymbolFactory> FACTORIES = new HashMap();
 	static ArrayListMultimap<String, SymbolProto> STATEMENT_KEYWORDS_PROTOS = ArrayListMultimap.create();
 	static Map<String, SymbolProto> VAR_KEYWORDS_PROTOS = new HashMap();

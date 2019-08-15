@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Serialize
 Bundle-SymbolicName: ummisco.gama.serialize;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.9.0.qualifier
 Require-Bundle: msi.gama.core;bundle-version="1.7.0",
  msi.gama.ext;bundle-version="1.0.0"
 Bundle-ClassPath: .,
@@ -36,5 +36,5 @@ Export-Package: com.thoughtworks.xstream,
  ummisco.gama.serializer.gaml
 Import-Package: org.apache.commons.lang
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: ummisco.gama.serialize

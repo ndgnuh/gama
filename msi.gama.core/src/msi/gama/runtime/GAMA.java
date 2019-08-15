@@ -10,6 +10,10 @@
  ********************************************************************************************************/
 package msi.gama.runtime;
 
+import static java.lang.Thread.currentThread;
+import static ummisco.gama.dev.utils.DEBUG.PAD;
+import static ummisco.gama.dev.utils.DEBUG.TIMER_WITH_EXCEPTIONS;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import msi.gama.common.interfaces.IBenchmarkable;
 import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.IStartupProgress;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.PoolUtils;
 import msi.gama.common.util.RandomUtils;
@@ -33,10 +38,12 @@ import msi.gama.runtime.benchmark.Benchmark;
 import msi.gama.runtime.benchmark.StopWatch;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
+import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.ISymbol;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.dev.utils.DEBUG.RunnableWithException;
 
 /**
  * Written by drogoul Modified on 23 nov. 2009
@@ -48,7 +55,7 @@ import ummisco.gama.dev.utils.DEBUG;
 public class GAMA {
 
 	static {
-		DEBUG.OFF();
+		DEBUG.ON();
 	}
 
 	public final static String VERSION = "GAMA 1.8";
@@ -74,24 +81,25 @@ public class GAMA {
 	 */
 
 	/**
-	 * Create a GUI experiment that replaces the current one (if any)
+	 * Create a GUI experiment that replaces the current one (if any). Returns the newly created IExperimentPlan or null
+	 * if it cannot be opened
 	 *
 	 * @param id
 	 * @param model
 	 */
-	public static void runGuiExperiment(final String id, final IModel model) {
+	public static IExperimentPlan runGuiExperiment(final String id, final IModel model) {
 		// DEBUG.OUT("Launching experiment " + id + " of model " + model.getFilePath());
 		final IExperimentPlan newExperiment = model.getExperiment(id);
 		if (newExperiment == null) {
-			// DEBUG.OUT("No experiment " + id + " in model " + model.getFilePath());
-			return;
+			DEBUG.OUT("No experiment " + id + " in model " + model.getFilePath());
+			return null;
 		}
 		IExperimentController controller = getFrontmostController();
 		if (controller != null) {
 			final IExperimentPlan existingExperiment = controller.getExperiment();
 			if (existingExperiment != null) {
 				controller.getScheduler().pause();
-				if (!getGui().confirmClose(existingExperiment)) { return; }
+				if (!getGui().confirmClose(existingExperiment)) { return null; }
 			}
 		}
 		controller = newExperiment.getController();
@@ -107,6 +115,18 @@ public class GAMA {
 			// we are unable to launch the perspective.
 			DEBUG.ERR("Unable to launch simulation perspective for experiment " + id + " of model "
 					+ model.getFilePath());
+			return null;
+		}
+		return newExperiment;
+	}
+
+	public static IExperimentPlan runModel(final Object object, final String exp, final boolean headless) {
+		final IModel model = GAML.findModelIn(object);
+		if (model == null) { return null; }
+		if (headless) {
+			return addHeadlessExperiment(model, exp, null, null);
+		} else {
+			return runGuiExperiment(exp, model);
 		}
 	}
 
@@ -224,7 +244,7 @@ public class GAMA {
 				|| controller.getExperiment().getAgent() == null) {
 			return false;
 		}
-		DEBUG.LOG("report error : " + g.getMessage());
+		// DEBUG.LOG("report error : " + g.getMessage());
 		// Returns whether or not to continue
 		if (!(g instanceof GamaRuntimeFileException) && scope != null && !scope.reportErrors()) {
 			// AD: we still throw exceptions related to files (Issue #1281)
@@ -484,4 +504,19 @@ public class GAMA {
 		benchmarkAgent = null;
 	}
 
+	private static IStartupProgress monitor;
+
+	public static void setStartupMonitor(final IStartupProgress splash) {
+		monitor = splash;
+	}
+
+	public static <T extends Throwable> void initializeAtStartup(final String title,
+			final RunnableWithException<T> runnable) throws T {
+		TIMER_WITH_EXCEPTIONS(PAD("> GAMA: " + title, 55) + PAD("[" + currentThread().getName() + "]", 20) + "in",
+				runnable);
+		if (monitor != null) {
+			monitor.add(title);
+		}
+
+	}
 }

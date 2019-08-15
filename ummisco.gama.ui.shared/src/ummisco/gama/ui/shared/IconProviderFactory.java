@@ -3,8 +3,8 @@ package ummisco.gama.ui.shared;
 import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
-import msi.gama.application.workbench.IIconProvider;
 import ummisco.gama.ui.resources.GamaIcons;
+import ummisco.gama.ui.utils.IIconProvider;
 
 public class IconProviderFactory extends AbstractServiceFactory {
 

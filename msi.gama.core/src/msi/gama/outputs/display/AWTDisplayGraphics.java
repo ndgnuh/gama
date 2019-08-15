@@ -41,13 +41,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.vividsolutions.jts.awt.PointTransformation;
-import com.vividsolutions.jts.awt.ShapeWriter;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.Lineal;
-import com.vividsolutions.jts.geom.Puntal;
+import org.locationtech.jts.awt.PointTransformation;
+import org.locationtech.jts.awt.ShapeWriter;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.Lineal;
+import org.locationtech.jts.geom.Puntal;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.GeometryUtils;
@@ -143,7 +143,7 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 	/**
 	 * Implements PointTransformation.transform
 	 *
-	 * @see com.vividsolutions.jts.awt.PointTransformation#transform(com.vividsolutions.jts.geom.Coordinate,
+	 * @see org.locationtech.jts.awt.PointTransformation#transform(org.locationtech.jts.geom.Coordinate,
 	 *      java.awt.geom.Point2D)
 	 */
 	@Override
@@ -174,7 +174,7 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 		shape = new GamaShape(shape, null, rotation, attributes.getLocation(), attributes.getSize(), true);
 		final GamaColor c = attributes.getColor();
 		return drawShape(shape.getInnerGeometry(),
-				new ShapeDrawingAttributes(shape.getLocation().toGamaPoint(), c, c, (IShape.Type) null));
+				new ShapeDrawingAttributes(shape.getLocation(), c, c, (IShape.Type) null));
 	}
 
 	AffineTransform imageTransform = new AffineTransform();

@@ -2,7 +2,7 @@
 <feature
       id="simtools.graphlayout.feature"
       label="Graph Layouts"
-      version="1.7.0.qualifier">
+      version="1.9.0.qualifier">
 
    <description url="http://www.example.com/description">
       Graph Layout Operators
@@ -17,7 +17,7 @@
    </license>
 
    <url>
-      <update label="GAMA 1.7.x Update Site" url="http://updates.gama-platform.org"/>
+      <update label="GAMA 1.9.x Update Site" url="http://updates.gama-platform.org"/>
    </url>
 
    <requires>

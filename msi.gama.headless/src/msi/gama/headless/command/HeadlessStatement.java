@@ -69,10 +69,10 @@ import msi.gaml.types.IType;
 public class HeadlessStatement extends AbstractStatement {
 	private final int numberOfThread = 4;
 	private final SimulationRuntime processorQueue;
-	private int maxSimulationID = 0;
+	private Integer maxSimulationID = 0;
 
 	public String getSimulationId() {
-		return new Integer(maxSimulationID++).toString();
+		return String.valueOf(maxSimulationID++);
 	}
 
 	public HeadlessStatement(final IDescription desc) {

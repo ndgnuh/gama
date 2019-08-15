@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gaml.types.GamaPointType.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.types.GamaPointType.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.types;
 
@@ -16,7 +16,6 @@ import java.util.Map;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.type;
@@ -36,26 +35,34 @@ import msi.gaml.operators.Cast;
 @type (
 		name = IKeyword.POINT,
 		id = IType.POINT,
-		wraps = { ILocation.class, GamaPoint.class },
+		wraps = { GamaPoint.class },
 		kind = ISymbolKind.Variable.REGULAR,
 		concept = { IConcept.TYPE, IConcept.POINT },
 		doc = @doc ("Represent locations in either 2 or 3 dimensions"))
 @SuppressWarnings ({ "unchecked", "rawtypes" })
-public class GamaPointType extends GamaType<ILocation> {
+public class GamaPointType extends GamaType<GamaPoint> {
 
 	@Override
-	public ILocation cast(final IScope scope, final Object obj, final Object param, final boolean copy)
+	public GamaPoint cast(final IScope scope, final Object obj, final Object param, final boolean copy)
 			throws GamaRuntimeException {
 		return staticCast(scope, obj, copy);
 	}
 
-	public static ILocation staticCast(final IScope scope, final Object obj, final boolean copy) {
-		if (obj instanceof ILocation) { return (ILocation) obj; }
+	public static GamaPoint staticCast(final IScope scope, final Object obj, final boolean copy) {
+		if (obj instanceof GamaPoint) {
+			if (copy) {
+				return new GamaPoint((GamaPoint) obj);
+			} else {
+				return (GamaPoint) obj;
+			}
+		}
 		if (obj instanceof IShape) { return ((IShape) obj).getLocation(); }
 		if (obj instanceof List) {
 			final List l = (List) obj;
-			if (l.size() > 2) { return new GamaPoint(Cast.asFloat(scope, l.get(0)), Cast.asFloat(scope, l.get(1)),
-					Cast.asFloat(scope, l.get(2))); }
+			if (l.size() > 2) {
+				return new GamaPoint(Cast.asFloat(scope, l.get(0)), Cast.asFloat(scope, l.get(1)),
+						Cast.asFloat(scope, l.get(2)));
+			}
 			if (l.size() > 1) { return new GamaPoint(Cast.asFloat(scope, l.get(0)), Cast.asFloat(scope, l.get(1))); }
 			if (l.size() > 0) { return staticCast(scope, l.get(0), copy); }
 			return new GamaPoint(0, 0, 0);
@@ -72,18 +79,20 @@ public class GamaPointType extends GamaType<ILocation> {
 			String s = ((String) obj).trim();
 			if (s.startsWith("{") && s.endsWith("}")) {
 				s = s.replace("{", "").replace("}", "").trim();
-			    return staticCast(scope, Arrays.asList(s.split(",")), false);
+				return staticCast(scope, Arrays.asList(s.split(",")), false);
 			}
 		}
-		if (obj instanceof GamaPair) { return new GamaPoint(Cast.asFloat(scope, ((GamaPair) obj).first()),
-				Cast.asFloat(scope, ((GamaPair) obj).last())); }
+		if (obj instanceof GamaPair) {
+			return new GamaPoint(Cast.asFloat(scope, ((GamaPair) obj).first()),
+					Cast.asFloat(scope, ((GamaPair) obj).last()));
+		}
 		if (obj == null) { return null; }
 		final double dval = Cast.asFloat(scope, obj);
 		return new GamaPoint(dval, dval, dval);
 	}
 
 	@Override
-	public ILocation getDefault() {
+	public GamaPoint getDefault() {
 		return null;
 	}
 

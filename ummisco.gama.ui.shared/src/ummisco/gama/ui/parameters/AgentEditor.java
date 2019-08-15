@@ -1,11 +1,10 @@
 /*********************************************************************************************
  *
- * 'AgentEditor.java, in plugin ummisco.gama.ui.shared, is part of the source code of the
- * GAMA modeling and simulation platform.
- * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'AgentEditor.java, in plugin ummisco.gama.ui.shared, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.parameters;
@@ -19,6 +18,7 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import msi.gama.kernel.experiment.IParameter;
 import msi.gama.metamodel.agent.IAgent;
+import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gaml.types.IType;
 import ummisco.gama.ui.interfaces.EditorListener;
@@ -26,9 +26,8 @@ import ummisco.gama.ui.interfaces.IAgentMenuFactory;
 import ummisco.gama.ui.menus.MenuAction;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaIcons;
-import ummisco.gama.ui.utils.WorkbenchHelper;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings ({ "unchecked", "rawtypes" })
 public class AgentEditor extends ExpressionBasedEditor {
 
 	// Label agentDisplayer;
@@ -88,10 +87,11 @@ public class AgentEditor extends ExpressionBasedEditor {
 		final Menu dropMenu = new Menu(items[CHANGE].getParent().getShell());
 		final IAgent a = (IAgent) (currentValue instanceof IAgent ? currentValue : null);
 		if (a != null) {
-			final IAgentMenuFactory factory = WorkbenchHelper.getService(IAgentMenuFactory.class);
-			if (factory != null)
+			final IAgentMenuFactory factory = GAMA.getGui().getUIService(IAgentMenuFactory.class);
+			if (factory != null) {
 				factory.fillPopulationSubMenu(dropMenu, a.getScope().getSimulation().getMicroPopulation(species), null,
 						action);
+			}
 		}
 		final Rectangle rect = items[CHANGE].getBounds();
 		final Point pt = items[CHANGE].getParent().toDisplay(new Point(rect.x, rect.y));
@@ -120,7 +120,7 @@ public class AgentEditor extends ExpressionBasedEditor {
 
 	/**
 	 * Method getToolItems()
-	 * 
+	 *
 	 * @see ummisco.gama.ui.parameters.AbstractEditor#getToolItems()
 	 */
 	@Override

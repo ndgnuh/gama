@@ -60,7 +60,7 @@ public class PostponedWarningList {
 
 		// raise errors
 		if (header != null && !header.isEmpty() && warning2count.size() > 1) {
-			GAMA.reportError(GAMA.getRuntimeScope(), GamaRuntimeException.error(header, scope), true);
+			GAMA.reportError(scope, GamaRuntimeException.error(header, scope), true);
 		}
 		warning2count.forEach((msg, times) -> {
 			final StringBuffer sb = new StringBuffer();
@@ -73,7 +73,7 @@ public class PostponedWarningList {
 			if (DEBUG.IS_ON()) {
 				DEBUG.ERR(sb.toString());
 			}
-			GAMA.reportError(GAMA.getRuntimeScope(), GamaRuntimeException.error(sb.toString(), scope), true);
+			GAMA.reportError(scope, GamaRuntimeException.error(sb.toString(), scope), true);
 		});
 
 	}

@@ -12,7 +12,7 @@ package msi.gaml.expressions;
 
 import msi.gama.common.interfaces.IGraphics;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gaml.types.Types;
 
@@ -23,9 +23,9 @@ public class CameraOrientationUnitExpression extends UnitConstantExpression {
 	}
 
 	@Override
-	public ILocation _value(final IScope scope) {
+	public GamaPoint _value(final IScope scope) {
 		final IGraphics g = scope.getGraphics();
-		if (g == null || g.is2D()) { return (ILocation) getConstValue(); }
+		if (g == null || g.is2D()) { return (GamaPoint) getConstValue(); }
 		return ((IGraphics.ThreeD) g).getCameraOrientation();
 	}
 

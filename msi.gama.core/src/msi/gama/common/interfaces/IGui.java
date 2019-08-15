@@ -12,13 +12,17 @@ package msi.gama.common.interfaces;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import msi.gama.common.interfaces.IDisplayCreator.DisplayDescription;
 import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.IDisplayOutput;
 import msi.gama.outputs.LayeredDisplayOutput;
@@ -28,7 +32,6 @@ import msi.gama.util.GamaMapFactory;
 import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.statements.test.CompoundSummary;
-import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.types.IType;
 
 /**
@@ -78,7 +81,7 @@ public interface IGui {
 
 	IGamaView showView(IScope scope, String viewId, String name, int code);
 
-	void tell(String message);
+	void tell(String title, String message);
 
 	void error(String error);
 
@@ -115,9 +118,7 @@ public interface IGui {
 
 	void cleanAfterExperiment();
 
-	void editModel(IScope scope, Object eObject);
-
-	void runModel(final Object object, final String exp);
+	void editModel(Object eObject);
 
 	void updateSpeedDisplay(IScope scope, Double d, boolean notify);
 
@@ -141,17 +142,28 @@ public interface IGui {
 
 	void run(String taskName, Runnable opener, boolean asynchronous);
 
+	void runInWorkspace(final Consumer<IProgressMonitor> r);
+
 	void setFocusOn(IShape o);
 
 	void applyLayout(IScope scope, Object layout);
 
 	void displayErrors(IScope scope, List<GamaRuntimeException> newExceptions);
 
-	ILocation getMouseLocationInModel();
+	GamaPoint getMouseLocationInModel();
 
-	void setMouseLocationInModel(ILocation modelCoordinates);
+	void setMouseLocationInModel(GamaPoint modelCoordinates);
 
 	IGamlLabelProvider getGamlLabelProvider();
+
+	<T> T getUIService(Class<T> clazz);
+
+	/**
+	 * The main UI loop
+	 *
+	 * @return
+	 */
+	int runUI();
 
 	void exit();
 
@@ -165,8 +177,6 @@ public interface IGui {
 
 	void endTestDisplay();
 
-	List<TestExperimentSummary> runHeadlessTests(final Object model);
-
 	/**
 	 * Tries to put the frontmost display in full screen mode or in normal view mode if it is already in full screen
 	 *
@@ -177,5 +187,15 @@ public interface IGui {
 	void refreshNavigator();
 
 	boolean isInDisplayThread();
+
+	boolean confirm(String title, String msg);
+
+	void failureExit(String string);
+
+	int openPickWorkspaceDialog();
+
+	void clearInitialLayout(boolean b);
+
+	IPath openSelectContainerDialog(final String title, final String msg);
 
 }

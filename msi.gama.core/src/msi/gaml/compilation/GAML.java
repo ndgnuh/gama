@@ -10,16 +10,27 @@
  ********************************************************************************************************/
 package msi.gaml.compilation;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Multimap;
 
+import msi.gama.common.GamlFileExtension;
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.experiment.ITopLevelAgent;
+import msi.gama.kernel.model.IModel;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IExecutionContext;
@@ -52,6 +63,7 @@ public class GAML {
 	public static ModelFactory modelFactory = null;
 	private static IGamlResourceInfoProvider infoProvider = null;
 	private static IGamlEcoreUtils gamlEcoreUtils = null;
+	private static IGamlModelBuilder modelBuilder = null;
 
 	public static <T> T notNull(final IScope scope, final T object) {
 		return notNull(scope, object, "Error: nil value detected");
@@ -70,17 +82,6 @@ public class GAML {
 		if (s == null) { return ""; }
 		return breakStringToLines(StringUtils.replaceEach(s, HTML_TAGS, REPLACEMENTS), 120, Strings.LN);
 	}
-
-	// private static String multiLine(final String longString, final String splitter, final int maxLength) {
-	// return Arrays.stream(longString.split(splitter)).collect(ArrayList<String>::new, (l, s) -> {
-	// final Function<ArrayList<String>, Integer> id = list -> list.size() - 1;
-	// if (l.size() == 0
-	// || l.get(id.apply(l)).length() != 0 && l.get(id.apply(l)).length() + s.length() >= maxLength) {
-	// l.add("");
-	// }
-	// l.set(id.apply(l), l.get(id.apply(l)) + (l.get(id.apply(l)).length() == 0 ? "" : splitter) + s);
-	// }, (l1, l2) -> l1.addAll(l2)).stream().reduce((s1, s2) -> s1 + "\n" + s2).get();
-	// }
 
 	/**
 	 * Indicates that a String search operation yielded no results.
@@ -142,56 +143,58 @@ public class GAML {
 	 */
 	public static String breakStringToLines(final String s, final int maxLength, final String newLineString) {
 		String str = s;
-		final StringBuilder result = new StringBuilder();
-		while (str.length() > maxLength) {
-			// Attempt to break on whitespace first,
-			int breakingIndex = lastIndexOfRegex(str, "\\s", maxLength);
+		try (TextBuilder sb = TextBuilder.create()) {
+			while (str.length() > maxLength) {
+				// Attempt to break on whitespace first,
+				int breakingIndex = lastIndexOfRegex(str, "\\s", maxLength);
 
-			// Then on other non-alphanumeric characters,
-			if (breakingIndex == NOT_FOUND) {
-				breakingIndex = lastIndexOfRegex(str, "[^a-zA-Z0-9]", maxLength);
+				// Then on other non-alphanumeric characters,
+				if (breakingIndex == NOT_FOUND) {
+					breakingIndex = lastIndexOfRegex(str, "[^a-zA-Z0-9]", maxLength);
+				}
+
+				// And if all else fails, break in the middle of the word
+				if (breakingIndex == NOT_FOUND) {
+					breakingIndex = maxLength;
+				}
+
+				// Append each prepared line to the builder
+				sb.append(str.substring(0, breakingIndex + 1));
+				sb.append(newLineString);
+
+				// And start the next line
+				str = str.substring(breakingIndex + 1);
 			}
 
-			// And if all else fails, break in the middle of the word
-			if (breakingIndex == NOT_FOUND) {
-				breakingIndex = maxLength;
+			// Check if there are any residual characters left
+			if (str.length() > 0) {
+				sb.append(str);
 			}
 
-			// Append each prepared line to the builder
-			result.append(str.substring(0, breakingIndex + 1));
-			result.append(newLineString);
-
-			// And start the next line
-			str = str.substring(breakingIndex + 1);
+			// Return the resulting string
+			return sb.toString();
 		}
-
-		// Check if there are any residual characters left
-		if (str.length() > 0) {
-			result.append(str);
-		}
-
-		// Return the resulting string
-		return result.toString();
 	}
 
 	public static String getDocumentationOn(final String query) {
 		final String keyword = StringUtils.removeEnd(StringUtils.removeStart(query.trim(), "#"), ":");
 		final Multimap<GamlIdiomsProvider<?>, IGamlDescription> results = GamlIdiomsProvider.forName(keyword);
 		if (results.isEmpty()) { return "No result found"; }
-		final StringBuilder sb = new StringBuilder();
-		final int max = results.keySet().stream().mapToInt(each -> each.name.length()).max().getAsInt();
-		final String separator = StringUtils.repeat("—", max + 6).concat(Strings.LN);
-		results.asMap().forEach((provider, list) -> {
-			sb.append("").append(separator).append("|| ");
-			sb.append(StringUtils.rightPad(provider.name, max));
-			sb.append(" ||").append(Strings.LN).append(separator);
-			for (final IGamlDescription d : list) {
-				sb.append("== ").append(toText(d.getTitle())).append(Strings.LN).append(toText(provider.document(d)))
-						.append(Strings.LN);
-			}
-		});
+		try (TextBuilder sb = TextBuilder.create()) {
+			final int max = results.keySet().stream().mapToInt(each -> each.name.length()).max().getAsInt();
+			final String separator = StringUtils.repeat("—", max + 6).concat(Strings.LN);
+			results.asMap().forEach((provider, list) -> {
+				sb.append("").append(separator).append("|| ");
+				sb.append(StringUtils.rightPad(provider.name, max));
+				sb.append(" ||").append(Strings.LN).append(separator);
+				for (final IGamlDescription d : list) {
+					sb.append("== ").append(toText(d.getTitle())).append(Strings.LN)
+							.append(toText(provider.document(d))).append(Strings.LN);
+				}
+			});
 
-		return sb.toString();
+			return sb.toString();
+		}
 
 		//
 	}
@@ -285,6 +288,10 @@ public class GAML {
 		gamlEcoreUtils = utils;
 	}
 
+	public static void registerGamlModelBuilder(final IGamlModelBuilder builder) {
+		modelBuilder = builder;
+	}
+
 	public static IGamlEcoreUtils getEcoreUtils() {
 		return gamlEcoreUtils;
 	}
@@ -295,6 +302,83 @@ public class GAML {
 
 	public static ISyntacticElement getContents(final URI uri) {
 		return infoProvider.getContents(uri);
+	}
+
+	public static IModel compile(final URI uri, final List<GamlCompilationError> errors) {
+		return modelBuilder.compile(uri, errors);
+	}
+
+	public static IModel compile(final URL url, final List<GamlCompilationError> errors) {
+		return modelBuilder.compile(url, errors);
+	}
+
+	public static void loadBuildContext(final List<URL> allURLs) {
+		modelBuilder.loadURLs(allURLs);
+	}
+
+	/**
+	 * @param object
+	 * @return
+	 */
+	public static IModel findModelIn(final Object object) {
+		if (object instanceof IModel) { return (IModel) object; }
+		if (object instanceof IFile) {
+			final IFile file = (IFile) object;
+			try {
+				if (file.findMaxProblemSeverity(IMarker.PROBLEM, true,
+						IResource.DEPTH_ZERO) == IMarker.SEVERITY_ERROR) {
+					GAMA.getGui().error("Model " + file.getFullPath() + " has errors and cannot be launched");
+					return null;
+				}
+			} catch (final CoreException e) {
+				e.printStackTrace();
+			}
+			final URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			return findModelIn(uri);
+		}
+		if (object instanceof URI) {
+			final URI uri = (URI) object;
+			final List<GamlCompilationError> errors = new ArrayList<>();
+			final IModel model = GAML.compile(uri, errors);
+			if (model == null) {
+				GAMA.getGui().error("File " + uri.lastSegment() + " cannot be built because of " + errors.size()
+						+ " compilation errors");
+			}
+			return model;
+		}
+
+		return null;
+	}
+
+	public static List<IFile> getAllGamaFilesInProject(final IProject project) {
+		final ArrayList<IFile> allGamaFiles = new ArrayList<>();
+		try {
+			if (project != null) {
+				project.accept(iR -> {
+					if (GamlFileExtension.isAny(iR.getName())) {
+						allGamaFiles.add((IFile) iR.requestResource());
+					}
+					return true;
+				}, IResource.FILE);
+			}
+		} catch (final CoreException e) {}
+		return allGamaFiles;
+	}
+
+	public static List<URI> getAllGamaURIsInProject(final IProject project) {
+		final ArrayList<URI> allGamaFiles = new ArrayList<>();
+		try {
+			if (project != null) {
+				project.accept(iR -> {
+					if (GamlFileExtension.isAny(iR.getName())) {
+						final URI uri = URI.createPlatformResourceURI(iR.requestFullPath().toString(), true);
+						allGamaFiles.add(uri);
+					}
+					return true;
+				}, IResource.FILE);
+			}
+		} catch (final CoreException e) {}
+		return allGamaFiles;
 	}
 
 }

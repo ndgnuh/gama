@@ -20,14 +20,14 @@ import com.bulletphysics.collision.shapes.ConvexHullShape;
 import com.bulletphysics.collision.shapes.SphereShape;
 import com.bulletphysics.dynamics.RigidBody;
 import com.bulletphysics.util.ObjectArrayList;
-import com.vividsolutions.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Coordinate;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.MinimalAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.precompiler.GamlAnnotations.action;
 import msi.gama.precompiler.GamlAnnotations.arg;
@@ -38,7 +38,6 @@ import msi.gama.precompiler.GamlAnnotations.setter;
 import msi.gama.precompiler.GamlAnnotations.species;
 import msi.gama.precompiler.GamlAnnotations.variable;
 import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaListFactory;
@@ -92,14 +91,13 @@ public class Physical3DWorldAgent extends MinimalAgent {
 	public void setRegisteredAgents(final IList<IAgent> agents) {
 		if (agents.size() > PhysicsWorldJBullet.MAX_OBJECTS) {
 			GamaRuntimeException.error(
-					"Physic engine cannot manage more than " + PhysicsWorldJBullet.MAX_OBJECTS + "agents",
-					GAMA.getRuntimeScope());
+					"Physic engine cannot manage more than " + PhysicsWorldJBullet.MAX_OBJECTS + "agents", getScope());
 		} else {
 
 			world = new PhysicsWorldJBullet(true);
 			cleanRegisteredAgents();
 			registeredAgents.addAll(agents);
-			setRegisteredAgentsToWorld();
+			setRegisteredAgentsToWorld(getScope());
 		}
 
 	}
@@ -157,7 +155,7 @@ public class Physical3DWorldAgent extends MinimalAgent {
 	 *
 	 * Once the CollisionShape is defined it is added in the JBulletPhysicWorld
 	 */
-	private RigidBody CollisionBoundToCollisionShape(final IAgent geom) {
+	private RigidBody CollisionBoundToCollisionShape(final IScope scope, final IAgent geom) {
 
 		// Double mass = 1.0;
 		CollisionShape shape = null;
@@ -168,7 +166,7 @@ public class Physical3DWorldAgent extends MinimalAgent {
 		// problem if the shape
 		// is not in the z plan it is totally wrong.
 
-		final IList<Double> velocity = Cast.asList(GAMA.getRuntimeScope(), geom.getAttribute("velocity"));
+		final IList<Double> velocity = Cast.asList(scope, geom.getAttribute("velocity"));
 		final Vector3f _velocity =
 				new Vector3f(velocity.get(0).floatValue(), velocity.get(1).floatValue(), velocity.get(2).floatValue());
 
@@ -220,9 +218,9 @@ public class Physical3DWorldAgent extends MinimalAgent {
 
 	private CollisionShape defaultCollisionShape(final IShape geom) {
 		final ObjectArrayList<Vector3f> points = new ObjectArrayList<>();
-		for (final ILocation loc : geom.getPoints()) {
-			points.add(new Vector3f((float) loc.toGamaPoint().x, (float) loc.toGamaPoint().y,
-					(float) loc.toGamaPoint().z));
+		for (final GamaPoint loc : geom.getPoints()) {
+			points.add(new Vector3f((float) loc.x, (float) loc.y,
+					(float) loc.z));
 		}
 		return new ConvexHullShape(points);
 	}
@@ -234,15 +232,15 @@ public class Physical3DWorldAgent extends MinimalAgent {
 		registeredAgents.clear();
 	}
 
-	private void setRegisteredAgentsToWorld() {
+	private void setRegisteredAgentsToWorld(final IScope scope) {
 		for (final IAgent ia : registeredAgents) {
-			registerAgent(ia);
+			registerAgent(scope, ia);
 		}
 
 	}
 
-	public void registerAgent(final IAgent ia) {
-		final RigidBody body = this.CollisionBoundToCollisionShape(ia);
+	public void registerAgent(final IScope scope, final IAgent ia) {
+		final RigidBody body = this.CollisionBoundToCollisionShape(scope, ia);
 		registeredMap.put(ia, body);
 	}
 

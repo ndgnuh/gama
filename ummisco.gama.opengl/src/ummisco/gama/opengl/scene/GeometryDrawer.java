@@ -20,8 +20,8 @@ import static msi.gama.common.geometry.GeometryUtils.getYNegatedCoordinates;
 import java.awt.Color;
 
 import com.jogamp.opengl.util.gl2.GLUT;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Polygon;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.ICoordinates;
@@ -247,7 +247,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		_vertices.setToYNegated(getContourCoordinates(p));
 		_vertices.getNormal(true, 1, _normal);
 		_vertices.getCenter(_center);
-		_tangent.setLocation(_vertices.at(0)).subtract(_vertices.at(1));
+		_tangent.withLocation(_vertices.at(0)).subtract(_vertices.at(1));
 		_scale.setTo(_tangent.norm(), _vertices.at(2).euclidianDistanceTo(_vertices.at(1)), height);
 		drawCachedGeometry(Type.CUBE, solid, border);
 	}
@@ -256,7 +256,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		_vertices.setToYNegated(getContourCoordinates(p));
 		_vertices.getNormal(true, 1, _normal);
 		_vertices.getCenter(_center);
-		_tangent.setLocation(_vertices.at(0)).subtract(_vertices.at(1));
+		_tangent.withLocation(_vertices.at(0)).subtract(_vertices.at(1));
 		_scale.setTo(height);
 		drawCachedGeometry(Type.PYRAMID, solid, border);
 	}
@@ -265,7 +265,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		_vertices.setToYNegated(getContourCoordinates(p));
 		_vertices.getNormal(true, 1, _normal);
 		_vertices.getCenter(_center);
-		_tangent.setLocation(_center).subtract(_vertices.at(0));
+		_tangent.withLocation(_center).subtract(_vertices.at(0));
 		_scale.setTo(height);
 		drawCachedGeometry(Type.SPHERE, solid, border);
 	}
@@ -274,7 +274,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		_vertices.setToYNegated(getContourCoordinates(p));
 		_vertices.getNormal(true, 1, _normal);
 		_vertices.getCenter(_center);
-		_tangent.setLocation(_center).subtract(_vertices.at(0));
+		_tangent.withLocation(_center).subtract(_vertices.at(0));
 		_scale.setTo(height);
 		drawCachedGeometry(Type.CIRCLE, solid, border);
 	}
@@ -293,7 +293,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		final double radius = g instanceof Polygon ? _vertices.getLength() / (2 * Math.PI) : height;
 		_vertices.getCenter(_center);
 		_vertices.getNormal(true, 1, _normal);
-		_tangent.setLocation(_center).subtract(_vertices.at(0));
+		_tangent.withLocation(_center).subtract(_vertices.at(0));
 		_scale.setTo(radius, radius, height);
 		drawCachedGeometry(Type.CYLINDER, solid, border);
 	}
@@ -327,7 +327,7 @@ public class GeometryDrawer extends ObjectDrawer<GeometryObject> {
 		final double radius = p instanceof Polygon ? _vertices.getLength() / (2 * Math.PI) : _vertices.getLength();
 		_vertices.getCenter(_center);
 		_vertices.getNormal(true, 1, _normal);
-		_tangent.setLocation(_center).subtract(_vertices.at(0));
+		_tangent.withLocation(_center).subtract(_vertices.at(0));
 		_rot.rotateToHorizontal(_normal, _tangent, false).revertInPlace();
 		_scale.setTo(radius, radius, height);
 		drawCachedGeometry(Type.CONE, solid, border);

@@ -4,7 +4,7 @@
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.navigator.contents;
@@ -46,17 +46,14 @@ public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 
 	@Override
 	public boolean hasChildren() {
-		if (!element.hasChildren())
-			return false;
-		if (element.isSpecies())
-			return true;
+		if (!element.hasChildren()) { return false; }
+		if (element.isSpecies()) { return true; }
 		return false;
 	}
 
 	@Override
 	public Object[] getNavigatorChildren() {
-		if (!hasChildren())
-			return null;
+		if (!hasChildren()) { return null; }
 		final List<WrappedSyntacticContent> children = new ArrayList<>();
 		element.visitAllChildren(elt -> children.add(new WrappedSyntacticContent(WrappedSyntacticContent.this, elt)));
 		return children.toArray();
@@ -74,14 +71,13 @@ public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 
 	@Override
 	public boolean handleDoubleClick() {
-		GAMA.getGui().editModel(null, element.getElement());
+		GAMA.getGui().editModel(element.getElement());
 		return true;
 	}
 
 	@Override
 	public boolean handleSingleClick() {
-
-		GAMA.getGui().editModel(null, element.getElement());
+		GAMA.getGui().editModel(element.getElement());
 		return true;
 	}
 
@@ -93,15 +89,14 @@ public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 	public int compareTo(final WrappedSyntacticContent o) {
 		final ISyntacticElement e = o.element;
 		if (element.isSpecies()) {
-			if (e.isSpecies())
-				return getName().compareTo(o.getName());
-			if (element.getKeyword().equals(IKeyword.GRID))
-				return 1;
+			if (e.isSpecies()) { return getName().compareTo(o.getName()); }
+			if (element.getKeyword().equals(IKeyword.GRID)) { return 1; }
 			return 1;
 		} else if (e.isSpecies()) {
 			return -1;
-		} else
+		} else {
 			return getName().compareTo(o.getName());
+		}
 
 	}
 
@@ -120,8 +115,7 @@ public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 	@Override
 	public ImageDescriptor getOverlay() {
 		final int severity = getURIProblem(uri);
-		if (severity != -1)
-			return DESCRIPTORS.get(severity);
+		if (severity != -1) { return DESCRIPTORS.get(severity); }
 		return null;
 	}
 

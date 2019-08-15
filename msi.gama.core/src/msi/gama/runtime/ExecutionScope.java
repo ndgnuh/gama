@@ -21,6 +21,7 @@ import msi.gama.common.interfaces.IGraphics;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.IStepable;
 import msi.gama.common.util.RandomUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.experiment.IExperimentAgent;
 import msi.gama.kernel.experiment.IExperimentController;
 import msi.gama.kernel.experiment.IExperimentPlan;
@@ -306,12 +307,13 @@ public class ExecutionScope implements IScope {
 	 *
 	 */
 	private void writeTrace() {
-		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < executionContext.depth(); i++) {
-			sb.append(Strings.TAB);
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (int i = 0; i < executionContext.depth(); i++) {
+				sb.append(Strings.TAB);
+			}
+			sb.append(currentSymbol.getTrace(this));
+			this.getGui().getConsole().informConsole(sb.toString(), getRoot());
 		}
-		sb.append(currentSymbol.getTrace(this));
-		this.getGui().getConsole().informConsole(sb.toString(), getRoot());
 	}
 
 	@Override
@@ -855,7 +857,7 @@ public class ExecutionScope implements IScope {
 
 	@Override
 	public IAgent[] getAgentsStack() {
-		try (final Collector.AsOrderedSet<IAgent> agents = Collector.getOrderedSet()) {
+		try (final Collector.AsOrderedSet<IAgent> agents = Collector.newOrderedSet()) {
 			AgentExecutionContext current = agentContext;
 			if (current == null) { return new IAgent[0]; }
 			while (current != null) {

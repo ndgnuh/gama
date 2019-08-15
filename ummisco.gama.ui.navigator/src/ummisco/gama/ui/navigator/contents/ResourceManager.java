@@ -42,8 +42,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
 import msi.gama.common.GamlFileExtension;
+import msi.gama.common.util.FileUtils;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.statements.test.CompoundSummary;
@@ -53,10 +53,6 @@ import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class ResourceManager implements IResourceChangeListener, IResourceDeltaVisitor, ISelectionChangedListener {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	public static ResourceManager INSTANCE;
 	public final static Cache<IResource, WrappedResource<?, ?>> cache =
@@ -314,8 +310,8 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 			final String nature = root.getNature();
 			final WrappedProject p = (WrappedProject) wrap(root, project);
 			post(() -> {
-				WorkspaceModelsManager.setValuesProjectDescription(project, nature == BUILTIN_NATURE,
-						nature == PLUGIN_NATURE, nature == TEST_NATURE, null);
+				FileUtils.setValuesProjectDescription(project, nature == BUILTIN_NATURE, nature == PLUGIN_NATURE,
+						nature == TEST_NATURE, null);
 				root.initializeChildren();
 				refreshResource(root);
 				reveal(p);

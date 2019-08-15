@@ -74,7 +74,7 @@ public class EcoreBasedExpressionDescription extends BasicExpressionDescription 
 			}
 			return Collections.EMPTY_SET;
 		}
-		try (final ICollector<String> result = Collector.getOrderedSet()) {
+		try (final ICollector<String> result = Collector.newOrderedSet()) {
 			final Array array = (Array) target;
 			for (final Expression expr : EGaml.getInstance().getExprsOf(array.getExprs())) {
 				final String type = skills ? "skill" : "attribute";

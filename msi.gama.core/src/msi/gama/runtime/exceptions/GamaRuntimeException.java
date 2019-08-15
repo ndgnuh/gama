@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.simulation.SimulationClock;
 import msi.gama.runtime.ExecutionScope;
 import msi.gama.runtime.IScope;
@@ -210,16 +211,17 @@ public class GamaRuntimeException extends RuntimeException {
 		if (size == 1) {
 			result.add("in agent " + agentsNames.get(0));
 		} else {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("in agents ").append(agentsNames.get(0));
-			for (int i = 1; i < agentsNames.size(); i++) {
-				sb.append(", ").append(agentsNames.get(i));
-				if (sb.length() > 100) {
-					sb.append("...");
-					break;
+			try (TextBuilder sb = TextBuilder.create()) {
+				sb.append("in agents ").append(agentsNames.get(0));
+				for (int i = 1; i < agentsNames.size(); i++) {
+					sb.append(", ").append(agentsNames.get(i));
+					if (sb.length() > 100) {
+						sb.append("...");
+						break;
+					}
 				}
+				result.add(sb.toString());
 			}
-			result.add(sb.toString());
 		}
 		return result;
 	}
@@ -255,17 +257,18 @@ public class GamaRuntimeException extends RuntimeException {
 	 * @return
 	 */
 	public String getAllText() {
-		final StringBuilder sb = new StringBuilder(300);
-		final String a = getAgentSummary();
-		if (a != null) {
-			sb.append(a).append(" at ");
+		try (TextBuilder sb = TextBuilder.create()) {
+			final String a = getAgentSummary();
+			if (a != null) {
+				sb.append(a).append(" at ");
+			}
+			sb.append("cycle ").append(getCycle()).append(": ").append(getMessage());
+			final List<String> strings = getContextAsList();
+			for (final String s : strings) {
+				sb.append(Strings.LN).append(s);
+			}
+			return sb.toString();
 		}
-		sb.append("cycle ").append(getCycle()).append(": ").append(getMessage());
-		final List<String> strings = getContextAsList();
-		for (final String s : strings) {
-			sb.append(Strings.LN).append(s);
-		}
-		return sb.toString();
 	}
 
 	// If the simulation or experiment is dead, no need to report errors

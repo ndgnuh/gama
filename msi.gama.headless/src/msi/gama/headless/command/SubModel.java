@@ -36,7 +36,7 @@ public class SubModel {
 	@no_test
 	public static Integer stepSubModel(final IScope scope, final IExperimentAgent expName) {
 		final Experiment exp = (Experiment) scope.getVarValue(expName.toString());
-		return new Integer((int) exp.step());
+		return ((int) exp.step());
 	}
 
 	@operator (

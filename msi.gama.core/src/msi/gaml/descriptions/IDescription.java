@@ -24,6 +24,7 @@ import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ISkill;
 import msi.gama.common.interfaces.ITyped;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.util.ICollector;
 import msi.gaml.compilation.ISymbol;
 import msi.gaml.descriptions.SymbolSerializer.ModelSerializer;
@@ -545,9 +546,10 @@ public interface IDescription
 	 */
 	@Override
 	default String getNameForBenchmarks() {
-		final StringBuilder sb = new StringBuilder();
-		getSerializer().serializeNoRecursion(sb, this, false);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			getSerializer().serializeNoRecursion(sb.getBuilder(), this, false);
+			return sb.toString();
+		}
 	}
 
 	/**

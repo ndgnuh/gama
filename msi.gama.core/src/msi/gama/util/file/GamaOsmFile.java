@@ -46,9 +46,10 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.ext.osmosis.Bound;
 import msi.gama.ext.osmosis.Entity;
 import msi.gama.ext.osmosis.EntityContainer;
@@ -198,23 +199,25 @@ public class GamaOsmFile extends GamaGisFile {
 
 		@Override
 		public String getDocumentation() {
-			final StringBuilder sb = new StringBuilder();
-			if (hasFailed) {
-				sb.append("Unreadable OSM file").append(Strings.LN)
-						.append("Decompress the file to an .osm file and retry");
-			} else {
-				sb.append("OSM file").append(Strings.LN);
-				sb.append(itemNumber).append(" objects").append(Strings.LN);
-				sb.append("Dimensions: ").append(Math.round(width) + "m x " + Math.round(height) + "m")
-						.append(Strings.LN);
-				sb.append("Coordinate Reference System: ").append(crs == null ? "No CRS" : crs.getName().getCode())
-						.append(Strings.LN);
-				if (!attributes.isEmpty()) {
-					sb.append("Attributes: ").append(Strings.LN);
-					attributes.forEach((k, v) -> sb.append("<li>").append(k).append(" (" + v + ")").append("</li>"));
+			try (final TextBuilder sb = TextBuilder.create()) {
+				if (hasFailed) {
+					sb.append("Unreadable OSM file").append(Strings.LN)
+							.append("Decompress the file to an .osm file and retry");
+				} else {
+					sb.append("OSM file").append(Strings.LN);
+					sb.append(itemNumber).append(" objects").append(Strings.LN);
+					sb.append("Dimensions: ").append(Math.round(width) + "m x " + Math.round(height) + "m")
+							.append(Strings.LN);
+					sb.append("Coordinate Reference System: ").append(crs == null ? "No CRS" : crs.getName().getCode())
+							.append(Strings.LN);
+					if (!attributes.isEmpty()) {
+						sb.append("Attributes: ").append(Strings.LN);
+						attributes
+								.forEach((k, v) -> sb.append("<li>").append(k).append(" (" + v + ")").append("</li>"));
+					}
 				}
+				return sb.toString();
 			}
-			return sb.toString();
 		}
 
 		public Map<String, String> getAttributes() {

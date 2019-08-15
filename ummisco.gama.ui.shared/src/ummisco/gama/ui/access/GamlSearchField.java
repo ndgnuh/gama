@@ -52,7 +52,7 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.swt.IFocusService;
 
 import msi.gama.common.interfaces.IGamlDescription;
-import ummisco.gama.dev.utils.DEBUG;
+import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.utils.PlatformHelper;
@@ -60,10 +60,6 @@ import ummisco.gama.ui.utils.WebHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class GamlSearchField {
-
-	static {
-		DEBUG.ON();
-	}
 
 	Shell shell;
 	protected Text text;
@@ -91,7 +87,7 @@ public class GamlSearchField {
 	void hookUpCommands() {
 		if (commandsInstalled) { return; }
 		commandsInstalled = true;
-		final IFocusService focus = WorkbenchHelper.getService(IFocusService.class);
+		final IFocusService focus = GAMA.getGui().getUIService(IFocusService.class);
 		focus.addFocusTracker(text, GamlSearchField.class.getName());
 
 		final org.eclipse.core.expressions.Expression focusExpr = new org.eclipse.core.expressions.Expression() {
@@ -107,7 +103,7 @@ public class GamlSearchField {
 			}
 		};
 
-		final IHandlerService whService = WorkbenchHelper.getService(IHandlerService.class);
+		final IHandlerService whService = GAMA.getGui().getUIService(IHandlerService.class);
 		whService.activateHandler(IWorkbenchCommandConstants.EDIT_SELECT_ALL, new AbstractHandler() {
 			@Override
 			public Object execute(final ExecutionEvent event) {

@@ -10,16 +10,17 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.GamaPair;
-import msi.gama.util.ICollector;
 import msi.gama.util.IMap;
 import msi.gaml.compilation.GAML;
 import msi.gaml.descriptions.OperatorProto;
@@ -148,22 +149,23 @@ public class MapExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(' ').append('[');
-		for (int i = 0; i < keys.length; i++) {
-			if (i > 0) {
-				sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(' ').append('[');
+			for (int i = 0; i < keys.length; i++) {
+				if (i > 0) {
+					sb.append(',');
+				}
+				if (keys[i] == null || vals[i] == null) {
+					continue;
+				} else {
+					sb.append(keys[i].serialize(includingBuiltIn));
+					sb.append("::");
+					sb.append(vals[i].serialize(includingBuiltIn));
+				}
 			}
-			if (keys[i] == null || vals[i] == null) {
-				continue;
-			} else {
-				sb.append(keys[i].serialize(includingBuiltIn));
-				sb.append("::");
-				sb.append(vals[i].serialize(includingBuiltIn));
-			}
+			sb.append(']').append(' ');
+			return sb.toString();
 		}
-		sb.append(']').append(' ');
-		return sb.toString();
 	}
 
 	public IExpression[] keysArray() {
@@ -236,7 +238,7 @@ public class MapExpression extends AbstractExpression implements IOperator {
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		for (final IExpression e : keys) {
 			if (e != null) {
 				e.collectUsedVarsOf(species, result);

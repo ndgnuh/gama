@@ -107,7 +107,7 @@ public abstract class GridNeighborhood implements INeighborhood {
 		}
 		final int[] nn = neighbors[placeIndex];
 		final int nnSize = neighborsIndexes[placeIndex][radius - 1];
-		try (final Collector.AsOrderedSet<IAgent> result = Collector.getOrderedSet()) {
+		try (final Collector.AsOrderedSet<IAgent> result = Collector.newOrderedSet()) {
 			for (int i = 0; i < nnSize; i++) {
 				result.add(matrix.matrix[nn[i]].getAgent());
 			}

@@ -65,16 +65,18 @@ species pedestrian skills: [moving] topology: (topology(shape - (corridor_wall_0
 	//Reflex to make the agent move to its target_location
 	reflex move {
 		point previous_location <- location;
-
+		
 		if (location.y < corridor_wall_height) and (location.x <= (environment_width / 2)) {
-			do move heading: self towards {(environment_width / 2) - (corridor_width / 2), corridor_wall_height};
+			 heading <- self towards {(environment_width / 2) - (corridor_width / 2), corridor_wall_height};
 		} else if (location.y > environment_height - corridor_wall_height) and (location.x <= (environment_width / 2)) {
-			do move heading: self towards {(environment_width / 2) - (corridor_width / 2), environment_height - corridor_wall_height};
+			heading <- self towards {(environment_width / 2) - (corridor_width / 2), environment_height - corridor_wall_height};
 		} else {
-			do move heading: self towards target_location;
+			heading <- self towards target_location;
 		}
+		do move;
 		if (location.x = previous_location.x) { // No move detected
-			do move heading: self towards {environment_width, world.shape.location.y};
+			heading <- self towards {environment_width, world.shape.location.y};
+			do move;
 		}
 	}
 
@@ -125,7 +127,7 @@ experiment "Corridor" type: gui autorun: true {
 		button_location <- {simulation.corridor_left_bounds + 100, 100};  
 	}
 	output {
-		display defaut_display background: #black fullscreen: true toolbar: false {
+		display defaut_display background: #black toolbar: #black autosave: {500,500} {
 			graphics back {
 				draw shape color: #black empty: false;
 				draw corridor_wall_0_display color: #gray empty: true;

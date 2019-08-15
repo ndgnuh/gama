@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.Platform;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.IValue;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
@@ -126,37 +127,38 @@ public class System {
 	public static String console(final IScope scope, final String s, final String directory,
 			final IMap<String, String> environment) {
 		if (s == null || s.isEmpty()) { return ""; }
-		final StringBuilder output = new StringBuilder();
-		final List<String> commands = new ArrayList<>();
-		commands.add(Platform.getOS().equals(Platform.OS_WIN32) ? "cmd.exe" : "/bin/bash");
-		commands.add(Platform.getOS().equals(Platform.OS_WIN32) ? "/C" : "-c");
-		commands.add(s.trim());
-		// commands.addAll(Arrays.asList(s.split(" ")));
-		final boolean nonBlocking = commands.get(commands.size() - 1).endsWith("&");
-		if (nonBlocking) {
-			// commands.(commands.size() - 1);
-		}
-		final ProcessBuilder b = new ProcessBuilder(commands);
-		b.redirectErrorStream(true);
-		b.directory(new File(directory));
-		b.environment().putAll(environment);
-		try {
-			final Process p = b.start();
-			if (nonBlocking) { return ""; }
-			final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			final int returnValue = p.waitFor();
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				output.append(line + Strings.LN);
+		try (TextBuilder sb = TextBuilder.create()) {
+			final List<String> commands = new ArrayList<>();
+			commands.add(Platform.getOS().equals(Platform.OS_WIN32) ? "cmd.exe" : "/bin/bash");
+			commands.add(Platform.getOS().equals(Platform.OS_WIN32) ? "/C" : "-c");
+			commands.add(s.trim());
+			// commands.addAll(Arrays.asList(s.split(" ")));
+			final boolean nonBlocking = commands.get(commands.size() - 1).endsWith("&");
+			if (nonBlocking) {
+				// commands.(commands.size() - 1);
 			}
+			final ProcessBuilder b = new ProcessBuilder(commands);
+			b.redirectErrorStream(true);
+			b.directory(new File(directory));
+			b.environment().putAll(environment);
+			try {
+				final Process p = b.start();
+				if (nonBlocking) { return ""; }
+				final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+				final int returnValue = p.waitFor();
+				String line = "";
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + Strings.LN);
+				}
 
-			if (returnValue != 0) {
-				throw GamaRuntimeException.error("Error in console command." + output.toString(), scope);
+				if (returnValue != 0) {
+					throw GamaRuntimeException.error("Error in console command." + sb.toString(), scope);
+				}
+			} catch (final IOException | InterruptedException e) {
+				throw GamaRuntimeException.error("Error in console command. " + e.getMessage(), scope);
 			}
-		} catch (final IOException | InterruptedException e) {
-			throw GamaRuntimeException.error("Error in console command. " + e.getMessage(), scope);
+			return sb.toString();
 		}
-		return output.toString();
 
 	}
 
@@ -293,6 +295,7 @@ public class System {
 		final IDescription d = agent.getSpecies().getDescription();
 		try {
 			final IExpression e = GAML.getExpressionFactory().createExpr(gaml, d);
+			// scope.disableErrorReporting();
 			return scope.evaluate(e, agent).getValue();
 		} catch (final GamaRuntimeException e) {
 			scope.getGui().getConsole().informConsole(
@@ -301,6 +304,8 @@ public class System {
 					scope.getRoot());
 
 			return null;
+		} finally {
+			// scope.enableErrorReporting();
 		}
 
 	}

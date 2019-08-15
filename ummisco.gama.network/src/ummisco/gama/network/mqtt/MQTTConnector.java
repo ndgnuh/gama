@@ -4,7 +4,7 @@
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.network.mqtt;
@@ -28,9 +28,6 @@ import ummisco.gama.network.common.GamaNetworkException;
 
 public final class MQTTConnector extends Connector {
 
-	static {
-		DEBUG.OFF();
-	}
 	public static String DEFAULT_USER = "gama_demo";
 	public static String DEFAULT_LOCAL_NAME = "gama-" + Calendar.getInstance().getTimeInMillis() + "@";
 	public static String DEFAULT_PASSWORD = "gama_demo";
@@ -65,7 +62,7 @@ public final class MQTTConnector extends Connector {
 	@Override
 	protected void releaseConnection(final IScope scope) {
 		try {
-			if( (sendConnection != null) && (sendConnection.isConnected()) ) {
+			if (sendConnection != null && sendConnection.isConnected()) {
 				sendConnection.disconnect();
 				sendConnection = null;
 			}
@@ -78,7 +75,7 @@ public final class MQTTConnector extends Connector {
 	protected void sendMessage(final IAgent sender, final String receiver, final String content) {
 		final MqttMessage mm = new MqttMessage(content.getBytes());
 		try {
-			DEBUG.OUT("is connected "+sendConnection.isConnected());
+			DEBUG.OUT("is connected " + sendConnection.isConnected());
 			sendConnection.publish(receiver, mm);
 		} catch (final MqttException e) {
 			DEBUG.OUT(GamaNetworkException.cannotSendMessage(sender.getScope(), receiver));
@@ -89,7 +86,7 @@ public final class MQTTConnector extends Connector {
 	@Override
 	protected void subscribeToGroup(final IAgent agt, final String boxName) {
 		try {
-		
+
 			sendConnection.subscribe(boxName);
 		} catch (final MqttException e) {
 			e.printStackTrace();
@@ -106,7 +103,7 @@ public final class MQTTConnector extends Connector {
 			throw GamaNetworkException.cannotUnsuscribeToTopic(simulationScope, boxName);
 		}
 	}
-	
+
 	@Override
 	protected boolean isAlive(final IAgent agent) throws GamaNetworkException {
 		return sendConnection.isConnected();
@@ -127,8 +124,8 @@ public final class MQTTConnector extends Connector {
 			password = password == null ? DEFAULT_PASSWORD : userName;
 			localName = localName == null ? DEFAULT_LOCAL_NAME + server : localName;
 
-			DEBUG.OUT("url "+ "tcp://" + server + ":" + port);
-			
+			DEBUG.OUT("url " + "tcp://" + server + ":" + port);
+
 			try {
 				sendConnection = new MqttClient("tcp://" + server + ":" + port, localName, new MemoryPersistence());
 				final MqttConnectOptions connOpts = new MqttConnectOptions();
@@ -139,8 +136,8 @@ public final class MQTTConnector extends Connector {
 				connOpts.setUserName(userName);
 				connOpts.setPassword(password.toCharArray());
 				sendConnection.connect(connOpts);
-				DEBUG.OUT("is connected  start "+sendConnection.isConnected());
-				
+				DEBUG.OUT("is connected  start " + sendConnection.isConnected());
+
 			} catch (final MqttException e) {
 				throw GamaNetworkException.cannotBeConnectedFailure(simulationScope);
 			}

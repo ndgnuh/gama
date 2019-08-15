@@ -20,7 +20,7 @@ import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.population.IPopulationSet;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.topology.graph.ISpatialGraph;
+import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.runtime.IScope;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.IContainer;
@@ -40,7 +40,7 @@ public abstract class In implements IAgentFilter {
 		return new InList(targets.listValue(scope, Types.NO_TYPE, false), species);
 	}
 
-	public static IAgentFilter edgesOf(final ISpatialGraph graph) {
+	public static IAgentFilter edgesOf(final GamaSpatialGraph graph) {
 		return graph;
 	}
 

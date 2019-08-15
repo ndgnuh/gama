@@ -20,7 +20,7 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.util.Pair;
 import org.jgrapht.graph.GraphWalk;
 
-import msi.gama.runtime.GAMA;
+import msi.gama.runtime.IScope;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
 import msi.gama.util.graph.GamaGraph;
@@ -196,18 +196,18 @@ public class FloydWarshallShortestPathsGAMA<V, E> {
 	 *
 	 * @return the path, or null if none found
 	 */
-	public GraphPath<V, E> getShortestPath(final V a, final V b) {
+	public GraphPath<V, E> getShortestPath(final IScope scope, final V a, final V b) {
 		lazyCalculatePaths();
-		return getShortestPathImpl(a, b);
+		return getShortestPathImpl(scope, a, b);
 	}
 
-	private GraphPath<V, E> getShortestPathImpl(final V a, final V b) {
+	private GraphPath<V, E> getShortestPathImpl(final IScope scope, final V a, final V b) {
 		int v_a = vertices.indexOf(a);
 		final int v_b = vertices.indexOf(b);
 		int prev = v_a;
 		final List<E> edges = new ArrayList<>();
 		if (matrix != null) {
-			v_a = matrix.get(GAMA.getRuntimeScope(), v_b, v_a);
+			v_a = matrix.get(scope, v_b, v_a);
 			if (v_a != -1) {
 				while (prev != v_b) {
 					final Set<E> eds = graph.getAllEdges(vertices.get(prev), vertices.get(v_a));
@@ -227,7 +227,7 @@ public class FloydWarshallShortestPathsGAMA<V, E> {
 					}
 					if (prev != v_b) {
 						prev = v_a;
-						v_a = matrix.get(GAMA.getRuntimeScope(), v_b, v_a);
+						v_a = matrix.get(scope, v_b, v_a);
 					}
 				}
 			}

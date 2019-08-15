@@ -24,11 +24,11 @@ import static msi.gaml.types.Types.POINT;
 
 import java.awt.Point;
 
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.common.interfaces.IGraphics;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.expressions.IExpression;
@@ -51,8 +51,8 @@ public class LayerData extends AttributeHolder implements ILayerData {
 	boolean positionIsInPixels, sizeIsInPixels;
 	Envelope visibleRegion;
 
-	Attribute<ILocation> size;
-	Attribute<ILocation> position;
+	Attribute<GamaPoint> size;
+	Attribute<GamaPoint> position;
 	Attribute<Boolean> refresh;
 	final Attribute<Boolean> fading;
 	final Attribute<Integer> trace;
@@ -100,8 +100,8 @@ public class LayerData extends AttributeHolder implements ILayerData {
 	}
 
 	@Override
-	public void setSize(final ILocation p) {
-		setSize(p.getX(), p.getY(), p.getZ());
+	public void setSize(final GamaPoint p) {
+		setSize(p.x, p.y, p.z);
 	}
 
 	@Override
@@ -111,8 +111,8 @@ public class LayerData extends AttributeHolder implements ILayerData {
 	}
 
 	@Override
-	public void setPosition(final ILocation p) {
-		setPosition(p.getX(), p.getY(), p.getZ());
+	public void setPosition(final GamaPoint p) {
+		setPosition(p.x, p.y, p.z);
 	}
 
 	@Override
@@ -138,12 +138,12 @@ public class LayerData extends AttributeHolder implements ILayerData {
 	}
 
 	@Override
-	public ILocation getPosition() {
+	public GamaPoint getPosition() {
 		return position.get();
 	}
 
 	@Override
-	public ILocation getSize() {
+	public GamaPoint getSize() {
 		return size.get();
 	}
 
@@ -214,7 +214,7 @@ public class LayerData extends AttributeHolder implements ILayerData {
 		final double xRatio = g.getxRatioBetweenPixelsAndModelUnits();
 		final double yRatio = g.getyRatioBetweenPixelsAndModelUnits();
 
-		ILocation point = getPosition();
+		GamaPoint point = getPosition();
 		// Computation of x
 		final double x = point.getX();
 

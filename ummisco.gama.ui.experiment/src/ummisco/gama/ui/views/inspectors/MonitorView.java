@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 
 import msi.gama.common.interfaces.IValue;
 import msi.gama.common.interfaces.ItemList;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.outputs.IDisplayOutput;
 import msi.gama.outputs.MonitorOutput;
@@ -149,19 +150,15 @@ public class MonitorView extends ExpandableItemsView<MonitorOutput> implements I
 		update(o);
 	}
 
-	// private final StringBuilder sb = new StringBuilder(100);
-
 	@Override
 	public String getItemDisplayName(final MonitorOutput o, final String previousName) {
-
-		final StringBuilder sb = new StringBuilder(100);
-		sb.setLength(0);
-		sb.append(o.getName()).append(ItemList.SEPARATION_CODE).append(getValueAsString(o));
-		if (o.isPaused()) {
-			sb.append(" (paused)");
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(o.getName()).append(ItemList.SEPARATION_CODE).append(getValueAsString(o));
+			if (o.isPaused()) {
+				sb.append(" (paused)");
+			}
+			return sb.toString();
 		}
-		return sb.toString();
-
 	}
 
 	public String getValueAsString(final MonitorOutput o) {

@@ -35,7 +35,7 @@ import msi.gaml.types.Signature;
  */
 public interface IExpressionCompiler<T> extends IDisposable {
 
-	IMap<String, IMap<Signature, OperatorProto>> OPERATORS = GamaMapFactory.createUnordered();
+	IMap<String, IMap<Signature, OperatorProto>> OPERATORS = GamaMapFactory.createUnordered(500);
 	Set<String> ITERATORS = new HashSet<>();
 
 	IExpression compile(final IExpressionDescription s, final IDescription parsingContext);

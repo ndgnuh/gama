@@ -18,6 +18,7 @@ import java.util.List;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
 import msi.gama.precompiler.GamlAnnotations.file;
@@ -76,14 +77,15 @@ public class RFile extends GamaFile<IMap, Object> {
 	@Override
 	public String _stringValue(final IScope scope) throws GamaRuntimeException {
 		getContents(scope);
-		final StringBuilder sb = new StringBuilder(getBuffer().length(scope) * 200);
-		for (final Object s : getBuffer().iterable(scope)) {
-			sb.append(s).append(Strings.LN); // TODO Factorize the different
-												// calls to
-			// "new line" ...
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final Object s : getBuffer().iterable(scope)) {
+				sb.append(s).append(Strings.LN); // TODO Factorize the different
+													// calls to
+				// "new line" ...
+			}
+			sb.setLength(sb.length() - 1);
+			return sb.toString();
 		}
-		sb.setLength(sb.length() - 1);
-		return sb.toString();
 	}
 
 	/*

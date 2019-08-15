@@ -13,6 +13,7 @@ package msi.gaml.operators;
 import java.util.StringTokenizer;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
 import msi.gama.precompiler.GamlAnnotations.operator;
@@ -377,9 +378,9 @@ public class Strings {
 							value = "reverse ('abcd')",
 							equals = "'dcba'")))
 	static public String reverse(final String s) {
-		final StringBuilder buf = new StringBuilder(s);
-		buf.reverse();
-		return buf.toString();
+		final StringBuilder sb = new StringBuilder(s);
+		sb.reverse();
+		return sb.toString();
 	}
 
 	@operator (
@@ -486,12 +487,13 @@ public class Strings {
 					equals = "\"my	text\""))
 	static public String indent(final String s, final int nb) {
 		if (nb <= 0) { return s; }
-		final StringBuilder sb = new StringBuilder(nb);
-		for (int i = 0; i < nb; i++) {
-			sb.append(TAB);
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (int i = 0; i < nb; i++) {
+				sb.append(TAB);
+			}
+			final String t = sb.toString();
+			return s.replaceAll("(?m)^", t);
 		}
-		final String t = sb.toString();
-		return s.replaceAll("(?m)^", t);
 	}
 
 	@operator (

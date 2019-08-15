@@ -77,10 +77,6 @@ import ummisco.gama.dev.utils.DEBUG;
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider implements IUnits {
 
-	static {
-		DEBUG.ON();
-	}
-
 	static final IMap EMPTY_MAP = GamaMapFactory.createUnordered();
 	private static IMap<EClass, TerminalMapBasedScope> GLOBAL_SCOPES = GamaMapFactory.createUnordered();
 	private static Set<QualifiedName> allNames;
@@ -259,18 +255,21 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	static {
-		// AD 15/01/16: added to make sure that the XText builder can wait
-		// until, at least, the main artefacts of GAMA have been built.
-		while (!GamaMetaModel.INSTANCE.isInitialized) {
-			try {
-				Thread.sleep(100);
-				// DEBUG.OUT("> GAMA: Waiting for GAML artefacts to build");
-			} catch (final InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		DEBUG.TIMER("> GAMA building GAML artefacts in ", () -> {
+
+		GAMA.initializeAtStartup("Initializing Constants", () -> {
 			IUnits.initialize();
+		});
+		GAMA.initializeAtStartup("Building XText artifacts", () -> {
+			// AD 15/01/16: added to make sure that the XText builder can wait
+			// until, at least, the main artefacts of GAMA have been built.
+			while (!GamaMetaModel.INSTANCE.isInitialized) {
+				try {
+					Thread.sleep(100);
+					DEBUG.OUT("> GAMA: Waiting for GAML artefacts to build");
+				} catch (final InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			createDescriptions();
 		});
 
@@ -425,6 +424,7 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	public static void createDescriptions() {
+
 		if (descriptions == null) {
 			initResources();
 			add(eAction, IExpressionFactory.TEMPORARY_ACTION_NAME);

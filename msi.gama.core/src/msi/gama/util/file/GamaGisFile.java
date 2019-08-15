@@ -14,11 +14,11 @@ import static msi.gama.common.geometry.GeometryUtils.GEOMETRY_FACTORY;
 
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import com.vividsolutions.jts.geom.CoordinateFilter;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.CoordinateFilter;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Polygon;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
@@ -104,7 +104,7 @@ public abstract class GamaGisFile extends GamaGeometryFile {
 				final Polygon p = (Polygon) geom.getGeometryN(i);
 				final ICoordinates coords = GeometryUtils.getContourCoordinates(p);
 				final LinearRing lr = GEOMETRY_FACTORY.createLinearRing(coords.toCoordinateArray());
-				try (final Collector.AsList<LinearRing> holes = Collector.getList()) {
+				try (final Collector.AsList<LinearRing> holes = Collector.newList()) {
 					for (int j = 0; j < p.getNumInteriorRing(); j++) {
 						final LinearRing h = (LinearRing) p.getInteriorRingN(j);
 						if (!hasNullElements(h.getCoordinates())) {

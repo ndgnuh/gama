@@ -11,6 +11,7 @@
 package msi.gama.kernel.root;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,7 +43,6 @@ import msi.gama.runtime.IScope;
 import msi.gama.runtime.MemoryUtils;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaColor;
-import msi.gama.util.ICollector;
 import msi.gama.util.IList;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -347,7 +347,7 @@ public class PlatformAgent extends GamlAgent implements ITopLevelAgent, IExpress
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {}
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 	@Override
 	public IType<?> getGamlType() {

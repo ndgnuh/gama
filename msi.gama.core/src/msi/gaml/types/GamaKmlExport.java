@@ -15,14 +15,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPoint;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.MultiLineString;
+import org.locationtech.jts.geom.MultiPoint;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 
 import de.micromata.opengis.kml.v_2_2_0.AltitudeMode;
 import de.micromata.opengis.kml.v_2_2_0.ColorMode;
@@ -40,7 +40,7 @@ import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Scale;
 import de.micromata.opengis.kml.v_2_2_0.Style;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
@@ -236,7 +236,7 @@ public class GamaKmlExport {
 		 * @param description
 		 *            Description (only displayed on mouse click on the label)
 		 */
-		public void addLabel(final IScope scope, final ILocation loc, final String beginDate, final String endDate,
+		public void addLabel(final IScope scope, final GamaPoint loc, final String beginDate, final String endDate,
 				final String name, final String description, final String styleName) {
 			final Placemark placemark = fold.createAndAddPlacemark().withStyleUrl("#" + styleName);
 			placemark.createAndSetTimeSpan().withBegin(beginDate).withEnd(endDate);
@@ -250,7 +250,7 @@ public class GamaKmlExport {
 			placemark.setDescription(description);
 		}
 
-		public void add3DModel(final IScope scope, final ILocation loc, final double orientation, final double scale,
+		public void add3DModel(final IScope scope, final GamaPoint loc, final double orientation, final double scale,
 				final String beginDate, final String endDate, final String daefile) {
 
 			final Placemark placemark = fold.createAndAddPlacemark();

@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import org.eclipse.emf.ecore.EObject;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.Facets;
 
@@ -53,9 +54,10 @@ public class SyntacticComposedElement extends AbstractSyntacticElement {
 	 */
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		visitAllChildren(c -> sb.append(Strings.LN).append(Strings.TAB).append(c.toString()));
-		return super.toString() + sb;
+		try (TextBuilder sb = TextBuilder.create()) {
+			visitAllChildren(c -> sb.append(Strings.LN).append(Strings.TAB).append(c.toString()));
+			return super.toString() + sb;
+		}
 	}
 
 	/*

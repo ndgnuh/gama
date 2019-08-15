@@ -10,11 +10,13 @@
  ********************************************************************************************************/
 package msi.gama.util.graph.writer;
 
+import static msi.gama.runtime.exceptions.GamaRuntimeException.error;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import msi.gama.runtime.GAMA;
+import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 
 /**
@@ -88,23 +90,21 @@ public class AvailableGraphWriters {
 
 	private static Map<String, IGraphWriter> name2singleton = new HashMap<>();
 
-	public static IGraphWriter getGraphWriter(final String name) {
+	public static IGraphWriter getGraphWriter(final IScope scope, final String name) {
 		IGraphWriter res = name2singleton.get(name);
 
 		if (res == null) {
 			// no singleton created
 			final Class<? extends IGraphWriter> classWriter = name2writer.get(name);
 			if (classWriter == null) {
-				throw GamaRuntimeException.error(
-						"unknown writer name: " + name + "; please choose one of " + getAvailableWriters().toString(),
-						GAMA.getRuntimeScope());
+				throw error("Unknown writer: " + name + "; please choose one of " + getAvailableWriters(), scope);
 			}
 			try {
 				res = classWriter.newInstance();
 			} catch (final InstantiationException e) {
-				throw GamaRuntimeException.create(e, GAMA.getRuntimeScope());
+				throw GamaRuntimeException.create(e, scope);
 			} catch (final IllegalAccessException e) {
-				throw GamaRuntimeException.create(e, GAMA.getRuntimeScope());
+				throw GamaRuntimeException.create(e, scope);
 			}
 			name2singleton.put(name, res);
 		}

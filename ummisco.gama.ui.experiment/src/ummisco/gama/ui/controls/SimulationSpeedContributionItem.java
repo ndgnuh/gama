@@ -23,7 +23,6 @@ import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.runtime.GAMA;
 import msi.gaml.operators.Maths;
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.interfaces.ISpeedDisplayer;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.IGamaColors;
@@ -38,10 +37,6 @@ import ummisco.gama.ui.resources.IGamaColors;
  *
  */
 public class SimulationSpeedContributionItem extends WorkbenchWindowControlContribution implements ISpeedDisplayer {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	private static SimulationSpeedContributionItem instance;
 	static double max = 1000;

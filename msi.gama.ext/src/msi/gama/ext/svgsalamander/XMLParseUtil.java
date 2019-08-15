@@ -628,7 +628,7 @@ public class XMLParseUtil {
 				eleVal = Integer.parseInt(valS);
 			} catch (final Exception e) {}
 
-			elementCache.addLast(new Integer(eleVal));
+			elementCache.addLast((eleVal));
 		}
 
 		final int[] retArr = new int[elementCache.size()];

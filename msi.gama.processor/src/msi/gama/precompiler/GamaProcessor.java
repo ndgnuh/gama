@@ -4,7 +4,7 @@
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.precompiler;
@@ -33,7 +33,7 @@ import msi.gama.precompiler.tests.TestProcessor;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 @SupportedAnnotationTypes ({ "*" })
-@SupportedSourceVersion (SourceVersion.RELEASE_8)
+@SupportedSourceVersion (SourceVersion.RELEASE_11)
 public class GamaProcessor extends AbstractProcessor implements Constants {
 
 	public final static String[] IMPORTS = new String[] { "msi.gaml.extensions.multi_criteria",
@@ -47,8 +47,8 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			"msi.gaml.compilation", "msi.gaml.factories", "msi.gaml.descriptions", "msi.gama.util.tree",
 			"msi.gama.util.file", "msi.gama.util.matrix", "msi.gama.util.graph", "msi.gama.util.path", "msi.gama.util",
 			"msi.gama.runtime.exceptions", "msi.gaml.factories", "msi.gaml.statements", "msi.gaml.skills",
-			"msi.gaml.variables", "msi.gama.kernel.experiment", "msi.gaml.operators",
-			"msi.gama.common.interfaces", "msi.gama.extensions.messaging", "msi.gama.metamodel.population" };
+			"msi.gaml.variables", "msi.gama.kernel.experiment", "msi.gaml.operators", "msi.gama.common.interfaces",
+			"msi.gama.extensions.messaging", "msi.gama.metamodel.population" };
 
 	private ProcessorContext context;
 	public static final String JAVA_HEADER;

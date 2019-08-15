@@ -30,7 +30,7 @@ import msi.gaml.types.IType;
 public class StatementWithChildrenDescription extends StatementDescription {
 
 	protected IMap<String, IVarExpression> temps;
-	protected final Collector.AsList<IDescription> children = Collector.getList();
+	protected final Collector.AsList<IDescription> children = Collector.newList();
 
 	public StatementWithChildrenDescription(final String keyword, final IDescription superDesc,
 			final Iterable<IDescription> cp, final boolean hasArgs, final EObject source, final Facets facets,
@@ -110,7 +110,7 @@ public class StatementWithChildrenDescription extends StatementDescription {
 		final String kw = getKeyword();
 		final String facet = LET.equals(kw) || LOOP.equals(kw) ? NAME : RETURNS;
 		if (temps == null) {
-			temps = GamaMapFactory.createUnordered();
+			temps = GamaMapFactory.createUnordered(4);
 		}
 		if (temps.containsKey(name) && !name.equals(MYSELF)) {
 			declaration.warning("This declaration of " + name + " shadows a previous declaration",

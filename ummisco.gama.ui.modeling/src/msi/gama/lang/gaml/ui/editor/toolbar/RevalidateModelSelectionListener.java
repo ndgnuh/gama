@@ -15,7 +15,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
-import msi.gama.lang.gaml.validation.GamlModelBuilder;
+import msi.gaml.compilation.GAML;
 import ummisco.gama.ui.views.toolbar.Selector;
 
 /**
@@ -46,7 +46,7 @@ public class RevalidateModelSelectionListener implements Selector {
 
 			@Override
 			public Object exec(final XtextResource state, final CancelIndicator c) throws Exception {
-				return GamlModelBuilder.getDefaultInstance().compile(state.getURI(), null);
+				return GAML.compile(state.getURI(), null);
 			}
 		});
 

@@ -21,7 +21,7 @@ public class WrappedExperimentContent extends WrappedSyntacticContent {
 
 	@Override
 	public boolean handleDoubleClick() {
-		GAMA.getGui().runModel(getParent(), element.getName());
+		GAMA.runModel(getFile().getResource(), element.getName(), false);
 		return true;
 	}
 }

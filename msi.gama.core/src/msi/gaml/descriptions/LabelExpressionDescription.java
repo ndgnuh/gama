@@ -10,13 +10,14 @@
  ********************************************************************************************************/
 package msi.gaml.descriptions;
 
+import java.util.Collection;
 import java.util.Set;
 
 import msi.gama.common.util.StringUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
@@ -90,24 +91,25 @@ public class LabelExpressionDescription extends BasicExpressionDescription imple
 	@Override
 	public Set<String> getStrings(final IDescription context, final boolean skills) {
 		// Assuming of the form [aaa, bbb]
-		try (Collector.AsSet<String> result = Collector.getSet()) {
-			final StringBuilder b = new StringBuilder();
-			for (final char c : value.toCharArray()) {
-				switch (c) {
-					case '[':
-					case ' ':
-						break;
-					case ']':
-					case ',': {
-						result.add(b.toString());
-						b.setLength(0);
-						break;
+		try (Collector.AsSet<String> result = Collector.newSet()) {
+			try (TextBuilder sb = TextBuilder.create()) {
+				for (final char c : value.toCharArray()) {
+					switch (c) {
+						case '[':
+						case ' ':
+							break;
+						case ']':
+						case ',': {
+							result.add(sb.toString());
+							sb.setLength(0);
+							break;
+						}
+						default:
+							sb.append(c);
 					}
-					default:
-						b.append(c);
 				}
+				return result.items();
 			}
-			return result.items();
 		}
 	}
 
@@ -172,6 +174,6 @@ public class LabelExpressionDescription extends BasicExpressionDescription imple
 	// public void collectMetaInformation(final GamlProperties meta) {}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {}
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 }

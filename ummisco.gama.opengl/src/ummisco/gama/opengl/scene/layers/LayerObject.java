@@ -10,13 +10,12 @@
  ********************************************************************************************************/
 package ummisco.gama.opengl.scene.layers;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.jogamp.opengl.GL2;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.interfaces.IKeyword;
@@ -27,7 +26,9 @@ import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.layers.OverlayLayer;
 import msi.gama.runtime.IScope;
+import msi.gama.util.Collector;
 import msi.gama.util.GamaColor;
+import msi.gama.util.ICollector;
 import msi.gama.util.file.GamaGeometryFile;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.PixelUnitExpression;
@@ -67,8 +68,8 @@ public class LayerObject {
 	volatile boolean locked;
 	boolean isAnimated;
 	protected final IOpenGLRenderer renderer;
-	protected final LinkedList<List<AbstractObject<?, ?>>> traces;
-	protected List<AbstractObject<?, ?>> currentList;
+	protected final LinkedList<Collection<AbstractObject<?, ?>>> traces;
+	protected Collection<AbstractObject<?, ?>> currentList;
 	protected Integer openGLListIndex;
 	protected boolean isFading;
 
@@ -107,7 +108,7 @@ public class LayerObject {
 
 		if (expr != null) {
 			final boolean containsPixels = expr.findAny((e) -> e instanceof PixelUnitExpression);
-			offset.setLocation((GamaPoint) Cast.asPoint(scope, expr.value(scope)));
+			offset.setLocation(Cast.asPoint(scope, expr.value(scope)));
 			if (Math.abs(offset.x) <= 1 && !containsPixels) {
 				offset.x *= renderer.getEnvWidth();
 			}
@@ -137,8 +138,8 @@ public class LayerObject {
 		return true;
 	}
 
-	protected List newCurrentList() {
-		return /* Collections.synchronizedList( */new ArrayList()/* ) */;
+	protected Collector.AsList newCurrentList() {
+		return Collector.newList();
 	}
 
 	protected boolean isPickable() {
@@ -212,7 +213,7 @@ public class LayerObject {
 		final IScope scope = renderer.getSurface().getScope();
 		final IExpression expr = layer.getDefinition().getFacet(IKeyword.SIZE);
 		if (expr != null) {
-			size = (GamaPoint) Cast.asPoint(scope, expr.value(scope));
+			size = Cast.asPoint(scope, expr.value(scope));
 			if (size.x <= 1) {
 				size.x *= renderer.getEnvWidth();
 			}
@@ -240,7 +241,7 @@ public class LayerObject {
 				delta = size == 0 ? 0 : 1d / size;
 			}
 			double alpha = 0d;
-			for (final List<AbstractObject<?, ?>> list : traces) {
+			for (final Collection<AbstractObject<?, ?>> list : traces) {
 				alpha = delta == 0d ? this.alpha : this.alpha * (alpha + delta);
 				drawObjects(gl, list, alpha, picking);
 			}
@@ -249,7 +250,7 @@ public class LayerObject {
 		}
 	}
 
-	protected void drawObjects(final OpenGL gl, final List<AbstractObject<?, ?>> list, final double alpha,
+	protected void drawObjects(final OpenGL gl, final Collection<AbstractObject<?, ?>> list, final double alpha,
 			final boolean picking) {
 		final ImmutableList<AbstractObject> l = ImmutableList.copyOf(list);
 		gl.setCurrentObjectAlpha(alpha);
@@ -351,7 +352,8 @@ public class LayerObject {
 			currentList = newCurrentList();
 			traces.offer(currentList);
 		} else {
-			currentList.clear();
+			Collector.release((ICollector) currentList);
+			currentList = null;
 		}
 		final Integer index = openGLListIndex;
 		if (index != null) {
@@ -397,8 +399,8 @@ public class LayerObject {
 		return true;
 	}
 
-	protected void addSyntheticObject(final List<AbstractObject<?, ?>> list, final IShape shape, final GamaColor color,
-			final IShape.Type type, final boolean empty) {
+	protected void addSyntheticObject(final Collection<AbstractObject<?, ?>> list, final IShape shape,
+			final GamaColor color, final IShape.Type type, final boolean empty) {
 		final DrawingAttributes att = new ShapeDrawingAttributes(shape, (IAgent) null, color, color, type,
 				GamaPreferences.Displays.CORE_LINE_WIDTH.getValue());
 		att.setEmpty(empty);

@@ -29,6 +29,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.SelectionListenerAction;
 import org.eclipse.ui.part.ResourceTransfer;
 
+import msi.gama.common.util.TextBuilder;
 import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 
@@ -112,27 +113,28 @@ import ummisco.gama.ui.navigator.contents.ResourceManager;
 		final int length = resources.length;
 		int actualLength = 0;
 		String[] fileNames = new String[length];
-		final StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < length; i++) {
-			final IPath location = resources[i].getLocation();
-			// location may be null. See bug 29491.
-			if (location != null) {
-				fileNames[actualLength++] = location.toOSString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (int i = 0; i < length; i++) {
+				final IPath location = resources[i].getLocation();
+				// location may be null. See bug 29491.
+				if (location != null) {
+					fileNames[actualLength++] = location.toOSString();
+				}
+				if (i > 0) {
+					sb.append("\n"); //$NON-NLS-1$
+				}
+				sb.append(resources[i].getName());
 			}
-			if (i > 0) {
-				buf.append("\n"); //$NON-NLS-1$
+			// was one or more of the locations null?
+			if (actualLength < length) {
+				final String[] tempFileNames = fileNames;
+				fileNames = new String[actualLength];
+				for (int i = 0; i < actualLength; i++) {
+					fileNames[i] = tempFileNames[i];
+				}
 			}
-			buf.append(resources[i].getName());
+			setClipboard(resources, fileNames, sb.toString());
 		}
-		// was one or more of the locations null?
-		if (actualLength < length) {
-			final String[] tempFileNames = fileNames;
-			fileNames = new String[actualLength];
-			for (int i = 0; i < actualLength; i++) {
-				fileNames[i] = tempFileNames[i];
-			}
-		}
-		setClipboard(resources, fileNames, buf.toString());
 
 		// update the enablement of the paste action
 		// workaround since the clipboard does not suppot callbacks

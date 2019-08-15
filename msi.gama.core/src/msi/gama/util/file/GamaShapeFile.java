@@ -34,11 +34,12 @@ import org.opengis.feature.type.AttributeDescriptor;
 import org.opengis.feature.type.GeometryType;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.util.GISUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaGisGeometry;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
@@ -181,9 +182,10 @@ public class GamaShapeFile extends GamaGisFile {
 		 */
 		@Override
 		public String getSuffix() {
-			final StringBuilder sb = new StringBuilder();
-			appendSuffix(sb);
-			return sb.toString();
+			try (TextBuilder sb = TextBuilder.create()) {
+				appendSuffix(sb.getBuilder());
+				return sb.toString();
+			}
 		}
 
 		@Override
@@ -201,17 +203,19 @@ public class GamaShapeFile extends GamaGisFile {
 
 		@Override
 		public String getDocumentation() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Shapefile").append(Strings.LN);
-			sb.append(itemNumber).append(" objects").append(Strings.LN);
-			sb.append("Dimensions: ").append(Math.round(width) + "m x " + Math.round(height) + "m").append(Strings.LN);
-			sb.append("Coordinate Reference System: ").append(crs == null ? "Unknown CRS" : crs.getName().getCode())
-					.append(Strings.LN);
-			if (!attributes.isEmpty()) {
-				sb.append("Attributes: ").append(Strings.LN);
-				attributes.forEach((k, v) -> sb.append("<li>").append(k).append(" (" + v + ")").append("</li>"));
+			try (TextBuilder sb = TextBuilder.create()) {
+				sb.append("Shapefile").append(Strings.LN);
+				sb.append(itemNumber).append(" objects").append(Strings.LN);
+				sb.append("Dimensions: ").append(Math.round(width) + "m x " + Math.round(height) + "m")
+						.append(Strings.LN);
+				sb.append("Coordinate Reference System: ").append(crs == null ? "Unknown CRS" : crs.getName().getCode())
+						.append(Strings.LN);
+				if (!attributes.isEmpty()) {
+					sb.append("Attributes: ").append(Strings.LN);
+					attributes.forEach((k, v) -> sb.append("<li>").append(k).append(" (" + v + ")").append("</li>"));
+				}
+				return sb.toString();
 			}
-			return sb.toString();
 		}
 
 		public Map<String, String> getAttributes() {

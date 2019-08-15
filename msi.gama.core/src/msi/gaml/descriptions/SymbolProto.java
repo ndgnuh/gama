@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.action;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.symbol;
@@ -81,7 +82,7 @@ public class SymbolProto extends AbstractProto {
 		this.hasScope = !doesNotHaveScope;
 		if (possibleFacets != null) {
 			final Builder<String> builder = ImmutableSet.builder();
-			this.possibleFacets = GamaMapFactory.createUnordered();
+			this.possibleFacets = GamaMapFactory.createUnordered(possibleFacets.length);
 			for (final FacetProto f : possibleFacets) {
 				this.possibleFacets.put(f.name, f);
 				f.setOwner(getTitle());
@@ -192,24 +193,26 @@ public class SymbolProto extends AbstractProto {
 	 */
 	@Override
 	public String getDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append(super.getDocumentation());
-		sb.append(getFacetsDocumentation());
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(super.getDocumentation());
+			sb.append(getFacetsDocumentation());
+			return sb.toString();
+		}
 	}
 
 	public String getFacetsDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append("<b><br/>Possible facets :</b><ul>");
-		final List<FacetProto> protos = new ArrayList(getPossibleFacets().values());
-		Collections.sort(protos);
-		for (final FacetProto f : protos) {
-			if (!f.internal) {
-				sb.append("<li>").append(f.getDocumentation());
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("<b><br/>Possible facets :</b><ul>");
+			final List<FacetProto> protos = new ArrayList(getPossibleFacets().values());
+			Collections.sort(protos);
+			for (final FacetProto f : protos) {
+				if (!f.internal) {
+					sb.append("<li>").append(f.getDocumentation());
+				}
+				sb.append("</li>");
 			}
-			sb.append("</li>");
+			return sb.toString();
 		}
-		return sb.toString();
 
 	}
 
@@ -284,14 +287,15 @@ public class SymbolProto extends AbstractProto {
 	 */
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		for (final FacetProto f : possibleFacets.values()) {
-			final String s = f.serialize(includingBuiltIn);
-			if (!s.isEmpty()) {
-				sb.append(s).append(" ");
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final FacetProto f : possibleFacets.values()) {
+				final String s = f.serialize(includingBuiltIn);
+				if (!s.isEmpty()) {
+					sb.append(s).append(" ");
+				}
 			}
+			return getName() + " " + sb.toString();
 		}
-		return getName() + " " + sb.toString();
 	}
 	//
 	// @Override

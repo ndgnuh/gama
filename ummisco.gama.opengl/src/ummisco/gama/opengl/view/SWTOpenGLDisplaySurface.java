@@ -42,7 +42,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.swt.GLCanvas;
 import com.jogamp.opengl.util.GLBuffers;
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IDisplaySurface;
@@ -52,7 +52,6 @@ import msi.gama.common.interfaces.ILayerManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.filter.Different;
 import msi.gama.outputs.LayeredDisplayData;
@@ -68,7 +67,6 @@ import msi.gama.runtime.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.statements.draw.DrawingAttributes;
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.opengl.renderer.JOGLRenderer;
 import ummisco.gama.ui.menus.AgentsMenu;
@@ -87,10 +85,6 @@ import ummisco.gama.ui.views.displays.DisplaySurfaceMenu;
 @display ("opengl")
 @doc ("Displays that uses the OpenGL technology to display their layers in 3D")
 public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	GLAnimatorControl animator;
 	IOpenGLRenderer renderer;
@@ -456,7 +450,7 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 * @see msi.gama.common.interfaces.IDisplaySurface#getModelCoordinates()
 	 */
 	@Override
-	public ILocation getModelCoordinates() {
+	public GamaPoint getModelCoordinates() {
 		final GamaPoint mp = renderer.getCameraHelper().getMousePosition();
 		if (mp == null) { return null; }
 		final GamaPoint p = renderer.getRealWorldPointFromWindowPoint(mp);
@@ -477,7 +471,7 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 			return;
 		}
 		// By default, returns the coordinates in the world.
-		final ILocation point = getModelCoordinates();
+		final GamaPoint point = getModelCoordinates();
 		final String x = point == null ? "N/A" : String.format("%8.6f", point.getX());
 		final String y = point == null ? "N/A" : String.format("%8.6f", point.getY());
 		sb.append(String.format("X%15s | Y%15s", x, y));
@@ -492,10 +486,10 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 			final Point origin = new Point(0, 0);
 			int xc = -origin.x;
 			int yc = -origin.y;
-			e.expandToInclude((GamaPoint) currentLayer.getModelCoordinatesFrom(xc, yc, this));
+			e.expandToInclude(currentLayer.getModelCoordinatesFrom(xc, yc, this));
 			xc = xc + renderer.getCanvas().getSurfaceWidth();
 			yc = yc + renderer.getCanvas().getSurfaceHeight();
-			e.expandToInclude((GamaPoint) currentLayer.getModelCoordinatesFrom(xc, yc, this));
+			e.expandToInclude(currentLayer.getModelCoordinatesFrom(xc, yc, this));
 			currentLayer.getData().setVisibleRegion(e);
 		}
 		return e;
@@ -507,7 +501,7 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 * @see msi.gama.common.interfaces.IDisplaySurface#getModelCoordinatesFrom(int, int, java.awt.Point, java.awt.Point)
 	 */
 	@Override
-	public ILocation getModelCoordinatesFrom(final int xOnScreen, final int yOnScreen, final Point sizeInPixels,
+	public GamaPoint getModelCoordinatesFrom(final int xOnScreen, final int yOnScreen, final Point sizeInPixels,
 			final Point positionInPixels) {
 		final GamaPoint mp = new GamaPoint(xOnScreen, yOnScreen);
 		final GamaPoint p = renderer.getRealWorldPointFromWindowPoint(mp);
@@ -521,7 +515,7 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 */
 	@Override
 	public Collection<IAgent> selectAgent(final int x, final int y) {
-		final ILocation pp = getModelCoordinatesFrom(x, y, null, null);
+		final GamaPoint pp = getModelCoordinatesFrom(x, y, null, null);
 		return scope.getRoot().getTopology().getNeighborsOf(scope, new GamaPoint(pp.getX(), pp.getY()),
 				renderer.getMaxEnvDim() / 100, Different.with());
 	}

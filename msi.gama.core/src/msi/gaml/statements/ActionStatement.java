@@ -210,7 +210,7 @@ public class ActionStatement extends AbstractStatementSequenceWithArgs {
 		private void assertReturnedValueIsOk(final StatementDescription cd) {
 			final IType at = cd.getGamlType();
 			if (at == Types.NO_TYPE) { return; }
-			try (final ICollector<StatementDescription> returns = Collector.getOrderedSet()) {
+			try (final ICollector<StatementDescription> returns = Collector.newOrderedSet()) {
 				final DescriptionVisitor<IDescription> finder = (desc) -> {
 					if (desc.getKeyword().equals(RETURN)) {
 						returns.add((StatementDescription) desc);

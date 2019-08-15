@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IKeyword;
@@ -34,7 +34,7 @@ import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.continuous.RootTopology;
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
@@ -374,10 +374,10 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	}
 
 	@Override
-	public void setLocation(final ILocation newGlobalLoc) {}
+	public void setLocation(final GamaPoint newGlobalLoc) {}
 
 	@Override
-	public ILocation getLocation() {
+	public GamaPoint getLocation() {
 		if (geometry == null || geometry.getInnerGeometry() == null) { return new GamaPoint(0, 0); }
 		return super.getLocation();
 	}
@@ -403,7 +403,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 
 		final Envelope3D env = geom.getEnvelope();
 		if (getProjectionFactory().getWorld() == null) {
-			projectionFactory.setWorldProjectionEnv(GAMA.getRuntimeScope(), env);
+			projectionFactory.setWorldProjectionEnv(getScope(), env);
 		}
 
 		((WorldProjection) getProjectionFactory().getWorld()).updateTranslations(env);

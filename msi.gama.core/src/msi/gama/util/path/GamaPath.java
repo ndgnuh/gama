@@ -18,6 +18,8 @@ import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.util.Collector;
+import msi.gama.util.Collector.AsList;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.IList;
 import msi.gama.util.IMap;
@@ -26,50 +28,39 @@ import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 
-// Si construit � partir d'une liste de points, cr�e la g�om�trie correspondante
-// Si construit � partir d'un graphe spatial, cr�e la g�om�trie � partir des edges pass�s.
-// Si
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamaPath<V, E, G extends IGraph<V, E>> implements Comparable, GraphPath<V, E>, IPath<V, E, G> {
 
 	V source, target;
 	IList<E> edges;
-
 	double weight = 0.0;
-
-	// The graph attribute is override in GamaSpatialPath by a GamaSpatialGraph
 	G graph;
 	int graphVersion;
-
-	// FIXME virer le constructeur par d�faut... used for the inheritance...
-	public GamaPath() {}
 
 	@Override
 	public IType getGamlType() {
 		return Types.PATH;
 	}
 
-	public GamaPath(final G g, final V start, final V target, final IList<? extends E> _edges) {
-		init(g, start, target, _edges, true);
+	protected GamaPath() {}
+
+	GamaPath(final G g, final V start, final V target, final IList<? extends E> _edges, final boolean modifyEdges) {
 		this.graph = g;
+		init(start, target, _edges, modifyEdges);
+
 	}
 
-	public GamaPath(final G g, final V start, final V target, final IList<? extends E> _edges,
-			final boolean modify_edges) {
-		init(g, start, target, _edges, modify_edges);
-		this.graph = g;
-	}
-
-	public GamaPath(final IList<? extends V> nodes) {
-		final IList<E> _edges = GamaListFactory.create();
-		for (int i = 0; i < nodes.size() - 1; i++) {
-			final E edge = createEdge(nodes.get(i), nodes.get(i + 1));
-			if (edge != null) {
-				_edges.add(edge);
-			}
-		}
-		init(null, nodes.get(0), nodes.get(nodes.size() - 1), _edges, false);
+	GamaPath(final IList<? extends V> nodes) {
 		this.graph = null;
+		try (AsList<E> _edges = Collector.newList()) {
+			for (int i = 0; i < nodes.size() - 1; i++) {
+				final E edge = createEdge(nodes.get(i), nodes.get(i + 1));
+				if (edge != null) {
+					_edges.add(edge);
+				}
+			}
+			init(nodes.get(0), nodes.get(nodes.size() - 1), _edges.items(), false);
+		}
 	}
 
 	protected E createEdge(final V v, final V v2) {
@@ -77,8 +68,7 @@ public class GamaPath<V, E, G extends IGraph<V, E>> implements Comparable, Graph
 		return null;
 	}
 
-	public void init(final G g, final V start, final V target, final IList<? extends E> _edges,
-			final boolean modify_edges) {
+	public void init(final V start, final V target, final IList<? extends E> _edges, final boolean modify_edges) {
 		this.source = start;
 		this.target = target;
 		this.edges = GamaListFactory.create();
@@ -89,24 +79,6 @@ public class GamaPath<V, E, G extends IGraph<V, E>> implements Comparable, Graph
 				edges.add(edge);
 			}
 		}
-	}
-
-	public GamaPath(final G g, final IList<? extends V> nodes) {
-		if (!(g instanceof GamaSpatialGraph) && nodes.isEmpty()) {
-			throw new ClassCastException("We cannot create an empty path in a non-spatial graph");
-		} else if (nodes.isEmpty()) {
-			source = null;
-			target = null;
-		} else {
-			source = nodes.get(0);
-			target = nodes.get(nodes.size() - 1);
-		}
-		edges = GamaListFactory.create();
-
-		for (int i = 0, n = nodes.size(); i < n - 1; i++) {
-			edges.add(g.getEdge(nodes.get(i), nodes.get(i + 1)));
-		}
-		graph = g;
 	}
 
 	// /////////////////////////////////////////////////
@@ -153,18 +125,11 @@ public class GamaPath<V, E, G extends IGraph<V, E>> implements Comparable, Graph
 
 	@Override
 	public GamaPath copy(final IScope scope) {
-		return new GamaPath(graph, source, target, edges);
+		return new GamaPath(graph, source, target, edges, true);
 	}
 
 	// /////////////////////////////////////////////////
 	// Implements methods from IPath
-
-	// @Override
-	// public IList<IShape> getAgentList() {
-	// GamaList<IShape> ags = GamaListFactory.create(Types.GEOMETRY);
-	// ags.addAll(new HashSet<IShape>(realObjects.values()));
-	// return ags;
-	// }
 
 	@Override
 	public IList<V> getVertexList() {
@@ -177,25 +142,6 @@ public class GamaPath<V, E, G extends IGraph<V, E>> implements Comparable, Graph
 	public double getWeight(final IShape line) throws GamaRuntimeException {
 		return line.getGeometry().getPerimeter(); // workaround for the moment
 	}
-
-	/**
-	 * Private method intended to compute the geometry of the path (a polyline) from the list of segments. While the
-	 * path is not invalidated, this list of segments should not be changed and the geometry can be cached.
-	 */
-	// FIXME BEN
-	// private void computeGeometry() {
-	// if ( super.getInnerGeometry() == null ) {
-	// try {
-	// setGeometry(GamaGeometryType.geometriesToGeometry(null, segments)); //
-	// Verify null
-	// // parameter
-	// } catch (GamaRuntimeException e) {
-	// GAMA.reportError(e);
-	// e.printStackTrace();
-	// }
-	// // Faire une methode geometriesToPolyline ? linesToPolyline ?
-	// }
-	// }
 
 	@Override
 	public String toString() {

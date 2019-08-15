@@ -11,14 +11,15 @@
 package msi.gaml.expressions;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaListFactory;
-import msi.gama.util.ICollector;
 import msi.gama.util.IList;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -142,9 +143,10 @@ public class ListExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		surround(sb, '[', ']', elements);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			surround(sb, '[', ']', elements);
+			return sb.toString();
+		}
 	}
 
 	@Override
@@ -179,7 +181,7 @@ public class ListExpression extends AbstractExpression implements IOperator {
 	// }
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		for (final IExpression e : elements) {
 			if (e != null) {
 				e.collectUsedVarsOf(species, result);

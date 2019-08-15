@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package msi.gama.util.matrix;
 
-import static com.vividsolutions.jts.index.quadtree.IntervalSize.isZeroWidth;
+import static org.locationtech.jts.index.quadtree.IntervalSize.isZeroWidth;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,11 +23,12 @@ import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import com.google.common.primitives.Doubles;
-import com.vividsolutions.jts.index.quadtree.IntervalSize;
+import org.locationtech.jts.index.quadtree.IntervalSize;
 
 import msi.gama.common.util.RandomUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaListFactory;
@@ -107,7 +108,7 @@ public class GamaFloatMatrix extends GamaMatrix<Double> {
 		}
 	}
 
-	public GamaFloatMatrix(final IScope scope, final List objects, final ILocation preferredSize)
+	public GamaFloatMatrix(final IScope scope, final List objects, final GamaPoint preferredSize)
 			throws GamaRuntimeException {
 		super(scope, objects, preferredSize, Types.FLOAT);
 		setMatrix(new double[numRows * numCols]);
@@ -275,7 +276,7 @@ public class GamaFloatMatrix extends GamaMatrix<Double> {
 	}
 
 	@Override
-	protected IMatrix _matrixValue(final IScope scope, final ILocation preferredSize, final IType type,
+	protected IMatrix _matrixValue(final IScope scope, final GamaPoint preferredSize, final IType type,
 			final boolean copy) {
 		return GamaMatrixType.from(scope, this, type, preferredSize, copy);
 	}
@@ -293,7 +294,7 @@ public class GamaFloatMatrix extends GamaMatrix<Double> {
 	}
 
 	@Override
-	public GamaFloatMatrix copy(final IScope scope, final ILocation size, final boolean copy) {
+	public GamaFloatMatrix copy(final IScope scope, final GamaPoint size, final boolean copy) {
 		if (size == null) {
 			if (copy) {
 				return new GamaFloatMatrix(numCols, numRows, Arrays.copyOf(getMatrix(), matrix.length));
@@ -399,21 +400,22 @@ public class GamaFloatMatrix extends GamaMatrix<Double> {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder(numRows * numCols * 5);
-		sb.append('[');
-		for (int row = 0; row < numRows; row++) {
-			for (int col = 0; col < numCols; col++) {
-				sb.append(get(null, col, row));
-				if (col < numCols - 1) {
-					sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append('[');
+			for (int row = 0; row < numRows; row++) {
+				for (int col = 0; col < numCols; col++) {
+					sb.append(get(null, col, row));
+					if (col < numCols - 1) {
+						sb.append(',');
+					}
+				}
+				if (row < numRows - 1) {
+					sb.append(';');
 				}
 			}
-			if (row < numRows - 1) {
-				sb.append(';');
-			}
+			sb.append(']');
+			return sb.toString();
 		}
-		sb.append(']');
-		return sb.toString();
 	}
 
 	/**

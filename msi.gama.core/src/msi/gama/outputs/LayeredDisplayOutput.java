@@ -322,7 +322,8 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 			}
 
 			final IExpressionDescription auto = d.getFacet(AUTOSAVE);
-			if (auto != null && auto.getExpression().isConst() && auto.getExpression().literalValue().equals(TRUE)) {
+			if (auto != null && auto.getExpression() != null && auto.getExpression().isConst()
+					&& TRUE.equals(auto.getExpression().literalValue())) {
 				d.info("With autosave enabled, GAMA must remain the frontmost window and the display must not be covered or obscured by other windows",
 						IGamlIssue.GENERAL, auto.getTarget(), AUTOSAVE);
 			}
@@ -517,10 +518,6 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 		if (surface == null) {
 			view = null;
 		}
-	}
-
-	public BufferedImage getImage() {
-		return surface == null ? null : surface.getImage(surface.getWidth(), surface.getHeight());
 	}
 
 	public BufferedImage getImage(final int w, final int h) {

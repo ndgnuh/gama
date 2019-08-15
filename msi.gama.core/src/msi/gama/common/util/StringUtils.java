@@ -34,8 +34,7 @@ import msi.gaml.types.Types;
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class StringUtils {
 
-	final static String strings = "'(?:[^\\\\']+|\\\\.)*'"; // Old:
-															// '[^'\\\r\n]*(?:\\.[^'\\\r\n]*)*'
+	final static String strings = "'(?:[^\\\\']+|\\\\.)*'";
 	final static String operators = "::|<>|!=|>=|<=|//";
 	public final static String ponctuation = "\\p{Punct}";
 	public final static String literals = "\\w+\\$\\w+|\\#\\w+|\\d+\\.\\d+|\\w+\\.\\w+|\\w+";
@@ -43,11 +42,12 @@ public class StringUtils {
 
 	static public String toGamlString(final String s) {
 		if (s == null) { return null; }
-		final StringBuilder sb = new StringBuilder(s.length());
-		sb.append('\'');
-		sb.append(s.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("/", "\\/"));
-		sb.append('\'');
-		return sb.toString();
+		try (final TextBuilder sb = TextBuilder.create()) {
+			sb.append('\'');
+			sb.append(s.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("/", "\\/"));
+			sb.append('\'');
+			return sb.toString();
+		}
 	}
 
 	static public String toJavaString(final String s) {
@@ -69,112 +69,71 @@ public class StringUtils {
 		return tokens;
 	}
 
-	/**
-	 * Unescape java.
-	 *
-	 * @param str
-	 *            the str
-	 *
-	 * @return the string
-	 */
-	static public String unescapeJava(final String str) {
-		if (str == null) { return null; }
+	public static String unescapeJava(final String st) {
+		if (st == null) { return null; }
+		try (TextBuilder sb = TextBuilder.create()) {
 
-		final StringBuilder writer = new StringBuilder(str.length());
-		unescapeJava(writer, str);
-		final String result = writer.toString();
-		// DEBUG.LOG("String en entrée:" + str + " ; en sortie:" +
-		// result);
-		// writer.setLength(0);
-		return result;
-
-	}
-
-	// private static final StringBuilder writer = new StringBuilder();
-	// private static final StringBuilder unicode = new StringBuilder(4);
-
-	/**
-	 * Unescape java.
-	 *
-	 * @param out
-	 *            the out
-	 * @param str
-	 *            the str
-	 */
-	static private void unescapeJava(final StringBuilder writer, final String str) {
-		if (str == null) { return; }
-		final int sz = str.length();
-
-		boolean hadSlash = false;
-		boolean inUnicode = false;
-		StringBuilder unicode = null;
-		for (int i = 0; i < sz; i++) {
-			final char ch = str.charAt(i);
-			if (inUnicode) {
-				// if in unicode, then we're reading unicode
-				// values in somehow
-				if (unicode == null) {
-					unicode = new StringBuilder(4);
-				}
-				unicode.append(ch);
-				if (unicode.length() == 4) {
-					// digits
-					// which represents our unicode character
-					final int value = Integer.parseInt(unicode.toString(), 16);
-					writer.append((char) value);
-					unicode.setLength(0);
-					inUnicode = false;
-					hadSlash = false;
-				}
-				continue;
-			}
-			if (hadSlash) {
-				// handle an escaped value
-				hadSlash = false;
-				switch (ch) {
-					case '\\':
-						writer.append('\\');
-						break;
-					case '\'':
-						writer.append('\'');
-						break;
-					case '\"':
-						writer.append('"');
-						break;
-					case 'r':
-						writer.append('\r');
-						break;
-					case 'f':
-						writer.append('\f');
-						break;
-					case 't':
-						writer.append('\t');
-						break;
-					case 'n':
-						writer.append('\n');
-						break;
-					case 'b':
-						writer.append('\b');
-						break;
-					case 'u': {
-						// uh-oh, we're in unicode country....
-						inUnicode = true;
-						break;
+			for (int i = 0; i < st.length(); i++) {
+				char ch = st.charAt(i);
+				if (ch == '\\') {
+					final char nextChar = i == st.length() - 1 ? '\\' : st.charAt(i + 1);
+					// Octal escape?
+					if (nextChar >= '0' && nextChar <= '7') {
+						String code = "" + nextChar;
+						i++;
+						if (i < st.length() - 1 && st.charAt(i + 1) >= '0' && st.charAt(i + 1) <= '7') {
+							code += st.charAt(i + 1);
+							i++;
+							if (i < st.length() - 1 && st.charAt(i + 1) >= '0' && st.charAt(i + 1) <= '7') {
+								code += st.charAt(i + 1);
+								i++;
+							}
+						}
+						sb.append((char) Integer.parseInt(code, 8));
+						continue;
 					}
-					default:
-						writer.append(ch);
-						break;
+					switch (nextChar) {
+						case '\\':
+							ch = '\\';
+							break;
+						case 'b':
+							ch = '\b';
+							break;
+						case 'f':
+							ch = '\f';
+							break;
+						case 'n':
+							ch = '\n';
+							break;
+						case 'r':
+							ch = '\r';
+							break;
+						case 't':
+							ch = '\t';
+							break;
+						case '\"':
+							ch = '\"';
+							break;
+						case '\'':
+							ch = '\'';
+							break;
+						// Hex Unicode: u????
+						case 'u':
+							if (i >= st.length() - 5) {
+								ch = 'u';
+								break;
+							}
+							final int code = Integer.parseInt(
+									"" + st.charAt(i + 2) + st.charAt(i + 3) + st.charAt(i + 4) + st.charAt(i + 5), 16);
+							sb.append(Character.toChars(code));
+							i += 5;
+							continue;
+					}
+					i++;
 				}
-				continue;
-			} else if (ch == '\\') {
-				hadSlash = true;
-				continue;
+				sb.append(ch);
 			}
-			writer.append(ch);
-		}
-		if (hadSlash) {
-			// string, let's output it anyway.
-			writer.append('\\');
+			return sb.toString();
 		}
 	}
 

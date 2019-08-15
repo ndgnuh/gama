@@ -20,9 +20,9 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import msi.gama.application.workbench.PerspectiveHelper;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.access.GamlSearchField;
+import ummisco.gama.ui.utils.IPerspectiveHelper;
 import ummisco.gama.ui.utils.PlatformHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -34,10 +34,6 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  *
  */
 public class GamaKeyBindings implements Listener {
-
-	static {
-		// DEBUG.ON();
-	}
 
 	public static int COMMAND = PlatformHelper.isMac() ? SWT.COMMAND : SWT.CTRL;
 	public static String SEARCH_STRING = format(COMMAND + SWT.SHIFT, 'H');
@@ -91,7 +87,7 @@ public class GamaKeyBindings implements Listener {
 				break;
 			// Handles RELOAD & RELAUNCH
 			case 'r': {
-				if (PerspectiveHelper.isModelingPerspective()) {
+				if (GAMA.getGui().getUIService(IPerspectiveHelper.class).isModelingPerspective()) {
 					// See Issue #2741
 					break;
 				}

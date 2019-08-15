@@ -477,7 +477,7 @@ public class ExperimentJob implements IExperimentJob {
 			aOutput.setAttributeNode(o1);
 
 			final Attr o2 = doc.createAttribute(XmlTAG.FRAMERATE_TAG);
-			o2.setValue(new Integer(o.getFrameRate()).toString());
+			o2.setValue((o.getFrameRate()).toString());
 			aOutput.setAttributeNode(o2);
 		}
 		return simulation;

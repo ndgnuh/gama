@@ -34,6 +34,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IGamlIssue;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
 import msi.gaml.expressions.DenotedActionExpression;
@@ -78,27 +79,29 @@ public abstract class TypeDescription extends SymbolDescription {
 	}
 
 	public String getAttributeDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append("<b><br/>Attributes :</b><ul>");
-		for (final VariableDescription f : getAttributes()) {
-			sb.append("<li>").append("<b>").append(f.getName()).append("</b>").append(f.getShortDescription());
-			sb.append("</li>");
-		}
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("<b><br/>Attributes :</b><ul>");
+			for (final VariableDescription f : getAttributes()) {
+				sb.append("<li>").append("<b>").append(f.getName()).append("</b>").append(f.getShortDescription());
+				sb.append("</li>");
+			}
 
-		sb.append("</ul>");
-		return sb.toString();
+			sb.append("</ul>");
+			return sb.toString();
+		}
 	}
 
 	public String getActionDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append("<b><br/>Actions :</b><ul>");
-		for (final ActionDescription f : getActions()) {
-			sb.append("<li>").append("<b>").append(f.getName()).append("</b>").append(f.getShortDescription());
-			sb.append("</li>");
-		}
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("<b><br/>Actions :</b><ul>");
+			for (final ActionDescription f : getActions()) {
+				sb.append("<li>").append("<b>").append(f.getName()).append("</b>").append(f.getShortDescription());
+				sb.append("</li>");
+			}
 
-		sb.append("</ul>");
-		return sb.toString();
+			sb.append("</ul>");
+			return sb.toString();
+		}
 	}
 
 	@Override
@@ -449,7 +452,7 @@ public abstract class TypeDescription extends SymbolDescription {
 				duplicateInfo(newAction, existing);
 			}
 		} else {
-			actions = GamaMapFactory.createUnordered();
+			actions = GamaMapFactory.createUnordered(4);
 		}
 		actions.put(actionName, newAction);
 	}

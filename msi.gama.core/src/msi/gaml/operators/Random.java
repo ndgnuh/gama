@@ -13,7 +13,7 @@ package msi.gaml.operators;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
 import msi.gama.precompiler.GamlAnnotations.operator;
@@ -24,6 +24,7 @@ import msi.gama.precompiler.IOperatorCategory;
 import msi.gama.precompiler.ITypeProvider;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.util.Collector;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.IContainer;
 import msi.gama.util.IList;
@@ -395,8 +396,6 @@ public class Random {
 		return new GamaPoint(x, y, z);
 	}
 
-	static GamaPoint NULL_POINT = new GamaPoint(0, 0, 0);
-
 	@operator (
 			value = "rnd",
 			category = { IOperatorCategory.RANDOM },
@@ -409,8 +408,8 @@ public class Random {
 					equals = "{x,y} with x in [0.0,2.0], y in [0.0,3.0], z = 0.0",
 					test = false) })
 	@test ("seed <- 1.0; rnd ({2.5,3, 1.0}) = {1.935030382553449,2.3551192220022856,0.5087825199078746}")
-	public static ILocation opRnd(final IScope scope, final GamaPoint max) {
-		return opRnd(scope, NULL_POINT, max);
+	public static GamaPoint opRnd(final IScope scope, final GamaPoint max) {
+		return opRnd(scope, GamaPoint.NULL_POINT, max);
 	}
 
 	@operator (
@@ -459,35 +458,36 @@ public class Random {
 			see = { "rnd" })
 	@test ("seed <- 1.0; rnd_choice([0.2,0.5,0.3]) = 2")
 	public static Integer opRndChoice(final IScope scope, final IList distribution) {
-		final IList<Double> normalizedDistribution = GamaListFactory.create(Types.FLOAT);
-		Double sumElt = 0.0;
+		try (Collector.AsList<Double> normalizedDistribution = Collector.newList()) {
+			Double sumElt = 0.0;
 
-		for (final Object eltDistrib : distribution) {
-			final Double elt = Cast.asFloat(scope, eltDistrib);
-			if (elt < 0.0) {
-				throw GamaRuntimeException.create(new RuntimeException("Distribution elements should be positive."),
-						scope);
+			for (final Object eltDistrib : distribution) {
+				final Double elt = Cast.asFloat(scope, eltDistrib);
+				if (elt < 0.0) {
+					throw GamaRuntimeException.create(new RuntimeException("Distribution elements should be positive."),
+							scope);
+				}
+				normalizedDistribution.add(elt);
+				sumElt = sumElt + elt;
 			}
-			normalizedDistribution.add(elt);
-			sumElt = sumElt + elt;
-		}
-		if (sumElt == 0.0) {
-			throw GamaRuntimeException
-					.create(new RuntimeException("Distribution elements should not be all equal to 0"), scope);
-		}
+			if (sumElt == 0.0) {
+				throw GamaRuntimeException
+						.create(new RuntimeException("Distribution elements should not be all equal to 0"), scope);
+			}
 
-		for (int i = 0; i < normalizedDistribution.size(); i++) {
-			normalizedDistribution.set(i, normalizedDistribution.get(i) / sumElt);
+			for (int i = 0; i < normalizedDistribution.size(); i++) {
+				normalizedDistribution.items().set(i, normalizedDistribution.items().get(i) / sumElt);
+			}
+
+			double randomValue = RANDOM(scope).between(0., 1.);
+
+			for (int i = 0; i < distribution.size(); i++) {
+				randomValue = randomValue - normalizedDistribution.items().get(i);
+				if (randomValue <= 0) { return i; }
+			}
+
+			return -1;
 		}
-
-		double randomValue = RANDOM(scope).between(0., 1.);
-
-		for (int i = 0; i < distribution.size(); i++) {
-			randomValue = randomValue - normalizedDistribution.get(i);
-			if (randomValue <= 0) { return i; }
-		}
-
-		return -1;
 	}
 
 	@operator (

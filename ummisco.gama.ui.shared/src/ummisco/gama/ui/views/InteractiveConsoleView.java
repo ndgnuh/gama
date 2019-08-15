@@ -54,7 +54,6 @@ import msi.gaml.types.IType;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.resources.IGamaIcons;
-import ummisco.gama.ui.utils.ViewsHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
@@ -184,17 +183,17 @@ public class InteractiveConsoleView extends GamaViewPart
 	private void insertHistory(final boolean back) {
 
 		if (history.size() == 0) {
-			ViewsHelper.requestUserAttention(this, "No history");
+			WorkbenchHelper.requestUserAttention(this, "No history");
 			return;
 		}
 		if (indexInHistory <= 0) {
 			if (back) {
-				ViewsHelper.requestUserAttention(this, "No more history");
+				WorkbenchHelper.requestUserAttention(this, "No more history");
 			}
 			indexInHistory = 0;
 		} else if (indexInHistory >= history.size() - 1) {
 			if (!back) {
-				ViewsHelper.requestUserAttention(this, "No more history");
+				WorkbenchHelper.requestUserAttention(this, "No more history");
 			}
 			indexInHistory = history.size() - 1;
 		}

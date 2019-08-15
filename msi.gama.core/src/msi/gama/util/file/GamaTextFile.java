@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gama.util.file.GamaTextFile.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gama.util.file.GamaTextFile.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gama.util.file;
 
@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
 import msi.gama.precompiler.GamlAnnotations.file;
@@ -41,18 +42,20 @@ import msi.gaml.types.Types;
 		doc = @doc ("Represents an arbitrary text file. The internal contents is a list of strings (lines)"))
 public class GamaTextFile extends GamaFile<IList<String>, String> {
 
-	@doc (value= "This file constructor allows to read a text file (.txt, .data, .text)",
-			examples = {
-					@example(value = "file f <-text_file(\"file.txt\");", isExecutable = false)
-			})
+	@doc (
+			value = "This file constructor allows to read a text file (.txt, .data, .text)",
+			examples = { @example (
+					value = "file f <-text_file(\"file.txt\");",
+					isExecutable = false) })
 	public GamaTextFile(final IScope scope, final String pathName) throws GamaRuntimeException {
 		super(scope, pathName);
 	}
-	
-	@doc (value= "This file constructor allows to store a list of string in a text file (it does not save it - just store it in memory)",
-			examples = {
-					@example(value = "file f <-text_file(\"file.txt\", [\"item1\",\"item2\",\"item3\"]);", isExecutable = false)
-			})
+
+	@doc (
+			value = "This file constructor allows to store a list of string in a text file (it does not save it - just store it in memory)",
+			examples = { @example (
+					value = "file f <-text_file(\"file.txt\", [\"item1\",\"item2\",\"item3\"]);",
+					isExecutable = false) })
 	public GamaTextFile(final IScope scope, final String pathName, final IList<String> text) {
 		super(scope, pathName, text);
 	}
@@ -65,17 +68,18 @@ public class GamaTextFile extends GamaFile<IList<String>, String> {
 	@Override
 	public String _stringValue(final IScope scope) throws GamaRuntimeException {
 		getContents(scope);
-		final StringBuilder sb = new StringBuilder(getBuffer().length(scope) * 200);
-		for (final String s : getBuffer().iterable(scope)) {
-			sb.append(s).append(Strings.LN);
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final String s : getBuffer().iterable(scope)) {
+				sb.append(s).append(Strings.LN);
+			}
+			sb.setLength(sb.length() - 1);
+			return sb.toString();
 		}
-		sb.setLength(sb.length() - 1);
-		return sb.toString();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see msi.gama.util.GamaFile#fillBuffer()
 	 */
 	@Override
@@ -96,7 +100,7 @@ public class GamaTextFile extends GamaFile<IList<String>, String> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see msi.gama.util.GamaFile#flushBuffer()
 	 */
 	@Override

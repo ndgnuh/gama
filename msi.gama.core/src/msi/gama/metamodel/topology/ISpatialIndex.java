@@ -12,8 +12,6 @@ package msi.gama.metamodel.topology;
 
 import java.util.Collection;
 
-import com.vividsolutions.jts.geom.Envelope;
-
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
@@ -35,15 +33,23 @@ public interface ISpatialIndex {
 
 	IAgent firstAtDistance(IScope scope, final IShape source, final double dist, final IAgentFilter f);
 
-	Collection<IAgent> firstAtDistance(IScope scope, final IShape source, final double dist, final IAgentFilter f,
-			int number, Collection<IAgent> alreadyChosen);
+	void firstAtDistance(IScope scope, final IShape source, final double dist, final IAgentFilter f, int number,
+			Collection<IAgent> result);
 
-	Collection<IAgent> allInEnvelope(IScope scope, final IShape source, final Envelope envelope, final IAgentFilter f,
+	Collection<IAgent> allInEnvelope(IScope scope, final IShape source, final Envelope3D envelope, final IAgentFilter f,
 			boolean contained);
 
 	Collection<IAgent> allAtDistance(IScope scope, IShape source, double dist, IAgentFilter f);
 
 	void dispose();
+
+	void updateWith(Envelope3D envelope);
+
+	Collection<IAgent> allAgents();
+
+	boolean isParallel();
+
+	Envelope3D getBounds();
 
 	public interface Compound extends ISpatialIndex {
 
@@ -51,14 +57,8 @@ public interface ISpatialIndex {
 
 		void remove(final IPopulation<? extends IAgent> species);
 
-		void updateQuadtree(Envelope envelope);
-
 		void mergeWith(Compound spatialIndex);
 
 	}
-
-	Collection<IAgent> allAgents();
-
-	boolean isParallel();
 
 }

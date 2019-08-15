@@ -11,6 +11,7 @@ package msi.gama.util.file.json;
 import java.util.Collection;
 import java.util.Iterator;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.util.GamaList;
 import msi.gaml.types.Types;
 
@@ -31,19 +32,20 @@ public class GamaJsonList extends GamaList<Object> implements Jsonable {
 
 	@Override
 	public String toJson() {
-		final StringBuilder writable = new StringBuilder();
-		boolean isFirstElement = true;
-		final Iterator<Object> elements = this.iterator();
-		writable.append('[');
-		while (elements.hasNext()) {
-			if (isFirstElement) {
-				isFirstElement = false;
-			} else {
-				writable.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			boolean isFirstElement = true;
+			final Iterator<Object> elements = this.iterator();
+			sb.append('[');
+			while (elements.hasNext()) {
+				if (isFirstElement) {
+					isFirstElement = false;
+				} else {
+					sb.append(',');
+				}
+				sb.append(Jsoner.serialize(elements.next()));
 			}
-			writable.append(Jsoner.serialize(elements.next()));
+			sb.append(']');
+			return sb.toString();
 		}
-		writable.append(']');
-		return writable.toString();
 	}
 }

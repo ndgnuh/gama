@@ -32,21 +32,18 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
-import msi.gama.application.workbench.PerspectiveHelper;
 import msi.gama.common.interfaces.IGamaView;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.runtime.GAMA;
 import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
 import one.util.streamex.StreamEx;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.ui.utils.IPerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 @SuppressWarnings ({ "rawtypes" })
 public class ArrangeDisplayViews extends AbstractHandler {
-
-	static {
-		DEBUG.ON();
-	}
 
 	public static final String LAYOUT_KEY = "msi.gama.displays.layout";
 
@@ -79,15 +76,15 @@ public class ArrangeDisplayViews extends AbstractHandler {
 	}
 
 	private static EPartService getPartService() {
-		return WorkbenchHelper.getService(EPartService.class);
+		return GAMA.getGui().getUIService(EPartService.class);
 	}
 
 	private static MApplication getApplication() {
-		return WorkbenchHelper.getService(MApplication.class);
+		return GAMA.getGui().getUIService(MApplication.class);
 	}
 
 	private static EModelService getModelService() {
-		return WorkbenchHelper.getService(EModelService.class);
+		return GAMA.getGui().getUIService(EModelService.class);
 	}
 
 	public static void execute(final GamaTree<String> tree) {
@@ -140,7 +137,7 @@ public class ArrangeDisplayViews extends AbstractHandler {
 
 	public static void decorateDisplays() {
 		WorkbenchHelper.getDisplayViews().forEach(v -> {
-			final Boolean tb = PerspectiveHelper.keepToolbars();
+			final Boolean tb = GAMA.getGui().getUIService(IPerspectiveHelper.class).keepToolbars();
 			if (tb != null) {
 				if (tb) {
 					v.showToolbar();
@@ -148,7 +145,7 @@ public class ArrangeDisplayViews extends AbstractHandler {
 					v.hideToolbar();
 				}
 			}
-			if (PerspectiveHelper.showOverlays()) {
+			if (GAMA.getGui().getUIService(IPerspectiveHelper.class).showOverlays()) {
 				v.showOverlay();
 			} else {
 				v.hideOverlay();
@@ -219,7 +216,10 @@ public class ArrangeDisplayViews extends AbstractHandler {
 		if (dir == null) { // stacks cannot be stacked
 			if (root instanceof MPartStack && isPartOfLayout(root)) { return root; }
 		}
-		if (dir == null && (root instanceof MPartStack || !PerspectiveHelper.keepTabs())) { return root; }
+		if (dir == null
+				&& (root instanceof MPartStack || !GAMA.getGui().getUIService(IPerspectiveHelper.class).keepTabs())) {
+			return root;
+		}
 		final MElementContainer c = dir != null ? INSTANCE.createPartSashContainer() : INSTANCE.createPartStack();
 		c.getTransientData().put("Dynamic", true);
 		c.getTransientData().put(LAYOUT, true);

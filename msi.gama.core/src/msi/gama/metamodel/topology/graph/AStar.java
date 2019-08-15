@@ -75,9 +75,9 @@ public class AStar<V, E> {
 	}
 
 	public IList<E> buildPath(final ASNode target) {
-		try (final Collector.AsList<E> path = Collector.getList();
+		try (final Collector.AsList<E> path = Collector.newList();
 
-				final Collector.AsList<ASNode> thePath = Collector.getList();) {
+				final Collector.AsList<ASNode> thePath = Collector.newList();) {
 			ASNode node = target;
 
 			while (node != null) {
@@ -153,8 +153,8 @@ public class AStar<V, E> {
 
 	protected double heuristic(final Object node1, final Object node2) {
 		if (isSpatialGraph) {
-			final GamaPoint pt1 = (GamaPoint) ((IShape) node1).getLocation();
-			final GamaPoint pt2 = (GamaPoint) ((IShape) node2).getLocation();
+			final GamaPoint pt1 = ((IShape) node1).getLocation();
+			final GamaPoint pt2 = ((IShape) node2).getLocation();
 			return pt1.distance(pt2);
 
 		}

@@ -167,7 +167,7 @@ public class GamaDate implements IValue, Temporal, Comparable<GamaDate> {
 	}
 
 	public GamaDate(final IScope scope, final String dateStr, final String pattern, final String locale) {
-		this(scope, parse(scope, dateStr, Dates.getFormatter(pattern, locale)));
+		this(scope, parse(scope, dateStr, Dates.getFormatter(scope, pattern, locale)));
 	}
 
 	public GamaDate(final IScope scope, final double val) {
@@ -483,7 +483,7 @@ public class GamaDate implements IValue, Temporal, Comparable<GamaDate> {
 	}
 
 	public String toString(final String string, final String locale) {
-		return Dates.getFormatter(string, locale).format(this);
+		return Dates.getFormatter(GAMA.getRuntimeScope(), string, locale).format(this);
 	}
 
 	public boolean isGreaterThan(final GamaDate date2, final boolean strict) {
@@ -499,8 +499,8 @@ public class GamaDate implements IValue, Temporal, Comparable<GamaDate> {
 	@Override
 	public boolean equals(final Object o) {
 		if (o instanceof GamaDate) {
-			Temporal a = getLocalDateTime();
-			Temporal b = ((GamaDate) o).getLocalDateTime();
+			final Temporal a = getLocalDateTime();
+			final Temporal b = ((GamaDate) o).getLocalDateTime();
 			return a.equals(b);
 		}
 
@@ -664,7 +664,7 @@ public class GamaDate implements IValue, Temporal, Comparable<GamaDate> {
 
 	public static GamaDate fromISOString(final String s) {
 		try {
-			final TemporalAccessor t = Dates.getFormatter(Dates.ISO_OFFSET_KEY, null).parse(s);
+			final TemporalAccessor t = Dates.getFormatter(GAMA.getRuntimeScope(), Dates.ISO_OFFSET_KEY, null).parse(s);
 			if (t instanceof Temporal) { return of((Temporal) t); }
 		} catch (final DateTimeParseException e) {}
 		return new GamaDate(null, s);

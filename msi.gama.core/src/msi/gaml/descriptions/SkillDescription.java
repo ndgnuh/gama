@@ -15,6 +15,7 @@ import java.util.Collections;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ISkill;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.skill;
 import msi.gaml.architecture.IArchitecture;
@@ -81,8 +82,9 @@ public class SkillDescription extends TypeDescription {
 	}
 
 	public Skill getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = createInstance();
+		}
 		return instance;
 	}
 
@@ -98,32 +100,33 @@ public class SkillDescription extends TypeDescription {
 	@Override
 	public String getDocumentation() {
 		final doc d = getDocAnnotation();
-		final StringBuilder sb = new StringBuilder(200);
-		if (d != null) {
-			String s = d.value();
-			if (s != null && !s.isEmpty()) {
-				sb.append(s);
-				sb.append("<br/>");
+		try (TextBuilder sb = TextBuilder.create()) {
+			if (d != null) {
+				final String s = d.value();
+				if (s != null && !s.isEmpty()) {
+					sb.append(s);
+					sb.append("<br/>");
+				}
+				final String deprecated = d.deprecated();
+				if (deprecated != null && !deprecated.isEmpty()) {
+					sb.append("<b>Deprecated</b>: ");
+					sb.append("<i>");
+					sb.append(deprecated);
+					sb.append("</i><br/>");
+				}
 			}
-			String deprecated = d.deprecated();
-			if (deprecated != null && !deprecated.isEmpty()) {
-				sb.append("<b>Deprecated</b>: ");
-				sb.append("<i>");
-				sb.append(deprecated);
-				sb.append("</i><br/>");
-			}
+			sb.append(getAttributeDocumentation());
+			sb.append("<br/>");
+			sb.append(getActionDocumentation());
+			sb.append("<br/>");
+			return sb.toString();
 		}
-		sb.append(getAttributeDocumentation());
-		sb.append("<br/>");
-		sb.append(getActionDocumentation());
-		sb.append("<br/>");
-		return sb.toString();
 
 	}
 
 	public doc getDocAnnotation() {
-		skill s = javaBase.getAnnotation(skill.class);
-		doc[] docs = s.doc();
+		final skill s = javaBase.getAnnotation(skill.class);
+		final doc[] docs = s.doc();
 		doc d = null;
 		if (docs.length == 0) {
 			if (javaBase.isAnnotationPresent(doc.class)) {
@@ -136,12 +139,10 @@ public class SkillDescription extends TypeDescription {
 	}
 
 	public String getDeprecated() {
-		doc d = getDocAnnotation();
-		if (d == null)
-			return null;
-		String s = d.deprecated();
-		if (s == null || s.isEmpty())
-			return null;
+		final doc d = getDocAnnotation();
+		if (d == null) { return null; }
+		final String s = d.deprecated();
+		if (s == null || s.isEmpty()) { return null; }
 		return s;
 	}
 

@@ -23,8 +23,9 @@ import org.apache.commons.math3.linear.RealMatrix;
 import com.google.common.primitives.Ints;
 
 import msi.gama.common.util.RandomUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.GAMA.InScope;
 import msi.gama.runtime.IScope;
@@ -110,7 +111,7 @@ public class GamaIntMatrix extends GamaMatrix<Integer> {
 		matrix = mat;
 	}
 
-	public GamaIntMatrix(final IScope scope, final List objects, final ILocation preferredSize) {
+	public GamaIntMatrix(final IScope scope, final List objects, final GamaPoint preferredSize) {
 		super(scope, objects, preferredSize, Types.INT);
 		matrix = new int[numRows * numCols];
 		if (preferredSize != null) {
@@ -289,7 +290,7 @@ public class GamaIntMatrix extends GamaMatrix<Integer> {
 	}
 
 	@Override
-	protected IMatrix _matrixValue(final IScope scope, final ILocation preferredSize, final IType type,
+	protected IMatrix _matrixValue(final IScope scope, final GamaPoint preferredSize, final IType type,
 			final boolean copy) {
 		return GamaMatrixType.from(scope, this, type, preferredSize, copy);
 	}
@@ -306,7 +307,7 @@ public class GamaIntMatrix extends GamaMatrix<Integer> {
 	}
 
 	@Override
-	public GamaIntMatrix copy(final IScope scope, final ILocation preferredSize, final boolean copy) {
+	public GamaIntMatrix copy(final IScope scope, final GamaPoint preferredSize, final boolean copy) {
 		if (preferredSize == null) {
 			if (copy) {
 				return new GamaIntMatrix(numCols, numRows, Arrays.copyOf(matrix, matrix.length));
@@ -412,28 +413,29 @@ public class GamaIntMatrix extends GamaMatrix<Integer> {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder(numRows * numCols * 5);
-		sb.append('[');
-		GAMA.run(new InScope.Void() {
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append('[');
+			GAMA.run(new InScope.Void() {
 
-			@Override
-			public void process(final IScope scope) {
-				for (int row = 0; row < numRows; row++) {
-					for (int col = 0; col < numCols; col++) {
-						sb.append(get(scope, col, row));
-						if (col < numCols - 1) {
-							sb.append(',');
+				@Override
+				public void process(final IScope scope) {
+					for (int row = 0; row < numRows; row++) {
+						for (int col = 0; col < numCols; col++) {
+							sb.append(get(scope, col, row));
+							if (col < numCols - 1) {
+								sb.append(',');
+							}
+						}
+						if (row < numRows - 1) {
+							sb.append(';');
 						}
 					}
-					if (row < numRows - 1) {
-						sb.append(';');
-					}
 				}
-			}
-		});
+			});
 
-		sb.append(']');
-		return sb.toString();
+			sb.append(']');
+			return sb.toString();
+		}
 	}
 
 	/**

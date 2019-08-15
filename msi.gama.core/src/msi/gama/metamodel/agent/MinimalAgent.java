@@ -13,14 +13,14 @@ package msi.gama.metamodel.agent;
 import java.util.Objects;
 import java.util.Set;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -92,7 +92,7 @@ public class MinimalAgent extends AbstractAgent {
 		}
 
 		final ITopology topology = getTopology();
-		final ILocation newGeomLocation = newGeometry.getLocation().copy(getScope());
+		final GamaPoint newGeomLocation = newGeometry.getLocation().copy(getScope());
 
 		// if the old geometry is "shared" with another agent, we create a new
 		// one. otherwise, we copy it directly.
@@ -145,9 +145,9 @@ public class MinimalAgent extends AbstractAgent {
 
 	@SuppressWarnings ("rawtypes")
 	@Override
-	public/* synchronized */void setLocation(final ILocation point) {
+	public/* synchronized */void setLocation(final GamaPoint point) {
 		if (point == null || dead() || this.getSpecies().isGrid()) { return; }
-		final ILocation newLocation = point.copy(getScope());
+		final GamaPoint newLocation = point.copy(getScope());
 		final ITopology topology = getTopology();
 		if (topology == null) { return; }
 		topology.normalizeLocation(newLocation, false);
@@ -155,7 +155,7 @@ public class MinimalAgent extends AbstractAgent {
 		if (geometry == null || geometry.getInnerGeometry() == null) {
 			setGeometry(GamaGeometryType.createPoint(newLocation));
 		} else {
-			final ILocation previousPoint = geometry.getLocation();
+			final GamaPoint previousPoint = geometry.getLocation();
 			if (newLocation.equals(previousPoint)) { return; }
 			final Envelope3D previous = geometry.getEnvelope();
 			geometry.setLocation(newLocation);
@@ -182,11 +182,11 @@ public class MinimalAgent extends AbstractAgent {
 	}
 
 	@Override
-	public/* synchronized */ILocation getLocation() {
+	public/* synchronized */GamaPoint getLocation() {
 		if (geometry == null || geometry.getInnerGeometry() == null) {
 			final IScope scope = this.getScope();
 			final ITopology t = getTopology();
-			final ILocation randomLocation = t == null ? null : t.getRandomLocation(scope);
+			final GamaPoint randomLocation = t == null ? null : t.getRandomLocation(scope);
 			if (randomLocation == null) { return null; }
 			setGeometry(GamaGeometryType.createPoint(randomLocation));
 			return randomLocation;

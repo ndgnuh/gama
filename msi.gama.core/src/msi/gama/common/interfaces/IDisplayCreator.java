@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gama.common.interfaces.IDisplayCreator.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gama.common.interfaces.IDisplayCreator.java, in plugin msi.gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gama.common.interfaces;
 
@@ -29,7 +29,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method create()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.IDisplayCreator#create(java.lang.Object[])
 		 */
 		@Override
@@ -49,7 +49,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method getName()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.INamed#getName()
 		 */
 		@Override
@@ -59,7 +59,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method setName()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.INamed#setName(java.lang.String)
 		 */
 		@Override
@@ -67,7 +67,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method serialize()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.IGamlable#serialize(boolean)
 		 */
 		@Override
@@ -77,7 +77,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method getTitle()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.IGamlDescription#getTitle()
 		 */
 		@Override
@@ -87,7 +87,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method getDocumentation()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.IGamlDescription#getDocumentation()
 		 */
 		@Override
@@ -97,7 +97,7 @@ public interface IDisplayCreator {
 
 		/**
 		 * Method getDefiningPlugin()
-		 * 
+		 *
 		 * @see msi.gama.common.interfaces.IGamlDescription#getDefiningPlugin()
 		 */
 		@Override
@@ -105,15 +105,6 @@ public interface IDisplayCreator {
 			return plugin;
 		}
 
-		/**
-		 * Method collectPlugins()
-		 * 
-		 * @see msi.gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-		 */
-		// @Override
-		// public void collectMetaInformation(final GamlProperties meta) {
-		// meta.put(GamlProperties.PLUGINS, plugin);
-		// }
 	}
 
 	IDisplaySurface create(Object... args);

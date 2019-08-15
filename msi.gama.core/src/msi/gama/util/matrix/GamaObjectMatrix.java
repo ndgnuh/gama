@@ -18,7 +18,8 @@ import org.apache.commons.lang.ArrayUtils;
 import com.google.common.collect.ImmutableList;
 
 import msi.gama.common.util.RandomUtils;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.common.util.TextBuilder;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.GAMA.InScope;
@@ -50,7 +51,7 @@ public class GamaObjectMatrix extends GamaMatrix<Object> {
 	/** The matrix. */
 	private Object[] matrix;
 
-	public GamaObjectMatrix(final ILocation p, final IType<?> contentsType) {
+	public GamaObjectMatrix(final GamaPoint p, final IType<?> contentsType) {
 		this((int) p.getX(), (int) p.getY(), contentsType);
 	}
 
@@ -82,7 +83,7 @@ public class GamaObjectMatrix extends GamaMatrix<Object> {
 		java.lang.System.arraycopy(objects, 0, getMatrix(), 0, Math.min(objects.length, rows * cols));
 	}
 
-	public GamaObjectMatrix(final IScope scope, final IList<?> objects, final ILocation preferredSize,
+	public GamaObjectMatrix(final IScope scope, final IList<?> objects, final GamaPoint preferredSize,
 			final IType<?> contentsType) {
 		super(scope, objects, preferredSize, contentsType);
 		setMatrix(new Object[numRows * numCols]);
@@ -255,7 +256,7 @@ public class GamaObjectMatrix extends GamaMatrix<Object> {
 	}
 
 	@Override
-	protected IMatrix<Object> _matrixValue(final IScope scope, final ILocation preferredSize, final IType type,
+	protected IMatrix<Object> _matrixValue(final IScope scope, final GamaPoint preferredSize, final IType type,
 			final boolean copy) {
 		return GamaMatrixType.from(scope, this, type, preferredSize, copy);
 	}
@@ -272,7 +273,7 @@ public class GamaObjectMatrix extends GamaMatrix<Object> {
 	}
 
 	@Override
-	public GamaObjectMatrix copy(final IScope scope, final ILocation size, final boolean copy) {
+	public GamaObjectMatrix copy(final IScope scope, final GamaPoint size, final boolean copy) {
 		if (size == null) {
 			if (copy) {
 				return new GamaObjectMatrix(numCols, numRows, Arrays.copyOf(matrix, matrix.length),
@@ -368,28 +369,29 @@ public class GamaObjectMatrix extends GamaMatrix<Object> {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder(numRows * numCols * 5);
-		sb.append('[');
-		GAMA.run(new InScope.Void() {
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append('[');
+			GAMA.run(new InScope.Void() {
 
-			@Override
-			public void process(final IScope scope) {
-				for (int row = 0; row < numRows; row++) {
-					for (int col = 0; col < numCols; col++) {
-						sb.append(get(scope, col, row));
-						if (col < numCols - 1) {
-							sb.append(',');
+				@Override
+				public void process(final IScope scope) {
+					for (int row = 0; row < numRows; row++) {
+						for (int col = 0; col < numCols; col++) {
+							sb.append(get(scope, col, row));
+							if (col < numCols - 1) {
+								sb.append(',');
+							}
+						}
+						if (row < numRows - 1) {
+							sb.append(';');
 						}
 					}
-					if (row < numRows - 1) {
-						sb.append(';');
-					}
 				}
-			}
-		});
+			});
 
-		sb.append(']');
-		return sb.toString();
+			sb.append(']');
+			return sb.toString();
+		}
 	}
 
 	/**

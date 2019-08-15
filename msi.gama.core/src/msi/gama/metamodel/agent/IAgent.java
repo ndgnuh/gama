@@ -20,7 +20,7 @@ import msi.gama.common.interfaces.IStepable;
 import msi.gama.common.interfaces.IVarAndActionSupport;
 import msi.gama.kernel.model.IModel;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.precompiler.GamlAnnotations.doc;
@@ -100,11 +100,11 @@ public interface IAgent extends /* ISkill, */ IShape, INamed, Comparable<IAgent>
 	@getter (
 			value = IKeyword.LOCATION,
 			initializer = true)
-	public ILocation getLocation();
+	public GamaPoint getLocation();
 
 	@Override
 	@setter (IKeyword.LOCATION)
-	public void setLocation(final ILocation l);
+	public void setLocation(final GamaPoint l);
 
 	@Override
 	@getter (IKeyword.SHAPE)

@@ -10,13 +10,12 @@
  ********************************************************************************************************/
 package msi.gama.util.file;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-// ArcGridReader still requires input streams
-import java.io.StringBufferInputStream;
 import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
@@ -24,20 +23,18 @@ import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.io.AbstractGridCoverage2DReader;
 import org.geotools.data.DataSourceException;
 import org.geotools.data.PrjFileReader;
-import org.geotools.factory.Hints;
 import org.geotools.gce.arcgrid.ArcGridReader;
 import org.geotools.gce.geotiff.GeoTiffReader;
 import org.geotools.geometry.DirectPosition2D;
 import org.geotools.geometry.GeneralEnvelope;
+import org.geotools.util.factory.Hints;
+import org.locationtech.jts.geom.Envelope;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
-
-import com.vividsolutions.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
@@ -115,11 +112,6 @@ public class GamaGridFile extends GamaGisFile {
 						} else {
 							text.append(line + NL);
 						}
-
-						// if (cpt < 10) {}
-						// else {
-						// text.append(line + NL);
-						// }
 					}
 				} catch (final FileNotFoundException e2) {
 					final GamaRuntimeException ex = GamaRuntimeException.error(
@@ -130,7 +122,7 @@ public class GamaGridFile extends GamaGisFile {
 
 				text.append(NL);
 				// fis = new StringBufferInputStream(text.toString());
-				reader = new GamaGridReader(scope, new StringBufferInputStream(text.toString()), fillBuffer);
+				reader = new GamaGridReader(scope, new ByteArrayInputStream(text.toString().getBytes()), fillBuffer);
 			}
 		}
 		return reader;
@@ -171,7 +163,8 @@ public class GamaGridFile extends GamaGisFile {
 				final GeneralEnvelope genv = store.getOriginalEnvelope();
 				numRows = store.getOriginalGridRange().getHigh(1) + 1;
 				numCols = store.getOriginalGridRange().getHigh(0) + 1;
-				final Envelope3D env = Envelope3D.of(genv.getMinimum(0), genv.getMaximum(0), genv.getMinimum(1), genv.getMaximum(1), 0, 0);
+				final Envelope3D env = Envelope3D.of(genv.getMinimum(0), genv.getMaximum(0), genv.getMinimum(1),
+						genv.getMaximum(1), 0, 0);
 				computeProjection(scope, env);
 				final Envelope envP = gis.getProjectedEnvelope();
 				final double cellHeight = envP.getHeight() / numRows;
@@ -360,34 +353,17 @@ public class GamaGridFile extends GamaGisFile {
 		final File source = getFile(scope);
 		// check to see if there is a projection file
 		// getting name for the prj file
-		final String sourceAsString;
-		sourceAsString = source.getAbsolutePath();
+		final String sourceAsString = source.getAbsolutePath();
 		final int index = sourceAsString.lastIndexOf('.');
-		final StringBuffer prjFileName;
-		if (index == -1) {
-			prjFileName = new StringBuffer(sourceAsString);
-		} else {
-			prjFileName = new StringBuffer(sourceAsString.substring(0, index));
-		}
-		prjFileName.append(".prj");
-
 		// does it exist?
-		final File prjFile = new File(prjFileName.toString());
+		final File prjFile = new File((index == -1 ? sourceAsString : sourceAsString.substring(0, index)) + ".prj");
 		if (prjFile.exists()) {
 			// it exists then we have to read it
 			PrjFileReader projReader = null;
 			try (FileInputStream fip = new FileInputStream(prjFile); final FileChannel channel = fip.getChannel();) {
 				projReader = new PrjFileReader(channel);
 				return projReader.getCoordinateReferenceSystem();
-			} catch (final FileNotFoundException e) {
-				// warn about the error but proceed, it is not fatal
-				// we have at least the default crs to use
-				return null;
-			} catch (final IOException e) {
-				// warn about the error but proceed, it is not fatal
-				// we have at least the default crs to use
-				return null;
-			} catch (final FactoryException e) {
+			} catch (final IOException | FactoryException e) {
 				// warn about the error but proceed, it is not fatal
 				// we have at least the default crs to use
 				return null;
@@ -414,18 +390,6 @@ public class GamaGridFile extends GamaGisFile {
 		return null;
 	}
 
-	// public static RenderedImage getImage(final String pathName) {
-	// return GAMA.run(new InScope<RenderedImage>() {
-	//
-	// @Override
-	// public RenderedImage run(final IScope scope) {
-	// GamaGridFile file = new GamaGridFile(scope, pathName);
-	// file.createReader(scope, true);
-	// return file.coverage.getRenderedImage();
-	// }
-	// });
-	// }
-
 	@Override
 	public void invalidateContents() {
 		super.invalidateContents();
@@ -440,7 +404,7 @@ public class GamaGridFile extends GamaGisFile {
 		return coverage;
 	}
 
-	public Double valueOf(final IScope scope, final ILocation loc) {
+	public Double valueOf(final IScope scope, final GamaPoint loc) {
 		if (getBuffer() == null) {
 			fillBuffer(scope);
 		}

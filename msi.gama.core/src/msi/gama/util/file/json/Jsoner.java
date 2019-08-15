@@ -20,6 +20,8 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
+import msi.gama.common.util.TextBuilder;
+
 /**
  * Jsoner provides JSON utilities for escaping strings to be JSON compatible, thread safe parsing (RFC 4627) JSON
  * strings, and serializing data to strings in JSON format.
@@ -402,55 +404,57 @@ public class Jsoner {
 	 *         [u2000..u20FF] with a backslash (\) which itself must be escaped by the backslash in a java string.
 	 */
 	public static String escape(final String escapable) {
-		final StringBuilder builder = new StringBuilder();
-		final int characters = escapable.length();
-		for (int i = 0; i < characters; i++) {
-			final char character = escapable.charAt(i);
-			switch (character) {
-				case '"':
-					builder.append("\\\"");
-					break;
-				case '\\':
-					builder.append("\\\\");
-					break;
-				case '\b':
-					builder.append("\\b");
-					break;
-				case '\f':
-					builder.append("\\f");
-					break;
-				case '\n':
-					builder.append("\\n");
-					break;
-				case '\r':
-					builder.append("\\r");
-					break;
-				case '\t':
-					builder.append("\\t");
-					break;
-				case '/':
-					builder.append("\\/");
-					break;
-				default:
-					/*
-					 * The many characters that get replaced are benign to software but could be mistaken by people
-					 * reading it for a JSON relevant character.
-					 */
-					if (character >= '\u0000' && character <= '\u001F' || character >= '\u007F' && character <= '\u009F'
-							|| character >= '\u2000' && character <= '\u20FF') {
-						final String characterHexCode = Integer.toHexString(character);
-						builder.append("\\u");
-						for (int k = 0; k < 4 - characterHexCode.length(); k++) {
-							builder.append("0");
+		try (TextBuilder sb = TextBuilder.create()) {
+			final int characters = escapable.length();
+			for (int i = 0; i < characters; i++) {
+				final char character = escapable.charAt(i);
+				switch (character) {
+					case '"':
+						sb.append("\\\"");
+						break;
+					case '\\':
+						sb.append("\\\\");
+						break;
+					case '\b':
+						sb.append("\\b");
+						break;
+					case '\f':
+						sb.append("\\f");
+						break;
+					case '\n':
+						sb.append("\\n");
+						break;
+					case '\r':
+						sb.append("\\r");
+						break;
+					case '\t':
+						sb.append("\\t");
+						break;
+					case '/':
+						sb.append("\\/");
+						break;
+					default:
+						/*
+						 * The many characters that get replaced are benign to software but could be mistaken by people
+						 * reading it for a JSON relevant character.
+						 */
+						if (character >= '\u0000' && character <= '\u001F'
+								|| character >= '\u007F' && character <= '\u009F'
+								|| character >= '\u2000' && character <= '\u20FF') {
+							final String characterHexCode = Integer.toHexString(character);
+							sb.append("\\u");
+							for (int k = 0; k < 4 - characterHexCode.length(); k++) {
+								sb.append("0");
+							}
+							sb.append(characterHexCode.toUpperCase());
+						} else {
+							/* Character didn't need escaping. */
+							sb.append(character);
 						}
-						builder.append(characterHexCode.toUpperCase());
-					} else {
-						/* Character didn't need escaping. */
-						builder.append(character);
-					}
+				}
 			}
+			return sb.toString();
 		}
-		return builder.toString();
 	}
 
 	/**
@@ -524,11 +528,12 @@ public class Jsoner {
 		if (spaces > 10 || spaces < 2) {
 			throw new IllegalArgumentException("Indentation with spaces must be between 2 and 10.");
 		}
-		final StringBuilder indentation = new StringBuilder("");
-		for (int i = 0; i < spaces; i++) {
-			indentation.append(" ");
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (int i = 0; i < spaces; i++) {
+				sb.append(" ");
+			}
+			return Jsoner.prettyPrint(printable, sb.toString());
 		}
-		return Jsoner.prettyPrint(printable, indentation.toString());
 	}
 
 	/**

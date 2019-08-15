@@ -2,11 +2,11 @@
  *
  * ummisco.gama.opengl.scene.layers.AxesLayerObject.java, in plugin ummisco.gama.opengl, is part of the source code of
  * the GAMA modeling and simulation platform (v. 1.8)
- * 
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package ummisco.gama.opengl.scene.layers;
 
@@ -20,7 +20,7 @@ import static msi.gaml.operators.IUnits.top_center;
 import static msi.gaml.types.GamaGeometryType.buildCone3D;
 import static msi.gaml.types.GamaGeometryType.buildLineCylinder;
 
-import java.util.List;
+import java.util.Collection;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.metamodel.shape.GamaPoint;
@@ -73,7 +73,7 @@ public class AxesLayerObject extends StaticLayerObject.World {
 	@Override
 	public void draw(final OpenGL gl) {
 		if (renderer.getOpenGLHelper().isInRotationMode()) {
-			final GamaPoint pivotPoint = (GamaPoint) renderer.getCameraTarget();
+			final GamaPoint pivotPoint = renderer.getCameraTarget();
 			setOffset(pivotPoint.yNegated());
 			final double size = renderer.getOpenGLHelper().sizeOfRotationElements();
 			final double ratio = size / renderer.getMaxEnvDim();
@@ -86,7 +86,7 @@ public class AxesLayerObject extends StaticLayerObject.World {
 	}
 
 	@Override
-	public void fillWithObjects(final List<AbstractObject<?, ?>> list) {
+	public void fillWithObjects(final Collection<AbstractObject<?, ?>> list) {
 		for (int i = 0; i < 3; i++) {
 			final GamaPoint p = dirs[i];
 			// build axis

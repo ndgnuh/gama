@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.common.util.StringUtils;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
@@ -56,24 +57,27 @@ public class StringBasedExpressionDescription extends BasicExpressionDescription
 	public Set<String> getStrings(final IDescription context, final boolean skills) {
 		// Assuming of the form [aaa, bbb]
 		final Set<String> result = new HashSet<>();
-		final StringBuilder b = new StringBuilder();
-		for (final char c : string.toCharArray()) {
-			switch (c) {
-				case '[':
-				case ' ':
-					break;
-				case ']':
-				case ',': {
-					result.add(b.toString());
-					b.setLength(0);
-					break;
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final char c : string.toCharArray()) {
+				switch (c) {
+					case '[':
+					case ' ':
+						break;
+					case ']':
+					case ',': {
+						result.add(sb.toString());
+						sb.setLength(0);
+						break;
+					}
+					default:
+						sb.append(c);
 				}
-				default:
-					b.append(c);
 			}
+			return result;
 		}
-		return result;
 	}
+	
+	
 
 	@Override
 	public IExpressionDescription cleanCopy() {

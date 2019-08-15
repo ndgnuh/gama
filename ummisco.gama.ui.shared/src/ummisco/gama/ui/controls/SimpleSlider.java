@@ -32,15 +32,11 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.IGamaColors;
 
 public class SimpleSlider extends Composite implements IPopupProvider {
 
-	static {
-		DEBUG.OFF();
-	}
 	final int thumbWidth = 6;
 	final Composite parent;
 	final Thumb thumb;

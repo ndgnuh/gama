@@ -95,7 +95,7 @@ public class Dates {
 			DEFAULT_FORMAT, IType.STRING, true).in(GamaPreferences.External.NAME, GamaPreferences.External.DATES)
 			.onChange((e) -> {
 				try {
-					FORMATTERS.put(CUSTOM_KEY, getFormatter(StringUtils.toJavaString(e), null));
+					FORMATTERS.put(CUSTOM_KEY, getFormatter(GAMA.getRuntimeScope(), StringUtils.toJavaString(e), null));
 					if (DEFAULT_VALUE.equals(CUSTOM_KEY)) {
 						FORMATTERS.put(DEFAULT_KEY, FORMATTERS.get(CUSTOM_KEY));
 					}
@@ -219,7 +219,7 @@ public class Dates {
 			examples = { @example (
 					value = "(date('2000-01-01') to date('2010-01-01')) every (#month) // builds an interval between these two dates which contains all the monthly dates starting from the beginning of the interval",
 					isExecutable = false) })
-	@test("list((date('2001-01-01') to date('2001-1-02')) every(#day)) collect each = [date ('2001-01-01 00:00:00')]")
+	@test ("list((date('2001-01-01') to date('2001-1-02')) every(#day)) collect each = [date ('2001-01-01 00:00:00')]")
 	public static IList<GamaDate> every(final IScope scope, final GamaDateInterval interval, final IExpression period) {
 		return interval.step(Cast.asFloat(scope, period.value(scope)));
 	}
@@ -238,8 +238,8 @@ public class Dates {
 					@example (
 							value = "(date('2000-01-01') to date('2010-01-01')) every (#month) // builds an interval between these two dates which contains all the monthly dates starting from the beginning of the interval",
 							isExecutable = false) })
-	@test("list((date('2001-01-01') to date('2001-4-01')) every(#month)) collect each =\n" + 
-			"		[date ('2001-01-01 00:00:00'),date ('2001-01-31 00:00:00'),date ('2001-03-02 00:00:00')]")
+	@test ("list((date('2001-01-01') to date('2001-4-01')) every(#month)) collect each =\n"
+			+ "		[date ('2001-01-01 00:00:00'),date ('2001-01-31 00:00:00'),date ('2001-03-02 00:00:00')]")
 	public static IList<GamaDate> to(final IScope scope, final GamaDate start, final GamaDate end) {
 		return GamaDateInterval.of(start, end);
 	}
@@ -256,9 +256,9 @@ public class Dates {
 					@example (
 							value = "every(2#days) since (starting_date + 1#day) // the computation will return true 1 day after the starting date and every two days after this reference date",
 							isExecutable = false) })
-	@test("starting_date <- date([2019,5,9]);since(date([2019,5,10])) = false")
-	@test("starting_date <- date([2019,5,9]);since(date([2019,5,9])) = true")
-	@test("starting_date <- date([2019,5,9]);since(date([2019,5,8])) = true")
+	@test ("starting_date <- date([2019,5,9]);since(date([2019,5,10])) = false")
+	@test ("starting_date <- date([2019,5,9]);since(date([2019,5,9])) = true")
+	@test ("starting_date <- date([2019,5,9]);since(date([2019,5,8])) = true")
 	public static boolean since(final IScope scope, final GamaDate date) {
 		return scope.getSimulation().getCurrentDate().isGreaterThan(date, false);
 	}
@@ -278,9 +278,9 @@ public class Dates {
 					@example (
 							value = "every(2#days) after (starting_date + 1#day) 	// the computation will return true every two days (using the starting_date of the model as the starting point) only for the dates strictly after this starting_date + 1#day",
 							isExecutable = false) })
-	@test("starting_date <- date([2019,5,9]);after(date([2019,5,10])) = false")
-	@test("starting_date <- date([2019,5,9]);after(date([2019,5,9])) = false")
-	@test("starting_date <- date([2019,5,9]);after(date([2019,5,8])) = true")
+	@test ("starting_date <- date([2019,5,9]);after(date([2019,5,10])) = false")
+	@test ("starting_date <- date([2019,5,9]);after(date([2019,5,9])) = false")
+	@test ("starting_date <- date([2019,5,9]);after(date([2019,5,8])) = true")
 	public static boolean after(final IScope scope, final GamaDate date) {
 		return scope.getSimulation().getCurrentDate().isGreaterThan(date, true);
 	}
@@ -294,9 +294,9 @@ public class Dates {
 			examples = { @example (
 					value = "reflex when: before(starting_date) {} 	// this reflex will never be run",
 					isExecutable = false) })
-	@test("starting_date <- date([2019,5,9]);before(date([2019,5,10])) = true")
-	@test("starting_date <- date([2019,5,9]);before(date([2019,5,9])) = false")
-	@test("starting_date <- date([2019,5,9]);before(date([2019,5,8])) = false")
+	@test ("starting_date <- date([2019,5,9]);before(date([2019,5,10])) = true")
+	@test ("starting_date <- date([2019,5,9]);before(date([2019,5,9])) = false")
+	@test ("starting_date <- date([2019,5,9]);before(date([2019,5,8])) = false")
 	public static boolean before(final IScope scope, final GamaDate date) {
 		return scope.getSimulation().getCurrentDate().isSmallerThan(date, true);
 	}
@@ -310,9 +310,9 @@ public class Dates {
 			examples = { @example (
 					value = "reflex when: until(starting_date) {} 	// This reflex will be run only once at the beginning of the simulation",
 					isExecutable = false) })
-	@test("starting_date <- date([2019,5,9]);until(date([2019,5,10])) = true")
-	@test("starting_date <- date([2019,5,9]);until(date([2019,5,9])) = true")
-	@test("starting_date <- date([2019,5,9]);until(date([2019,5,8])) = false")
+	@test ("starting_date <- date([2019,5,9]);until(date([2019,5,10])) = true")
+	@test ("starting_date <- date([2019,5,9]);until(date([2019,5,9])) = true")
+	@test ("starting_date <- date([2019,5,9]);until(date([2019,5,8])) = false")
 	public static boolean until(final IScope scope, final GamaDate date) {
 		return scope.getSimulation().getCurrentDate().isSmallerThan(date, false);
 	}
@@ -405,7 +405,7 @@ public class Dates {
 							@example (
 									value = "between(date('2000-01-01'), date('2020-02-02'))",
 									isExecutable = false) }))
-	@test("starting_date <- date([2019,5,9]);between((date([2019,5,8])), (date([2019,5,10]))) = true")
+	@test ("starting_date <- date([2019,5,9]);between((date([2019,5,8])), (date([2019,5,10]))) = true")
 	public static boolean between(final IScope scope, final GamaDate date1, final GamaDate date2) {
 		return scope.getSimulation().getCurrentDate().isGreaterThan(date1, true)
 				&& scope.getSimulation().getCurrentDate().isSmallerThan(date2, true);
@@ -923,7 +923,7 @@ public class Dates {
 		return p + locale;
 	}
 
-	public static DateTimeFormatter getFormatter(final String p, final String locale) {
+	public static DateTimeFormatter getFormatter(final IScope scope, final String p, final String locale) {
 
 		final String pattern = p;
 		// Can happen during initialization
@@ -939,8 +939,7 @@ public class Dates {
 				FORMATTERS.put(getFormatterKey(pattern, locale), result);
 				return result;
 			} catch (final IllegalArgumentException e) {
-				GAMA.reportAndThrowIfNeeded(GAMA.getRuntimeScope(),
-						GamaRuntimeException.create(e, GAMA.getRuntimeScope()), false);
+				GAMA.reportAndThrowIfNeeded(scope, GamaRuntimeException.create(e, scope), false);
 				return FORMATTERS.get(DEFAULT_KEY);
 			}
 		}
@@ -1038,7 +1037,7 @@ public class Dates {
 					examples = @example (
 							value = "date d <- date(\"1999-january-30\", 'yyyy-MMMM-dd', 'en');",
 							test = false)))
-	@test("date('1999-01-30', 'yyyy-MM-dd', 'en') = date('1999-01-30 00:00:00')")
+	@test ("date('1999-01-30', 'yyyy-MM-dd', 'en') = date('1999-01-30 00:00:00')")
 	// @test("date('1999-january-30', 'yyyy-MMMM-dd', 'en') = date('1999-01-30 00:00:00')")
 	public static GamaDate date(final IScope scope, final String value, final String pattern, final String locale) {
 		return new GamaDate(scope, value, pattern, locale);

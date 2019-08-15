@@ -13,15 +13,15 @@ package simtools.gaml.extensions.traffic;
 import java.util.Collection;
 import java.util.Collections;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
@@ -287,7 +287,7 @@ public class OldDrivingSkill extends MovingSkill {
 							@example ("do gotoTraffic target: one_of (list (species (self))) speed: speed * 2 on: road_network living_space: 2.0;") }))
 	public IPath primGotoTraffic(final IScope scope) throws GamaRuntimeException {
 		final IAgent agent = getCurrentAgent(scope);
-		final ILocation source = agent.getLocation().copy(scope);
+		final GamaPoint source = agent.getLocation().copy(scope);
 		final double maxDist = computeDistance(scope, agent);
 		final double tolerance = computeTolerance(scope, agent);
 		final double livingSpace = computeLivingSpace(scope, agent);
@@ -423,7 +423,7 @@ public class OldDrivingSkill extends MovingSkill {
 	private void moveToNextLocAlongPathSimplifiedTraffic(final IScope scope, final IAgent agent, final IPath path,
 			final double _distance, final IMap weigths, final double livingSpace, final double tolerance,
 			final String laneAttributes, final IList<ISpecies> obsSpecies) {
-		GamaPoint currentLocation = (GamaPoint) agent.getLocation().copy(scope);
+		GamaPoint currentLocation = agent.getLocation().copy(scope);
 		final IList indexVals = initMoveAlongPath(agent, path, currentLocation);
 		if (indexVals == null) { return; }
 		int index = (Integer) indexVals.get(0);
@@ -512,7 +512,7 @@ public class OldDrivingSkill extends MovingSkill {
 			// The current edge is over, agent moves to the next one
 		}
 		if (currentLocation.equals(falseTarget)) {
-			currentLocation = ((IShape) path.getEndVertex()).getLocation().toGamaPoint();
+			currentLocation = ((IShape) path.getEndVertex()).getLocation();
 		}
 		path.setIndexSegementOf(agent, indexSegment);
 		path.setIndexOf(agent, index);
@@ -524,7 +524,7 @@ public class OldDrivingSkill extends MovingSkill {
 	private IPath moveToNextLocAlongPathTraffic(final IScope scope, final IAgent agent, final IPath path,
 			final double _distance, final IMap weigths, final double livingSpace, final double tolerance,
 			final String laneAttributes, final IList<ISpecies> obsSpecies) {
-		GamaPoint currentLocation = (GamaPoint) agent.getLocation().copy(scope);
+		GamaPoint currentLocation = agent.getLocation().copy(scope);
 		final IList indexVals = initMoveAlongPath(agent, path, currentLocation);
 		if (indexVals == null) { return null; }
 		int index = (Integer) indexVals.get(0);
@@ -536,7 +536,7 @@ public class OldDrivingSkill extends MovingSkill {
 		final int nb = edges.size();
 		double distance = _distance;
 		final IList<IShape> segments = GamaListFactory.create(Types.GEOMETRY);
-		final GamaPoint startLocation = (GamaPoint) agent.getLocation().copy(scope);
+		final GamaPoint startLocation = agent.getLocation().copy(scope);
 		final IMap agents = GamaMapFactory.createUnordered();
 		for (int i = index; i < nb; i++) {
 			final IShape line = edges.get(i);
@@ -625,7 +625,7 @@ public class OldDrivingSkill extends MovingSkill {
 		path.setSource(currentLocation.copy(scope));
 		if (segments.isEmpty()) { return null; }
 		final IPath followedPath =
-				PathFactory.newInstance(scope, scope.getTopology(), startLocation, currentLocation, segments);
+				PathFactory.create(scope, scope.getTopology(), startLocation, currentLocation, segments);
 		// new GamaPath(scope.getTopology(), startLocation, currentLocation,
 		// segments);
 		followedPath.setRealObjects(agents);

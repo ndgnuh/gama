@@ -235,7 +235,7 @@ public class SystemOfEquationsStatement extends AbstractStatementSequence implem
 							getFacet(IKeyword.PARAMS));
 			}
 		}
-		try (final Collector.AsList<ISymbol> others = Collector.getList()) {
+		try (final Collector.AsList<ISymbol> others = Collector.newList()) {
 			for (final ISymbol s : cmd) {
 				if (s instanceof SingleEquationStatement) {
 					((SingleEquationStatement) s).establishVar();
@@ -257,10 +257,6 @@ public class SystemOfEquationsStatement extends AbstractStatementSequence implem
 			super.setChildren(others.items());
 		}
 	}
-
-	// static {
-	// DEBUG.ON();
-	// }
 
 	public void assignValue(final IScope scope, final double time, final double[] y) {
 		// final List<SingleEquationStatement> equationValues = new

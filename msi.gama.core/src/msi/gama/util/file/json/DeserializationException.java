@@ -8,9 +8,11 @@
  */
 package msi.gama.util.file.json;
 
+import msi.gama.common.util.TextBuilder;
+
 /**
  * DeserializationException explains how and where the problem occurs in the source JSON text during deserialization.
- * 
+ *
  * @since 2.0.0
  */
 public class DeserializationException extends Exception {
@@ -35,7 +37,7 @@ public class DeserializationException extends Exception {
 
 	/**
 	 * Instantiates a DeserializationException without assumptions.
-	 * 
+	 *
 	 * @param position
 	 *            where the exception occurred.
 	 * @param problemType
@@ -56,42 +58,45 @@ public class DeserializationException extends Exception {
 
 	@Override
 	public String getMessage() {
-		final StringBuilder sb = new StringBuilder();
-		switch (this.problemType) {
-			case DISALLOWED_TOKEN:
-				sb.append("The disallowed token (").append(this.unexpectedObject).append(") was found at position ")
-						.append(this.position)
-						.append(". If this is in error, try again with a parse that allows the token instead. Otherwise, fix the parsable string and try again.");
-				break;
-			case IOEXCEPTION:
-				sb.append(
-						"An IOException was encountered, ensure the reader is properly instantiated, isn't closed, or that it is ready before trying again.\n")
-						.append(this.unexpectedObject);
-				break;
-			case UNEXPECTED_CHARACTER:
-				sb.append("The unexpected character (").append(this.unexpectedObject).append(") was found at position ")
-						.append(this.position).append(". Fix the parsable string and try again.");
-				break;
-			case UNEXPECTED_TOKEN:
-				sb.append("The unexpected token ").append(this.unexpectedObject).append(" was found at position ")
-						.append(this.position).append(". Fix the parsable string and try again.");
-				break;
-			case UNEXPECTED_EXCEPTION:
-				sb.append(
-						"Please report this to the library's maintainer. The unexpected exception that should be addressed before trying again occurred at position ")
-						.append(this.position).append(":\n").append(this.unexpectedObject);
-				break;
-			default:
-				sb.append("Please report this to the library's maintainer. An error at position ").append(this.position)
-						.append(" occurred. There are no recovery recommendations available.");
-				break;
+		try (TextBuilder sb = TextBuilder.create()) {
+			switch (this.problemType) {
+				case DISALLOWED_TOKEN:
+					sb.append("The disallowed token (").append(this.unexpectedObject).append(") was found at position ")
+							.append(this.position)
+							.append(". If this is in error, try again with a parse that allows the token instead. Otherwise, fix the parsable string and try again.");
+					break;
+				case IOEXCEPTION:
+					sb.append(
+							"An IOException was encountered, ensure the reader is properly instantiated, isn't closed, or that it is ready before trying again.\n")
+							.append(this.unexpectedObject);
+					break;
+				case UNEXPECTED_CHARACTER:
+					sb.append("The unexpected character (").append(this.unexpectedObject)
+							.append(") was found at position ").append(this.position)
+							.append(". Fix the parsable string and try again.");
+					break;
+				case UNEXPECTED_TOKEN:
+					sb.append("The unexpected token ").append(this.unexpectedObject).append(" was found at position ")
+							.append(this.position).append(". Fix the parsable string and try again.");
+					break;
+				case UNEXPECTED_EXCEPTION:
+					sb.append(
+							"Please report this to the library's maintainer. The unexpected exception that should be addressed before trying again occurred at position ")
+							.append(this.position).append(":\n").append(this.unexpectedObject);
+					break;
+				default:
+					sb.append("Please report this to the library's maintainer. An error at position ")
+							.append(this.position)
+							.append(" occurred. There are no recovery recommendations available.");
+					break;
+			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	/**
 	 * Helps debug the location of a problem.
-	 * 
+	 *
 	 * @return an index of the string character the error type occurred at.
 	 */
 	public int getPosition() {
@@ -100,7 +105,7 @@ public class DeserializationException extends Exception {
 
 	/**
 	 * Helps find an appropriate solution for a problem.
-	 * 
+	 *
 	 * @return the enumeration for how the exception occurred.
 	 */
 	public Problems getProblemType() {
@@ -109,7 +114,7 @@ public class DeserializationException extends Exception {
 
 	/**
 	 * Helps identify the problem.
-	 * 
+	 *
 	 * @return a representation of what caused the exception.
 	 */
 	public Object getUnexpectedObject() {

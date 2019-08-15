@@ -35,8 +35,8 @@ import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.gl2.GLUT;
 import com.jogamp.opengl.util.texture.Texture;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Polygon;
 
 import jogamp.opengl.glu.tessellator.GLUtessellatorImpl;
 import msi.gama.common.geometry.Envelope3D;
@@ -48,6 +48,7 @@ import msi.gama.common.geometry.UnboundedCoordinateSequence;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
+import msi.gama.runtime.GAMA;
 import msi.gama.util.file.GamaGeometryFile;
 import msi.gama.util.file.GamaImageFile;
 import msi.gaml.operators.Maths;
@@ -81,7 +82,6 @@ import ummisco.gama.ui.utils.PlatformHelper;
 public class OpenGL extends AbstractRendererHelper implements Tesselator {
 
 	static {
-		DEBUG.OFF();
 		GamaPreferences.Displays.DRAW_ROTATE_HELPER.onChange((v) -> SHOULD_DRAW_ROTATION_SPHERE = v);
 	}
 
@@ -507,7 +507,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	 */
 	public void drawPolygon(final Polygon p, final ICoordinates yNegatedVertices, final boolean clockwise) {
 		if (useJTSTriangulation) {
-			iterateOverTriangles(p,
+			iterateOverTriangles(GAMA.getRuntimeScope(), p,
 					(tri) -> drawSimpleShape(getYNegatedCoordinates(tri), 3, true, clockwise, false, null));
 		} else {
 			gluTessBeginPolygon(tobj, null);
@@ -784,7 +784,10 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	}
 
 	public Envelope3D getEnvelopeFor(final Object obj) {
-		if (obj instanceof GamaGeometryFile) { return geometryCache.getEnvelope((GamaGeometryFile) obj); }
+		// Always return a copy (see #2829)
+		if (obj instanceof GamaGeometryFile) {
+			return Envelope3D.of(geometryCache.getEnvelope((GamaGeometryFile) obj));
+		}
 		if (obj instanceof Geometry) { return Envelope3D.of((Geometry) obj); }
 		return null;
 	}

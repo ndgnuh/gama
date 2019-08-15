@@ -49,8 +49,8 @@ import msi.gama.lang.gaml.ui.reference.OperatorsReferenceMenu;
 import msi.gama.lang.gaml.ui.reference.TemplateReferenceMenu;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.Collector;
+import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.ast.ISyntacticElement;
-import ummisco.gama.ui.access.ModelsFinder;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.menus.GamaMenu;
 import ummisco.gama.ui.resources.GamaIcons;
@@ -177,7 +177,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 						@Override
 						public void done() {
 							super.done();
-							WorkbenchHelper.getService(IRefreshHandler.class).refreshNavigator();
+							GAMA.getGui().getUIService(IRefreshHandler.class).refreshNavigator();
 
 						}
 
@@ -259,7 +259,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 				final IProject proj = myFile.getProject();
 				// AD Addresses Issue 796 by passing null to the "without"
 				// parameter
-				final List<URI> resources = ModelsFinder.getAllGamaURIsInProject(proj);
+				final List<URI> resources = GAML.getAllGamaURIsInProject(proj);
 				final ResourceSet rs = editor.resourceSetProvider.get(proj);
 				for (final URI uri : resources) {
 					final GamlResource xr = (GamlResource) rs.getResource(uri, true);
@@ -306,7 +306,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 		public void widgetSelected(final SelectionEvent e) {
 			final MenuItem mi = (MenuItem) e.widget;
 			final URI uri = (URI) mi.getData("uri");
-			GAMA.getGui().editModel(null, uri);
+			GAMA.getGui().editModel(uri);
 		}
 	};
 
@@ -318,7 +318,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 			final URI uri = (URI) mi.getData("uri");
 			final String exp = (String) mi.getData("exp");
 			if (uri != null && exp != null) {
-				GAMA.getGui().runModel(uri, exp);
+				GAMA.runModel(uri, exp, false);
 			}
 		}
 	};
@@ -342,7 +342,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 	}
 
 	private static Set<URI> getImporters(final GamlEditor editor) {
-		try (final Collector.AsOrderedSet<URI> map = Collector.getOrderedSet()) {
+		try (final Collector.AsOrderedSet<URI> map = Collector.newOrderedSet()) {
 			editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 
 				@Override

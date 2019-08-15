@@ -19,9 +19,10 @@ import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IValue;
 import msi.gama.common.util.RandomUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.common.util.StringUtils;
 import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
@@ -105,7 +106,7 @@ public class MetaPopulation implements IContainer.Addressable<Integer, IAgent>, 
 	 */
 	@Override
 	public IContainer<?, ? extends IAgent> getAgents(final IScope scope) {
-		try (final Collector.AsList<java.lang.Iterable<? extends IAgent>> result = Collector.getList()) {
+		try (final Collector.AsList<java.lang.Iterable<? extends IAgent>> result = Collector.newList()) {
 			for (final IPopulationSet p : populationSets) {
 				result.add(p.iterable(scope));
 			}
@@ -170,16 +171,17 @@ public class MetaPopulation implements IContainer.Addressable<Integer, IAgent>, 
 	 */
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder(populationSets.size() * 10);
-		sb.append('[');
-		for (int i = 0; i < populationSets.size(); i++) {
-			if (i != 0) {
-				sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append('[');
+			for (int i = 0; i < populationSets.size(); i++) {
+				if (i != 0) {
+					sb.append(',');
+				}
+				sb.append(StringUtils.toGaml(populationSets.get(i), includingBuiltIn));
 			}
-			sb.append(StringUtils.toGaml(populationSets.get(i), includingBuiltIn));
+			sb.append(']');
+			return sb.toString();
 		}
-		sb.append(']');
-		return sb.toString();
 
 	}
 
@@ -324,10 +326,10 @@ public class MetaPopulation implements IContainer.Addressable<Integer, IAgent>, 
 	/**
 	 * Method matrixValue()
 	 *
-	 * @see msi.gama.util.IContainer#matrixValue(msi.gama.runtime.IScope, msi.gama.metamodel.shape.ILocation)
+	 * @see msi.gama.util.IContainer#matrixValue(msi.gama.runtime.IScope, msi.gama.metamodel.shape.GamaPoint)
 	 */
 	@Override
-	public IMatrix matrixValue(final IScope scope, final IType contentsType, final ILocation preferredSize,
+	public IMatrix matrixValue(final IScope scope, final IType contentsType, final GamaPoint preferredSize,
 			final boolean copy) throws GamaRuntimeException {
 		return listValue(scope, contentsType, false).matrixValue(scope, contentsType, preferredSize, false);
 	}
@@ -350,7 +352,7 @@ public class MetaPopulation implements IContainer.Addressable<Integer, IAgent>, 
 	 */
 	@Override
 	public java.lang.Iterable<? extends IAgent> iterable(final IScope scope) {
-		try (final Collector.AsList<java.lang.Iterable<? extends IAgent>> result = Collector.getList()) {
+		try (final Collector.AsList<java.lang.Iterable<? extends IAgent>> result = Collector.newList()) {
 			for (final IPopulationSet p : populationSets) {
 				result.add(p.iterable(scope));
 			}

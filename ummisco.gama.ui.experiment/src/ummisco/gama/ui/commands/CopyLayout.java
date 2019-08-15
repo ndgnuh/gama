@@ -14,9 +14,11 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import msi.gama.application.workbench.PerspectiveHelper;
+import msi.gama.common.util.TextBuilder;
+import msi.gama.runtime.GAMA;
 import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
+import ummisco.gama.ui.utils.IPerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class CopyLayout extends AbstractHandler {
@@ -28,21 +30,23 @@ public class CopyLayout extends AbstractHandler {
 		if (tree == null) { return this; }
 		final GamaNode<String> firstSash = tree.getRoot().getChildren().get(0);
 		firstSash.setWeight(null);
-		final StringBuilder sb = new StringBuilder();
-		sb.append(" layout " + firstSash);
-		if (PerspectiveHelper.keepTabs() != null) {
-			sb.append(" tabs:").append(PerspectiveHelper.keepTabs());
+		try (TextBuilder sb = TextBuilder.create()) {
+			final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
+			sb.append(" layout " + firstSash);
+			if (pp.keepTabs() != null) {
+				sb.append(" tabs:").append(pp.keepTabs());
+			}
+			if (pp.keepToolbars() != null) {
+				sb.append(" toolbars:").append(pp.keepToolbars());
+			}
+			if (pp.keepControls() != null) {
+				sb.append(" controls:").append(pp.keepControls());
+			}
+			sb.append(" editors: ").append(WorkbenchHelper.getPage().isEditorAreaVisible()).append(";");
+			WorkbenchHelper.copy(sb.toString());
+			tree.dispose();
+			return this;
 		}
-		if (PerspectiveHelper.keepToolbars() != null) {
-			sb.append(" toolbars:").append(PerspectiveHelper.keepToolbars());
-		}
-		if (PerspectiveHelper.keepControls() != null) {
-			sb.append(" controls:").append(PerspectiveHelper.keepControls());
-		}
-		sb.append(" editors: ").append(WorkbenchHelper.getPage().isEditorAreaVisible()).append(";");
-		WorkbenchHelper.copy(sb.toString());
-		tree.dispose();
-		return this;
 	}
 
 }

@@ -406,7 +406,7 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 
 	@Override
 	public Set<Object> neighborValues(final IScope scope) throws GamaRuntimeException {
-		try (Collector.AsSet<Object> neighborValues = Collector.getSet()) {
+		try (Collector.AsSet<Object> neighborValues = Collector.newSet()) {
 			if (getAmongValue(scope) != null && !getAmongValue(scope).isEmpty()) {
 				final int index = getAmongValue(scope).indexOf(this.value(scope));
 				if (index > 0) {

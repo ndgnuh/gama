@@ -4,7 +4,7 @@
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.views;
@@ -31,6 +31,7 @@ import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import msi.gama.common.interfaces.ItemList;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import ummisco.gama.ui.controls.ParameterExpandItem;
@@ -102,7 +103,7 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				GAMA.getGui().editModel(null, exception.getEditorContext());
+				GAMA.getGui().editModel(exception.getEditorContext());
 			}
 
 			@Override
@@ -134,7 +135,7 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 	}
 
 	private IRuntimeExceptionHandler getExceptionHandler() {
-		return WorkbenchHelper.getService(IRuntimeExceptionHandler.class);
+		return GAMA.getGui().getUIService(IRuntimeExceptionHandler.class);
 	}
 
 	@Override
@@ -150,14 +151,15 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 
 	@Override
 	public String getItemDisplayName(final GamaRuntimeException obj, final String previousName) {
-		final StringBuilder sb = new StringBuilder(300);
-		final String a = obj.getAgentSummary();
-		if (a != null) {
-			sb.append(a).append(" at ");
+		try (TextBuilder sb = TextBuilder.create()) {
+			final String a = obj.getAgentSummary();
+			if (a != null) {
+				sb.append(a).append(" at ");
+			}
+			sb.append("cycle ").append(obj.getCycle()).append(ItemList.SEPARATION_CODE)
+					.append(obj.isWarning() ? ItemList.WARNING_CODE : ItemList.ERROR_CODE).append(obj.getMessage());
+			return sb.toString();
 		}
-		sb.append("cycle ").append(obj.getCycle()).append(ItemList.SEPARATION_CODE)
-		.append(obj.isWarning() ? ItemList.WARNING_CODE : ItemList.ERROR_CODE).append(obj.getMessage());
-		return sb.toString();
 	}
 
 	@Override
@@ -199,7 +201,7 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 
 	/**
 	 * Method handleMenu()
-	 * 
+	 *
 	 * @see msi.gama.common.interfaces.ItemList#handleMenu(java.lang.Object)
 	 */
 	@Override
@@ -208,13 +210,13 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 		result.put("Copy error to clipboard", () -> {
 			WorkbenchHelper.copy(item.getAllText());
 		});
-		result.put("Show in editor", () -> GAMA.getGui().editModel(null, item.getEditorContext()));
+		result.put("Show in editor", () -> GAMA.getGui().editModel(item.getEditorContext()));
 		result.put("Report issue on GitHub", () -> this.reportError(item));
 		return result;
 	}
 
 	private void reportError(final GamaRuntimeException item) {
-		//		final String data = item.getAllText();
+		// final String data = item.getAllText();
 		WebHelper.openPage("https://github.com/gama-platform/gama/issues/new");
 	}
 

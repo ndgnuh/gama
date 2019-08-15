@@ -18,7 +18,6 @@ import msi.gama.common.geometry.Rotation3D;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaFont;
 import msi.gama.util.GamaListFactory;
@@ -46,11 +45,11 @@ public class DrawingData extends AttributeHolder {
 
 	static final GamaColor DEFAULT_BORDER_COLOR = new GamaColor(Color.BLACK);
 
-	final Attribute<ILocation> size;
+	final Attribute<GamaPoint> size;
 	final Attribute<Double> depth;
 	final Attribute<AxisAngle> rotation;
-	final Attribute<ILocation> location;
-	final Attribute<ILocation> anchor;
+	final Attribute<GamaPoint> location;
+	final Attribute<GamaPoint> anchor;
 	final Attribute<Boolean> empty;
 	final Attribute<GamaColor> border, color;
 	// private final Attribute<IList<GamaColor>> colors;
@@ -63,7 +62,7 @@ public class DrawingData extends AttributeHolder {
 
 	public DrawingData(final DrawStatement symbol) {
 		super(symbol);
-		final Function<IExpression, ILocation> constSizeCaster = (exp) -> {
+		final Function<IExpression, GamaPoint> constSizeCaster = (exp) -> {
 			if (exp.getGamlType().isNumber()) {
 				final double val = Cast.asFloat(null, exp.getConstValue());
 				// We do not consider the z ordinate -- see Issue #1539
@@ -86,7 +85,7 @@ public class DrawingData extends AttributeHolder {
 		final Function<IExpression, AxisAngle> constRotationCaster = (exp) -> {
 			if (exp.getGamlType().getGamlType() == Types.PAIR) {
 				final GamaPair currentRotation = Cast.asPair(null, exp.getConstValue(), true);
-				return new AxisAngle((GamaPoint) Cast.asPoint(null, currentRotation.value),
+				return new AxisAngle(Cast.asPoint(null, currentRotation.value),
 						Cast.asFloat(null, currentRotation.key));
 			} else {
 				return new AxisAngle(Rotation3D.PLUS_K, Cast.asFloat(null, exp.getConstValue()));
@@ -95,14 +94,14 @@ public class DrawingData extends AttributeHolder {
 		this.rotation = create(IKeyword.ROTATE, (scope, exp) -> {
 			if (exp.getGamlType().getGamlType() == Types.PAIR) {
 				final GamaPair currentRotation = Cast.asPair(scope, exp.value(scope), true);
-				return new AxisAngle((GamaPoint) Cast.asPoint(scope, currentRotation.value),
+				return new AxisAngle(Cast.asPoint(scope, currentRotation.value),
 						Cast.asFloat(scope, currentRotation.key));
 			} else {
 				return new AxisAngle(Rotation3D.PLUS_K, Cast.asFloat(scope, exp.value(scope)));
 			}
 		}, Types.NO_TYPE, null, constRotationCaster);
 		this.anchor = create(IKeyword.ANCHOR, (scope, exp) -> {
-			final GamaPoint p = (GamaPoint) Cast.asPoint(scope, exp.value(scope));
+			final GamaPoint p = Cast.asPoint(scope, exp.value(scope));
 			p.x = Math.min(1d, Math.max(p.x, 0d));
 			p.y = Math.min(1d, Math.max(p.y, 0d));
 			return p;
@@ -166,11 +165,11 @@ public class DrawingData extends AttributeHolder {
 	}
 
 	public GamaPoint getLocation() {
-		return location.get() == null ? null : location.get().toGamaPoint();
+		return location.get() == null ? null : location.get();
 	}
 
 	public GamaPoint getAnchor() {
-		return anchor.get() == null ? null : anchor.get().toGamaPoint();
+		return anchor.get() == null ? null : anchor.get();
 	}
 
 }

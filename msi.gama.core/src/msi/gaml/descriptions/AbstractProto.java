@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gaml.descriptions.AbstractProto.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.descriptions.AbstractProto.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.descriptions;
 
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.usage;
 
@@ -42,21 +43,22 @@ public abstract class AbstractProto implements IGamlDescription {
 	public String getDocumentation() {
 		final doc d = getDocAnnotation();
 		if (d == null) { return ""; }
-		final StringBuilder sb = new StringBuilder(200);
-		String s = d.value();
-		if (s != null && !s.isEmpty()) {
-			sb.append(s);
-			sb.append("<br/>");
-		}
-		s = d.deprecated();
-		if (s != null && !s.isEmpty()) {
-			sb.append("<b>Deprecated</b>: ");
-			sb.append("<i>");
-			sb.append(s);
-			sb.append("</i><br/>");
-		}
+		try (TextBuilder sb = TextBuilder.create()) {
+			String s = d.value();
+			if (s != null && !s.isEmpty()) {
+				sb.append(s);
+				sb.append("<br/>");
+			}
+			s = d.deprecated();
+			if (s != null && !s.isEmpty()) {
+				sb.append("<b>Deprecated</b>: ");
+				sb.append("<i>");
+				sb.append(s);
+				sb.append("</i><br/>");
+			}
 
-		return sb.toString();
+			return sb.toString();
+		}
 	}
 
 	public String getDeprecated() {
@@ -83,7 +85,7 @@ public abstract class AbstractProto implements IGamlDescription {
 
 	/**
 	 * Method getTitle()
-	 * 
+	 *
 	 * @see msi.gama.common.interfaces.IGamlDescription#getTitle()
 	 */
 	@Override
@@ -93,7 +95,7 @@ public abstract class AbstractProto implements IGamlDescription {
 
 	/**
 	 * Method setName()
-	 * 
+	 *
 	 * @see msi.gama.common.interfaces.INamed#setName(java.lang.String)
 	 */
 	@Override

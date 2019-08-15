@@ -68,9 +68,9 @@ public class GamaGraphType extends GamaContainerType<IGraph> {
 
 	public static IGraph from(final IScope scope, final IMap<?, ?> obj, final boolean spatial) {
 		final IGraph result = spatial
-				? new GamaSpatialGraph(GamaListFactory.create(Types.NO_TYPE), false, false, null, null, scope,
+				? new GamaSpatialGraph(GamaListFactory.EMPTY_LIST, false, false, null, null, scope,
 						obj.getGamlType().getKeyType(), Types.NO_TYPE)
-				: new GamaGraph(scope, GamaListFactory.create(Types.NO_TYPE), false, false, null, null,
+				: new GamaGraph(scope, GamaListFactory.EMPTY_LIST, false, false, null, null,
 						obj.getGamlType().getKeyType(), Types.NO_TYPE);
 		final GamaPair p = new GamaPair(null, null, Types.NO_TYPE, Types.NO_TYPE);
 		for (final Map.Entry<?, ?> k : obj.entrySet()) {

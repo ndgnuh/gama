@@ -15,6 +15,7 @@ import java.util.Set;
 import com.google.common.collect.ImmutableSet;
 
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.facet;
 import msi.gama.precompiler.GamlAnnotations.facets;
@@ -99,39 +100,40 @@ public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 	}
 
 	public String typesToString() {
-		final StringBuilder s = new StringBuilder(30);
-		s.append(types.length < 2 ? " " : " any type in [");
-		for (int i = 0; i < types.length; i++) {
-			switch (typesDescribers[i]) {
-				case IType.ID:
-					s.append("an identifier");
-					break;
-				case IType.LABEL:
-					s.append("a label");
-					break;
-				case IType.NEW_TEMP_ID:
-				case IType.NEW_VAR_ID:
-					s.append("a new identifier");
-					break;
-				case IType.TYPE_ID:
-					s.append("a datatype identifier");
-					break;
-				case IType.NONE:
-					s.append("any type");
-					break;
-				default:
-					// TODO AD 2/16 Document the types with the new possibility to
-					// include of and index
-					s.append(types[i].toString());
+		try (TextBuilder s = TextBuilder.create()) {
+			s.append(types.length < 2 ? " " : " any type in [");
+			for (int i = 0; i < types.length; i++) {
+				switch (typesDescribers[i]) {
+					case IType.ID:
+						s.append("an identifier");
+						break;
+					case IType.LABEL:
+						s.append("a label");
+						break;
+					case IType.NEW_TEMP_ID:
+					case IType.NEW_VAR_ID:
+						s.append("a new identifier");
+						break;
+					case IType.TYPE_ID:
+						s.append("a datatype identifier");
+						break;
+					case IType.NONE:
+						s.append("any type");
+						break;
+					default:
+						// TODO AD 2/16 Document the types with the new possibility to
+						// include of and index
+						s.append(types[i].toString());
+				}
+				if (i != types.length - 1) {
+					s.append(", ");
+				}
 			}
-			if (i != types.length - 1) {
-				s.append(", ");
+			if (types.length >= 2) {
+				s.append("]");
 			}
+			return s.toString();
 		}
-		if (types.length >= 2) {
-			s.append("]");
-		}
-		return s.toString();
 	}
 
 	/**
@@ -141,22 +143,23 @@ public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 	 */
 	@Override
 	public String getDocumentation() {
-		final StringBuilder sb = new StringBuilder(100);
-		sb.append("<b>").append(name).append("</b>, ")
-				.append(deprecated != null ? "deprecated" : optional ? "optional" : "required").append("")
-				.append(", expects ").append(typesToString());
-		if (values != null && values.size() > 0) {
-			sb.append(", takes values in ").append(values).append(". ");
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("<b>").append(name).append("</b>, ")
+					.append(deprecated != null ? "deprecated" : optional ? "optional" : "required").append("")
+					.append(", expects ").append(typesToString());
+			if (values != null && values.size() > 0) {
+				sb.append(", takes values in ").append(values).append(". ");
+			}
+			if (doc != null && doc.length() > 0) {
+				sb.append(" - ").append(doc);
+			}
+			if (deprecated != null) {
+				sb.append(" <b>[");
+				sb.append(deprecated);
+				sb.append("]</b>");
+			}
+			return sb.toString();
 		}
-		if (doc != null && doc.length() > 0) {
-			sb.append(" - ").append(doc);
-		}
-		if (deprecated != null) {
-			sb.append(" <b>[");
-			sb.append(deprecated);
-			sb.append("]</b>");
-		}
-		return sb.toString();
 	}
 
 	/**

@@ -50,10 +50,6 @@ import ummisco.gama.ui.views.toolbar.IToolbarDecoratedView;
 public abstract class GamaViewPart extends ViewPart
 		implements DisposeListener, IGamaView, IToolbarDecoratedView, ITooltipDisplayer {
 
-	static {
-		DEBUG.OFF();
-	}
-
 	public final List<IDisplayOutput> outputs = new ArrayList<>();
 	private Composite parent;
 	protected GamaToolbar2 toolbar;

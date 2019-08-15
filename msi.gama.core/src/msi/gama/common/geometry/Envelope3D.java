@@ -10,17 +10,16 @@
  ********************************************************************************************************/
 package msi.gama.common.geometry;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Envelope;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.Polygon;
 
 import msi.gama.common.interfaces.IDisposable;
 import msi.gama.common.util.PoolUtils;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gaml.operators.Comparison;
 import msi.gaml.types.GamaGeometryType;
@@ -66,8 +65,10 @@ public class Envelope3D extends Envelope implements IDisposable {
 		return of(s.getInnerGeometry());
 	}
 
-	public static Envelope3D of(final ILocation s) {
-		return of((Coordinate) s);
+	public static Envelope3D of(final GamaPoint s) {
+		final Envelope3D env = create();
+		env.init(s);
+		return env;
 	}
 
 	public static Envelope3D of(final Envelope e) {
@@ -80,12 +81,6 @@ public class Envelope3D extends Envelope implements IDisposable {
 		final Envelope3D env = create();
 		env.init(e);
 		env.init(env.getMinX(), env.getMaxX(), -env.getMinY(), -env.getMaxY(), env.minz, env.maxz);
-		return env;
-	}
-
-	public static Envelope3D of(final Coordinate p) {
-		final Envelope3D env = create();
-		env.init(p);
 		return env;
 	}
 
@@ -583,6 +578,12 @@ public class Envelope3D extends Envelope implements IDisposable {
 		return minz == maxz;
 	}
 
+	public Envelope3D flattened() {
+		final Envelope3D result = of(this);
+		result.minz = result.maxz = 0d;
+		return result;
+	}
+
 	public boolean isHorizontal() {
 		return minz == maxz;
 	}
@@ -610,6 +611,10 @@ public class Envelope3D extends Envelope implements IDisposable {
 		se = new GamaShape(se, null, rotation, se.getLocation());
 		init(se.getEnvelope());
 		return this;
+	}
+
+	public boolean intersects2D(final Envelope3D r) {
+		return super.intersects(r);
 	}
 
 }

@@ -203,7 +203,7 @@ public class GamlSyntacticConverter {
 		if (!m.eIsSet(GamlPackage.MODEL__PRAGMAS)) { return null; }
 		final List<Pragma> pragmas = m.getPragmas();
 		if (pragmas.isEmpty()) { return null; }
-		try (final Collector.AsList<String> result = Collector.getList()) {
+		try (final Collector.AsList<String> result = Collector.newList()) {
 			for (int i = 0; i < pragmas.size(); i++) {
 				final String pragma = pragmas.get(i).getName();
 				result.add(pragma);

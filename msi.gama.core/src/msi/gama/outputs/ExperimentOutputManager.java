@@ -30,7 +30,6 @@ import msi.gaml.compilation.Symbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.types.IType;
-import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * The Class OutputManager.
@@ -92,10 +91,6 @@ import ummisco.gama.dev.utils.DEBUG;
 								value = "}",
 								isExecutable = false) }) })
 public class ExperimentOutputManager extends AbstractOutputManager {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	public static ExperimentOutputManager createEmpty() {
 		return new ExperimentOutputManager(DescriptionFactory.create(IKeyword.PERMANENT, (String[]) null));

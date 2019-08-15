@@ -125,7 +125,6 @@ import msi.gama.lang.gaml.validation.IGamlBuilderListener;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ValidationContext;
 import ummisco.gama.ui.controls.FlatButton;
-import ummisco.gama.ui.interfaces.IModelRunner;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.GamaIcons;
@@ -173,7 +172,6 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 
 	@Inject public IResourceSetProvider resourceSetProvider;
 	@Inject Injector injector;
-	@Inject IModelRunner runner;
 	@Inject private GamlEditTemplateDialogFactory templateDialogFactory;
 	@Inject private TemplateStore templateStore;
 	@Inject private IResourceValidator validator;
@@ -464,7 +462,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 					listener = new RevalidateModelSelectionListener(GamlEditor.this);
 					imageName = "marker.error2";
 				} else {
-					listener = new OpenExperimentSelectionListener(GamlEditor.this, newState, runner);
+					listener = new OpenExperimentSelectionListener(GamlEditor.this, newState);
 				}
 
 				if (msg != null) {

@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
-import msi.gama.lang.gaml.validation.GamlModelBuilder;
 import msi.gama.outputs.IOutput;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
@@ -27,6 +26,7 @@ import msi.gama.util.GamaListFactory;
 import msi.gama.util.IList;
 import msi.gama.util.IMap;
 import msi.gama.util.file.GamaFile;
+import msi.gaml.compilation.GAML;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
@@ -70,7 +70,7 @@ public class GamlFile extends GamaFile<IList<IModel>, IModel> {
 		super(scope, pathName);
 		experimentName = "";
 		aliasName = "";
-		mymodel = GamlModelBuilder.getDefaultInstance().compile(URI.createURI(getPath(scope), false), null);
+		mymodel = GAML.compile(URI.createURI(getPath(scope), false), null);
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class GamlFile extends GamaFile<IList<IModel>, IModel> {
 		super(scope, pathName);
 		experimentName = expName;
 		aliasName = cName;
-		mymodel = GamlModelBuilder.getDefaultInstance().compile(URI.createURI(getPath(scope), false), null);
+		mymodel = GAML.compile(URI.createURI(getPath(scope), false), null);
 		((ModelDescription) mymodel.getDescription()).setAlias(aliasName);
 	}
 

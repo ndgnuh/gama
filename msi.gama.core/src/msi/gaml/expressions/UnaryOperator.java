@@ -19,12 +19,13 @@ import static msi.gama.precompiler.ITypeProvider.KEY_TYPE_AT_INDEX;
 import static msi.gama.precompiler.ITypeProvider.TYPE_AT_INDEX;
 import static msi.gama.precompiler.ITypeProvider.WRAPPED;
 
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamaGetter;
 import msi.gaml.descriptions.IDescription;
@@ -96,13 +97,14 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
 		final String s = literalValue();
-		final StringBuilder sb = new StringBuilder(s);
-		if (OperatorProto.noMandatoryParenthesis.contains(s)) {
-			parenthesize(sb, child);
-		} else {
-			sb.append("(").append(child.serialize(includingBuiltIn)).append(")");
+		try (TextBuilder sb = TextBuilder.create()) {
+			if (OperatorProto.noMandatoryParenthesis.contains(s)) {
+				parenthesize(sb, child);
+			} else {
+				sb.append("(").append(child.serialize(includingBuiltIn)).append(")");
+			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	@Override
@@ -117,11 +119,12 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 
 	@Override
 	public String getTitle() {
-		final StringBuilder sb = new StringBuilder(50);
-		sb.append("operator ").append(getName()).append(" (");
-		sb.append(child == null ? prototype.signature : child.getGamlType().getTitle());
-		sb.append(") returns ").append(getGamlType().getTitle());
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("operator ").append(getName()).append(" (");
+			sb.append(child == null ? prototype.signature : child.getGamlType().getTitle());
+			sb.append(") returns ").append(getGamlType().getTitle());
+			return sb.toString();
+		}
 	}
 
 	@Override
@@ -222,7 +225,7 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 	// }
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		prototype.collectImplicitVarsOf(species, result);
 		child.collectUsedVarsOf(species, result);
 	}

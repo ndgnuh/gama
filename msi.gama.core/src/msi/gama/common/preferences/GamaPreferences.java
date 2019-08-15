@@ -37,6 +37,7 @@ import org.geotools.referencing.CRS;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceBeforeChangeListener;
 import msi.gama.common.preferences.Pref.ValueProvider;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
@@ -122,11 +123,15 @@ public class GamaPreferences {
 				"Maintain the state of the navigator across sessions", true, IType.BOOL, false).in(NAME, STARTUP);
 
 		static {
-			for (int i = 0; i < 5; i++) {
-				SIMULATION_COLORS[i] = create("pref_simulation_color_" + i,
-						"Color of Simulation " + i + " in the UI (console, view tabs) ", BASIC_COLORS[i], IType.COLOR,
-						true).in(NAME, SIMULATIONS);
-			}
+			GAMA.initializeAtStartup("Initializing preferences", () -> {
+				for (int i = 0; i < 5; i++) {
+					SIMULATION_COLORS[i] = create("pref_simulation_color_" + i,
+							"Color of Simulation " + i + " in the UI (console, view tabs) ", BASIC_COLORS[i],
+							IType.COLOR, true).in(NAME, SIMULATIONS);
+				}
+
+			});
+
 		}
 
 	}
@@ -564,7 +569,6 @@ public class GamaPreferences {
 	private static List<String> storeKeys;
 
 	static {
-
 		try {
 			store = Preferences.userRoot().node("gama");
 			try {
@@ -789,11 +793,11 @@ public class GamaPreferences {
 	}
 
 	public static void savePreferencesTo(final String path) {
-		try (FileWriter os = new FileWriter(path)) {
+		try (FileWriter os = new FileWriter(path);
+				TextBuilder read = TextBuilder.create();
+				TextBuilder write = TextBuilder.create()) {
 			final List<Pref<? extends Object>> entries = StreamEx.ofValues(prefs).sortedBy((p) -> p.getName()).toList();
 
-			final StringBuilder read = new StringBuilder(1000);
-			final StringBuilder write = new StringBuilder(1000);
 			for (final Pref e : entries) {
 				if (e.isHidden() || !e.inGaml()) {
 					continue;
@@ -810,12 +814,12 @@ public class GamaPreferences {
 			os.append("model preferences").append(Strings.LN).append(Strings.LN);
 			os.append("experiment 'Display Preferences' type: gui {").append(Strings.LN);
 			os.append("init {").append(Strings.LN);
-			os.append(read);
+			os.append(read.toString());
 			os.append("}").append(Strings.LN);
 			os.append("}").append(Strings.LN).append(Strings.LN).append(Strings.LN);
 			os.append("experiment 'Set Preferences' type: gui {").append(Strings.LN);
 			os.append("init {").append(Strings.LN);
-			os.append(write);
+			os.append(write.toString());
 			os.append("}").append(Strings.LN);
 			os.append("}").append(Strings.LN);
 			os.flush();

@@ -16,8 +16,8 @@ import static com.google.common.collect.Iterators.limit;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.metamodel.shape.GamaPoint;
 
@@ -67,7 +67,7 @@ public class UnboundedCoordinateSequence implements ICoordinates {
 	}
 
 	@Override
-	public final UnboundedCoordinateSequence clone() {
+	public final UnboundedCoordinateSequence copy() {
 		return new UnboundedCoordinateSequence(true, nbPoints, points);
 	}
 
@@ -285,7 +285,7 @@ public class UnboundedCoordinateSequence implements ICoordinates {
 		final GamaPoint origin = points[0];
 		for (int i = nbPoints - 1; i > 0; i--) {
 			if (!points[i].equals(origin)) {
-				result.setLocation(points[i]).subtract(origin).normalize();
+				result.withLocation(points[i]).subtract(origin).normalize();
 				return result;
 			}
 		}
@@ -406,6 +406,12 @@ public class UnboundedCoordinateSequence implements ICoordinates {
 			points[j].setLocation(temp);
 
 		}
+	}
+
+	@SuppressWarnings ("deprecation")
+	@Override
+	public UnboundedCoordinateSequence clone() {
+		return copy();
 	}
 
 }

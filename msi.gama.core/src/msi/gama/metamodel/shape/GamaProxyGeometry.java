@@ -12,9 +12,9 @@ package msi.gama.metamodel.shape;
 
 import static msi.gama.common.geometry.GeometryUtils.translate;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Polygon;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
@@ -58,14 +58,14 @@ import msi.gaml.types.Types;
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public abstract class GamaProxyGeometry implements IShape, Cloneable {
 
-	ILocation absoluteLocation;
+	GamaPoint absoluteLocation;
 	// Property map to add all kinds of information (e.g to specify if the
 	// geometry is a sphere, a
 	// cube, etc...). Can be reused by subclasses (for example to store GIS
 	// information)
 	protected IMap<String, Object> attributes;
 
-	public GamaProxyGeometry(final ILocation loc) {
+	public GamaProxyGeometry(final GamaPoint loc) {
 		setLocation(loc);
 	}
 
@@ -83,10 +83,10 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method setLocation()
 	 *
-	 * @see msi.gama.common.interfaces.ILocated#setLocation(msi.gama.metamodel.shape.ILocation)
+	 * @see msi.gama.common.interfaces.ILocated#setLocation(msi.gama.metamodel.shape.GamaPoint)
 	 */
 	@Override
-	public void setLocation(final ILocation loc) {
+	public void setLocation(final GamaPoint loc) {
 		absoluteLocation = loc;
 	}
 
@@ -96,7 +96,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	 * @see msi.gama.common.interfaces.ILocated#getLocation()
 	 */
 	@Override
-	public ILocation getLocation() {
+	public GamaPoint getLocation() {
 		return absoluteLocation;
 	}
 
@@ -262,7 +262,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	@Override
 	public Geometry getInnerGeometry() {
 		final Geometry copy = (Geometry) getReferenceGeometry().getInnerGeometry().clone();
-		translate(copy, getReferenceGeometry().getLocation().toGamaPoint(), getLocation().toGamaPoint());
+		translate(copy, getReferenceGeometry().getLocation(), getLocation());
 		return copy;
 	}
 
@@ -275,8 +275,8 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	@Override
 	public Envelope3D getEnvelope() {
 		final Envelope3D copy = getReferenceGeometry().getEnvelope();
-		final ILocation loc = getLocation();
-		final ILocation loc2 = getReferenceGeometry().getLocation();
+		final GamaPoint loc = getLocation();
+		final GamaPoint loc2 = getReferenceGeometry().getLocation();
 		final double dx = loc.getX() - loc2.getX();
 		final double dy = loc.getY() - loc2.getY();
 		final double dz = loc.getZ() - loc2.getZ();
@@ -319,10 +319,10 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method euclidianDistanceTo()
 	 *
-	 * @see msi.gama.metamodel.shape.IShape#euclidianDistanceTo(msi.gama.metamodel.shape.ILocation)
+	 * @see msi.gama.metamodel.shape.IShape#euclidianDistanceTo(msi.gama.metamodel.shape.GamaPoint)
 	 */
 	@Override
-	public double euclidianDistanceTo(final ILocation g) {
+	public double euclidianDistanceTo(final GamaPoint g) {
 		if (isPoint()) { return g.euclidianDistanceTo(getLocation()); }
 		return getInnerGeometry().distance(g.getInnerGeometry());
 		// GamaShape.ppd.initialize();
@@ -354,7 +354,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method setInnerGeometry()
 	 *
-	 * @see msi.gama.metamodel.shape.IShape#setInnerGeometry(com.vividsolutions.jts.geom.Geometry)
+	 * @see msi.gama.metamodel.shape.IShape#setInnerGeometry(org.locationtech.jts.geom.Geometry)
 	 */
 	@Override
 	public void setInnerGeometry(final Geometry intersection) {}
@@ -383,7 +383,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	 * @see msi.gama.metamodel.shape.IShape#getPoints()
 	 */
 	@Override
-	public IList<? extends ILocation> getPoints() {
+	public IList<? extends GamaPoint> getPoints() {
 		final IList<GamaPoint> result = GamaListFactory.create(Types.POINT);
 		final Coordinate[] points = getInnerGeometry().getCoordinates();
 		for (final Coordinate c : points) {
@@ -449,7 +449,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	 */
 	@Override
 	public GamaPoint getCentroid() {
-		return absoluteLocation.toGamaPoint();
+		return absoluteLocation;
 	}
 
 	/**

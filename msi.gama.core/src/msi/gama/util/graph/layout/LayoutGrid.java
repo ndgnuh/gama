@@ -18,8 +18,7 @@ import msi.gaml.operators.Random;
 import msi.gaml.operators.Spatial;
 import msi.gaml.operators.Spatial.Queries;
 import msi.gaml.types.Types;
-import sun.awt.util.IdentityArrayList;
- 
+
 public class LayoutGrid {
 
 	private final IGraph<IShape, IShape> graph;

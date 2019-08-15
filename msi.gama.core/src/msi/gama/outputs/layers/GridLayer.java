@@ -91,7 +91,7 @@ public class GridLayer extends AbstractLayer {
 
 	@Override
 	public Set<IAgent> collectAgentsAt(final int x, final int y, final IDisplaySurface g) {
-		try (Collector.AsSet<IAgent> result = Collector.getSet()) {
+		try (Collector.AsSet<IAgent> result = Collector.newSet()) {
 			result.add(getData().getGrid().getAgentAt(getModelCoordinatesFrom(x, y, g)));
 			return result.items();
 		}

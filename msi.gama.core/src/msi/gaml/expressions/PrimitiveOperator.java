@@ -10,10 +10,12 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import java.util.Collection;
+
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -83,10 +85,11 @@ public class PrimitiveOperator implements IExpression, IOperator {
 
 	@Override
 	public String getTitle() {
-		final StringBuilder sb = new StringBuilder(50);
-		sb.append("action ").append(getName()).append(" defined in species ")
-				.append(target.getGamlType().getSpeciesName()).append(" returns ").append(getGamlType().getTitle());
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("action ").append(getName()).append(" defined in species ")
+					.append(target.getGamlType().getSpeciesName()).append(" returns ").append(getGamlType().getTitle());
+			return sb.toString();
+		}
 
 	}
 
@@ -102,19 +105,20 @@ public class PrimitiveOperator implements IExpression, IOperator {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		if (target != null) {
-			AbstractExpression.parenthesize(sb, target);
-			sb.append(".");
+		try (TextBuilder sb = TextBuilder.create()) {
+			if (target != null) {
+				AbstractExpression.parenthesize(sb, target);
+				sb.append(".");
+			}
+			sb.append(literalValue()).append("(");
+			argsToGaml(sb, includingBuiltIn);
+			sb.append(")");
+			return sb.toString();
 		}
-		sb.append(literalValue()).append("(");
-		argsToGaml(sb, includingBuiltIn);
-		sb.append(")");
-		return sb.toString();
 	}
 
-	protected String argsToGaml(final StringBuilder sb, final boolean includingBuiltIn) {
-		if (parameters == null || parameters.isEmpty()) { return ""; }
+	protected void argsToGaml(final TextBuilder sb, final boolean includingBuiltIn) {
+		if (parameters == null || parameters.isEmpty()) { return; }
 		parameters.forEachFacet((name, expr) -> {
 			if (Strings.isGamaNumber(name)) {
 				sb.append(expr.serialize(false));
@@ -127,7 +131,6 @@ public class PrimitiveOperator implements IExpression, IOperator {
 		if (sb.length() > 0) {
 			sb.setLength(sb.length() - 2);
 		}
-		return sb.toString();
 	}
 
 	/**
@@ -150,7 +153,7 @@ public class PrimitiveOperator implements IExpression, IOperator {
 	// }
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		if (parameters != null) {
 			parameters.forEachFacet((name, exp) -> {
 				final IExpression expression = exp.getExpression();

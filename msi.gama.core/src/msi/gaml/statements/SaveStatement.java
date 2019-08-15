@@ -54,20 +54,20 @@ import org.opengis.geometry.Envelope;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import com.vividsolutions.jts.algorithm.CGAlgorithms;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPoint;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
-import com.vividsolutions.jts.geom.impl.CoordinateArraySequenceFactory;
+import org.locationtech.jts.algorithm.CGAlgorithms;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.MultiLineString;
+import org.locationtech.jts.geom.MultiPoint;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.impl.CoordinateArraySequenceFactory;
 
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.interfaces.IGamlIssue;
@@ -385,7 +385,7 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					if (getAvailableWriters().contains(type)) {
 						final IGraph g = Cast.asGraph(scope, item);
 						if (g == null) { return null; }
-						getGraphWriter(type).writeGraph(scope, g, null, path);
+						getGraphWriter(scope, type).writeGraph(scope, g, null, path);
 					} else {
 						throw GamaRuntimeFileException.error("Format is not recognized ('" + type + "')", scope);
 					}
@@ -605,9 +605,9 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 
 	public void saveShape(final IList<? extends IShape> agents, final File f, final IScope scope, final boolean geoJson)
 			throws GamaRuntimeException {
-		final StringBuilder specs = new StringBuilder(agents.size() * 20);
+		final StringBuilder sb = new StringBuilder(agents.size() * 20);
 		final String geomType = getGeometryType(agents);
-		specs.append("geometry:" + geomType);
+		sb.append("geometry:" + geomType);
 		try {
 			final SpeciesDescription species =
 					agents instanceof IPopulation ? ((IPopulation) agents).getSpecies().getDescription()
@@ -624,14 +624,14 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					String name = e.replaceAll("\"", "");
 					name = name.replaceAll("'", "");
 					final String type = type(var);
-					specs.append(',').append(name).append(':').append(type);
+					sb.append(',').append(name).append(':').append(type);
 				}
 			}
 			final IProjection proj = defineProjection(scope, f);
 			if (!geoJson) {
-				saveShapeFile(scope, f, agents, specs.toString(), attributes, proj);
+				saveShapeFile(scope, f, agents, sb.toString(), attributes, proj);
 			} else {
-				saveGeoJSonFile(scope, f, agents, specs.toString(), attributes, proj);
+				saveGeoJSonFile(scope, f, agents, sb.toString(), attributes, proj);
 			}
 		} catch (final GamaRuntimeException e) {
 			throw e;

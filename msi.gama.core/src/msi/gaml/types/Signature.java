@@ -1,17 +1,18 @@
 /*******************************************************************************************************
  *
- * msi.gaml.types.Signature.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.types.Signature.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.types;
 
 import java.util.Arrays;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 
@@ -182,13 +183,14 @@ public class Signature {
 	 * @return
 	 */
 	public String asPattern(final boolean withVariables) {
-		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < list.length; i++) {
-			sb.append(withVariables ? list[i].asPattern() : list[i].serialize(true));
-			if (i < list.length - 1) {
-				sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (int i = 0; i < list.length; i++) {
+				sb.append(withVariables ? list[i].asPattern() : list[i].serialize(true));
+				if (i < list.length - 1) {
+					sb.append(',');
+				}
 			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 }

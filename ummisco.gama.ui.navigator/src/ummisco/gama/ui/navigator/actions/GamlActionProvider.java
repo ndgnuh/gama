@@ -37,7 +37,7 @@ public class GamlActionProvider extends CommonActionProvider {
 		revealAction = new SelectionListenerAction("Reveal...") {
 			@Override
 			public void run() {
-				GAMA.getGui().editModel(null, selection.getElement().getElement());
+				GAMA.getGui().editModel(selection.getElement().getElement());
 			}
 		};
 		revealAction.setId("reveal.item");
@@ -47,8 +47,7 @@ public class GamlActionProvider extends CommonActionProvider {
 	@Override
 	public void fillContextMenu(final IMenuManager menu) {
 		super.fillContextMenu(menu);
-		if (selection == null)
-			return;
+		if (selection == null) { return; }
 		menu.add(new Separator());
 		if (selection instanceof WrappedExperimentContent) {
 			menu.appendToGroup("group.copy", runAction);

@@ -19,8 +19,8 @@ public class Messages {
 		WorkbenchHelper.run(() -> MessageDialog.openError(WorkbenchHelper.getShell(), "Error", error));
 	}
 
-	public static void tell(final String error) {
-		WorkbenchHelper.run(() -> MessageDialog.openInformation(WorkbenchHelper.getShell(), "Message", error));
+	public static void tell(final String title, final String error) {
+		WorkbenchHelper.run(() -> MessageDialog.openInformation(WorkbenchHelper.getShell(), title, error));
 	}
 
 	public static boolean question(final String title, final String message) {

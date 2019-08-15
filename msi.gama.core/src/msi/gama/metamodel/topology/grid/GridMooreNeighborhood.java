@@ -29,7 +29,7 @@ public class GridMooreNeighborhood extends GridNeighborhood {
 	protected Set<Integer> getNeighborsAtRadius(final int placeIndex, final int radius) {
 		final int y = placeIndex / this.matrix.numCols;
 		final int x = placeIndex - y * this.matrix.numCols;
-		final Set<Integer> v = new HashSet(radius + 1 * radius + 1);
+		final Set<Integer> v = new HashSet<Integer>(radius + 1 * radius + 1);
 		int p;
 		for (int i = 1 - radius; i < radius; i++) {
 			p = this.matrix.getPlaceIndexAt(x + i, y - radius);

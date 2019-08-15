@@ -31,6 +31,7 @@ import msi.gama.common.interfaces.IGamaView;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.ItemList;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.GamaColor;
 import msi.gaml.statements.test.AbstractSummary;
@@ -236,10 +237,11 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 
 	@Override
 	public String getItemDisplayName(final AbstractSummary<?> obj, final String previousName) {
-		final StringBuilder sb = new StringBuilder(300);
-		final String name = obj.getTitle();
-		sb.append(obj.getState()).append(ItemList.SEPARATION_CODE).append(name).append(" ");
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			final String name = obj.getTitle();
+			sb.append(obj.getState()).append(ItemList.SEPARATION_CODE).append(name).append(" ");
+			return sb.toString();
+		}
 	}
 
 	@Override
@@ -290,7 +292,7 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 		result.put("Copy summary to clipboard", () -> {
 			WorkbenchHelper.copy(item.toString());
 		});
-		result.put("Show in editor", () -> GAMA.getGui().editModel(null, item.getURI()));
+		result.put("Show in editor", () -> GAMA.getGui().editModel(item.getURI()));
 		return result;
 	}
 
@@ -300,7 +302,7 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 	}
 
 	@Override
-	public void displayProgress(int number, int total) {
+	public void displayProgress(final int number, final int total) {
 		WorkbenchHelper.asyncRun(() -> {
 			if (toolbar != null) {
 				toolbar.status(null, "Executing test models: " + number + " on " + total, null, IGamaColors.NEUTRAL,

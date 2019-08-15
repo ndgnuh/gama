@@ -20,12 +20,11 @@ import java.util.List;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.swt.GLCanvas;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.ILayer;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.display.AbstractDisplayGraphics;
 import msi.gama.outputs.layers.charts.ChartOutput;
@@ -39,7 +38,6 @@ import msi.gaml.statements.draw.FileDrawingAttributes;
 import msi.gaml.statements.draw.ShapeDrawingAttributes;
 import msi.gaml.statements.draw.TextDrawingAttributes;
 import msi.gaml.types.GamaGeometryType;
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.opengl.OpenGL;
 import ummisco.gama.opengl.renderer.helpers.CameraHelper;
 import ummisco.gama.opengl.renderer.helpers.KeystoneHelper;
@@ -60,10 +58,6 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  */
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRenderer {
-
-	static {
-		DEBUG.ON();
-	}
 
 	// Helpers
 	private final KeystoneHelper keystoneHelper = createKeystoneHelper();
@@ -378,17 +372,17 @@ public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRend
 	 */
 
 	@Override
-	public final ILocation getCameraPos() {
+	public final GamaPoint getCameraPos() {
 		return cameraHelper.getPosition();
 	}
 
 	@Override
-	public final ILocation getCameraTarget() {
+	public final GamaPoint getCameraTarget() {
 		return cameraHelper.getTarget();
 	}
 
 	@Override
-	public final ILocation getCameraOrientation() {
+	public final GamaPoint getCameraOrientation() {
 		return cameraHelper.getOrientation();
 	}
 

@@ -27,13 +27,13 @@ import org.jgrapht.alg.ConnectivityInspector;
 import org.jgrapht.alg.flow.EdmondsKarpMFImpl;
 import org.jgrapht.alg.interfaces.MaximumFlowAlgorithm.MaximumFlow;
 
-import com.vividsolutions.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Coordinate;
 
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph.VertexRelationship;
@@ -167,7 +167,7 @@ public class Graphs {
 
 				return nb == 2;
 			}
-			try (ICollector<ILocation> cp = Collector.getSet()) {
+			try (ICollector<GamaPoint> cp = Collector.newSet()) {
 				final GamaPoint[] lp1 = GeometryUtils.getPointsOf(p1);
 				for (final GamaPoint pt : GeometryUtils.getPointsOf(p2)) {
 					if (ArrayUtils.contains(lp1, pt)) {

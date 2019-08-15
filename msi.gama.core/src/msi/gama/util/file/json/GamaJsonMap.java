@@ -11,6 +11,7 @@ package msi.gama.util.file.json;
 import java.util.Iterator;
 import java.util.Map;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.util.GamaMap;
 import msi.gaml.types.Types;
 
@@ -28,20 +29,21 @@ public class GamaJsonMap extends GamaMap<String, Object> implements Jsonable {
 
 	@Override
 	public String toJson() {
-		final StringBuilder writable = new StringBuilder();
-		boolean isFirstEntry = true;
-		final Iterator<Map.Entry<String, Object>> entries = this.entrySet().iterator();
-		writable.append('{');
-		while (entries.hasNext()) {
-			if (isFirstEntry) {
-				isFirstEntry = false;
-			} else {
-				writable.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			boolean isFirstEntry = true;
+			final Iterator<Map.Entry<String, Object>> entries = this.entrySet().iterator();
+			sb.append('{');
+			while (entries.hasNext()) {
+				if (isFirstEntry) {
+					isFirstEntry = false;
+				} else {
+					sb.append(',');
+				}
+				final Map.Entry<String, Object> entry = entries.next();
+				sb.append(Jsoner.serialize(entry.getKey())).append(':').append(Jsoner.serialize(entry.getValue()));
 			}
-			final Map.Entry<String, Object> entry = entries.next();
-			writable.append(Jsoner.serialize(entry.getKey())).append(':').append(Jsoner.serialize(entry.getValue()));
+			sb.append('}');
+			return sb.toString();
 		}
-		writable.append('}');
-		return writable.toString();
 	}
 }

@@ -17,16 +17,16 @@ import static msi.gama.common.geometry.GeometryUtils.translate;
 import static msi.gama.util.GamaListFactory.create;
 import static msi.gaml.types.Types.POINT;
 
-import com.vividsolutions.jts.algorithm.PointLocator;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
-import com.vividsolutions.jts.geom.TopologyException;
-import com.vividsolutions.jts.util.AssertionFailedException;
+import org.locationtech.jts.algorithm.PointLocator;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.MultiLineString;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.TopologyException;
+import org.locationtech.jts.util.AssertionFailedException;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Envelope3D;
@@ -37,6 +37,7 @@ import msi.gama.common.interfaces.BiConsumerWithPruning;
 import msi.gama.common.interfaces.IAttributed;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.IScope;
+import msi.gama.util.Collector;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IList;
@@ -158,7 +159,7 @@ public class GamaShape implements IShape {
 	 *            can be null
 	 */
 
-	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final ILocation newLocation) {
+	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final GamaPoint newLocation) {
 		this(source, geom);
 		if (!isPoint() && rotation != null) {
 			Double normalZ = null;
@@ -194,7 +195,7 @@ public class GamaShape implements IShape {
 	 *            indicates whether the previous parameter should be considered as an absolute bounding box (width,
 	 *            height, ) or as a set of coefficients.
 	 */
-	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final ILocation newLocation,
+	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final GamaPoint newLocation,
 			final Scaling3D bounds, final boolean isBoundingBox) {
 		this(source, geom, rotation, newLocation);
 		if (bounds != null && !isPoint()) {
@@ -225,7 +226,7 @@ public class GamaShape implements IShape {
 	 * @param newLocation
 	 *            can be null
 	 */
-	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final ILocation newLocation,
+	public GamaShape(final IShape source, final Geometry geom, final AxisAngle rotation, final GamaPoint newLocation,
 			final Double scaling) {
 		this(source, geom, rotation, newLocation);
 		if (scaling != null && !isPoint()) {
@@ -307,15 +308,15 @@ public class GamaShape implements IShape {
 	}
 
 	@Override
-	public void setLocation(final ILocation l) {
+	public void setLocation(final GamaPoint l) {
 		if (isPoint()) {
-			geometry = GEOMETRY_FACTORY.createPoint(l.toGamaPoint());
+			geometry = GEOMETRY_FACTORY.createPoint(l);
 		} else {
-			translate(geometry, getLocation(), l.toGamaPoint());
+			translate(geometry, getLocation(), l);
 		}
 	}
 
-	public GamaShape translatedTo(final IScope scope, final ILocation target) {
+	public GamaShape translatedTo(final IScope scope, final GamaPoint target) {
 		final GamaShape result = copy(scope);
 		result.setLocation(target);
 		return result;
@@ -374,15 +375,16 @@ public class GamaShape implements IShape {
 
 	@Override
 	public IList<GamaShape> getHoles() {
-		final IList<GamaShape> holes = GamaListFactory.create(Types.GEOMETRY);
-		if (getInnerGeometry() instanceof Polygon) {
-			final Polygon p = (Polygon) getInnerGeometry();
-			final int n = p.getNumInteriorRing();
-			for (int i = 0; i < n; i++) {
-				holes.add(new GamaShape(GEOMETRY_FACTORY.createPolygon(p.getInteriorRingN(i).getCoordinates())));
+		try (Collector.AsList<GamaShape> holes = Collector.newList()) {
+			if (getInnerGeometry() instanceof Polygon) {
+				final Polygon p = (Polygon) getInnerGeometry();
+				final int n = p.getNumInteriorRing();
+				for (int i = 0; i < n; i++) {
+					holes.add(new GamaShape(GEOMETRY_FACTORY.createPolygon(p.getInteriorRingN(i).getCoordinates())));
+				}
 			}
+			return holes.items();
 		}
-		return holes;
 	}
 
 	@Override
@@ -460,9 +462,9 @@ public class GamaShape implements IShape {
 	}
 
 	@Override
-	public IList<? extends ILocation> getPoints() {
+	public IList<GamaPoint> getPoints() {
 		if (getInnerGeometry() == null) { return create(POINT); }
-		return (IList<? extends ILocation>) GamaListFactory.wrap(POINT, getInnerGeometry().getCoordinates());
+		return (IList) GamaListFactory.wrap(POINT, getInnerGeometry().getCoordinates());
 	}
 
 	@Override
@@ -565,7 +567,7 @@ public class GamaShape implements IShape {
 	@Override
 	public boolean covers(final IShape g) {
 		// WARNING Only 2D now
-		if (g.isPoint()) { return pl.intersects((Coordinate) g.getLocation(), geometry); }
+		if (g.isPoint()) { return pl.intersects(g.getLocation(), geometry); }
 		try {
 			return geometry.covers(g.getInnerGeometry());
 		} catch (final TopologyException e) {
@@ -596,7 +598,7 @@ public class GamaShape implements IShape {
 	}
 
 	@Override
-	public double euclidianDistanceTo(final ILocation g) {
+	public double euclidianDistanceTo(final GamaPoint g) {
 		// WARNING Only 2D now
 		if (isPoint()) { return g.euclidianDistanceTo(getLocation()); }
 		return getInnerGeometry().distance(g.getInnerGeometry());
@@ -608,7 +610,7 @@ public class GamaShape implements IShape {
 	@Override
 	public boolean intersects(final IShape g) {
 		// WARNING Only 2D now
-		if (g.isPoint()) { return pl.intersects((Coordinate) g.getLocation(), getInnerGeometry()); }
+		if (g.isPoint()) { return pl.intersects(g.getLocation(), getInnerGeometry()); }
 		try {
 			return getInnerGeometry().intersects(g.getInnerGeometry());
 		} catch (final TopologyException e) {
@@ -630,7 +632,7 @@ public class GamaShape implements IShape {
 	@Override
 	public boolean crosses(final IShape g) {
 		// WARNING Only 2D now
-		if (g.isPoint()) { return pl.intersects((Coordinate) g.getLocation(), getInnerGeometry()); }
+		if (g.isPoint()) { return pl.intersects(g.getLocation(), getInnerGeometry()); }
 		try {
 			return geometry.crosses(g.getInnerGeometry());
 		} catch (final TopologyException e) {

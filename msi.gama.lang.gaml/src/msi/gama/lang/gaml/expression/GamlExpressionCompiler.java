@@ -859,7 +859,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final boolean isMatrix = Types.MATRIX.isAssignableFrom(contType);
 		final IType keyType = contType.getKeyType();
 		final List<? extends Expression> list = EGaml.getInstance().getExprsOf(object.getRight());
-		try (final Collector.AsList<IExpression> result = Collector.getList()) {
+		try (final Collector.AsList<IExpression> result = Collector.newList()) {
 			// final List<IExpression> result = new ArrayList<>();
 			final int size = list.size();
 			for (int i = 0; i < size; i++) {
@@ -1225,7 +1225,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 			final IExecutionContext tempContext) throws GamaRuntimeException {
 		final String s = "__synthetic__ {" + string + "}";
 		final GamlResource resource = GamlResourceServices.getTemporaryResource(getContext());
-		try (final Collector.AsList<IDescription> result = Collector.getList()) {
+		try (final Collector.AsList<IDescription> result = Collector.newList()) {
 			final InputStream is = new ByteArrayInputStream(s.getBytes());
 			try {
 				resource.loadSynthetic(is, tempContext);

@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.ISkill;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.GamlAgent;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.IMacroAgent;
@@ -346,7 +347,7 @@ public class SpeciesDescription extends TypeDescription {
 			duplicateInfo(ce, getAspect(aspectName));
 		}
 		if (aspects == null) {
-			aspects = GamaMapFactory.createUnordered();
+			aspects = GamaMapFactory.createUnordered(4);
 		}
 		aspects.put(aspectName, ce);
 	}
@@ -491,29 +492,31 @@ public class SpeciesDescription extends TypeDescription {
 
 	@Override
 	public String getDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append(getDocumentationWithoutMeta());
-		sb.append(getMeta().getDocumentation());
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(getDocumentationWithoutMeta());
+			sb.append(getMeta().getDocumentation());
+			return sb.toString();
+		}
 	}
 
 	public String getDocumentationWithoutMeta() {
-		final StringBuilder sb = new StringBuilder(200);
-		final String parentName = getParent() == null ? "nil" : getParent().getName();
-		final String hostName = getMacroSpecies() == null ? null : getMacroSpecies().getName();
-		sb.append("<b>Subspecies of:</b> ").append(parentName).append("<br>");
-		if (hostName != null) {
-			sb.append("<b>Microspecies of:</b> ").append(hostName).append("<br>");
+		try (TextBuilder sb = TextBuilder.create()) {
+			final String parentName = getParent() == null ? "nil" : getParent().getName();
+			final String hostName = getMacroSpecies() == null ? null : getMacroSpecies().getName();
+			sb.append("<b>Subspecies of:</b> ").append(parentName).append("<br>");
+			if (hostName != null) {
+				sb.append("<b>Microspecies of:</b> ").append(hostName).append("<br>");
+			}
+			final Iterable<String> skills = getSkillsNames();
+			if (!Iterables.isEmpty(skills)) {
+				sb.append("<b>Skills:</b> ").append(skills).append("<br>");
+			}
+			sb.append(getAttributeDocumentation());
+			sb.append("<br/>");
+			sb.append(getActionDocumentation());
+			sb.append("<br/>");
+			return sb.toString();
 		}
-		final Iterable<String> skills = getSkillsNames();
-		if (!Iterables.isEmpty(skills)) {
-			sb.append("<b>Skills:</b> ").append(skills).append("<br>");
-		}
-		sb.append(getAttributeDocumentation());
-		sb.append("<br/>");
-		sb.append(getActionDocumentation());
-		sb.append("<br/>");
-		return sb.toString();
 	}
 
 	public Iterable<String> getSkillsNames() {

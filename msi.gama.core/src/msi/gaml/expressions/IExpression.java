@@ -10,6 +10,7 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import java.util.Collection;
 import java.util.function.Predicate;
 
 import msi.gama.common.interfaces.IDisposable;
@@ -17,7 +18,6 @@ import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.ITyped;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.descriptions.IExpressionDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
@@ -109,7 +109,7 @@ public interface IExpression extends IGamlDescription, ITyped, IDisposable {
 	 *            a collector which can be fed with the description of the attributes defined in the species if they
 	 *            happend to be used by this expression or one of its sub-expression
 	 */
-	default void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	default void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		// Nothing by default
 	}
 

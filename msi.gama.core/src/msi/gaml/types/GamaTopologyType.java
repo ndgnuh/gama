@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gaml.types.GamaTopologyType.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.types.GamaTopologyType.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.types;
 
@@ -18,7 +18,6 @@ import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.continuous.ContinuousTopology;
 import msi.gama.metamodel.topology.continuous.MultipleTopology;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
-import msi.gama.metamodel.topology.graph.ISpatialGraph;
 import msi.gama.metamodel.topology.grid.GridTopology;
 import msi.gama.metamodel.topology.grid.IGrid;
 import msi.gama.precompiler.GamlAnnotations.doc;
@@ -33,10 +32,10 @@ import msi.gaml.species.ISpecies;
 
 /**
  * The type topology.
- * 
+ *
  * @author Alexis Drogoul
  * @since 26 nov. 2011
- * 
+ *
  */
 @SuppressWarnings ("unchecked")
 @type (
@@ -53,13 +52,13 @@ public class GamaTopologyType extends GamaType<ITopology> {
 			throws GamaRuntimeException {
 		// Many cases.
 		if (obj == null) { return null; }
-		if (obj instanceof ISpatialGraph) { return ((ISpatialGraph) obj).getTopology(scope); }
+		if (obj instanceof GamaSpatialGraph) { return ((GamaSpatialGraph) obj).getTopology(scope); }
 		if (obj instanceof ITopology) { return (ITopology) obj; }
-		if (obj instanceof IAgent)
-			return ((IAgent) obj).getTopology();
+		if (obj instanceof IAgent) { return ((IAgent) obj).getTopology(); }
 		if (obj instanceof IPopulation) { return ((IPopulation) obj).getTopology(); }
-		if (obj instanceof ISpecies) { return staticCast(scope, scope.getAgent().getPopulationFor((ISpecies) obj),
-				copy); }
+		if (obj instanceof ISpecies) {
+			return staticCast(scope, scope.getAgent().getPopulationFor((ISpecies) obj), copy);
+		}
 		if (obj instanceof IShape) { return from(scope, (IShape) obj); }
 		if (obj instanceof IContainer) { return from(scope, (IContainer) obj); }
 		return staticCast(scope, Cast.asGeometry(scope, obj, copy), copy);

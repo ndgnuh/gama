@@ -46,14 +46,9 @@ import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.ValidationContext;
-import ummisco.gama.dev.utils.DEBUG;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamlResourceServices {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	private static int resourceCount = 0;
 	private static IDocManager documenter = new GamlResourceDocumenter();

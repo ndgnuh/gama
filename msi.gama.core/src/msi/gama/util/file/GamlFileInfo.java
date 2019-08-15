@@ -18,6 +18,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import msi.gama.common.util.TextBuilder;
+
 public class GamlFileInfo extends GamaFileMetaData {
 
 	public static String BATCH_PREFIX = "***";
@@ -58,7 +60,7 @@ public class GamlFileInfo extends GamaFileMetaData {
 	public GamlFileInfo(final String propertyString) {
 		super(propertyString);
 		final String[] values = split(propertyString);
-		int size = values.length;
+		final int size = values.length;
 		final List<String> imports = asList(splitByWholeSeparatorPreserveAllTokens(values[1], SUB_DELIMITER));
 		this.imports = imports == null || imports.isEmpty() || imports.contains(null) ? null : imports;
 		final List<String> uses = asList(splitByWholeSeparatorPreserveAllTokens(values[2], SUB_DELIMITER));
@@ -78,8 +80,7 @@ public class GamlFileInfo extends GamaFileMetaData {
 	 */
 	@Override
 	public String getSuffix() {
-		if (invalid)
-			return ERRORS;
+		if (invalid) { return ERRORS; }
 		final int expCount = experiments == null ? 0 : experiments.size();
 		if (expCount > 0) { return "" + (expCount == 1 ? "1 experiment" : expCount + " experiments"); }
 
@@ -95,22 +96,25 @@ public class GamlFileInfo extends GamaFileMetaData {
 		final int expCount = experiments == null ? 0 : experiments.size();
 		if (expCount > 0) {
 			sb.append(expCount).append(" experiment");
-			if (expCount > 1)
+			if (expCount > 1) {
 				sb.append("s");
-		} else
+			}
+		} else {
 			sb.append("no experiment");
+		}
 	}
 
 	@Override
 	public String toPropertyString() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(super.toPropertyString()).append(DELIMITER);
-		sb.append(imports == null ? "" : join(imports, SUB_DELIMITER)).append(DELIMITER);
-		sb.append(uses == null ? "" : join(uses, SUB_DELIMITER)).append(DELIMITER);
-		sb.append(experiments == null ? "" : join(experiments, SUB_DELIMITER)).append(DELIMITER);
-		sb.append(tags == null ? "" : join(tags, SUB_DELIMITER)).append(DELIMITER);
-		sb.append(invalid ? "TRUE" : "FALSE").append(DELIMITER);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(super.toPropertyString()).append(DELIMITER);
+			sb.append(imports == null ? "" : join(imports, SUB_DELIMITER)).append(DELIMITER);
+			sb.append(uses == null ? "" : join(uses, SUB_DELIMITER)).append(DELIMITER);
+			sb.append(experiments == null ? "" : join(experiments, SUB_DELIMITER)).append(DELIMITER);
+			sb.append(tags == null ? "" : join(tags, SUB_DELIMITER)).append(DELIMITER);
+			sb.append(invalid ? "TRUE" : "FALSE").append(DELIMITER);
+			return sb.toString();
+		}
 
 	}
 

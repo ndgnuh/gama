@@ -23,12 +23,13 @@ import static msi.gama.precompiler.ITypeProvider.TYPE_AT_INDEX;
 import static msi.gama.precompiler.ITypeProvider.WRAPPED;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.function.Predicate;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.ITypeProvider;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.compilation.GamaGetter;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -207,10 +208,11 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(literalValue());
-		parenthesize(sb, exprs);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(literalValue());
+			parenthesize(sb, exprs);
+			return sb.toString();
+		}
 	}
 
 	public int numArg() {
@@ -226,20 +228,21 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 
 	@Override
 	public String getTitle() {
-		final StringBuilder sb = new StringBuilder(50);
-		sb.append("operator ").append(getName()).append(" (");
-		if (exprs != null) {
-			for (final IExpression expr : exprs) {
-				sb.append(expr == null ? "nil" : expr.getGamlType().getTitle());
-				sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("operator ").append(getName()).append(" (");
+			if (exprs != null) {
+				for (final IExpression expr : exprs) {
+					sb.append(expr == null ? "nil" : expr.getGamlType().getTitle());
+					sb.append(',');
+				}
+				sb.setLength(sb.length() - 1);
+			} else if (prototype.signature != null) {
+				sb.append("Argument types: " + prototype.signature.toString());
 			}
-			sb.setLength(sb.length() - 1);
-		} else if (prototype.signature != null) {
-			sb.append("Argument types: " + prototype.signature.toString());
+			sb.append(") returns ");
+			sb.append(type.getTitle());
+			return sb.toString();
 		}
-		sb.append(") returns ");
-		sb.append(type.getTitle());
-		return sb.toString();
 	}
 
 	@Override
@@ -271,7 +274,7 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 	// }
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		prototype.collectImplicitVarsOf(species, result);
 		if (exprs != null) {
 			for (final IExpression e : exprs) {

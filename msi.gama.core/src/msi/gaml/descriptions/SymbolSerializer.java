@@ -18,6 +18,7 @@ import java.util.Set;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.common.util.StringUtils;
 import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.Strings;
@@ -272,9 +273,10 @@ public class SymbolSerializer<C extends SymbolDescription> implements IKeyword {
 	 */
 	public final String serialize(final SymbolDescription symbolDescription, final boolean includingBuiltIn) {
 		if (symbolDescription.isBuiltIn() && !includingBuiltIn) { return ""; }
-		final StringBuilder sb = new StringBuilder();
-		serialize(symbolDescription, sb, includingBuiltIn);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			serialize(symbolDescription, sb.getBuilder(), includingBuiltIn);
+			return sb.toString();
+		}
 	}
 
 	public final void serializeNoRecursion(final StringBuilder sb, final IDescription symbolDescription,
@@ -298,19 +300,19 @@ public class SymbolSerializer<C extends SymbolDescription> implements IKeyword {
 	protected void serializeChildren(final SymbolDescription symbolDescription, final StringBuilder sb,
 			final boolean includingBuiltIn) {
 
-		final StringBuilder childBuilder = new StringBuilder();
-		symbolDescription.visitChildren(desc -> {
-			serializeChild(desc, childBuilder, includingBuiltIn);
-			return true;
-		});
-		if (childBuilder.length() == 0) {
-			sb.append(';');
-		} else {
-			sb.append(' ').append('{').append(Strings.LN);
-			sb.append(childBuilder);
-			sb.append('}').append(Strings.LN);
+		try (TextBuilder childBuilder = TextBuilder.create()) {
+			symbolDescription.visitChildren(desc -> {
+				serializeChild(desc, childBuilder.getBuilder(), includingBuiltIn);
+				return true;
+			});
+			if (childBuilder.length() == 0) {
+				sb.append(';');
+			} else {
+				sb.append(' ').append('{').append(Strings.LN);
+				sb.append(childBuilder);
+				sb.append('}').append(Strings.LN);
+			}
 		}
-
 	}
 
 	protected void serializeChild(final IDescription s, final StringBuilder sb, final boolean includingBuiltIn) {

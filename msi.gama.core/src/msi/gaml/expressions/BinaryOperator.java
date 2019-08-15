@@ -12,6 +12,7 @@ package msi.gaml.expressions;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
@@ -42,23 +43,25 @@ public class BinaryOperator extends AbstractNAryOperator {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		final String name = getName();
-		if (name.equals("internal_at")) {
-			// '[' and ']' included
-			sb.append(exprs[0].serialize(includingBuiltIn)).append(exprs[1].serialize(includingBuiltIn));
-		} else if (OperatorProto.binaries.contains(name)) {
-			parenthesize(sb, exprs[0]);
-			sb.append(' ').append(name).append(' ');
-			parenthesize(sb, exprs[1]);
-		} else if (name.equals(IKeyword.AS)) {
-			// Special case for the "as" operator
-			sb.append(exprs[1].serialize(false)).append("(").append(exprs[0].serialize(includingBuiltIn)).append(")");
-		} else {
-			sb.append(name);
-			parenthesize(sb, exprs[0], exprs[1]);
+		try (TextBuilder sb = TextBuilder.create()) {
+			final String name = getName();
+			if (name.equals("internal_at")) {
+				// '[' and ']' included
+				sb.append(exprs[0].serialize(includingBuiltIn)).append(exprs[1].serialize(includingBuiltIn));
+			} else if (OperatorProto.binaries.contains(name)) {
+				parenthesize(sb, exprs[0]);
+				sb.append(' ').append(name).append(' ');
+				parenthesize(sb, exprs[1]);
+			} else if (name.equals(IKeyword.AS)) {
+				// Special case for the "as" operator
+				sb.append(exprs[1].serialize(false)).append("(").append(exprs[0].serialize(includingBuiltIn))
+						.append(")");
+			} else {
+				sb.append(name);
+				parenthesize(sb, exprs[0], exprs[1]);
+			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	@Override
@@ -129,11 +132,12 @@ public class BinaryOperator extends AbstractNAryOperator {
 
 		@Override
 		public String serialize(final boolean includingBuiltIn) {
-			final StringBuilder sb = new StringBuilder();
-			parenthesize(sb, exprs[0]);
-			sb.append('.');
-			sb.append(exprs[1].serialize(includingBuiltIn));
-			return sb.toString();
+			try (TextBuilder sb = TextBuilder.create()) {
+				parenthesize(sb, exprs[0]);
+				sb.append('.');
+				sb.append(exprs[1].serialize(includingBuiltIn));
+				return sb.toString();
+			}
 		}
 
 		@Override

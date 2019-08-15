@@ -10,6 +10,9 @@
  ********************************************************************************************************/
 package msi.gama.util.graph;
 
+import static msi.gama.runtime.GAMA.reportError;
+import static msi.gama.runtime.exceptions.GamaRuntimeException.warning;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +24,7 @@ import msi.gama.ext.graphstream.MultiGraph;
 import msi.gama.ext.graphstream.Node;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.IScope;
 import msi.gama.util.GamaColor;
 
 /**
@@ -59,7 +61,7 @@ public class GraphUtilsGraphStream {
 	 * @param gamaGraph
 	 * @return
 	 */
-	public static Graph getGraphstreamGraphFromGamaGraph(final IGraph gamaGraph) {
+	public static Graph getGraphstreamGraphFromGamaGraph(final IScope scope, final IGraph gamaGraph) {
 
 		final Graph g = new MultiGraph("tmpGraph", true, false);
 
@@ -79,14 +81,6 @@ public class GraphUtilsGraphStream {
 					n.setAttribute(key.toString(), preprocessGamaValue(value).toString());
 					return true;
 				});
-				// for (final Object key : a.getAttributes().keySet()) {
-				//
-				// final Object value = preprocessGamaValue(a.getAttributes().get(key));
-				//
-				// // standard attribute
-				// n.setAttribute(key.toString(), value.toString());
-				//
-				// }
 			}
 
 			if (v instanceof IShape) {
@@ -119,16 +113,14 @@ public class GraphUtilsGraphStream {
 					// }
 				}
 			} catch (final EdgeRejectedException e) {
-				GAMA.reportError(GAMA.getRuntimeScope(),
-						GamaRuntimeException.warning(
-								"an edge was rejected during the transformation, probably because it was a double one",
-								GAMA.getRuntimeScope()),
+				reportError(scope,
+						warning("an edge was rejected during the transformation, probably because it was a double one",
+								scope),
 						true);
 			} catch (final IdAlreadyInUseException e) {
-				GAMA.reportError(GAMA.getRuntimeScope(),
-						GamaRuntimeException.warning(
-								"an edge was rejected during the transformation, probably because it was a double one",
-								GAMA.getRuntimeScope()),
+				reportError(scope,
+						warning("an edge was rejected during the transformation, probably because it was a double one",
+								scope),
 						true);
 			}
 
@@ -136,17 +128,17 @@ public class GraphUtilsGraphStream {
 
 		// some basic tests for integrity
 		if (gamaGraph.getVertices().size() != g.getNodeCount()) {
-			GAMA.reportError(GAMA.getRuntimeScope(),
-					GamaRuntimeException.warning("The exportation ran without error, but an integrity test failed: "
+			reportError(scope,
+					warning("The exportation ran without error, but an integrity test failed: "
 							+ "the number of vertices is not correct(" + g.getNodeCount() + " instead of "
-							+ gamaGraph.getVertices().size() + ")", GAMA.getRuntimeScope()),
+							+ gamaGraph.getVertices().size() + ")", scope),
 					true);
 		}
 		if (gamaGraph.getEdges().size() != g.getEdgeCount()) {
-			GAMA.reportError(GAMA.getRuntimeScope(),
-					GamaRuntimeException.warning("The exportation ran without error, but an integrity test failed: "
+			reportError(scope,
+					warning("The exportation ran without error, but an integrity test failed: "
 							+ "the number of edges is not correct(" + g.getEdgeCount() + " instead of "
-							+ gamaGraph.getEdges().size() + ")", GAMA.getRuntimeScope()),
+							+ gamaGraph.getEdges().size() + ")", scope),
 					true);
 		}
 

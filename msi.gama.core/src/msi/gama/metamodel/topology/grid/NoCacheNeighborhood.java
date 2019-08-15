@@ -44,7 +44,7 @@ public class NoCacheNeighborhood implements INeighborhood {
 	}
 
 	private Set<IAgent> computeNeighborsFrom(final IScope scope, final int placeIndex, final int begin, final int end) {
-		try (final Collector.AsOrderedSet<IAgent> result = Collector.getOrderedSet()) {
+		try (final Collector.AsOrderedSet<IAgent> result = Collector.newOrderedSet()) {
 			for (int i = begin; i <= end; i++) {
 				for (final Integer index : matrix.usesVN ? get4NeighborsAtRadius(placeIndex, i)
 						: get8NeighborsAtRadius(placeIndex, i)) {

@@ -12,18 +12,16 @@ package msi.gama.metamodel.topology.projection;
 
 import java.util.Map;
 
-import javax.measure.converter.UnitConverter;
-import javax.measure.unit.SI;
-import javax.measure.unit.Unit;
+import javax.measure.Unit;
+import javax.measure.UnitConverter;
 
 import org.geotools.referencing.CRS;
+import org.locationtech.jts.geom.Envelope;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.crs.ProjectedCRS;
 import org.opengis.referencing.cs.CartesianCS;
-
-import com.vividsolutions.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.preferences.GamaPreferences;
@@ -31,6 +29,7 @@ import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.file.GamaGisFile;
+import si.uom.SI;
 
 /**
  * Class ProjectionFactory.
@@ -58,6 +57,7 @@ public class ProjectionFactory {
 		// ((WorldProjection) world).updateTranslations(env);
 	}
 
+	@SuppressWarnings ("unchecked")
 	void computeTargetCRS(final IScope scope, final CoordinateReferenceSystem crs, final double longitude,
 			final double latitude) {
 		// If we already know in which CRS we project the data in GAMA, no need to recompute it. This information is
@@ -69,9 +69,9 @@ public class ProjectionFactory {
 			} else {
 				if (crs != null && crs instanceof ProjectedCRS) { // Temporary fix of issue 766... a better solution
 					final CartesianCS ccs = ((ProjectedCRS) crs).getCoordinateSystem();
-					final Unit<?> unitX = ccs.getAxis(0).getUnit();
-					if (unitX != null && !unitX.equals(SI.METER)) {
-						unitConverter = unitX.getConverterTo(SI.METER);
+					final Unit unitX = ccs.getAxis(0).getUnit();
+					if (unitX != null && !unitX.equals(SI.METRE)) {
+						unitConverter = unitX.getConverterTo(SI.METRE);
 					}
 					targetCRS = crs;
 				} else {

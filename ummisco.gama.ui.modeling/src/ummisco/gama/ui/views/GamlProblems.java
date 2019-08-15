@@ -21,7 +21,7 @@ public class GamlProblems extends FiltersContributionParameters {
 	static {
 		parametersMap = new HashMap<>();
 		parametersMap.put(IMarker.SEVERITY,
-			new Integer(IMarker.SEVERITY_WARNING | IMarker.SEVERITY_ERROR | IMarker.SEVERITY_INFO));
+			(IMarker.SEVERITY_WARNING | IMarker.SEVERITY_ERROR | IMarker.SEVERITY_INFO));
 	}
 
 	/**

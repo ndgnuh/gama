@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.agent.IAgent;
@@ -68,12 +69,13 @@ public class GamaSavedSimulationFile extends GamaFile<IList<String>, String> {
 
 		@Override
 		public String getDocumentation() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Model: ").append(savedModel).append(Strings.LN);
-			sb.append("Experiment: ").append(savedExperiment).append(Strings.LN);
-			sb.append("Cycle: ").append(savedCycle).append(Strings.LN);
+			try (TextBuilder sb = TextBuilder.create()) {
+				sb.append("Model: ").append(savedModel).append(Strings.LN);
+				sb.append("Experiment: ").append(savedExperiment).append(Strings.LN);
+				sb.append("Cycle: ").append(savedCycle).append(Strings.LN);
 
-			return sb.toString();
+				return sb.toString();
+			}
 		}
 
 		@Override
@@ -185,12 +187,13 @@ public class GamaSavedSimulationFile extends GamaFile<IList<String>, String> {
 	@Override
 	public String _stringValue(final IScope scope) throws GamaRuntimeException {
 		getContents(scope);
-		final StringBuilder sb = new StringBuilder(getBuffer().length(scope) * 200);
-		for (final String s : getBuffer().iterable(scope)) {
-			sb.append(s).append(Strings.LN);
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final String s : getBuffer().iterable(scope)) {
+				sb.append(s).append(Strings.LN);
+			}
+			sb.setLength(sb.length() - 1);
+			return sb.toString();
 		}
-		sb.setLength(sb.length() - 1);
-		return sb.toString();
 	}
 
 	/*
@@ -201,9 +204,8 @@ public class GamaSavedSimulationFile extends GamaFile<IList<String>, String> {
 	@Override
 	protected void fillBuffer(final IScope scope) throws GamaRuntimeException {
 		if (getBuffer() != null) { return; }
-		try (BufferedReader in = new BufferedReader(new FileReader(getFile(scope)))) {
-			final StringBuilder sb = new StringBuilder();
-
+		try (final TextBuilder sb = TextBuilder.create();
+				BufferedReader in = new BufferedReader(new FileReader(getFile(scope)))) {
 			// manage the metadata (and thus remove the first metadata lines)
 			readMetada(in);
 

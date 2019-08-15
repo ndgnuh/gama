@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gaml.statements.PrimitiveStatement.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.statements.PrimitiveStatement.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.statements;
 
@@ -23,9 +23,9 @@ import msi.gama.precompiler.ISymbolKind;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.IDescriptionValidator.NullValidator;
-import msi.gaml.compilation.annotations.validator;
 import msi.gaml.compilation.IGamaHelper;
 import msi.gaml.compilation.ISymbol;
+import msi.gaml.compilation.annotations.validator;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.PrimitiveDescription;
 import msi.gaml.species.AbstractSpecies;
@@ -87,7 +87,8 @@ public class PrimitiveStatement extends ActionStatement {
 	@Override
 	public Object privateExecuteIn(final IScope scope) throws GamaRuntimeException {
 		Object result = null;
-		scope.stackArguments(actualArgs.get());
+		final Arguments myArgs = actualArgs.get();
+		scope.stackArguments(myArgs);
 		final IAgent agent = scope.getAgent();
 		result = helper.run(scope, agent, skill == null ? agent : skill);
 		return result;

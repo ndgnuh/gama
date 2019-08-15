@@ -12,7 +12,6 @@ package msi.gaml.compilation.kernel;
 
 import static ummisco.gama.dev.utils.DEBUG.ERR;
 import static ummisco.gama.dev.utils.DEBUG.PAD;
-import static ummisco.gama.dev.utils.DEBUG.TIMER_WITH_EXCEPTIONS;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,6 +26,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleException;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -34,6 +34,7 @@ import com.google.common.collect.Multimap;
 import msi.gama.common.interfaces.ICreateDelegate;
 import msi.gama.common.interfaces.IEventLayerDelegate;
 import msi.gama.outputs.layers.EventLayerStatement;
+import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.IGamlAdditions;
 import msi.gaml.statements.CreateStatement;
 import msi.gaml.types.Types;
@@ -86,8 +87,10 @@ public class GamaBundleLoader {
 	public static Set<String> HANDLED_FILE_EXTENSIONS = new HashSet<>();
 
 	public static void preBuildContributions() throws Exception {
-		DEBUG.TIMER("> GAMA total load time ", () -> {
-			final IExtensionRegistry registry = Platform.getExtensionRegistry();
+
+		final IExtensionRegistry registry = Platform.getExtensionRegistry();
+		GAMA.initializeAtStartup("Initializing plugins", () -> {
+
 			// We retrieve the elements declared as extensions to the GAML language,
 			// either with the new or the deprecated extension
 			final Set<IExtension> extensions = new HashSet<>();
@@ -120,13 +123,6 @@ public class GamaBundleLoader {
 					TEST_PLUGINS.put(bundle, GENERATED_TESTS_LAYOUT);
 				}
 			}
-			// LOG(">GAMA plugins with language additions: "
-			// + StreamEx.of(GAMA_PLUGINS).map(e -> e.getSymbolicName()).toSet());
-			// LOG(">GAMA plugins with models: " + StreamEx.of(MODEL_PLUGINS.keySet()).map(e
-			// ->
-			// e.getSymbolicName()).toSet());
-			// LOG(">GAMA plugins with tests: " + StreamEx.of(TEST_PLUGINS.keySet()).map(e
-			// -> e.getSymbolicName()).toSet());
 
 			// We remove the core plugin, in order to build it first (important)
 			GAMA_PLUGINS.remove(CORE_PLUGIN);
@@ -193,8 +189,10 @@ public class GamaBundleLoader {
 			}
 			// CRUCIAL INITIALIZATIONS
 			LOADED = true;
+		});
+		GAMA.initializeAtStartup(PAD("Initializing metamodel", 45), () -> {
 			GamaMetaModel.INSTANCE.build();
-			Types.init();
+			// Types.init();
 
 			// We gather all the content types extensions defined in GAMA plugins
 			// (not in the other ones)
@@ -214,11 +212,13 @@ public class GamaBundleLoader {
 			// We reinit the type hierarchy to gather additional types
 			Types.init();
 		});
+
 	}
 
 	@SuppressWarnings ("unchecked")
 	public static void preBuild(final Bundle bundle) throws Exception {
-		TIMER_WITH_EXCEPTIONS(PAD("> GAMA: " + bundle.getSymbolicName(), 45) + " loaded in ", () -> {
+
+		GAMA.initializeAtStartup("Loading " + bundle.getSymbolicName(), () -> {
 			GamaClassLoader.getInstance().addBundle(bundle);
 			Class<IGamlAdditions> gamlAdditions = null;
 			try {
@@ -245,7 +245,6 @@ public class GamaBundleLoader {
 				ERR(">> Impossible to instantiate additions from " + bundle);
 				throw e;
 			}
-
 		});
 	}
 
@@ -260,6 +259,15 @@ public class GamaBundleLoader {
 
 	public static Multimap<Bundle, String> getPluginsWithTests() {
 		return TEST_PLUGINS;
+	}
+
+	public static void loadUI() {
+		final Bundle bundle = Platform.getBundle("ummisco.gama.ui.shared");
+		try {
+			bundle.start();
+		} catch (final BundleException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

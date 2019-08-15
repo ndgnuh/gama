@@ -4,21 +4,22 @@
  * modeling and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editor.toolbar;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.kernel.model.IModel;
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
 import msi.gama.lang.gaml.ui.editor.GamlEditorState;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gaml.compilation.GAML;
 import ummisco.gama.ui.controls.FlatButton;
-import ummisco.gama.ui.interfaces.IModelRunner;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.toolbar.Selector;
 
@@ -33,16 +34,13 @@ public class OpenExperimentSelectionListener implements Selector {
 
 	GamlEditor editor;
 	GamlEditorState state;
-	final IModelRunner runner;
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
-	public OpenExperimentSelectionListener(final GamlEditor editor, final GamlEditorState state,
-			final IModelRunner runner) {
+	public OpenExperimentSelectionListener(final GamlEditor editor, final GamlEditorState state) {
 		this.editor = editor;
 		this.state = state;
-		this.runner = runner;
 	}
 
 	/**
@@ -61,15 +59,14 @@ public class OpenExperimentSelectionListener implements Selector {
 		final int i = state.abbreviations.indexOf(name);
 		if (i == -1) { return; }
 		name = state.experiments.get(i);
-		runner.runModel(editor.getDocument(), name);
-
-	}
-
-	void gotoEditor(final GamaRuntimeException exception) {
-		final EObject o = exception.getEditorContext();
-		if (o != null) {
-			WorkbenchHelper.asyncRun(() -> GAMA.getGui().editModel(null, o));
+		final IXtextDocument doc = editor.getDocument();
+		IModel model = null;
+		try {
+			model = doc.readOnly(state -> GAML.compile(state.getURI(), null));
+		} catch (final GamaRuntimeException ex) {
+			GAMA.getGui().error("Experiment cannot be instantiated because of the following error: " + ex.getMessage());
 		}
+		GAMA.runModel(model, name, false);
 
 	}
 

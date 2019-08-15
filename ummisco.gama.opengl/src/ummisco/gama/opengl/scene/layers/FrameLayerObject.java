@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package ummisco.gama.opengl.scene.layers;
 
-import java.util.List;
+import java.util.Collection;
 
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
@@ -32,7 +32,7 @@ public class FrameLayerObject extends StaticLayerObject.World {
 	}
 
 	@Override
-	public void fillWithObjects(final List<AbstractObject<?, ?>> list) {
+	public void fillWithObjects(final Collection<AbstractObject<?, ?>> list) {
 		final double w = renderer.getData().getEnvWidth();
 		final double h = renderer.getData().getEnvHeight();
 		final IShape g = GamaGeometryType.buildRectangle(w, h, new GamaPoint(w / 2, h / 2));

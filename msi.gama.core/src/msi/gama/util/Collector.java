@@ -27,14 +27,16 @@ import msi.gama.common.util.RandomUtils;
 import msi.gaml.types.Types;
 
 /**
- * A generic class that forwards additions to a set and prevents creating the set if no additions occur
+ * A set of classes that forward operations to collections (IList, HashSet, LinkedHashSet), avoiding creating them if
+ * they are not manipulated. All implement Closeable, allowing their use in try-with constructs. In this case, they
+ * automatically manage their instances in distinct pools.
  *
  * @author drogoul
  *
  * @param <E>
  */
 
-public abstract class Collector<E, C extends Collection<E>> implements ICollector<E>, Collection<E> {
+public abstract class Collector<E, C extends Collection<E>> implements ICollector<E> {
 
 	private static final PoolUtils.ObjectPool<ICollector<?>> LISTS =
 			PoolUtils.create("Ordered Collectors", true, () -> new Collector.AsList<>(), c -> c.clear());
@@ -46,17 +48,17 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 			PoolUtils.create("Unique Ordered Collectors", true, () -> new Collector.AsOrderedSet<>(), c -> c.clear());
 
 	@SuppressWarnings ("unchecked")
-	public static final <T> Collector.AsList<T> getList() {
+	public static final <T> Collector.AsList<T> newList() {
 		return (AsList<T>) LISTS.get();
 	}
 
 	@SuppressWarnings ("unchecked")
-	public static final <T> Collector.AsSet<T> getSet() {
+	public static final <T> Collector.AsSet<T> newSet() {
 		return (AsSet<T>) SETS.get();
 	}
 
 	@SuppressWarnings ("unchecked")
-	public static final <T> Collector.AsOrderedSet<T> getOrderedSet() {
+	public static final <T> Collector.AsOrderedSet<T> newOrderedSet() {
 		return (AsOrderedSet<T>) ORDERED_SETS.get();
 	}
 
@@ -231,11 +233,6 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	C collect;
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see msi.gama.util.ICollector#add(E)
-	 */
 	@Override
 	public boolean add(final E vd) {
 		initCollect();
@@ -244,11 +241,6 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	protected abstract void initCollect();
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see msi.gama.util.ICollector#items()
-	 */
 	@Override
 	public abstract C items();
 
@@ -257,32 +249,17 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 		return items().iterator();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see msi.gama.util.ICollector#remove(E)
-	 */
 	@Override
 	public boolean remove(final Object e) {
 		if (collect == null) { return false; }
 		return collect.remove(e);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see msi.gama.util.ICollector#isEmpty()
-	 */
 	@Override
 	public boolean isEmpty() {
 		return collect == null || collect.isEmpty();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see msi.gama.util.ICollector#clear()
-	 */
 	@Override
 	public void clear() {
 		collect = null;

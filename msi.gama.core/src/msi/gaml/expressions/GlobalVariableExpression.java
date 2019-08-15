@@ -10,13 +10,14 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import java.util.Collection;
+
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.experiment.ITopLevelAgent;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.ICollector;
 import msi.gaml.compilation.GAML;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -118,7 +119,7 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		final SpeciesDescription sd = this.getDefinitionDescription().getSpeciesContext();
 		if (species.equals(sd)) {
 			result.add(sd.getAttribute(getName()));

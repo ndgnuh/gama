@@ -16,6 +16,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import msi.gama.common.interfaces.IValue;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.type;
 import msi.gama.precompiler.GamlAnnotations.variable;
@@ -94,16 +95,17 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	public String getFieldDocumentation() {
 		if (getters == null) { return ""; }
-		final StringBuilder sb = new StringBuilder(200);
-		sb.append("<b><br/>Fields :</b><ul>");
-		for (final OperatorProto f : getters.values()) {
-			sb.append("<li> ").append(f.getName()).append(" of type ").append(f.returnType)
-					.append(getFieldDocumentation(f));
-			sb.append("</li>");
-		}
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append("<b><br/>Fields :</b><ul>");
+			for (final OperatorProto f : getters.values()) {
+				sb.append("<li> ").append(f.getName()).append(" of type ").append(f.returnType)
+						.append(getFieldDocumentation(f));
+				sb.append("</li>");
+			}
 
-		sb.append("</ul>");
-		return sb.toString();
+			sb.append("</ul>");
+			return sb.toString();
+		}
 	}
 
 	private String getFieldDocumentation(final OperatorProto prototype) {
@@ -414,7 +416,7 @@ public abstract class GamaType<Support> implements IType<Support> {
 	public static IType<?> findCommonType(final IExpression[] elements, final int kind) {
 		final IType<?> result = Types.NO_TYPE;
 		if (elements.length == 0) { return result; }
-		try (final ICollector<IType<?>> types = Collector.getOrderedSet()) {
+		try (final ICollector<IType<?>> types = Collector.newOrderedSet()) {
 			for (final IExpression e : elements) {
 				// TODO Indicates a previous error in compiling expressions. Maybe
 				// we should cut this

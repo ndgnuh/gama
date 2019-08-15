@@ -16,7 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.PlatformUI;
 
-import msi.gama.application.workspace.PickWorkspaceDialog;
+import ummisco.gama.ui.PickWorkspaceDialog;
 
 public class SwitchWorkspaceHandler extends AbstractHandler {
 

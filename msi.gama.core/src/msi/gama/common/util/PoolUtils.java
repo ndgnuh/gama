@@ -1,10 +1,9 @@
 package msi.gama.common.util;
 
+import java.util.ArrayDeque;
 import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
-
-import com.google.common.collect.Queues;
 
 import msi.gama.common.interfaces.IDisposable;
 import msi.gama.common.preferences.GamaPreferences;
@@ -12,10 +11,10 @@ import ummisco.gama.dev.utils.DEBUG;
 
 public class PoolUtils {
 
-	static Set<ObjectPool> POOLS = new LinkedHashSet<>();
+	static Set<ObjectPool<?>> POOLS = new LinkedHashSet<>();
 	static boolean POOL = GamaPreferences.External.USE_POOLING.getValue();
 	static {
-		DEBUG.ON();
+		// DEBUG.ON();
 		GamaPreferences.External.USE_POOLING.onChange(v -> {
 			POOLS.forEach((p) -> p.dispose());
 			POOL = v;
@@ -27,7 +26,7 @@ public class PoolUtils {
 		DEBUG.SECTION("Pool statistics");
 		POOLS.forEach((p) -> {
 			DEBUG.OUT(p.name, 30, "accessed " + p.accessed + " times | created " + p.created + " times | released "
-					+ p.released + " times | objects size: " + p.objects.size());
+					+ p.released + " times | objects size: " + p.objects.get().size());
 		});
 	}
 
@@ -41,24 +40,26 @@ public class PoolUtils {
 
 	public static class ObjectPool<T> implements IDisposable {
 
-		private String name;
+		private final String name;
 		private long accessed, released, created;
 		private final ObjectFactory<T> factory;
 		private final ObjectCleaner<T> cleaner;
-		private final Queue<T> objects;
+		private final ThreadLocal<Queue<T>> objects = ThreadLocal.withInitial(() -> new ArrayDeque<>());
 		public boolean active;
 
-		private ObjectPool(final ObjectFactory<T> factory, final ObjectCleaner<T> cleaner) {
+		private ObjectPool(final String name, final ObjectFactory<T> factory, final ObjectCleaner<T> cleaner,
+				final boolean active) {
+			this.name = name;
 			this.factory = factory;
 			this.cleaner = cleaner;
-			objects = Queues.synchronizedDeque(Queues.newArrayDeque());
+			this.active = active;
 		}
 
 		public T get() {
 			if (!POOL || !active) { return factory.createNew(); }
 			accessed++;
 
-			T result = objects.poll();
+			T result = objects.get().poll();
 			if (result == null) {
 				created++;
 				result = factory.createNew();
@@ -73,26 +74,24 @@ public class PoolUtils {
 			}
 			if (POOL && active) {
 				released++;
-				objects.offer(t);
+				objects.get().offer(t);
 			}
 
 		}
 
 		@Override
 		public void dispose() {
-			objects.clear();
+			objects.get().clear();
 		}
 	}
 
 	public static <T> ObjectPool<T> create(final String name, final boolean active, final ObjectFactory<T> factory,
 			final ObjectCleaner<T> cleaner) {
 		DEBUG.OUT("Adding object pool: " + name);
-		final ObjectPool<T> result = new ObjectPool<>(factory, cleaner);
-		result.active = active;
-		result.name = name;
-		// if (DEBUG.IS_ON()) {
-		POOLS.add(result);
-		// }
+		final ObjectPool<T> result = new ObjectPool<>(name, factory, cleaner, active);
+		if (DEBUG.IS_ON()) {
+			POOLS.add(result);
+		}
 		return result;
 	}
 

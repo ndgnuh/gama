@@ -28,13 +28,14 @@ import javax.imageio.ImageIO;
 
 import org.opengis.referencing.FactoryException;
 
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.util.ImageUtils;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.projection.IProjection;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
@@ -131,10 +132,11 @@ public class GamaImageFile extends GamaFile<IMatrix<Integer>, Integer> {
 
 		@Override
 		public String getDocumentation() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append(getShortLabel(type)).append(" Image File").append(Strings.LN);
-			sb.append("Dimensions: ").append(width + " pixels x " + height + " pixels").append(Strings.LN);
-			return sb.toString();
+			try (TextBuilder sb = TextBuilder.create()) {
+				sb.append(getShortLabel(type)).append(" Image File").append(Strings.LN);
+				sb.append("Dimensions: ").append(width + " pixels x " + height + " pixels").append(Strings.LN);
+				return sb.toString();
+			}
 		}
 
 		// @Override
@@ -259,7 +261,7 @@ public class GamaImageFile extends GamaFile<IMatrix<Integer>, Integer> {
 	}
 
 	@Override
-	protected IMatrix _matrixValue(final IScope scope, final IType contentsType, final ILocation preferredSize,
+	protected IMatrix _matrixValue(final IScope scope, final IType contentsType, final GamaPoint preferredSize,
 			final boolean copy) throws GamaRuntimeException {
 		getContents(scope);
 		if (preferredSize != null) {
@@ -304,13 +306,13 @@ public class GamaImageFile extends GamaFile<IMatrix<Integer>, Integer> {
 
 	}
 
-	private IMatrix matrixValueFromImage(final IScope scope, final ILocation preferredSize)
+	private IMatrix matrixValueFromImage(final IScope scope, final GamaPoint preferredSize)
 			throws GamaRuntimeException {
 		final BufferedImage image = loadImage(scope, true);
 		return matrixValueFromImage(scope, image, preferredSize);
 	}
 
-	private IMatrix matrixValueFromImage(final IScope scope, final BufferedImage image, final ILocation preferredSize) {
+	private IMatrix matrixValueFromImage(final IScope scope, final BufferedImage image, final GamaPoint preferredSize) {
 		int xSize, ySize;
 		BufferedImage resultingImage = image;
 		if (preferredSize == null) {
@@ -484,8 +486,8 @@ public class GamaImageFile extends GamaFile<IMatrix<Integer>, Integer> {
 		GamaPoint maxCorner =
 				new GamaPoint(xNeg ? Math.min(x1, x2) : Math.max(x1, x2), yNeg ? Math.min(y1, y2) : Math.max(y1, y2));
 		if (geodataFile != null) {
-			minCorner = (GamaPoint) Projections.to_GAMA_CRS(scope, minCorner).getLocation();
-			maxCorner = (GamaPoint) Projections.to_GAMA_CRS(scope, maxCorner).getLocation();
+			minCorner = Projections.to_GAMA_CRS(scope, minCorner).getLocation();
+			maxCorner = Projections.to_GAMA_CRS(scope, maxCorner).getLocation();
 		}
 
 		return Envelope3D.of(minCorner.x, maxCorner.x, minCorner.y, maxCorner.y, 0, 0);

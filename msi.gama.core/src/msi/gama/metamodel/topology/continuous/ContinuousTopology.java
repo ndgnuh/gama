@@ -11,7 +11,7 @@
 package msi.gama.metamodel.topology.continuous;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.AbstractTopology;
 import msi.gama.metamodel.topology.ITopology;
@@ -68,7 +68,7 @@ public class ContinuousTopology extends AbstractTopology {
 	 * @see msi.gama.environment.ITopology#isValidLocation(msi.gama.util.GamaPoint)
 	 */
 	@Override
-	public boolean isValidLocation(final IScope scope, final ILocation p) {
+	public boolean isValidLocation(final IScope scope, final GamaPoint p) {
 		return environment.covers(p);
 	}
 
@@ -86,8 +86,8 @@ public class ContinuousTopology extends AbstractTopology {
 		// conviendrait plutot de
 		// faire une DistanceOp().getNearestPoints()
 		if (g1 == null || g2 == null) { return null; }
-		ILocation source = g1.getLocation();
-		ILocation target = g2.getLocation();
+		GamaPoint source = g1.getLocation();
+		GamaPoint target = g2.getLocation();
 		if (isTorus()) {
 			source = normalizeLocation(source, false);
 			target = normalizeLocation(target, false);
@@ -116,7 +116,7 @@ public class ContinuousTopology extends AbstractTopology {
 	}
 
 	@Override
-	public Double distanceBetween(final IScope scope, final ILocation g1, final ILocation g2) {
+	public Double distanceBetween(final IScope scope, final GamaPoint g1, final GamaPoint g2) {
 		if (g1 == g2) { return 0d; }
 		if (isTorus()) { return returnToroidalGeom(g1).distance(returnToroidalGeom(g2)); }
 		return g1.euclidianDistanceTo(g2);

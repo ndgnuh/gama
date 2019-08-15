@@ -12,13 +12,13 @@ package msi.gaml.statements.draw;
 
 import java.awt.geom.Rectangle2D;
 
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.interfaces.IGraphics;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.file.GamaFile;
@@ -50,7 +50,7 @@ class FileExecuter extends DrawExecuter {
 			final Scaling3D size = attributes.getSize();
 			if (size != null) {
 				// if a size is provided
-				final Envelope3D expected = Envelope3D.of((ILocation) attributes.getLocation());
+				final Envelope3D expected = Envelope3D.of(attributes.getLocation());
 				expected.expandBy(size.getX() / 2, size.getY() / 2);
 				final Envelope visible = g.getVisibleRegion();
 				if (visible != null) {
@@ -71,7 +71,7 @@ class FileExecuter extends DrawExecuter {
 		// We push the location of the agent if none has been provided and if it is not a GIS file (where coordinates
 		// are already provided, see Issue #2165)
 		if (!gisFile && attributes.getLocation() == null) {
-			attributes.setLocation(scope.getAgent().getLocation().toGamaPoint().clone());
+			attributes.setLocation(scope.getAgent().getLocation().clone());
 		}
 		if (twoD) {
 			if (imageFile) {

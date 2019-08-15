@@ -32,7 +32,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 import org.eclipse.ui.internal.navigator.resources.plugin.WorkbenchNavigatorMessages;
 import org.eclipse.ui.part.ResourceTransfer;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
+import msi.gama.common.util.FileUtils;
 import ummisco.gama.ui.navigator.contents.UserProjectsFolder;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -277,8 +277,8 @@ public class PasteAction extends SelectionListenerAction {
 			final Shell shell = WorkbenchHelper.getWorkbench().getActiveWorkbenchWindow().getShell();
 			if (f.isDirectory()) {
 				try {
-					if (WorkspaceModelsManager.instance.isGamaProject(f)) {
-						container = WorkspaceModelsManager.createOrUpdateProject(f.getName());
+					if (FileUtils.isGamaProject(f)) {
+						container = FileUtils.createOrUpdateProject(f.getName());
 						final CopyFilesAndFoldersOperation op = new CopyFilesAndFoldersOperation(shell);
 						op.setVirtualFolders(false);
 						final File[] list = f.listFiles();
@@ -292,7 +292,7 @@ public class PasteAction extends SelectionListenerAction {
 						}
 						op.copyFiles(names.toArray(new String[0]), container);
 					} else {
-						container = WorkspaceModelsManager.instance.createUnclassifiedModelsProject(new Path(name));
+						container = FileUtils.createUnclassifiedModelsProject(new Path(name));
 						final CopyFilesAndFoldersOperation op = new CopyFilesAndFoldersOperation(shell);
 						op.setVirtualFolders(false);
 						op.copyFiles(new String[] { name }, container);
@@ -304,7 +304,7 @@ public class PasteAction extends SelectionListenerAction {
 				}
 			} else {
 				try {
-					container = WorkspaceModelsManager.instance.createUnclassifiedModelsProject(new Path(name));
+					container = FileUtils.createUnclassifiedModelsProject(new Path(name));
 					final CopyFilesAndFoldersOperation op = new CopyFilesAndFoldersOperation(shell);
 					op.setVirtualFolders(false);
 					op.copyFiles(new String[] { name }, container);

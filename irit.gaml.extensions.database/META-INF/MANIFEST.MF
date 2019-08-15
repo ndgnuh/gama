@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Additions of Database Tools to GAML
 Bundle-SymbolicName: irit.gaml.extensions.database;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.9.0.qualifier
 Require-Bundle: msi.gama.ext;bundle-version="1.0.0",
  msi.gama.core;bundle-version="1.6.0",
  org.eclipse.osgi
@@ -12,6 +12,6 @@ Export-Package: irit.gaml.extensions.database.skills,
  msi.gama.database.mdx,
  msi.gama.database.sql
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: msi.gama.database.Activator
 Automatic-Module-Name: irit.gaml.extensions.database

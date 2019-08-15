@@ -29,14 +29,43 @@ import javax.imageio.ImageIO;
 import javax.media.jai.JAI;
 import javax.media.jai.RenderedOp;
 
+import org.geotools.coverage.CoverageFactoryFinder;
+import org.geotools.factory.CommonFactoryFinder;
+import org.geotools.util.factory.GeoTools;
+import org.geotools.util.factory.Hints;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.sun.media.jai.codec.FileSeekableStream;
 
+import it.geosolutions.jaiext.ConcurrentOperationRegistry;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
+import ummisco.gama.dev.utils.DEBUG;
 
 public class ImageUtils {
+
+	static {
+		DEBUG.ON();
+		init();
+	}
+
+	private static void init() {
+		GAMA.initializeAtStartup("Initializing JAI/ImageIO subsystem", () -> {
+			final JAI jaiDef = JAI.getDefaultInstance();
+			if (!(jaiDef.getOperationRegistry() instanceof ConcurrentOperationRegistry)) {
+				jaiDef.setOperationRegistry(ConcurrentOperationRegistry.initializeRegistry());
+			}
+			ImageIO.scanForPlugins();
+			Hints.putSystemDefault(Hints.FILTER_FACTORY, CommonFactoryFinder.getFilterFactory2(null));
+			Hints.putSystemDefault(Hints.STYLE_FACTORY, CommonFactoryFinder.getStyleFactory(null));
+			Hints.putSystemDefault(Hints.FEATURE_FACTORY, CommonFactoryFinder.getFeatureFactory(null));
+			Hints.putSystemDefault(Hints.USE_JAI_IMAGEREAD, true);
+			final Hints defHints = GeoTools.getDefaultHints();
+			Hints.putSystemDefault(Hints.GRID_COVERAGE_FACTORY, CoverageFactoryFinder.getGridCoverageFactory(defHints));
+		});
+
+	}
 
 	private static BufferedImage NO_IMAGE;
 	private final Cache<String, BufferedImage> cache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES)

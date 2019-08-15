@@ -28,7 +28,6 @@ import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.expressions.IExpression;
-import ummisco.gama.dev.utils.DEBUG;
 
 /**
  * Class ParametricType. A class that allows to build composed types with a content type and a key type
@@ -38,12 +37,6 @@ import ummisco.gama.dev.utils.DEBUG;
  *
  */
 public class ParametricType implements IContainerType<IContainer<?, ?>> {
-
-	static {
-		DEBUG.OFF();
-	}
-
-	// static int savedTypes = 0;
 
 	static Cache<Integer, ParametricType> CACHE2 = newBuilder().expireAfterAccess(30, MINUTES).build();
 	static boolean USE_CACHE = true;

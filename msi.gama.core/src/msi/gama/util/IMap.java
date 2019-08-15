@@ -13,7 +13,7 @@ import com.google.common.collect.Iterators;
 
 import msi.gama.common.interfaces.BiConsumerWithPruning;
 import msi.gama.common.interfaces.ConsumerWithPruning;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
 import msi.gama.precompiler.GamlAnnotations.getter;
@@ -282,7 +282,7 @@ public interface IMap<K, V> extends Map<K, V>, IModifiableContainer<K, V, K, V>,
 	}
 
 	@Override
-	default IMatrix matrixValue(final IScope scope, final IType contentsType, final ILocation preferredSize,
+	default IMatrix matrixValue(final IScope scope, final IType contentsType, final GamaPoint preferredSize,
 			final boolean copy) throws GamaRuntimeException {
 		return matrixValue(scope, contentsType, copy);
 	}

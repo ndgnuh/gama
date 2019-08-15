@@ -19,7 +19,7 @@ import msi.gama.common.interfaces.IGraphics;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.example;
@@ -124,7 +124,7 @@ public class AspectStatement extends AbstractStatementSequence {
 
 				if (index != null) {
 					final Double defaultSize = GamaPreferences.Displays.CORE_SIZE.getValue();
-					final ILocation point = agent.getLocation();
+					final GamaPoint point = agent.getLocation();
 
 					switch (SHAPES.get(defaultShape)) {
 						case 1:

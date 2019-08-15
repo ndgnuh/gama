@@ -70,7 +70,7 @@ public class Facets implements IGamlable {
 	}
 
 	protected Facets(final int size) {
-		facets = Collector.getList();
+		facets = Collector.newList();
 		facets.setSize(size);
 	}
 

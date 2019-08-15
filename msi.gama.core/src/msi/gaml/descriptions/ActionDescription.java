@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.Arguments;
@@ -180,28 +181,29 @@ public class ActionDescription extends StatementWithChildrenDescription {
 	}
 
 	public String getArgDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
+		try (TextBuilder sb = TextBuilder.create()) {
 
-		if (getArgNames().size() > 0) {
-			final List<String> args = ImmutableList.copyOf(Iterables.transform(getFormalArgs(), desc -> {
-				final StringBuilder sb1 = new StringBuilder(100);
-				sb1.append("<li><b>").append(Strings.TAB).append(desc.getName()).append("</b>, type ")
-						.append(desc.getGamlType());
-				if (desc.hasFacet(IKeyword.DEFAULT)) {
-					sb1.append(" <i>(default: ").append(desc.getFacetExpr(IKeyword.DEFAULT).serialize(false))
-							.append(")</i>");
+			if (getArgNames().size() > 0) {
+				final List<String> args = ImmutableList.copyOf(Iterables.transform(getFormalArgs(), desc -> {
+					final StringBuilder sb1 = new StringBuilder(100);
+					sb1.append("<li><b>").append(Strings.TAB).append(desc.getName()).append("</b>, type ")
+							.append(desc.getGamlType());
+					if (desc.hasFacet(IKeyword.DEFAULT)) {
+						sb1.append(" <i>(default: ").append(desc.getFacetExpr(IKeyword.DEFAULT).serialize(false))
+								.append(")</i>");
+					}
+					sb1.append("</li>");
+
+					return sb1.toString();
+				}));
+				sb.append("Arguments accepted: ").append("<br/><ul>");
+				for (final String a : args) {
+					sb.append(a);
 				}
-				sb1.append("</li>");
-
-				return sb1.toString();
-			}));
-			sb.append("Arguments accepted: ").append("<br/><ul>");
-			for (final String a : args) {
-				sb.append(a);
+				sb.append("</ul><br/>");
 			}
-			sb.append("</ul><br/>");
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	// @Override
@@ -217,15 +219,16 @@ public class ActionDescription extends StatementWithChildrenDescription {
 	public String getShortDescription() {
 		final String returns = getGamlType().equals(Types.NO_TYPE) ? ", no value returned"
 				: ", returns a result of type " + getGamlType().getTitle();
-		final StringBuilder args = new StringBuilder();
-		for (final IDescription desc : getFormalArgs()) {
-			args.append(desc.getGamlType()).append(" ").append(desc.getName()).append(", ");
-		}
-		if (args.length() > 0) {
-			args.setLength(args.length() - 2);
-		}
+		try (TextBuilder sb = TextBuilder.create()) {
+			for (final IDescription desc : getFormalArgs()) {
+				sb.append(desc.getGamlType()).append(" ").append(desc.getName()).append(", ");
+			}
+			if (sb.length() > 0) {
+				sb.setLength(sb.length() - 2);
+			}
 
-		return "(" + args.toString() + ")" + returns;
+			return "(" + sb.toString() + ")" + returns;
+		}
 
 	}
 

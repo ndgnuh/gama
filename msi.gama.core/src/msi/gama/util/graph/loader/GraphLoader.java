@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gama.util.graph.loader.GraphLoader.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gama.util.graph.loader.GraphLoader.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gama.util.graph.loader;
 
@@ -42,12 +42,15 @@ public class GraphLoader {
 			f = new File(filename);
 		}
 
-		if (!f.exists()) { throw GamaRuntimeException
-				.error("unable to open this file, which does not exists: " + filename, scope); }
-		if (!f.canRead()) { throw GamaRuntimeException
-				.error("unable to open this file, which is not readable: " + filename, scope); }
-		if (!f.isFile()) { throw GamaRuntimeException.error("this is not a file (probably a directory): " + filename,
-				scope); }
+		if (!f.exists()) {
+			throw GamaRuntimeException.error("unable to open this file, which does not exists: " + filename, scope);
+		}
+		if (!f.canRead()) {
+			throw GamaRuntimeException.error("unable to open this file, which is not readable: " + filename, scope);
+		}
+		if (!f.isFile()) {
+			throw GamaRuntimeException.error("this is not a file (probably a directory): " + filename, scope);
+		}
 
 		// this listener will receive events
 		final GamaGraphParserListener list = new GamaGraphParserListener(scope, nodeSpecies, edgeSpecies,
@@ -69,8 +72,11 @@ public class GraphLoader {
 			final Map<String, String> edgeGraphAttribute2AgentAttribute, final String format, final boolean spatial) {
 
 		// if format is provided, attempt to load using only this format
-		if (format != null) { return loadAGraph(scope, nodeSpecies, edgeSpecies, nodeGraphAttribute2AgentAttribute,
-				edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(format), filename, spatial); }
+		if (format != null) {
+			return loadAGraph(scope, nodeSpecies, edgeSpecies, nodeGraphAttribute2AgentAttribute,
+					edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(scope, format), filename,
+					spatial);
+		}
 
 		// else,
 
@@ -91,8 +97,8 @@ public class GraphLoader {
 				// opening with the default loader for this extension
 				try {
 					final GamaGraph res = loadAGraph(scope, nodeSpecies, edgeSpecies, nodeGraphAttribute2AgentAttribute,
-							edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(extension), filename,
-							spatial);
+							edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(scope, extension),
+							filename, spatial);
 					/*
 					 * GAMA.reportError(GamaRuntimeException .warning(
 					 * "Automatically detected the type of this graph from file extension ('" + extension +
@@ -112,7 +118,7 @@ public class GraphLoader {
 		for (final String loaderName : AvailableGraphParsers.getLoadersForAutoDetection()) {
 			try {
 				final GamaGraph res = loadAGraph(scope, nodeSpecies, edgeSpecies, nodeGraphAttribute2AgentAttribute,
-						edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(loaderName), filename,
+						edgeGraphAttribute2AgentAttribute, AvailableGraphParsers.getLoader(scope, loaderName), filename,
 						spatial);
 				GAMA.reportError(scope,
 						GamaRuntimeException.warning("Automatically detected the type of this graph :'" + loaderName
@@ -130,9 +136,10 @@ public class GraphLoader {
 		}
 
 		// raise an error !
-		throw GamaRuntimeException
-				.error("attempted to detect the type of this graph automatically; no type detected among the supported parsers: "
-						+ AvailableGraphParsers.getLoadersForAutoDetection(), scope);
+		throw GamaRuntimeException.error(
+				"attempted to detect the type of this graph automatically; no type detected among the supported parsers: "
+						+ AvailableGraphParsers.getLoadersForAutoDetection(),
+				scope);
 
 	}
 }

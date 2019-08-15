@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.wizards;
@@ -37,7 +37,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
+import msi.gama.common.util.FileUtils;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -124,7 +124,7 @@ public class NewProjectWizard extends Wizard implements INewWizard, IExecutableE
 			if (monitor.isCanceled()) { throw new OperationCanceledException(); }
 			proj.open(m.split(1000));
 
-			WorkspaceModelsManager.setValuesProjectDescription(proj, false, false, isTest, null);
+			FileUtils.setValuesProjectDescription(proj, false, false, isTest, null);
 
 			/*
 			 * We now have the project and we can do more things with it before updating the perspective.

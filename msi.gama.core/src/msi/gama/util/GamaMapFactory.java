@@ -100,7 +100,12 @@ public class GamaMapFactory {
 	}
 
 	public static IMap createUnordered() {
-		final Map map = new HashMap();
+		return createUnordered(DEFAULT_SIZE);
+	}
+
+	public static IMap createUnordered(final int size) {
+		final Map map = new HashMap(size);
+
 		return new GamaMapSimpleWrapper() {
 
 			@Override

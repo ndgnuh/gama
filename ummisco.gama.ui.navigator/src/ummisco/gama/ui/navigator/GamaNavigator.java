@@ -47,6 +47,7 @@ import org.eclipse.ui.navigator.CommonNavigatorManager;
 import org.eclipse.ui.navigator.CommonViewer;
 
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import ummisco.gama.ui.navigator.contents.NavigatorRoot;
 import ummisco.gama.ui.navigator.contents.Tag;
 import ummisco.gama.ui.navigator.contents.TopLevelFolder;
@@ -125,20 +126,21 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 	@Override
 	public void saveState(final IMemento newMemento) {
 		if (GamaPreferences.Interface.KEEP_NAVIGATOR_STATE.getValue()) {
-			final StringBuilder sb = new StringBuilder();
-			for (final Object o : getCommonViewer().getExpandedElements()) {
-				final String name =
-						o instanceof WrappedContainer ? ((WrappedContainer<?>) o).getResource().getFullPath().toString()
-								: o instanceof TopLevelFolder ? ((TopLevelFolder) o).getName() : null;
-				if (name != null) {
-					sb.append(name);
-					sb.append("@@");
+			try (TextBuilder sb = TextBuilder.create()) {
+				for (final Object o : getCommonViewer().getExpandedElements()) {
+					final String name = o instanceof WrappedContainer
+							? ((WrappedContainer<?>) o).getResource().getFullPath().toString()
+							: o instanceof TopLevelFolder ? ((TopLevelFolder) o).getName() : null;
+					if (name != null) {
+						sb.append(name);
+						sb.append("@@");
+					}
 				}
+				if (sb.length() > 2) {
+					sb.setLength(sb.length() - 2);
+				}
+				newMemento.putString("EXPANDED_STATE", sb.toString());
 			}
-			if (sb.length() > 2) {
-				sb.setLength(sb.length() - 2);
-			}
-			newMemento.putString("EXPANDED_STATE", sb.toString());
 		}
 		super.saveState(newMemento);
 	}
@@ -223,7 +225,7 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 		final Object element = selection.getFirstElement();
 		if (element instanceof VirtualContent && ((VirtualContent<?>) element).handleDoubleClick()) {
 			if (element instanceof Tag) {
-				Tag t = (Tag) element;
+				final Tag t = (Tag) element;
 				findControl.searchFor(t.getName());
 				return;
 			}

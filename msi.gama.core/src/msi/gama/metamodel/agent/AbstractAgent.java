@@ -15,14 +15,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.primitives.Ints;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.model.IModel;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -131,7 +132,7 @@ public abstract class AbstractAgent implements IAgent {
 	}
 
 	@Override
-	public double euclidianDistanceTo(final ILocation g) {
+	public double euclidianDistanceTo(final GamaPoint g) {
 		return getGeometry().euclidianDistanceTo(g);
 	}
 
@@ -149,7 +150,7 @@ public abstract class AbstractAgent implements IAgent {
 	}
 
 	/**
-	 * @see msi.gama.common.interfaces.IGeometry#setInnerGeometry(com.vividsolutions.jts.geom.Geometry)
+	 * @see msi.gama.common.interfaces.IGeometry#setInnerGeometry(org.locationtech.jts.geom.Geometry)
 	 */
 	@Override
 	public void setInnerGeometry(final Geometry geom) {
@@ -183,12 +184,13 @@ public abstract class AbstractAgent implements IAgent {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder(30);
-		sb.append(getSpeciesName()).append('(').append(getIndex()).append(')');
-		if (dead()) {
-			sb.append(" /* dead */");
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append(getSpeciesName()).append('(').append(getIndex()).append(')');
+			if (dead()) {
+				sb.append(" /* dead */");
+			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	@Override
@@ -329,12 +331,12 @@ public abstract class AbstractAgent implements IAgent {
 	public void setName(final String name) {}
 
 	@Override
-	public ILocation getLocation() {
+	public GamaPoint getLocation() {
 		return getGeometry().getLocation();
 	}
 
 	@Override
-	public void setLocation(final ILocation l) {
+	public void setLocation(final GamaPoint l) {
 		getGeometry().setLocation(l);
 	}
 
@@ -538,8 +540,8 @@ public abstract class AbstractAgent implements IAgent {
 					type = IType.STRING,
 					doc = @doc ("The message to display")) })
 	public final Object primTell(final IScope scope) throws GamaRuntimeException {
-		final String s = getName() + " says : " + scope.getArg("message", IType.STRING);
-		scope.getGui().tell(s);
+		final String s = (String) scope.getArg("message", IType.STRING);
+		scope.getGui().tell(getName() + " says : ", s);
 		return s;
 	}
 
@@ -595,7 +597,7 @@ public abstract class AbstractAgent implements IAgent {
 	 * @see msi.gama.metamodel.shape.IShape#getPoints()
 	 */
 	@Override
-	public IList<? extends ILocation> getPoints() {
+	public IList<? extends GamaPoint> getPoints() {
 		if (getGeometry() == null) { return GamaListFactory.EMPTY_LIST; }
 		return getGeometry().getPoints();
 	}

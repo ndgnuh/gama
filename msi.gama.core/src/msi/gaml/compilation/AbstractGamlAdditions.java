@@ -221,7 +221,7 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 		for (final String keyword : keywords) {
 			final String kw = keyword;
 			if (!OPERATORS.containsKey(kw)) {
-				OPERATORS.put(kw, GamaMapFactory.createUnordered());
+				OPERATORS.put(kw, GamaMapFactory.createUnordered(4));
 			}
 			final Map<Signature, OperatorProto> map = OPERATORS.get(kw);
 			if (!map.containsKey(signature)) {
@@ -257,7 +257,7 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 		for (final String keyword : keywords) {
 			final String kw = keyword;
 			if (!OPERATORS.containsKey(kw)) {
-				OPERATORS.put(kw, GamaMapFactory.createUnordered());
+				OPERATORS.put(kw, GamaMapFactory.createUnordered(4));
 			}
 			final Map<Signature, OperatorProto> map = OPERATORS.get(kw);
 			if (!map.containsKey(signature)) {
@@ -301,7 +301,7 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 		for (final String keyword : keywords) {
 			final String kw = keyword;
 			if (!OPERATORS.containsKey(kw)) {
-				OPERATORS.put(kw, GamaMapFactory.createUnordered());
+				OPERATORS.put(kw, GamaMapFactory.createUnordered(4));
 			}
 			final Map<Signature, OperatorProto> map = OPERATORS.get(kw);
 			if (!map.containsKey(signature)) {

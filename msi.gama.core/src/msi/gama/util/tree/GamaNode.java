@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import msi.gama.common.util.TextBuilder;
+
 public class GamaNode<T> {
 
 	static Integer DEFAULT_WEIGHT = null;
@@ -73,9 +75,10 @@ public class GamaNode<T> {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		toString(sb, 0);
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			toString(sb.getBuilder(), 0);
+			return sb.toString();
+		}
 	}
 
 	@Override

@@ -1,15 +1,16 @@
 /*******************************************************************************************************
  *
- * msi.gaml.expressions.TypeFieldExpression.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.expressions.TypeFieldExpression.java, in plugin msi.gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.precompiler.GamlAnnotations.variable;
 import msi.gama.precompiler.GamlAnnotations.vars;
 import msi.gama.runtime.IScope;
@@ -29,10 +30,11 @@ public class TypeFieldExpression extends UnaryOperator {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder();
-		parenthesize(sb, child);
-		sb.append(".").append(getName());
-		return sb.toString();
+		try (TextBuilder sb = TextBuilder.create()) {
+			parenthesize(sb, child);
+			sb.append(".").append(getName());
+			return sb.toString();
+		}
 	}
 
 	@Override
@@ -43,23 +45,24 @@ public class TypeFieldExpression extends UnaryOperator {
 
 	@Override
 	public String getDocumentation() {
-		final StringBuilder sb = new StringBuilder(200);
-		if (child != null) {
-			sb.append("Defined on objects of type " + child.getGamlType().getTitle());
-		}
-		final vars annot = prototype.getSupport().getAnnotation(vars.class);
-		if (annot != null) {
-			final variable[] allVars = annot.value();
-			for (final variable v : allVars) {
-				if (v.name().equals(getName())) {
-					if (v.doc().length > 0) {
-						sb.append("<br/>");
-						sb.append(v.doc()[0].value());
+		try (TextBuilder sb = TextBuilder.create()) {
+			if (child != null) {
+				sb.append("Defined on objects of type " + child.getGamlType().getTitle());
+			}
+			final vars annot = prototype.getSupport().getAnnotation(vars.class);
+			if (annot != null) {
+				final variable[] allVars = annot.value();
+				for (final variable v : allVars) {
+					if (v.name().equals(getName())) {
+						if (v.doc().length > 0) {
+							sb.append("<br/>");
+							sb.append(v.doc()[0].value());
+						}
 					}
 				}
 			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	@Override

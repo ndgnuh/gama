@@ -38,7 +38,7 @@ public class GamaPathReducer {
 				|| IReference.isReference(edges)) {
 			path = new ReferencePath(this);
 		} else {
-			path = PathFactory.newInstance(g, start, target, edges);
+			path = PathFactory.create(g, start, target, edges);
 		}
 		return path;
 	}

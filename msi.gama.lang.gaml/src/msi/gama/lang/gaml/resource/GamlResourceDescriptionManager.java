@@ -52,7 +52,7 @@ public class GamlResourceDescriptionManager extends DefaultResourceDescriptionMa
 			final IResourceDescriptions context) {
 		// final boolean result = false;
 		final URI newUri = candidate.getURI();
-		try (ICollector<URI> deltaUris = Collector.getSet()) {
+		try (ICollector<URI> deltaUris = Collector.newSet()) {
 			for (final Delta d : deltas) {
 				deltaUris.add(GamlResourceServices.properlyEncodedURI(d.getUri()));
 			}

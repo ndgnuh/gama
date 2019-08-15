@@ -14,12 +14,15 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import msi.gama.common.interfaces.IConsoleDisplayer;
 import msi.gama.common.interfaces.IDisplayCreator;
@@ -35,7 +38,6 @@ import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.IDisplayOutput;
 import msi.gama.outputs.LayeredDisplayOutput;
@@ -48,7 +50,6 @@ import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.test.CompoundSummary;
-import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.types.IType;
 import ummisco.gama.dev.utils.DEBUG;
 
@@ -115,8 +116,8 @@ public class HeadlessListener implements IGui {
 	}
 
 	@Override
-	public void tell(final String message) {
-		log("Message: " + message);
+	public void tell(final String title, final String message) {
+		log(title + " " + message);
 	}
 
 	@Override
@@ -162,7 +163,7 @@ public class HeadlessListener implements IGui {
 	}
 
 	@Override
-	public void editModel(final IScope scope, final Object eObject) {}
+	public void editModel(final Object eObject) {}
 
 	@Override
 	public void updateParameterView(final IScope scope, final IExperimentPlan exp) {}
@@ -181,9 +182,6 @@ public class HeadlessListener implements IGui {
 		}
 
 	}
-
-	@Override
-	public void runModel(final Object object, final String exp) {}
 
 	/**
 	 * Method updateSpeedDisplay()
@@ -414,12 +412,12 @@ public class HeadlessListener implements IGui {
 	public void displayErrors(final IScope scope, final List<GamaRuntimeException> list) {}
 
 	@Override
-	public ILocation getMouseLocationInModel() {
+	public GamaPoint getMouseLocationInModel() {
 		return new GamaPoint(0, 0);
 	}
 
 	@Override
-	public void setMouseLocationInModel(final ILocation modelCoordinates) {}
+	public void setMouseLocationInModel(final GamaPoint modelCoordinates) {}
 
 	@Override
 	public IGamlLabelProvider getGamlLabelProvider() {
@@ -460,29 +458,61 @@ public class HeadlessListener implements IGui {
 	}
 
 	@Override
-	public List<TestExperimentSummary> runHeadlessTests(final Object model) {
-		return null;
-	}
-
-	@Override
 	public void endTestDisplay() {}
 
 	@Override
 	public boolean toggleFullScreenMode() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void refreshNavigator() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public boolean isInDisplayThread() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public <T> T getUIService(final Class<T> clazz) {
+		// Should return null !
+		return null;
+	}
+
+	@Override
+	public boolean confirm(final String title, final String msg) {
+		return true;
+	}
+
+	@Override
+	public int runUI() {
+		return 0;
+	}
+
+	@Override
+	public void failureExit(final String string) {
+		error(string);
+		System.exit(0);
+	}
+
+	@Override
+	public int openPickWorkspaceDialog() {
+		return 0;
+	}
+
+	@Override
+	public void clearInitialLayout(final boolean b) {}
+
+	@Override
+	public void runInWorkspace(final Consumer<IProgressMonitor> r) {
+		r.accept(null);
+	}
+
+	@Override
+	public IPath openSelectContainerDialog(final String title, final String msg) {
+		return null;
 	}
 
 }

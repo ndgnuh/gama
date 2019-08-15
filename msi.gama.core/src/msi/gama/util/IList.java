@@ -15,8 +15,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import msi.gama.common.util.TextBuilder;
 import msi.gama.common.util.StringUtils;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.matrix.IMatrix;
@@ -63,7 +64,7 @@ public interface IList<E>
 	}
 
 	@Override
-	default IMatrix<E> matrixValue(final IScope scope, final IType contentsType, final ILocation preferredSize,
+	default IMatrix<E> matrixValue(final IScope scope, final IType contentsType, final GamaPoint preferredSize,
 			final boolean copy) {
 		return GamaMatrixType.from(scope, this, contentsType, preferredSize);
 	}
@@ -75,16 +76,17 @@ public interface IList<E>
 
 	@Override
 	default String serialize(final boolean includingBuiltIn) {
-		final StringBuilder sb = new StringBuilder(size() * 10);
-		sb.append('[');
-		for (int i = 0; i < size(); i++) {
-			if (i != 0) {
-				sb.append(',');
+		try (TextBuilder sb = TextBuilder.create()) {
+			sb.append('[');
+			for (int i = 0; i < size(); i++) {
+				if (i != 0) {
+					sb.append(',');
+				}
+				sb.append(StringUtils.toGaml(get(i), includingBuiltIn));
 			}
-			sb.append(StringUtils.toGaml(get(i), includingBuiltIn));
+			sb.append(']');
+			return sb.toString();
 		}
-		sb.append(']');
-		return sb.toString();
 	}
 
 	@Override

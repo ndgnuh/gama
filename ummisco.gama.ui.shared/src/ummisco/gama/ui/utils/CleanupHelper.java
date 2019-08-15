@@ -43,21 +43,20 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.wizards.IWizardCategory;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 
-import ummisco.gama.dev.utils.DEBUG;
+import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.resources.GamaIcons;
 
 public class CleanupHelper {
 
-	static {
-		DEBUG.OFF();
-	}
-
 	public static void run() {
-		RemoveUnwantedWizards.run();
-		RemoveUnwantedActionSets.run();
-		RearrangeMenus.run();
-		ForceMaximizeRestoration.run();
-		RemoveActivities.run();
+		GAMA.initializeAtStartup("Cleaning UI", () -> {
+			RemoveUnwantedWizards.run();
+			RemoveUnwantedActionSets.run();
+			RearrangeMenus.run();
+			ForceMaximizeRestoration.run();
+			RemoveActivities.run();
+		});
+
 	}
 
 	static class RemoveActivities {
@@ -143,9 +142,6 @@ public class CleanupHelper {
 
 		@Override
 		public void perspectiveActivated(final IWorkbenchPage page, final IPerspectiveDescriptor perspective) {
-			// if (perspective != null) {
-			// DEBUG.OUT("Perspective " + perspective.getId() + " activated");
-			// }
 			final WorkbenchWindow w = (WorkbenchWindow) page.getWorkbenchWindow();
 			if (w.isClosing()) { return; }
 			WorkbenchHelper.runInUI("Cleaning menus", 0, m -> {
@@ -295,11 +291,8 @@ public class CleanupHelper {
 		}
 
 		private static void processItems(final IMenuManager menu) {
-			// final StringBuilder sb = new StringBuilder();
-			// sb.append("Menu ").append(menu.getId()).append(" :: ");
 			for (final IContributionItem item : menu.getItems()) {
 				final String name = item.getId();
-				// DEBUG.LOG(name);
 				if (MENU_ITEMS_TO_REMOVE.contains(name)) {
 					item.setVisible(false);
 					continue;
@@ -310,10 +303,7 @@ public class CleanupHelper {
 				if (MENU_IMAGES.containsKey(name)) {
 					changeIcon(menu, item, GamaIcons.create(MENU_IMAGES.get(name)).descriptor());
 				}
-				// sb.append(Strings.LN).append(Strings.TAB);
-				// sb.append(name).append('[').append(item.getClass().getSimpleName()).append("]:: ");
 			}
-			// DEBUG.LOG(sb.toString());
 		}
 
 		private static void changeIcon(final IMenuManager menu, final IContributionItem item,

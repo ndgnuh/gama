@@ -30,14 +30,9 @@ import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.ImageUtils;
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.opengl.OpenGL;
 
 public class TextureCache2 implements ITextureCache {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	private final LoadingCache<BufferedImage, Texture> volatileTextures;
 	private final Cache<String, Texture> staticTextures =

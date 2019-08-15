@@ -43,7 +43,9 @@ public class ExecutionContext implements IExecutionContext {
 
 	@Override
 	public void dispose() {
-		local = null;
+		if (local != null) {
+			local.clear();
+		}
 		outer = null;
 		scope = null;
 		POOL.release(this);
@@ -107,7 +109,7 @@ public class ExecutionContext implements IExecutionContext {
 	@Override
 	public void putLocalVar(final String varName, final Object val) {
 		if (local == null) {
-			local = GamaMapFactory.createUnordered();
+			local = GamaMapFactory.createUnordered(4);
 		}
 		local.put(varName, val);
 	}

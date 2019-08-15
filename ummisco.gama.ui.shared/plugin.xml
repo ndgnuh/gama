@@ -339,28 +339,28 @@
          </activeWhen>
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="ummisco.gama.ui.Startup">
-      </startup>
-   </extension>
    <extension point="org.eclipse.ui.services">
       <serviceFactory
             factoryClass="ummisco.gama.ui.shared.WebHelperFactory">
          <service
-               serviceClass="msi.gama.application.workbench.IWebHelper">
+               serviceClass="ummisco.gama.ui.utils.IWebHelper">
          </service>
       </serviceFactory>
       <serviceFactory
             factoryClass="ummisco.gama.ui.shared.IconProviderFactory">
          <service
-               serviceClass="msi.gama.application.workbench.IIconProvider"></service>
+               serviceClass="ummisco.gama.ui.utils.IIconProvider"></service>
       </serviceFactory>
       <serviceFactory
             factoryClass="ummisco.gama.ui.shared.PreferenceHelperFactory">
          <service
-               serviceClass="msi.gama.application.workbench.IPreferenceHelper">
+               serviceClass="ummisco.gama.ui.utils.IPreferenceHelper">
+         </service>
+      </serviceFactory>
+      <serviceFactory
+            factoryClass="ummisco.gama.ui.shared.PerspectiveHelperFactory">
+         <service
+               serviceClass="ummisco.gama.ui.utils.IPerspectiveHelper">
          </service>
       </serviceFactory>
    </extension>

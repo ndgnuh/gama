@@ -13,17 +13,21 @@ package msi.gama.metamodel.shape;
 import static java.lang.Math.sqrt;
 import static msi.gaml.operators.Maths.round;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.util.NumberUtil;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.util.NumberUtil;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
 import msi.gama.common.interfaces.IAttributed;
+import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.agent.IAgent;
+import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.getter;
+import msi.gama.precompiler.GamlAnnotations.variable;
+import msi.gama.precompiler.GamlAnnotations.vars;
 import msi.gama.runtime.IScope;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaMapFactory;
@@ -40,13 +44,21 @@ import msi.gaml.types.Types;
  * @author drogoul 11 oct. 07
  */
 @SuppressWarnings ({ "unchecked", "rawtypes" })
+@vars ({ @variable (
+		name = IKeyword.X,
+		type = IType.FLOAT,
+		doc = { @doc ("Returns the x ordinate of this point") }),
+		@variable (
+				name = IKeyword.Y,
+				type = IType.FLOAT,
+				doc = { @doc ("Returns the y ordinate of this point") }),
+		@variable (
+				name = IKeyword.Z,
+				type = IType.FLOAT,
+				doc = { @doc ("Returns the z ordinate of this point") }) })
+public class GamaPoint extends Coordinate implements IShape {
 
-public class GamaPoint extends Coordinate implements ILocation {
-
-	@Override
-	public GamaPoint toGamaPoint() {
-		return this;
-	}
+	public static final GamaPoint NULL_POINT = new GamaPoint();
 
 	public GamaPoint() {
 		x = 0.0d;
@@ -70,15 +82,14 @@ public class GamaPoint extends Coordinate implements ILocation {
 		}
 	}
 
-	@Override
-	public void setLocation(final ILocation al) {
-		if (al == this) { return; }
-		setLocation(al.getX(), al.getY(), al.getZ());
+	public GamaPoint withLocation(final GamaPoint other) {
+		return setLocation(other.x, other.y, other.z);
 	}
 
-	public GamaPoint setLocation(final GamaPoint al) {
-		if (al == this) { return this; }
-		return setLocation(al.x, al.y, al.z);
+	@Override
+	public void setLocation(final GamaPoint al) {
+		if (al == this) { return; }
+		setLocation(al.x, al.y, al.z);
 	}
 
 	public GamaPoint setLocation(final double x, final double y, final double z) {
@@ -108,34 +119,28 @@ public class GamaPoint extends Coordinate implements ILocation {
 		}
 	}
 
-	@Override
 	public void setX(final double xx) {
 		x = xx;
 	}
 
-	@Override
 	public void setY(final double yy) {
 		y = yy;
 	}
 
-	@Override
 	public void setZ(final double zz) {
 		z = Double.isNaN(zz) ? 0.0d : zz;
 	}
 
-	@Override
 	@getter ("x")
 	public double getX() {
 		return x;
 	}
 
-	@Override
 	@getter ("y")
 	public double getY() {
 		return y;
 	}
 
-	@Override
 	@getter ("z")
 	public double getZ() {
 		return z;
@@ -169,13 +174,6 @@ public class GamaPoint extends Coordinate implements ILocation {
 	@Override
 	public String stringValue(final IScope scope) {
 		return "{" + x + "," + y + "," + z + "}";
-	}
-
-	@Override
-	public void add(final ILocation loc) {
-		setX(x + loc.getX());
-		setY(y + loc.getY());
-		setZ(z + loc.getZ());
 	}
 
 	public GamaPoint add(final GamaPoint loc) {
@@ -246,7 +244,7 @@ public class GamaPoint extends Coordinate implements ILocation {
 	 */
 	@Override
 	public Envelope3D getEnvelope() {
-		return Envelope3D.of((Coordinate) this);
+		return Envelope3D.of(this);
 	}
 
 	@Override
@@ -259,8 +257,7 @@ public class GamaPoint extends Coordinate implements ILocation {
 		return super.equals(o);
 	}
 
-	@Override
-	public boolean equalsWithTolerance(final Coordinate c, final double tolerance) {
+	public boolean equalsWithTolerance(final GamaPoint c, final double tolerance) {
 		if (tolerance == 0.0) { return equals3D(c); }
 		if (!NumberUtil.equalsWithTolerance(this.x, c.x, tolerance)) { return false; }
 		if (!NumberUtil.equalsWithTolerance(this.y, c.y, tolerance)) { return false; }
@@ -290,13 +287,6 @@ public class GamaPoint extends Coordinate implements ILocation {
 	}
 
 	@Override
-	public double euclidianDistanceTo(final ILocation p) {
-		final double dx = p.getX() - x;
-		final double dy = p.getY() - y;
-		final double dz = p.getZ() - z;
-		return sqrt(dx * dx + dy * dy + dz * dz);
-	}
-
 	public double euclidianDistanceTo(final GamaPoint p) {
 		return distance3D(p);
 	}
@@ -331,7 +321,7 @@ public class GamaPoint extends Coordinate implements ILocation {
 	public void setAgent(final IAgent agent) {}
 
 	/**
-	 * @see msi.gama.common.interfaces.IGeometry#setInnerGeometry(com.vividsolutions.jts.geom.Geometry)
+	 * @see msi.gama.common.interfaces.IGeometry#setInnerGeometry(org.locationtech.jts.geom.Geometry)
 	 */
 	@Override
 	public void setInnerGeometry(final Geometry point) {
@@ -454,7 +444,7 @@ public class GamaPoint extends Coordinate implements ILocation {
 	 * @see msi.gama.metamodel.shape.IShape#getPoints()
 	 */
 	@Override
-	public IList<? extends ILocation> getPoints() {
+	public IList<? extends GamaPoint> getPoints() {
 		final IList result = GamaListFactory.create(Types.POINT);
 		result.add(clone());
 		return result;
@@ -463,7 +453,6 @@ public class GamaPoint extends Coordinate implements ILocation {
 	/**
 	 * @return the point with y negated (for OpenGL, for example), without side effect on the point.
 	 */
-	@Override
 	public GamaPoint yNegated() {
 		return new GamaPoint(x, -y, z);
 	}
@@ -631,7 +620,6 @@ public class GamaPoint extends Coordinate implements ILocation {
 		return new GamaPoint(inverse * y, -inverse * x, 0);
 	}
 
-	@Override
 	public GamaPoint withPrecision(final int i) {
 		return new GamaPoint(round(x, i), round(y, i), round(z, i));
 	}
@@ -643,11 +631,6 @@ public class GamaPoint extends Coordinate implements ILocation {
 	public GamaPoint clone() {
 		return new GamaPoint(x, y, z);
 	}
-
-	// @Override
-	// public Map<String, Object> getAttributes() {
-	// return null;
-	// }
 
 	@Override
 	public void forEachAttribute(final BiConsumerWithPruning<String, Object> visitor) {}

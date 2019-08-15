@@ -13,12 +13,18 @@ package msi.gama.common.util;
 import static java.util.stream.Collectors.toList;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileInfo;
@@ -29,20 +35,29 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.osgi.framework.Bundle;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.ext.webb.Webb;
 import msi.gama.ext.webb.WebbException;
 import msi.gama.kernel.experiment.IExperimentAgent;
 import msi.gama.kernel.model.IModel;
+import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.file.CacheLocationProvider;
@@ -58,6 +73,13 @@ import ummisco.gama.dev.utils.DEBUG;
 @SuppressWarnings ("deprecation")
 public class FileUtils {
 
+	public final static String GAMA_NATURE = "msi.gama.application.gamaNature";
+	public final static String XTEXT_NATURE = "org.eclipse.xtext.ui.shared.xtextNature";
+	public final static String PLUGIN_NATURE = "msi.gama.application.pluginNature";
+	public final static String TEST_NATURE = "msi.gama.application.testNature";
+	public final static String BUILTIN_NATURE = "msi.gama.application.builtinNature";
+
+	public static final QualifiedName BUILTIN_PROPERTY = new QualifiedName("gama.builtin", "models");
 	public static ThreadLocal<Webb> WEB = ThreadLocal.withInitial(() -> Webb.create());
 	public static final String URL_SEPARATOR_REPLACEMENT = "+_+";
 	public static final String COPY_OF = "copy of ";
@@ -70,6 +92,7 @@ public class FileUtils {
 	static String USER_HOME = System.getProperty("user.home");
 	static final URI WORKSPACE_URI = URI.createURI(ROOT.getLocationURI().toString(), false);
 	public static final File CACHE;
+	private static final FilenameFilter isDotFile = (dir, name) -> name.equals(".project");
 
 	static {
 		DEBUG.OFF();
@@ -413,6 +436,343 @@ public class FileUtils {
 			scope.getGui().getStatus(scope).endSubStatus(status);
 		}
 		return pathName;
+	}
+
+	public static String UNCLASSIFIED_MODELS = "Unclassified Models";
+
+	public static IFolder createUnclassifiedModelsProject(final IPath location) throws CoreException {
+		// First allow to select a parent folder
+		final IPath result = GAMA.getGui().openSelectContainerDialog("Project selection",
+				"Select a parent project or cancel to create a new project:");
+
+		IProject project;
+		IFolder modelFolder;
+
+		if (result == null) {
+			project = createOrUpdateProject(UNCLASSIFIED_MODELS);
+			modelFolder = project.getFolder(new Path("models"));
+			if (!modelFolder.exists()) {
+				modelFolder.create(true, true, null);
+			}
+		} else {
+			final IContainer container = (IContainer) ResourcesPlugin.getWorkspace().getRoot().findMember(result);
+			if (container instanceof IProject) {
+				project = (IProject) container;
+				modelFolder = project.getFolder(new Path("models"));
+				if (!modelFolder.exists()) {
+					modelFolder.create(true, true, null);
+				}
+			} else {
+				modelFolder = (IFolder) container;
+			}
+
+		}
+
+		return modelFolder;
+	}
+
+	public static boolean isGamaProject(final File f) throws CoreException {
+		final String[] list = f.list();
+		if (list != null) {
+			for (final String s : list) {
+				if (s.equals(".project")) {
+					IPath p = new Path(f.getAbsolutePath());
+					p = p.append(".project");
+					final IProjectDescription pd = ResourcesPlugin.getWorkspace().loadProjectDescription(p);
+					if (pd.hasNature(GAMA_NATURE)) { return true; }
+				}
+			}
+		}
+		return false;
+	}
+
+	static public void setValuesProjectDescription(final IProject proj, final boolean builtin, final boolean inPlugin,
+			final boolean inTests, final Bundle bundle) {
+		/* Modify the project description */
+		IProjectDescription desc = null;
+		try {
+
+			final List<String> ids = new ArrayList<>();
+			ids.add(XTEXT_NATURE);
+			ids.add(GAMA_NATURE);
+			if (inTests) {
+				ids.add(TEST_NATURE);
+			} else if (inPlugin) {
+				ids.add(PLUGIN_NATURE);
+			} else if (builtin) {
+				ids.add(BUILTIN_NATURE);
+			}
+			desc = proj.getDescription();
+			desc.setNatureIds(ids.toArray(new String[ids.size()]));
+			// Addition of a special nature to the project.
+			if (inTests && bundle == null) {
+				desc.setComment("user defined");
+			} else if ((inPlugin || inTests) && bundle != null) {
+				String name = bundle.getSymbolicName();
+				final String[] ss = name.split("\\.");
+				name = ss[ss.length - 1] + " plugin";
+				desc.setComment(name);
+			} else {
+				desc.setComment("");
+			}
+			proj.setDescription(desc, IResource.FORCE, null);
+			// Addition of a special persistent property to indicate that the project is built-in
+			if (builtin) {
+				proj.setPersistentProperty(BUILTIN_PROPERTY,
+						Platform.getProduct().getDefiningBundle().getVersion().toString());
+			}
+		} catch (final CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void findProjects(final File folder, final Map<File, IPath> found) {
+		if (folder == null) { return; }
+		final File[] dotFile = folder.listFiles(isDotFile);
+		if (dotFile == null) { return; } // not a directory
+		if (dotFile.length == 0) { // no .project file
+			final File[] files = folder.listFiles();
+			if (files != null) {
+				for (final File f : files) {
+					findProjects(f, found);
+				}
+			}
+			return;
+		}
+		found.put(folder, new Path(dotFile[0].getAbsolutePath()));
+
+	}
+
+	/**
+	 * @param lastSegment
+	 * @param modelFolder
+	 * @return
+	 */
+	public static IFile createUniqueFileFrom(final IFile originalFile, final IFolder modelFolder) {
+		IFile file = originalFile;
+		final Pattern p = Pattern.compile("(.*?)(\\d+)?(\\..*)?");
+		while (file.exists()) {
+			final IPath path = file.getLocation();
+			String fName = path.lastSegment();
+			final Matcher m = p.matcher(fName);
+			if (m.matches()) {// group 1 is the prefix, group 2 is the number, group 3 is the suffix
+				fName = m.group(1) + (m.group(2) == null ? 1 : Integer.parseInt(m.group(2)) + 1)
+						+ (m.group(3) == null ? "" : m.group(3));
+			}
+			file = modelFolder.getFile(fName);
+		}
+		return file;
+
+	}
+
+	/**
+	 * @param filePath
+	 * @return
+	 * @throws CoreException
+	 */
+	public static IFile findAndLoadIFile(final String filePath) throws CoreException {
+		// GAMA.getGui().debug("WorkspaceModelsManager.findAndLoadIFile " + filePath);
+		// No error in case of an empty argument
+		if (isBlank(filePath)) { return null; }
+		final IPath path = new Path(filePath);
+
+		// 1st case: the path can be identified as a file residing in the workspace
+		IFile result = findInWorkspace(path);
+		if (result != null) { return result; }
+		// 2nd case: the path is outside the workspace
+		result = findOutsideWorkspace(path);
+		if (result != null) { return result; }
+		// DEBUG.OUT(
+		// "File " + filePath + " cannot be located. Please check its name and location. Arguments provided were : " +
+		// Arrays.toString(CommandLineArgs.getApplicationArgs()));
+		return null;
+	}
+
+	private static boolean isBlank(final String cs) {
+		if (cs == null) { return true; }
+		if (cs.isEmpty()) { return true; }
+		final int sz = cs.length();
+		for (int i = 0; i < sz; i++) {
+			if (!Character.isWhitespace(cs.charAt(i))) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 * @param filePath
+	 * @return
+	 */
+	private static IFile findInWorkspace(final IPath originalPath) {
+		// GAMA.getGui().debug("WorkspaceModelsManager.findInWorkspace " + originalPath);
+		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		final IPath workspacePath = new Path(Platform.getInstanceLocation().getURL().getPath());
+		final IPath filePath = originalPath.makeRelativeTo(workspacePath);
+		IFile file = null;
+		try {
+			file = workspace.getRoot().getFile(filePath);
+		} catch (final Exception e) {
+			return null;
+		}
+		if (!file.exists()) { return null; }
+		return file;
+	}
+
+	private static IFile findOutsideWorkspace(final IPath originalPath) throws CoreException {
+		// GAMA.getGui().debug("WorkspaceModelsManager.findOutsideWorkspace " + originalPath);
+		final File modelFile = new File(originalPath.toOSString());
+		// TODO If the file does not exist we return null (might be a good idea to check other locations)
+		if (!modelFile.exists()) { return null; }
+
+		// We try to find a folder containing the model file which can be considered as a project
+		File projectFileBean = new File(modelFile.getPath());
+		File dotFile = null;
+		while (projectFileBean != null && dotFile == null) {
+			projectFileBean = projectFileBean.getParentFile();
+			if (projectFileBean != null) {
+				/* parcours des fils pour trouver le dot file et creer le lien vers le projet */
+				final File[] children = projectFileBean.listFiles();
+				if (children != null) {
+					for (final File element : children) {
+						if (element.getName().equals(".project")) {
+							dotFile = element;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		if (dotFile == null || projectFileBean == null) {
+			GAMA.getGui().tell("No project", "The model '" + modelFile.getAbsolutePath()
+					+ "' does not seem to belong to an existing GAML project. You can import it in an existing project or in the 'Unclassified models' project.");
+			return createUnclassifiedModelsProjectAndAdd(originalPath);
+		}
+
+		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		final IPath location = new Path(dotFile.getAbsolutePath());
+		final String pathToProject = projectFileBean.getName();
+
+		// We load the project description.
+		final IProjectDescription description = workspace.loadProjectDescription(location);
+		if (description != null) {
+			final Consumer<IProgressMonitor> r = (monitor) -> {
+				// We try to get the project in the workspace
+				IProject proj = workspace.getRoot().getProject(pathToProject);
+				// If it does not exist, we create it
+				if (!proj.exists()) {
+					// If a project with the same name exists
+					final IProject[] projects = workspace.getRoot().getProjects();
+					final String name = description.getName();
+					for (final IProject p : projects) {
+						if (p.getName().equals(name)) {
+							GAMA.getGui().tell("Existing project",
+									"A project with the same name already exists in the workspace. The model '"
+											+ modelFile.getAbsolutePath()
+											+ " will be imported as part of the 'Unclassified models' project.");
+							createUnclassifiedModelsProjectAndAdd(originalPath);
+							return;
+						}
+					}
+
+					try {
+						proj.create(description, monitor);
+					} catch (final CoreException e) {
+						GAMA.getGui().error("Error wien importing project: " + e.getMessage());
+					}
+				} else {
+					// project exists but is not accessible, so we delete it and recreate it
+					if (!proj.isAccessible()) {
+						try {
+							proj.delete(true, null);
+						} catch (final CoreException e) {
+							GAMA.getGui().error("Error wien importing project: " + e.getMessage());
+						}
+						proj = workspace.getRoot().getProject(pathToProject);
+						try {
+							proj.create(description, monitor);
+						} catch (final CoreException e) {
+							GAMA.getGui().error("Error wien importing project: " + e.getMessage());
+						}
+					}
+				}
+				// We open the project
+				try {
+					proj.open(IResource.NONE, monitor);
+				} catch (final CoreException e) {
+					GAMA.getGui().error("Error wien importing project: " + e.getMessage());
+				}
+				// And we set some properties to it
+				setValuesProjectDescription(proj, false, false, false, null);
+			};
+			GAMA.getGui().runInWorkspace(r);
+		}
+
+		final IProject project = workspace.getRoot().getProject(pathToProject);
+		final String relativePathToModel =
+				project.getName() + modelFile.getAbsolutePath().replace(projectFileBean.getPath(), "");
+		return findInWorkspace(new Path(relativePathToModel));
+	}
+
+	static public IProject createOrUpdateProject(final String name) {
+		final IWorkspace ws = ResourcesPlugin.getWorkspace();
+		final IProject[] projectHandle = new IProject[] { null };
+		final Consumer<IProgressMonitor> r = (monitor) -> {
+			final SubMonitor m = SubMonitor.convert(monitor, "Creating or updating " + name, 2000);
+			final IProject project = ws.getRoot().getProject(name);
+			if (!project.exists()) {
+				final IProjectDescription desc = ws.newProjectDescription(name);
+				try {
+					project.create(desc, m.split(1000));
+				} catch (final CoreException e) {
+					GAMA.getGui().error("Error wien creating project: " + e.getMessage());
+				}
+			}
+			if (monitor.isCanceled()) { throw new OperationCanceledException(); }
+			try {
+				project.open(IResource.BACKGROUND_REFRESH, m.split(1000));
+			} catch (final CoreException e) {
+				GAMA.getGui().error("Error wien creating project: " + e.getMessage());
+			}
+			projectHandle[0] = project;
+			setValuesProjectDescription(project, false, false, false, null);
+		};
+		GAMA.getGui().runInWorkspace(r);
+		return projectHandle[0];
+	}
+
+	public static IFile createUnclassifiedModelsProjectAndAdd(final IPath location) {
+		IFile iFile = null;
+		try {
+			final IFolder modelFolder = createUnclassifiedModelsProject(location);
+			iFile = modelFolder.getFile(location.lastSegment());
+			if (iFile.exists()) {
+				if (iFile.isLinked()) {
+					final IPath path = iFile.getLocation();
+					if (path.equals(location)) {
+						// First case, this is a linked resource to the same location. In that case, we simply return
+						// its name.
+						return iFile;
+					} else {
+						// Second case, this resource is a link to another location. We create a filename that is
+						// guaranteed not to exist and change iFile accordingly.
+						iFile = FileUtils.createUniqueFileFrom(iFile, modelFolder);
+					}
+				} else {
+					// Third case, this resource is local and we do not want to overwrite it. We create a filename that
+					// is guaranteed not to exist and change iFile accordingly.
+					iFile = FileUtils.createUniqueFileFrom(iFile, modelFolder);
+				}
+			}
+			iFile.createLink(location, IResource.NONE, null);
+			// RefreshHandler.run();
+			return iFile;
+		} catch (final CoreException e) {
+			e.printStackTrace();
+			GAMA.getGui().tell("Error in creation",
+					"The file " + (iFile == null ? location.lastSegment() : iFile.getFullPath().lastSegment())
+							+ " cannot be created because of the following exception " + e.getMessage());
+			return null;
+		}
 	}
 
 }

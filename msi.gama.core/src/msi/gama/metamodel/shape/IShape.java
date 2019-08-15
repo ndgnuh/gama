@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.io.WKTWriter;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.io.WKTWriter;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IAttributed;
@@ -150,7 +150,7 @@ public interface IShape extends ILocated, IValue, IAttributed {
 
 	void dispose();
 
-	double euclidianDistanceTo(ILocation g);
+	double euclidianDistanceTo(GamaPoint g);
 
 	double euclidianDistanceTo(IShape g);
 
@@ -223,7 +223,7 @@ public interface IShape extends ILocated, IValue, IAttributed {
 	GamaShape getGeometricEnvelope();
 
 	@getter ("points")
-	IList<? extends ILocation> getPoints();
+	IList<? extends GamaPoint> getPoints();
 
 	@getter ("geometries")
 	IList<? extends IShape> getGeometries();

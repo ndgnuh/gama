@@ -36,7 +36,9 @@ import msi.gama.lang.gaml.resource.GamlResourceDescriptionManager;
 import msi.gama.lang.gaml.resource.GamlResourceDescriptionStrategy;
 import msi.gama.lang.gaml.resource.GamlResourceInfoProvider;
 import msi.gama.lang.gaml.validation.ErrorToDiagnoticTranslator;
+import msi.gama.lang.gaml.validation.GamlModelBuilder;
 import msi.gama.lang.gaml.validation.GamlResourceValidator;
+import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.GAML;
 import msi.gaml.expressions.GamlExpressionFactory;
 import msi.gaml.expressions.IExpressionCompiler;
@@ -59,6 +61,7 @@ public class GamlRuntimeModule extends msi.gama.lang.gaml.AbstractGamlRuntimeMod
 			GamlExpressionFactory.registerParserProvider(() -> new GamlExpressionCompiler());
 			GAML.registerInfoProvider(GamlResourceInfoProvider.INSTANCE);
 			GAML.registerGamlEcoreUtils(EGaml.getInstance());
+			GAML.registerGamlModelBuilder(new GamlModelBuilder());
 			initialized = true;
 
 		}
@@ -67,18 +70,19 @@ public class GamlRuntimeModule extends msi.gama.lang.gaml.AbstractGamlRuntimeMod
 
 	@Override
 	public void configure(final Binder binder) {
-		super.configure(binder);
-		staticInitialize();
-		// binder.bind(ExpressionDescriptionBuilder.class);
-		// binder.bind(IDocManager.class).to(GamlResourceDocumenter.class);
-		// binder.bind(GamlSyntacticConverter.class);
-		binder.bind(IDefaultResourceDescriptionStrategy.class).to(GamlResourceDescriptionStrategy.class);
-		binder.bind(IQualifiedNameConverter.class).to(GamlNameConverter.class);
-		binder.bind(IResourceDescription.Manager.class).to(GamlResourceDescriptionManager.class);
-		// binder.bind(IOutputConfigurationProvider.class).to(GamlOutputConfigurationProvider.class);
-		binder.bind(IResourceValidator.class).to(GamlResourceValidator.class);
-		binder.bind(ErrorToDiagnoticTranslator.class);
-
+		GAMA.initializeAtStartup("Initializing XText runtime", () -> {
+			super.configure(binder);
+			staticInitialize();
+			// binder.bind(ExpressionDescriptionBuilder.class);
+			// binder.bind(IDocManager.class).to(GamlResourceDocumenter.class);
+			// binder.bind(GamlSyntacticConverter.class);
+			binder.bind(IDefaultResourceDescriptionStrategy.class).to(GamlResourceDescriptionStrategy.class);
+			binder.bind(IQualifiedNameConverter.class).to(GamlNameConverter.class);
+			binder.bind(IResourceDescription.Manager.class).to(GamlResourceDescriptionManager.class);
+			// binder.bind(IOutputConfigurationProvider.class).to(GamlOutputConfigurationProvider.class);
+			binder.bind(IResourceValidator.class).to(GamlResourceValidator.class);
+			binder.bind(ErrorToDiagnoticTranslator.class);
+		});
 	}
 
 	@Override

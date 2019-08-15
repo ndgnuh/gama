@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Headless version of GAMA
 Bundle-SymbolicName: msi.gama.headless;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.9.0.qualifier
 Bundle-Activator: msi.gama.headless.runtime.Activator
 Require-Bundle: msi.gama.core,
  msi.gama.lang.gaml,
@@ -32,5 +32,5 @@ Export-Package:
  msi.gama.headless.util;uses:="org.w3c.dom",
  msi.gama.headless.xml;uses:="msi.gama.headless.job"
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: msi.gama.headless

@@ -13,13 +13,14 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import msi.gama.application.workbench.PerspectiveHelper;
+import msi.gama.runtime.GAMA;
+import ummisco.gama.ui.utils.IPerspectiveHelper;
 
 public class SwitchToModeling extends AbstractHandler {
 
 	@Override
 	public Object execute(final ExecutionEvent event) throws ExecutionException {
-		PerspectiveHelper.openModelingPerspective(true, true);
+		GAMA.getGui().getUIService(IPerspectiveHelper.class).openModelingPerspective(true, true);
 		return null;
 	}
 }

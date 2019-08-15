@@ -4,15 +4,22 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui;
 
+import static org.eclipse.jface.resource.JFaceResources.TEXT_FONT;
+
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.builder.builderState.IMarkerUpdater;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
@@ -54,6 +61,8 @@ import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
 import msi.gama.common.interfaces.IGamlLabelProvider;
+import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.lang.gaml.GamlRuntimeModule;
 import msi.gama.lang.gaml.ide.contentassist.antlr.GamlParser;
 import msi.gama.lang.gaml.parsing.GamlSyntaxErrorMessageProvider;
 import msi.gama.lang.gaml.resource.GamlEncodingProvider;
@@ -64,6 +73,7 @@ import msi.gama.lang.gaml.ui.editor.GamaAutoEditStrategyProvider;
 import msi.gama.lang.gaml.ui.editor.GamaSourceViewerFactory;
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
 import msi.gama.lang.gaml.ui.editor.GamlEditor.GamaSourceViewerConfiguration;
+import msi.gama.lang.gaml.ui.editor.GamlEditorBindings;
 import msi.gama.lang.gaml.ui.editor.GamlEditorTickUpdater;
 import msi.gama.lang.gaml.ui.editor.GamlHyperlinkDetector;
 import msi.gama.lang.gaml.ui.editor.GamlMarkOccurrenceActionContributor;
@@ -79,14 +89,50 @@ import msi.gama.lang.gaml.ui.labeling.GamlLabelProvider;
 import msi.gama.lang.gaml.ui.outline.GamlLinkWithEditorOutlineContribution;
 import msi.gama.lang.gaml.ui.outline.GamlOutlinePage;
 import msi.gama.lang.gaml.ui.outline.GamlSortOutlineContribution;
+import msi.gama.lang.gaml.ui.reference.OperatorsReferenceMenu;
 import msi.gama.lang.gaml.ui.templates.GamlTemplateStore;
-import msi.gama.lang.gaml.ui.utils.ModelRunner;
-import ummisco.gama.ui.interfaces.IModelRunner;
+import msi.gama.util.GamaColor;
+import msi.gama.util.GamaFont;
+import ummisco.gama.ui.utils.GamlReferenceSearch;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class GamlUiModule extends msi.gama.lang.gaml.ui.AbstractGamlUiModule {
+
+	private static GamaColor getDefaultBackground() {
+		EditorsPlugin.getDefault().getPreferenceStore()
+				.setValue(AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND_SYSTEM_DEFAULT, false);
+		final RGB rgb = PreferenceConverter.getColor(EditorsPlugin.getDefault().getPreferenceStore(),
+				AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND);
+		return new GamaColor(rgb.red, rgb.green, rgb.blue);
+	}
+
+	private static GamaFont getDefaultFontData() {
+		final FontData fd = PreferenceConverter.getFontData(EditorsPlugin.getDefault().getPreferenceStore(), TEXT_FONT);
+		return new GamaFont(fd.getName(), fd.getStyle(), fd.getHeight());
+	}
+
+	static {
+
+		GamaPreferences.Modeling.EDITOR_BASE_FONT.init(() -> getDefaultFontData()).onChange(font -> {
+			try {
+				final FontData newValue = new FontData(font.getName(), font.getSize(), font.getStyle());
+				PreferenceConverter.setValue(EditorsPlugin.getDefault().getPreferenceStore(), TEXT_FONT, newValue);
+			} catch (final Exception e) {}
+		});
+		GamaPreferences.Modeling.EDITOR_BACKGROUND_COLOR.init(() -> getDefaultBackground()).onChange(c -> {
+			final RGB rgb = new RGB(c.getRed(), c.getGreen(), c.getBlue());
+			PreferenceConverter.setValue(EditorsPlugin.getDefault().getPreferenceStore(),
+					AbstractTextEditor.PREFERENCE_COLOR_BACKGROUND, rgb);
+			GamaPreferences.Modeling.OPERATORS_MENU_SORT
+					.onChange(newValue -> OperatorsReferenceMenu.byName = newValue.equals("Name"));
+		});
+		GamlRuntimeModule.staticInitialize();
+		GamlEditorBindings.install();
+		GamlReferenceSearch.install();
+
+	}
 
 	public GamlUiModule(final AbstractUIPlugin plugin) {
 		super(plugin);
@@ -105,8 +151,6 @@ public class GamlUiModule extends msi.gama.lang.gaml.ui.AbstractGamlUiModule {
 				.to(InternalGamlLexer.class);
 		binder.bind(IResourceLoader.class).toProvider(ResourceLoaderProviders.getParallelLoader());
 		binder.bind(IResourceClusteringPolicy.class).to(DynamicResourceClusteringPolicy.class);
-		binder.bind(IModelRunner.class).to(ModelRunner.class);
-		// binder.bind(XtextDocumentProvider.class).to(XtextDocumentProvider.class);
 		binder.bind(IMarkerUpdater.class).to(GamlMarkerUpdater.class);
 		binder.bind(IGamlLabelProvider.class).to(GamlLabelProvider.class);
 	}

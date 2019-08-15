@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
@@ -16,7 +16,7 @@ import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.ILocation;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.runtime.IScope;
@@ -103,7 +103,7 @@ public class ReferenceAgent implements IReference, IAgent {
 	}
 
 	@Override
-	public double euclidianDistanceTo(final ILocation g) {
+	public double euclidianDistanceTo(final GamaPoint g) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -247,7 +247,7 @@ public class ReferenceAgent implements IReference, IAgent {
 	}
 
 	@Override
-	public IList<? extends ILocation> getPoints() {
+	public IList<? extends GamaPoint> getPoints() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -367,13 +367,13 @@ public class ReferenceAgent implements IReference, IAgent {
 	}
 
 	@Override
-	public ILocation getLocation() {
+	public GamaPoint getLocation() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setLocation(final ILocation l) {
+	public void setLocation(final GamaPoint l) {
 		// TODO Auto-generated method stub
 
 	}

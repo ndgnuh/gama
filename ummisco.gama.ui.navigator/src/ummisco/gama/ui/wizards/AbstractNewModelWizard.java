@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.wizards;
@@ -182,7 +182,7 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 		}
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
-		GAMA.getGui().editModel(null, file);
+		GAMA.getGui().editModel(file);
 		monitor.worked(1);
 	}
 
@@ -210,7 +210,7 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 
 	/**
 	 * Method for adding to the stream the header of the file just created
-	 * 
+	 *
 	 * @param folder
 	 */
 	protected InputStream addFileHeader(final IContainer folder, final InputStream streamModel, final String title,

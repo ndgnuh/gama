@@ -31,7 +31,6 @@ import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.IWorkbenchPage;
 
-import msi.gama.application.workbench.PerspectiveHelper;
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.preferences.GamaPreferences;
@@ -45,6 +44,7 @@ import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.resources.IGamaIcons;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.PlatformHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.InteractiveConsoleView;
@@ -53,10 +53,6 @@ import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
 
 public class LayeredDisplayDecorator implements DisplayDataListener {
-
-	static {
-		DEBUG.OFF();
-	}
 
 	protected SWTLayeredDisplayMultiListener keyAndMouseListener;
 	protected DisplaySurfaceMenu menuManager;

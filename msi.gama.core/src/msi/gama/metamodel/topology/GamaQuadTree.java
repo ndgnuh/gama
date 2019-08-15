@@ -11,21 +11,19 @@
 
 package msi.gama.metamodel.topology;
 
+import static com.google.common.collect.Iterables.limit;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import com.google.common.collect.Ordering;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Envelope;
-
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.metamodel.agent.IAgent;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
 import msi.gama.runtime.IScope;
 import msi.gama.util.Collector;
-import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.ICollector;
 import msi.gama.util.IMap;
@@ -49,29 +47,22 @@ public class GamaQuadTree implements ISpatialIndex {
 	public static final int SW = 2;
 	public static final int SE = 3;
 
-	final QuadNode root;
+	QuadNode root;
 	final static int maxCapacity = 100;
 	double minSize = 10;
 	final boolean parallel;
 
-	public static ISpatialIndex create(final Envelope envelope, final boolean parallel) {
-		// if (GamaPreferences.GRID_OPTIMIZATION.getValue())
-		// return new GamaParallelQuadTree(envelope);
-		// else
+	public static GamaQuadTree create(final Envelope3D envelope, final boolean parallel) {
 		return new GamaQuadTree(envelope, parallel);
 	}
 
-	private GamaQuadTree(final Envelope bounds, final boolean sync) {
+	private GamaQuadTree(final Envelope3D bounds, final boolean sync) {
 		// AD To address Issue 804, explictely converts the bounds to an
 		// Envelope 2D, so that all computations are made
 		// in 2D in the QuadTree
 		this.parallel = sync;
-		root = new QuadNode(new Envelope(bounds));
+		root = new QuadNode(bounds.flattened());
 		minSize = bounds.getWidth() / 100d;
-		// GamaPreferences.External.QUADTREE_SYNCHRONIZATION.onChange((v) -> {
-		// parallel = v;
-		// root.synchronizeChanged();
-		// });
 	}
 
 	@Override
@@ -83,13 +74,23 @@ public class GamaQuadTree implements ISpatialIndex {
 	public void insert(final IAgent agent) {
 		if (agent == null) { return; }
 		if (agent.isPoint()) {
-			root.add((Coordinate) agent.getLocation(), agent);
+			root.add(agent.getLocation(), agent);
 		} else {
 			root.add(agent.getEnvelope(), agent);
 		}
 	}
 
-	private boolean isPoint(final Envelope env) {
+	@Override
+	public void updateWith(final Envelope3D envelope) {
+		final Collection<IAgent> agents = allAgents();
+		dispose();
+		root = new QuadNode(envelope.flattened());
+		for (final IAgent a : agents) {
+			insert(a);
+		}
+	}
+
+	private boolean isPoint(final Envelope3D env) {
 		return env.getArea() == 0.0;
 	}
 
@@ -105,11 +106,11 @@ public class GamaQuadTree implements ISpatialIndex {
 		current.dispose();
 	}
 
-	protected Collection<IAgent> findIntersects(final IScope scope, final IShape source, final Envelope r,
+	protected Collection<IAgent> findIntersects(final IScope scope, final IShape source, final Envelope3D r,
 			final IAgentFilter filter) {
 		// Adresses Issue 722 by explicitly shuffling the results with GAMA
 		// random procedures and removing duplicates
-		try (final ICollector<IAgent> list = Collector.getOrderedSet()) {
+		try (final ICollector<IAgent> list = Collector.newOrderedSet()) {
 			root.findIntersects(r, list);
 			if (list.isEmpty()) { return Collections.EMPTY_LIST; }
 			filter.filter(scope, source, list);
@@ -136,19 +137,13 @@ public class GamaQuadTree implements ISpatialIndex {
 	}
 
 	@Override
-	public Collection<IAgent> firstAtDistance(final IScope scope, final IShape source, final double dist,
-			final IAgentFilter f, final int number, final Collection<IAgent> alreadyChosen) {
+	public void firstAtDistance(final IScope scope, final IShape source, final double dist, final IAgentFilter f,
+			final int number, final Collection<IAgent> result) {
 		final double exp = dist * Maths.SQRT2;
 		final Envelope3D env = Envelope3D.of(source.getEnvelope());
 		env.expandBy(exp);
 		try {
-			final Collection<IAgent> in_square = findIntersects(scope, source, env, f);
-			in_square.removeAll(alreadyChosen);
-			if (in_square.isEmpty()) { return GamaListFactory.EMPTY_LIST; }
-
-			if (in_square.size() <= number) { return in_square; }
-			final Ordering<IShape> ordering = Ordering.natural().onResultOf(input -> source.euclidianDistanceTo(input));
-			return ordering.leastOf(in_square, number);
+			limit(findIntersects(scope, source, env, f), number).forEach(a -> result.add(a));
 		} finally {
 			env.dispose();
 		}
@@ -157,7 +152,7 @@ public class GamaQuadTree implements ISpatialIndex {
 	@Override
 	public IAgent firstAtDistance(final IScope scope, final IShape source, final double dist, final IAgentFilter f) {
 		final double exp = dist * Maths.SQRT2;
-		final Envelope3D env = Envelope3D.of(source.getEnvelope());
+		final Envelope3D env = Envelope3D.of(source);
 		env.expandBy(exp);
 		try {
 			final Collection<IAgent> in_square = findIntersects(scope, source, env, f);
@@ -178,14 +173,14 @@ public class GamaQuadTree implements ISpatialIndex {
 	}
 
 	@Override
-	public Collection<IAgent> allInEnvelope(final IScope scope, final IShape source, final Envelope envelope,
+	public Collection<IAgent> allInEnvelope(final IScope scope, final IShape source, final Envelope3D envelope,
 			final IAgentFilter f, final boolean contained) {
 		return findIntersects(scope, source, envelope, f);
 	}
 
 	@Override
 	public Collection<IAgent> allAgents() {
-		try (final ICollector<IAgent> result = Collector.getOrderedSet()) {
+		try (final ICollector<IAgent> result = Collector.newOrderedSet()) {
 			root.findIntersects(root.bounds, result);
 			return result.items();
 		}
@@ -193,40 +188,23 @@ public class GamaQuadTree implements ISpatialIndex {
 
 	private class QuadNode {
 
-		final Envelope bounds;
+		final Envelope3D bounds;
 		private final double halfx, halfy;
 		private volatile QuadNode[] nodes = null;
 		// ** Addresses part of Issue 722 -- Need to keep the agents ordered
 		// (by insertion order) **
-		private IMap<IAgent, Envelope3D> objects;
+		private final IMap<IAgent, Envelope3D> objects;
 		private final boolean canSplit;
 
-		public QuadNode(final Envelope bounds) {
+		public QuadNode(final Envelope3D bounds) {
 			this.bounds = bounds;
 			final double hw = bounds.getWidth();
 			final double hh = bounds.getHeight();
 			halfx = bounds.getMinX() + hw / 2;
 			halfy = bounds.getMinY() + hh / 2;
 			canSplit = hw > minSize && hh > minSize;
+			objects = parallel ? GamaMapFactory.concurrentMap() : GamaMapFactory.create();
 		}
-
-		private IMap<IAgent, Envelope3D> getOrCreateObjects() {
-			if (objects == null) {
-				objects = parallel ? GamaMapFactory.concurrentMap() : GamaMapFactory.create();
-			}
-			return objects;
-		}
-
-		// public void synchronizeChanged() {
-		// synchronized (objects) {
-		// objects = parallel ? GamaMapFactory.synchronizedMap(objects) : objects;
-		// }
-		// if (nodes != null) {
-		// for (final QuadNode n : nodes) {
-		// n.synchronizeChanged();
-		// }
-		// }
-		// }
 
 		public void dispose() {
 			if (objects != null) {
@@ -237,7 +215,6 @@ public class GamaQuadTree implements ISpatialIndex {
 				});
 				objects.clear();
 			}
-			objects = null;
 			if (nodes != null) {
 				for (final QuadNode n : nodes) {
 					n.dispose();
@@ -246,27 +223,23 @@ public class GamaQuadTree implements ISpatialIndex {
 			}
 		}
 
-		public void remove(final Coordinate p, final IShape a) {
+		public void remove(final GamaPoint p, final IShape a) {
 			if (nodes == null) {
-				if (objects != null) {
-					final Envelope3D env = objects.remove(a);
-					if (env != null) {
-						env.dispose();
-					}
+				final Envelope3D env = objects.remove(a);
+				if (env != null) {
+					env.dispose();
 				}
 			} else {
 				nodes[quadrant(p)].remove(p, a);
 			}
 		}
 
-		public void remove(final Envelope env, final IShape a) {
+		public void remove(final Envelope3D env, final IShape a) {
 			if (nodes == null) {
-				if (objects != null) {
-					objects.remove(a);
-				}
+				objects.remove(a);
 			} else {
 				for (final QuadNode node : nodes) {
-					if (node.bounds.intersects(env)) {
+					if (node.bounds.intersects2D(env)) {
 						node.remove(env, a);
 					}
 				}
@@ -274,15 +247,15 @@ public class GamaQuadTree implements ISpatialIndex {
 		}
 
 		public boolean shouldSplit() {
-			return canSplit && nodes == null && objects != null && objects.size() >= maxCapacity;
+			return canSplit && nodes == null && objects.size() >= maxCapacity;
 		}
 
-		public void add(final Coordinate p, final IAgent a) {
+		public void add(final GamaPoint p, final IAgent a) {
 			if (shouldSplit()) {
 				split();
 			}
 			if (nodes == null) {
-				getOrCreateObjects().put(a, Envelope3D.of(p));
+				objects.put(a, Envelope3D.of(p));
 			} else {
 				nodes[quadrant(p)].add(p, a);
 			}
@@ -293,17 +266,17 @@ public class GamaQuadTree implements ISpatialIndex {
 				split();
 			}
 			if (nodes == null) {
-				getOrCreateObjects().put(a, env);
+				objects.put(a, env);
 			} else {
 				for (final QuadNode node : nodes) {
-					if (node.bounds.intersects(env)) {
+					if (node.bounds.intersects2D(env)) {
 						node.add(env, a);
 					}
 				}
 			}
 		}
 
-		int quadrant(final Coordinate p) {
+		int quadrant(final GamaPoint p) {
 			final boolean north = p.y >= bounds.getMinY() && p.y < halfy;
 			final boolean west = p.x >= bounds.getMinX() && p.x < halfx;
 			return north ? west ? NW : NE : west ? SW : SE;
@@ -314,35 +287,35 @@ public class GamaQuadTree implements ISpatialIndex {
 			final double minx = bounds.getMinX();
 			final double miny = bounds.getMinY();
 			final double maxy = bounds.getMaxY();
-			nodes = new QuadNode[] { new QuadNode(new Envelope(minx, halfx, miny, halfy)),
-					new QuadNode(new Envelope(halfx, maxx, miny, halfy)),
-					new QuadNode(new Envelope(minx, halfx, halfy, maxy)),
-					new QuadNode(new Envelope(halfx, maxx, halfy, maxy)) };
-			if (objects != null) {
-				for (final Map.Entry<IAgent, Envelope3D> entry : objects.entrySet()) {
-					final IAgent agent = entry.getKey();
-					if (agent != null && !agent.dead()) {
-						final IShape g = agent.getGeometry();
-						if (g.isPoint()) {
-							add((Coordinate) g.getLocation(), agent);
-						} else {
-							add(g.getEnvelope(), agent);
-						}
-					}
-				}
-				objects.clear();
-				objects = null;
-			}
+			nodes = new QuadNode[] { new QuadNode(Envelope3D.of(minx, halfx, miny, halfy, 0d, 0d)),
+					new QuadNode(Envelope3D.of(halfx, maxx, miny, halfy, 0d, 0d)),
+					new QuadNode(Envelope3D.of(minx, halfx, halfy, maxy, 0d, 0d)),
+					new QuadNode(Envelope3D.of(halfx, maxx, halfy, maxy, 0d, 0d)) };
+			wipeObjects();
 		}
 
-		public void findIntersects(final Envelope r, final Collection<IAgent> result) {
+		private void wipeObjects() {
+			for (final Map.Entry<IAgent, Envelope3D> entry : objects.entrySet()) {
+				final IAgent agent = entry.getKey();
+				if (agent != null && !agent.dead()) {
+					final IShape g = agent.getGeometry();
+					if (g.isPoint()) {
+						add(g.getLocation(), agent);
+					} else {
+						add(g.getEnvelope(), agent);
+					}
+				}
+			}
+			objects.clear();
+		}
+
+		public void findIntersects(final Envelope3D r, final Collection<IAgent> result) {
 			if (bounds.intersects(r)) {
-				if (objects != null) {
-					for (final Map.Entry<IAgent, Envelope3D> entry : objects.entrySet()) {
-						final Envelope3D env = entry.getValue();
-						if (env != null && env.intersects(r)) {
-							result.add(entry.getKey());
-						}
+
+				for (final Map.Entry<IAgent, Envelope3D> entry : objects.entrySet()) {
+					final Envelope3D env = entry.getValue();
+					if (env != null && env.intersects2D(r)) {
+						result.add(entry.getKey());
 					}
 				}
 
@@ -360,6 +333,11 @@ public class GamaQuadTree implements ISpatialIndex {
 	@Override
 	public boolean isParallel() {
 		return parallel;
+	}
+
+	@Override
+	public Envelope3D getBounds() {
+		return root.bounds;
 	}
 
 }

@@ -96,7 +96,7 @@ public class GamlScopeProvider extends org.eclipse.xtext.scoping.impl.SimpleLoca
 
 	@Override
 	protected ISelectable getAllDescriptions(final Resource resource) {
-		try (final Collector.AsList<IEObjectDescription> descriptions = Collector.getList()) {
+		try (final Collector.AsList<IEObjectDescription> descriptions = Collector.newList()) {
 			final Iterator<EObject> iterator = resource.getAllContents();
 			while (iterator.hasNext()) {
 				final EObject from = iterator.next();

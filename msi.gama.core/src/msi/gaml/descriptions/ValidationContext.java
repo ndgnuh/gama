@@ -32,7 +32,7 @@ public class ValidationContext extends Collector.AsList<GamlCompilationError> im
 	final static int MAX_SIZE = 1000;
 	public static final ValidationContext NULL = new ValidationContext(null, false, IDocManager.NULL);
 	final URI resourceURI;
-	final Collector.AsList<GamlCompilationError> importedErrors = Collector.getList();
+	final Collector.AsList<GamlCompilationError> importedErrors = Collector.newList();
 	private boolean noWarning, noInfo, hasSyntaxErrors, noExperiment;
 	private final IDocManager docDelegate;
 

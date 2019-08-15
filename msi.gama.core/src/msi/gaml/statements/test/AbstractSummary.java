@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.TextBuilder;
 import msi.gama.util.GamaColor;
 import one.util.streamex.StreamEx;
 
@@ -82,21 +83,22 @@ public abstract class AbstractSummary<S extends WithTestSummary<?>> {
 				&& state != TestState.ABORTED) {
 			return "";
 		}
-		final StringBuilder sb = new StringBuilder();
-		printHeader(sb);
-		sb.append(state).append(": ").append(getTitle()).append(" ");
-		if (error != null) {
-			sb.append('[').append(error).append(']');
-		}
-		printFooter(sb);
-		for (final AbstractSummary<?> summary : getSummaries().values()) {
-			final String child = summary.toString();
-			if (child.isEmpty()) {
-				continue;
+		try (TextBuilder sb = TextBuilder.create()) {
+			printHeader(sb.getBuilder());
+			sb.append(state).append(": ").append(getTitle()).append(" ");
+			if (error != null) {
+				sb.append('[').append(error).append(']');
 			}
-			sb.append(child);
+			printFooter(sb.getBuilder());
+			for (final AbstractSummary<?> summary : getSummaries().values()) {
+				final String child = summary.toString();
+				if (child.isEmpty()) {
+					continue;
+				}
+				sb.append(child);
+			}
+			return sb.toString();
 		}
-		return sb.toString();
 	}
 
 	protected void printFooter(final StringBuilder sb) {}

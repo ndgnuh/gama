@@ -33,7 +33,7 @@ public class AssertEditor extends AbstractStatementEditor<AbstractSummary<?>> {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				GAMA.getGui().editModel(null, getStatement().getURI());
+				GAMA.getGui().editModel(getStatement().getURI());
 			}
 		});
 		return textBox;

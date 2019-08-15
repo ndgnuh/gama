@@ -63,11 +63,11 @@ public class GamaPathType extends GamaType<IPath> {
 		if (obj instanceof IPath) { return (IPath) obj; }
 		if (obj instanceof IShape) { 
 			IShape shape = ((IShape) obj);
-			return PathFactory.newInstance(scope, (IList<IShape>) shape.getPoints(), false);
+			return PathFactory.create(scope, (IList<IShape>) shape.getPoints(), false);
 		}
 		 
 		if (obj instanceof List) {
-			// List<ILocation> list = new GamaList();
+			// List<GamaPoint> list = new GamaList();
 			final List<IShape> list = GamaListFactory.create(Types.GEOMETRY);
 			boolean isEdges = true;
 
@@ -78,7 +78,7 @@ public class GamaPathType extends GamaType<IPath> {
 				}
 			}
 			// return new GamaPath(scope.getTopology(), list);
-			return PathFactory.newInstance(scope, isEdges ? (IList<IShape>) obj : (IList<IShape>) list, isEdges);
+			return PathFactory.create(scope, isEdges ? (IList<IShape>) obj : (IList<IShape>) list, isEdges);
 		}
 		return null;
 	}

@@ -108,8 +108,8 @@ public class GamlAgent extends MinimalAgent implements IMacroAgent {
 			return GamaListFactory.EMPTY_LIST;
 		}
 
-		try (final ICollector<IAgent> candidates = Collector.getList();
-				final Collector.AsList<IAgent> capturedAgents = Collector.getList()) {
+		try (final ICollector<IAgent> candidates = Collector.newList();
+				final Collector.AsList<IAgent> capturedAgents = Collector.newList()) {
 			for (final IAgent a : microAgents.iterable(scope)) {
 				if (this.canCapture(a, microSpecies)) {
 					candidates.add(a);
@@ -263,13 +263,6 @@ public class GamlAgent extends MinimalAgent implements IMacroAgent {
 	public IContainer<?, IAgent> getMembers(final IScope scope) {
 		if (dead()) { return GamaListFactory.EMPTY_LIST; }
 		final MetaPopulation mp = new MetaPopulation(getMicroPopulations());
-		// forEachAttribute((s, pop) -> {
-		// if (pop instanceof IPopulation && ((IPopulation) pop).size() > 0) {
-		// mp.addPopulation((IPopulation<? extends IAgent>) pop);
-		// }
-		// return true;
-		// });
-
 		return mp;
 	}
 
@@ -304,15 +297,16 @@ public class GamlAgent extends MinimalAgent implements IMacroAgent {
 		if (!hasMembers()) { return GamaListFactory.EMPTY_LIST; }
 
 		final IContainer<?, IAgent> members = getMembers(scope);
-		final IList<IAgent> agents = GamaListFactory.create(Types.AGENT);
-		agents.addAll(members.listValue(scope, Types.NO_TYPE, false));
-		for (final IAgent m : members.iterable(scope)) {
-			if (m instanceof IMacroAgent) {
-				agents.addAll(((IMacroAgent) m).getAgents(scope));
+		try (Collector.AsList<IAgent> agents = Collector.newList()) {
+			agents.addAll(members.listValue(scope, Types.NO_TYPE, false));
+			for (final IAgent m : members.iterable(scope)) {
+				if (m instanceof IMacroAgent) {
+					agents.addAll(((IMacroAgent) m).getAgents(scope));
+				}
 			}
-		}
 
-		return agents;
+			return agents.items();
+		}
 	}
 
 	@Override

@@ -18,10 +18,6 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class GamaIcon {
 
-	static {
-		DEBUG.ON();
-	}
-
 	final String code;
 	final String path;
 	final String plugin;

@@ -506,12 +506,6 @@
        </decorator>
 	</extension>
     <extension
-          point="org.eclipse.ui.startup">
-       <startup
-             class="msi.gama.lang.gaml.ui.AutoStartup">
-       </startup>
-    </extension>
-    <extension
           point="org.eclipse.ui.ide.markerSupport">
           
       
@@ -832,6 +826,12 @@
              factoryClass="msi.gama.lang.gaml.ui.outline.LabelProviderFactory">
           <service
                 serviceClass="msi.gama.common.interfaces.IGamlLabelProvider">
+          </service>
+       </serviceFactory>
+       <serviceFactory
+             factoryClass="ummisco.gama.ui.modeling.URIOpenerFactory">
+          <service
+                serviceClass="ummisco.gama.ui.utils.IModelEditor">
           </service>
        </serviceFactory>
     </extension>
