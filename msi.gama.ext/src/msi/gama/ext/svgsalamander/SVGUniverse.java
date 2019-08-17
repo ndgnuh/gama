@@ -102,7 +102,7 @@ public class SVGUniverse implements Serializable {
 	public void setCurTime(final double curTime) {
 		final double oldTime = this.curTime;
 		this.curTime = curTime;
-		changes.firePropertyChange("curTime", new Double(oldTime), new Double(curTime));
+		changes.firePropertyChange("curTime", oldTime, curTime);
 	}
 
 	// //

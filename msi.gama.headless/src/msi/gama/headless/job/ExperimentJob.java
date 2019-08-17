@@ -213,7 +213,7 @@ public class ExperimentJob implements IExperimentJob {
 
 	public ExperimentJob(final String sourcePath, final String exp, final long max, final String untilCond,
 			final double s) {
-		this(sourcePath, new Long(ExperimentJob.generateID()).toString(), exp, max, untilCond, s);
+		this(sourcePath, String.valueOf(ExperimentJob.generateID()), exp, max, untilCond, s);
 	}
 
 	public ExperimentJob(final String sourcePath, final String expId, final String exp, final long max,
@@ -426,11 +426,11 @@ public class ExperimentJob implements IExperimentJob {
 		simulation.setAttributeNode(attr3);
 
 		final Attr attr2 = doc.createAttribute(XmlTAG.FINAL_STEP_TAG);
-		attr2.setValue(new Long(this.finalStep).toString());
+		attr2.setValue(String.valueOf(this.finalStep));
 		simulation.setAttributeNode(attr2);
 
 		final Attr attr5 = doc.createAttribute(XmlTAG.SEED_TAG);
-		attr5.setValue(new Float(this.seed).toString());
+		attr5.setValue(String.valueOf(this.seed));
 		simulation.setAttributeNode(attr5);
 
 		final Attr attr4 = doc.createAttribute(XmlTAG.EXPERIMENT_NAME_TAG);
@@ -477,7 +477,7 @@ public class ExperimentJob implements IExperimentJob {
 			aOutput.setAttributeNode(o1);
 
 			final Attr o2 = doc.createAttribute(XmlTAG.FRAMERATE_TAG);
-			o2.setValue((o.getFrameRate()).toString());
+			o2.setValue(o.getFrameRate().toString());
 			aOutput.setAttributeNode(o2);
 		}
 		return simulation;
@@ -494,7 +494,7 @@ public class ExperimentJob implements IExperimentJob {
 		}
 		final IDescription d = expD.getChildWithKeyword(IKeyword.OUTPUT);
 		final ExperimentJob expJob =
-				new ExperimentJob(path, new Long(ExperimentJob.generateID()).toString(), expName, 0, "", mseed);
+				new ExperimentJob(path, String.valueOf(ExperimentJob.generateID()), expName, 0, "", mseed);
 
 		if (d != null) {
 			final Iterable<IDescription> monitors = d.getChildrenWithKeyword(IKeyword.MONITOR);

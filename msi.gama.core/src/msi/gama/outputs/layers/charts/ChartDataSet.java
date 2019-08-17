@@ -378,14 +378,14 @@ public class ChartDataSet {
 				if (this.useYSource && xval instanceof Number) {
 					final double dvalue = Cast.asFloat(scope, xval);
 					final String lvalue = Cast.asString(scope, xlab);
-					YSeriesValues.add(new Double(dvalue));
+					YSeriesValues.add(dvalue);
 					Ycategories.add(lvalue);
 				}
 				if (targetNb == -1 && !this.forceNoYAccumulate) {
 					targetNb = YSeriesValues.size() + 1;
 				}
 				while (YSeriesValues.size() < targetNb) {
-					YSeriesValues.add(new Double(getYCycleOrPlusOneForBatch(scope, chartCycle)));
+					YSeriesValues.add(getYCycleOrPlusOneForBatch(scope, chartCycle));
 					Ycategories.add(Cast.asString(scope, xlab));
 				}
 			}

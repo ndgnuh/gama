@@ -451,7 +451,7 @@ public class GeometryStrategies {
 
 		final ParseStrategy coord_child = (arg, gf) -> {
 			if (arg.text == null) { return null; }
-			return new Double(arg.text.toString());
+			return Double.parseDouble(arg.text.toString());
 		};
 
 		// coord-x

@@ -14,19 +14,19 @@ import java.util.HashMap;
 
 import javax.vecmath.Vector3f;
 
+import org.locationtech.jts.geom.Coordinate;
+
 import com.bulletphysics.collision.shapes.BoxShape;
 import com.bulletphysics.collision.shapes.CollisionShape;
 import com.bulletphysics.collision.shapes.ConvexHullShape;
 import com.bulletphysics.collision.shapes.SphereShape;
 import com.bulletphysics.dynamics.RigidBody;
 import com.bulletphysics.util.ObjectArrayList;
-import org.locationtech.jts.geom.Coordinate;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.MinimalAgent;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -219,8 +219,7 @@ public class Physical3DWorldAgent extends MinimalAgent {
 	private CollisionShape defaultCollisionShape(final IShape geom) {
 		final ObjectArrayList<Vector3f> points = new ObjectArrayList<>();
 		for (final GamaPoint loc : geom.getPoints()) {
-			points.add(new Vector3f((float) loc.x, (float) loc.y,
-					(float) loc.z));
+			points.add(new Vector3f((float) loc.x, (float) loc.y, (float) loc.z));
 		}
 		return new ConvexHullShape(points);
 	}
@@ -270,8 +269,7 @@ public class Physical3DWorldAgent extends MinimalAgent {
 
 			final RigidBody node = registeredMap.get(ia);
 			final Vector3f _position = world.getNodePosition(node);
-			final GamaPoint position =
-					new GamaPoint(new Double(_position.x), new Double(_position.y), new Double(_position.z));
+			final GamaPoint position = new GamaPoint(_position.x, _position.y, _position.z);
 
 			ia.setLocation(position);
 			final Coordinate[] coordinates = ia.getInnerGeometry().getCoordinates();

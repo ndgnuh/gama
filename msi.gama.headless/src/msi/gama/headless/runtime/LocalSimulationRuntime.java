@@ -252,7 +252,7 @@ public class LocalSimulationRuntime extends Observable implements SimulationRunt
 
 		final HashMap<String, Double> res = new HashMap<>();
 		for (final ExperimentJob exp : simulations.values()) {
-			res.put(exp.getExperimentID(), new Double(exp.getStep() / exp.getFinalStep()));
+			res.put(exp.getExperimentID(), (double) (exp.getStep() / exp.getFinalStep()));
 		}
 		return res;
 	}

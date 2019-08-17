@@ -262,10 +262,10 @@ public class BasicPlayer implements BasicController, Runnable {
 			}
 			// Add JavaSound properties.
 			if (m_audioFileFormat.getByteLength() > 0) {
-				properties.put("audio.length.bytes", (m_audioFileFormat.getByteLength()));
+				properties.put("audio.length.bytes", m_audioFileFormat.getByteLength());
 			}
 			if (m_audioFileFormat.getFrameLength() > 0) {
-				properties.put("audio.length.frames", (m_audioFileFormat.getFrameLength()));
+				properties.put("audio.length.frames", m_audioFileFormat.getFrameLength());
 			}
 			if (m_audioFileFormat.getType() != null) {
 				properties.put("audio.type", m_audioFileFormat.getType().toString());
@@ -273,19 +273,19 @@ public class BasicPlayer implements BasicController, Runnable {
 			// Audio format.
 			final AudioFormat audioFormat = m_audioFileFormat.getFormat();
 			if (audioFormat.getFrameRate() > 0) {
-				properties.put("audio.framerate.fps", new Float(audioFormat.getFrameRate()));
+				properties.put("audio.framerate.fps", audioFormat.getFrameRate());
 			}
 			if (audioFormat.getFrameSize() > 0) {
-				properties.put("audio.framesize.bytes", (audioFormat.getFrameSize()));
+				properties.put("audio.framesize.bytes", audioFormat.getFrameSize());
 			}
 			if (audioFormat.getSampleRate() > 0) {
-				properties.put("audio.samplerate.hz", new Float(audioFormat.getSampleRate()));
+				properties.put("audio.samplerate.hz", audioFormat.getSampleRate());
 			}
 			if (audioFormat.getSampleSizeInBits() > 0) {
-				properties.put("audio.samplesize.bits", (audioFormat.getSampleSizeInBits()));
+				properties.put("audio.samplesize.bits", audioFormat.getSampleSizeInBits());
 			}
 			if (audioFormat.getChannels() > 0) {
-				properties.put("audio.channels", (audioFormat.getChannels()));
+				properties.put("audio.channels", audioFormat.getChannels());
 			}
 			if (audioFormat instanceof TAudioFormat) {
 				// Tritonus SPI compliant audio format.

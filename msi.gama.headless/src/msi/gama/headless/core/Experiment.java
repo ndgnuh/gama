@@ -22,7 +22,6 @@ import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.GAML;
 import msi.gaml.expressions.IExpression;
-import ummisco.gama.dev.utils.DEBUG;
 
 public class Experiment implements IExperiment {
 
@@ -74,7 +73,7 @@ public class Experiment implements IExperiment {
 	private synchronized void loadCurrentExperiment(final String expName) {
 		this.experimentName = expName;
 		this.currentStep = 0;
-		this.currentExperiment = GAMA.addHeadlessExperiment(model, experimentName, this.params, new Double(seed));
+		this.currentExperiment = GAMA.addHeadlessExperiment(model, experimentName, this.params, seed);
 		this.currentSimulation = this.currentExperiment.getAgent().getSimulation();
 		this.currentExperiment.setHeadless(true);
 	}
@@ -93,10 +92,10 @@ public class Experiment implements IExperiment {
 			currentExperiment.getAgent().step(currentExperiment.getAgent().getScope());
 		} else {
 			currentExperiment.getAgent().step(this.getScope());
-			//currentExperiment.getAgent().getSimulation().step(this.getScope());
+			// currentExperiment.getAgent().getSimulation().step(this.getScope());
 		}
 		return currentStep++;
- 
+
 	}
 
 	@Override
@@ -112,10 +111,13 @@ public class Experiment implements IExperiment {
 		final IOutput output =
 				((AbstractOutputManager) currentSimulation.getOutputManager()).getOutputWithOriginalName(parameterName);
 		// System.out.
-		if (output == null) { throw GamaRuntimeException.error("Output does not exist: " + parameterName,
-				currentSimulation.getScope()); }
-		if (!(output instanceof MonitorOutput)) { throw GamaRuntimeException
-				.error("Output " + parameterName + " is not an alphanumeric data.", currentSimulation.getScope()); }
+		if (output == null) {
+			throw GamaRuntimeException.error("Output does not exist: " + parameterName, currentSimulation.getScope());
+		}
+		if (!(output instanceof MonitorOutput)) {
+			throw GamaRuntimeException.error("Output " + parameterName + " is not an alphanumeric data.",
+					currentSimulation.getScope());
+		}
 		output.update();
 		return ((MonitorOutput) output).getLastValue();
 	}
@@ -125,8 +127,9 @@ public class Experiment implements IExperiment {
 		// this.currentExperiment.getSimulationOutputs().step(this.getScope());
 		final Object res =
 				this.currentExperiment.getCurrentSimulation().getDirectVarValue(this.getScope(), parameterName);
-		if (res == null) { throw GamaRuntimeException.error("Output unresolved: " + parameterName,
-				currentSimulation.getScope()); }
+		if (res == null) {
+			throw GamaRuntimeException.error("Output unresolved: " + parameterName, currentSimulation.getScope());
+		}
 		return res;
 	}
 
