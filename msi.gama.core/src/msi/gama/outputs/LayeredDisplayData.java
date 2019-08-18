@@ -586,7 +586,7 @@ public class LayeredDisplayData {
 	public void setZRotationAngle(final double val) {
 		zRotationAngleDelta = val;
 		currentRotationAboutZ = val;
-		notifyListeners(Changes.ROTATION, val);
+		// notifyListeners(Changes.ROTATION, val);
 	}
 
 	public void incrementZRotation() {
