@@ -11,6 +11,7 @@ package ummisco.gama.ui.parameters;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.FileDialog;
@@ -65,6 +66,13 @@ public class FileEditor extends AbstractEditor<IGamaFile> {
 			file = Files.from(getScope(), path);
 			modifyAndDisplayValue(file);
 		}
+	}
+	
+	@Override
+	protected GridData getParameterGridData() {
+		final GridData d = new GridData(SWT.FILL, SWT.TOP, true, false);
+		d.minimumWidth = 50;
+		return d;
 	}
 
 	@Override
