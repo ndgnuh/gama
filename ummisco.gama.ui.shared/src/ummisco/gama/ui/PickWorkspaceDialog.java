@@ -33,6 +33,8 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import com.google.common.io.Files;
+
 import msi.gama.application.workspace.WorkspaceManager;
 
 /**
@@ -196,30 +198,15 @@ public class PickWorkspaceDialog extends TitleAreaDialog {
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 
-	/* Checks whether a target directory is a subdirectory of ourselves */
-	private boolean isTargetSubdirOfDir(final File source, final File target) {
-		final List<File> subdirs = new ArrayList<>();
-		getAllSubdirectoriesOf(source, subdirs);
-		return subdirs.contains(target);
-	}
 
-	/* Helper for above */
-	private void getAllSubdirectoriesOf(final File target, final List<File> buffer) {
-		final File[] files = target.listFiles();
-		if (files == null || files.length == 0) { return; }
 
-		for (final File f : files) {
-			if (f.isDirectory()) {
-				buffer.add(f);
-				getAllSubdirectoriesOf(f, buffer);
-			}
-		}
-	}
 
 	/**
-	 * This function will copy files or directories from one location to another. note that the source and the
-	 * destination must be mutually exclusive. This function can not be used to copy a directory to a sub directory of
-	 * itself. The function will also have problems if the destination files already exist.
+	 * This function will copy files or directories from one location to
+	 * another. note that the source and the destination must be mutually
+	 * exclusive. This function can not be used to copy a directory to a sub
+	 * directory of itself. The function will also have problems if the
+	 * destination files already exist.
 	 *
 	 * @param src
 	 *            -- A File object that represents the source for the copy
@@ -230,27 +217,28 @@ public class PickWorkspaceDialog extends TitleAreaDialog {
 	 */
 	public static void copyFiles(final File src, final File dest) throws IOException {
 		/* Check to ensure that the source is valid... */
-		if (!src.exists()) {
+		if ( !src.exists() ) {
 			throw new IOException("Can not find source: " + src.getAbsolutePath());
-		} else if (!src.canRead()) { // check to ensure we have rights to the
-										// source...
+		} else if ( !src.canRead() ) {
 			throw new IOException("Cannot read: " + src.getAbsolutePath() + ". Check file permissions.");
 		}
 		/* Is this a directory copy? */
 		final List<String> noCopy = Arrays.asList("org.eclipse.core.runtime", "org.eclipse.e4.workbench",
-				"org.eclipse.emf.common.ui", "org.eclipse.ui.workbench", "org.eclipse.xtext.builder");
-		if (src.isDirectory()) {
-			if (noCopy.contains(src.getName())) { return; }
+			"org.eclipse.emf.common.ui", "org.eclipse.ui.workbench", "org.eclipse.xtext.builder");
+		if ( src.isDirectory() ) {
+			if ( noCopy.contains(src.getName()) ) { return; }
 			/* Does the destination already exist? */
-			if (!dest.exists()) {
+			if ( !dest.exists() ) {
 				/* If not we need to make it exist if possible */
-				if (!dest.mkdirs()) { throw new IOException("Could not create direcotry: " + dest.getAbsolutePath()); }
+				if ( !dest.mkdirs() ) {
+					throw new IOException("Could not create direcotry: " + dest.getAbsolutePath());
+				}
 			}
 			/* Get a listing of files... */
 			final String list[] = src.list();
 			/* Copy all the files in the list. */
-			if (list != null) {
-				for (final String element : list) {
+			if ( list != null ) {
+				for ( final String element : list ) {
 					final File dest1 = new File(dest, element);
 					final File src1 = new File(src, element);
 					copyFiles(src1, dest1);
@@ -258,58 +246,24 @@ public class PickWorkspaceDialog extends TitleAreaDialog {
 			}
 		} else {
 			/* This was not a directory, so lets just copy the file */
-			final byte[] buffer = new byte[4096];
-			int bytesRead;
-			try (FileInputStream fin = new FileInputStream(src); FileOutputStream fout = new FileOutputStream(dest);) {
-				/* Open the files for input and output */
-
-				/* While bytesRead indicates a successful read, lets write... */
-				while ((bytesRead = fin.read(buffer)) >= 0) {
-					fout.write(buffer, 0, bytesRead);
-				}
-			} catch (final IOException e) {
-				final IOException wrapper = new IOException(
-						"Unable to copy file: " + src.getAbsolutePath() + "to" + dest.getAbsolutePath());
-				wrapper.initCause(e);
-				wrapper.setStackTrace(e.getStackTrace());
-				throw wrapper;
-				/* Ensure that the files are closed (if they were open). */
-			}
+			Files.copy(src, dest);
 		}
 	}
 
 	protected void cloneCurrentWorkspace() {
 		final String currentLocation = WorkspaceManager.getLastSetWorkspaceDirectory();
-		if (currentLocation.isEmpty()) {
+		if ( currentLocation == null || currentLocation.isEmpty() ) {
 			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
-					"No current workspace exists. Can only clone from an existing workspace");
+				"No current workspace exists. Can only clone from an existing workspace");
 			return;
 		}
-		cloneWorkspace(currentLocation);
-	}
-
-	protected void cloneWorkspace(final String locationToClone) {
-		// Some checks first
 		final String newLocation = workspacePathCombo.getText();
-
-		final File workspaceDirectory = new File(locationToClone);
-		final File targetDirectory = new File(newLocation);
-		if (workspaceDirectory.exists()
-				&& targetDirectory.getAbsolutePath().equals(workspaceDirectory.getAbsolutePath())) {
+		// Fixes Issue #2848
+		if ( newLocation.startsWith(currentLocation) ) {
 			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
-					"Please enter a different location for the new workspace. A workspace cannot be cloned into itself.");
+				"The path entered is either that of the current wokspace or of a subdirectory of it. Neither can be used as a destination.");
 			return;
 		}
-		// recursive check, if new directory is a subdirectory of
-		// our workspace, that's a big no-no or we'll
-		// create directories forever
-		if (isTargetSubdirOfDir(workspaceDirectory, targetDirectory)) {
-			MessageDialog.openError(Display.getDefault().getActiveShell(), "Error",
-					"The path entered is a subdirectory of the current workspace. A workspace cannot be cloned in one of its sub-directories");
-			return;
-		}
-		// If the checks are ok, we set "cloning" to true and do as if ok was
-		// pressed.
 		cloning = true;
 		try {
 			okPressed();
