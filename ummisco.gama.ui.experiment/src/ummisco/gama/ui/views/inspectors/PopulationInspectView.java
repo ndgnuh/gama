@@ -277,11 +277,6 @@ public class PopulationInspectView extends GamaViewPart
 		attributesMenu.setLayout(layout);
 		attributesMenu.setBackground(IGamaColors.WHITE.color());
 		fillAttributeMenu();
-		final Point size = attributesMenu.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
-		attributesMenu.setSize(size);
-		attributesMenu.layout(true, true);
-		scroll.setMinSize(size);
-
 	}
 
 	private void createExpressionComposite() {
@@ -392,6 +387,10 @@ public class PopulationInspectView extends GamaViewPart
 			b.setSelection(hasPreviousSelection && selectedColumns.get(speciesName).contains(name));
 			b.addSelectionListener(attributeAdapter);
 		}
+		final Point size = attributesMenu.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
+		attributesMenu.setSize(size);
+		attributesMenu.layout(true, true);
+		((ScrolledComposite) attributesMenu.getParent()).setMinSize(size);
 	}
 
 	@Override
