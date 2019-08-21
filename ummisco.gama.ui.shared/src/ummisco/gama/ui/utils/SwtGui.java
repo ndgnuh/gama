@@ -739,7 +739,9 @@ public class SwtGui implements IGui {
 
 	@Override
 	public int openPickWorkspaceDialog() {
-		return new PickWorkspaceDialog().open();
+		final int[] result = new int[1];
+		Display.getDefault().syncExec(() -> result[0] = new PickWorkspaceDialog().open());
+		return result[0];
 	}
 
 }
