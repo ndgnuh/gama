@@ -203,6 +203,7 @@ public class System {
 		return scope.evaluate(s, a).getValue();
 	}
 
+	@SuppressWarnings ("unchecked")
 	@operator (
 			value = "copy",
 			type = ITypeProvider.TYPE_AT_INDEX + 1,
@@ -212,8 +213,8 @@ public class System {
 	@doc (
 			value = "returns a copy of the operand.")
 	@no_test
-	public static Object opCopy(final IScope scope, final Object o) throws GamaRuntimeException {
-		if (o instanceof IValue) { return ((IValue) o).copy(scope); }
+	public static <T> T opCopy(final IScope scope, final T o) throws GamaRuntimeException {
+		if (o instanceof IValue) { return (T) ((IValue) o).copy(scope); }
 		return o;
 	}
 
