@@ -9,7 +9,7 @@
  **********************************************************************************************/
 package ummisco.gama.ui.parameters;
 
-import static ummisco.gama.ui.utils.PreferencesHelper.CORE_EDITORS_HIGHLIGHT;
+import static ummisco.gama.ui.GamaUIPreferences.CORE_EDITORS_HIGHLIGHT;
 
 import java.util.ArrayList;
 import java.util.HashSet;

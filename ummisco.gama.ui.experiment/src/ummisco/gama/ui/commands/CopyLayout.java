@@ -15,10 +15,9 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.GAMA;
 import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
-import ummisco.gama.ui.utils.IPerspectiveHelper;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class CopyLayout extends AbstractHandler {
@@ -27,11 +26,12 @@ public class CopyLayout extends AbstractHandler {
 	public Object execute(final ExecutionEvent event) throws ExecutionException {
 		final GamaTree<String> tree =
 				new LayoutTreeConverter().convertCurrentLayout(ArrangeDisplayViews.listDisplayViews());
-		if (tree == null) { return this; }
+		if (tree == null)
+			return this;
 		final GamaNode<String> firstSash = tree.getRoot().getChildren().get(0);
 		firstSash.setWeight(null);
 		try (TextBuilder sb = TextBuilder.create()) {
-			final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
+			final PerspectiveHelper pp = PerspectiveHelper.getInstance();
 			sb.append(" layout " + firstSash);
 			if (pp.keepTabs() != null) {
 				sb.append(" tabs:").append(pp.keepTabs());

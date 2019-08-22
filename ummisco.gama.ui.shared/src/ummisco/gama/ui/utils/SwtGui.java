@@ -82,6 +82,7 @@ import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.types.IType;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.ApplicationWorkbenchAdvisor;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.PickWorkspaceDialog;
 import ummisco.gama.ui.Splash;
 import ummisco.gama.ui.dialogs.Messages;
@@ -110,14 +111,14 @@ public class SwtGui implements IGui {
 	public SwtGui() {
 		Display.setAppName("Gama");
 		Display.setAppVersion(GAMA.VERSION);
-		PreferencesHelper.initializePrefs();
+		GamaUIPreferences.initializePrefs();
 	}
 
 	@Override
 	public boolean confirmClose(final IExperimentPlan exp) {
 		if (exp == null || !GamaPreferences.Runtime.CORE_ASK_CLOSING.getValue())
 			return true;
-		getUIService(IPerspectiveHelper.class).switchToSimulationPerspective();
+		PerspectiveHelper.getInstance().switchToSimulationPerspective();
 		return Messages.question("Close simulation confirmation", "Do you want to close experiment '" + exp.getName()
 				+ "' of model '" + exp.getModel().getName() + "' ?");
 	}
@@ -262,7 +263,7 @@ public class SwtGui implements IGui {
 
 	@Override
 	public final boolean openSimulationPerspective(final IModel model, final String experimentName) {
-		return getUIService(IPerspectiveHelper.class).openSimulationPerspective(model, experimentName);
+		return PerspectiveHelper.getInstance().openSimulationPerspective(model, experimentName);
 	}
 
 	@Override
@@ -470,11 +471,11 @@ public class SwtGui implements IGui {
 					WorkbenchHelper.getWindow().setCoolBarVisible(showControls);
 				}
 				if (keepTray != null) {
-					getUIService(IPerspectiveHelper.class).showBottomTray(keepTray);
+					PerspectiveHelper.getInstance().showBottomTray(keepTray);
 				}
 
-				getUIService(IPerspectiveHelper.class).initCurrentSimulationPerspective(keepTabs, keepToolbars,
-						showControls, keepTray);
+				PerspectiveHelper.getInstance().initCurrentSimulationPerspective(keepTabs, keepToolbars, showControls,
+						keepTray);
 
 			});
 
@@ -574,8 +575,8 @@ public class SwtGui implements IGui {
 			if (openModelingPerspective) {
 				DEBUG.OUT("Deleting simulation perspective and opening immediately the modeling perspective = "
 						+ immediately);
-				getUIService(IPerspectiveHelper.class).deleteCurrentSimulationPerspective();
-				getUIService(IPerspectiveHelper.class).openModelingPerspective(immediately, false);
+				PerspectiveHelper.getInstance().deleteCurrentSimulationPerspective();
+				PerspectiveHelper.getInstance().openModelingPerspective(immediately, false);
 			}
 
 			getStatus(scope).neutralStatus("No simulation running");

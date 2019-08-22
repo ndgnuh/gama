@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.reference;
@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.ui.IEditorPart;
 
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
 import ummisco.gama.ui.menus.GamaMenu;
@@ -100,7 +101,10 @@ public abstract class GamlReferenceMenu extends GamaMenu {
 	// Helper methods for working with editors and menus
 
 	protected GamlEditor getEditor() {
-		return (GamlEditor) WorkbenchHelper.getActiveEditor();
+		IEditorPart ed = WorkbenchHelper.getActiveEditor();
+		if (ed instanceof GamlEditor)
+			return (GamlEditor) ed;
+		return null;
 	}
 
 	@Override
@@ -113,13 +117,15 @@ public abstract class GamlReferenceMenu extends GamaMenu {
 
 	protected final void applyText(final String t) {
 		final GamlEditor editor = getEditor();
-		if (editor == null) { return; }
+		if (editor == null)
+			return;
 		editor.insertText(t);
 	}
 
 	public void applyTemplate(final Template t) {
 		final GamlEditor editor = getEditor();
-		if (editor == null) { return; }
+		if (editor == null)
+			return;
 		editor.applyTemplate(t);
 
 	}

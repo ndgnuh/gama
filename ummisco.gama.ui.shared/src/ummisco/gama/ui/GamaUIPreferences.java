@@ -7,7 +7,7 @@
  *
  *
  **********************************************************************************************/
-package ummisco.gama.ui.utils;
+package ummisco.gama.ui;
 
 import static msi.gama.common.interfaces.IGui.NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID;
 import static msi.gama.common.preferences.GamaPreferences.create;
@@ -40,7 +40,7 @@ import msi.gaml.types.IType;
 import ummisco.gama.ui.menus.GamaColorMenu;
 import ummisco.gama.ui.resources.IGamaColors;
 
-public class PreferencesHelper {
+public class GamaUIPreferences {
 
 	public static void initializePrefs() {
 

@@ -4,7 +4,7 @@
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.utils;
@@ -31,7 +31,7 @@ import msi.gama.common.interfaces.IGamaView;
 import msi.gama.common.interfaces.IGamaView.Html;
 import msi.gama.common.preferences.GamaPreferences;
 
-public class WebHelper implements IWebHelper {
+public class WebHelper {
 
 	private static WebHelper instance = new WebHelper();
 
@@ -44,19 +44,22 @@ public class WebHelper implements IWebHelper {
 	private static URL HOME_URL;
 
 	public static URL getWelcomePageURL() {
-		if (HOME_URL == null)
+		if (HOME_URL == null) {
 			try {
 				HOME_URL = FileLocator
 						.toFileURL(Platform.getBundle("ummisco.gama.ui.shared").getEntry("/welcome/welcome.html"));
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
+		}
 		return HOME_URL;
 	}
 
 	public static void openWelcomePage(final boolean ifEmpty) {
-		if (ifEmpty && WorkbenchHelper.getPage().getActiveEditor() != null) { return; }
-		if (ifEmpty && !GamaPreferences.Interface.CORE_SHOW_PAGE.getValue()) { return; }
+		if (ifEmpty && WorkbenchHelper.getPage().getActiveEditor() != null)
+			return;
+		if (ifEmpty && !GamaPreferences.Interface.CORE_SHOW_PAGE.getValue())
+			return;
 		// get the workspace
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 
@@ -122,18 +125,15 @@ public class WebHelper implements IWebHelper {
 		}
 	}
 
-	@Override
 	public void showWelcome() {
 		openWelcomePage(false);
 
 	}
 
-	@Override
 	public void showPage(final String url) {
 		openPage(url);
 	}
 
-	@Override
 	public void showURL(final URL url) {
 		showWeb2Editor(url);
 

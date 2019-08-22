@@ -21,7 +21,6 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.RGB;
 
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
-import ummisco.gama.ui.utils.IIconProvider;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 /**
@@ -31,7 +30,7 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  * @since 12 sept. 2013
  *
  */
-public class GamaIcons implements IIconProvider {
+public class GamaIcons {
 
 	public static final String PLUGIN_ID = "ummisco.gama.ui.shared";
 
@@ -134,7 +133,8 @@ public class GamaIcons implements IIconProvider {
 	public static Image createTempColorIcon(final GamaUIColor gcolor) {
 		final String name = "color" + gcolor.getRGB().toString();
 		final GamaIcon icon = getInstance().getIcon(name);
-		if (icon != null) { return icon.image(); }
+		if (icon != null)
+			return icon.image();
 		// Color color = gcolor.color();
 		final GamaIcon blank = create("display.color2");
 		final Image image = new Image(WorkbenchHelper.getDisplay(), blank.image().getImageData());
@@ -155,7 +155,8 @@ public class GamaIcons implements IIconProvider {
 	public static Image createTempRoundColorIcon(final GamaUIColor gcolor) {
 		final String name = "roundcolor" + gcolor.getRGB().toString();
 		final GamaIcon icon = getInstance().getIcon(name);
-		if (icon != null) { return icon.image(); }
+		if (icon != null)
+			return icon.image();
 		// Color color = gcolor.color();
 		final GamaIcon blank = create("display.color3");
 		final Image image = new Image(WorkbenchHelper.getDisplay(), blank.image().getImageData());
@@ -173,13 +174,11 @@ public class GamaIcons implements IIconProvider {
 		return image;
 	}
 
-	@Override
 	public ImageDescriptor desc(final String name) {
 		final GamaIcon icon = create(name);
 		return icon.descriptor();
 	}
 
-	@Override
 	public Image image(final String name) {
 		final GamaIcon icon = create(name);
 		return icon.image();

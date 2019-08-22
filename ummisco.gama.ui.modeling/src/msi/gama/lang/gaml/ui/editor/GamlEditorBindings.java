@@ -4,17 +4,17 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editor;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.ui.IEditorPart;
 
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.bindings.GamaKeyBindings.PluggableBinding;
 import ummisco.gama.ui.utils.WorkbenchHelper;
-import ummisco.gama.ui.views.IGamlEditor;
 
 /**
  * The class GamlEditorBindings.
@@ -33,8 +33,9 @@ public class GamlEditorBindings {
 
 			@Override
 			public void run() {
-				final IGamlEditor editor = WorkbenchHelper.getActiveEditor();
-				if (!(editor instanceof GamlEditor)) { return; }
+				final IEditorPart editor = WorkbenchHelper.getPage().getActiveEditor();
+				if (!(editor instanceof GamlEditor))
+					return;
 				((GamlEditor) editor).doSearch();
 			}
 		});

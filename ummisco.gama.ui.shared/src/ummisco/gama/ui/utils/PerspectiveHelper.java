@@ -33,22 +33,33 @@ import org.eclipse.ui.internal.WorkbenchWindow;
 import org.eclipse.ui.internal.registry.PerspectiveDescriptor;
 import org.eclipse.ui.internal.registry.PerspectiveRegistry;
 
+import msi.gama.common.interfaces.IGui;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.model.IModel;
 
-public class PerspectiveHelper implements IPerspectiveHelper {
+public class PerspectiveHelper {
+
+	public static String PERSPECTIVE_MODELING_ID = IGui.PERSPECTIVE_MODELING_ID;
+	static String PERSPECTIVE_SIMULATION_ID = "msi.gama.application.perspectives.SimulationPerspective";
+	static String PERSPECTIVE_SIMULATION_FRAGMENT = "Simulation";
 
 	private static final String BOTTOM_TRIM_ID = "org.eclipse.ui.trim.status"; //$NON-NLS-1$
 
 	public static String currentPerspectiveId = PERSPECTIVE_MODELING_ID;
 	public static IPerspectiveDescriptor currentSimulationPerspective = null;
 	public static IEditorInput activeEditor;
+	private static PerspectiveHelper instance = new PerspectiveHelper();
+
+	public static PerspectiveHelper getInstance() {
+		return instance;
+	}
+
+	private PerspectiveHelper() {}
 
 	static boolean matches(final String id) {
 		return !id.equals(PERSPECTIVE_SIMULATION_ID) && id.contains(PERSPECTIVE_SIMULATION_FRAGMENT);
 	}
 
-	@Override
 	public void cleanPerspectives() {
 		final EModelService e = PlatformUI.getWorkbench().getService(EModelService.class);
 		final MApplication a = PlatformUI.getWorkbench().getService(MApplication.class);
@@ -86,12 +97,10 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 		return PlatformUI.getWorkbench().getPerspectiveRegistry();
 	}
 
-	@Override
 	public boolean isModelingPerspective() {
 		return currentPerspectiveId.equals(PERSPECTIVE_MODELING_ID);
 	}
 
-	@Override
 	public boolean isSimulationPerspective() {
 		return isSimulationPerspective(currentPerspectiveId);
 	}
@@ -100,7 +109,6 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 		return perspectiveId.contains(PERSPECTIVE_SIMULATION_FRAGMENT);
 	}
 
-	@Override
 	public final boolean openModelingPerspective(final boolean immediately, final boolean memorizeEditors) {
 		// AD 08/18: turn off autosave to prevent workspace corruption
 		return openPerspective(PERSPECTIVE_MODELING_ID, immediately, false, memorizeEditors);
@@ -113,7 +121,6 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 		return modelService.find(BOTTOM_TRIM_ID, searchRoot);
 	}
 
-	@Override
 	public void showBottomTray(final Boolean show) {
 		final WorkbenchWindow window = WorkbenchHelper.getWindow();
 		final MUIElement trimStatus = getTrimStatus(window);
@@ -124,19 +131,21 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 
 	}
 
-	@Override
 	public final boolean switchToSimulationPerspective() {
-		if (currentSimulationPerspective == null) { return false; }
+		if (currentSimulationPerspective == null)
+			return false;
 		IWorkbenchPage activePage = null;
 		try {
 			activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		if (activePage == null) { return false; }
+		if (activePage == null)
+			return false;
 		final IWorkbenchPage page = activePage;
 		final WorkbenchWindow window = (WorkbenchWindow) page.getWorkbenchWindow();
-		if (page.getPerspective().equals(currentSimulationPerspective)) { return true; }
+		if (page.getPerspective().equals(currentSimulationPerspective))
+			return true;
 		Display.getDefault().syncExec(() -> {
 			memorizeActiveEditor(page);
 			try {
@@ -161,9 +170,9 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 		return true;
 	}
 
-	@Override
 	public final boolean openSimulationPerspective(final IModel model, final String experimentName) {
-		if (model == null) { return false; }
+		if (model == null)
+			return false;
 		final String name = getNewPerspectiveName(model.getName(), experimentName);
 		return openPerspective(name, true, false, true);
 	}
@@ -173,9 +182,8 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 	}
 
 	private IPerspectiveDescriptor findOrBuildPerspectiveWithId(final String id) {
-		if (currentSimulationPerspective != null && currentSimulationPerspective.getId().equals(id)) {
+		if (currentSimulationPerspective != null && currentSimulationPerspective.getId().equals(id))
 			return currentSimulationPerspective;
-		}
 		final PerspectiveRegistry pr = (PerspectiveRegistry) getPerspectiveRegistry();
 		IPerspectiveDescriptor tempDescriptor = pr.findPerspectiveWithId(id);
 		if (tempDescriptor == null) {
@@ -200,8 +208,10 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 
 	private boolean openPerspective(final String perspectiveId, final boolean immediately, final boolean withAutoSave,
 			final boolean memorizeEditors) {
-		if (perspectiveId == null) { return false; }
-		if (perspectiveId.equals(currentPerspectiveId)) { return true; }
+		if (perspectiveId == null)
+			return false;
+		if (perspectiveId.equals(currentPerspectiveId))
+			return true;
 
 		IWorkbenchPage activePage = null;
 		try {
@@ -214,7 +224,8 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 			}
 			e.printStackTrace();
 		}
-		if (activePage == null) { return false; }
+		if (activePage == null)
+			return false;
 
 		if (GamaPreferences.Modeling.EDITOR_PERSPECTIVE_SAVE.getValue()) {
 			activePage.saveAllEditors(false);
@@ -271,7 +282,8 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 	}
 
 	private void applyActiveEditor(final IWorkbenchPage page) {
-		if (activeEditor == null) { return; }
+		if (activeEditor == null)
+			return;
 		final IEditorPart part = page.findEditor(activeEditor);
 		if (part != null) {
 			page.activate(part);
@@ -285,7 +297,8 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 	private void memorizeActiveEditor(final IWorkbenchPage page) {
 		// DEBUG.OUT("Trying to memorize editor in " + page.getPerspective().getId());
 		final IEditorPart part = page.isEditorAreaVisible() ? page.getActiveEditor() : null;
-		if (part == null) { return; }
+		if (part == null)
+			return;
 		activeEditor = part.getEditorInput();
 		// DEBUG.OUT("Memorized editor in " + page.getPerspective().getId() + " = " + activeEditor.getName());
 
@@ -304,47 +317,38 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 
 	}
 
-	@Override
 	public Boolean keepTabs() {
 		final IPerspectiveDescriptor d = getActivePerspective();
-		if (d instanceof SimulationPerspectiveDescriptor) {
+		if (d instanceof SimulationPerspectiveDescriptor)
 			return ((SimulationPerspectiveDescriptor) d).keepTabs;
-		} else {
+		else
 			return true;
-		}
 	}
 
-	@Override
 	public Boolean keepToolbars() {
 		final IPerspectiveDescriptor d = getActivePerspective();
-		if (d instanceof SimulationPerspectiveDescriptor) {
+		if (d instanceof SimulationPerspectiveDescriptor)
 			return ((SimulationPerspectiveDescriptor) d).keepToolbars();
-		} else {
+		else
 			return null;
-		}
 	}
 
-	@Override
 	public Boolean keepControls() {
 		final IPerspectiveDescriptor d = getActivePerspective();
-		if (d instanceof SimulationPerspectiveDescriptor) {
+		if (d instanceof SimulationPerspectiveDescriptor)
 			return ((SimulationPerspectiveDescriptor) d).keepControls();
-		} else {
+		else
 			return true;
-		}
 	}
 
-	@Override
 	public Boolean keepTray() {
 		final IPerspectiveDescriptor d = getActivePerspective();
-		if (d instanceof SimulationPerspectiveDescriptor) {
+		if (d instanceof SimulationPerspectiveDescriptor)
 			return ((SimulationPerspectiveDescriptor) d).keepTray();
-		} else {
+		else
 			return true;
-		}
 	}
 
-	@Override
 	public boolean showOverlays() {
 		return GamaPreferences.Displays.CORE_OVERLAY.getValue();
 	}
@@ -457,7 +461,6 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 		return PERSPECTIVE_SIMULATION_FRAGMENT + ":" + model + ":" + experiment;
 	}
 
-	@Override
 	public void deleteCurrentSimulationPerspective() {
 		if (currentSimulationPerspective != null) {
 			final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -474,14 +477,12 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 
 	private SimulationPerspectiveDescriptor getActiveSimulationPerspective() {
 		final IPerspectiveDescriptor d = getActivePerspective();
-		if (d instanceof SimulationPerspectiveDescriptor) {
+		if (d instanceof SimulationPerspectiveDescriptor)
 			return (SimulationPerspectiveDescriptor) d;
-		} else {
+		else
 			return null;
-		}
 	}
 
-	@Override
 	public void initCurrentSimulationPerspective(final Boolean keepTabs, final Boolean keepToolbars,
 			final Boolean showControls, final Boolean keepTray) {
 		final SimulationPerspectiveDescriptor sd = getActiveSimulationPerspective();
@@ -494,7 +495,6 @@ public class PerspectiveHelper implements IPerspectiveHelper {
 
 	}
 
-	@Override
 	public void toggleTabsOfCurrentSimulationPerspective() {
 		final SimulationPerspectiveDescriptor sd = getActiveSimulationPerspective();
 		if (sd != null) {

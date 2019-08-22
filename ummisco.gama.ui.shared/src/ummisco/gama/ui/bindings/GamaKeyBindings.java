@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Listener;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.access.GamlSearchField;
-import ummisco.gama.ui.utils.IPerspectiveHelper;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 /**
@@ -65,7 +65,8 @@ public class GamaKeyBindings implements Listener {
 			}
 			return;
 		}
-		if (event.stateMask == 0) { return; }
+		if (event.stateMask == 0)
+			return;
 
 		switch (event.keyCode) {
 
@@ -87,7 +88,7 @@ public class GamaKeyBindings implements Listener {
 				break;
 			// Handles RELOAD & RELAUNCH
 			case 'r': {
-				if (GAMA.getGui().getUIService(IPerspectiveHelper.class).isModelingPerspective()) {
+				if (PerspectiveHelper.getInstance().isModelingPerspective()) {
 					// See Issue #2741
 					break;
 				}

@@ -1,6 +1,7 @@
 package ummisco.gama.ui;
 
 import java.util.List;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
@@ -31,9 +32,9 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
 
-import ummisco.gama.ui.utils.IIconProvider;
-import ummisco.gama.ui.utils.IPreferenceHelper;
-import ummisco.gama.ui.utils.IWebHelper;
+import ummisco.gama.ui.resources.GamaIcons;
+import ummisco.gama.ui.utils.WebHelper;
+import ummisco.gama.ui.views.GamaPreferencesView;
 
 public class GamaActionBarAdvisor extends ActionBarAdvisor {
 
@@ -71,18 +72,16 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 	 * Indicates if the action builder has been disposed
 	 */
 	private boolean isDisposed = false;
-	final IIconProvider icons;
 
 	/**
-	 * Constructs a new action builder which contributes actions
-	 * to the given window.
+	 * Constructs a new action builder which contributes actions to the given window.
 	 *
-	 * @param configurer the action bar configurer for the window
+	 * @param configurer
+	 *            the action bar configurer for the window
 	 */
 	public GamaActionBarAdvisor(final IActionBarConfigurer configurer) {
 		super(configurer);
 		window = configurer.getWindowConfigurer().getWindow();
-		icons = window.getService(IIconProvider.class);
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 			final String newId = ActionFactory.NEW.getId();
 			final MenuManager newMenu = new MenuManager(newText, newId);
 			newMenu.setActionDefinitionId("org.eclipse.ui.file.newQuickMenu"); //$NON-NLS-1$
-			newMenu.setImageDescriptor(icons.desc("navigator/navigator.new2"));
+			newMenu.setImageDescriptor(GamaIcons.getInstance().desc("navigator/navigator.new2"));
 			newMenu.add(new Separator(newId));
 			this.newWizardMenu = new BaseNewWizardMenu(getWindow(), null) {
 
@@ -230,10 +229,9 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 	}
 
 	/**
-	 * Adds a <code>GroupMarker</code> or <code>Separator</code> to a menu.
-	 * The test for whether a separator should be added is done by checking for
-	 * the existence of a preference matching the string
-	 * useSeparator.MENUID.GROUPID that is set to <code>true</code>.
+	 * Adds a <code>GroupMarker</code> or <code>Separator</code> to a menu. The test for whether a separator should be
+	 * added is done by checking for the existence of a preference matching the string useSeparator.MENUID.GROUPID that
+	 * is set to <code>true</code>.
 	 *
 	 * @param menu
 	 *            the menu to add to
@@ -243,7 +241,7 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 	private void addSeparatorOrGroupMarker(final MenuManager menu, final String groupId) {
 		final String prefId = "useSeparator." + menu.getId() + "." + groupId; //$NON-NLS-1$ //$NON-NLS-2$
 		final boolean addExtraSeparators = IDEWorkbenchPlugin.getDefault().getPreferenceStore().getBoolean(prefId);
-		if ( addExtraSeparators ) {
+		if (addExtraSeparators) {
 			menu.add(new Separator(groupId));
 		} else {
 			menu.add(new GroupMarker(groupId));
@@ -251,12 +249,12 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 	}
 
 	/**
-	 * Disposes any resources and unhooks any listeners that are no longer needed.
-	 * Called when the window is closed.
+	 * Disposes any resources and unhooks any listeners that are no longer needed. Called when the window is closed.
 	 */
 	@Override
 	public void dispose() {
-		if ( isDisposed ) { return; }
+		if (isDisposed)
+			return;
 		isDisposed = true;
 
 		getActionBarConfigurer().getStatusLineManager().remove(statusLineItem);
@@ -277,7 +275,7 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 		quitAction = null;
 		openWorkspaceAction = null;
 		projectPropertyDialogAction = null;
-		if ( newWizardMenu != null ) {
+		if (newWizardMenu != null) {
 			newWizardMenu.dispose();
 			newWizardMenu = null;
 		}
@@ -286,14 +284,15 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 	}
 
 	/**
-	 * Returns true if the menu with the given ID should
-	 * be considered as an OLE container menu. Container menus
-	 * are preserved in OLE menu merging.
+	 * Returns true if the menu with the given ID should be considered as an OLE container menu. Container menus are
+	 * preserved in OLE menu merging.
 	 */
 	@Override
 	public boolean isApplicationMenu(final String menuId) {
-		if ( menuId.equals(IWorkbenchActionConstants.M_FILE) ) { return true; }
-		if ( menuId.equals(IWorkbenchActionConstants.M_WINDOW) ) { return true; }
+		if (menuId.equals(IWorkbenchActionConstants.M_FILE))
+			return true;
+		if (menuId.equals(IWorkbenchActionConstants.M_WINDOW))
+			return true;
 		return false;
 	}
 
@@ -363,13 +362,13 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 			setId("preferences");
 			setText("Preferences");
 			setToolTipText("Open GAMA preferences");
-			setImageDescriptor(icons.desc("menu.open.preferences2"));
+			setImageDescriptor(GamaIcons.getInstance().desc("menu.open.preferences2"));
 			window.getWorkbench().getHelpSystem().setHelp(this, IWorkbenchHelpContextIds.OPEN_PREFERENCES_ACTION);
 		}
 
 		@Override
 		public void run() {
-			window.getService(IPreferenceHelper.class).openPreferences();
+			GamaPreferencesView.show();
 		}
 
 		@Override
@@ -384,7 +383,7 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 
 	public void createAboutAction(final IWorkbenchWindow aWindow) {
 		aboutAction = ActionFactory.ABOUT.create(aWindow);
-		aboutAction.setImageDescriptor(icons.desc("menu.about2"));
+		aboutAction.setImageDescriptor(GamaIcons.getInstance().desc("menu.about2"));
 		register(aboutAction);
 	}
 
@@ -395,13 +394,13 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 			setId("helpContents");
 			setText("GAMA documentation");
 			setToolTipText("GAMA online documentation");
-			setImageDescriptor(icons.desc("menu.help2"));
+			setImageDescriptor(GamaIcons.getInstance().desc("menu.help2"));
 			window.getWorkbench().getHelpSystem().setHelp(this, IWorkbenchHelpContextIds.HELP_CONTENTS_ACTION);
 		}
 
 		@Override
 		public void run() {
-			window.getService(IWebHelper.class).showPage("http://doc.gama-platform.org");
+			WebHelper.getInstance().showPage("http://doc.gama-platform.org");
 		}
 
 		@Override
@@ -463,45 +462,45 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 		final String prevState = prefs.getString(stateKey);
 		final String currentState = String.valueOf(Platform.getStateStamp());
 		final boolean sameState = currentState.equals(prevState);
-		if ( !sameState ) {
+		if (!sameState) {
 			prefs.putValue(stateKey, currentState);
 		}
 	}
 
 	private IContributionItem getCutItem() {
 		return getItem(ActionFactory.CUT.getId(), ActionFactory.CUT.getCommandId(), "menu.cut2", null,
-			WorkbenchMessages.Workbench_cut, WorkbenchMessages.Workbench_cutToolTip, null);
+				WorkbenchMessages.Workbench_cut, WorkbenchMessages.Workbench_cutToolTip, null);
 	}
 
 	private IContributionItem getCopyItem() {
 		return getItem(ActionFactory.COPY.getId(), ActionFactory.COPY.getCommandId(), "menu.copy2", null,
-			WorkbenchMessages.Workbench_copy, WorkbenchMessages.Workbench_copyToolTip, null);
+				WorkbenchMessages.Workbench_copy, WorkbenchMessages.Workbench_copyToolTip, null);
 	}
 
 	private IContributionItem getPasteItem() {
 		return getItem(ActionFactory.PASTE.getId(), ActionFactory.PASTE.getCommandId(), "menu.paste2", null,
-			WorkbenchMessages.Workbench_paste, WorkbenchMessages.Workbench_pasteToolTip, null);
+				WorkbenchMessages.Workbench_paste, WorkbenchMessages.Workbench_pasteToolTip, null);
 	}
 
 	private IContributionItem getPrintItem() {
 		return getItem(ActionFactory.PRINT.getId(), ActionFactory.PRINT.getCommandId(), "menu.print2", null,
-			WorkbenchMessages.Workbench_print, WorkbenchMessages.Workbench_printToolTip, null);
+				WorkbenchMessages.Workbench_print, WorkbenchMessages.Workbench_printToolTip, null);
 	}
 
 	private IContributionItem getSelectAllItem() {
 		return getItem(ActionFactory.SELECT_ALL.getId(), ActionFactory.SELECT_ALL.getCommandId(), "action.selectall2",
-			null, WorkbenchMessages.Workbench_selectAll, WorkbenchMessages.Workbench_selectAllToolTip, null);
+				null, WorkbenchMessages.Workbench_selectAll, WorkbenchMessages.Workbench_selectAllToolTip, null);
 	}
 
 	private IContributionItem getFindItem() {
 		return getItem(ActionFactory.FIND.getId(), ActionFactory.FIND.getCommandId(), null, null,
-			WorkbenchMessages.Workbench_findReplace, WorkbenchMessages.Workbench_findReplaceToolTip, null);
+				WorkbenchMessages.Workbench_findReplace, WorkbenchMessages.Workbench_findReplaceToolTip, null);
 	}
 
 	private IContributionItem getDeleteItem() {
 		return getItem(ActionFactory.DELETE.getId(), ActionFactory.DELETE.getCommandId(), "menu.delete2", null,
-			WorkbenchMessages.Workbench_delete, WorkbenchMessages.Workbench_deleteToolTip,
-			IWorkbenchHelpContextIds.DELETE_RETARGET_ACTION);
+				WorkbenchMessages.Workbench_delete, WorkbenchMessages.Workbench_deleteToolTip,
+				IWorkbenchHelpContextIds.DELETE_RETARGET_ACTION);
 	}
 
 	// private IContributionItem getRevertItem() {
@@ -511,34 +510,34 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 
 	private IContributionItem getRefreshItem() {
 		return getItem(ActionFactory.REFRESH.getId(), ActionFactory.REFRESH.getCommandId(),
-			"navigator/navigator.refresh2", null, WorkbenchMessages.Workbench_refresh,
-			WorkbenchMessages.Workbench_refreshToolTip, null);
+				"navigator/navigator.refresh2", null, WorkbenchMessages.Workbench_refresh,
+				WorkbenchMessages.Workbench_refreshToolTip, null);
 	}
 
 	private IContributionItem getPropertiesItem() {
 		return getItem(ActionFactory.PROPERTIES.getId(), ActionFactory.PROPERTIES.getCommandId(), "display.sidebar2",
-			null, WorkbenchMessages.Workbench_properties, WorkbenchMessages.Workbench_propertiesToolTip, null);
+				null, WorkbenchMessages.Workbench_properties, WorkbenchMessages.Workbench_propertiesToolTip, null);
 	}
 
 	private IContributionItem getMoveItem() {
 		return getItem(ActionFactory.MOVE.getId(), ActionFactory.MOVE.getCommandId(), "navigator/navigator.move2", null,
-			WorkbenchMessages.Workbench_move, WorkbenchMessages.Workbench_moveToolTip, null);
+				WorkbenchMessages.Workbench_move, WorkbenchMessages.Workbench_moveToolTip, null);
 	}
 
 	private IContributionItem getRenameItem() {
 		return getItem(ActionFactory.RENAME.getId(), ActionFactory.RENAME.getCommandId(), "navigator/navigator.rename2",
-			null, WorkbenchMessages.Workbench_rename, WorkbenchMessages.Workbench_renameToolTip, null);
+				null, WorkbenchMessages.Workbench_rename, WorkbenchMessages.Workbench_renameToolTip, null);
 	}
 
 	private IContributionItem getItem(final String actionId, final String commandId, final String image,
-		final String disabledImage, final String label, final String tooltip, final String helpContextId) {
+			final String disabledImage, final String label, final String tooltip, final String helpContextId) {
 
 		final IActionCommandMappingService acms = getWindow().getService(IActionCommandMappingService.class);
 		acms.map(actionId, commandId);
 
 		final CommandContributionItemParameter commandParm = new CommandContributionItemParameter(getWindow(), actionId,
-			commandId, null, image != null ? icons.desc(image) : null, null, null, label, null, tooltip,
-			CommandContributionItem.STYLE_PUSH, null, false);
+				commandId, null, image != null ? GamaIcons.getInstance().desc(image) : null, null, null, label, null,
+				tooltip, CommandContributionItem.STYLE_PUSH, null, false);
 		return new CommandContributionItem(commandParm);
 	}
 }

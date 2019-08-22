@@ -51,12 +51,12 @@ import msi.gama.runtime.GAMA;
 import msi.gama.util.file.GamaShapeFile;
 import msi.gama.util.file.GamaShapeFile.ShapeInfo;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.controls.FlatButton;
 import ummisco.gama.ui.menus.GamaMenu;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.IGamaColors;
-import ummisco.gama.ui.utils.PreferencesHelper;
 import ummisco.gama.ui.viewers.gis.geotools.styling.Mode;
 import ummisco.gama.ui.viewers.gis.geotools.styling.SLDs;
 import ummisco.gama.ui.viewers.gis.geotools.styling.Utils;
@@ -90,8 +90,8 @@ public class ShapeFileViewer extends GISFileViewer implements IToolbarDecoratedV
 				fts = null;
 			}
 			if (fts != null) {
-				this.setFillColor(PreferencesHelper.SHAPEFILE_VIEWER_FILL.getValue(), mode, fts);
-				this.setStrokeColor(PreferencesHelper.SHAPEFILE_VIEWER_LINE_COLOR.getValue(), mode, fts);
+				this.setFillColor(GamaUIPreferences.SHAPEFILE_VIEWER_FILL.getValue(), mode, fts);
+				this.setStrokeColor(GamaUIPreferences.SHAPEFILE_VIEWER_LINE_COLOR.getValue(), mode, fts);
 				((StyleLayer) layer).setStyle(style);
 			}
 			content.addLayer(layer);

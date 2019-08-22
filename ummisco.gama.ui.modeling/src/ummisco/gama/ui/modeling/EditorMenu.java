@@ -32,6 +32,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.menus.IWorkbenchContribution;
 import org.eclipse.ui.services.IServiceLocator;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
@@ -471,7 +472,10 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 
 	}
 
-	GamlEditor getEditor() {
-		return (GamlEditor) WorkbenchHelper.getActiveEditor();
+	protected GamlEditor getEditor() {
+		IEditorPart ed = WorkbenchHelper.getActiveEditor();
+		if (ed instanceof GamlEditor)
+			return (GamlEditor) ed;
+		return null;
 	}
 }

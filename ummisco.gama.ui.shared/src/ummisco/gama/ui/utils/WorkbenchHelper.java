@@ -59,7 +59,6 @@ import msi.gama.common.interfaces.IGamaView;
 import msi.gama.common.util.FileUtils;
 import one.util.streamex.StreamEx;
 import ummisco.gama.dev.utils.DEBUG;
-import ummisco.gama.ui.views.IGamlEditor;
 
 public class WorkbenchHelper {
 
@@ -71,7 +70,8 @@ public class WorkbenchHelper {
 				@Override
 				public Object load(final Class<?> key) throws Exception {
 					final Object o = getWorkbench().getService(key);
-					if (o == null) { return NULL; }
+					if (o == null)
+						return NULL;
 					return o;
 				}
 			});
@@ -90,7 +90,8 @@ public class WorkbenchHelper {
 		if (d == null) {
 			d = Display.getCurrent();
 		}
-		if (d == null) { return false; }
+		if (d == null)
+			return false;
 		return d.getThread() == Thread.currentThread();
 	}
 
@@ -124,13 +125,15 @@ public class WorkbenchHelper {
 	}
 
 	public static Display getDisplay() {
-		if (Workbench.getInstance() == null) return Display.getDefault();
+		if (Workbench.getInstance() == null)
+			return Display.getDefault();
 		return getWorkbench().getDisplay();
 	}
 
 	public static IWorkbenchPage getPage() {
 		final IWorkbenchWindow w = getWindow();
-		if (w == null) { return null; }
+		if (w == null)
+			return null;
 		final IWorkbenchPage p = w.getActivePage();
 		return p;
 	}
@@ -149,23 +152,23 @@ public class WorkbenchHelper {
 		}
 		if (w == null) {
 			final IWorkbenchWindow[] windows = getWorkbench().getWorkbenchWindows();
-			if (windows != null && windows.length > 0) { return (WorkbenchWindow) windows[0]; }
+			if (windows != null && windows.length > 0)
+				return (WorkbenchWindow) windows[0];
 		}
 		return w;
 	}
 
-	public static IGamlEditor getActiveEditor() {
+	public static IEditorPart getActiveEditor() {
 		final IWorkbenchPage page = getPage();
-		if (page != null) {
-			final IEditorPart editor = page.getActiveEditor();
-			if (editor instanceof IGamlEditor) { return (IGamlEditor) editor; }
-		}
+		if (page != null)
+			return page.getActiveEditor();
 		return null;
 	}
 
 	public static IWorkbenchPart getActivePart() {
 		final IWorkbenchPage page = getPage();
-		if (page != null) { return page.getActivePart(); }
+		if (page != null)
+			return page.getActivePart();
 		return null;
 	}
 
@@ -175,18 +178,23 @@ public class WorkbenchHelper {
 
 	public static IGamaView.Display findDisplay(final String id) {
 		final IWorkbenchPage page = WorkbenchHelper.getPage();
-		if (page == null) { return null; } // Closing the workbench
+		if (page == null)
+			return null;
 		final IViewReference ref = page.findViewReference(id);
-		if (ref == null) { return null; }
+		if (ref == null)
+			return null;
 		final IViewPart view = ref.getView(false);
-		if (view instanceof IGamaView.Display) { return (IGamaView.Display) view; }
+		if (view instanceof IGamaView.Display)
+			return (IGamaView.Display) view;
 		return null;
 	}
 
 	public static boolean isDisplay(final String id) {
-		if (!id.startsWith(SwtGui.GL_LAYER_VIEW_ID) && !id.startsWith(SwtGui.LAYER_VIEW_ID)) { return false; }
+		if (!id.startsWith(SwtGui.GL_LAYER_VIEW_ID) && !id.startsWith(SwtGui.LAYER_VIEW_ID))
+			return false;
 		final IWorkbenchPage page = WorkbenchHelper.getPage();
-		if (page == null) { return false; } // Closing the workbench
+		if (page == null)
+			return false;
 		final IViewReference ref = page.findViewReference(id);
 		return ref != null;
 		// final IViewPart view = ref.getView(false);
@@ -196,16 +204,19 @@ public class WorkbenchHelper {
 
 	public static IViewPart findView(final String id, final String second, final boolean restore) {
 		final IWorkbenchPage page = WorkbenchHelper.getPage();
-		if (page == null) { return null; } // Closing the workbench
+		if (page == null)
+			return null;
 		final IViewReference ref = page.findViewReference(id, second);
-		if (ref == null) { return null; }
+		if (ref == null)
+			return null;
 		final IViewPart part = ref.getView(restore);
 		return part;
 	}
 
 	public static List<IGamaView.Display> getDisplayViews() {
 		final IWorkbenchPage page = WorkbenchHelper.getPage();
-		if (page == null) { return Collections.EMPTY_LIST; } // Closing the workbench
+		if (page == null)
+			return Collections.EMPTY_LIST;
 		return StreamEx.of(page.getViewReferences()).map(v -> v.getView(false)).select(IGamaView.Display.class)
 				.toList();
 	}
@@ -223,7 +234,8 @@ public class WorkbenchHelper {
 
 		run(() -> {
 			final IWorkbenchPage activePage = getPage();
-			if (activePage == null) { return; } // Closing the workbench
+			if (activePage == null)
+				return;
 			final IWorkbenchPart part = activePage.findView(id);
 			if (part != null && activePage.isPartVisible(part)) {
 				activePage.hideView((IViewPart) part);
@@ -234,7 +246,8 @@ public class WorkbenchHelper {
 
 	public static void hideView(final IViewPart gamaViewPart) {
 		final IWorkbenchPage activePage = getPage();
-		if (activePage == null) { return; } // Closing the workbenc
+		if (activePage == null)
+			return;
 		activePage.hideView(gamaViewPart);
 
 	}
@@ -264,15 +277,19 @@ public class WorkbenchHelper {
 	 */
 	public static IViewPart findFrontmostGamaViewUnderMouse() {
 		final IWorkbenchPage page = getPage();
-		if (page == null) { return null; }
+		if (page == null)
+			return null;
 		final Point p = getDisplay().getCursorLocation();
 		final List<IGamaView.Display> displays = StreamEx.of(page.getViewReferences()).map((r) -> r.getView(false))
 				.filter((part) -> page.isPartVisible(part)).select(IGamaView.Display.class)
 				.filter((display) -> display.containsPoint(p.x, p.y)).toList();
-		if (displays.isEmpty()) { return null; }
-		if (displays.size() == 1) { return (IViewPart) displays.get(0); }
+		if (displays.isEmpty())
+			return null;
+		if (displays.size() == 1)
+			return (IViewPart) displays.get(0);
 		for (final IGamaView.Display display : displays) {
-			if (display.isFullScreen()) { return (IViewPart) display; }
+			if (display.isFullScreen())
+				return (IViewPart) display;
 		}
 		// Strange: n views, none of them fullscreen, claiming to contain the mouse pointer...
 		return (IViewPart) displays.get(0);
@@ -380,7 +397,8 @@ public class WorkbenchHelper {
 	static volatile boolean isRequesting;
 
 	public static void requestUserAttention(final IGamaView part, final String tempMessage) {
-		if (isRequesting) { return; }
+		if (isRequesting)
+			return;
 		// rate at which the title will change in milliseconds
 		final int rateOfChange = 200;
 		final int numberOfTimes = 2;

@@ -37,7 +37,6 @@ Export-Package: ummisco.gama.ui,
  ummisco.gama.ui.menus,
  ummisco.gama.ui.parameters,
  ummisco.gama.ui.resources,
- ummisco.gama.ui.shared,
  ummisco.gama.ui.utils,
  ummisco.gama.ui.views,
  ummisco.gama.ui.views.toolbar

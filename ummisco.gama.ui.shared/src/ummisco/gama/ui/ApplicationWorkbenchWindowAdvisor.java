@@ -30,7 +30,7 @@ import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.commands.TestsRunner;
 import ummisco.gama.ui.utils.CleanupHelper;
-import ummisco.gama.ui.utils.IPerspectiveHelper;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 
 public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor {
 
@@ -65,12 +65,11 @@ public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor
 
 			@Override
 			public void perspectiveActivated(final IWorkbenchPage page, final IPerspectiveDescriptor perspective) {
-				final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
-				if (pp != null && pp.isSimulationPerspective()) {
+				if (PerspectiveHelper.getInstance().isSimulationPerspective()) {
 					// DEBUG.OUT("Running the perspective listener to automatically launch modeling");
 					final IPerspectiveDescriptor desc = page.getPerspective();
 					page.closePerspective(desc, false, false);
-					pp.openModelingPerspective(true, false);
+					PerspectiveHelper.getInstance().openModelingPerspective(true, false);
 				}
 				configurer.getWindow().removePerspectiveListener(this);
 
@@ -81,10 +80,7 @@ public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor
 			@Override
 			public void pageActivated(final IWorkbenchPage page) {
 				configurer.getWindow().removePageListener(this);
-				final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
-				if (pp != null) {
-					pp.openModelingPerspective(true, false);
-				}
+				PerspectiveHelper.getInstance().openModelingPerspective(true, false);
 			}
 
 			@Override
@@ -118,10 +114,7 @@ public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor
 
 	@Override
 	public void postWindowOpen() {
-		final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
-		if (pp != null) {
-			pp.cleanPerspectives();
-		}
+		PerspectiveHelper.getInstance().cleanPerspectives();
 		GAMA.getGui().openWelcomePage(true);
 	}
 

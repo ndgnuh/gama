@@ -20,10 +20,10 @@ import org.eclipse.swt.graphics.Image;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IGamaFileMetaData;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.navigator.NavigatorContentProvider;
 import ummisco.gama.ui.resources.GamaFonts;
 import ummisco.gama.ui.resources.GamaIcons;
-import ummisco.gama.ui.utils.PreferencesHelper;
 
 public class WrappedFile extends WrappedResource<WrappedResource<?, ?>, IFile> {
 
@@ -128,7 +128,7 @@ public class WrappedFile extends WrappedResource<WrappedResource<?, ?>, IFile> {
 
 	@Override
 	public void getSuffix(final StringBuilder sb) {
-		if (PreferencesHelper.NAVIGATOR_METADATA.getValue()) {
+		if (GamaUIPreferences.NAVIGATOR_METADATA.getValue()) {
 			final IGamaFileMetaData data = GAMA.getGui().getMetaDataProvider().getMetaData(getResource(), false, true);
 			if (data != null) {
 				data.appendSuffix(sb);

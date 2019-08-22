@@ -45,7 +45,6 @@ import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.resources.IGamaIcons;
-import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.InteractiveConsoleView;
 import ummisco.gama.ui.views.toolbar.GamaCommand;
@@ -245,7 +244,7 @@ public class LayeredDisplayDecorator implements DisplayDataListener {
 
 			@Override
 			public void perspectiveActivated(final IWorkbenchPage page, final IPerspectiveDescriptor perspective) {
-				if (perspective.getId().equals(PerspectiveHelper.PERSPECTIVE_MODELING_ID)) {
+				if (perspective.getId().equals(IGui.PERSPECTIVE_MODELING_ID)) {
 					if (view.getOutput() != null && view.getDisplaySurface() != null) {
 						if (!GamaPreferences.Displays.CORE_DISPLAY_PERSPECTIVE.getValue()) {
 							previousState = view.getOutput().isPaused();
@@ -289,19 +288,22 @@ public class LayeredDisplayDecorator implements DisplayDataListener {
 	}
 
 	private void destroyFullScreenShell() {
-		if (fullScreenShell == null) { return; }
+		if (fullScreenShell == null)
+			return;
 		fullScreenShell.close();
 		fullScreenShell.dispose();
 		fullScreenShell = null;
 	}
 
 	protected Runnable displayOverlay = () -> {
-		if (overlay == null) { return; }
+		if (overlay == null)
+			return;
 		updateOverlay();
 	};
 
 	protected void updateOverlay() {
-		if (overlay == null) { return; }
+		if (overlay == null)
+			return;
 		if (view.forceOverlayVisibility()) {
 			if (!overlay.isVisible()) {
 				isOverlayTemporaryVisible = true;
@@ -345,7 +347,8 @@ public class LayeredDisplayDecorator implements DisplayDataListener {
 		}
 		final InteractiveConsoleView view =
 				(InteractiveConsoleView) WorkbenchHelper.findView(IGui.INTERACTIVE_CONSOLE_VIEW_ID, null, true);
-		if (view == null) { return; }
+		if (view == null)
+			return;
 		if (interactiveConsoleVisible) {
 			view.getControlToDisplayInFullScreen().setParent(view.getParentOfControlToDisplayFullScreen());
 			view.getParentOfControlToDisplayFullScreen().layout();

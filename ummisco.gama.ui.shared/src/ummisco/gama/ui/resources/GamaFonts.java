@@ -14,8 +14,8 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.utils.GraphicsHelper;
-import ummisco.gama.ui.utils.PreferencesHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class GamaFonts {
@@ -43,7 +43,7 @@ public class GamaFonts {
 
 	private static java.awt.Font getAwtBaseFont() {
 		if (awtBaseFont == null) {
-			awtBaseFont = PreferencesHelper.BASE_BUTTON_FONT.getValue();
+			awtBaseFont = GamaUIPreferences.BASE_BUTTON_FONT.getValue();
 		}
 		return awtBaseFont;
 	}

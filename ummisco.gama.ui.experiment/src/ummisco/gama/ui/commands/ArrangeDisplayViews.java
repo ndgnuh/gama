@@ -39,7 +39,7 @@ import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
 import one.util.streamex.StreamEx;
 import ummisco.gama.dev.utils.DEBUG;
-import ummisco.gama.ui.utils.IPerspectiveHelper;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 @SuppressWarnings ({ "rawtypes" })
@@ -99,7 +99,8 @@ public class ArrangeDisplayViews extends AbstractHandler {
 			}
 			final List<MPlaceholder> holders = listDisplayViews();
 			final MPartStack displayStack = getDisplaysPlaceholder();
-			if (displayStack == null) { return; }
+			if (displayStack == null)
+				return;
 			displayStack.setToBeRendered(true);
 			final MElementContainer<?> root = displayStack.getParent();
 			hideDisplays(displayStack, holders);
@@ -137,7 +138,7 @@ public class ArrangeDisplayViews extends AbstractHandler {
 
 	public static void decorateDisplays() {
 		WorkbenchHelper.getDisplayViews().forEach(v -> {
-			final Boolean tb = GAMA.getGui().getUIService(IPerspectiveHelper.class).keepToolbars();
+			final Boolean tb = PerspectiveHelper.getInstance().keepToolbars();
 			if (tb != null) {
 				if (tb) {
 					v.showToolbar();
@@ -145,7 +146,7 @@ public class ArrangeDisplayViews extends AbstractHandler {
 					v.hideToolbar();
 				}
 			}
-			if (GAMA.getGui().getUIService(IPerspectiveHelper.class).showOverlays()) {
+			if (PerspectiveHelper.getInstance().showOverlays()) {
 				v.showOverlay();
 			} else {
 				v.hideOverlay();
@@ -214,12 +215,11 @@ public class ArrangeDisplayViews extends AbstractHandler {
 
 	static MElementContainer create(final MElementContainer root, final String weight, final Boolean dir) {
 		if (dir == null) { // stacks cannot be stacked
-			if (root instanceof MPartStack && isPartOfLayout(root)) { return root; }
+			if (root instanceof MPartStack && isPartOfLayout(root))
+				return root;
 		}
-		if (dir == null
-				&& (root instanceof MPartStack || !GAMA.getGui().getUIService(IPerspectiveHelper.class).keepTabs())) {
+		if (dir == null && (root instanceof MPartStack || !PerspectiveHelper.getInstance().keepTabs()))
 			return root;
-		}
 		final MElementContainer c = dir != null ? INSTANCE.createPartSashContainer() : INSTANCE.createPartStack();
 		c.getTransientData().put("Dynamic", true);
 		c.getTransientData().put(LAYOUT, true);

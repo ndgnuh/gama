@@ -69,11 +69,11 @@ import org.eclipse.ui.part.FileEditorInput;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IGamaFileMetaData;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.metadata.ImageDataLoader;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.IGamaColors;
-import ummisco.gama.ui.utils.PreferencesHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
@@ -737,7 +737,7 @@ public class ImageViewer extends EditorPart
 	 */
 	@Override
 	public GamaUIColor getColor(final int index) {
-		return GamaColors.get(PreferencesHelper.IMAGE_VIEWER_BACKGROUND.getValue());
+		return GamaColors.get(GamaUIPreferences.IMAGE_VIEWER_BACKGROUND.getValue());
 	}
 
 	/**

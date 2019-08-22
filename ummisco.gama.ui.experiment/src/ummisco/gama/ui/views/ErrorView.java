@@ -34,11 +34,11 @@ import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.controls.ParameterExpandItem;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.GamaFonts;
-import ummisco.gama.ui.utils.PreferencesHelper;
 import ummisco.gama.ui.utils.WebHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -112,8 +112,8 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 		final GridData firstColData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		t.setLayoutData(firstColData);
 		final java.util.List<String> strings = exception.getContextAsList();
-		t.setForeground(exception.isWarning() ? GamaColors.get(PreferencesHelper.WARNING_TEXT_COLOR.getValue()).color()
-				: GamaColors.get(PreferencesHelper.ERROR_TEXT_COLOR.getValue()).color());
+		t.setForeground(exception.isWarning() ? GamaColors.get(GamaUIPreferences.WARNING_TEXT_COLOR.getValue()).color()
+				: GamaColors.get(GamaUIPreferences.ERROR_TEXT_COLOR.getValue()).color());
 		final TableColumn c = new TableColumn(t, SWT.NONE);
 		c.setResizable(true);
 		final TableColumn column2 = new TableColumn(t, SWT.NONE);

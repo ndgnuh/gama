@@ -29,9 +29,9 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
 import msi.gama.util.GamaColor;
+import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaIcons;
-import ummisco.gama.ui.utils.PreferencesHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.toolbar.Selector;
 
@@ -127,7 +127,7 @@ public class GamaColorMenu extends GamaMenu {
 	@Override
 	public void fillMenu() {
 		if (colorComp == null) {
-			final String pref = PreferencesHelper.COLOR_MENU_SORT.getValue();
+			final String pref = GamaUIPreferences.COLOR_MENU_SORT.getValue();
 			if (pref.equals(SORT_NAMES[0])) {
 				colorComp = byRGB;
 			} else if (pref.equals(SORT_NAMES[1])) {
@@ -139,10 +139,10 @@ public class GamaColorMenu extends GamaMenu {
 			}
 		}
 		if (getReverse() == null) {
-			setReverse(PreferencesHelper.COLOR_MENU_REVERSE.getValue() ? -1 : 1);
+			setReverse(GamaUIPreferences.COLOR_MENU_REVERSE.getValue() ? -1 : 1);
 		}
 		if (breakdown == null) {
-			breakdown = PreferencesHelper.COLOR_MENU_GROUP.getValue();
+			breakdown = GamaUIPreferences.COLOR_MENU_GROUP.getValue();
 		}
 		action("Custom...", new SelectionAdapter() {
 

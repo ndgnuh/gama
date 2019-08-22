@@ -44,7 +44,7 @@ import msi.gama.outputs.layers.EventLayerStatement;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import ummisco.gama.dev.utils.DEBUG;
-import ummisco.gama.ui.utils.IPerspectiveHelper;
+import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.SwtGui;
 
 public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
@@ -67,7 +67,8 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 
 		@Override
 		public void catchUp(final Display display) {
-			if (filesToOpen.isEmpty()) { return; }
+			if (filesToOpen.isEmpty())
+				return;
 
 			final String[] filePaths = filesToOpen.toArray(new String[filesToOpen.size()]);
 			filesToOpen.clear();
@@ -125,9 +126,8 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 			DEBUG.LOG("Arguments received by GAMA : " + Arrays.toString(args));
 		}
 		if (args.length > 0 && args[0].contains("launcher.defaultAction")
-				&& !args[0].contains("--launcher.defaultAction")) {
+				&& !args[0].contains("--launcher.defaultAction"))
 			return;
-		}
 		if (args.length >= 1) {
 
 			if (args[args.length - 1].endsWith(".gamr")) {
@@ -149,7 +149,8 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 		final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		final IProject[] projects = workspace.getRoot().getProjects();
 		// If no projects are registered at all, we are facing a fresh new workspace
-		if (projects.length == 0) { return true; }
+		if (projects.length == 0)
+			return true;
 		return false;
 	}
 
@@ -167,12 +168,9 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 		try {
 			saveEclipsePreferences();
 			GAMA.closeAllExperiments(true, true);
-			final IPerspectiveHelper pp = GAMA.getGui().getUIService(IPerspectiveHelper.class);
-			if (pp != null) {
-				pp.deleteCurrentSimulationPerspective();
-				// So that they are not saved to the workbench.xmi file
-				pp.cleanPerspectives();
-			}
+			PerspectiveHelper.getInstance().deleteCurrentSimulationPerspective();
+			// So that they are not saved to the workbench.xmi file
+			PerspectiveHelper.getInstance().cleanPerspectives();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -225,7 +223,8 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 			@Override
 			public void handle(final StatusAdapter statusAdapter, final int style) {
 				final int severity = statusAdapter.getStatus().getSeverity();
-				if (severity == IStatus.INFO || severity == IStatus.CANCEL) { return; }
+				if (severity == IStatus.INFO || severity == IStatus.CANCEL)
+					return;
 				final Throwable e = statusAdapter.getStatus().getException();
 				if (e instanceof OutOfMemoryError) {
 					GamaExecutorService.EXCEPTION_HANDLER.uncaughtException(Thread.currentThread(), e);

@@ -132,7 +132,6 @@ import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.resources.IGamaIcons;
 import ummisco.gama.ui.utils.WorkbenchHelper;
-import ummisco.gama.ui.views.IGamlEditor;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
 import ummisco.gama.ui.views.toolbar.IToolbarDecoratedView;
@@ -146,8 +145,7 @@ import ummisco.gama.ui.views.toolbar.Selector;
  * @since 4 mars 2012
  */
 @SuppressWarnings ("all")
-public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGamlEditor, IBoxEnabledEditor,
-		IToolbarDecoratedView /* IToolbarDecoratedView.Sizable, ITooltipDisplayer */ {
+public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBoxEnabledEditor, IToolbarDecoratedView {
 
 	static {
 		final IPreferenceStore store = EditorsUI.getPreferenceStore();
@@ -203,7 +201,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 
 			@Override
 			public int getLayer(final Annotation annotation) {
-				if (annotation.isMarkedDeleted()) { return IAnnotationAccessExtension.DEFAULT_LAYER; }
+				if (annotation.isMarkedDeleted())
+					return IAnnotationAccessExtension.DEFAULT_LAYER;
 				return super.getLayer(annotation);
 			}
 
@@ -220,7 +219,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 
 			@Override
 			public boolean isPaintable(final Annotation annotation) {
-				if (imageProvider.getManagedImage(annotation) != null) { return true; }
+				if (imageProvider.getManagedImage(annotation) != null)
+					return true;
 				return super.isPaintable(annotation);
 			}
 
@@ -349,14 +349,16 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	}
 
 	private void scheduleValidationJob() {
-		if (!isEditable()) { return; }
+		if (!isEditable())
+			return;
 		final IValidationIssueProcessor processor = new MarkerIssueProcessor(getResource(),
 				getInternalSourceViewer().getAnnotationModel(), markerCreator, markerTypeProvider);
 		final ValidationJob validate = new ValidationJob(validator, getDocument(), processor, CheckMode.FAST_ONLY) {
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
 				final List<Issue> issues = getDocument().readOnly(resource -> {
-					if (resource.isValidationDisabled()) { return Collections.emptyList(); }
+					if (resource.isValidationDisabled())
+						return Collections.emptyList();
 					return validator.validate(resource, getCheckMode(), null);
 				});
 				processor.processIssues(issues, monitor);
@@ -371,7 +373,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	@Override
 	public boolean isOverviewRulerVisible() {
 		final GamaSourceViewer viewer = getInternalSourceViewer();
-		if (viewer == null) { return super.isOverviewRulerVisible(); }
+		if (viewer == null)
+			return super.isOverviewRulerVisible();
 		return viewer.isOverviewVisible();
 	}
 
@@ -407,20 +410,25 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 		if (!isRangeIndicatorEnabled()) {
 			projectionViewer.doOperation(ProjectionViewer.TOGGLE);
 		}
-	};
+	}
 
 	@Override
 	protected void handleCursorPositionChanged() {
-		if (getSelectionProvider() == null) { return; }
-		if (getInternalSourceViewer() == null) { return; }
-		if (getInternalSourceViewer().getControl() == null) { return; }
-		if (getInternalSourceViewer().getControl().isDisposed()) { return; }
+		if (getSelectionProvider() == null)
+			return;
+		if (getInternalSourceViewer() == null)
+			return;
+		if (getInternalSourceViewer().getControl() == null)
+			return;
+		if (getInternalSourceViewer().getControl().isDisposed())
+			return;
 		super.handleCursorPositionChanged();
 		this.markInNavigationHistory();
 	}
 
 	private void enableButton(final int index, final String text, final SelectionListener listener) {
-		if (text == null) { return; }
+		if (text == null)
+			return;
 		final String expType = state.types.get(index);
 		final Image image = IKeyword.BATCH.equals(expType) ? GamaIcons.create(IGamaIcons.BUTTON_BATCH).image()
 				: IKeyword.MEMORIZE.equals(expType) ? GamaIcons.create(IGamaIcons.BUTTON_BACK).image()
@@ -440,7 +448,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	private void updateToolbar(final GamlEditorState newState, final boolean forceState) {
 		if (forceState || !state.equals(newState)) {
 			WorkbenchHelper.runInUI("Editor refresh", 50, (m) -> {
-				if (toolbar == null || toolbar.isDisposed()) { return; }
+				if (toolbar == null || toolbar.isDisposed())
+					return;
 				toolbar.wipe(SWT.LEFT, true);
 				if (PlatformHelper.isWindows()) {
 					toolbar.sep(4, SWT.LEFT);
@@ -534,7 +543,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	}
 
 	private void beforeSave() {
-		if (!GamaPreferences.Modeling.EDITOR_CLEAN_UP.getValue()) { return; }
+		if (!GamaPreferences.Modeling.EDITOR_CLEAN_UP.getValue())
+			return;
 		final SourceViewer sv = getInternalSourceViewer();
 		final Point p = sv.getSelectedRange();
 		sv.setSelectedRange(0, sv.getDocument().getLength());
@@ -567,7 +577,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	 */
 	@Override
 	public void createDecorator() {
-		if (decorator != null) { return; }
+		if (decorator != null)
+			return;
 		final IBoxProvider provider = BoxProviderRegistry.getInstance().getGamlProvider();
 		decorator = provider.createDecorator();
 		decorator.setStyledText(getStyledText());
@@ -604,7 +615,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	}
 
 	public void updateBoxes() {
-		if (!decorationEnabled) { return; }
+		if (!decorationEnabled)
+			return;
 		getDecorator().forceUpdate();
 	}
 
@@ -615,7 +627,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 
 	private void assignBoxPartListener() {
 		final IPartService partService = getSite().getWorkbenchWindow().getPartService();
-		if (partService == null) { return; }
+		if (partService == null)
+			return;
 		if (partListeners == null) {
 			partListeners = new HashMap<>();
 		}
@@ -646,7 +659,8 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IGa
 	public String getSelectedText() {
 		final ITextSelection sel = (ITextSelection) getSelectionProvider().getSelection();
 		final int length = sel.getLength();
-		if (length == 0) { return ""; }
+		if (length == 0)
+			return "";
 		final IDocument doc = getDocument();
 		try {
 			return doc.get(sel.getOffset(), length);
