@@ -1,11 +1,10 @@
 /*********************************************************************************************
  *
- * 'BoxProviderRegistry.java, in plugin ummisco.gama.ui.modeling, is part of the source code of the
- * GAMA modeling and simulation platform.
- * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'BoxProviderRegistry.java, in plugin ummisco.gama.ui.modeling, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editbox;
@@ -20,27 +19,28 @@ import java.util.Map;
 
 import ummisco.gama.ui.modeling.internal.ModelingActivator;
 
-@SuppressWarnings({ "rawtypes" })
+@SuppressWarnings ({ "rawtypes" })
 public class BoxProviderRegistry {
 
 	private static final String PROIVDERS = "proivders";
 	private static final String PROVIDER_ID_ = "ummisco.gaml.editbox.provider.";
 
-	protected Collection<IBoxProvider> providers;
+	protected Collection<BoxProvider> providers;
 
 	private static BoxProviderRegistry INSTANCE;
 
 	public static BoxProviderRegistry getInstance() {
-		if (INSTANCE == null)
+		if (INSTANCE == null) {
 			INSTANCE = new BoxProviderRegistry();
+		}
 		return INSTANCE;
 	}
 
-	public IBoxProvider getGamlProvider() {
+	public BoxProvider getGamlProvider() {
 		return getInstance().providerForName("GAML");
 	}
 
-	public Collection<IBoxProvider> getBoxProviders() {
+	public Collection<BoxProvider> getBoxProviders() {
 		if (providers == null) {
 			providers = loadProviders();
 		}
@@ -50,13 +50,13 @@ public class BoxProviderRegistry {
 		return providers;
 	}
 
-	protected Collection<IBoxProvider> loadProviders() {
-		List<IBoxProvider> result = null;
+	protected Collection<BoxProvider> loadProviders() {
+		List<BoxProvider> result = null;
 		final String pSetting = ModelingActivator.getInstance().getPreferenceStore().getString(PROIVDERS);
 		if (pSetting != null && pSetting.length() > 0) {
 			final String[] split = pSetting.split(",");
 			if (split.length > 0) {
-				result = new ArrayList<IBoxProvider>();
+				result = new ArrayList<>();
 
 				for (final String s : split) {
 					if (s.trim().length() > 0) {
@@ -68,14 +68,14 @@ public class BoxProviderRegistry {
 		return result;
 	}
 
-	public void setProviders(final Collection<IBoxProvider> newProviders) {
+	public void setProviders(final Collection<BoxProvider> newProviders) {
 		providers = newProviders;
 	}
 
 	public void storeProviders() {
 		if (providers != null) {
 			final StringBuilder sb = new StringBuilder();
-			for (final IBoxProvider p : providers) {
+			for (final BoxProvider p : providers) {
 				if (sb.length() != 0) {
 					sb.append(",");
 				}
@@ -85,16 +85,16 @@ public class BoxProviderRegistry {
 		}
 	}
 
-	protected Collection<IBoxProvider> defaultProviders() {
-		final List<IBoxProvider> result = new ArrayList<IBoxProvider>();
+	protected Collection<BoxProvider> defaultProviders() {
+		final List<BoxProvider> result = new ArrayList<>();
 		// order important (see supports())
 		result.add(gamlProvider());
 		result.add(textProvider());
 		return result;
 	}
 
-	protected BoxProviderImpl createProvider(final String name) {
-		final BoxProviderImpl provider = new BoxProviderImpl();
+	protected BoxProvider createProvider(final String name) {
+		final BoxProvider provider = new BoxProvider();
 		provider.setId(PROVIDER_ID_ + name);
 		provider.setName(name);
 		provider.setBuilders(defaultBuilders());
@@ -102,8 +102,8 @@ public class BoxProviderRegistry {
 		return provider;
 	}
 
-	protected BoxProviderImpl gamlProvider() {
-		final BoxProviderImpl provider = createProvider("GAML");
+	protected BoxProvider gamlProvider() {
+		final BoxProvider provider = createProvider("GAML");
 		provider.setDefaultSettingsCatalog(Arrays.asList("GAML", "Default", "OnClick", "GreyGradient", "Classic"));
 		if (provider.getEditorsBoxSettings().getFileNames() == null) {
 			provider.getEditorsBoxSettings().setFileNames(Arrays.asList("*.gaml"));
@@ -111,8 +111,8 @@ public class BoxProviderRegistry {
 		return provider;
 	}
 
-	protected BoxProviderImpl textProvider() {
-		final BoxProviderImpl provider = createProvider("Text");
+	protected BoxProvider textProvider() {
+		final BoxProvider provider = createProvider("Text");
 		provider.setDefaultSettingsCatalog(Arrays.asList("Default", "Whitebox"));
 		if (provider.getEditorsBoxSettings().getFileNames() == null) {
 			provider.getEditorsBoxSettings().setFileNames(Arrays.asList("*.txt", "*.*"));
@@ -121,28 +121,26 @@ public class BoxProviderRegistry {
 	}
 
 	protected Map<String, Class> defaultBuilders() {
-		final Map<String, Class> result = new HashMap<String, Class>();
-		result.put("Text", BoxBuilderImpl.class);
+		final Map<String, Class> result = new HashMap<>();
+		result.put("Text", BoxBuilder.class);
 		result.put("GAML", JavaBoxBuilder.class);
-		// result.put("Markup", MarkupBuilder2.class);
 		result.put("Text2", TextBoxBuilder.class);
 		return result;
 	}
 
-	public IBoxProvider providerForName(final String name) {
-		final Collection<IBoxProvider> providers = getBoxProviders();
-		for (final IBoxProvider provider : providers) {
-			if (provider.getName().equals(name)) {
+	public BoxProvider providerForName(final String name) {
+		final Collection<BoxProvider> providers = getBoxProviders();
+		for (final BoxProvider provider : providers) {
+			if (provider.getName().equals(name))
 				return provider;
-			}
 		}
-		final IBoxProvider provider = createProvider(name);
+		final BoxProvider provider = createProvider(name);
 		providers.add(provider);
 		return provider;
 	}
 
 	public void removeProvider(final String name) {
-		for (final Iterator<IBoxProvider> it = getBoxProviders().iterator(); it.hasNext();) {
+		for (final Iterator<BoxProvider> it = getBoxProviders().iterator(); it.hasNext();) {
 			if (it.next().getName().equals(name)) {
 				it.remove();
 			}

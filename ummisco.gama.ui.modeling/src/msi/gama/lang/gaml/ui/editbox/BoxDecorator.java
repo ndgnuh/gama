@@ -37,10 +37,10 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.ColorDialog;
 
-public class BoxDecoratorImpl implements IBoxDecorator {
+public class BoxDecorator {
 
 	protected static final int ROUND_BOX_ARC = 5;
-	protected IBoxProvider provider;
+	protected BoxProvider provider;
 	protected boolean visible;
 	protected IBoxSettings settings;
 	protected StyledText boxText;
@@ -59,7 +59,7 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 	protected List<Box> boxes;
 	protected boolean setCaretOffset;
 	protected String builderName;
-	protected IBoxBuilder builder;
+	protected BoxBuilder builder;
 	protected Box currentBox;
 	protected Point oldCaretLoc;
 	protected int oldXOffset = -1;
@@ -72,7 +72,6 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 	public boolean keyPressed;
 	protected int charCount;
 
-	@Override
 	public void enableUpdates(final boolean flag) {
 		final boolean update = flag && !this.visible;
 		this.visible = flag;
@@ -82,31 +81,28 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 		}
 	}
 
-	@Override
-	public IBoxProvider getProvider() {
+	public BoxProvider getProvider() {
 		return provider;
 	}
 
-	@Override
-	public void setProvider(final IBoxProvider newProvider) {
+	public void setProvider(final BoxProvider newProvider) {
 		this.provider = newProvider;
 	}
 
-	@Override
 	public void setSettings(final IBoxSettings newSettings) {
 		this.settings = newSettings;
 		settingsChangeListener = new SettingsChangeListener();
 		this.settings.addPropertyChangeListener(settingsChangeListener);
 	}
 
-	@Override
 	public void setStyledText(final StyledText newSt) {
 		this.boxText = newSt;
 	}
 
 	protected void buildBoxes() {
-		final IBoxBuilder boxBuilder = getBuilder();
-		if (boxBuilder == null) { return; }
+		final BoxBuilder boxBuilder = getBuilder();
+		if (boxBuilder == null)
+			return;
 
 		builder.setTabSize(boxText.getTabs());
 		builder.setCaretOffset(setCaretOffset ? boxText.getCaretOffset() : -1);
@@ -124,8 +120,9 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 		charCount = boxText.getCharCount();
 	}
 
-	protected IBoxBuilder getBuilder() {
-		if (settings.getBuilder() == null) { return null; }
+	protected BoxBuilder getBuilder() {
+		if (settings.getBuilder() == null)
+			return null;
 		if (builder == null || builderName == null || !builderName.equals(settings.getBuilder())) {
 			builderName = settings.getBuilder();
 			builder = provider.createBoxBuilder(builderName);
@@ -133,7 +130,6 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 		return builder;
 	}
 
-	@Override
 	public void forceUpdate() {
 		boxes = null;
 		update();
@@ -157,11 +153,13 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 	}
 
 	void drawBackgroundBoxes() {
-		if (boxes == null || !visible) { return; }
+		if (boxes == null || !visible)
+			return;
 
 		final Rectangle r0 = boxText.getClientArea();
 
-		if (r0.width < 1 || r0.height < 1) { return; }
+		if (r0.width < 1 || r0.height < 1)
+			return;
 
 		final int xOffset = boxText.getHorizontalPixel();
 		final int yOffset = boxText.getTopPixel();
@@ -275,7 +273,8 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 	}
 
 	void fillRectangle(final Color c, final GC gc, final int x, final int y, final int width, final int height) {
-		if (c == null) { return; }
+		if (c == null)
+			return;
 
 		gc.setBackground(c);
 		if (settings.getRoundBox()) {
@@ -291,10 +290,10 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 		}
 	}
 
-	@Override
 	public void decorate(final boolean mouseDbClickColorChange) {
 		decorated = false;
-		if (boxText == null || settings == null) { return; }
+		if (boxText == null || settings == null)
+			return;
 
 		boxPaint = new BoxPaintListener();
 		boxMouseMove = new BoxMouseMoveListener();
@@ -331,13 +330,14 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 		decorated = true;
 	}
 
-	@Override
 	public void undecorate() {
-		if (boxText == null && !decorated) { return; }
+		if (boxText == null && !decorated)
+			return;
 		if (settingsChangeListener != null) {
 			settings.removePropertyChangeListener(settingsChangeListener);
 		}
-		if (boxText == null || boxText.isDisposed()) { return; }
+		if (boxText == null || boxText.isDisposed())
+			return;
 		decorated = false;
 		if (boxMouseClick != null) {
 			boxText.removeMouseListener(boxMouseClick);
@@ -441,7 +441,8 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 	}
 
 	protected boolean turnOnBox(final int x0, final int y0) {
-		if (boxes == null || !visible) { return false; }
+		if (boxes == null || !visible)
+			return false;
 
 		final int x = x0 + boxText.getHorizontalPixel();
 		final int y = y0 + boxText.getTopPixel();
@@ -586,7 +587,8 @@ public class BoxDecoratorImpl implements IBoxDecorator {
 
 		@Override
 		public void paintControl(final PaintEvent e) {
-			if (paintMode) { return; }
+			if (paintMode)
+				return;
 			paintMode = true;
 			try {
 				// check charCount as workaround for no event when

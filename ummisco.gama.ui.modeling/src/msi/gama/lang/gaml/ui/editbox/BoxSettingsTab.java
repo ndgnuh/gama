@@ -36,10 +36,10 @@ import org.eclipse.swt.widgets.Spinner;
 
 public class BoxSettingsTab {
 
-	protected IBoxProvider provider;
-	protected IBoxSettingsStore store;
+	protected BoxProvider provider;
+	protected BoxSettingsStore store;
 	protected IBoxSettings settings;
-	protected IBoxDecorator decorator;
+	protected BoxDecorator decorator;
 
 	Button enabled;
 	Combo combo;
@@ -77,7 +77,7 @@ public class BoxSettingsTab {
 
 	public BoxSettingsTab() {}
 
-	public Control createContro(final Composite parent, final IBoxProvider provider0) {
+	public Control createContro(final Composite parent, final BoxProvider provider0) {
 		provider = provider0;
 		if (provider == null) {
 			final Label l = new Label(parent, SWT.NONE);
@@ -558,9 +558,11 @@ public class BoxSettingsTab {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				if (fromColorLab.getColorValue() == null || toColorLab.getColorValue() == null) { return; }
+				if (fromColorLab.getColorValue() == null || toColorLab.getColorValue() == null)
+					return;
 				final Color[] colors = settings.getColors();
-				if (colors == null || colors.length < 2) { return; }
+				if (colors == null || colors.length < 2)
+					return;
 				settings.setColorsRGB(rgbGradient(colors));
 			}
 		});
@@ -585,7 +587,8 @@ public class BoxSettingsTab {
 	}
 
 	protected Shell getShell() {
-		if (composite != null) { return composite.getShell(); }
+		if (composite != null)
+			return composite.getShell();
 		return null;
 	}
 
@@ -721,7 +724,7 @@ public class BoxSettingsTab {
 		return sb.toString();
 	}
 
-	public IBoxProvider getProvider() {
+	public BoxProvider getProvider() {
 		return provider;
 	}
 
@@ -731,7 +734,8 @@ public class BoxSettingsTab {
 
 	public String validate() {
 		settings.setName(combo.getText());
-		if (settings.getName() == null || settings.getName().length() == 0) { return "Enter configuration name"; }
+		if (settings.getName() == null || settings.getName().length() == 0)
+			return "Enter configuration name";
 		return null;
 	}
 

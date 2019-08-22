@@ -106,11 +106,10 @@ import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceAfterChangeListener;
 import msi.gama.lang.gaml.resource.GamlResourceServices;
 import msi.gama.lang.gaml.ui.decorators.GamlAnnotationImageProvider;
+import msi.gama.lang.gaml.ui.editbox.BoxDecorator;
 import msi.gama.lang.gaml.ui.editbox.BoxDecoratorPartListener;
+import msi.gama.lang.gaml.ui.editbox.BoxProvider;
 import msi.gama.lang.gaml.ui.editbox.BoxProviderRegistry;
-import msi.gama.lang.gaml.ui.editbox.IBoxDecorator;
-import msi.gama.lang.gaml.ui.editbox.IBoxEnabledEditor;
-import msi.gama.lang.gaml.ui.editbox.IBoxProvider;
 import msi.gama.lang.gaml.ui.editor.toolbar.CreateExperimentSelectionListener;
 import msi.gama.lang.gaml.ui.editor.toolbar.EditorSearchControls;
 import msi.gama.lang.gaml.ui.editor.toolbar.EditorToolbar;
@@ -145,7 +144,7 @@ import ummisco.gama.ui.views.toolbar.Selector;
  * @since 4 mars 2012
  */
 @SuppressWarnings ("all")
-public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBoxEnabledEditor, IToolbarDecoratedView {
+public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IToolbarDecoratedView {
 
 	static {
 		final IPreferenceStore store = EditorsUI.getPreferenceStore();
@@ -160,7 +159,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 
 	protected static Map<IPartService, IPartListener2> partListeners;
 
-	IBoxDecorator decorator;
+	BoxDecorator decorator;
 	GamlEditorState state = new GamlEditorState(null, Collections.EMPTY_LIST);
 	GamaToolbar2 toolbar;
 	Composite toolbarParent;
@@ -564,8 +563,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 	/**
 	 * @see msi.gama.lang.gaml.ui.editbox.IBoxEnabledEditor#getDecorator()
 	 */
-	@Override
-	public IBoxDecorator getDecorator() {
+	public BoxDecorator getDecorator() {
 		if (decorator == null) {
 			createDecorator();
 		}
@@ -575,11 +573,10 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 	/**
 	 * @see msi.gama.lang.gaml.ui.editbox.IBoxEnabledEditor#createDecorator(msi.gama.lang.gaml.ui.editbox.IBoxProvider)
 	 */
-	@Override
 	public void createDecorator() {
 		if (decorator != null)
 			return;
-		final IBoxProvider provider = BoxProviderRegistry.getInstance().getGamlProvider();
+		final BoxProvider provider = BoxProviderRegistry.getInstance().getGamlProvider();
 		decorator = provider.createDecorator();
 		decorator.setStyledText(getStyledText());
 		decorator.setSettings(provider.getEditorsBoxSettings());
@@ -595,7 +592,6 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 	/**
 	 * @see msi.gama.lang.gaml.ui.editbox.IBoxEnabledEditor#decorate()
 	 */
-	@Override
 	public void decorate(final boolean doIt) {
 		if (doIt) {
 			getDecorator().decorate(false);
@@ -605,7 +601,6 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 		enableUpdates(doIt);
 	}
 
-	@Override
 	public void enableUpdates(final boolean visible) {
 		getDecorator().enableUpdates(visible);
 	}
@@ -620,7 +615,6 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, IBo
 		getDecorator().forceUpdate();
 	}
 
-	@Override
 	public boolean isDecorationEnabled() {
 		return decorationEnabled;
 	}

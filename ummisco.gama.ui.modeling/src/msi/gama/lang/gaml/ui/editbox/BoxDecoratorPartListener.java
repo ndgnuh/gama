@@ -4,7 +4,7 @@
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editbox;
@@ -13,17 +13,20 @@ import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 
+import msi.gama.lang.gaml.ui.editor.GamlEditor;
+
 public class BoxDecoratorPartListener implements IPartListener2 {
 
-	private IBoxEnabledEditor getEditor(final IWorkbenchPartReference ref) {
+	private GamlEditor getEditor(final IWorkbenchPartReference ref) {
 		final IWorkbenchPart part = ref.getPart(false);
-		if (part == null) { return null; }
-		return part instanceof IBoxEnabledEditor ? (IBoxEnabledEditor) part : null;
+		if (part == null)
+			return null;
+		return part instanceof GamlEditor ? (GamlEditor) part : null;
 	}
 
 	@Override
 	public void partActivated(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null && editor.isDecorationEnabled()) {
 			editor.decorate(true);
 			editor.enableUpdates(true);
@@ -32,7 +35,7 @@ public class BoxDecoratorPartListener implements IPartListener2 {
 
 	@Override
 	public void partBroughtToTop(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null && editor.isDecorationEnabled()) {
 			editor.decorate(true);
 			editor.enableUpdates(true);
@@ -41,7 +44,7 @@ public class BoxDecoratorPartListener implements IPartListener2 {
 
 	@Override
 	public void partClosed(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null) {
 			editor.decorate(false);
 		}
@@ -52,7 +55,7 @@ public class BoxDecoratorPartListener implements IPartListener2 {
 
 	@Override
 	public void partHidden(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null && editor.isDecorationEnabled()) {
 			editor.decorate(true);
 			editor.enableUpdates(false);
@@ -61,7 +64,7 @@ public class BoxDecoratorPartListener implements IPartListener2 {
 
 	@Override
 	public void partInputChanged(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null && editor.isDecorationEnabled()) {
 			editor.decorate(true);
 			editor.enableUpdates(false);
@@ -75,7 +78,7 @@ public class BoxDecoratorPartListener implements IPartListener2 {
 
 	@Override
 	public void partVisible(final IWorkbenchPartReference partRef) {
-		final IBoxEnabledEditor editor = getEditor(partRef);
+		final GamlEditor editor = getEditor(partRef);
 		if (editor != null && editor.isDecorationEnabled()) {
 			editor.decorate(true);
 			editor.enableUpdates(true);

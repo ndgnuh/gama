@@ -20,7 +20,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import ummisco.gama.ui.modeling.internal.ModelingActivator;
 
-public class BoxSettingsStoreImpl implements IBoxSettingsStore {
+public class BoxSettingsStore {
 
 	private static final String FILE_NAMES = "fileNames";
 	private static final String TXT_POSTFIX = "$txt";
@@ -42,12 +42,10 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 		return providerId + "_" + postfix;
 	}
 
-	@Override
 	public void setProviderId(final String id) {
 		this.providerId = id;
 	}
 
-	@Override
 	public void loadDefaults(final IBoxSettings editorsSettings) {
 		String defaultName = getStore().getString(key(DEFAULT));
 		if (isEmpty(defaultName)) {
@@ -56,7 +54,6 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 		load(defaultName, editorsSettings);
 	}
 
-	@Override
 	public void load(final String name, final IBoxSettings editorsSettings) {
 		final String value = getStore().getString(key(name));
 		if (!isEmpty(value)) {
@@ -78,11 +75,11 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 
 	protected boolean getIsEnabled() {
 		final String key = key(ENABLED);
-		if (getStore().contains(key)) { return getStore().getBoolean(key); }
+		if (getStore().contains(key))
+			return getStore().getBoolean(key);
 		return true;
 	}
 
-	@Override
 	public void saveDefaults(final IBoxSettings settings) {
 		getStore().setValue(key(ENABLED), settings.getEnabled() ? "true" : "false");
 		getStore().setValue(key(DEFAULT), settings.getName());
@@ -117,7 +114,6 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 		getStore().setValue(key("catalog"), sb.toString());
 	}
 
-	@Override
 	public Set<String> getCatalog() {
 		if (catalog == null) {
 			catalog = new LinkedHashSet<>();
@@ -140,7 +136,6 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 	}
 
 	@SuppressWarnings ("deprecation")
-	@Override
 	public void remove(final String name) {
 		if (getCatalog().remove(name)) {
 			storeCatalog(getCatalog());
@@ -171,7 +166,8 @@ public class BoxSettingsStoreImpl implements IBoxSettingsStore {
 	protected Collection<String> getFileNames() {
 		final String key = key(FILE_NAMES);
 
-		if (!getStore().contains(key)) { return null; }
+		if (!getStore().contains(key))
+			return null;
 
 		final String value = getStore().getString(key);
 		final List<String> l = new ArrayList<>();

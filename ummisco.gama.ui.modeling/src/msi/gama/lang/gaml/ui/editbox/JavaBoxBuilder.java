@@ -10,7 +10,7 @@
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editbox;
 
-public class JavaBoxBuilder extends BoxBuilderImpl {
+public class JavaBoxBuilder extends BoxBuilder {
 
 	@Override
 	protected void addLine(final int s, final int end, final int o, final boolean empty) {

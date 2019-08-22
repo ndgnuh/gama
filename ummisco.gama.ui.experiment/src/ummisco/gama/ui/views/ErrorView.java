@@ -35,6 +35,7 @@ import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import ummisco.gama.ui.GamaUIPreferences;
+import ummisco.gama.ui.commands.RuntimeExceptionHandler;
 import ummisco.gama.ui.controls.ParameterExpandItem;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
@@ -72,7 +73,8 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 	protected ParameterExpandItem createItem(final Composite parent, final GamaRuntimeException data,
 			final boolean expanded, final GamaUIColor color) {
 		createViewer(parent);
-		if (getViewer() == null) { return null; }
+		if (getViewer() == null)
+			return null;
 		final ScrolledComposite control = createItemContentsFor(data);
 		ParameterExpandItem item;
 		if (expanded) {
@@ -135,7 +137,7 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 	}
 
 	private IRuntimeExceptionHandler getExceptionHandler() {
-		return GAMA.getGui().getUIService(IRuntimeExceptionHandler.class);
+		return RuntimeExceptionHandler.getInstance();
 	}
 
 	@Override
@@ -172,7 +174,8 @@ public class ErrorView extends ExpandableItemsView<GamaRuntimeException> impleme
 		final List<GamaRuntimeException> errors = new ArrayList<>();
 		final List<GamaRuntimeException> exceptions = getExceptionHandler().getCleanExceptions();
 		final int size = exceptions.size();
-		if (size == 0) { return errors; }
+		if (size == 0)
+			return errors;
 		final int end = size;
 		int begin = end - numberOfDisplayedErrors;
 		begin = begin < 0 ? 0 : begin;

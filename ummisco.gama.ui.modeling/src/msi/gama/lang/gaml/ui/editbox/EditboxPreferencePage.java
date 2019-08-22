@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.ui.editbox;
@@ -126,8 +126,8 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 	}
 
 	protected void loadData() {
-		final Collection<IBoxProvider> boxProviders = BoxProviderRegistry.getInstance().getBoxProviders();
-		for (final IBoxProvider provider : boxProviders) {
+		final Collection<BoxProvider> boxProviders = BoxProviderRegistry.getInstance().getBoxProviders();
+		for (final BoxProvider provider : boxProviders) {
 			newTab(provider.getName());
 		}
 	}
@@ -136,9 +136,11 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 	public void init(final IWorkbench workbench) {}
 
 	protected boolean contains(final String[] items, final String newText) {
-		if (items == null || items.length == 0) { return false; }
+		if (items == null || items.length == 0)
+			return false;
 		for (final String s : items) {
-			if (s.equalsIgnoreCase(newText)) { return true; }
+			if (s.equalsIgnoreCase(newText))
+				return true;
 		}
 		return false;
 	}
@@ -148,7 +150,7 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 		final TabItem item = new TabItem(folder, SWT.NONE);
 		item.setText(value);
 		final BoxSettingsTab p = new BoxSettingsTab();
-		final IBoxProvider provider = BoxProviderRegistry.getInstance().providerForName(value);
+		final BoxProvider provider = BoxProviderRegistry.getInstance().providerForName(value);
 		item.setControl(p.createContro(folder, provider));
 		item.setData(p);
 		if (categoryFiles == null) {
@@ -166,7 +168,8 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 
 	public String[] namesArray(final String name) {
 		final LinkedHashSet<String> set = categoryFiles.get(name);
-		if (set == null || set.isEmpty()) { return new String[0]; }
+		if (set == null || set.isEmpty())
+			return new String[0];
 		return set.toArray(new String[0]);
 	}
 
@@ -227,8 +230,8 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 		@Override
 		public void widgetSelected(final SelectionEvent e) {
 			final InputDialog dialog = new InputDialog(getShell(), "New Category", "Name:", null, newText -> {
-				if (newText != null && newText.trim().length() > 0
-						&& !contains(categoryList.getItems(), newText)) { return null; }
+				if (newText != null && newText.trim().length() > 0 && !contains(categoryList.getItems(), newText))
+					return null;
 				return "Unique name required";
 			});
 
@@ -286,7 +289,8 @@ public class EditboxPreferencePage extends PreferencePage implements IWorkbenchP
 		public void widgetSelected(final SelectionEvent e) {
 			final InputDialog dialog =
 					new InputDialog(getShell(), "New Name", "File name pattern like *.java, my.xml:", null, newText -> {
-						if (newText != null && newText.trim().length() > 0) { return null; }
+						if (newText != null && newText.trim().length() > 0)
+							return null;
 						return "";
 					});
 

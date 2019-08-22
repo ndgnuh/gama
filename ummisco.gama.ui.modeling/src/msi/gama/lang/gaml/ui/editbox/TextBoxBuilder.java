@@ -11,7 +11,7 @@
 package msi.gama.lang.gaml.ui.editbox;
 
 
-public class TextBoxBuilder extends BoxBuilderImpl {
+public class TextBoxBuilder extends BoxBuilder {
 
 	protected void addbox0(int start, int end, int offset) {
 

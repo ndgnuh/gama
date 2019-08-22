@@ -26,7 +26,9 @@ import msi.gama.runtime.exceptions.GamaRuntimeException;
 
 public class RuntimeExceptionHandler extends Job implements IRuntimeExceptionHandler {
 
-	public RuntimeExceptionHandler() {
+	private static final IRuntimeExceptionHandler instance = new RuntimeExceptionHandler();
+
+	private RuntimeExceptionHandler() {
 		super("Runtime error collector");
 	}
 
@@ -59,7 +61,8 @@ public class RuntimeExceptionHandler extends Job implements IRuntimeExceptionHan
 					return Status.OK_STATUS;
 				}
 			}
-			if (!running) { return Status.CANCEL_STATUS; }
+			if (!running)
+				return Status.CANCEL_STATUS;
 			if (remainingTime <= 0) {
 				stop();
 				return Status.OK_STATUS;
@@ -146,6 +149,10 @@ public class RuntimeExceptionHandler extends Job implements IRuntimeExceptionHan
 	@Override
 	public List<GamaRuntimeException> getCleanExceptions() {
 		return cleanExceptions;
+	}
+
+	public static IRuntimeExceptionHandler getInstance() {
+		return instance;
 	}
 
 }
