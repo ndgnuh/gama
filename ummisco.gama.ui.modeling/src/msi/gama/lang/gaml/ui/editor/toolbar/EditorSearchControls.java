@@ -35,9 +35,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.swt.IFocusService;
 
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
+import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.resources.IGamaColors;
-import ummisco.gama.ui.utils.PlatformHelper;
 import ummisco.gama.ui.views.toolbar.GamaToolbarSimple;
 
 /**

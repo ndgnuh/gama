@@ -18,12 +18,14 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
 import msi.gama.common.interfaces.IStartupProgress;
 import msi.gama.runtime.GAMA;
+import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class Splash implements IStartupProgress {
 
@@ -70,7 +72,7 @@ public class Splash implements IStartupProgress {
 	}
 
 	public void open() {
-		shell = new Shell(SWT.NO_TRIM | SWT.ON_TOP | SWT.MODELESS);
+		WorkbenchHelper.run(()->{shell = new Shell(SWT.NO_TRIM | SWT.ON_TOP | SWT.MODELESS);
 		final Color color = new Color(shell.getDisplay(), new RGB(22, 94, 147));
 		final Image im = getImageDescriptor().createImage(shell.getDisplay());
 		shell.addDisposeListener(e -> im.dispose());
@@ -93,7 +95,8 @@ public class Splash implements IStartupProgress {
 		shell.setVisible(true);
 		shell.forceActive();
 		color.dispose();
-		updater.schedule();
+		updater.schedule();});
+		
 	}
 
 	public void close() {

@@ -21,7 +21,7 @@ import ummisco.gama.opengl.renderer.shaders.AbstractPostprocessingShader;
 import ummisco.gama.opengl.renderer.shaders.AbstractShader;
 import ummisco.gama.opengl.renderer.shaders.FrameBufferObject;
 import ummisco.gama.opengl.renderer.shaders.KeystoneShaderProgram;
-import ummisco.gama.ui.utils.PlatformHelper;
+import ummisco.gama.ui.utils.GraphicsHelper;
 
 public class KeystoneHelper extends AbstractRendererHelper {
 
@@ -51,11 +51,11 @@ public class KeystoneHelper extends AbstractRendererHelper {
 	}
 
 	int getViewWidth() {
-		return PlatformHelper.scaleDownIfMac(getRenderer().getViewWidth());
+		return GraphicsHelper.scaleDownIfMac(getRenderer().getViewWidth());
 	}
 
 	int getViewHeight() {
-		return PlatformHelper.scaleDownIfMac(getRenderer().getViewHeight());
+		return GraphicsHelper.scaleDownIfMac(getRenderer().getViewHeight());
 	}
 
 	@Override

@@ -24,7 +24,7 @@ import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.opengl.renderer.helpers.CameraHelper;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
-import ummisco.gama.ui.utils.PlatformHelper;
+import ummisco.gama.ui.utils.GraphicsHelper;
 
 public abstract class AbstractCamera implements ICamera {
 
@@ -224,8 +224,8 @@ public abstract class AbstractCamera implements ICamera {
 	}
 
 	protected void internalMouseMove(final MouseEvent e) {
-		mousePosition.x = PlatformHelper.scaleUpIfWin(e.x);
-		mousePosition.y = PlatformHelper.scaleUpIfWin(e.y);
+		mousePosition.x = GraphicsHelper.scaleUpIfWin(e.x);
+		mousePosition.y = GraphicsHelper.scaleUpIfWin(e.y);
 		setCtrlPressed(GamaKeyBindings.ctrl(e));
 		setShiftPressed(GamaKeyBindings.shift(e));
 	}
@@ -296,8 +296,8 @@ public abstract class AbstractCamera implements ICamera {
 	private int clickOnKeystone(final MouseEvent e) {
 		// int x = e.x;
 		// int y = e.y;
-		final int x = PlatformHelper.scaleUpIfWin(e.x);
-		final int y = PlatformHelper.scaleUpIfWin(e.y);
+		final int x = GraphicsHelper.scaleUpIfWin(e.x);
+		final int y = GraphicsHelper.scaleUpIfWin(e.y);
 		// return the number of the corner clicked. Return -1 if no click on
 		// keystone.
 		// final GamaPoint p = getNormalizedCoordinates(e);
@@ -307,8 +307,8 @@ public abstract class AbstractCamera implements ICamera {
 	protected int hoverOnKeystone(final MouseEvent e) {
 		// int x = e.x;
 		// int y = e.y;
-		final int x = PlatformHelper.scaleUpIfWin(e.x);
-		final int y = PlatformHelper.scaleUpIfWin(e.y);
+		final int x = GraphicsHelper.scaleUpIfWin(e.x);
+		final int y = GraphicsHelper.scaleUpIfWin(e.y);
 		// return the number of the corner clicked. Return -1 if no click on
 		// keystone. Return 10 if click on the center.
 		// final GamaPoint p = getNormalizedCoordinates(e);
@@ -316,8 +316,8 @@ public abstract class AbstractCamera implements ICamera {
 	}
 
 	protected void internalMouseDown(final MouseEvent e) {
-		final int x = PlatformHelper.scaleUpIfWin(e.x);
-		final int y = PlatformHelper.scaleUpIfWin(e.y);
+		final int x = GraphicsHelper.scaleUpIfWin(e.x);
+		final int y = GraphicsHelper.scaleUpIfWin(e.y);
 		if (firsttimeMouseDown) {
 			firstMousePressedPosition.setLocation(x, y, 0);
 			firsttimeMouseDown = false;
@@ -391,8 +391,8 @@ public abstract class AbstractCamera implements ICamera {
 	}
 
 	private void startROI(final org.eclipse.swt.events.MouseEvent e) {
-		getMousePosition().x = PlatformHelper.scaleUpIfWin(e.x);
-		getMousePosition().y = PlatformHelper.scaleUpIfWin(e.y);
+		getMousePosition().x = GraphicsHelper.scaleUpIfWin(e.x);
+		getMousePosition().y = GraphicsHelper.scaleUpIfWin(e.y);
 		renderer.getOpenGLHelper().defineROI(new GamaPoint(firstMousePressedPosition), new GamaPoint(mousePosition));
 		ROICurrentlyDrawn = true;
 	}

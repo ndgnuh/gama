@@ -28,34 +28,23 @@ import static ummisco.gama.ui.resources.GamaFonts.getBaseFont;
 import static ummisco.gama.ui.resources.GamaFonts.setLabelFont;
 import static ummisco.gama.ui.resources.IGamaColors.WARNING;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IDecoratorManager;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.Pref;
-import msi.gama.runtime.MemoryUtils;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaFont;
 import msi.gaml.types.IType;
-import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.menus.GamaColorMenu;
 import ummisco.gama.ui.resources.IGamaColors;
-import ummisco.gama.ui.views.GamaPreferencesView;
 
 public class PreferencesHelper {
+
+	public static void initializePrefs() {
+
+	}
 
 	public static final Pref<Boolean> CORE_EDITORS_HIGHLIGHT =
 			create("pref_editors_highligth", "Highlight in yellow the title of value editors when they change", true,
@@ -113,126 +102,5 @@ public class PreferencesHelper {
 						}
 
 					});
-
-	public static File findIniFile() {
-		final String path = Platform.getConfigurationLocation().getURL().getPath();
-		DEBUG.OUT("Install location of GAMA is " + path);
-		File dir = new File(path);
-		File result = findIn(dir);
-		if (result == null) {
-			if (PlatformHelper.isMac()) {
-				dir = new File(path + "Gama.app/Contents/MacOS");
-				result = findIn(dir);
-				if (result == null) {
-					dir = new File(path + "Gama.app/Eclipse");
-					result = findIn(dir);
-				}
-			} else {
-				dir = dir.getParentFile();
-				result = findIn(dir);
-			}
-		}
-		return result;
-	}
-
-	private static File findIn(final File path) {
-		DEBUG.OUT("Looking for ini file in " + path);
-		final File ini = new File(path.getAbsolutePath() + "/Gama.ini");
-		return ini.exists() ? ini : null;
-	}
-
-	public static void initialize() {
-		final File ini = findIniFile();
-		final int memory = readMaxMemoryInMegabytes(ini);
-		final String text = ini == null || memory == 0
-				? "The max. memory allocated needs to be set in Eclipse (developer version) or in Gama.ini file"
-				: "Maximum memory allocated in Mb (requires to restart GAMA)";
-		final Pref<Integer> p = GamaPreferences
-				.create("pref_memory_max", text, memory == 0 ? (int) MemoryUtils.availableMemory() : memory, 1, false)
-				.in(GamaPreferences.Runtime.NAME, GamaPreferences.Runtime.MEMORY);
-		if (memory == 0) {
-			p.disabled();
-		}
-		p.onChange(newValue -> {
-			changeMaxMemory(ini, newValue);
-			GamaPreferencesView.setRestartRequired();
-		});
-
-	}
-
-	public static int readMaxMemoryInMegabytes(final File ini) {
-		try {
-			if (ini != null) {
-				try (final FileInputStream stream = new FileInputStream(ini);
-						final BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
-					String s = reader.readLine();
-					while (s != null) {
-						if (s.startsWith("-Xmx")) {
-							final char last = s.charAt(s.length() - 1);
-							double divider = 1000000;
-							boolean unit = false;
-							switch (last) {
-								case 'k':
-								case 'K':
-									unit = true;
-									divider = 1000;
-									break;
-								case 'm':
-								case 'M':
-									unit = true;
-									divider = 1;
-									break;
-								case 'g':
-								case 'G':
-									unit = true;
-									divider = 0.001;
-									break;
-							}
-							String trim = s;
-							trim = trim.replace("-Xmx", "");
-							if (unit) {
-								trim = trim.substring(0, trim.length() - 1);
-							}
-							final int result = Integer.parseInt(trim);
-							return (int) (result / divider);
-
-						}
-						s = reader.readLine();
-					}
-				}
-			}
-		} catch (final IOException e) {}
-		return 0;
-
-	}
-
-	public static void changeMaxMemory(final File ini, final int memory) {
-		final int mem = memory < 128 ? 128 : memory;
-		try {
-			final List<String> contents = new ArrayList<>();
-			if (ini != null) {
-				try (final FileInputStream stream = new FileInputStream(ini);
-						final BufferedReader reader = new BufferedReader(new InputStreamReader(stream));) {
-					String s = reader.readLine();
-					while (s != null) {
-						if (s.startsWith("-Xmx")) {
-							s = "-Xmx" + mem + "m";
-						}
-						contents.add(s);
-						s = reader.readLine();
-					}
-				}
-				try (final FileOutputStream os = new FileOutputStream(ini);
-						final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os));) {
-					for (final String line : contents) {
-						writer.write(line);
-						writer.newLine();
-					}
-					writer.flush();
-				}
-			}
-		} catch (final IOException e) {}
-
-	}
 
 }

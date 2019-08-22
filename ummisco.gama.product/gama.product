@@ -32,6 +32,7 @@ openFile
 -noverify
 -Xmn128m
 -Xss2m
+-Xms256m -Xmx2048m
 -XX:+UseParallelGC
 -XX:+UseAdaptiveSizePolicy
 -XX:+OptimizeStringConcat
@@ -41,27 +42,15 @@ openFile
 -Declipse.log.level=ERROR
 -Dosgi.checkConfiguration=false
       </vmArgs>
-      <vmArgsLin>
-         <argsX86>-Xms256m -Xmx1024m</argsX86>
-         <argsX86_64>-Xms256m -Xmx2048m</argsX86_64>
-      </vmArgsLin>
-      <vmArgsMac>-XstartOnFirstThread 
--Dorg.eclipse.swt.internal.carbon.smallFonts
--Xms256m -Xmx2048m
-         <argsX86>-d32</argsX86>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
       <vmArgsWin>-Dfile.encoding=UTF-8
-         <argsX86>-Xms256m -Xmx1024m</argsX86>
-         <argsX86_64>-Xms256m -Xmx2048m</argsX86_64>
       </vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="branding_icons/icon16.png" i32="branding_icons/icon32.png" i48="branding_icons/icon48.png" i64="branding_icons/icon64.png" i128="branding_icons/icon128.png" i256="branding_icons/icon256.png"/>
 
-   <splash
-      startupProgressRect="71,515,500,12"
-      startupMessageRect="230,490,500,16"
-      startupForegroundColor="165E93" />
+
    <launcher name="Gama">
       <linux icon="launcher_icons/icon.xpm"/>
       <macosx icon="launcher_icons/icon.icns"/>
@@ -78,12 +67,10 @@ openFile
       </win>
    </launcher>
 
-
    <vm>
-      <linux include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</linux>
+      <linux include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</linux>
       <macos include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</macos>
-      <solaris include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</solaris>
-      <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
+      <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</windows>
    </vm>
 
    <license>
@@ -276,14 +263,14 @@ openFile
       <feature id="org.eclipse.equinox.p2.extras.feature"/>
       <feature id="org.eclipse.equinox.p2.rcp.feature"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
-      <feature id="ummisco.gama.feature.core.ui" version="1.7.0.qualifier" installMode="root"/>
-      <feature id="ummisco.gama.feature.core.extensions" version="1.7.0.qualifier" installMode="root"/>
-      <feature id="ummisco.gama.feature.core" version="1.7.0.qualifier" installMode="root"/>
+      <feature id="ummisco.gama.feature.core.ui" installMode="root"/>
+      <feature id="ummisco.gama.feature.core.extensions" installMode="root"/>
+      <feature id="ummisco.gama.feature.core" installMode="root"/>
       <feature id="ummisco.gama.feature.dependencies" installMode="root"/>
-      <feature id="ummisco.gama.feature.models" version="1.7.0.qualifier" installMode="root"/>
-      <feature id="ummisco.gama.feature.core.ui" version="1.7.0.qualifier" installMode="root"/>
-      <feature id="ummisco.gama.feature.experiment.ui" version="1.7.0.qualifier" installMode="root"/>
-      <feature id="ummisco.gama.feature.modeling.ui" version="1.7.0.qualifier" installMode="root"/>
+      <feature id="ummisco.gama.feature.models" installMode="root"/>
+      <feature id="ummisco.gama.feature.core.ui" installMode="root"/>
+      <feature id="ummisco.gama.feature.experiment.ui" installMode="root"/>
+      <feature id="ummisco.gama.feature.modeling.ui" installMode="root"/>
    </features>
 
    <configurations>
@@ -293,12 +280,102 @@ openFile
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="5" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <property name="version" value="1.9" />
       <property name="eclipse.buildId" value="${build.id}" />
       <property name="org.eclipse.update.reconcile" value="false" />
-      <property name="version" value="1.9" />
    </configurations>
 
    <repositories>
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
+      <repository location="http://updates.gama-platform.org" enabled="true" />
+      <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
+      <repository location="http://anb0s.github.io/EasyShell" enabled="true" />
+      <repository location="http://updates.gama-platform.org/experimental" enabled="true" />
+      <repository location="http://updates.gama-platform.org/graphical_modeling" enabled="true" />
+      <repository location="http://www.irit.fr/genstar/p2updatesite/" enabled="true" />
       <repository location="http://updates.gama-platform.org" enabled="true" />
       <repository location="http://download.eclipse.org/tm/terminal/marketplace" enabled="true" />
       <repository location="http://anb0s.github.io/EasyShell" enabled="true" />

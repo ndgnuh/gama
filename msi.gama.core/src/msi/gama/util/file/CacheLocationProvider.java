@@ -26,7 +26,7 @@ public class CacheLocationProvider extends PathVariableResolver {
 
 	@Override
 	public String getValue(final String variable, final IResource resource) {
-		return FileUtils.CACHE.toURI().toASCIIString();
+		return FileUtils.CACHE().toURI().toASCIIString();
 	}
 
 }

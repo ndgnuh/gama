@@ -12,11 +12,15 @@ package ummisco.gama.ui.utils;
 import javax.swing.JPanel;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.internal.DPIUtil;
+
+import msi.gama.runtime.PlatformHelper;
 
 /**
  * Utility class gathering some useful and general method. Mainly convert forth and back graphical stuff between awt and
@@ -25,6 +29,7 @@ import org.eclipse.swt.graphics.GC;
 public class GraphicsHelper {
 
 	private final static String Az = "ABCpqr";
+	private static boolean isHiDPI = DPIUtil.getDeviceZoom() > 100;
 
 	/** A dummy JPanel used to provide font metrics. */
 	protected static final JPanel DUMMY_PANEL = new JPanel();
@@ -183,6 +188,42 @@ public class GraphicsHelper {
 			}
 		}
 		return new org.eclipse.swt.graphics.Color(device, color.getRed(), color.getGreen(), color.getBlue());
+	}
+
+	public static boolean isHiDPI() {
+		return isHiDPI;
+	}
+
+	public static int scaleDownIfMac(final int size) {
+		return PlatformHelper.isMac() ? DPIUtil.autoScaleDown(size) : size;
+	}
+
+	public static float scaleUpIfWin(final float size) {
+		return PlatformHelper.isWindows() ? DPIUtil.autoScaleUp(size) : size;
+	}
+
+	public static int scaleUpIfWin(final int size) {
+		return PlatformHelper.isWindows() ? DPIUtil.autoScaleUp(size) : size;
+	}
+
+	private static MouseEvent autoScaleDown(final MouseEvent e) {
+		e.x = DPIUtil.autoScaleDown(e.x);
+		e.y = DPIUtil.autoScaleDown(e.y);
+		return e;
+	}
+
+	static MouseEvent autoScaleUp(final MouseEvent e) {
+		e.x = DPIUtil.autoScaleDown(e.x);
+		e.y = DPIUtil.autoScaleDown(e.y);
+		return e;
+	}
+
+	public static MouseEvent scaleDownIfMac(final MouseEvent size) {
+		return PlatformHelper.isMac() ? autoScaleDown(size) : size;
+	}
+
+	public static MouseEvent scaleUpIfWin(final MouseEvent size) {
+		return PlatformHelper.isWindows() ? autoScaleUp(size) : size;
 	}
 
 }

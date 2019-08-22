@@ -10,8 +10,6 @@
  ********************************************************************************************************/
 package ummisco.gama.opengl.view;
 
-import static ummisco.gama.ui.utils.PlatformHelper.scaleDownIfMac;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -32,6 +30,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.locationtech.jts.geom.Envelope;
 
 import com.jogamp.opengl.FPSCounter;
 import com.jogamp.opengl.GL;
@@ -42,7 +41,6 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.swt.GLCanvas;
 import com.jogamp.opengl.util.GLBuffers;
-import org.locationtech.jts.geom.Envelope;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IDisplaySurface;
@@ -72,6 +70,7 @@ import ummisco.gama.opengl.renderer.JOGLRenderer;
 import ummisco.gama.ui.menus.AgentsMenu;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaIcons;
+import ummisco.gama.ui.utils.GraphicsHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.displays.DisplaySurfaceMenu;
 
@@ -173,7 +172,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 			}
 		}
 		final GLCanvas glad = renderer.getCanvas();
-		if (glad == null || glad.getGL() == null || glad.getGL().getContext() == null) { return null; }
+		if (glad == null || glad.getGL() == null || glad.getGL().getContext() == null)
+			return null;
 		final boolean current = glad.getGL().getContext().isCurrent();
 		if (!current) {
 			glad.getGL().getContext().makeCurrent();
@@ -204,8 +204,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	protected BufferedImage getImage(final GL2 gl3, final int ww, final int hh) {
 
 		// See #2628 and https://github.com/sgothel/jogl/commit/ca7f0fb61b0a608b6e684a5bbde71f6ecb6e3fe0
-		final int width = scaleDownIfMac(ww);
-		final int height = scaleDownIfMac(hh);
+		final int width = GraphicsHelper.scaleDownIfMac(ww);
+		final int height = GraphicsHelper.scaleDownIfMac(hh);
 		final BufferedImage screenshot = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		final Graphics graphics = screenshot.getGraphics();
 
@@ -237,7 +237,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	@Override
 	public void updateDisplay(final boolean force) {
 
-		if (alreadyUpdating) { return; }
+		if (alreadyUpdating)
+			return;
 		try {
 			alreadyUpdating = true;
 
@@ -283,7 +284,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 */
 	@Override
 	public void zoomIn() {
-		if (renderer.getData().cameraInteractionDisabled()) { return; }
+		if (renderer.getData().cameraInteractionDisabled())
+			return;
 		renderer.getCameraHelper().zoom(true);
 	}
 
@@ -294,7 +296,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 */
 	@Override
 	public void zoomOut() {
-		if (renderer.getData().cameraInteractionDisabled()) { return; }
+		if (renderer.getData().cameraInteractionDisabled())
+			return;
 		renderer.getCameraHelper().zoom(false);
 	}
 
@@ -452,9 +455,11 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	@Override
 	public GamaPoint getModelCoordinates() {
 		final GamaPoint mp = renderer.getCameraHelper().getMousePosition();
-		if (mp == null) { return null; }
+		if (mp == null)
+			return null;
 		final GamaPoint p = renderer.getRealWorldPointFromWindowPoint(mp);
-		if (p == null) { return null; }
+		if (p == null)
+			return null;
 		return new GamaPoint(p.x, -p.y);
 	}
 
@@ -479,7 +484,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 
 	@Override
 	public Envelope getVisibleRegionForLayer(final ILayer currentLayer) {
-		if (currentLayer instanceof OverlayLayer) { return getScope().getSimulation().getEnvelope(); }
+		if (currentLayer instanceof OverlayLayer)
+			return getScope().getSimulation().getEnvelope();
 		Envelope e = currentLayer.getData().getVisibleRegion();
 		if (e == null) {
 			e = new Envelope();
@@ -669,7 +675,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 
 	@Override
 	public void dispose() {
-		if (disposed) { return; }
+		if (disposed)
+			return;
 		disposed = true;
 		if (layerManager != null) {
 			layerManager.dispose();
@@ -696,7 +703,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	 */
 	@Override
 	public void changed(final Changes property, final Object value) {
-		if (renderer == null) { return; }
+		if (renderer == null)
+			return;
 		switch (property) {
 
 			case CHANGE_CAMERA:
@@ -770,15 +778,18 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 
 	@Override
 	public boolean isRealized() {
-		if (renderer == null) { return false; }
+		if (renderer == null)
+			return false;
 		final GLAutoDrawable d = renderer.getCanvas();
-		if (d == null) { return false; }
+		if (d == null)
+			return false;
 		return d.isRealized();
 	}
 
 	@Override
 	public boolean isRendered() {
-		if (renderer == null || renderer.getSceneHelper().getSceneToRender() == null) { return false; }
+		if (renderer == null || renderer.getSceneHelper().getSceneToRender() == null)
+			return false;
 		return renderer.getSceneHelper().getSceneToRender().rendered();
 	}
 

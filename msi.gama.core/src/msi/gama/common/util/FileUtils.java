@@ -87,26 +87,12 @@ public class FileUtils {
 	public static final String SEPARATOR = "/";
 	public static final IPath CACHE_FOLDER_PATH = new Path(".cache");
 	public static final IPath EXTERNAL_FOLDER_PATH = new Path("external");
-	static IWorkspaceRoot ROOT = ResourcesPlugin.getWorkspace().getRoot();
+	private static IWorkspaceRoot ROOT;
 	static IFileSystem FILE_SYSTEM = EFS.getLocalFileSystem();
 	static String USER_HOME = System.getProperty("user.home");
-	static final URI WORKSPACE_URI = URI.createURI(ROOT.getLocationURI().toString(), false);
-	public static final File CACHE;
+	private static URI WORKSPACE_URI;
+	private static File CACHE;
 	private static final FilenameFilter isDotFile = (dir, name) -> name.equals(".project");
-
-	static {
-		DEBUG.OFF();
-		CACHE = new File(ROOT.getLocation().toFile().getAbsolutePath() + SEPARATOR + CACHE_FOLDER_PATH.toString());
-		if (!CACHE.exists()) {
-			CACHE.mkdirs();
-		}
-		try {
-			ROOT.getPathVariableManager().setValue("CACHE_LOC", ROOT.getLocation().append(CACHE_FOLDER_PATH));
-		} catch (final CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Checks if is absolute path.
@@ -140,19 +126,19 @@ public class FileUtils {
 				}
 			}
 			final String file = findOutsideWorkspace(fp, modelBase, mustExist);
-			if (file != null) {
+			if (file != null)
 				// DEBUG.OUT("Hit with EFS-based search: " + file);
 				return file;
-			}
 		}
 		if (scope != null) {
 			final IExperimentAgent a = scope.getExperiment();
 			// No need to search more if the experiment is null
-			if (a == null) { return fp; }
+			if (a == null)
+				return fp;
 			if (!a.isHeadless()) {
 				// Necessary to ask the workspace for the containers as projects might be linked
 				final List<IContainer> paths = a.getWorkingPaths().stream()
-						.map(s -> ROOT.findContainersForLocation(new Path(s))[0]).collect(toList());
+						.map(s -> ROOT().findContainersForLocation(new Path(s))[0]).collect(toList());
 				for (final IContainer folder : paths) {
 					final String file = findInWorkspace(fp, folder, mustExist);
 					if (file != null) {
@@ -169,25 +155,28 @@ public class FileUtils {
 
 	private static String findInWorkspace(final String fp, final IContainer container, final boolean mustExist) {
 		final IPath full = container.getFullPath().append(fp);
-		IResource file = ROOT.getFile(full);
+		IResource file = ROOT().getFile(full);
 		if (!file.exists()) {
 			// Might be a folder we're looking for
-			file = ROOT.getFolder(full);
+			file = ROOT().getFolder(full);
 		}
 		if (!file.exists()) {
-			if (mustExist) { return null; }
+			if (mustExist)
+				return null;
 		}
 		return file.getLocation().toString();
 		// getLocation() works for regular and linked files
 	}
 
 	private static String findOutsideWorkspace(final String fp, final URI modelBase, final boolean mustExist) {
-		if (!mustExist) { return fp; }
+		if (!mustExist)
+			return fp;
 		final IFileStore file = FILE_SYSTEM.getStore(new Path(fp));
 		final IFileInfo info = file.fetchInfo();
 		if (info.exists()) {
 			final IFile linkedFile = createLinkToExternalFile(fp, modelBase);
-			if (linkedFile == null) { return fp; }
+			if (linkedFile == null)
+				return fp;
 			return linkedFile.getLocation().toFile().getAbsolutePath();
 		}
 		return null;
@@ -198,18 +187,21 @@ public class FileUtils {
 		// happens to be in the workspace
 		// (manageable by it)
 		final IPath filePath = new Path(path);
-		final IResource[] resources = ROOT.findFilesForLocation(filePath);
+		final IResource[] resources = ROOT().findFilesForLocation(filePath);
 		if (resources.length > 0) {
 			final IResource r = resources[0];
-			if (r instanceof IFile) { return (IFile) r; }
+			if (r instanceof IFile)
+				return (IFile) r;
 		}
 
 		final IFolder folder = createExternalFolder(workspaceResource);
-		if (folder == null) { return null; }
+		if (folder == null)
+			return null;
 		// We try to find an existing file linking to this uri (in case it has been
 		// renamed, for instance)
 		IFile file = findExistingLinkedFile(folder, path);
-		if (file != null) { return file; }
+		if (file != null)
+			return file;
 		// We get the file with the same last name
 		// If it already exists, we need to find it a new name as it doesnt point to the
 		// same absolute file
@@ -234,7 +226,8 @@ public class FileUtils {
 	 * @return an URI or null if it cannot be determined.
 	 */
 	public static URI getURI(final String target, final URI existingResource) {
-		if (target == null) { return null; }
+		if (target == null)
+			return null;
 		try {
 			final IPath path = Path.fromOSString(target);
 			final IFileStore file = EFS.getLocalFileSystem().getStore(path);
@@ -252,10 +245,11 @@ public class FileUtils {
 					root = existingResource;
 				}
 				if (root == null) {
-					root = WORKSPACE_URI;
+					root = WORKSPACE_URI();
 				}
 				final URI iu = first.resolve(root);
-				if (isFileExistingInWorkspace(iu)) { return iu; }
+				if (isFileExistingInWorkspace(iu))
+					return iu;
 				return null;
 			}
 		} catch (final Exception e) {
@@ -264,16 +258,19 @@ public class FileUtils {
 	}
 
 	public static boolean isFileExistingInWorkspace(final URI uri) {
-		if (uri == null) { return false; }
+		if (uri == null)
+			return false;
 		final IFile file = getWorkspaceFile(uri);
-		if (file != null) { return file.exists(); }
+		if (file != null)
+			return file.exists();
 		return false;
 	}
 
 	public static IFile getFile(final String path, final URI root, final boolean mustExist) {
 		final URI uri = getURI(path, root);
 		if (uri != null) {
-			if (uri.isPlatformResource()) { return getWorkspaceFile(uri); }
+			if (uri.isPlatformResource())
+				return getWorkspaceFile(uri);
 			return createLinkToExternalFile(path, root);
 		}
 		return null;
@@ -291,7 +288,7 @@ public class FileUtils {
 		final java.net.URI javaURI = URIUtil.toURI(path);// new java.io.File(path).toURI();
 
 		try {
-			resolvedURI = ROOT.getPathVariableManager().convertToRelative(javaURI, true, null);
+			resolvedURI = ROOT().getPathVariableManager().convertToRelative(javaURI, true, null);
 		} catch (final CoreException e1) {
 			resolvedURI = javaURI;
 		}
@@ -336,10 +333,12 @@ public class FileUtils {
 	}
 
 	private static IFolder createExternalFolder(final URI workspaceResource) {
-		if (workspaceResource == null || !isFileExistingInWorkspace(workspaceResource)) { return null; }
+		if (workspaceResource == null || !isFileExistingInWorkspace(workspaceResource))
+			return null;
 		final IFile root = getWorkspaceFile(workspaceResource);
 		final IProject project = root.getProject();
-		if (!project.exists()) { return null; }
+		if (!project.exists())
+			return null;
 		final IFolder folder = project.getFolder(EXTERNAL_FOLDER_PATH);
 		if (!folder.exists()) {
 			try {
@@ -356,25 +355,28 @@ public class FileUtils {
 		final IPath uriAsPath = new Path(URI.decode(uri.toString()));
 		IFile file;
 		try {
-			file = ROOT.getFile(uriAsPath);
+			file = ROOT().getFile(uriAsPath);
 		} catch (final Exception e1) {
 			return null;
 		}
-		if (file != null && file.exists()) { return file; }
+		if (file != null && file.exists())
+			return file;
 		final String uriAsText = uri.toPlatformString(true);
 		final IPath path = uriAsText != null ? new Path(uriAsText) : null;
-		if (path == null) { return null; }
+		if (path == null)
+			return null;
 		try {
-			file = ROOT.getFile(path);
+			file = ROOT().getFile(path);
 		} catch (final Exception e) {
 			return null;
 		}
-		if (file != null && file.exists()) { return file; }
+		if (file != null && file.exists())
+			return file;
 		return null;
 	}
 
 	public static String constructAbsoluteTempFilePath(final IScope scope, final URL url) {
-		return CACHE.getAbsolutePath() + SEPARATOR + url.getHost() + URL_SEPARATOR_REPLACEMENT
+		return CACHE().getAbsolutePath() + SEPARATOR + url.getHost() + URL_SEPARATOR_REPLACEMENT
 				+ url.getPath().replace(SEPARATOR, URL_SEPARATOR_REPLACEMENT);
 
 	}
@@ -387,7 +389,7 @@ public class FileUtils {
 
 	public static void cleanCache() {
 		if (GamaPreferences.External.CORE_HTTP_EMPTY_CACHE.getValue()) {
-			final File[] files = CACHE.listFiles();
+			final File[] files = CACHE().listFiles();
 			if (files != null) {
 				for (final File f : files) {
 					if (!f.isDirectory()) {
@@ -405,7 +407,8 @@ public class FileUtils {
 	public static boolean isDirectoryOrNullExternalFile(final String path) {
 		final IFileStore external = FILE_SYSTEM.getStore(new Path(path));
 		final IFileInfo info = external.fetchInfo();
-		if (info.isDirectory() || !info.exists()) { return true; }
+		if (info.isDirectory() || !info.exists())
+			return true;
 		return false;
 	}
 
@@ -422,7 +425,7 @@ public class FileUtils {
 					.readTimeout(GamaPreferences.External.CORE_HTTP_READ_TIMEOUT.getValue())
 					.retry(GamaPreferences.External.CORE_HTTP_RETRY_NUMBER.getValue(), false).asStream().getBody();) {
 				// final java.net.URI uri = URIUtil.toURI(pathName);
-				pathName = ROOT.getPathVariableManager().resolvePath(new Path(pathName)).toOSString();
+				pathName = ROOT().getPathVariableManager().resolvePath(new Path(pathName)).toOSString();
 				// pathName = ROOT.getPathVariableManager().resolveURI(uri).getPath();
 				final java.nio.file.Path p = new File(pathName).toPath();
 				if (Files.exists(p)) {
@@ -479,7 +482,8 @@ public class FileUtils {
 					IPath p = new Path(f.getAbsolutePath());
 					p = p.append(".project");
 					final IProjectDescription pd = ResourcesPlugin.getWorkspace().loadProjectDescription(p);
-					if (pd.hasNature(GAMA_NATURE)) { return true; }
+					if (pd.hasNature(GAMA_NATURE))
+						return true;
 				}
 			}
 		}
@@ -527,9 +531,11 @@ public class FileUtils {
 	}
 
 	public static void findProjects(final File folder, final Map<File, IPath> found) {
-		if (folder == null) { return; }
+		if (folder == null)
+			return;
 		final File[] dotFile = folder.listFiles(isDotFile);
-		if (dotFile == null) { return; } // not a directory
+		if (dotFile == null)
+			return;
 		if (dotFile.length == 0) { // no .project file
 			final File[] files = folder.listFiles();
 			if (files != null) {
@@ -573,15 +579,18 @@ public class FileUtils {
 	public static IFile findAndLoadIFile(final String filePath) throws CoreException {
 		// GAMA.getGui().debug("WorkspaceModelsManager.findAndLoadIFile " + filePath);
 		// No error in case of an empty argument
-		if (isBlank(filePath)) { return null; }
+		if (isBlank(filePath))
+			return null;
 		final IPath path = new Path(filePath);
 
 		// 1st case: the path can be identified as a file residing in the workspace
 		IFile result = findInWorkspace(path);
-		if (result != null) { return result; }
+		if (result != null)
+			return result;
 		// 2nd case: the path is outside the workspace
 		result = findOutsideWorkspace(path);
-		if (result != null) { return result; }
+		if (result != null)
+			return result;
 		// DEBUG.OUT(
 		// "File " + filePath + " cannot be located. Please check its name and location. Arguments provided were : " +
 		// Arrays.toString(CommandLineArgs.getApplicationArgs()));
@@ -589,11 +598,14 @@ public class FileUtils {
 	}
 
 	private static boolean isBlank(final String cs) {
-		if (cs == null) { return true; }
-		if (cs.isEmpty()) { return true; }
+		if (cs == null)
+			return true;
+		if (cs.isEmpty())
+			return true;
 		final int sz = cs.length();
 		for (int i = 0; i < sz; i++) {
-			if (!Character.isWhitespace(cs.charAt(i))) { return false; }
+			if (!Character.isWhitespace(cs.charAt(i)))
+				return false;
 		}
 		return true;
 	}
@@ -613,7 +625,8 @@ public class FileUtils {
 		} catch (final Exception e) {
 			return null;
 		}
-		if (!file.exists()) { return null; }
+		if (!file.exists())
+			return null;
 		return file;
 	}
 
@@ -621,7 +634,8 @@ public class FileUtils {
 		// GAMA.getGui().debug("WorkspaceModelsManager.findOutsideWorkspace " + originalPath);
 		final File modelFile = new File(originalPath.toOSString());
 		// TODO If the file does not exist we return null (might be a good idea to check other locations)
-		if (!modelFile.exists()) { return null; }
+		if (!modelFile.exists())
+			return null;
 
 		// We try to find a folder containing the model file which can be considered as a project
 		File projectFileBean = new File(modelFile.getPath());
@@ -727,7 +741,8 @@ public class FileUtils {
 					GAMA.getGui().error("Error wien creating project: " + e.getMessage());
 				}
 			}
-			if (monitor.isCanceled()) { throw new OperationCanceledException(); }
+			if (monitor.isCanceled())
+				throw new OperationCanceledException();
 			try {
 				project.open(IResource.BACKGROUND_REFRESH, m.split(1000));
 			} catch (final CoreException e) {
@@ -748,11 +763,11 @@ public class FileUtils {
 			if (iFile.exists()) {
 				if (iFile.isLinked()) {
 					final IPath path = iFile.getLocation();
-					if (path.equals(location)) {
+					if (path.equals(location))
 						// First case, this is a linked resource to the same location. In that case, we simply return
 						// its name.
 						return iFile;
-					} else {
+					else {
 						// Second case, this resource is a link to another location. We create a filename that is
 						// guaranteed not to exist and change iFile accordingly.
 						iFile = FileUtils.createUniqueFileFrom(iFile, modelFolder);
@@ -773,6 +788,64 @@ public class FileUtils {
 							+ " cannot be created because of the following exception " + e.getMessage());
 			return null;
 		}
+	}
+
+	public static File findIniFile() {
+		final String path = Platform.getConfigurationLocation().getURL().getPath();
+		DEBUG.OUT("Install location of GAMA is " + path);
+		File dir = new File(path);
+		File result = findIn(dir);
+		if (result == null) {
+			if (Platform.getOS().equals(Platform.OS_MACOSX)) {
+				dir = new File(path + "Gama.app/Contents/MacOS");
+				result = findIn(dir);
+				if (result == null) {
+					dir = new File(path + "Gama.app/Eclipse");
+					result = findIn(dir);
+				}
+			} else {
+				dir = dir.getParentFile();
+				result = findIn(dir);
+			}
+		}
+		return result;
+	}
+
+	private static File findIn(final File path) {
+		DEBUG.OUT("Looking for ini file in " + path);
+		final File ini = new File(path.getAbsolutePath() + "/Gama.ini");
+		return ini.exists() ? ini : null;
+	}
+
+	public static File CACHE() {
+		if (CACHE == null) {
+			CACHE = new File(
+					ROOT().getLocation().toFile().getAbsolutePath() + SEPARATOR + CACHE_FOLDER_PATH.toString());
+			if (!CACHE.exists()) {
+				CACHE.mkdirs();
+			}
+			try {
+				ROOT().getPathVariableManager().setValue("CACHE_LOC", ROOT().getLocation().append(CACHE_FOLDER_PATH));
+			} catch (final CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return CACHE;
+	}
+
+	static IWorkspaceRoot ROOT() {
+		if (ROOT == null) {
+			ROOT = ResourcesPlugin.getWorkspace().getRoot();
+		}
+		return ROOT;
+	}
+
+	static URI WORKSPACE_URI() {
+		if (WORKSPACE_URI == null) {
+			WORKSPACE_URI = URI.createURI(ROOT().getLocationURI().toString(), false);
+		}
+		return WORKSPACE_URI;
 	}
 
 }

@@ -68,7 +68,7 @@ import ummisco.gama.opengl.scene.GeometryDrawer;
 import ummisco.gama.opengl.scene.ObjectDrawer;
 import ummisco.gama.opengl.scene.ResourceDrawer;
 import ummisco.gama.opengl.scene.StringDrawer;
-import ummisco.gama.ui.utils.PlatformHelper;
+import ummisco.gama.ui.utils.GraphicsHelper;
 
 /**
  * A class that represents an intermediate state between the rendering and the opengl state. It captures all the
@@ -795,7 +795,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	// TEXT
 
 	private int computeFontSize(final int size) {
-		return PlatformHelper.scaleUpIfWin(Math.round(size * textSizeMultiplier));
+		return GraphicsHelper.scaleUpIfWin(Math.round(size * textSizeMultiplier));
 	}
 
 	public void cacheFont(final Font f) {

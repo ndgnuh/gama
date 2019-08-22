@@ -17,6 +17,7 @@ import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.osgi.service.datalocation.Location;
 import msi.gama.application.workspace.WorkspaceManager;
 import msi.gama.runtime.GAMA;
+import msi.gama.runtime.MemoryUtils;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.operators.Dates;
@@ -26,6 +27,7 @@ public class Application implements IApplication {
 
 	@Override
 	public Object start(final IApplicationContext context) throws Exception {
+		MemoryUtils.initialize();
 		GamaBundleLoader.loadUI();
 
 		// while (GAMA.getRegularGui() == null) {
@@ -34,15 +36,16 @@ public class Application implements IApplication {
 		// } catch (final InterruptedException e2) {}
 		// }
 		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-			if ( e instanceof OutOfMemoryError &&
-				GAMA.getGui().confirm("Out of memory", "GAMA is out of memory. Do you want to close now ?") ) {
+			if ( e instanceof OutOfMemoryError
+				&& GAMA.getGui().confirm("Out of memory", "GAMA is out of memory. Do you want to close now ?") ) {
 				this.stop();
 			}
 			e.printStackTrace();
 		});
 
 		final Object check = WorkspaceManager.checkWorkspace();
-		if ( EXIT_OK.equals(check) ) { return EXIT_OK; }
+		if ( EXIT_OK.equals(check) )
+			return EXIT_OK;
 
 		/*
 		 * Early build of various GAML/GAMA contributions
@@ -56,7 +59,8 @@ public class Application implements IApplication {
 			Dates.initialize();
 		});
 		try {
-			if ( GAMA.getGui().runUI() == 1 /* PlatformUI.RETURN_RESTART */ ) { return IApplication.EXIT_RESTART; }
+			if ( GAMA.getGui().runUI() == 1 /* PlatformUI.RETURN_RESTART */ )
+				return IApplication.EXIT_RESTART;
 			return IApplication.EXIT_OK;
 		} finally {
 			final Location instanceLoc = Platform.getInstanceLocation();

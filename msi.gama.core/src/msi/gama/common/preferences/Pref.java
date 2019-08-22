@@ -50,6 +50,7 @@ public class Pref<T> implements IParameter {
 	boolean slider = true; // by default
 	String[] enables, disables;
 	Set<IPreferenceChangeListener<T>> listeners = new HashSet<>();
+	boolean restart = false; // by default
 	// private T[] v;
 
 	Pref(final String key, final int type, final boolean inGaml) {
@@ -65,6 +66,15 @@ public class Pref<T> implements IParameter {
 
 	public boolean isDisabled() {
 		return disabled;
+	}
+
+	public boolean shouldRestartAfterChange() {
+		return restart;
+	}
+
+	public Pref<T> restartRequired() {
+		restart = true;
+		return this;
 	}
 
 	public Pref<T> onChange(final IPreferenceAfterChangeListener<T> consumer) {

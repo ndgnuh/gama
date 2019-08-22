@@ -18,7 +18,7 @@ import msi.gama.outputs.LayeredDisplayData;
 import msi.gaml.operators.Maths;
 import ummisco.gama.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
-import ummisco.gama.ui.utils.PlatformHelper;
+import ummisco.gama.ui.utils.GraphicsHelper;
 
 public class CameraArcBall extends AbstractCamera {
 
@@ -378,8 +378,8 @@ public class CameraArcBall extends AbstractCamera {
 			final int selectedCorner = getRenderer().getKeystoneHelper().getCornerSelected();
 			if (selectedCorner != -1) {
 				final GamaPoint origin = getNormalizedCoordinates(getMousePosition().x, getMousePosition().y);
-				x = PlatformHelper.scaleUpIfWin(e.x);
-				y = PlatformHelper.scaleUpIfWin(e.y);
+				x = GraphicsHelper.scaleUpIfWin(e.x);
+				y = GraphicsHelper.scaleUpIfWin(e.y);
 				GamaPoint p = getNormalizedCoordinates(x, y);
 				final GamaPoint translation = origin.minus(p).yNegated();
 				p = getRenderer().getKeystoneHelper().getKeystoneCoordinates(selectedCorner).plus(-translation.x,
@@ -395,7 +395,7 @@ public class CameraArcBall extends AbstractCamera {
 
 		super.internalMouseMove(e);
 		if ((e.stateMask & SWT.BUTTON_MASK) == 0) { return; }
-		final GamaPoint newPoint = new GamaPoint(PlatformHelper.scaleUpIfWin(x), PlatformHelper.scaleUpIfWin(y));
+		final GamaPoint newPoint = new GamaPoint(GraphicsHelper.scaleUpIfWin(x), GraphicsHelper.scaleUpIfWin(y));
 		if (cameraInteraction && GamaKeyBindings.ctrl(e)) {
 			final int horizMovement = (int) (newPoint.x - lastMousePressedPosition.x);
 			final int vertMovement = (int) (newPoint.y - lastMousePressedPosition.y);
@@ -455,8 +455,8 @@ public class CameraArcBall extends AbstractCamera {
 			// phi = phi - vertMovement_real * get_sensivity();
 			updateCartesianCoordinatesFromAngles();
 		} else if (shiftPressed && isViewInXYPlan()) {
-			getMousePosition().x = PlatformHelper.scaleUpIfWin(x);
-			getMousePosition().y = PlatformHelper.scaleUpIfWin(y);
+			getMousePosition().x = GraphicsHelper.scaleUpIfWin(x);
+			getMousePosition().y = GraphicsHelper.scaleUpIfWin(y);
 			getRenderer().getOpenGLHelper().defineROI(
 					new GamaPoint(firstMousePressedPosition.x, firstMousePressedPosition.y),
 					new GamaPoint(getMousePosition().x, getMousePosition().y));
@@ -467,8 +467,8 @@ public class CameraArcBall extends AbstractCamera {
 			getRenderer().getOpenGLHelper().getROIEnvelope().translate(p.x, p.y);
 
 		} else if (cameraInteraction) {
-			int horizMovement = (int) (PlatformHelper.scaleUpIfWin(x) - lastMousePressedPosition.x);
-			int vertMovement = (int) (PlatformHelper.scaleUpIfWin(y) - lastMousePressedPosition.y);
+			int horizMovement = (int) (GraphicsHelper.scaleUpIfWin(x) - lastMousePressedPosition.x);
+			int vertMovement = (int) (GraphicsHelper.scaleUpIfWin(y) - lastMousePressedPosition.y);
 			if (flipped) {
 				horizMovement = -horizMovement;
 				vertMovement = -vertMovement;

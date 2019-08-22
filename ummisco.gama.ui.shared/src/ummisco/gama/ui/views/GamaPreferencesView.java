@@ -81,7 +81,6 @@ public class GamaPreferencesView {
 	public static int NB_DIVISIONS = 2;
 
 	static GamaPreferencesView instance;
-	static boolean restartRequired;
 
 	public static void show() {
 		if (instance == null || instance.shell == null || instance.shell.isDisposed()) {
@@ -313,7 +312,8 @@ public class GamaPreferencesView {
 				final FileDialog fd = new FileDialog(shell, SWT.OPEN);
 				fd.setFilterExtensions(new String[] { "*.prefs" });
 				final String path = fd.open();
-				if (path == null) { return; }
+				if (path == null)
+					return;
 				GamaPreferences.applyPreferencesFrom(path, modelValues);
 				for (final IParameterEditor ed : editors.values()) {
 					ed.updateValue(true);
@@ -334,7 +334,8 @@ public class GamaPreferencesView {
 				fd.setFilterExtensions(new String[] { "*.gaml" });
 				fd.setOverwrite(false);
 				final String path = fd.open();
-				if (path == null) { return; }
+				if (path == null)
+					return;
 				GamaPreferences.savePreferencesTo(path);
 			}
 
@@ -363,13 +364,14 @@ public class GamaPreferencesView {
 
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				GamaPreferences.setNewPreferences(modelValues);
+				boolean restartRequired = GamaPreferences.setNewPreferences(modelValues);
 				if (restartRequired) {
-					restartRequired = false;
-					final boolean restart = Messages.confirm("Restart ?", "Restart GAMA now ?");
+					final boolean restart = Messages.confirm("Restart GAMA", "Restart GAMA now ?");
 					if (restart) {
 						close();
 						PlatformUI.getWorkbench().restart(true);
+					} else {
+						close();
 					}
 				} else {
 					close();
@@ -456,7 +458,8 @@ public class GamaPreferencesView {
 	}
 
 	private void saveDialogProperties() {
-		if (shell.isDisposed()) { return; }
+		if (shell.isDisposed())
+			return;
 		saveLocation();
 		saveSize();
 		saveTab();
@@ -491,11 +494,6 @@ public class GamaPreferencesView {
 		}
 
 		saveDialogProperties();
-
-	}
-
-	public static void setRestartRequired() {
-		restartRequired = true;
 
 	}
 

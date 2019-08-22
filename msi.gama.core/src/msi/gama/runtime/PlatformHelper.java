@@ -15,28 +15,20 @@
  * Contributors: SAS Institute Inc. - initial API and implementation ILOG S.A. - initial API and implementation IBM
  * Corporation - Java/SWT versioning code (from org.eclipse.swt.internal.Library)
  *******************************************************************************/
-package ummisco.gama.ui.utils;
+package msi.gama.runtime;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.internal.DPIUtil;
 
-public class PlatformHelper extends DPIUtil {
+public class PlatformHelper {
 
-	private static String platformString = SWT.getPlatform();
-	private static boolean isWindows = "win32".equals(platformString);
-	private static boolean isMac = "cocoa".equals(platformString) || "carbon".equals(platformString);
-	private static boolean isLinux = "gtk".equals(platformString);
-	private static boolean isHiDPI = DPIUtil.getDeviceZoom() > 100;
+	private static String platformString = Platform.getOS();
+	private static boolean isWindows = Platform.OS_WIN32.equals(platformString);
+	private static boolean isMac = Platform.OS_MACOSX.equals(platformString);
+	private static boolean isLinux = Platform.OS_LINUX.equals(platformString);
 
 	private static Boolean isDeveloper;
 
 	private PlatformHelper() {}
-
-	public static boolean isHiDPI() {
-		return isHiDPI;
-	}
 
 	public static boolean isWindows() {
 		return isWindows;
@@ -58,38 +50,6 @@ public class PlatformHelper extends DPIUtil {
 		return isDeveloper;
 	}
 
-	public static int scaleDownIfMac(final int size) {
-		return isMac ? autoScaleDown(size) : size;
-	}
-
-	public static float scaleUpIfWin(final float size) {
-		return isWindows ? autoScaleUp(size) : size;
-	}
-
-	public static int scaleUpIfWin(final int size) {
-		return isWindows ? autoScaleUp(size) : size;
-	}
-
-	private static MouseEvent autoScaleDown(final MouseEvent e) {
-		e.x = autoScaleDown(e.x);
-		e.y = autoScaleDown(e.y);
-		return e;
-	}
-
-	private static MouseEvent autoScaleUp(final MouseEvent e) {
-		e.x = autoScaleDown(e.x);
-		e.y = autoScaleDown(e.y);
-		return e;
-	}
-
-	public static MouseEvent scaleDownIfMac(final MouseEvent size) {
-		return isMac ? autoScaleDown(size) : size;
-	}
-
-	public static MouseEvent scaleUpIfWin(final MouseEvent size) {
-		return isWindows ? autoScaleUp(size) : size;
-	}
-
 	/**
 	 * The JAVA version
 	 */
@@ -99,7 +59,8 @@ public class PlatformHelper extends DPIUtil {
 	}
 
 	static int parseVersion(final String version) {
-		if (version == null) { return 0; }
+		if (version == null)
+			return 0;
 		int major = 0, minor = 0, micro = 0;
 		final int length = version.length();
 		int index = 0, start = 0;

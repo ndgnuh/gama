@@ -140,7 +140,7 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 				WorkspaceModelsManager.instance.openModelPassedAsArgument(args[args.length - 1]);
 			}
 		}
-		Activator.instance.splash.close();
+		SwtGui.splash.close();
 		GAMA.getGui().updateExperimentState(null, SwtGui.NONE);
 	}
 

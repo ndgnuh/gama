@@ -47,6 +47,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.internal.WorkbenchWindow;
 import org.eclipse.ui.progress.UIJob;
 
@@ -123,6 +124,7 @@ public class WorkbenchHelper {
 	}
 
 	public static Display getDisplay() {
+		if (Workbench.getInstance() == null) return Display.getDefault();
 		return getWorkbench().getDisplay();
 	}
 
