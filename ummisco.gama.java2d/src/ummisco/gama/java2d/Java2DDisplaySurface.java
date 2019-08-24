@@ -52,6 +52,7 @@ import msi.gama.common.interfaces.ILayer;
 import msi.gama.common.interfaces.ILayerManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.ImageUtils;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
@@ -66,7 +67,6 @@ import msi.gama.precompiler.GamlAnnotations.display;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
-import msi.gama.runtime.PlatformHelper;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import ummisco.gama.dev.utils.DEBUG;
@@ -771,7 +771,7 @@ public class Java2DDisplaySurface extends JPanel implements IDisplaySurface {
 	public Font computeFont(final Font f) {
 		if (f == null)
 			return null;
-		if (PlatformHelper.isWindows() && GraphicsHelper.isHiDPI())
+		if (PlatformUtils.isWindows() && GraphicsHelper.isHiDPI())
 			return f.deriveFont(GraphicsHelper.scaleUpIfWin(f.getSize2D()));
 		return f;
 

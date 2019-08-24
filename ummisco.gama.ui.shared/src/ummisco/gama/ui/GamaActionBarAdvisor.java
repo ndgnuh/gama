@@ -119,7 +119,7 @@ public class GamaActionBarAdvisor extends ActionBarAdvisor {
 			this.newWizardMenu = new BaseNewWizardMenu(getWindow(), null) {
 
 				@Override
-				protected void addItems(final List list) {
+				protected void addItems(final List<IContributionItem> list) {
 					addShortcuts(list);
 				}
 			};

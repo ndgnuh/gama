@@ -13,7 +13,6 @@ package msi.gaml.architecture.simplebdi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.precompiler.GamlAnnotations.doc;
@@ -413,7 +412,7 @@ public class RuleStatement extends AbstractStatement {
 				&& newUncertainties == null && removeBeliefs == null && removeDesires == null && removeEmotions == null
 				&& removeUncertainties == null)
 			return null;
-		boolean allVal = (all != null) && Cast.asBool(scope, all.value(scope));
+		boolean allVal = all != null && Cast.asBool(scope, all.value(scope));
 		List<Predicate> predBeliefList = null;
 		List<Predicate> predUncertaintyList = null;
 		List<Predicate> predIdealList = null;
@@ -424,7 +423,7 @@ public class RuleStatement extends AbstractStatement {
 				tempBelief.setPredicate((Predicate) belief.value(scope));
 				has_belief = SimpleBdiArchitecture.hasBelief(scope, tempBelief);
 				if (has_belief) {
-					predBeliefList = new ArrayList<Predicate>();
+					predBeliefList = new ArrayList<>();
 					for (final MentalState mental : SimpleBdiArchitecture.getBase(scope,
 							SimpleBdiArchitecture.BELIEF_BASE)) {
 						if (mental.getPredicate() != null) {
@@ -447,7 +446,7 @@ public class RuleStatement extends AbstractStatement {
 						tempUncertainty.setPredicate((Predicate) uncertainty.value(scope));
 						has_uncertainty = SimpleBdiArchitecture.hasUncertainty(scope, tempUncertainty);
 						if (has_uncertainty) {
-							predUncertaintyList = new ArrayList<Predicate>();
+							predUncertaintyList = new ArrayList<>();
 							for (final MentalState mental : SimpleBdiArchitecture.getBase(scope,
 									SimpleBdiArchitecture.UNCERTAINTY_BASE)) {
 								if (mental.getPredicate() != null) {
@@ -465,7 +464,7 @@ public class RuleStatement extends AbstractStatement {
 							tempIdeal.setPredicate((Predicate) ideal.value(scope));
 							has_ideal = SimpleBdiArchitecture.hasIdeal(scope, tempIdeal);
 							if (has_ideal) {
-								predIdealList = new ArrayList<Predicate>();
+								predIdealList = new ArrayList<>();
 								for (final MentalState mental : SimpleBdiArchitecture.getBase(scope,
 										SimpleBdiArchitecture.IDEAL_BASE)) {
 									if (mental.getPredicate() != null) {
@@ -504,7 +503,7 @@ public class RuleStatement extends AbstractStatement {
 																							.value(scope)) {
 																if (newDesire != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -512,10 +511,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -529,7 +527,8 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addDesire(scope,
 																						null, tempNewDesire);
 																			}
-																		if (predUncertaintyList != null)
+																		}
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -537,10 +536,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -554,7 +552,8 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addDesire(scope,
 																						null, tempNewDesire);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -562,10 +561,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -579,6 +577,7 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addDesire(scope,
 																						null, tempNewDesire);
 																			}
+																		}
 																	} else {
 																		final Predicate newDes =
 																				(Predicate) newDesire.value(scope);
@@ -599,7 +598,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (newBelief != null) {
 																	if (allVal) {
-																		if (predUncertaintyList != null)
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -607,10 +606,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -624,7 +622,8 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addDesire(scope,
 																						null, tempNewDesire);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -632,10 +631,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -649,6 +647,7 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addBelief(scope,
 																						tempNewDesire);
 																			}
+																		}
 																	} else {
 																		final Predicate newBel =
 																				(Predicate) newBelief.value(scope);
@@ -673,7 +672,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (newUncertainty != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate newUncert =
 																						(Predicate) newUncertainty
@@ -682,10 +681,8 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Uncertainty",
 																								newUncert);
 																				tempNewUncertainty.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewUncertainty.setStrength(
 																							Cast.asFloat(scope, strength
@@ -699,7 +696,8 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addUncertainty(
 																						scope, tempNewUncertainty);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -707,10 +705,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -724,6 +721,7 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addUncertainty(
 																						scope, tempNewDesire);
 																			}
+																		}
 																	} else {
 																		final Predicate newUncert =
 																				(Predicate) newUncertainty.value(scope);
@@ -744,7 +742,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (newIdeal != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate newIde =
 																						(Predicate) newIdeal
@@ -752,10 +750,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewIdeal =
 																						new MentalState("Ideal",
 																								newIde);
-																				tempNewIdeal.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewIdeal.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewIdeal.setStrength(
 																							Cast.asFloat(scope, strength
@@ -769,7 +766,8 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addIdeal(scope,
 																						tempNewIdeal);
 																			}
-																		if (predUncertaintyList != null)
+																		}
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate newDes =
 																						(Predicate) newDesire
@@ -777,10 +775,9 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempNewDesire =
 																						new MentalState("Desire",
 																								newDes);
-																				tempNewDesire.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempNewDesire.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				if (strength != null) {
 																					tempNewDesire.setStrength(
 																							Cast.asFloat(scope, strength
@@ -794,6 +791,7 @@ public class RuleStatement extends AbstractStatement {
 																				SimpleBdiArchitecture.addIdeal(scope,
 																						tempNewDesire);
 																			}
+																		}
 																	} else {
 																		final Predicate newIde =
 																				(Predicate) newIdeal.value(scope);
@@ -813,7 +811,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (removeBelief != null) {
 																	if (allVal) {
-																		if (predUncertaintyList != null)
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate removBel =
 																						(Predicate) removeBelief
@@ -822,14 +820,13 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Belief",
 																								removBel);
 																				tempRemoveBelief.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeBelief(
 																						scope, tempRemoveBelief);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate removBel =
 																						(Predicate) removeBelief
@@ -838,13 +835,12 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Belief",
 																								removBel);
 																				tempRemoveBelief.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeBelief(
 																						scope, tempRemoveBelief);
 																			}
+																		}
 																	} else {
 																		final Predicate removBel =
 																				(Predicate) removeBelief.value(scope);
@@ -856,7 +852,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (removeDesire != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate removeDes =
 																						(Predicate) removeDesire
@@ -865,14 +861,13 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Desire",
 																								removeDes);
 																				tempRemoveDesire.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeDesire(
 																						scope, tempRemoveDesire);
 																			}
-																		if (predUncertaintyList != null)
+																		}
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate removeDes =
 																						(Predicate) removeDesire
@@ -881,14 +876,13 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Desire",
 																								removeDes);
 																				tempRemoveDesire.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeDesire(
 																						scope, tempRemoveDesire);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate removeDes =
 																						(Predicate) removeDesire
@@ -897,13 +891,12 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Desire",
 																								removeDes);
 																				tempRemoveDesire.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeDesire(
 																						scope, tempRemoveDesire);
 																			}
+																		}
 																	} else {
 																		final Predicate removeDes =
 																				(Predicate) removeDesire.value(scope);
@@ -929,7 +922,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (removeUncertainty != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate removUncert =
 																						(Predicate) removeUncertainty
@@ -938,14 +931,13 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Uncertainty",
 																								removUncert);
 																				tempRemoveUncertainty.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeUncertainty(
 																						scope, tempRemoveUncertainty);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate removUncert =
 																						(Predicate) removeUncertainty
@@ -954,13 +946,12 @@ public class RuleStatement extends AbstractStatement {
 																						new MentalState("Uncertainty",
 																								removUncert);
 																				tempRemoveUncertainty.getPredicate()
-																						.setValues(
-																								(Map<String, Object>) System
-																										.opCopy(scope, p
-																												.getValues()));
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeUncertainty(
 																						scope, tempRemoveUncertainty);
 																			}
+																		}
 																	} else {
 																		final Predicate removUncert =
 																				(Predicate) removeUncertainty
@@ -974,7 +965,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (removeIdeal != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate removeIde =
 																						(Predicate) removeIdeal
@@ -982,14 +973,14 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempRemoveIde =
 																						new MentalState("Ideal",
 																								removeIde);
-																				tempRemoveIde.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempRemoveIde.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeIdeal(scope,
 																						tempRemoveIde);
 																			}
-																		if (predUncertaintyList != null)
+																		}
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate removeIde =
 																						(Predicate) removeIdeal
@@ -997,13 +988,13 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempRemoveIde =
 																						new MentalState("Ideal",
 																								removeIde);
-																				tempRemoveIde.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempRemoveIde.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeIdeal(scope,
 																						tempRemoveIde);
 																			}
+																		}
 																	} else {
 																		final Predicate removeIde =
 																				(Predicate) removeIdeal.value(scope);
@@ -1015,7 +1006,7 @@ public class RuleStatement extends AbstractStatement {
 																}
 																if (removeObligation != null) {
 																	if (allVal) {
-																		if (predBeliefList != null)
+																		if (predBeliefList != null) {
 																			for (Predicate p : predBeliefList) {
 																				final Predicate removeObl =
 																						(Predicate) removeObligation
@@ -1023,14 +1014,14 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempRemoveObl =
 																						new MentalState("Obligation",
 																								removeObl);
-																				tempRemoveObl.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempRemoveObl.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeObligation(
 																						scope, tempRemoveObl);
 																			}
-																		if (predUncertaintyList != null)
+																		}
+																		if (predUncertaintyList != null) {
 																			for (Predicate p : predUncertaintyList) {
 																				final Predicate removeObl =
 																						(Predicate) removeObligation
@@ -1038,14 +1029,14 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempRemoveObl =
 																						new MentalState("Obligation",
 																								removeObl);
-																				tempRemoveObl.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempRemoveObl.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeObligation(
 																						scope, tempRemoveObl);
 																			}
-																		if (predIdealList != null)
+																		}
+																		if (predIdealList != null) {
 																			for (Predicate p : predIdealList) {
 																				final Predicate removeObl =
 																						(Predicate) removeObligation
@@ -1053,13 +1044,13 @@ public class RuleStatement extends AbstractStatement {
 																				final MentalState tempRemoveObl =
 																						new MentalState("Obligation",
 																								removeObl);
-																				tempRemoveObl.getPredicate().setValues(
-																						(Map<String, Object>) System
-																								.opCopy(scope,
-																										p.getValues()));
+																				tempRemoveObl.getPredicate()
+																						.setValues(System.opCopy(scope,
+																								p.getValues()));
 																				SimpleBdiArchitecture.removeObligation(
 																						scope, tempRemoveObl);
 																			}
+																		}
 																	} else {
 																		final Predicate removeObl =
 																				(Predicate) removeObligation
@@ -1110,8 +1101,9 @@ public class RuleStatement extends AbstractStatement {
 																if (newEmotions != null) {
 																	final List<Emotion> newEmos =
 																			(List<Emotion>) newEmotions.value(scope);
-																	for (final Emotion newEmo : newEmos)
+																	for (final Emotion newEmo : newEmos) {
 																		SimpleBdiArchitecture.addEmotion(scope, newEmo);
+																	}
 																}
 																if (newUncertainties != null) {
 																	final List<Predicate> newUncerts =
@@ -1176,9 +1168,10 @@ public class RuleStatement extends AbstractStatement {
 																if (removeEmotions != null) {
 																	final List<Emotion> removeEmos =
 																			(List<Emotion>) removeEmotions.value(scope);
-																	for (final Emotion removeEmo : removeEmos)
+																	for (final Emotion removeEmo : removeEmos) {
 																		SimpleBdiArchitecture.removeEmotion(scope,
 																				removeEmo);
+																	}
 																}
 																if (removeUncertainties != null) {
 																	final List<Predicate> removUncerts =

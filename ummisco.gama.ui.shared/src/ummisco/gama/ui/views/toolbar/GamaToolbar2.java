@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ToolItem;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import ummisco.gama.ui.controls.FlatButton;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
@@ -111,7 +111,7 @@ public class GamaToolbar2 extends Composite {
 		final GamaIcon icon = GamaIcons.createSizer(getBackground(), n, height);
 		final ToolItem item = create(icon.getCode(), null, null, null, SWT.NONE, false, null, side);
 		item.setDisabledImage(icon.image());
-		if (!PlatformHelper.isLinux()) {
+		if (!PlatformUtils.isLinux()) {
 			item.setEnabled(false);
 		}
 		return item;

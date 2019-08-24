@@ -47,8 +47,8 @@ import org.eclipse.ui.navigator.CommonNavigatorManager;
 import org.eclipse.ui.navigator.CommonViewer;
 
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.navigator.contents.NavigatorRoot;
 import ummisco.gama.ui.navigator.contents.Tag;
 import ummisco.gama.ui.navigator.contents.TopLevelFolder;
@@ -282,7 +282,7 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 	@Override
 	public void createToolItems(final GamaToolbar2 tb) {
 		this.toolbar = tb;
-		if (PlatformHelper.isWindows() || PlatformHelper.isLinux()) {
+		if (PlatformUtils.isWindows() || PlatformUtils.isLinux()) {
 			tb.sep(24, SWT.RIGHT);
 			findControl = new NavigatorSearchControl(this).fill(toolbar.getToolbar(SWT.RIGHT));
 			linkItem = tb.check(linkCommand, SWT.RIGHT);

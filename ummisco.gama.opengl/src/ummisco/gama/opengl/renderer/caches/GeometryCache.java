@@ -13,14 +13,14 @@ package ummisco.gama.opengl.renderer.caches;
 import static com.google.common.cache.CacheBuilder.newBuilder;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static msi.gama.common.geometry.GeometryUtils.getTypeOf;
-import static msi.gama.metamodel.shape.IShape.Type.CIRCLE;
-import static msi.gama.metamodel.shape.IShape.Type.CONE;
-import static msi.gama.metamodel.shape.IShape.Type.CUBE;
-import static msi.gama.metamodel.shape.IShape.Type.CYLINDER;
-import static msi.gama.metamodel.shape.IShape.Type.POINT;
-import static msi.gama.metamodel.shape.IShape.Type.PYRAMID;
-import static msi.gama.metamodel.shape.IShape.Type.SPHERE;
-import static msi.gama.metamodel.shape.IShape.Type.SQUARE;
+import static org.locationtech.jts.geom.ShapeType.CIRCLE;
+import static org.locationtech.jts.geom.ShapeType.CONE;
+import static org.locationtech.jts.geom.ShapeType.CUBE;
+import static org.locationtech.jts.geom.ShapeType.CYLINDER;
+import static org.locationtech.jts.geom.ShapeType.POINT;
+import static org.locationtech.jts.geom.ShapeType.PYRAMID;
+import static org.locationtech.jts.geom.ShapeType.SPHERE;
+import static org.locationtech.jts.geom.ShapeType.SQUARE;
 
 import java.nio.DoubleBuffer;
 import java.util.Map;
@@ -30,6 +30,7 @@ import java.util.function.Consumer;
 
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFilter;
+import org.locationtech.jts.geom.ShapeType;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheLoader;
@@ -43,7 +44,6 @@ import msi.gama.common.geometry.ICoordinates;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.shape.IShape.Type;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gama.util.file.GamaGeometryFile;
@@ -108,7 +108,7 @@ public class GeometryCache {
 		}
 	}
 
-	private final Cache<IShape.Type, BuiltInGeometry> builtInCache;
+	private final Cache<ShapeType, BuiltInGeometry> builtInCache;
 	private final LoadingCache<String, Integer> fileCache;
 	private final Map<String, GamaGeometryFile> fileMap = new ConcurrentHashMap<>();
 	private final Map<String, GamaGeometryFile> geometriesToProcess = new ConcurrentHashMap<>();
@@ -122,7 +122,8 @@ public class GeometryCache {
 		envelopes = newBuilder().expireAfterAccess(10, MINUTES).build();
 		builtInCache = newBuilder().concurrencyLevel(2).initialCapacity(10).build();
 		fileCache = newBuilder().expireAfterAccess(10, MINUTES).initialCapacity(10).removalListener((notif) -> {
-			if (renderer.isDisposed()) { return; }
+			if (renderer.isDisposed())
+				return;
 			renderer.getOpenGLHelper().getGL().glDeleteLists((Integer) notif.getValue(), 1);
 
 		}).build(new CacheLoader<String, Integer>() {
@@ -138,7 +139,7 @@ public class GeometryCache {
 		return fileCache.getUnchecked(file.getPath(scope));
 	}
 
-	public BuiltInGeometry get(final IShape.Type id) {
+	public BuiltInGeometry get(final ShapeType id) {
 		final BuiltInGeometry index = builtInCache.getIfPresent(id);
 		return index;
 	}
@@ -156,7 +157,8 @@ public class GeometryCache {
 				f.drawToOpenGL(gl);
 			} else {
 				final IShape shape = file.getGeometry(scope);
-				if (shape == null) { return; }
+				if (shape == null)
+					return;
 				try {
 					drawSimpleGeometry(gl, shape.getInnerGeometry());
 				} catch (final ExecutionException e) {
@@ -185,9 +187,11 @@ public class GeometryCache {
 	}
 
 	public void process(final GamaGeometryFile file) {
-		if (file == null) { return; }
+		if (file == null)
+			return;
 		final String path = file.getPath(scope);
-		if (fileCache.getIfPresent(path) != null) { return; }
+		if (fileCache.getIfPresent(path) != null)
+			return;
 		fileMap.putIfAbsent(path, file);
 		if (!geometriesToProcess.containsKey(path)) {
 			geometriesToProcess.put(path, file);
@@ -202,7 +206,7 @@ public class GeometryCache {
 		}
 	}
 
-	public void put(final Type key, final BuiltInGeometry value) {
+	public void put(final ShapeType key, final BuiltInGeometry value) {
 		builtInCache.put(key, value);
 	}
 
@@ -250,7 +254,7 @@ public class GeometryCache {
 			drawSphere(gl, 1.0, 5, 5);
 		})));
 
-		put(IShape.Type.ROUNDED, BuiltInGeometry.assemble().bottom(gl.compileAsList(() -> {
+		put(ShapeType.ROUNDED, BuiltInGeometry.assemble().bottom(gl.compileAsList(() -> {
 			drawRoundedRectangle(gl.getGL());
 		})));
 		put(SQUARE, BuiltInGeometry.assemble().bottom(gl.compileAsList(() -> {

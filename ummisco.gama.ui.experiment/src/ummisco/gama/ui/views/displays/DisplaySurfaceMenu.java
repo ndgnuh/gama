@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.ILayer;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.outputs.layers.AgentLayer;
 import msi.gama.outputs.layers.GraphicLayer;
@@ -42,7 +43,6 @@ import msi.gama.outputs.layers.GridLayer;
 import msi.gama.outputs.layers.ImageLayer;
 import msi.gama.outputs.layers.SpeciesLayer;
 import msi.gama.outputs.layers.charts.ChartLayer;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.menus.AgentsMenu;
 import ummisco.gama.ui.menus.GamaMenu;
 import ummisco.gama.ui.menus.MenuAction;
@@ -110,7 +110,8 @@ public class DisplaySurfaceMenu {
 	}
 
 	public void buildMenu(final int mousex, final int mousey, final int x, final int y, final List<ILayer> displays) {
-		if (displays.isEmpty()) { return; }
+		if (displays.isEmpty())
+			return;
 		final Set<IAgent> all = new LinkedHashSet<>();
 		for (final ILayer display : displays) {
 			if (display.getData().isSelectable()) {
@@ -172,7 +173,8 @@ public class DisplaySurfaceMenu {
 	static int MAX_RETRIES = 10;
 
 	private void retryVisible(final Menu menu, final int retriesRemaining) {
-		if (!PlatformHelper.isLinux()) { return; }
+		if (!PlatformUtils.isLinux())
+			return;
 		WorkbenchHelper.asyncRun(() -> {
 			if (!menu.isVisible() && retriesRemaining > 0) {
 				menu.setVisible(false);
@@ -200,18 +202,19 @@ public class DisplaySurfaceMenu {
 			AgentsMenu.cascadingAgentMenuItem(menu, surface.getScope().getSimulation(), "World", actions);
 			if (filteredList != null && !filteredList.isEmpty()) {
 				GamaMenu.separate(menu);
-			} else {
+			} else
 				return;
-			}
 			if (byLayer) {
 				GamaMenu.separate(menu, "Layers");
 			}
 		}
 		if (!byLayer) {
 			// If the list is null or empty, no need to display anything more
-			if (filteredList == null || filteredList.isEmpty()) { return; }
+			if (filteredList == null || filteredList.isEmpty())
+				return;
 			// If only the world is selected, no need to display anything more
-			if (filteredList.size() == 1 && filteredList.contains(surface.getScope().getSimulation())) { return; }
+			if (filteredList.size() == 1 && filteredList.contains(surface.getScope().getSimulation()))
+				return;
 			final FocusOnSelection adapter = new FocusOnSelection(surface);
 			final MenuAction focus =
 					new MenuAction(adapter, GamaIcons.create(IGamaIcons.MENU_FOCUS).image(), "Focus on this display");

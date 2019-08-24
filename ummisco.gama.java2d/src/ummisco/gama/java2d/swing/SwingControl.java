@@ -21,7 +21,7 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.java2d.Java2DDisplaySurface;
 import ummisco.gama.java2d.WorkaroundForIssue2476;
@@ -63,13 +63,14 @@ public abstract class SwingControl extends Composite {
 	}
 
 	protected void populate() {
-		if (isDisposed()) { return; }
+		if (isDisposed())
+			return;
 		if (!populated) {
 			populated = true;
 			frame = SWT_AWT.new_Frame(this);
 			EventQueue.invokeLater(() -> {
 				applet = new JApplet();
-				if (PlatformHelper.isWindows()) {
+				if (PlatformUtils.isWindows()) {
 					applet.setFocusTraversalPolicy(new LayoutFocusTraversalPolicy());
 				}
 				frame.add(applet);

@@ -34,8 +34,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.swt.IFocusService;
 
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.lang.gaml.ui.editor.GamlEditor;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.views.toolbar.GamaToolbarSimple;
@@ -60,7 +60,7 @@ public class EditorSearchControls {
 
 	public EditorSearchControls fill(final GamaToolbarSimple toolbar) {
 		Composite parent = toolbar;
-		if (PlatformHelper.isWindows()) {
+		if (PlatformUtils.isWindows()) {
 			parent = new Composite(toolbar, SWT.NONE);
 			final GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			data.heightHint = 24;

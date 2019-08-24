@@ -16,8 +16,8 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.osgi.service.datalocation.Location;
 import msi.gama.application.workspace.WorkspaceManager;
+import msi.gama.common.util.MemoryUtils;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.MemoryUtils;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.operators.Dates;
@@ -28,20 +28,8 @@ public class Application implements IApplication {
 	@Override
 	public Object start(final IApplicationContext context) throws Exception {
 		MemoryUtils.initialize();
+		// This is where a branch to headless should (or could) be made
 		GamaBundleLoader.loadUI();
-
-		// while (GAMA.getRegularGui() == null) {
-		// try {
-		// Thread.sleep(100);
-		// } catch (final InterruptedException e2) {}
-		// }
-		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-			if ( e instanceof OutOfMemoryError
-				&& GAMA.getGui().confirm("Out of memory", "GAMA is out of memory. Do you want to close now ?") ) {
-				this.stop();
-			}
-			e.printStackTrace();
-		});
 
 		final Object check = WorkspaceManager.checkWorkspace();
 		if ( EXIT_OK.equals(check) )

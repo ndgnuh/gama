@@ -15,6 +15,7 @@ import static msi.gama.common.geometry.GeometryUtils.translate;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
@@ -373,7 +374,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	}
 
 	@Override
-	public Type getGeometricalType() {
+	public ShapeType getGeometricalType() {
 		return getReferenceGeometry().getGeometricalType();
 	}
 

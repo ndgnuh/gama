@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import com.google.common.collect.ImmutableList;
 import com.jogamp.opengl.GL2;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.interfaces.IKeyword;
@@ -226,7 +227,7 @@ public class LayerObject {
 		gl.scaleBy(size.x, size.y, 1);
 		gl.setCurrentColor(((OverlayLayer) layer).getData().getBackgroundColor(scope));
 		gl.setCurrentObjectAlpha(((OverlayLayer) layer).getData().getTransparency(scope));
-		gl.drawCachedGeometry(IShape.Type.ROUNDED, true, null);
+		gl.drawCachedGeometry(ShapeType.ROUNDED, true, null);
 		gl.popMatrix();
 	}
 
@@ -400,7 +401,7 @@ public class LayerObject {
 	}
 
 	protected void addSyntheticObject(final Collection<AbstractObject<?, ?>> list, final IShape shape,
-			final GamaColor color, final IShape.Type type, final boolean empty) {
+			final GamaColor color, final ShapeType type, final boolean empty) {
 		final DrawingAttributes att = new ShapeDrawingAttributes(shape, (IAgent) null, color, color, type,
 				GamaPreferences.Displays.CORE_LINE_WIDTH.getValue());
 		att.setEmpty(empty);

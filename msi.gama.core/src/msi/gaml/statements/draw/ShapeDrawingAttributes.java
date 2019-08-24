@@ -12,6 +12,8 @@ package msi.gaml.statements.draw;
 
 import java.util.List;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.metamodel.agent.IAgent;
@@ -27,7 +29,7 @@ public class ShapeDrawingAttributes extends FileDrawingAttributes {
 	public ShapeDrawingAttributes(final Scaling3D size, final Double depth, final AxisAngle rotation,
 			final GamaPoint location, final Boolean empty, final GamaColor color, /* final List<GamaColor> colors, */
 			final GamaColor border, final List<GamaImageFile> textures, final GamaMaterial material, final IAgent agent,
-			final IShape.Type type, final Double lineWidth, final Boolean lighting) {
+			final ShapeType type, final Double lineWidth, final Boolean lighting) {
 		super(size, rotation, location, color, border, agent, lineWidth, false, lighting);
 		setHeight(depth);
 		setEmpty(empty);
@@ -38,7 +40,7 @@ public class ShapeDrawingAttributes extends FileDrawingAttributes {
 	}
 
 	public ShapeDrawingAttributes(final GamaPoint location, final GamaColor color, final GamaColor border,
-			final IShape.Type type) {
+			final ShapeType type) {
 		super(null, null, location, color, border, null, null, false, null);
 		setHeight(null);
 		setEmpty(color == null);
@@ -55,7 +57,7 @@ public class ShapeDrawingAttributes extends FileDrawingAttributes {
 	}
 
 	public ShapeDrawingAttributes(final IShape shape, final IAgent agent, final GamaColor color, final GamaColor border,
-			final IShape.Type type, final Double lineWidth) {
+			final ShapeType type, final Double lineWidth) {
 		this(null, null, null, shape.getLocation(), color == null, color, /* null, */ border, null, null,
 				agent, type, lineWidth, null);
 	}

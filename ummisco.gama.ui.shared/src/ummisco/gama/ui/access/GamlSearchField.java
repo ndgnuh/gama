@@ -52,8 +52,8 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.swt.IFocusService;
 
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.utils.WebHelper;
@@ -139,7 +139,7 @@ public class GamlSearchField {
 		GridLayoutFactory.fillDefaults().margins(0, 0).spacing(0, 0).extendedMargins(0, 5, 5, 5).numColumns(2)
 				.equalWidth(false).applyTo(composite);
 		text = createText(composite);
-		final int height = PlatformHelper.isWindows() ? 16 : 24;
+		final int height = PlatformUtils.isWindows() ? 16 : 24;
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER).grab(true, false).hint(200, height).applyTo(text);
 
 		parent.getShell().addControlListener(new ControlListener() {

@@ -10,11 +10,12 @@
  ********************************************************************************************************/
 package msi.gaml.statements.draw;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;
 
 public class FileDrawingAttributes extends DrawingAttributes {
@@ -28,13 +29,13 @@ public class FileDrawingAttributes extends DrawingAttributes {
 		super(size, rotation, location, color, border, lighting);
 		this.agentIdentifier = agent;
 		setLineWidth(lineWidth);
-		setType(isImage ? IShape.Type.POLYGON : IShape.Type.THREED_FILE);
+		setType(isImage ? ShapeType.POLYGON : ShapeType.THREED_FILE);
 	}
 
 	public FileDrawingAttributes(final GamaPoint location, final boolean isImage) {
 		super(null, null, location, null, null, null);
 		agentIdentifier = null;
-		setType(isImage ? IShape.Type.POLYGON : IShape.Type.THREED_FILE);
+		setType(isImage ? ShapeType.POLYGON : ShapeType.THREED_FILE);
 	}
 
 	@Override

@@ -37,6 +37,7 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import com.jogamp.opengl.util.texture.Texture;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.ShapeType;
 
 import jogamp.opengl.glu.tessellator.GLUtessellatorImpl;
 import msi.gama.common.geometry.Envelope3D;
@@ -47,7 +48,6 @@ import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.geometry.UnboundedCoordinateSequence;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.file.GamaGeometryFile;
 import msi.gama.util.file.GamaImageFile;
@@ -962,7 +962,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 		}
 	}
 
-	public void drawCachedGeometry(final IShape.Type id, final boolean solid, final Color border) {
+	public void drawCachedGeometry(final ShapeType id, final boolean solid, final Color border) {
 		if (geometryCache == null) { return; }
 		if (id == null) { return; }
 		final BuiltInGeometry object = geometryCache.get(id);

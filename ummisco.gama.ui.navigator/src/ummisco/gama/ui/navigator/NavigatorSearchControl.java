@@ -31,7 +31,7 @@ import org.eclipse.ui.navigator.CommonViewer;
 import org.eclipse.ui.progress.UIJob;
 import org.eclipse.ui.swt.IFocusService;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import one.util.streamex.StreamEx;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 import ummisco.gama.ui.navigator.contents.VirtualContent;
@@ -121,7 +121,7 @@ public class NavigatorSearchControl {
 
 	public NavigatorSearchControl fill(final GamaToolbarSimple toolbar) {
 		Composite parent = toolbar;
-		if (PlatformHelper.isWindows()) {
+		if (PlatformUtils.isWindows()) {
 			parent = new Composite(toolbar, SWT.NONE);
 			final GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
 			data.heightHint = 24;

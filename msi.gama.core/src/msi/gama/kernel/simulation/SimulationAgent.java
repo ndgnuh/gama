@@ -34,7 +34,6 @@ import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.continuous.RootTopology;
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
@@ -214,7 +213,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@getter (IKeyword.EXPERIMENT)
 	public IExperimentAgent getExperiment() {
 		final IMacroAgent agent = getHost();
-		if (agent instanceof IExperimentAgent) { return (IExperimentAgent) agent; }
+		if (agent instanceof IExperimentAgent)
+			return (IExperimentAgent) agent;
 		return null;
 	}
 
@@ -339,7 +339,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 
 	@Override
 	public void dispose() {
-		if (dead) { return; }
+		if (dead)
+			return;
 		executer.executeDisposeActions();
 		// hqnghi if simulation come from popultion extern, dispose pop first
 		// and then their outputs
@@ -378,7 +379,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 
 	@Override
 	public GamaPoint getLocation() {
-		if (geometry == null || geometry.getInnerGeometry() == null) { return new GamaPoint(0, 0); }
+		if (geometry == null || geometry.getInnerGeometry() == null)
+			return new GamaPoint(0, 0);
 		return super.getLocation();
 	}
 
@@ -426,9 +428,11 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@Override
 	public IPopulation<? extends IAgent> getPopulationFor(final String speciesName) throws GamaRuntimeException {
 		IPopulation<? extends IAgent> pop = super.getPopulationFor(speciesName);
-		if (pop != null) { return pop; }
+		if (pop != null)
+			return pop;
 		final ISpecies microSpec = getSpecies().getMicroSpecies(speciesName);
-		if (microSpec == null) { return null; }
+		if (microSpec == null)
+			return null;
 		pop = GamaPopulation.createPopulation(getScope(), this, microSpec);
 		setAttribute(speciesName, pop);
 		pop.initializeFor(getScope());
@@ -438,7 +442,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@getter (CYCLE)
 	public Integer getCycle(final IScope scope) {
 		final SimulationClock clock = getClock();
-		if (clock != null) { return clock.getCycle(); }
+		if (clock != null)
+			return clock.getCycle();
 		return 0;
 	}
 
@@ -477,7 +482,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 			initializer = true)
 	public double getTimeStep(final IScope scope) {
 		final SimulationClock clock = getClock();
-		if (clock != null) { return clock.getStepInSeconds(); }
+		if (clock != null)
+			return clock.getStepInSeconds();
 		return 1d;
 	}
 
@@ -493,7 +499,8 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@getter (TIME)
 	public double getTime(final IScope scope) {
 		final SimulationClock clock = getClock();
-		if (clock != null) { return clock.getTimeElapsedInSeconds(); }
+		if (clock != null)
+			return clock.getTimeElapsedInSeconds();
 		return 0d;
 	}
 
@@ -582,24 +589,24 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	public String buildPostfix() {
 		final boolean noName = !GamaPreferences.Interface.CORE_SIMULATION_NAME.getValue();
 		if (noName) {
-			if (getPopulation().size() > 1) {
+			if (getPopulation().size() > 1)
 				return " (S" + getIndex() + ")";
-			} else {
+			else
 				return "";
-			}
-		} else {
+		} else
 			return " (" + getName() + ")";
-		}
 
 	}
 
 	public void setOutputs(final IOutputManager iOutputManager) {
-		if (iOutputManager == null) { return; }
+		if (iOutputManager == null)
+			return;
 		// hqnghi push outputManager down to Simulation level
 		// create a copy of outputs from description
 		if ( /* !scheduled && */ !getExperiment().getSpecies().isBatch()) {
 			final IDescription des = ((ISymbol) iOutputManager).getDescription();
-			if (des == null) { return; }
+			if (des == null)
+				return;
 			outputs = (SimulationOutputManager) des.compile();
 			final Map<String, IOutput> mm = GamaMapFactory.create();
 			for (final Map.Entry<String, ? extends IOutput> entry : outputs.getOutputs().entrySet()) {

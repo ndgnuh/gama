@@ -10,11 +10,8 @@
  ********************************************************************************************************/
 package msi.gama.metamodel.shape;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 import org.locationtech.jts.io.WKTWriter;
 
 import msi.gama.common.geometry.Envelope3D;
@@ -27,7 +24,6 @@ import msi.gama.precompiler.GamlAnnotations.getter;
 import msi.gama.precompiler.GamlAnnotations.variable;
 import msi.gama.precompiler.GamlAnnotations.vars;
 import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IList;
 import msi.gama.util.IMap;
 import msi.gaml.types.IType;
@@ -100,45 +96,6 @@ import msi.gaml.types.IType;
 				type = IType.GEOMETRY,
 				doc = { @doc ("Returns the polyline representing the contour of this geometry") }) })
 public interface IShape extends ILocated, IValue, IAttributed {
-	Map<String, Type> JTS_TYPES = GamaMapFactory.createUnordered();
-	Set<Type> THREED_TYPES = new HashSet<>();
-
-	enum Type {
-		BOX("3D"),
-		CIRCLE("3D"),
-		CONE("3D"),
-		CUBE("3D"),
-		SQUARE("3D"),
-		ROUNDED(""),
-		CYLINDER("3D"),
-		GRIDLINE(""),
-		LINEARRING("LinearRing"),
-		LINESTRING("LineString"),
-		MULTILINESTRING("MultiLineString"),
-		MULTIPOINT("MultiPoint"),
-		MULTIPOLYGON("MultiPolygon"),
-		NULL(""),
-		PLAN("3D"),
-		POINT("Point"),
-		POLYGON("Polygon"),
-		POLYHEDRON("3D"),
-		POLYPLAN("3D"),
-		PYRAMID("3D"),
-		SPHERE("3D"),
-		TEAPOT("3D"),
-		LINECYLINDER("3D"),
-		THREED_FILE("");
-
-		Type(final String name) {
-			if (name.isEmpty()) { return; }
-			if (name.equals("3D")) {
-				THREED_TYPES.add(this);
-			} else {
-				JTS_TYPES.put(name, this);
-			}
-		}
-	}
-
 	WKTWriter SHAPE_WRITER = new WKTWriter();
 
 	@Override
@@ -156,7 +113,12 @@ public interface IShape extends ILocated, IValue, IAttributed {
 
 	IAgent getAgent();
 
-	Envelope3D getEnvelope();
+	default Envelope3D getEnvelope() {
+		Geometry g = getInnerGeometry();
+		if (g == null)
+			return null;
+		return Envelope3D.of(g);
+	}
 
 	/**
 	 * Returns the geometrical type of this shape. May be computed dynamically (from the JTS inner geometry) or stored
@@ -165,7 +127,7 @@ public interface IShape extends ILocated, IValue, IAttributed {
 	 * @param g
 	 * @return
 	 */
-	IShape.Type getGeometricalType();
+	ShapeType getGeometricalType();
 
 	IShape getGeometry();
 
@@ -238,12 +200,12 @@ public interface IShape extends ILocated, IValue, IAttributed {
 		if (d != null) {
 			setDepth(d);
 		}
-		final Type t = other.getGeometricalType();
-		if (THREED_TYPES.contains(t)) {
+		final ShapeType t = other.getGeometricalType();
+		if (t.is3D) {
 			setGeometricalType(t);
 		}
 	}
 
-	void setGeometricalType(Type t);
+	void setGeometricalType(ShapeType t);
 
 }

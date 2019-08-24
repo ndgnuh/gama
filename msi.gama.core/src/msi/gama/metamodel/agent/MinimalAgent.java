@@ -14,13 +14,13 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -68,7 +68,7 @@ public class MinimalAgent extends AbstractAgent {
 	}
 
 	@Override
-	public void setGeometricalType(final Type t) {
+	public void setGeometricalType(final ShapeType t) {
 		geometry.setGeometricalType(t);
 	}
 
@@ -87,9 +87,8 @@ public class MinimalAgent extends AbstractAgent {
 		// Addition to address Issue 817: if the new geometry is exactly the one
 		// possessed by the agent, no need to change anything.
 		if (newGeometry == geometry || newGeometry == null || newGeometry.getInnerGeometry() == null || dead()
-				|| this.getSpecies().isGrid() && ((GamlSpecies) this.getSpecies()).belongsToAMicroModel()) {
+				|| this.getSpecies().isGrid() && ((GamlSpecies) this.getSpecies()).belongsToAMicroModel())
 			return;
-		}
 
 		final ITopology topology = getTopology();
 		final GamaPoint newGeomLocation = newGeometry.getLocation().copy(getScope());
@@ -113,7 +112,7 @@ public class MinimalAgent extends AbstractAgent {
 		}
 
 		newLocalGeom.setAgent(this);
-		final Envelope3D previous = Envelope3D.of(geometry);
+		final Envelope3D previous = geometry.getEnvelope();
 		geometry.setGeometry(newLocalGeom);
 
 		topology.updateAgent(previous, this);
@@ -131,11 +130,10 @@ public class MinimalAgent extends AbstractAgent {
 		if (name == null) {
 			name = super.getName();
 		}
-		if (dead()) {
+		if (dead())
 			return name + " (dead)";
-		} else {
+		else
 			return name;
-		}
 	}
 
 	@Override
@@ -146,17 +144,20 @@ public class MinimalAgent extends AbstractAgent {
 	@SuppressWarnings ("rawtypes")
 	@Override
 	public/* synchronized */void setLocation(final GamaPoint point) {
-		if (point == null || dead() || this.getSpecies().isGrid()) { return; }
+		if (point == null || dead() || this.getSpecies().isGrid())
+			return;
 		final GamaPoint newLocation = point.copy(getScope());
 		final ITopology topology = getTopology();
-		if (topology == null) { return; }
+		if (topology == null)
+			return;
 		topology.normalizeLocation(newLocation, false);
 
 		if (geometry == null || geometry.getInnerGeometry() == null) {
 			setGeometry(GamaGeometryType.createPoint(newLocation));
 		} else {
 			final GamaPoint previousPoint = geometry.getLocation();
-			if (newLocation.equals(previousPoint)) { return; }
+			if (newLocation.equals(previousPoint))
+				return;
 			final Envelope3D previous = geometry.getEnvelope();
 			geometry.setLocation(newLocation);
 			topology.updateAgent(previous, this);
@@ -187,7 +188,8 @@ public class MinimalAgent extends AbstractAgent {
 			final IScope scope = this.getScope();
 			final ITopology t = getTopology();
 			final GamaPoint randomLocation = t == null ? null : t.getRandomLocation(scope);
-			if (randomLocation == null) { return null; }
+			if (randomLocation == null)
+				return null;
 			setGeometry(GamaGeometryType.createPoint(randomLocation));
 			return randomLocation;
 		}
@@ -197,7 +199,8 @@ public class MinimalAgent extends AbstractAgent {
 	@Override
 	public boolean isInstanceOf(final ISpecies s, final boolean direct) {
 		// TODO and direct ?
-		if (s.getName().equals(IKeyword.AGENT)) { return true; }
+		if (s.getName().equals(IKeyword.AGENT))
+			return true;
 		return super.isInstanceOf(s, direct);
 	}
 
@@ -234,9 +237,8 @@ public class MinimalAgent extends AbstractAgent {
 		if (!getPopulation().isStepOverriden()) {
 			super.doStep(scope);
 			return !scope.interrupted();
-		} else {
+		} else
 			return scope.execute(getSpecies().getAction(ISpecies.stepActionName), this, null).passed();
-		}
 	}
 
 	/**

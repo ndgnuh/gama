@@ -15,11 +15,11 @@
  * Contributors: SAS Institute Inc. - initial API and implementation ILOG S.A. - initial API and implementation IBM
  * Corporation - Java/SWT versioning code (from org.eclipse.swt.internal.Library)
  *******************************************************************************/
-package msi.gama.runtime;
+package msi.gama.common.util;
 
 import org.eclipse.core.runtime.Platform;
 
-public class PlatformHelper {
+public class PlatformUtils {
 
 	private static String platformString = Platform.getOS();
 	private static boolean isWindows = Platform.OS_WIN32.equals(platformString);
@@ -28,7 +28,7 @@ public class PlatformHelper {
 
 	private static Boolean isDeveloper;
 
-	private PlatformHelper() {}
+	private PlatformUtils() {}
 
 	public static boolean isWindows() {
 		return isWindows;

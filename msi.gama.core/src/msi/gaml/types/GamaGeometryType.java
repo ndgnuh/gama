@@ -10,17 +10,17 @@
  ********************************************************************************************************/
 package msi.gaml.types;
 
-import static msi.gama.metamodel.shape.IShape.Type.BOX;
-import static msi.gama.metamodel.shape.IShape.Type.CONE;
-import static msi.gama.metamodel.shape.IShape.Type.CUBE;
-import static msi.gama.metamodel.shape.IShape.Type.CYLINDER;
-import static msi.gama.metamodel.shape.IShape.Type.LINECYLINDER;
-import static msi.gama.metamodel.shape.IShape.Type.PLAN;
-import static msi.gama.metamodel.shape.IShape.Type.POLYHEDRON;
-import static msi.gama.metamodel.shape.IShape.Type.POLYPLAN;
-import static msi.gama.metamodel.shape.IShape.Type.PYRAMID;
-import static msi.gama.metamodel.shape.IShape.Type.SPHERE;
-import static msi.gama.metamodel.shape.IShape.Type.TEAPOT;
+import static org.locationtech.jts.geom.ShapeType.BOX;
+import static org.locationtech.jts.geom.ShapeType.CONE;
+import static org.locationtech.jts.geom.ShapeType.CUBE;
+import static org.locationtech.jts.geom.ShapeType.CYLINDER;
+import static org.locationtech.jts.geom.ShapeType.LINECYLINDER;
+import static org.locationtech.jts.geom.ShapeType.PLAN;
+import static org.locationtech.jts.geom.ShapeType.POLYHEDRON;
+import static org.locationtech.jts.geom.ShapeType.POLYPLAN;
+import static org.locationtech.jts.geom.ShapeType.PYRAMID;
+import static org.locationtech.jts.geom.ShapeType.SPHERE;
+import static org.locationtech.jts.geom.ShapeType.TEAPOT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -269,7 +269,7 @@ public class GamaGeometryType extends GamaType<IShape> {
 		return new GamaShape(p);
 	}
 
-	public static IShape buildRectangle(final double width, final double height, final GamaPoint location) {
+	public static IShape buildRectangle(final double width, final double height, final Coordinate location) {
 		final Coordinate[] points = new Coordinate[5];
 		final double x = location == null ? 0 : location.getX();
 		final double y = location == null ? 0 : location.getY();
@@ -376,7 +376,7 @@ public class GamaGeometryType extends GamaType<IShape> {
 	}
 
 	public static IShape buildBox(final double width, final double height, final double depth,
-			final GamaPoint location) {
+			final Coordinate location) {
 		final IShape g = buildRectangle(width, height, location);
 		g.setDepth(depth);
 		g.setGeometricalType(BOX);

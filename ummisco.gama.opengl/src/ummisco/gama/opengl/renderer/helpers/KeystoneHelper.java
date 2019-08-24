@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
@@ -12,7 +14,6 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import msi.gama.common.geometry.ICoordinates;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.LayeredDisplayData;
 import msi.gama.util.GamaColor.NamedGamaColor;
 import ummisco.gama.opengl.OpenGL;
@@ -117,7 +118,7 @@ public class KeystoneHelper extends AbstractRendererHelper {
 		openGL.translateBy(centerX, centerY, centerY);
 		openGL.setCurrentColor(fill);
 		openGL.scaleBy(Scaling3D.of(width, height, 1));
-		openGL.drawCachedGeometry(IShape.Type.SQUARE, true, null);
+		openGL.drawCachedGeometry(ShapeType.SQUARE, true, null);
 		openGL.popMatrix();
 	}
 

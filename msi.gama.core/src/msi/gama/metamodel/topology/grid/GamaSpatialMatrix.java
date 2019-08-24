@@ -32,6 +32,7 @@ import com.google.common.collect.Ordering;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 import org.locationtech.jts.operation.distance.DistanceOp;
 
 import msi.gama.common.geometry.Envelope3D;
@@ -1475,7 +1476,7 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 		}
 
 		@Override
-		public void setGeometricalType(final Type t) {}
+		public void setGeometricalType(final ShapeType t) {}
 
 		/**
 		 * Method getReferenceGeometry(). Directly refers to the reference shape declared by the matrix.
@@ -1885,7 +1886,7 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 			}
 
 			@Override
-			public void setGeometricalType(final Type t) {}
+			public void setGeometricalType(final ShapeType t) {}
 
 			@Override
 			public final int getX() {

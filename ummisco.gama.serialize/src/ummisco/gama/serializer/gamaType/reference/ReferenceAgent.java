@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
@@ -94,7 +95,7 @@ public class ReferenceAgent implements IReference, IAgent {
 	}
 
 	@Override
-	public void setGeometricalType(final Type t) {}
+	public void setGeometricalType(final ShapeType t) {}
 
 	@Override
 	public void dispose() {
@@ -127,7 +128,7 @@ public class ReferenceAgent implements IReference, IAgent {
 	}
 
 	@Override
-	public Type getGeometricalType() {
+	public ShapeType getGeometricalType() {
 		// TODO Auto-generated method stub
 		return null;
 	}

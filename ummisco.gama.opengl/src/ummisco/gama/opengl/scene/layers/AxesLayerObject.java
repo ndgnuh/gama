@@ -22,10 +22,11 @@ import static msi.gaml.types.GamaGeometryType.buildLineCylinder;
 
 import java.util.Collection;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaFont;
 import msi.gaml.statements.draw.TextDrawingAttributes;
@@ -90,14 +91,14 @@ public class AxesLayerObject extends StaticLayerObject.World {
 		for (int i = 0; i < 3; i++) {
 			final GamaPoint p = dirs[i];
 			// build axis
-			addSyntheticObject(list, axes[i], COLORS[i], IShape.Type.LINECYLINDER, false);
+			addSyntheticObject(list, axes[i], COLORS[i], ShapeType.LINECYLINDER, false);
 			// build labels
 			final TextDrawingAttributes text = new TextDrawingAttributes(of(1), null, p.times(1.3).yNegated(),
 					ANCHORS[i], COLORS[i], AXES_FONT, false);
 			list.add(new StringObject(LABELS[i], text));
 			// build arrows
 			final GamaShape s = new GamaShape(arrow, null, ROTATIONS[i], p.times(0.98));
-			addSyntheticObject(list, s, COLORS[i], IShape.Type.CONE, false);
+			addSyntheticObject(list, s, COLORS[i], ShapeType.CONE, false);
 		}
 	}
 

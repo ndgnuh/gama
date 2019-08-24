@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
@@ -24,7 +25,6 @@ import com.jogamp.opengl.swt.GLCanvas;
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.ILayer;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.display.AbstractDisplayGraphics;
 import msi.gama.outputs.layers.charts.ChartOutput;
 import msi.gama.util.GamaColor;
@@ -342,7 +342,7 @@ public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRend
 		final double cellWidth = getEnvHeight() / dimensions.x;
 		final double cellHeight = getEnvWidth() / dimensions.y;
 		final GamaColor color = GamaColor.getInt(lineColor.getRGB());
-		final DrawingAttributes attributes = new ShapeDrawingAttributes(null, color, color, IShape.Type.GRIDLINE);
+		final DrawingAttributes attributes = new ShapeDrawingAttributes(null, color, color, ShapeType.GRIDLINE);
 		attributes.setEmpty(true);
 		for (double i = 0; i < dimensions.x; i++) {
 			for (double j = 0; j < dimensions.y; j++) {

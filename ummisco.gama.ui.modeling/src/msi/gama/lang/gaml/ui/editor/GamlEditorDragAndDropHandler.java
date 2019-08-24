@@ -40,7 +40,7 @@ import org.eclipse.ui.part.ResourceTransfer;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import msi.gama.common.util.FileUtils;
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import msi.gaml.operators.Strings;
 import msi.gaml.types.GamaFileType;
 import msi.gaml.types.ParametricFileType;
@@ -293,7 +293,7 @@ public class GamlEditorDragAndDropHandler {
 		final List<IFile> files = new ArrayList<>();
 		for (final String raw : data) {
 			String path = raw;
-			if (PlatformHelper.isWindows()) {
+			if (PlatformUtils.isWindows()) {
 				// Bug in getLocation().toString() under Windows. The documentation states that
 				// the returned string is platform independant, but it is not
 				path = path.replace('\\', '/');

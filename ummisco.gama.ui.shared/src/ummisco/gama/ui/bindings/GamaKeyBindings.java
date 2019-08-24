@@ -20,8 +20,8 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.access.GamlSearchField;
 import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
@@ -35,7 +35,7 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  */
 public class GamaKeyBindings implements Listener {
 
-	public static int COMMAND = PlatformHelper.isMac() ? SWT.COMMAND : SWT.CTRL;
+	public static int COMMAND = PlatformUtils.isMac() ? SWT.COMMAND : SWT.CTRL;
 	public static String SEARCH_STRING = format(COMMAND + SWT.SHIFT, 'H');
 	public static String PLAY_STRING = format(COMMAND, 'P');
 	public static String STEP_STRING = format(COMMAND + SWT.SHIFT, 'P');

@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPartReference;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.utils.WorkbenchHelper;
@@ -92,7 +92,7 @@ public class WorkaroundForIssue1353 {
 	}
 
 	public static void install() {
-		if (!PlatformHelper.isMac()) { return; }
+		if (!PlatformUtils.isMac()) { return; }
 		if (shell != null) { return; }
 		DEBUG.OUT(WorkaroundForIssue1353.class.getSimpleName() + " installed");
 		WorkbenchHelper.run(() -> {

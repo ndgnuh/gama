@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPartReference;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -25,12 +25,14 @@ public class WorkaroundForIssue2745 {
 
 	public static void installOn(final AWTDisplayView view) {
 		// Only installs on macOS
-		if (!PlatformHelper.isMac()) { return; }
+		if (!PlatformUtils.isMac())
+			return;
 		final IPartListener2 pl = new IPartListener2() {
 
 			void forceLayout() {
 				final Control c = view.controlToSetFullScreen();
-				if (c == null || c.getParent() == null) { return; }
+				if (c == null || c.getParent() == null)
+					return;
 				c.setVisible(false);
 				c.getParent().layout(true, true);
 				c.setVisible(true);

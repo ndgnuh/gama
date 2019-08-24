@@ -34,10 +34,10 @@ import org.eclipse.ui.IWorkbenchPage;
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.outputs.LayeredDisplayData.Changes;
 import msi.gama.outputs.LayeredDisplayData.DisplayDataListener;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.dialogs.Messages;
@@ -256,7 +256,7 @@ public class LayeredDisplayDecorator implements DisplayDataListener {
 					}
 				} else {
 					// Issue #2639
-					if (PlatformHelper.isMac() && !view.isOpenGL()) {
+					if (PlatformUtils.isMac() && !view.isOpenGL()) {
 						final IDisplaySurface ds = view.getDisplaySurface();
 						if (ds != null) {
 							ds.updateDisplay(true);

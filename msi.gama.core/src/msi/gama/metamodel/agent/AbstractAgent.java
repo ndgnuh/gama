@@ -16,6 +16,7 @@ import java.util.Map.Entry;
 
 import com.google.common.primitives.Ints;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
@@ -558,7 +559,7 @@ public abstract class AbstractAgent implements IAgent {
 	}
 
 	@Override
-	public Type getGeometricalType() {
+	public ShapeType getGeometricalType() {
 		return getGeometry().getGeometricalType();
 	}
 

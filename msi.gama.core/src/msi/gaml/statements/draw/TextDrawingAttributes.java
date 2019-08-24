@@ -10,10 +10,11 @@
  ********************************************************************************************************/
 package msi.gaml.statements.draw;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape.Type;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaFont;
 
@@ -27,7 +28,7 @@ public class TextDrawingAttributes extends DrawingAttributes implements Cloneabl
 	public TextDrawingAttributes(final Scaling3D size, final AxisAngle rotation, final GamaPoint location,
 			final GamaPoint anchor, final GamaColor color, final GamaFont font, final Boolean perspective) {
 		super(size, rotation, location, color, null, null);
-		setType(Type.POLYGON);
+		setType(ShapeType.POLYGON);
 		this.font = font;
 		this.anchor = anchor;
 		this.perspective = perspective == null || perspective.booleanValue();

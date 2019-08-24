@@ -16,23 +16,25 @@ import javax.swing.JApplet;
 import org.eclipse.swt.SWT;
 
 import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.dev.utils.DEBUG;
 
 public class WorkaroundForIssue2476 {
-	
+
 	static {
 		DEBUG.OFF();
 	}
-	
-	private static void setMousePosition(IDisplaySurface surface, int x, int y) {
+
+	private static void setMousePosition(final IDisplaySurface surface, final int x, final int y) {
 		surface.setMousePosition(x, y);
 		GAMA.getGui().setMouseLocationInModel(surface.getModelCoordinates());
 	}
 
 	public static void installOn(final JApplet applet, final IDisplaySurface surface) {
 		// Install only on Linux
-		if (!msi.gama.runtime.PlatformHelper.isLinux()) { return; }
+		if (!PlatformUtils.isLinux())
+			return;
 		applet.addMouseWheelListener(e -> {
 			if (e.getPreciseWheelRotation() > 0) {
 				surface.zoomOut();
@@ -65,7 +67,6 @@ public class WorkaroundForIssue2476 {
 			@Override
 			public void mousePressed(final java.awt.event.MouseEvent e) {
 
-				
 			}
 
 			@Override
@@ -89,15 +90,15 @@ public class WorkaroundForIssue2476 {
 					surface.selectAgentsAroundMouse();
 					return;
 				}
-				
+
 				if (inMenu) {
 					inMenu = false;
 					return;
 				}
-				//DEBUG.OUT("Click on " + e.getX() + " " + e.getY());
+				// DEBUG.OUT("Click on " + e.getX() + " " + e.getY());
 				setMousePosition(surface, e.getX(), e.getY());
 				surface.dispatchMouseEvent(SWT.MouseDown);
-				
+
 			}
 		});
 

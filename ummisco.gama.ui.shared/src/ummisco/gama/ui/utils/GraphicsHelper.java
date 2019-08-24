@@ -20,7 +20,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.internal.DPIUtil;
 
-import msi.gama.runtime.PlatformHelper;
+import msi.gama.common.util.PlatformUtils;
 
 /**
  * Utility class gathering some useful and general method. Mainly convert forth and back graphical stuff between awt and
@@ -195,15 +195,15 @@ public class GraphicsHelper {
 	}
 
 	public static int scaleDownIfMac(final int size) {
-		return PlatformHelper.isMac() ? DPIUtil.autoScaleDown(size) : size;
+		return PlatformUtils.isMac() ? DPIUtil.autoScaleDown(size) : size;
 	}
 
 	public static float scaleUpIfWin(final float size) {
-		return PlatformHelper.isWindows() ? DPIUtil.autoScaleUp(size) : size;
+		return PlatformUtils.isWindows() ? DPIUtil.autoScaleUp(size) : size;
 	}
 
 	public static int scaleUpIfWin(final int size) {
-		return PlatformHelper.isWindows() ? DPIUtil.autoScaleUp(size) : size;
+		return PlatformUtils.isWindows() ? DPIUtil.autoScaleUp(size) : size;
 	}
 
 	private static MouseEvent autoScaleDown(final MouseEvent e) {
@@ -219,11 +219,11 @@ public class GraphicsHelper {
 	}
 
 	public static MouseEvent scaleDownIfMac(final MouseEvent size) {
-		return PlatformHelper.isMac() ? autoScaleDown(size) : size;
+		return PlatformUtils.isMac() ? autoScaleDown(size) : size;
 	}
 
 	public static MouseEvent scaleUpIfWin(final MouseEvent size) {
-		return PlatformHelper.isWindows() ? autoScaleUp(size) : size;
+		return PlatformUtils.isWindows() ? autoScaleUp(size) : size;
 	}
 
 }

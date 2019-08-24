@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package msi.gama.runtime;
+package msi.gama.common.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +23,7 @@ import java.util.List;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.Pref;
-import msi.gama.common.util.FileUtils;
+import msi.gama.runtime.GAMA;
 
 /**
  * All-purpose static-method container class.
@@ -36,6 +36,14 @@ public final class MemoryUtils {
 	private MemoryUtils() {}
 
 	public static void initialize() {
+
+		Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+			if (e instanceof OutOfMemoryError
+					&& GAMA.getGui().confirm("Out of memory", "GAMA is out of memory. Do you want to close it now ?")) {
+				GAMA.getGui().exit();
+			}
+			e.printStackTrace();
+		});
 		final File ini = FileUtils.findIniFile();
 		final int memory = readMaxMemoryInMegabytes(ini);
 		final String text = ini == null || memory == 0

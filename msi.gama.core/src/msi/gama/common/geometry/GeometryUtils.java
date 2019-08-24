@@ -11,12 +11,12 @@
 package msi.gama.common.geometry;
 
 import static org.locationtech.jts.algorithm.CGAlgorithms.distancePointLine;
-import static msi.gama.metamodel.shape.IShape.Type.LINESTRING;
-import static msi.gama.metamodel.shape.IShape.Type.MULTILINESTRING;
-import static msi.gama.metamodel.shape.IShape.Type.MULTIPOINT;
-import static msi.gama.metamodel.shape.IShape.Type.NULL;
-import static msi.gama.metamodel.shape.IShape.Type.POINT;
-import static msi.gama.metamodel.shape.IShape.Type.POLYGON;
+import static org.locationtech.jts.geom.ShapeType.LINESTRING;
+import static org.locationtech.jts.geom.ShapeType.MULTILINESTRING;
+import static org.locationtech.jts.geom.ShapeType.MULTIPOINT;
+import static org.locationtech.jts.geom.ShapeType.NULL;
+import static org.locationtech.jts.geom.ShapeType.POINT;
+import static org.locationtech.jts.geom.ShapeType.POLYGON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +39,7 @@ import org.locationtech.jts.geom.MultiPolygon;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.ShapeType;
 import org.locationtech.jts.geom.impl.CoordinateArraySequence;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
@@ -56,7 +57,6 @@ import msi.gama.common.util.RandomUtils;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.shape.IShape.Type;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.Collector;
@@ -589,7 +589,7 @@ public class GeometryUtils {
 	}
 
 	public static Geometry buildGeometryJTS(final List<List<List<GamaPoint>>> listPoints) {
-		final IShape.Type geometryType = geometryType(listPoints);
+		final ShapeType geometryType = geometryType(listPoints);
 		switch (geometryType) {
 			case NULL:
 				return null;
@@ -674,11 +674,11 @@ public class GeometryUtils {
 		return poly;
 	}
 
-	private static IShape.Type geometryType(final List<List<List<GamaPoint>>> listPoints) {
+	private static ShapeType geometryType(final List<List<List<GamaPoint>>> listPoints) {
 		final int size = listPoints.size();
 		if (size == 0) { return NULL; }
 		if (size == 1) { return geometryTypeSimp(listPoints.get(0)); }
-		final IShape.Type type = geometryTypeSimp(listPoints.get(0));
+		final ShapeType type = geometryTypeSimp(listPoints.get(0));
 		switch (type) {
 			case POINT:
 				return MULTIPOINT;
@@ -691,7 +691,7 @@ public class GeometryUtils {
 		}
 	}
 
-	private static IShape.Type geometryTypeSimp(final List<List<GamaPoint>> listPoints) {
+	private static ShapeType geometryTypeSimp(final List<List<GamaPoint>> listPoints) {
 		if (listPoints.isEmpty() || listPoints.get(0).isEmpty()) { return NULL; }
 		final List<GamaPoint> list0 = listPoints.get(0);
 		final int size0 = list0.size();
@@ -902,9 +902,9 @@ public class GeometryUtils {
 	 * @param intersect
 	 * @return
 	 */
-	public static Type getTypeOf(final Geometry g) {
-		if (g == null) { return Type.NULL; }
-		return IShape.JTS_TYPES.get(g.getGeometryType());
+	public static ShapeType getTypeOf(final Geometry g) {
+		if (g == null) { return ShapeType.NULL; }
+		return ShapeType.JTS_TYPES.get(g.getGeometryType());
 	}
 
 	/**

@@ -33,14 +33,14 @@ import java.util.RandomAccess;
  * manipulate the size of the array that is used internally to store the list. (This class is roughly equivalent to
  * <tt>Vector, except that it is unsynchronized.)
  *
- * 
+ *
  * The <tt>size, isEmpty, get, set, <tt>iterator, and listIterator operations run in constant time. The <tt>add
  * operation runs in amortized constant time, that is, adding n elements requires O(n) time. All of the other operations
  * run in linear time (roughly speaking). The constant factor is low compared to that for the <tt>LinkedList
  * implementation.
  *
- * 
- * 
+ *
+ *
  * Each <tt>IdentityArrayList instance has a capacity. The capacity is the size of the array used to store the elements
  * in the list. It is always at least as large as the list size. As elements are added to an IdentityArrayList, its
  * capacity grows automatically. The details of the growth policy are not specified beyond the fact that adding an
@@ -60,7 +60,7 @@ import java.util.RandomAccess;
  * If no such object exists, the list should be "wrapped" using the {@link Collections#synchronizedList
  * Collections.synchronizedList} method. This is best done at creation time, to prevent accidental unsynchronized access
  * to the list:
- * 
+ *
  * <pre>
  *   List list = Collections.synchronizedList(new IdentityArrayList(...));
  * </pre>
@@ -79,8 +79,8 @@ import java.util.RandomAccess;
  * depended on this exception for its correctness: <i>the fail-fast behavior of iterators should be used only to detect
  * bugs.</i>
  *
- * 
- * 
+ *
+ *
  */
 
 public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess {
@@ -89,7 +89,7 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	 * The array buffer into which the elements of the IdentityArrayList are stored. The capacity of the
 	 * IdentityArrayList is the length of this array buffer.
 	 */
-	private transient Object[] elementData;
+	private transient E[] elementData;
 
 	/**
 	 * The size of the IdentityArrayList (the number of elements it contains).
@@ -106,10 +106,12 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	 * @exception IllegalArgumentException
 	 *                if the specified initial capacity is negative
 	 */
+	@SuppressWarnings ("unchecked")
 	public IdentityArrayList(final int initialCapacity) {
 		super();
-		if (initialCapacity < 0) { throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity); }
-		this.elementData = new Object[initialCapacity];
+		if (initialCapacity < 0)
+			throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
+		this.elementData = (E[]) new Object[initialCapacity];
 	}
 
 	/**
@@ -128,13 +130,10 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	 * @throws NullPointerException
 	 *             if the specified collection is null
 	 */
+	@SuppressWarnings ("unchecked")
 	public IdentityArrayList(final Collection<? extends E> c) {
-		elementData = c.toArray();
+		elementData = (E[]) c.toArray();
 		size = elementData.length;
-		// c.toArray might (incorrectly) not return Object[] (see 6260652)
-		if (elementData.getClass() != Object[].class) {
-			elementData = Arrays.copyOf(elementData, size, Object[].class);
-		}
 	}
 
 	/**
@@ -160,7 +159,6 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 		modCount++;
 		final int oldCapacity = elementData.length;
 		if (minCapacity > oldCapacity) {
-			final Object oldData[] = elementData;
 			int newCapacity = oldCapacity * 3 / 2 + 1;
 			if (newCapacity < minCapacity) {
 				newCapacity = minCapacity;
@@ -211,7 +209,8 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	@Override
 	public int indexOf(final Object o) {
 		for (int i = 0; i < size; i++) {
-			if (o == elementData[i]) { return i; }
+			if (o == elementData[i])
+				return i;
 		}
 		return -1;
 	}
@@ -224,7 +223,8 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	@Override
 	public int lastIndexOf(final Object o) {
 		for (int i = size - 1; i >= 0; i--) {
-			if (o == elementData[i]) { return i; }
+			if (o == elementData[i])
+				return i;
 		}
 		return -1;
 	}
@@ -267,12 +267,12 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	 * @throws NullPointerException
 	 *             if the specified array is null
 	 */
+	@SuppressWarnings ("unchecked")
 	@Override
 	public <T> T[] toArray(final T[] a) {
-		if (a.length < size) {
+		if (a.length < size)
 			// Make a new array of a's runtime type, but my contents:
 			return (T[]) Arrays.copyOf(elementData, size, a.getClass());
-		}
 		System.arraycopy(elementData, 0, a, 0, size);
 		if (a.length > size) {
 			a[size] = null;
@@ -295,7 +295,7 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	public E get(final int index) {
 		rangeCheck(index);
 
-		return (E) elementData[index];
+		return elementData[index];
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	public E set(final int index, final E element) {
 		rangeCheck(index);
 
-		final E oldValue = (E) elementData[index];
+		final E oldValue = elementData[index];
 		elementData[index] = element;
 		return oldValue;
 	}
@@ -368,7 +368,7 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 		rangeCheck(index);
 
 		modCount++;
-		final E oldValue = (E) elementData[index];
+		final E oldValue = elementData[index];
 
 		final int numMoved = size - index - 1;
 		if (numMoved > 0) {
@@ -515,14 +515,16 @@ public class IdentityArrayList<E> extends AbstractList<E> implements List<E>, Ra
 	 * ArrayIndexOutOfBoundsException if index is negative.
 	 */
 	private void rangeCheck(final int index) {
-		if (index >= size) { throw new IndexOutOfBoundsException(outOfBoundsMsg(index)); }
+		if (index >= size)
+			throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 	}
 
 	/**
 	 * A version of rangeCheck used by add and addAll.
 	 */
 	private void rangeCheckForAdd(final int index) {
-		if (index > size || index < 0) { throw new IndexOutOfBoundsException(outOfBoundsMsg(index)); }
+		if (index > size || index < 0)
+			throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
 	}
 
 	/**

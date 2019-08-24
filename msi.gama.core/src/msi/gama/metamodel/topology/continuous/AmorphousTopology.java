@@ -379,7 +379,7 @@ public class AmorphousTopology implements ITopology {
 
 			@Override
 			public Envelope3D getBounds() {
-				return Envelope3D.of(expandableEnvironment);
+				return expandableEnvironment.getEnvelope();
 			}
 		};
 	}

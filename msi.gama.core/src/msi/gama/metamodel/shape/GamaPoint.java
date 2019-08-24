@@ -15,6 +15,7 @@ import static msi.gaml.operators.Maths.round;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 import org.locationtech.jts.util.NumberUtil;
 
 import msi.gama.common.geometry.Envelope3D;
@@ -364,8 +365,8 @@ public class GamaPoint extends Coordinate implements IShape {
 	 * @see msi.gama.metamodel.shape.IShape#getGeometricalType()
 	 */
 	@Override
-	public Type getGeometricalType() {
-		return Type.POINT;
+	public ShapeType getGeometricalType() {
+		return ShapeType.POINT;
 	}
 
 	public GamaPoint times(final double d) {
@@ -625,7 +626,7 @@ public class GamaPoint extends Coordinate implements IShape {
 	}
 
 	@Override
-	public void setGeometricalType(final Type t) {}
+	public void setGeometricalType(final ShapeType t) {}
 
 	@Override
 	public GamaPoint clone() {

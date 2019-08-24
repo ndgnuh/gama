@@ -104,6 +104,7 @@ import msi.gama.common.GamlFileExtension;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.lang.gaml.resource.GamlResourceServices;
 import msi.gama.lang.gaml.ui.decorators.GamlAnnotationImageProvider;
 import msi.gama.lang.gaml.ui.editbox.BoxDecorator;
@@ -121,7 +122,6 @@ import msi.gama.lang.gaml.ui.templates.GamlEditTemplateDialog;
 import msi.gama.lang.gaml.ui.templates.GamlEditTemplateDialogFactory;
 import msi.gama.lang.gaml.ui.templates.GamlTemplateStore;
 import msi.gama.lang.gaml.validation.IGamlBuilderListener;
-import msi.gama.runtime.PlatformHelper;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ValidationContext;
 import ummisco.gama.ui.controls.FlatButton;
@@ -450,7 +450,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 				if (toolbar == null || toolbar.isDisposed())
 					return;
 				toolbar.wipe(SWT.LEFT, true);
-				if (PlatformHelper.isWindows()) {
+				if (PlatformUtils.isWindows()) {
 					toolbar.sep(4, SWT.LEFT);
 				}
 

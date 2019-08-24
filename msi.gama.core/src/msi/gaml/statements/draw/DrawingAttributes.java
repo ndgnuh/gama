@@ -14,12 +14,13 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
+import org.locationtech.jts.geom.ShapeType;
+
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaMaterial;
 import msi.gama.util.file.GamaGifFile;
@@ -36,7 +37,7 @@ public class DrawingAttributes {
 	Scaling3D size;
 	AxisAngle rotation;
 	Double depth = null, lineWidth = GamaPreferences.Displays.CORE_LINE_WIDTH.getValue();
-	public IShape.Type type;
+	public ShapeType type;
 	GamaColor fill, highlight, border;
 	List<?> textures;
 	boolean empty = false, selected = false, synthetic = false, lighting = true;
@@ -151,7 +152,7 @@ public class DrawingAttributes {
 		return lineWidth;
 	}
 
-	public IShape.Type getType() {
+	public ShapeType getType() {
 		return type;
 	}
 
@@ -159,7 +160,7 @@ public class DrawingAttributes {
 		return true;
 	}
 
-	public void setType(final IShape.Type type) {
+	public void setType(final ShapeType type) {
 		this.type = type;
 	}
 

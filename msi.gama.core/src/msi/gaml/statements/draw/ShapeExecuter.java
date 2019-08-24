@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.ICoordinates;
@@ -109,13 +110,13 @@ class ShapeExecuter extends DrawExecuter {
 			final Geometry withArrows = addArrows(scope, gg, !attributes.isEmpty());
 			if (withArrows != gg) {
 				gg = withArrows;
-				attributes.setType(IShape.Type.NULL);
+				attributes.setType(ShapeType.NULL);
 			}
 		}
 		final Geometry withTorus = addToroidalParts(scope, gg);
 		if (withTorus != gg) {
 			gg = withTorus;
-			attributes.setType(IShape.Type.NULL);
+			attributes.setType(ShapeType.NULL);
 		}
 
 		// XXX EXPERIMENTAL See Issue #1521

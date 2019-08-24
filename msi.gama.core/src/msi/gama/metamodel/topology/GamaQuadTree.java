@@ -72,7 +72,8 @@ public class GamaQuadTree implements ISpatialIndex {
 
 	@Override
 	public void insert(final IAgent agent) {
-		if (agent == null) { return; }
+		if (agent == null)
+			return;
 		if (agent.isPoint()) {
 			root.add(agent.getLocation(), agent);
 		} else {
@@ -97,7 +98,8 @@ public class GamaQuadTree implements ISpatialIndex {
 	@Override
 	public void remove(final Envelope3D previous, final IAgent agent) {
 		final Envelope3D current = previous == null ? agent.getEnvelope() : previous;
-		if (current == null) { return; }
+		if (current == null)
+			return;
 		if (isPoint(current)) {
 			root.remove(current.centre(), agent);
 		} else {
@@ -112,7 +114,8 @@ public class GamaQuadTree implements ISpatialIndex {
 		// random procedures and removing duplicates
 		try (final ICollector<IAgent> list = Collector.newOrderedSet()) {
 			root.findIntersects(r, list);
-			if (list.isEmpty()) { return Collections.EMPTY_LIST; }
+			if (list.isEmpty())
+				return Collections.EMPTY_LIST;
 			filter.filter(scope, source, list);
 			scope.getRandom().shuffle2(list);
 			return list.items();
@@ -128,7 +131,8 @@ public class GamaQuadTree implements ISpatialIndex {
 		env.expandBy(exp);
 		try {
 			final Collection<IAgent> result = findIntersects(scope, source, env, f);
-			if (result.isEmpty()) { return Collections.EMPTY_LIST; }
+			if (result.isEmpty())
+				return Collections.EMPTY_LIST;
 			result.removeIf(each -> source.euclidianDistanceTo(each) > dist);
 			return result;
 		} finally {
@@ -152,11 +156,12 @@ public class GamaQuadTree implements ISpatialIndex {
 	@Override
 	public IAgent firstAtDistance(final IScope scope, final IShape source, final double dist, final IAgentFilter f) {
 		final double exp = dist * Maths.SQRT2;
-		final Envelope3D env = Envelope3D.of(source);
+		final Envelope3D env = source.getEnvelope();
 		env.expandBy(exp);
 		try {
 			final Collection<IAgent> in_square = findIntersects(scope, source, env, f);
-			if (in_square.isEmpty()) { return null; }
+			if (in_square.isEmpty())
+				return null;
 			double min_distance = dist;
 			IAgent min_agent = null;
 			for (final IAgent a : in_square) {

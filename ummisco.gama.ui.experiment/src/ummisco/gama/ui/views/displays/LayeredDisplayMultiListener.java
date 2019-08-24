@@ -15,8 +15,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 
 import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.PlatformHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class LayeredDisplayMultiListener {
@@ -59,7 +59,8 @@ public class LayeredDisplayMultiListener {
 	}
 
 	public void keyReleased(final int e, final boolean command) {
-		if (!command) { return; }
+		if (!command)
+			return;
 		keyListener.accept(e);
 	}
 
@@ -69,12 +70,15 @@ public class LayeredDisplayMultiListener {
 			suppressNextEnter = false;
 			return;
 		}
-		if (modifier) { return; }
+		if (modifier)
+			return;
 
 		setMousePosition(x, y);
-		if (button > 0) { return; }
+		if (button > 0)
+			return;
 		final long currentTime = System.currentTimeMillis();
-		if (currentTime - lastEnterTime < 100 && lastEnterPosition.x == x && lastEnterPosition.y == y) { return; }
+		if (currentTime - lastEnterTime < 100 && lastEnterPosition.x == x && lastEnterPosition.y == y)
+			return;
 		lastEnterTime = System.currentTimeMillis();
 		lastEnterPosition = new Point(x, y);
 		// DEBUG.LOG("Mouse entering " + e);
@@ -83,9 +87,11 @@ public class LayeredDisplayMultiListener {
 
 	public void mouseExit(final int x, final int y, final boolean modifier, final int button) {
 		final long currentTime = System.currentTimeMillis();
-		if (currentTime - lastEnterTime < 100 && lastEnterPosition.x == x && lastEnterPosition.y == y) { return; }
+		if (currentTime - lastEnterTime < 100 && lastEnterPosition.x == x && lastEnterPosition.y == y)
+			return;
 		setMousePosition(-1, -1);
-		if (button > 0) { return; }
+		if (button > 0)
+			return;
 		// DEBUG.LOG("Mouse exiting " + e);
 		surface.dispatchMouseEvent(SWT.MouseExit);
 		// if (!view.isFullScreen() && WorkaroundForIssue1353.isInstalled()) {
@@ -97,17 +103,17 @@ public class LayeredDisplayMultiListener {
 	}
 
 	public void mouseHover(final int button) {
-		if (button > 0) { return; }
+		if (button > 0)
+			return;
 		// DEBUG.LOG("Mouse hovering on " + view.getPartName());
 		surface.dispatchMouseEvent(SWT.MouseHover);
 	}
 
 	public void mouseMove(final int x, final int y, final boolean modifier) {
 		WorkbenchHelper.asyncRun(view.displayOverlay);
-		if (modifier) {
+		if (modifier)
 			return;
-			// DEBUG.LOG("Mouse moving on " + view.getPartName());
-		}
+		// DEBUG.LOG("Mouse moving on " + view.getPartName());
 
 		if (mouseIsDown) {
 			surface.draggedTo(x, y);
@@ -137,12 +143,12 @@ public class LayeredDisplayMultiListener {
 			inMenu = false;
 			return;
 		}
-		if (modifier) { return; }
-		if (PlatformHelper.isWindows() && button == 3) {
+		if (modifier)
+			return;
+		if (PlatformUtils.isWindows() && button == 3)
 			// see Issue #2756: Windows emits the mouseDown(...) event *before* the menuDetected(..) one.
 			// No need to patch mouseUp(...) right now
 			return;
-		}
 		mouseIsDown = true;
 		// DEBUG.LOG("Mouse down on " + view.getPartName());
 		surface.dispatchMouseEvent(SWT.MouseDown);
@@ -162,9 +168,11 @@ public class LayeredDisplayMultiListener {
 	 */
 	public void mouseUp(final int x, final int y, final int button, final boolean modifier) {
 		// In case the mouse has moved (for example on a menu)
-		if (!mouseIsDown) { return; }
+		if (!mouseIsDown)
+			return;
 		setMousePosition(x, y);
-		if (modifier) { return; }
+		if (modifier)
+			return;
 		mouseIsDown = false;
 		// DEBUG.LOG("Mouse up on " + view.getPartName());
 		// if (!view.isFullScreen() && WorkaroundForIssue1353.isInstalled()) {
@@ -174,7 +182,8 @@ public class LayeredDisplayMultiListener {
 	}
 
 	public void menuDetected(final int x, final int y) {
-		if (inMenu) { return; }
+		if (inMenu)
+			return;
 		// DEBUG.LOG("Menu detected on " + view.getPartName());
 		inMenu = true;
 		setMousePosition(x, y);

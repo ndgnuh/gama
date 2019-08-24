@@ -48,6 +48,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryCollection;
 import org.locationtech.jts.geom.Lineal;
 import org.locationtech.jts.geom.Puntal;
+import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.GeometryUtils;
@@ -174,7 +175,7 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 		shape = new GamaShape(shape, null, rotation, attributes.getLocation(), attributes.getSize(), true);
 		final GamaColor c = attributes.getColor();
 		return drawShape(shape.getInnerGeometry(),
-				new ShapeDrawingAttributes(shape.getLocation(), c, c, (IShape.Type) null));
+				new ShapeDrawingAttributes(shape.getLocation(), c, c, (ShapeType) null));
 	}
 
 	AffineTransform imageTransform = new AffineTransform();
