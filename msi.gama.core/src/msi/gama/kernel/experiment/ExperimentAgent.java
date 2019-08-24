@@ -32,6 +32,7 @@ import msi.gama.metamodel.agent.GamlAgent;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
+import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.IOutputManager;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -76,12 +77,12 @@ import ummisco.gama.dev.utils.DEBUG;
 		type = IType.LIST,
 		of = ITypeProvider.MODEL_TYPE,
 		doc = @doc (
-				value = "contains the list of currently running simulations")),
+				value = "Contains the list of currently running simulations")),
 		@variable (
 				name = IKeyword.SIMULATION,
 				type = ITypeProvider.MODEL_TYPE,
 				doc = @doc (
-						value = "contains a reference to the current simulation being run by this experiment",
+						value = "Contains a reference to the current simulation being run by this experiment",
 						comment = "will be nil if no simulation have been created. In case several simulations are launched, contains a reference to the latest one")),
 		// @var(name = GAMA._FATAL, type = IType.BOOL),
 		@variable (
@@ -137,7 +138,9 @@ import ummisco.gama.dev.utils.DEBUG;
 						comment = "Always terminated with a trailing separator")) })
 @experiment (
 		value = IKeyword.GUI_)
-@doc ("Experiments that declare a graphical user interface")
+@doc ("An experiment is a declaration of a graphical user interface. Any experiment attached to a model is a species (introduced by the keyword 'experiment' which directly or indirectly inherits from an abstract species called 'experiment' itself. This abstract species (sub-species of 'agent') defines several attributes and actions that can then be used in any experiment."
+		+ "\n"
+		+ " 'experiment' defines several attributes, which, in addition to the attributes inherited from agent, form the minimal set of knowledge any experiment will have access to.")
 public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 
 	static {
