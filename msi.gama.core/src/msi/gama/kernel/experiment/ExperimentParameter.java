@@ -203,8 +203,10 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 
 		}
 		slider = getFacet("slider");
-		final IExpressionDescription d = type.equals(Types.BOOL) ? getDescription().getFacet(IKeyword.DISABLES) : null;
-		final IExpressionDescription e = type.equals(Types.BOOL) ? getDescription().getFacet(IKeyword.ENABLES) : null;
+		final IExpressionDescription<String> d =
+				type.equals(Types.BOOL) ? getDescription().getFacet(IKeyword.DISABLES) : null;
+		final IExpressionDescription<String> e =
+				type.equals(Types.BOOL) ? getDescription().getFacet(IKeyword.ENABLES) : null;
 		disables = d != null ? d.getStrings(getDescription(), false).toArray(new String[0]) : EMPTY_STRINGS;
 		enables = e != null ? e.getStrings(getDescription(), false).toArray(new String[0]) : EMPTY_STRINGS;
 		init = hasFacet(IKeyword.INIT) ? getFacet(IKeyword.INIT) : targetedGlobalVar.getFacetExpr(IKeyword.INIT);
@@ -232,25 +234,25 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 		// this.order = p.getDefinitionOrder();
 		this.amongValue = among;
 		if (among != null) {
-			this.among = new ConstantExpression(among);
+			this.among = new ConstantExpression<>(among);
 		} else {
 			this.among = null;
 		}
 		this.minValue = p.getMinValue(scope);
 		if (minValue != null) {
-			this.min = new ConstantExpression(minValue);
+			this.min = new ConstantExpression<>(minValue);
 		} else {
 			min = null;
 		}
 		this.maxValue = p.getMaxValue(scope);
 		if (maxValue != null) {
-			this.max = new ConstantExpression(maxValue);
+			this.max = new ConstantExpression<>(maxValue);
 		} else {
 			max = null;
 		}
 		this.stepValue = p.getStepValue(scope);
 		if (stepValue != null) {
-			this.step = new ConstantExpression(stepValue);
+			this.step = new ConstantExpression<>(stepValue);
 		} else {
 			step = null;
 		}
@@ -386,8 +388,10 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 	}
 
 	public void tryToInit(final IScope scope) {
-		if (value != UNDEFINED) { return; }
-		if (init == null) { return; }
+		if (value != UNDEFINED)
+			return;
+		if (init == null)
+			return;
 		setValue(scope, init.value(scope));
 
 	}
@@ -544,13 +548,15 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 
 	@Override
 	public String getUnitLabel(final IScope scope) {
-		if (unitLabel == null && canBeExplored()) { return computeExplorableLabel(scope); }
+		if (unitLabel == null && canBeExplored())
+			return computeExplorableLabel(scope);
 		return unitLabel;
 	}
 
 	private String computeExplorableLabel(final IScope scope) {
 		final List l = getAmongValue(scope);
-		if (l != null) { return "among " + l; }
+		if (l != null)
+			return "among " + l;
 		final Number theMax = getMaxValue(scope);
 		final Number theMin = getMinValue(scope);
 		final Number theStep = getStepValue(scope);
@@ -569,7 +575,8 @@ public class ExperimentParameter extends Symbol implements IParameter.Batch {
 
 	@Override
 	public boolean acceptsSlider(final IScope scope) {
-		if (slider == null) { return true; }
+		if (slider == null)
+			return true;
 		return Cast.asBool(scope, slider.value(scope));
 	}
 

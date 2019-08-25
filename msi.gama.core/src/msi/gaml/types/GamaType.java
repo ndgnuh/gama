@@ -94,7 +94,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 	}
 
 	public String getFieldDocumentation() {
-		if (getters == null) { return ""; }
+		if (getters == null)
+			return "";
 		try (TextBuilder sb = TextBuilder.create()) {
 			sb.append("<b><br/>Fields :</b><ul>");
 			for (final OperatorProto f : getters.values()) {
@@ -184,7 +185,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	@Override
 	public OperatorProto getGetter(final String field) {
-		if (getters == null) { return null; }
+		if (getters == null)
+			return null;
 		return getters.get(field);
 	}
 
@@ -216,7 +218,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	@Override
 	public boolean equals(final Object c) {
-		if (c instanceof IType) { return ((IType<?>) c).id() == id; }
+		if (c instanceof IType)
+			return ((IType<?>) c).id() == id;
 		return false;
 	}
 
@@ -277,8 +280,10 @@ public abstract class GamaType<Support> implements IType<Support> {
 	}
 
 	protected boolean isSuperTypeOf(final IType<?> type) {
-		if (type == null) { return false; }
-		if (parented && type.isParented()) { return type == this || isSuperTypeOf(type.getParent()); }
+		if (type == null)
+			return false;
+		if (parented && type.isParented())
+			return type == this || isSuperTypeOf(type.getParent());
 		final Class<?> remote = type.toClass();
 		return support.isAssignableFrom(remote);
 	}
@@ -295,7 +300,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	@Override
 	public boolean canBeTypeOf(final IScope scope, final Object c) {
-		if (c == null) { return acceptNullInstances(); }
+		if (c == null)
+			return acceptNullInstances();
 		return support.isAssignableFrom(c.getClass());
 	}
 
@@ -324,24 +330,33 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	@Override
 	public int distanceTo(final IType<?> type) {
-		if (type == this) { return 0; }
-		if (type == null) { return Integer.MAX_VALUE; }
+		if (type == this)
+			return 0;
+		if (type == null)
+			return Integer.MAX_VALUE;
 		if (parented) {
-			if (isSuperTypeOf(type)) { return 1 + distanceTo(type.getParent()); }
+			if (isSuperTypeOf(type))
+				return 1 + distanceTo(type.getParent());
 			return 1 + getParent().distanceTo(type);
 		}
-		if (isTranslatableInto(type)) { return 1; }
-		if (isAssignableFrom(type)) { return 1; }
+		if (isTranslatableInto(type))
+			return 1;
+		if (isAssignableFrom(type))
+			return 1;
 		return Integer.MAX_VALUE;
 	}
 
 	@SuppressWarnings ({ "rawtypes", "unchecked" })
 	@Override
 	public IType<? super Support> findCommonSupertypeWith(final IType<?> type) {
-		if (type == this) { return this; }
-		if (type == Types.NO_TYPE) { return getDefault() == null ? this : (GamaNoType) type; }
-		if (type.isTranslatableInto(this)) { return this; }
-		if (this.isTranslatableInto(type)) { return (IType) type; }
+		if (type == this)
+			return this;
+		if (type == Types.NO_TYPE)
+			return getDefault() == null ? this : (GamaNoType) type;
+		if (type.isTranslatableInto(this))
+			return this;
+		if (this.isTranslatableInto(type))
+			return (IType) type;
 		return getParent().findCommonSupertypeWith(type.getParent());
 	}
 
@@ -361,7 +376,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 	}
 
 	public static Object toType(final IScope scope, final Object value, final IType<?> type, final boolean copy) {
-		if (type == null || type.id() == IType.NONE) { return value; }
+		if (type == null || type.id() == IType.NONE)
+			return value;
 		return type.cast(scope, value, null, copy);
 	}
 
@@ -389,7 +405,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	public static IContainerType<?> from(final IContainerType<IContainer<?, ?>> t, final IType<?> keyType,
 			final IType<?> contentType) {
-		if (keyType == Types.NO_TYPE && contentType == Types.NO_TYPE) { return t; }
+		if (keyType == Types.NO_TYPE && contentType == Types.NO_TYPE)
+			return t;
 		final IType<?> kt = keyType == Types.NO_TYPE ? t.getGamlType().getKeyType() : keyType;
 		final IType<?> ct = contentType == Types.NO_TYPE ? t.getGamlType().getContentType() : contentType;
 		return ParametricType.createParametricType(t.getGamlType(), kt, ct);
@@ -399,9 +416,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 	public static IType<?> from(final IType<?> t, final IType<?> keyType, final IType<?> contentType) {
 		if (t instanceof IContainerType) {
 			if (!(t instanceof GamaSpeciesType)) {
-				if (contentType.isAssignableFrom(t.getContentType()) && keyType.isAssignableFrom(t.getKeyType())) {
+				if (contentType.isAssignableFrom(t.getContentType()) && keyType.isAssignableFrom(t.getKeyType()))
 					return t;
-				}
 			}
 			return from((IContainerType) t, keyType, contentType);
 		}
@@ -415,7 +431,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	public static IType<?> findCommonType(final IExpression[] elements, final int kind) {
 		final IType<?> result = Types.NO_TYPE;
-		if (elements.length == 0) { return result; }
+		if (elements.length == 0)
+			return result;
 		try (final ICollector<IType<?>> types = Collector.newOrderedSet()) {
 			for (final IExpression e : elements) {
 				// TODO Indicates a previous error in compiling expressions. Maybe
@@ -434,9 +451,11 @@ public abstract class GamaType<Support> implements IType<Support> {
 
 	public static IType<?> findCommonType(final IType<?>... types) {
 		IType<?> result = Types.NO_TYPE;
-		if (types.length == 0) { return result; }
+		if (types.length == 0)
+			return result;
 		result = types[0];
-		if (types.length == 1) { return result; }
+		if (types.length == 1)
+			return result;
 		for (int i = 1; i < types.length; i++) {
 			final IType<?> currentType = types[i];
 			if (currentType == Types.NO_TYPE) {
@@ -456,11 +475,16 @@ public abstract class GamaType<Support> implements IType<Support> {
 	 * @param obj
 	 * @return
 	 */
-	public static IType<?> of(final Object obj) {
-		if (obj instanceof IValue) { return ((IValue) obj).getGamlType(); }
-		if (obj instanceof IExpression) { return ((IExpression) obj).getGamlType(); }
-		if (obj == null) { return Types.NO_TYPE; }
-		return Types.get(obj.getClass());
+	public static <T> IType<T> of(final T obj) {
+		if (obj instanceof IValue)
+			return (IType<T>) ((IValue) obj).getGamlType();
+		if (obj == null)
+			return Types.NO_TYPE;
+		return (IType<T>) Types.get(obj.getClass());
+	}
+
+	public static IType<?> of(final IExpression obj) {
+		return obj.getGamlType();
 	}
 
 	/**
@@ -471,9 +495,8 @@ public abstract class GamaType<Support> implements IType<Support> {
 	}
 
 	public static boolean requiresCasting(final IType<?> castingType, final IType<?> originalType) {
-		if (castingType == null || castingType == Types.NO_TYPE || castingType.isAssignableFrom(originalType)) {
+		if (castingType == null || castingType == Types.NO_TYPE || castingType.isAssignableFrom(originalType))
 			return false;
-		}
 		return true;
 	}
 

@@ -11,11 +11,10 @@
 package msi.gaml.expressions;
 
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gaml.types.Types;
 
-public class UserLocationUnitExpression extends UnitConstantExpression {
+public class UserLocationUnitExpression extends UnitConstantExpression<GamaPoint> {
 
 	public UserLocationUnitExpression(final String doc) {
 		super(new GamaPoint(), Types.POINT, "user_location", doc, null);

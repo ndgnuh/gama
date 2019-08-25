@@ -25,17 +25,20 @@ import msi.gaml.types.GamaType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 
-public class ConstantExpressionDescription extends ConstantExpression implements IExpressionDescription {
+public class ConstantExpressionDescription<T> extends ConstantExpression<T> implements IExpressionDescription<T> {
 
 	final static Cache<Object, IExpressionDescription> CACHE = CacheBuilder.newBuilder().maximumSize(1000).build();
-	public final static ConstantExpressionDescription NULL_EXPR_DESCRIPTION = new ConstantExpressionDescription(null);
-	public final static ConstantExpressionDescription TRUE_EXPR_DESCRIPTION = new ConstantExpressionDescription(true);
-	public final static ConstantExpressionDescription FALSE_EXPR_DESCRIPTION = new ConstantExpressionDescription(false);
+	public final static ConstantExpressionDescription NULL_EXPR_DESCRIPTION = new ConstantExpressionDescription<>(null);
+	public final static ConstantExpressionDescription<Boolean> TRUE_EXPR_DESCRIPTION =
+			new ConstantExpressionDescription<>(true);
+	public final static ConstantExpressionDescription<Boolean> FALSE_EXPR_DESCRIPTION =
+			new ConstantExpressionDescription<>(false);
 
-	public static IExpressionDescription create(final Object object) {
-		if (object == null) { return NULL_EXPR_DESCRIPTION; }
+	public static <E> IExpressionDescription<E> create(final E object) {
+		if (object == null)
+			return NULL_EXPR_DESCRIPTION;
 		try {
-			return CACHE.get(object, () -> new ConstantExpressionDescription(object));
+			return CACHE.get(object, () -> new ConstantExpressionDescription<>(object));
 		} catch (final ExecutionException e) {
 			return null;
 		}
@@ -43,7 +46,7 @@ public class ConstantExpressionDescription extends ConstantExpression implements
 
 	public static IExpressionDescription create(final Integer i) {
 		try {
-			return CACHE.get(i, () -> new ConstantExpressionDescription(i, Types.INT));
+			return CACHE.get(i, () -> new ConstantExpressionDescription<>(i, Types.INT));
 		} catch (final ExecutionException e) {
 			return null;
 		}
@@ -52,7 +55,7 @@ public class ConstantExpressionDescription extends ConstantExpression implements
 
 	public static IExpressionDescription create(final Double d) {
 		try {
-			return CACHE.get(d, () -> new ConstantExpressionDescription(d, Types.FLOAT));
+			return CACHE.get(d, () -> new ConstantExpressionDescription<>(d, Types.FLOAT));
 		} catch (final ExecutionException e) {
 			return null;
 		}
@@ -63,11 +66,11 @@ public class ConstantExpressionDescription extends ConstantExpression implements
 		return b ? TRUE_EXPR_DESCRIPTION : FALSE_EXPR_DESCRIPTION;
 	}
 
-	private ConstantExpressionDescription(final Object object) {
+	private ConstantExpressionDescription(final T object) {
 		this(object, GamaType.of(object));
 	}
 
-	private ConstantExpressionDescription(final Object object, final IType<?> t) {
+	private ConstantExpressionDescription(final T object, final IType<T> t) {
 		super(object, t);
 	}
 
@@ -88,7 +91,7 @@ public class ConstantExpressionDescription extends ConstantExpression implements
 	public void setExpression(final IExpression expr) {}
 
 	@Override
-	public IExpressionDescription cleanCopy() {
+	public IExpressionDescription<T> cleanCopy() {
 		return this;
 	}
 

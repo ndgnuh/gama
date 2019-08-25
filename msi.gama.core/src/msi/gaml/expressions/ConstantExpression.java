@@ -25,26 +25,26 @@ import msi.gaml.types.IType;
  * @author drogoul 22 août 07
  */
 
-public class ConstantExpression extends AbstractExpression {
+public class ConstantExpression<T> extends AbstractExpression {
 
-	Object value;
+	T value;
 
-	public ConstantExpression(final Object val, final IType<?> t, final String name) {
+	public ConstantExpression(final T val, final IType<T> t, final String name) {
 		value = val;
 		type = t;
 		setName(name);
 	}
 
-	public ConstantExpression(final Object val, final IType<?> t) {
+	public ConstantExpression(final T val, final IType<T> t) {
 		this(val, t, val == null ? "nil" : val.toString());
 	}
 
-	public ConstantExpression(final Object val) {
+	public ConstantExpression(final T val) {
 		this(val, GamaType.of(val));
 	}
 
 	@Override
-	public Object _value(final IScope scope) {
+	public T _value(final IScope scope) {
 		return value;
 	}
 
@@ -80,16 +80,6 @@ public class ConstantExpression extends AbstractExpression {
 	public boolean shouldBeParenthesized() {
 		return false;
 	}
-
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see msi.gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	//
-	// }
 
 	@Override
 	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}

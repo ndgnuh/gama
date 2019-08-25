@@ -31,12 +31,12 @@ import msi.gaml.types.Types;
  * @since 22 avr. 2014
  *
  */
-public class UnitConstantExpression extends ConstantExpression implements IExpressionDescription {
+public class UnitConstantExpression<T> extends ConstantExpression<T> implements IExpressionDescription<T> {
 
 	String name;
 
 	// Already cached in IExpressionFactory.UNIT_EXPRS
-	public static UnitConstantExpression create(final Object val, final IType<?> t, final String unit, final String doc,
+	public static <E> UnitConstantExpression create(final E val, final IType<E> t, final String unit, final String doc,
 			final boolean isTime, final String[] names) {
 
 		switch (unit) {
@@ -63,15 +63,16 @@ public class UnitConstantExpression extends ConstantExpression implements IExpre
 				return new CurrentErrorUnitExpression(doc);
 
 		}
-		if (isTime) { return new TimeUnitConstantExpression(val, t, unit, doc, names); }
-		return new UnitConstantExpression(val, t, unit, doc, names);
+		if (isTime)
+			return new TimeUnitConstantExpression(val, t, unit, doc, names);
+		return new UnitConstantExpression<>(val, t, unit, doc, names);
 	}
 
 	String documentation;
 	final List<String> alternateNames;
 	private boolean isDeprecated;
 
-	public UnitConstantExpression(final Object val, final IType<?> t, final String name, final String doc,
+	public UnitConstantExpression(final T val, final IType<T> t, final String name, final String doc,
 			final String[] names) {
 		super(val, t);
 		this.name = name;

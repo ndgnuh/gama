@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gaml.descriptions.IExpressionDescription.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gaml.descriptions.IExpressionDescription.java, in plugin msi.gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gaml.descriptions;
 
@@ -26,29 +26,29 @@ import msi.gaml.types.IType;
  * @since 31 mars 2012
  *
  */
-public interface IExpressionDescription extends IGamlable, IDisposable {
+public interface IExpressionDescription<T> extends IGamlable, IDisposable {
 
-	public abstract void setExpression(final IExpression expr);
+	void setExpression(final IExpression expr);
 
-	public abstract IExpression compile(final IDescription context);
+	IExpression compile(final IDescription context);
 
-	public abstract IExpression getExpression();
+	IExpression getExpression();
 
-	public abstract IExpressionDescription compileAsLabel();
+	IExpressionDescription compileAsLabel();
 
-	public abstract boolean equalsString(String o);
+	boolean equalsString(String o);
 
-	public EObject getTarget();
+	EObject getTarget();
 
-	public void setTarget(EObject target);
+	void setTarget(EObject target);
 
-	public boolean isConst();
+	boolean isConst();
 
-	public Collection<String> getStrings(IDescription context, boolean skills);
+	Collection<String> getStrings(IDescription context, boolean skills);
 
-	public abstract IExpressionDescription cleanCopy();
+	IExpressionDescription cleanCopy();
 
-	public abstract IType<?> getDenotedType(IDescription context);
+	IType<?> getDenotedType(IDescription context);
 
 	// public abstract void collectMetaInformation(GamlProperties meta);
 

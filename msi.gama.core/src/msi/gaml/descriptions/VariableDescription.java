@@ -97,7 +97,8 @@ public class VariableDescription extends SymbolDescription {
 
 	@Override
 	public void dispose() {
-		if (isBuiltIn()) { return; }
+		if (isBuiltIn())
+			return;
 		super.dispose();
 	}
 
@@ -108,7 +109,8 @@ public class VariableDescription extends SymbolDescription {
 
 		v2.visitFacets((facetName, exp) -> {
 			if (isFunction) {
-				if (facetName.equals(INIT) || facetName.equals(UPDATE) || facetName.equals(VALUE)) { return true; }
+				if (facetName.equals(INIT) || facetName.equals(UPDATE) || facetName.equals(VALUE))
+					return true;
 			}
 			if (!hasFacet(facetName)) {
 				setFacet(facetName, exp);
@@ -149,7 +151,8 @@ public class VariableDescription extends SymbolDescription {
 	public boolean isContextualType() {
 		String type = getLitteral(TYPE);
 		int provider = GamaIntegerType.staticCast(null, type, null, false);
-		if (provider < 0) { return true; }
+		if (provider < 0)
+			return true;
 		type = getLitteral(OF);
 		provider = GamaIntegerType.staticCast(null, type, null, false);
 		return provider < 0;
@@ -170,21 +173,25 @@ public class VariableDescription extends SymbolDescription {
 				case ITypeProvider.MACRO_TYPE:
 					final IDescription species = this.getEnclosingDescription();
 					final IDescription macro = species.getEnclosingDescription();
-					if (macro == null) { return Types.AGENT; }
+					if (macro == null)
+						return Types.AGENT;
 					return macro.getGamlType();
 				case ITypeProvider.OWNER_TYPE: // This represents the type of the
 												// agents of the enclosing species
-					if (this.getEnclosingDescription() == null) { return Types.AGENT; }
+					if (this.getEnclosingDescription() == null)
+						return Types.AGENT;
 					return this.getEnclosingDescription().getGamlType();
 				case ITypeProvider.MODEL_TYPE: // This represents the type of the
 												// model (used for simulations)
 					final ModelDescription md = this.getModelDescription();
-					if (md == null) { return Types.get("model"); }
+					if (md == null)
+						return Types.get("model");
 					return md.getGamlType();
 				case ITypeProvider.EXPERIMENT_TYPE:
 					return Types.get("experiment");
 				case ITypeProvider.MIRROR_TYPE:
-					if (getEnclosingDescription() == null) { return null; }
+					if (getEnclosingDescription() == null)
+						return null;
 					final IExpression mirrors = getEnclosingDescription().getFacetExpr(MIRRORS);
 					if (mirrors != null) {
 						// We try to change the type of the 'target' variable if the
@@ -244,10 +251,6 @@ public class VariableDescription extends SymbolDescription {
 		}
 	}
 
-	public boolean isUpdatable() {
-		return !_isNotModifiable && (hasFacet(VALUE) || hasFacet(UPDATE));
-	}
-
 	public boolean isNotModifiable() {
 		return _isNotModifiable;
 	}
@@ -272,7 +275,8 @@ public class VariableDescription extends SymbolDescription {
 
 	public String getParameterName() {
 		final String pName = getLitteral(PARAMETER);
-		if (pName == null || pName.equals(TRUE)) { return getName(); }
+		if (pName == null || pName.equals(TRUE))
+			return getName();
 		return pName;
 	}
 
@@ -280,14 +284,16 @@ public class VariableDescription extends SymbolDescription {
 	public String getTitle() {
 		final String title = getGamlType().getTitle()
 				+ (isParameter() ? " parameter " : isNotModifiable() ? " constant " : " attribute ") + getName();
-		if (getEnclosingDescription() == null) { return title; }
+		if (getEnclosingDescription() == null)
+			return title;
 		return title + " of " + this.getEnclosingDescription().getTitle() + "<br/>";
 	}
 
 	@Override
 	public String getDocumentation() {
 		final String doc = getBuiltInDoc();
-		if (isBuiltIn()) { return doc == null ? "Not yet documented" : doc; }
+		if (isBuiltIn())
+			return doc == null ? "Not yet documented" : doc;
 		String s = "";
 		if (doc != null) {
 			s += doc + "<br/>";
@@ -306,17 +312,18 @@ public class VariableDescription extends SymbolDescription {
 
 	public String getBuiltInDoc() {
 		final VariableDescription builtIn = getBuiltInAncestor();
-		if (builtIn == null) { return null; }
+		if (builtIn == null)
+			return null;
 		return AbstractGamlAdditions.TEMPORARY_BUILT_IN_VARS_DOCUMENTATION.get(builtIn.getName());
 	}
 
 	private VariableDescription getBuiltInAncestor() {
 		if (getEnclosingDescription() instanceof TypeDescription) {
 			final TypeDescription td = (TypeDescription) getEnclosingDescription();
-			if (td.isBuiltIn()) { return this; }
-			if (td.getParent() != null && td.getParent().hasAttribute(name)) {
+			if (td.isBuiltIn())
+				return this;
+			if (td.getParent() != null && td.getParent().hasAttribute(name))
 				return td.getParent().getAttribute(name).getBuiltInAncestor();
-			}
 		}
 		return null;
 	}

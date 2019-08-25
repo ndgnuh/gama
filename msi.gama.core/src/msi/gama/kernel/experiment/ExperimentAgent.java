@@ -32,7 +32,6 @@ import msi.gama.metamodel.agent.GamlAgent;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.ILocation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.outputs.IOutputManager;
 import msi.gama.precompiler.GamlAnnotations.action;
@@ -205,9 +204,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	}
 
 	public String getDefinedRng() {
-		if (GamaPreferences.External.CORE_RND_EDITABLE.getValue()) {
+		if (GamaPreferences.External.CORE_RND_EDITABLE.getValue())
 			return (String) ((ExperimentPlan) getSpecies()).parameters.get(IKeyword.RNG).value(ownScope);
-		}
 		return GamaPreferences.External.CORE_RNG.getValue();
 	}
 
@@ -247,7 +245,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 
 	@Override
 	public void dispose() {
-		if (dead) { return; }
+		if (dead)
+			return;
 		closeSimulations();
 		GAMA.releaseScope(ownScope);
 		super.dispose();
@@ -260,7 +259,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	 */
 	@Override
 	public Object _init_(final IScope scope) {
-		if (scope.interrupted()) { return null; }
+		if (scope.interrupted())
+			return null;
 		if (automaticallyCreateFirstSimulation()) {
 			createSimulation(getParameterValues(), scheduled);
 		}
@@ -293,7 +293,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	 */
 	@Override
 	public Object primDie(final IScope scope) throws GamaRuntimeException {
-		if (dying) { return null; }
+		if (dying)
+			return null;
 		dying = true;
 		getSpecies().getArchitecture().abort(scope);
 		GAMA.closeExperiment(getSpecies());
@@ -303,7 +304,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 
 	public SimulationAgent createSimulation(final ParametersSet parameters, final boolean scheduleIt) {
 		final IPopulation<? extends IAgent> pop = getSimulationPopulation();
-		if (pop == null) { return null; }
+		if (pop == null)
+			return null;
 		final ParametersSet ps = getParameterValues();
 		ps.putAll(parameters);
 		final IList<Map<String, Object>> list = GamaListFactory.create(Types.MAP);
@@ -380,9 +382,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	 */
 
 	public List<? extends IParameter.Batch> getDefaultParameters() {
-		if (!getSpecies().isHeadless() && !GamaPreferences.External.CORE_RND_EDITABLE.getValue()) {
+		if (!getSpecies().isHeadless() && !GamaPreferences.External.CORE_RND_EDITABLE.getValue())
 			return new ArrayList<>();
-		}
 		final List<ExperimentParameter> params = new ArrayList<>();
 		final String cat = getExperimentParametersCategory();
 		ExperimentParameter p = new ExperimentParameter(getScope(), getSpecies().getVar(IKeyword.RNG),
@@ -591,7 +592,8 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	@Override
 	@getter (IKeyword.SIMULATION)
 	public SimulationAgent getSimulation() {
-		if (getSimulationPopulation() != null) { return getSimulationPopulation().lastSimulationCreated(); }
+		if (getSimulationPopulation() != null)
+			return getSimulationPopulation().lastSimulationCreated();
 		return null;
 	}
 
@@ -610,9 +612,11 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 
 	@Override
 	public IPopulation<? extends IAgent> getPopulationFor(final ISpecies species) {
-		if (species == getModel()) { return getSimulationPopulation(); }
+		if (species == getModel())
+			return getSimulationPopulation();
 		final SimulationAgent sim = getSimulation();
-		if (sim == null) { return IPopulation.createEmpty(species); }
+		if (sim == null)
+			return IPopulation.createEmpty(species);
 		return sim.getPopulationFor(species.getName());
 
 	}
@@ -713,36 +717,37 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 		public Object getGlobalVarValue(final String varName) {
 
 			// First case: we have the variable inside the experiment.
-			if (ExperimentAgent.this.hasAttribute(varName) || getSpecies().hasVar(varName)) {
+			if (ExperimentAgent.this.hasAttribute(varName) || getSpecies().hasVar(varName))
 				return super.getGlobalVarValue(varName);
-			}
 			// Second case: the simulation is not null, so it should handle it
 			final SimulationAgent sim = getSimulation();
-			if (sim != null && !sim.dead()) { return sim.getScope().getGlobalVarValue(varName); }
+			if (sim != null && !sim.dead())
+				return sim.getScope().getGlobalVarValue(varName);
 			// Third case, the simulation is null but the model defines this variable (see #2044). We then grab its
 			// initial value if possible
 			// However, if the experiment is defined with keep_simulations: false, we should not give access to the
 			// value, as no simulations can be made available (see #2727)
 			if (this.getModel().getSpecies().hasVar(varName)) {
-				if (!getExperiment().getSpecies().keepsSimulations()) {
+				if (!getExperiment().getSpecies().keepsSimulations())
 					throw GamaRuntimeException.error("This experiment does not keep its simulations. " + varName
 							+ " cannot be retrieved in this context", this);
-				}
 				return getModel().getSpecies().getVar(varName).getInitialValue(this);
 			}
 			// Fourth case: this is a parameter, so we get it from the species
-			if (getSpecies().hasParameter(varName)) {
+			if (getSpecies().hasParameter(varName))
 				return getSpecies().getExperimentScope().getGlobalVarValue(varName);
-			}
 			// Fifth case: it is an extra parameter
 			return extraParametersMap.get(varName);
 		}
 
 		@Override
 		public boolean hasAccessToGlobalVar(final String varName) {
-			if (ExperimentAgent.this.hasAttribute(varName) || getSpecies().hasVar(varName)) { return true; }
-			if (this.getModel().getSpecies().hasVar(varName)) { return true; }
-			if (getSpecies().hasParameter(varName)) { return true; }
+			if (ExperimentAgent.this.hasAttribute(varName) || getSpecies().hasVar(varName))
+				return true;
+			if (this.getModel().getSpecies().hasVar(varName))
+				return true;
+			if (getSpecies().hasParameter(varName))
+				return true;
 			return extraParametersMap.containsKey(varName);
 		}
 
@@ -771,13 +776,15 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 
 		@Override
 		public Object getAgentVarValue(final IAgent a, final String varName) {
-			if (a == ExperimentAgent.this) { return getGlobalVarValue(varName); }
+			if (a == ExperimentAgent.this)
+				return getGlobalVarValue(varName);
 			return super.getAgentVarValue(a, varName);
 		}
 
 		@Override
 		public IGui getGui() {
-			if (getSpecies().isHeadless()) { return GAMA.getHeadlessGui(); }
+			if (getSpecies().isHeadless())
+				return GAMA.getHeadlessGui();
 			return GAMA.getRegularGui();
 		}
 
@@ -788,10 +795,9 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	 */
 	public Iterable<IOutputManager> getAllSimulationOutputs() {
 		final SimulationPopulation pop = getSimulationPopulation();
-		if (pop != null) {
+		if (pop != null)
 			return Iterables.filter(Iterables.concat(Iterables.transform(pop, each -> each.getOutputManager()),
 					Collections.singletonList(getOutputManager())), each -> each != null);
-		}
 		return Collections.EMPTY_LIST;
 	}
 

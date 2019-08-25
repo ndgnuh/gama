@@ -1587,8 +1587,7 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 				}
 			}
 
-			for (final String s : orderedVarNames) {
-				final IVariable var = species.getVar(s);
+			for (final IVariable var : orderedVars) {
 				for (int i = 0; i < actualNumberOfCells; i++) {
 					final IAgent a = (IAgent) matrix[i];
 					if (a != null) {

@@ -256,10 +256,9 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 		public void createVariables(final IScope scope, final IAgent a, final Map<String, Object> inits)
 				throws GamaRuntimeException {
 			final Set<String> names = inits.keySet();
-			for (final String s : orderedVarNames) {
-				final IVariable var = getVar(s);
-				var.initializeWith(scope, a, inits.get(s));
-				names.remove(s);
+			for (final IVariable var : orderedVars) {
+				var.initializeWith(scope, a, inits.get(var.getName()));
+				names.remove(var.getName());
 			}
 			for (final String s : names) {
 				a.getScope().setAgentVarValue(a, s, inits.get(s));
@@ -496,7 +495,8 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 	private void createOutput(final BatchOutput output) throws GamaRuntimeException {
 		// TODO revoir tout ceci. Devrait plut�t �tre une commande
-		if (output == null) { return; }
+		if (output == null)
+			return;
 		IExpression data = output.getFacet(IKeyword.DATA);
 		if (data == null) {
 			data = exploration.getFitnessExpression();
@@ -598,14 +598,16 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 	public IParameter.Batch getParameterByTitle(final String title) {
 		for (final IParameter p : parameters.values()) {
-			if (p.getTitle().equals(title) && p instanceof IParameter.Batch) { return (IParameter.Batch) p; }
+			if (p.getTitle().equals(title) && p instanceof IParameter.Batch)
+				return (IParameter.Batch) p;
 		}
 		return null;
 	}
 
 	public IParameter.Batch getParameter(final String parameterName) {
 		final IParameter p = parameters.get(parameterName);
-		if (p instanceof IParameter.Batch) { return (IParameter.Batch) p; }
+		if (p instanceof IParameter.Batch)
+			return (IParameter.Batch) p;
 		return null;
 	}
 
@@ -620,19 +622,17 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 	protected IParameter.Batch checkGetParameterByTitle(final String parameterName) throws GamaRuntimeException {
 		final IParameter.Batch v = getParameterByTitle(parameterName);
-		if (v == null) {
+		if (v == null)
 			throw GamaRuntimeException.error("No parameter named " + parameterName + " in experiment " + getName(),
 					getExperimentScope());
-		}
 		return v;
 	}
 
 	protected IParameter.Batch checkGetParameter(final String parameterName) throws GamaRuntimeException {
 		final IParameter.Batch v = getParameter(parameterName);
-		if (v == null) {
+		if (v == null)
 			throw GamaRuntimeException.error("No parameter named " + parameterName + " in experiment " + getName(),
 					getExperimentScope());
-		}
 		return v;
 	}
 
@@ -643,7 +643,8 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 	@Override
 	public SimulationAgent getCurrentSimulation() {
-		if (agent == null) { return null; }
+		if (agent == null)
+			return null;
 		return agent.getSimulation();
 	}
 
@@ -676,9 +677,11 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 		@Override
 		public Object getGlobalVarValue(final String varName) throws GamaRuntimeException {
-			if (hasParameter(varName)) { return getParameterValue(varName); }
+			if (hasParameter(varName))
+				return getParameterValue(varName);
 			final SimulationAgent a = getCurrentSimulation();
-			if (a != null) { return a.getDirectVarValue(this, varName); }
+			if (a != null)
+				return a.getDirectVarValue(this, varName);
 			return null;
 		}
 
@@ -798,7 +801,8 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 
 	@Override
 	public Iterable<IOutputManager> getActiveOutputManagers() {
-		if (agent == null) { return Collections.EMPTY_LIST; }
+		if (agent == null)
+			return Collections.EMPTY_LIST;
 		return Iterables.concat(agent.getAllSimulationOutputs(), Arrays.asList(experimentOutputs));
 
 	}

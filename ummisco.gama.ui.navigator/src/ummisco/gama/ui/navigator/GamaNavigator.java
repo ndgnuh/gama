@@ -146,9 +146,11 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 	}
 
 	private void restoreState() {
-		if (memento == null) { return; }
+		if (memento == null)
+			return;
 		final String saved = memento.getString("EXPANDED_STATE");
-		if (saved == null) { return; }
+		if (saved == null)
+			return;
 		if (GamaPreferences.Interface.KEEP_NAVIGATOR_STATE.getValue()) {
 			final List<VirtualContent<?>> contents = new ArrayList<>();
 			final String[] names = saved.split("@@");
@@ -166,7 +168,7 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 					}
 				}
 			}
-			final VirtualContent<?>[] sel = contents.toArray(new VirtualContent[0]);
+			final Object[] sel = contents.toArray(new Object[0]);
 			if (sel.length > 0) {
 				getCommonViewer().setExpandedElements(sel);
 				getCommonViewer().setSelection(new StructuredSelection(sel[sel.length - 1]));

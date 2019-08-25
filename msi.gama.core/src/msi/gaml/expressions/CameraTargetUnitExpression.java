@@ -12,11 +12,10 @@ package msi.gaml.expressions;
 
 import msi.gama.common.interfaces.IGraphics;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gaml.types.Types;
 
-public class CameraTargetUnitExpression extends UnitConstantExpression {
+public class CameraTargetUnitExpression extends UnitConstantExpression<GamaPoint> {
 
 	public CameraTargetUnitExpression(final String doc) {
 		super(new GamaPoint(), Types.POINT, "camera_target", doc, null);
@@ -24,9 +23,11 @@ public class CameraTargetUnitExpression extends UnitConstantExpression {
 
 	@Override
 	public GamaPoint _value(final IScope scope) {
-		if (scope == null) { return (GamaPoint) getConstValue(); }
+		if (scope == null)
+			return (GamaPoint) getConstValue();
 		final IGraphics g = scope.getGraphics();
-		if (g == null || g.is2D()) { return (GamaPoint) getConstValue(); }
+		if (g == null || g.is2D())
+			return (GamaPoint) getConstValue();
 		return ((IGraphics.ThreeD) g).getCameraTarget();
 	}
 

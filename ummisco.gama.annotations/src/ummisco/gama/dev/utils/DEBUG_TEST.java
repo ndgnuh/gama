@@ -2,7 +2,7 @@ package ummisco.gama.dev.utils;
 
 public class DEBUG_TEST {
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		new DEBUG_TEST().run();
 	}
 
@@ -12,12 +12,17 @@ public class DEBUG_TEST {
 		for (int i = 0; i < 1000000; i++) {
 			DEBUG.findCallingClassName();
 		}
-		DEBUG.LOG("Security manager caller: " + (System.currentTimeMillis() - start) + "ms");
+		DEBUG.LOG("Security manager : " + (System.currentTimeMillis() - start) + "ms");
 		start = System.currentTimeMillis();
 		for (int i = 0; i < 1000000; i++) {
-			DEBUG.findCallingClassNameOld();
+			DEBUG.findCallingClassNameThreadTechnique();
 		}
-		DEBUG.LOG("Stack trace caller: " + (System.currentTimeMillis() - start) + "ms");
+		DEBUG.LOG("Thread Stack trace : " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
+		for (int i = 0; i < 1000000; i++) {
+			DEBUG.findCallingClassNameStackWalkerTechnique();
+		}
+		DEBUG.LOG("StackWalker for each : " + (System.currentTimeMillis() - start) + "ms");
 
 	}
 }

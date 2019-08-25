@@ -1,5 +1,6 @@
 package ummisco.gama.dev.utils;
 
+import static java.lang.StackWalker.Option.RETAIN_CLASS_REFERENCE;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.currentThread;
 
@@ -25,6 +26,7 @@ public class DEBUG {
 		}
 	}
 
+	private static StackWalker WALKER = StackWalker.getInstance(RETAIN_CLASS_REFERENCE);
 	private final static MySecurityManager SECURITY_MANAGER = new MySecurityManager();
 
 	// AD 08/18: Changes to ConcurrentHashMap for multi-threaded DEBUG operations
@@ -45,21 +47,39 @@ public class DEBUG {
 	}
 
 	/**
-	 * Uses a custom security manager to get the caller class name. Use of reflection would be faster, but more prone to
-	 * Oracle evolutions. StackWalker in Java 9 will be interesting to use for that
+	 * Getting the caller class name using the new StackWalker API. On average, 2x slower (see {@link DEBUG_TEST}) than
+	 * the approach using a custom {@link SecurityManager}.
+	 *
+	 * @return
+	 */
+	static String findCallingClassNameStackWalkerTechnique() {
+		String result[] = new String[1];
+		WALKER.forEach(s -> {
+			if (result[0] == null && s.getDeclaringClass() != DEBUG.class) {
+				result[0] = s.getClassName();
+			}
+		});
+		return result[0];
+	}
+
+	/**
+	 * Getting the caller class name. Uses a custom security manager to get the caller class name. Use of reflection
+	 * should be faster, but more prone to Oracle evolutions.
 	 *
 	 * @return the name of the class that has called the method that has called this method
 	 */
+
 	static String findCallingClassName() {
 		return SECURITY_MANAGER.getCallerClassName(3);
 	}
 
 	/**
-	 * Uses the stack trace to find the calling class. This one is 10x slower on average...
+	 * Uses the stack trace to find the calling class. On average, 10x slower (see {@link DEBUG_TEST}) than the approach
+	 * using a custom {@link SecurityManager}.
 	 *
 	 * @return
 	 */
-	static String findCallingClassNameOld() {
+	static String findCallingClassNameThreadTechnique() {
 		return currentThread().getStackTrace()[3].getClassName();
 	}
 
@@ -157,7 +177,8 @@ public class DEBUG {
 
 	public static <T> T TIMER(final String title, final Supplier<T> supplier) {
 		final String s = findCallingClassName();
-		if (!IS_ON(s)) { return supplier.get(); }
+		if (!IS_ON(s))
+			return supplier.get();
 		final long start = System.currentTimeMillis();
 		final T result = supplier.get();
 		LOG(title + ": " + (System.currentTimeMillis() - start) + "ms");
@@ -168,7 +189,8 @@ public class DEBUG {
 	 * Turns DEBUG on for the calling class
 	 */
 	public static final void ON() {
-		if (GLOBAL_OFF) { return; }
+		if (GLOBAL_OFF)
+			return;
 		final String calling = findCallingClassName();
 		REGISTERED.put(calling, calling);
 	}
@@ -179,7 +201,8 @@ public class DEBUG {
 	 * actions, for instance.
 	 */
 	public static final void OFF() {
-		if (GLOBAL_OFF) { return; }
+		if (GLOBAL_OFF)
+			return;
 		final String name = findCallingClassName();
 		REGISTERED.remove(name);
 	}
@@ -191,7 +214,8 @@ public class DEBUG {
 	 * @return whether DEBUG is active for this class
 	 */
 	public static boolean IS_ON() {
-		if (GLOBAL_OFF) { return false; }
+		if (GLOBAL_OFF)
+			return false;
 		return IS_ON(findCallingClassName());
 	}
 
@@ -257,14 +281,14 @@ public class DEBUG {
 	 * @return its string representation
 	 */
 	public static String TO_STRING(final Object object) {
-		if (object == null) { return "null"; }
+		if (object == null)
+			return "null";
 		if (object.getClass().isArray()) {
 			final Class<?> clazz = object.getClass().getComponentType();
-			if (clazz.isPrimitive()) {
+			if (clazz.isPrimitive())
 				return TO_STRING.get(clazz).apply(object);
-			} else {
+			else
 				return Arrays.deepToString((Object[]) object);
-			}
 		}
 		return object.toString();
 
@@ -274,7 +298,8 @@ public class DEBUG {
 		// Necessary to loop on the names as the call can emanate from an inner class or an anonymous class of the
 		// "allowed" class
 		for (final String name : REGISTERED.keySet()) {
-			if (className.startsWith(name)) { return true; }
+			if (className.startsWith(name))
+				return true;
 		}
 		return false;
 	}
@@ -288,7 +313,8 @@ public class DEBUG {
 	 *            the message to output
 	 */
 	public static final void OUT(final Object s) {
-		if (GLOBAL_OFF) { return; }
+		if (GLOBAL_OFF)
+			return;
 		if (IS_ON(findCallingClassName())) {
 			LOG(s, true);
 		}
@@ -303,7 +329,8 @@ public class DEBUG {
 	 *            whether or not to output a new line after the message
 	 */
 	public static final void OUT(final Object s, final boolean newLine) {
-		if (GLOBAL_OFF) { return; }
+		if (GLOBAL_OFF)
+			return;
 		if (IS_ON(findCallingClassName())) {
 			LOG(s, newLine);
 		}
@@ -320,8 +347,10 @@ public class DEBUG {
 	 *            another object on which TO_STRING() is applied
 	 */
 	public static final void OUT(final String title, final int pad, final Object other) {
-		if (GLOBAL_OFF) { return; }
-		if (title == null) { return; }
+		if (GLOBAL_OFF)
+			return;
+		if (title == null)
+			return;
 		if (IS_ON(findCallingClassName())) {
 			LOG(PAD(title, pad) + TO_STRING(other));
 		}
@@ -339,7 +368,8 @@ public class DEBUG {
 	 *
 	 */
 	public static final void SECTION(final String s) {
-		if (s == null) { return; }
+		if (s == null)
+			return;
 		LINE();
 		LOG(PAD("---------- " + s.toUpperCase() + " ", 80, '-'));
 		LINE();
@@ -369,7 +399,8 @@ public class DEBUG {
 	 */
 
 	public static String PAD(final String string, final int minLength, final char c) {
-		if (string.length() >= minLength) { return string; }
+		if (string.length() >= minLength)
+			return string;
 		final StringBuilder sb = new StringBuilder(minLength);
 		sb.append(string);
 		for (int i = string.length(); i < minLength; i++) {
