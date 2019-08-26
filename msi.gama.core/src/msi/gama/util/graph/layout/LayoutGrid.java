@@ -10,7 +10,9 @@ import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.IScope;
 import msi.gama.util.GamaListFactory;
+import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IList;
+import msi.gama.util.IMap;
 import msi.gama.util.graph.IGraph;
 import msi.gaml.operators.Graphs;
 import msi.gaml.operators.Maths;
@@ -37,6 +39,7 @@ public class LayoutGrid {
 	public void applyLayout(final IScope scope) {
 
 		IList<IShape> places = null;
+		IMap<IShape, GamaPoint> locs = GamaMapFactory.create();
 		do {
 			places = Spatial.Transformations.toSquares(scope, envelopeGeometry,
 					Maths.round(graph.getVertices().size() * coeffSq), false);
@@ -48,6 +51,7 @@ public class LayoutGrid {
 		final int nbV = graph.getVertices().size();
 		for (final IShape v : graph.getVertices()) {
 			final int d = graph.degreeOf(v);
+			locs.put(v, v.getLocation().copy(scope));
 			degrees.put(v, d);
 			if (d > dmax) {
 				dmax = d;
@@ -56,7 +60,7 @@ public class LayoutGrid {
 		}
 		IShape center = Queries.overlapping(scope, places, envelopeGeometry.getLocation()).firstValue(scope);
 		places.remove(center);
-		currentV.setLocation(center.getLocation());
+		locs.put(currentV, center.getLocation());
 		final List<IShape> open = new IdentityArrayList<>();
 		final List<IShape> remaining = new IdentityArrayList<>();
 		remaining.addAll(graph.getVertices());
@@ -72,9 +76,9 @@ public class LayoutGrid {
 
 			for (final IShape n : neigh) {
 				if (remaining.contains(n)) {
-					center = Queries.closest_to(scope, places, currentV.getLocation());
+					center = Queries.closest_to(scope, places, locs.get(currentV));
 					places.remove(center);
-					n.setLocation(center.getLocation());
+					locs.put(n, center.getLocation());
 					open.add(n);
 					remaining.remove(n);
 				}
@@ -115,22 +119,26 @@ public class LayoutGrid {
 				if (!neigh2.isEmpty()) {
 					final IList<GamaPoint> pts = GamaListFactory.create(Types.POINT);
 					for (final IShape n : neigh2) {
-						pts.add(n.getCentroid());
+						pts.add(locs.get(n));
 					}
 					final GamaPoint targetLoc = (GamaPoint) msi.gaml.operators.Containers.mean(scope, pts);
 					center = places.size() > 0 ? Queries.closest_to(scope, places, targetLoc.getLocation())
-							: nV.getLocation();
+							: locs.get(nV);
 				} else {
 
-					center = places.size() > 0 ? places.anyValue(scope) : nV.getLocation();
+					center = places.size() > 0 ? places.anyValue(scope) : locs.get(nV);
 				}
 				places.remove(center);
-				nV.setLocation(center.getLocation());
+				locs.put(nV, center.getLocation());
 
 			}
 
 		}
 
+		for (IShape v : locs.keySet()) {
+			v.setLocation(locs.get(v));
+
+		}
 	}
 
 }
