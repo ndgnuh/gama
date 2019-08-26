@@ -28,7 +28,6 @@ global {
 	float max_speed <- 100.0;
 	list<building> residential_buildings;
 	list<building> industrial_buildings;
-	float start <- machine_time;
 	//Declaration of a graph that will represent our road network
 	graph the_graph;
 
@@ -48,10 +47,7 @@ global {
 		create people number: nb_people;
 	}
 
-	reflex when: every(10000) {
-		write machine_time - start;
-		start <- machine_time;
-	}
+	
 
 }
 
