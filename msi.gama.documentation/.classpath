@@ -6,7 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/ummisco.gama.annotations"/>
-	<classpathentry kind="src" path="gaml/"/>
-	<classpathentry kind="src" path="libs/"/>
+	<classpathentry kind="src" path="libs"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
