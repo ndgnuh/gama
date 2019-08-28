@@ -123,7 +123,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 		public boolean containsKey(final Object key) {
 			for (int i = 0; i < contents.length; i += 2) {
 				final String k = contents[i];
-				if (k.equals(key)) { return true; }
+				if (k.equals(key))
+					return true;
 			}
 			return false;
 		}
@@ -137,7 +138,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 		public boolean containsValue(final Object value) {
 			for (int i = 1; i < contents.length; i += 2) {
 				final String k = contents[i];
-				if (k.equals(value)) { return true; }
+				if (k.equals(value))
+					return true;
 			}
 			return false;
 
@@ -152,7 +154,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 		public String get(final Object key) {
 			for (int i = 0; i < contents.length; i += 2) {
 				final String k = contents[i];
-				if (k.equals(key)) { return contents[i + 1]; }
+				if (k.equals(key))
+					return contents[i + 1];
 			}
 			return null;
 
@@ -255,7 +258,6 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	static {
-
 		GAMA.initializeAtStartup("Initializing Constants", () -> {
 			IUnits.initialize();
 		});
@@ -413,7 +415,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	public TerminalMapBasedScope getGlobalScope(final EClass eClass) {
-		if (GLOBAL_SCOPES.containsKey(eClass)) { return GLOBAL_SCOPES.get(eClass); }
+		if (GLOBAL_SCOPES.containsKey(eClass))
+			return GLOBAL_SCOPES.get(eClass);
 		IMap<QualifiedName, IEObjectDescription> descriptions = getEObjectDescriptions(eClass);
 		if (descriptions == null) {
 			descriptions = EMPTY_MAP;
@@ -473,13 +476,13 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	public Map<URI, String> getAllImportedURIs(final Resource resource, final ResourceSet set) {
-		return GamlResourceIndexer.allLabeledImportsOf((GamlResource) resource);
+		return GamlResourceIndexer.INSTANCE.allLabeledImportsOf((GamlResource) resource);
 	}
 
 	@Override
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
-		final LinkedHashSet<URI> result = new LinkedHashSet(
-				Arrays.asList(Iterators.toArray(GamlResourceIndexer.allImportsOf(resource.getURI()), URI.class)));
+		final LinkedHashSet<URI> result = new LinkedHashSet(Arrays
+				.asList(Iterators.toArray(GamlResourceIndexer.INSTANCE.allImportsOf(resource.getURI()), URI.class)));
 		return result;
 	}
 
@@ -488,7 +491,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 			final Predicate<IEObjectDescription> filter) {
 		IScope scope = getGlobalScope(type);
 		final Collection<URI> uniqueImportURIs = getAllImportedURIs(resource, resource.getResourceSet()).keySet();
-		if (uniqueImportURIs.size() == 1) { return scope; }
+		if (uniqueImportURIs.size() == 1)
+			return scope;
 		final List<URI> urisAsList = Lists.newArrayList(uniqueImportURIs);
 		urisAsList.remove(resource.getURI());
 		Collections.reverse(urisAsList);
@@ -498,7 +502,8 @@ public class BuiltinGlobalScopeProvider extends ImportUriGlobalScopeProvider imp
 	}
 
 	public static IEObjectDescription getVar(final String name) {
-		if (name == null) { return null; }
+		if (name == null)
+			return null;
 		return descriptions.get(eVar).get(QualifiedName.create(name));
 	}
 

@@ -6,8 +6,8 @@
          point="org.eclipse.ui.ide.projectNatureImages">
       <image
             icon="platform:/plugin/ummisco.gama.ui.shared/icons/navigator/folder.model3.png"
-            id="msi.gama.application.nature.gamaNature.img"
-            natureId="msi.gama.application.gamaNature">
+            id="ummisco.gama.application.nature.gamaNature.img"
+            natureId="ummisco.gama.application.gamaNature">
       </image>
    </extension>
    <extension
@@ -29,7 +29,7 @@
       <activityPatternBinding
             activityId="disabled"
             isEqualityPattern="false"
-            pattern="msi.gama.application/msi.gama.application.perspectives..*">
+            pattern="ummisco.gama.application/ummisco.gama.application.perspectives..*">
       </activityPatternBinding>
       <activityPatternBinding
             activityId="disabled"
@@ -63,7 +63,7 @@
             category="msi.gama.gui.category.gama"
             class="ummisco.gama.ui.views.InteractiveConsoleView"
             icon="platform:/plugin/ummisco.gama.ui.shared/icons/view.interactive2.png"
-            id="msi.gama.application.view.InteractiveConsoleView"
+            id="ummisco.gama.application.view.InteractiveConsoleView"
             name="Interactive console"
             restorable="true">
       </view>
@@ -72,7 +72,7 @@
                   category="msi.gama.gui.category.gama"
                   class="ummisco.gama.ui.views.TestView"
                   icon="/icons/view.test2.png"
-                  id="msi.gama.application.view.TestView"
+                  id="ummisco.gama.application.view.TestView"
                   name="Tests"
                   restorable="false">
             </view>
@@ -82,7 +82,7 @@
       <command
             categoryId="msi.gama.category"
             defaultHandler="ummisco.gama.ui.commands.OpenGamaWebsiteHandler"
-            id="msi.gama.application.command.web"
+            id="ummisco.gama.application.command.web"
             name="Welcome page">
       </command>
       <category
@@ -90,7 +90,7 @@
             name="Specific to GAMA">
       </category>
       <commandParameterType
-            id="msi.gama.application.String"
+            id="ummisco.gama.application.String"
             type="java.lang.String">
       </commandParameterType>
    </extension>
@@ -213,10 +213,10 @@
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar">
          <toolbar
-               id="msi.gama.application.common.toolbar"
+               id="ummisco.gama.application.common.toolbar"
                label="Common">
             <command
-                  commandId="msi.gama.application.goto.modeling"
+                  commandId="ummisco.gama.application.goto.modeling"
                   icon="platform:/plugin/ummisco.gama.ui.shared/icons/perspective.modeling2.png"
                   label="Modeling perspective"
                   style="push"
@@ -282,7 +282,7 @@
                visible="true">
          </separator>
          <command
-               commandId="msi.gama.application.command.web"
+               commandId="ummisco.gama.application.command.web"
                icon="platform:/plugin/ummisco.gama.ui.shared/icons/menu.open.web2.png"
                label="Welcome page"
                style="push">

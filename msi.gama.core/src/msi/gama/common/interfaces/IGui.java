@@ -50,21 +50,21 @@ public interface IGui {
 	int USER = 4;
 
 	Map<String, DisplayDescription> DISPLAYS = GamaMapFactory.createUnordered();
-	String MONITOR_VIEW_ID = "msi.gama.application.view.MonitorView";
-	String INTERACTIVE_CONSOLE_VIEW_ID = "msi.gama.application.view.InteractiveConsoleView";
-	String AGENT_VIEW_ID = "msi.gama.application.view.AgentInspectView";
-	String TABLE_VIEW_ID = "msi.gama.application.view.TableAgentInspectView";
-	String LAYER_VIEW_ID = "msi.gama.application.view.LayeredDisplayView";
-	String GL_LAYER_VIEW_ID = "msi.gama.application.view.OpenGLDisplayView";
-	String GL_LAYER_VIEW_ID2 = "msi.gama.application.view.OpenGLDisplayView2";
+	String MONITOR_VIEW_ID = "ummisco.gama.application.view.MonitorView";
+	String INTERACTIVE_CONSOLE_VIEW_ID = "ummisco.gama.application.view.InteractiveConsoleView";
+	String AGENT_VIEW_ID = "ummisco.gama.application.view.AgentInspectView";
+	String TABLE_VIEW_ID = "ummisco.gama.application.view.TableAgentInspectView";
+	String LAYER_VIEW_ID = "ummisco.gama.application.view.LayeredDisplayView";
+	String GL_LAYER_VIEW_ID = "ummisco.gama.application.view.OpenGLDisplayView";
+	String GL_LAYER_VIEW_ID2 = "ummisco.gama.application.view.OpenGLDisplayView2";
 
-	String ERROR_VIEW_ID = "msi.gama.application.view.ErrorView";
-	String TEST_VIEW_ID = "msi.gama.application.view.TestView";
-	String PARAMETER_VIEW_ID = "msi.gama.application.view.ParameterView";
+	String ERROR_VIEW_ID = "ummisco.gama.application.view.ErrorView";
+	String TEST_VIEW_ID = "ummisco.gama.application.view.TestView";
+	String PARAMETER_VIEW_ID = "ummisco.gama.application.view.ParameterView";
 
 	String NAVIGATOR_VIEW_ID = "msi.gama.gui.view.GamaNavigator";
 	String NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID = "msi.gama.application.decorator";
-	String CONSOLE_VIEW_ID = "msi.gama.application.view.ConsoleView";
+	String CONSOLE_VIEW_ID = "ummisco.gama.application.view.ConsoleView";
 	String USER_CONTROL_VIEW_ID = "msi.gama.views.userControlView";
 
 	String PAUSED = "STOPPED";

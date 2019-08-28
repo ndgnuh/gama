@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'PickWorkspaceDialog.java, in plugin msi.gama.application, is part of the source code of the GAMA modeling and
+ * 'PickWorkspaceDialog.java, in plugin ummisco.gama.application, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.google.common.io.Files;
 
-import msi.gama.application.workspace.WorkspaceManager;
+import ummisco.gama.application.workspace.WorkspaceManager;
 
 /**
  * Dialog that lets/forces a user to enter/select a workspace that will be used when saving all configuration files and

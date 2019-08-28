@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Gama" uid="ummisco.gama.application.product" id="msi.gama.application.product" application="msi.gama.application.GamaApplication" version="1.9.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Gama" uid="ummisco.gama.application.product" id="ummisco.gama.application.product" application="ummisco.gama.application.GamaApplication" version="1.9.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="branding_icons/icon128.png"/>
@@ -49,7 +49,6 @@ openFile
    </launcherArgs>
 
    <windowImages i16="branding_icons/icon16.png" i32="branding_icons/icon32.png" i48="branding_icons/icon48.png" i64="branding_icons/icon64.png" i128="branding_icons/icon128.png" i256="branding_icons/icon256.png"/>
-
 
    <launcher name="Gama">
       <linux icon="launcher_icons/icon.xpm"/>
@@ -281,8 +280,8 @@ openFile
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="5" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <property name="version" value="1.9" />
-      <property name="eclipse.buildId" value="${build.id}" />
       <property name="org.eclipse.update.reconcile" value="false" />
+      <property name="eclipse.buildId" value="${build.id}" />
    </configurations>
 
    <repositories>

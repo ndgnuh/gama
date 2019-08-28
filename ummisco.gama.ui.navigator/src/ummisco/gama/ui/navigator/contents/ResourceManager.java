@@ -59,8 +59,8 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 			CacheBuilder.newBuilder().initialCapacity(1000).concurrencyLevel(4).build();
 	final CommonViewer viewer;
 	final IResourceChangeListener delegate;
-	volatile static boolean BLOCKED = false;
-	private static volatile boolean IN_INITIALIZATION_PHASE = false;
+	private volatile static boolean BLOCKED = true;
+	private static volatile boolean IS_REFRESHING = false;
 	private final List<Runnable> postEventActions = new ArrayList<>();
 	private final Set<VirtualContent<?>> toRefresh = Collections.synchronizedSet(new HashSet<>());
 	private final Set<VirtualContent<?>> toUpdate = Collections.synchronizedSet(new HashSet<>());
@@ -78,13 +78,13 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 			try {
 				NavigatorRoot.getInstance().resetVirtualFolders(null);
 				NavigatorRoot.getInstance().recreateVirtualFolders();
-				IN_INITIALIZATION_PHASE = true;
+				IS_REFRESHING = true;
 				for (final IResourceChangeEvent event : BLOCKED_EVENTS) {
 					INSTANCE.resourceChanged(event);
 					monitor.worked(1);
 				}
 			} finally {
-				IN_INITIALIZATION_PHASE = false;
+				IS_REFRESHING = false;
 			}
 		});
 
@@ -130,7 +130,8 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	void runPostEventActions() {
 
 		WorkbenchHelper.runInUI("Resource changes", 5, (m) -> {
-			if (viewer.getControl().isDisposed()) { return; }
+			if (viewer.getControl().isDisposed())
+				return;
 			viewer.getControl().setRedraw(false);
 			final List<Runnable> runnables;
 			synchronized (postEventActions) {
@@ -175,21 +176,25 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	}
 
 	public static IResource getResource(final Object target) {
-		if (target instanceof IResource) { return (IResource) target; }
+		if (target instanceof IResource)
+			return (IResource) target;
 		if (target instanceof IAdaptable) {
 			final IAdaptable adapter = (IAdaptable) target;
 			final IResource r = adapter.getAdapter(IResource.class);
-			if (r != null) { return r; }
+			if (r != null)
+				return r;
 		}
 		return null;
 	}
 
 	public static IFile getFile(final Object target) {
-		if (target instanceof IFile) { return (IFile) target; }
+		if (target instanceof IFile)
+			return (IFile) target;
 		if (target instanceof IAdaptable) {
 			final IAdaptable adapter = (IAdaptable) target;
 			final IFile r = adapter.getAdapter(IFile.class);
-			if (r != null) { return r; }
+			if (r != null)
+				return r;
 		}
 		return null;
 	}
@@ -214,7 +219,8 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 			DEBUG.OUT("========= New Event =========");
 		}
 		try {
-			if (event == null) { return; }
+			if (event == null)
+				return;
 			// begin();
 			final int type = event.getType();
 			switch (type) {
@@ -296,7 +302,8 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	public TopLevelFolder chooseFolderForPasting(final IProject project) {
 		if (currentSelection != null && !currentSelection.isEmpty()) {
 			final Object o = currentSelection.getFirstElement();
-			if (o instanceof VirtualContent) { return ((VirtualContent<?>) o).getTopLevelFolder(); }
+			if (o instanceof VirtualContent)
+				return ((VirtualContent<?>) o).getTopLevelFolder();
 		}
 		return NavigatorRoot.getInstance().getUserFolder();
 	}
@@ -305,7 +312,7 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 		if (DEBUG.IS_ON()) {
 			DEBUG.OUT("Project " + project.getName() + " has been added");
 		}
-		if (!IN_INITIALIZATION_PHASE) {
+		if (!IS_REFRESHING) {
 			final TopLevelFolder root = chooseFolderForPasting(project);
 			final String nature = root.getNature();
 			final WrappedProject p = (WrappedProject) wrap(root, project);
@@ -495,12 +502,14 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	}
 
 	private void updateResource(final IResource res) {
-		if (res == null) { return; }
+		if (res == null)
+			return;
 		updateResource(findWrappedInstanceOf(res));
 	}
 
 	private void updateResource(final VirtualContent<?> res) {
-		if (res == null) { return; }
+		if (res == null)
+			return;
 		VirtualContent<?> resource = res;
 		synchronized (toUpdate) {
 			while (resource != null) {
@@ -539,23 +548,28 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	}
 
 	public WrappedResource<?, ?> findWrappedInstanceOf(final Object resource) {
-		if (resource == null) { return null; }
-		if (resource instanceof WrappedResource) { return (WrappedResource<?, ?>) resource; }
+		if (resource == null)
+			return null;
+		if (resource instanceof WrappedResource)
+			return (WrappedResource<?, ?>) resource;
 		return cache.getIfPresent(resource);
 	}
 
 	public WrappedContainer<?> findWrappedInstanceOf(final IContainer shape) {
-		if (shape == null) { return null; }
+		if (shape == null)
+			return null;
 		return (WrappedContainer<?>) cache.getIfPresent(shape);
 	}
 
 	public WrappedProject findWrappedInstanceOf(final IProject parent) {
-		if (parent == null) { return null; }
+		if (parent == null)
+			return null;
 		return (WrappedProject) cache.getIfPresent(parent);
 	}
 
 	public WrappedResource<?, ?> wrap(final VirtualContent<?> parent, final IResource child) {
-		if (parent == null || child == null) { return null; }
+		if (parent == null || child == null)
+			return null;
 		try {
 			return cache.get(child, () -> privateCreateWrapping(parent, child));
 		} catch (final ExecutionException e) {
@@ -569,10 +583,10 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 		}
 		switch (child.getType()) {
 			case IResource.FILE:
-				if (FileMetaDataProvider.GAML_CT_ID.equals(getContentTypeId((IFile) child))) {
+				if (FileMetaDataProvider.GAML_CT_ID.equals(getContentTypeId((IFile) child)))
 					return new WrappedGamaFile((WrappedContainer<?>) parent, (IFile) child);
-				}
-				if (child.isLinked()) { return new WrappedLink((WrappedContainer<?>) parent, (IFile) child); }
+				if (child.isLinked())
+					return new WrappedLink((WrappedContainer<?>) parent, (IFile) child);
 				return new WrappedFile((WrappedContainer<?>) parent, (IFile) child);
 			case IResource.FOLDER:
 				return new WrappedFolder((WrappedContainer<?>) parent, (IFolder) child);
@@ -583,13 +597,15 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 	}
 
 	public boolean validateLocation(final IFile resource) {
-		if (!resource.isLinked()) { return true; }
+		if (!resource.isLinked())
+			return true;
 		if (DEBUG.IS_ON()) {
 			DEBUG.OUT("Validating link location of " + resource);
 		}
 		final boolean internal =
 				ResourcesPlugin.getWorkspace().validateLinkLocation(resource, resource.getLocation()).isOK();
-		if (!internal) { return false; }
+		if (!internal)
+			return false;
 		final IFileStore file = EFS.getLocalFileSystem().getStore(resource.getLocation());
 		final IFileInfo info = file.fetchInfo();
 		return info.exists();

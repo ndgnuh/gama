@@ -325,7 +325,7 @@ public class ImageViewer extends EditorPart
 				} catch (final CoreException ex) {
 					return ex.getStatus();
 				} catch (final SWTException ex) {
-					return new Status(IStatus.ERROR, "msi.gama.application", ex.getMessage());
+					return new Status(IStatus.ERROR, "ummisco.gama.application", ex.getMessage());
 				} finally {
 					monitor.done();
 				}
@@ -495,7 +495,7 @@ public class ImageViewer extends EditorPart
 			if (t instanceof CoreException) {
 				st = ((CoreException) t).getStatus();
 			} else {
-				st = new Status(IStatus.ERROR, "msi.gama.application", 0, t.toString(), t);
+				st = new Status(IStatus.ERROR, "ummisco.gama.application", 0, t.toString(), t);
 			}
 			if (st.getSeverity() != IStatus.CANCEL) {
 				ErrorDialog.openError(getSite().getShell(), title, mesg, st);
@@ -535,7 +535,7 @@ public class ImageViewer extends EditorPart
 						loader.save(pout, imageType);
 						pout.flush();
 					} catch (final Exception ex) {
-						status = new Status(IStatus.ERROR, "msi.gama.application",
+						status = new Status(IStatus.ERROR, "ummisco.gama.application",
 								MessageFormat.format("Error getting image data for {0}", dest.getFullPath()), ex);
 					} finally {
 						try {

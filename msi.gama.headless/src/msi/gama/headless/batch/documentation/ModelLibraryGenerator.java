@@ -35,7 +35,7 @@ public class ModelLibraryGenerator {
 	static String sourceFolder = "F:/Gama/GamaSource/";
 	static String wikiFolderOnOVH = "http://vps226121.ovh.net/gm_wiki/";
 	static String[] inputPathToModelLibrary =
-			{ sourceFolder + "msi.gama.models/models/", sourceFolder + "ummisco.gaml.extensions.maths/models",
+			{ sourceFolder + "msi.gama.models/models/", sourceFolder + "ummisco.gama.extensions.maths/models",
 			/* sourceFolder+"msi.gaml.extensions.fipa/models", */ // commented
 																	// because
 																	// unable to

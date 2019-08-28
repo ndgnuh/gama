@@ -13,10 +13,10 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-Vendor: UMMISCO
 Bundle-Version: 1.9.0.qualifier
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: msi.gama.application;singleton:=true
-Export-Package: msi.gama.application;uses:="org.eclipse.ui,org.eclipse.equinox.app",
- msi.gama.application.projects,
- msi.gama.application.workspace
+Bundle-SymbolicName: ummisco.gama.application;singleton:=true
+Export-Package: ummisco.gama.application;uses:="org.eclipse.ui,org.eclipse.equinox.app",
+ ummisco.gama.application.projects,
+ ummisco.gama.application.workspace
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: msi.gama.application

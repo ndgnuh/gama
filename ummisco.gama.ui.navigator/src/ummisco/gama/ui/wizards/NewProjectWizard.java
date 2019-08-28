@@ -43,7 +43,7 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class NewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 
-	public static final String NATURE_ID = "msi.gama.application.nature.gamaNature";
+	public static final String NATURE_ID = "ummisco.gama.application.nature.gamaNature";
 	private NewProjectWizardPage wizardPage;
 	private IProject project;
 

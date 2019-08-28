@@ -37,12 +37,10 @@ import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.lang.gaml.documentation.GamlResourceDocumenter;
 import msi.gama.lang.gaml.indexer.GamlResourceIndexer;
-import msi.gama.lang.gaml.parsing.GamlSyntacticConverter;
 import msi.gama.lang.gaml.validation.IGamlBuilderListener;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
-import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.ValidationContext;
@@ -52,7 +50,6 @@ public class GamlResourceServices {
 
 	private static int resourceCount = 0;
 	private static IDocManager documenter = new GamlResourceDocumenter();
-	private static GamlSyntacticConverter converter = new GamlSyntacticConverter();
 	private static final Map<URI, IGamlBuilderListener> resourceListeners = GamaMapFactory.createUnordered();
 	private static final Map<URI, ValidationContext> resourceErrors = GamaMapFactory.createUnordered();
 	private static final XtextResourceSet poolSet = new XtextResourceSet() {
@@ -84,11 +81,13 @@ public class GamlResourceServices {
 	 *         encoded version of the parameter.
 	 */
 	public static URI properlyEncodedURI(final URI uri) {
-		if (uri == null) { return null; }
+		if (uri == null)
+			return null;
 		URI pre_properlyEncodedURI = uri;
 		if (GAMA.isInHeadLessMode() && !uri.isPlatformResource()) {
 			final String filePath = uri.toFileString();
-			if (filePath == null) { return null; }
+			if (filePath == null)
+				return null;
 			final File file = new File(filePath);
 			try {
 				pre_properlyEncodedURI = URI.createFileURI(file.getCanonicalPath());
@@ -118,7 +117,8 @@ public class GamlResourceServices {
 		final URI newURI = properlyEncodedURI(uri);
 
 		final IGamlBuilderListener listener = resourceListeners.get(newURI);
-		if (listener == null) { return; }
+		if (listener == null)
+			return;
 		// DEBUG.LOG("Finishing updating the state of editor for " +
 		// uri.lastSegment());
 		final Iterable exps = model == null ? newState ? Collections.EMPTY_SET : null
@@ -192,9 +192,9 @@ public class GamlResourceServices {
 	}
 
 	public static String getModelPathOf(final Resource r) {
-		if (r.getURI().isFile()) {
+		if (r.getURI().isFile())
 			return new Path(r.getURI().toFileString()).toOSString();
-		} else {
+		else {
 			final IPath path = getPathOf(r);
 			final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			final IPath fullPath = file.getLocation();
@@ -205,9 +205,9 @@ public class GamlResourceServices {
 	public static String getProjectPathOf(final Resource r) {
 		final IPath path = getPathOf(r);
 		// final String modelPath, projectPath;
-		if (r.getURI().isFile()) {
+		if (r.getURI().isFile())
 			return path.toOSString();
-		} else {
+		else {
 			final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			final IPath fullPath = file.getProject().getLocation();
 			return fullPath == null ? "" : fullPath.toOSString();
@@ -239,7 +239,7 @@ public class GamlResourceServices {
 		imports.put(uri, null);
 		if (r != null) {
 			imports.put(r.getURI(), null);
-			final Map<URI, String> uris = GamlResourceIndexer.allLabeledImportsOf(r);
+			final Map<URI, String> uris = GamlResourceIndexer.INSTANCE.allLabeledImportsOf(r);
 			imports.putAll(uris);
 		}
 		result.getCache().getOrCreate(result).set(GamlResourceIndexer.IMPORTED_URIS, imports);
@@ -256,10 +256,6 @@ public class GamlResourceServices {
 
 	public static IDocManager getResourceDocumenter() {
 		return documenter;
-	}
-
-	public static ISyntacticElement buildSyntacticContents(final GamlResource r) {
-		return converter.buildSyntacticContents(r.getParseResult().getRootASTElement(), null);
 	}
 
 }

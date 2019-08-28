@@ -28,7 +28,7 @@ import ummisco.gama.ui.navigator.contents.ResourceManager;
  */
 public class NavigatorDateLighweightDecorator implements ILightweightLabelDecorator {
 
-	static final public String ID = "msi.gama.application.decorator";
+	static final public String ID = "ummisco.gama.application.decorator";
 
 	@Override
 	public void decorate(final Object element, final IDecoration decoration) {

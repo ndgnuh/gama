@@ -6,7 +6,7 @@
       <decorator
             adaptable="false"
             class="ummisco.gama.ui.navigator.NavigatorBaseLighweightDecorator"
-            id="msi.gama.application.decorator"
+            id="ummisco.gama.application.decorator"
             label="Metadata Decorator"
             lightweight="true"
             location="REPLACE"
@@ -78,7 +78,7 @@
       <decorator
             adaptable="true"
             class="ummisco.gama.ui.navigator.NavigatorDateLighweightDecorator"
-            id="msi.gama.application.date.decorator"
+            id="ummisco.gama.application.date.decorator"
             label="Date Decorator"
             lightweight="true"
             state="false">
@@ -149,7 +149,7 @@
                </parameter>
             </command>
             <separator
-                  name="msi.gama.application.separator22"
+                  name="ummisco.gama.application.separator22"
                   visible="true">
             </separator>
             <command
@@ -231,7 +231,7 @@
                </parameter>
             </command>
             <separator
-                  name="msi.gama.application.separator1"
+                  name="ummisco.gama.application.separator1"
                   visible="true">
             </separator>
             <command
@@ -402,7 +402,7 @@
             </parameter>
          </command>
          <separator
-               name="msi.gama.application.separator10"
+               name="ummisco.gama.application.separator10"
                visible="true">
          </separator>
          <command
@@ -486,11 +486,11 @@
             viewerId="msi.gama.gui.view.GamaNavigator">
          <includes>
             <contentExtension
-                  pattern="msi.gama.application.shapefile.filter">
+                  pattern="ummisco.gama.application.shapefile.filter">
             </contentExtension>
             <contentExtension
                   isRoot="true"
-                  pattern="msi.gama.application.resourceVirtualNavigatorContent">
+                  pattern="ummisco.gama.application.resourceVirtualNavigatorContent">
             </contentExtension>
             <contentExtension
                   pattern="ummisco.gama.ui.navigator.linkHelper1">
@@ -508,7 +508,7 @@
             activeByDefault="true"
             appearsBefore="org.eclipse.ui.navigator.resourceContent"
             contentProvider="ummisco.gama.ui.navigator.NavigatorContentProvider"
-            id="msi.gama.application.resourceVirtualNavigatorContent"
+            id="ummisco.gama.application.resourceVirtualNavigatorContent"
             labelProvider="ummisco.gama.ui.navigator.NavigatorLabelProvider"
             name="Virtual GamaNavigator Content"
             priority="highest"
@@ -558,7 +558,7 @@
          </commonSorter>
          <dropAssistant
                class="ummisco.gama.ui.navigator.NavigatorDropAssistant"
-               id="msi.gama.application.dropAssistant1">
+               id="ummisco.gama.application.dropAssistant1">
             <possibleDropTargets>
                <instanceof
                      value="java.lang.Object">
@@ -574,7 +574,7 @@
       <commonFilter
             activeByDefault="true"
             class="ummisco.gama.ui.navigator.NavigatorFilter"
-            id="msi.gama.application.shapefile.filter"
+            id="ummisco.gama.application.shapefile.filter"
             name="Filters Shapefile support files"
             visibleInUI="true">
       </commonFilter>

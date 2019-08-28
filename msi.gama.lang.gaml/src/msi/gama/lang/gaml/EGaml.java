@@ -13,10 +13,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.lang.gaml.gaml.ActionRef;
@@ -44,6 +49,7 @@ import msi.gama.lang.gaml.gaml.S_Definition;
 import msi.gama.lang.gaml.gaml.S_DirectAssignment;
 import msi.gama.lang.gaml.gaml.S_Display;
 import msi.gama.lang.gaml.gaml.S_Equations;
+import msi.gama.lang.gaml.gaml.S_Experiment;
 import msi.gama.lang.gaml.gaml.S_If;
 import msi.gama.lang.gaml.gaml.SkillRef;
 import msi.gama.lang.gaml.gaml.Statement;
@@ -85,9 +91,12 @@ public class EGaml implements IGamlEcoreUtils {
 
 	@Override
 	public String getNameOf(final EObject o) {
-		if (o instanceof GamlDefinition) { return ((GamlDefinition) o).getName(); }
-		if (o instanceof S_Display) { return ((S_Display) o).getName(); }
-		if (o instanceof HeadlessExperiment) { return ((HeadlessExperiment) o).getName(); }
+		if (o instanceof GamlDefinition)
+			return ((GamlDefinition) o).getName();
+		if (o instanceof S_Display)
+			return ((S_Display) o).getName();
+		if (o instanceof HeadlessExperiment)
+			return ((HeadlessExperiment) o).getName();
 		return null;
 	}
 
@@ -101,9 +110,8 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public List<Expression> getExprsOf(final EObject o) {
 		if (o instanceof ExpressionList) {
-			if (((ExpressionListImpl) o).eIsSet(GamlPackage.EXPRESSION_LIST__EXPRS)) {
+			if (((ExpressionListImpl) o).eIsSet(GamlPackage.EXPRESSION_LIST__EXPRS))
 				return ((ExpressionList) o).getExprs();
-			}
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -117,11 +125,11 @@ public class EGaml implements IGamlEcoreUtils {
 	 */
 	@Override
 	public List<ArgumentDefinition> getArgsOf(final EObject args) {
-		if (args == null) { return Collections.EMPTY_LIST; }
+		if (args == null)
+			return Collections.EMPTY_LIST;
 		if (args instanceof ActionArgumentsImpl) {
-			if (((ActionArgumentsImpl) args).eIsSet(GamlPackage.ACTION_ARGUMENTS__ARGS)) {
+			if (((ActionArgumentsImpl) args).eIsSet(GamlPackage.ACTION_ARGUMENTS__ARGS))
 				return ((ActionArgumentsImpl) args).getArgs();
-			}
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -136,11 +144,11 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public List<Facet> getFacetsOf(final EObject s) {
 		if (s instanceof StatementImpl) {
-			if (((StatementImpl) s).eIsSet(GamlPackage.STATEMENT__FACETS)) { return ((StatementImpl) s).getFacets(); }
+			if (((StatementImpl) s).eIsSet(GamlPackage.STATEMENT__FACETS))
+				return ((StatementImpl) s).getFacets();
 		} else if (s instanceof HeadlessExperimentImpl) {
-			if (((HeadlessExperimentImpl) s).eIsSet(GamlPackage.HEADLESS_EXPERIMENT__FACETS)) {
+			if (((HeadlessExperimentImpl) s).eIsSet(GamlPackage.HEADLESS_EXPERIMENT__FACETS))
 				return ((HeadlessExperimentImpl) s).getFacets();
-			}
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -155,7 +163,8 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public Map<String, Facet> getFacetsMapOf(final EObject s) {
 		final List<? extends EObject> list = getFacetsOf(s);
-		if (list.isEmpty()) { return Collections.EMPTY_MAP; }
+		if (list.isEmpty())
+			return Collections.EMPTY_MAP;
 		final Map<String, Facet> map = GamaMapFactory.create();
 		for (final EObject f : list) {
 			if (f instanceof Facet) {
@@ -173,31 +182,38 @@ public class EGaml implements IGamlEcoreUtils {
 	 */
 	@Override
 	public Expression getExpressionAtKey(final EObject s, final String name) {
-		if (s == null || name == null) { return null; }
-		if (name.equals("value") && s instanceof S_DirectAssignment) { return ((S_DirectAssignment) s).getValue(); }
+		if (s == null || name == null)
+			return null;
+		if (name.equals("value") && s instanceof S_DirectAssignment)
+			return ((S_DirectAssignment) s).getValue();
 		final List<Facet> list = getFacetsOf(s);
 
 		for (final Facet f : list) {
 			final String key = getKeyOf(f);
 			if (s instanceof Statement && (name.equals("value") || name.equals("init"))) {
-				if (key.equals("<-")) { return f.getExpr(); }
+				if (key.equals("<-"))
+					return f.getExpr();
 			} else if (s instanceof S_Assignment && name.equals("item")) {
-				if (key.contains("<") || key.contains(">")) { return f.getExpr(); }
+				if (key.contains("<") || key.contains(">"))
+					return f.getExpr();
 			}
-			if (name.equals(key)) { return f.getExpr(); }
+			if (name.equals(key))
+				return f.getExpr();
 		}
 		return null;
 	}
 
 	@Override
 	public Expression getExprOf(final EObject s) {
-		if (s instanceof Expression) { return (Expression) s; }
-		if (s instanceof Statement) { return ((Statement) s).getExpr(); }
+		if (s instanceof Expression)
+			return (Expression) s;
+		if (s instanceof Statement)
+			return ((Statement) s).getExpr();
 		return null;
 	}
 
 	/** The children switch. */
-	private final GamlSwitch<Boolean> childrenSwitch = new GamlSwitch<Boolean>() {
+	private final GamlSwitch<Boolean> childrenSwitch = new GamlSwitch<>() {
 
 		@Override
 		public Boolean caseModel(final Model object) {
@@ -206,7 +222,8 @@ public class EGaml implements IGamlEcoreUtils {
 
 		@Override
 		public Boolean caseS_Action(final S_Action object) {
-			if (((S_ActionImpl) object).eIsSet(GamlPackage.SACTION__ARGS)) { return true; }
+			if (((S_ActionImpl) object).eIsSet(GamlPackage.SACTION__ARGS))
+				return true;
 			return caseStatement(object);
 		}
 
@@ -269,10 +286,10 @@ public class EGaml implements IGamlEcoreUtils {
 	public List<Statement> getStatementsOf(final EObject block) {
 
 		if (block instanceof BlockImpl) {
-			if (((BlockImpl) block).eIsSet(GamlPackage.BLOCK__STATEMENTS)) {
+			if (((BlockImpl) block).eIsSet(GamlPackage.BLOCK__STATEMENTS))
 				return ((BlockImpl) block).getStatements();
-			}
-		} else if (block instanceof Model) { return getStatementsOf(((Model) block).getBlock()); }
+		} else if (block instanceof Model)
+			return getStatementsOf(((Model) block).getBlock());
 		return Collections.EMPTY_LIST;
 	}
 
@@ -286,9 +303,8 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public List<S_Assignment> getEquationsOf(final EObject stm) {
 		if (stm instanceof S_EquationsImpl) {
-			if (((S_EquationsImpl) stm).eIsSet(GamlPackage.SEQUATIONS__EQUATIONS)) {
+			if (((S_EquationsImpl) stm).eIsSet(GamlPackage.SEQUATIONS__EQUATIONS))
 				return ((S_EquationsImpl) stm).getEquations();
-			}
 		}
 		return Collections.EMPTY_LIST;
 	}
@@ -302,7 +318,8 @@ public class EGaml implements IGamlEcoreUtils {
 	 */
 	@Override
 	public String getKeyOf(final EObject f) {
-		if (f == null) { return null; }
+		if (f == null)
+			return null;
 		return getKeyOf(f, f.eClass());
 	}
 
@@ -340,7 +357,8 @@ public class EGaml implements IGamlEcoreUtils {
 				s = ((Statement) object).getKey();
 				if (s == null && object instanceof S_Definition) {
 					final TypeRef type = (TypeRef) ((S_Definition) object).getTkey();
-					if (type != null) { return getKeyOf(type); }
+					if (type != null)
+						return getKeyOf(type);
 				}
 				return s;
 			case GamlPackage.FACET:
@@ -391,22 +409,22 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public String getNameOfRef(final EObject o) {
 		final ICompositeNode n = NodeModelUtils.getNode(o);
-		if (n != null) { return NodeModelUtils.getTokenText(n); }
-		if (o instanceof VariableRef) {
+		if (n != null)
+			return NodeModelUtils.getTokenText(n);
+		if (o instanceof VariableRef)
 			return ((VariableRef) o).getRef().getName();
-		} else if (o instanceof UnitName) {
+		else if (o instanceof UnitName)
 			return ((UnitName) o).getRef().getName();
-		} else if (o instanceof ActionRef) {
+		else if (o instanceof ActionRef)
 			return ((ActionRef) o).getRef().getName();
-		} else if (o instanceof SkillRef) {
+		else if (o instanceof SkillRef)
 			return ((SkillRef) o).getRef().getName();
-		} else if (o instanceof EquationRef) {
+		else if (o instanceof EquationRef)
 			return ((EquationRef) o).getRef().getName();
-		} else if (o instanceof TypeRef) {
+		else if (o instanceof TypeRef)
 			return ((TypeRef) o).getRef().getName();
-		} else {
+		else
 			return "";
-		}
 	}
 
 	/**
@@ -428,12 +446,15 @@ public class EGaml implements IGamlEcoreUtils {
 
 	@Override
 	public String toString(final EObject expr) {
-		if (expr == null) { return null; }
-		if (expr instanceof Statement) {
+		if (expr == null)
+			return null;
+		if (expr instanceof Statement)
 			return getNameOf(expr);
-		} else if (expr instanceof Facet) { return ((Facet) expr).getName(); }
+		else if (expr instanceof Facet)
+			return ((Facet) expr).getName();
 
-		if (!(expr instanceof Expression)) { return expr.toString(); }
+		if (!(expr instanceof Expression))
+			return expr.toString();
 		final StringBuilder serializer = new StringBuilder(100);
 		serializer.setLength(0);
 		serialize(serializer, (Expression) expr);
@@ -449,9 +470,9 @@ public class EGaml implements IGamlEcoreUtils {
 	 *            the expr
 	 */
 	private void serialize(final StringBuilder serializer, final Expression expr) {
-		if (expr == null) {
+		if (expr == null)
 			return;
-		} else if (expr instanceof If) {
+		else if (expr instanceof If) {
 			serializer.append("(");
 			serialize(serializer, ((If) expr).getLeft());
 			serializer.append(")").append(((If) expr).getOp()).append("(");
@@ -568,11 +589,11 @@ public class EGaml implements IGamlEcoreUtils {
 	 */
 	@Override
 	public Statement getStatement(final EObject o) {
-		if (o instanceof Statement) { return (Statement) o; }
+		if (o instanceof Statement)
+			return (Statement) o;
 		if (o instanceof TypeRef && o.eContainer() instanceof S_Definition
-				&& ((S_Definition) o.eContainer()).getTkey() == o) {
+				&& ((S_Definition) o.eContainer()).getTkey() == o)
 			return (Statement) o.eContainer();
-		}
 		return null;
 
 	}
@@ -587,19 +608,23 @@ public class EGaml implements IGamlEcoreUtils {
 	@Override
 	public boolean isBatch(final EObject e) {
 		if (e instanceof StatementImpl) {
-			if (!((StatementImpl) e).eIsSet(GamlPackage.STATEMENT__FACETS)) { return false; }
+			if (!((StatementImpl) e).eIsSet(GamlPackage.STATEMENT__FACETS))
+				return false;
 			for (final Facet f : ((Statement) e).getFacets()) {
 				if (getKeyOf(f).equals(IKeyword.TYPE)) {
 					final String type = EGaml.getInstance().getKeyOf(f.getExpr());
-					if (IKeyword.BATCH.equals(type) || IKeyword.TEST.equals(type)) { return true; }
+					if (IKeyword.BATCH.equals(type) || IKeyword.TEST.equals(type))
+						return true;
 				}
 			}
 		} else if (e instanceof HeadlessExperimentImpl) {
-			if (!((HeadlessExperimentImpl) e).eIsSet(GamlPackage.HEADLESS_EXPERIMENT__FACETS)) { return false; }
+			if (!((HeadlessExperimentImpl) e).eIsSet(GamlPackage.HEADLESS_EXPERIMENT__FACETS))
+				return false;
 			for (final Facet f : ((HeadlessExperimentImpl) e).getFacets()) {
 				if (getKeyOf(f).equals(IKeyword.TYPE)) {
 					final String type = EGaml.getInstance().getKeyOf(f.getExpr());
-					if (IKeyword.BATCH.equals(type)) { return true; }
+					if (IKeyword.BATCH.equals(type))
+						return true;
 				}
 			}
 		}
@@ -607,4 +632,29 @@ public class EGaml implements IGamlEcoreUtils {
 
 	}
 
+	@Override
+	public ResourceSet getResourceSet() {
+		return new SynchronizedXtextResourceSet();
+	}
+
+	@Override
+	public boolean isExperiment(final EObject e) {
+		return e instanceof S_Experiment;
+	}
+
+	@Override
+	public boolean isHeadlessExperiment(final EObject e) {
+		return e instanceof HeadlessExperimentImpl;
+	}
+
+	@Override
+	public TreeIterator<EObject> getAllContents(final Resource resource, final boolean resolve) {
+		return EcoreUtil2.getAllContents(resource, resolve);
+	}
+
+	@Override
+	public boolean isStringLiteral(final EObject e) {
+		return e instanceof StringLiteral;
+
+	}
 }

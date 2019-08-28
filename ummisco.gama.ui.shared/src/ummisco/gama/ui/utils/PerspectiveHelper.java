@@ -1,6 +1,6 @@
 /*******************************************************************************************************
  *
- * msi.gama.application.workbench.PerspectiveHelper.java, in plugin msi.gama.application, is part of the source code of
+ * ummisco.gama.application.workbench.PerspectiveHelper.java, in plugin ummisco.gama.application, is part of the source code of
  * the GAMA modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
@@ -40,7 +40,7 @@ import msi.gama.kernel.model.IModel;
 public class PerspectiveHelper {
 
 	public static String PERSPECTIVE_MODELING_ID = IGui.PERSPECTIVE_MODELING_ID;
-	static String PERSPECTIVE_SIMULATION_ID = "msi.gama.application.perspectives.SimulationPerspective";
+	static String PERSPECTIVE_SIMULATION_ID = "ummisco.gama.application.perspectives.SimulationPerspective";
 	static String PERSPECTIVE_SIMULATION_FRAGMENT = "Simulation";
 
 	private static final String BOTTOM_TRIM_ID = "org.eclipse.ui.trim.status"; //$NON-NLS-1$

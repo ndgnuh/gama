@@ -113,7 +113,7 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 
 		try {
 			final IDecoratorManager mgr = PlatformUI.getWorkbench().getDecoratorManager();
-			mgr.setEnabled("msi.gama.application.date.decorator", false);
+			mgr.setEnabled("ummisco.gama.application.date.decorator", false);
 		} catch (final CoreException e) {
 			e.printStackTrace();
 		}
@@ -262,7 +262,7 @@ public class GamaNavigator extends CommonNavigator implements IToolbarDecoratedV
 
 		try {
 			final IDecoratorManager mgr = PlatformUI.getWorkbench().getDecoratorManager();
-			mgr.setEnabled("msi.gama.application.date.decorator", enabled);
+			mgr.setEnabled("ummisco.gama.application.date.decorator", enabled);
 		} catch (final CoreException e) {
 			e.printStackTrace();
 		}

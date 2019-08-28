@@ -16,7 +16,7 @@ species Person skills:[network]
 	}
 }
 
-experiment "Tests for ummisco.gama.network" type: test skills:[network] {
+experiment "Tests for ummisco.gama.extensions.network" type: test skills:[network] {
 	bool already_build <- false;
 	string group_spice <- "spice girls";
 	list<string> girls <- ["Victoria","Mel","Melanie","Geri","Emma"];

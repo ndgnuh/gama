@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.views.user;
@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ToolItem;
 
 import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGui;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gaml.architecture.user.UserInputStatement;
@@ -46,8 +45,6 @@ import ummisco.gama.ui.views.GamaViewPart;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 
 public class UserControlView extends GamaViewPart implements IGamaView.User {
-
-	public static String ID = IGui.USER_CONTROL_VIEW_ID;
 
 	IScope scope;
 	UserPanelStatement panel;
@@ -81,7 +78,8 @@ public class UserControlView extends GamaViewPart implements IGamaView.User {
 	@Override
 	public void ownCreatePartControl(final Composite parent) {
 		parent.setBackground(IGamaColors.WHITE.color());
-		if (scope == null) { return; }
+		if (scope == null)
+			return;
 		inspectItem.setEnabled(true);
 		continueItem.setEnabled(true);
 		setPartName(
@@ -172,7 +170,7 @@ public class UserControlView extends GamaViewPart implements IGamaView.User {
 
 	/**
 	 * Method createToolItem()
-	 * 
+	 *
 	 * @see ummisco.gama.ui.views.toolbar.IToolbarDecoratedView#createToolItem(int,
 	 *      ummisco.gama.ui.views.toolbar.GamaToolbar2)
 	 */

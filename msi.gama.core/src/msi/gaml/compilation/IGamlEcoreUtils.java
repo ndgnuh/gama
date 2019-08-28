@@ -3,8 +3,11 @@ package msi.gaml.compilation;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 public interface IGamlEcoreUtils {
 
@@ -145,6 +148,16 @@ public interface IGamlEcoreUtils {
 	 */
 	boolean isBatch(EObject e);
 
+	boolean isExperiment(EObject e);
+
 	EObject getExprOf(EObject element);
+
+	ResourceSet getResourceSet();
+
+	boolean isHeadlessExperiment(EObject e);
+
+	TreeIterator<EObject> getAllContents(Resource r, boolean b);
+
+	boolean isStringLiteral(EObject e);
 
 }

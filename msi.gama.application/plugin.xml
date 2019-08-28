@@ -7,7 +7,7 @@
          name="Base product"
          point="org.eclipse.core.runtime.products">
       <product
-            application="msi.gama.application.GamaApplication"
+            application="ummisco.gama.application.GamaApplication"
             name="Gama">
          <property
                name="windowImages"
@@ -50,7 +50,7 @@
          point="org.eclipse.core.runtime.applications">
       <application>
          <run
-               class="msi.gama.application.Application">
+               class="ummisco.gama.application.Application">
             <parameter
                   name="preferenceCustomization"
                   value="plugin_customization.ini">
@@ -65,7 +65,7 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="msi.gama.application.projects.GamaNature"> 
+               class="ummisco.gama.application.projects.GamaNature"> 
          </run>
       </runtime>
       <content-type
@@ -79,7 +79,7 @@
                point="org.eclipse.core.resources.natures">
             <runtime>
                <run
-                     class="msi.gama.application.projects.BuiltinNature">
+                     class="ummisco.gama.application.projects.BuiltinNature">
                </run>
             </runtime>
             <requires-nature
@@ -92,7 +92,7 @@
                point="org.eclipse.core.resources.natures">
             <runtime>
                <run
-                     class="msi.gama.application.projects.PluginNature">
+                     class="ummisco.gama.application.projects.PluginNature">
                </run>
             </runtime>
             <requires-nature
@@ -103,7 +103,7 @@
                id="runtime"
                point="org.eclipse.core.runtime.products">
             <product
-                  application="msi.gama.application.GamaApplication"
+                  application="ummisco.gama.application.GamaApplication"
                   name="Gama (runtime)">
                <property
                      name="windowImages"
@@ -118,24 +118,8 @@
                      value="branding_icons/icon128.png">
                </property>
                <property
-                     name="startupForegroundColor"
-                     value="165E93">
-               </property>
-               <property
-                     name="startupProgressRect"
-                     value="71,515,500,12">
-               </property>
-               <property
-                     name="startupMessageRect"
-                     value="230,490,500,16">
-               </property>
-               <property
                      name="appName"
                      value="Gama (runtime)">
-               </property>
-               <property
-                     name="preferenceCustomization"
-                     value="plugin_customization.ini">
                </property>
             </product>
          </extension>
@@ -145,7 +129,7 @@
                point="org.eclipse.core.resources.natures">
             <runtime>
                <run
-                     class="msi.gama.application.projects.TestNature">
+                     class="ummisco.gama.application.projects.TestNature">
                </run>
             </runtime>
              <requires-nature

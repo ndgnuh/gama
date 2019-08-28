@@ -28,7 +28,6 @@ import org.eclipse.ui.PartInitException;
 import com.google.common.primitives.Ints;
 
 import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.ItemList;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
@@ -54,11 +53,10 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 	static final Comparator<AbstractSummary<?>> BY_SEVERITY = (o1, o2) -> {
 		final TestState s1 = o1.getState();
 		final TestState s2 = o2.getState();
-		if (s1 == s2) {
+		if (s1 == s2)
 			return BY_ORDER.compare(o1, o2);
-		} else {
+		else
 			return s1.compareTo(s2);
-		}
 	};
 	public final List<AbstractSummary<?>> experiments = new ArrayList<>();
 	private boolean runningAllTests;
@@ -66,8 +64,6 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 	static {
 		layout.verticalSpacing = 0;
 	}
-
-	public static String ID = IGui.TEST_VIEW_ID;
 
 	@Override
 	public void init(final IViewSite site) throws PartInitException {
@@ -132,7 +128,8 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 		}
 		if (onlyFailed) {
 			final TestState state = experiment.getState();
-			if (state != TestState.FAILED && state != TestState.ABORTED) { return false; }
+			if (state != TestState.FAILED && state != TestState.ABORTED)
+				return false;
 		}
 		item = createItem(getParentComposite(), experiment, !runningAllTests,
 				GamaColors.get(getItemDisplayColor(experiment)));
@@ -149,7 +146,8 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 	protected ParameterExpandItem createItem(final Composite parent, final AbstractSummary<?> data,
 			final boolean expanded, final GamaUIColor color) {
 		createViewer(parent);
-		if (getViewer() == null) { return null; }
+		if (getViewer() == null)
+			return null;
 		final Composite control = createItemContentsFor(data);
 		ParameterExpandItem item;
 		if (expanded) {
@@ -189,7 +187,8 @@ public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements
 			final AbstractSummary<?> subTest, final String name) {
 		if (GamaPreferences.Runtime.FAILED_TESTS.getValue()) {
 			final TestState state = subTest.getState();
-			if (state != TestState.FAILED && state != TestState.ABORTED) { return; }
+			if (state != TestState.FAILED && state != TestState.ABORTED)
+				return;
 		}
 		final AssertEditor ed = new AssertEditor(GAMA.getRuntimeScope(), subTest);
 		// editorsByExperiment.get(globalTest).put(name, ed);

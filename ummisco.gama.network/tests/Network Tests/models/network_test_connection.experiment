@@ -7,7 +7,7 @@
 
 model networktest
 
-experiment "Tests for ummisco.gama.network" type: test skills:[network] {
+experiment "Tests for ummisco.gama.extensions.network" type: test skills:[network] {
 	test "Action connect to the MQTT server" {
 		bool res <- false;
 		try{ 

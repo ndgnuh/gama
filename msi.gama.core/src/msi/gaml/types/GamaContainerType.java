@@ -45,6 +45,11 @@ public class GamaContainerType<T extends IContainer<?, ?>> extends GamaType<T> i
 		// Types.NO_TYPE, Types.NO_TYPE));
 	}
 
+	@Override
+	public int getNumberOfParameters() {
+		return 1;
+	}
+
 	@SuppressWarnings ("unchecked")
 	@Override
 	public T cast(final IScope scope, final Object obj, final Object param, final IType<?> keyType,
@@ -82,9 +87,8 @@ public class GamaContainerType<T extends IContainer<?, ?>> extends GamaType<T> i
 	@Override
 	public IType<?> contentsTypeIfCasting(final IExpression exp) {
 		final IType<?> itemType = exp.getGamlType();
-		if (itemType.isContainer() || itemType.isAgentType() || itemType.isCompoundType()) {
+		if (itemType.isContainer() || itemType.isAgentType() || itemType.isCompoundType())
 			return itemType.getContentType();
-		}
 		return itemType;
 	}
 
@@ -104,7 +108,8 @@ public class GamaContainerType<T extends IContainer<?, ?>> extends GamaType<T> i
 		final IType<?> kt = getKeyType();
 		IType<?> ct = sub1;
 		if (ct == Types.NO_TYPE) {
-			if (kt == Types.NO_TYPE) { return this; }
+			if (kt == Types.NO_TYPE)
+				return this;
 			ct = getContentType();
 		}
 		return ParametricType.createParametricType((IContainerType<IContainer<?, ?>>) this, kt, ct);
@@ -117,7 +122,8 @@ public class GamaContainerType<T extends IContainer<?, ?>> extends GamaType<T> i
 		IType<?> kt = sub1;
 		IType<?> ct = sub2;
 		if (ct == Types.NO_TYPE) {
-			if (kt == Types.NO_TYPE) { return this; }
+			if (kt == Types.NO_TYPE)
+				return this;
 			ct = getContentType();
 		}
 		if (kt == Types.NO_TYPE) {

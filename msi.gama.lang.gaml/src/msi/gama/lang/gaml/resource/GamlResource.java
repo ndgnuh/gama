@@ -37,6 +37,7 @@ import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.lang.gaml.gaml.GamlPackage;
 import msi.gama.lang.gaml.gaml.Model;
 import msi.gama.lang.gaml.indexer.GamlResourceIndexer;
+import msi.gama.lang.gaml.parsing.GamlSyntacticConverter;
 import msi.gama.runtime.IExecutionContext;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
@@ -58,6 +59,8 @@ import msi.gaml.factories.ModelFactory;
 public class GamlResource extends LazyLinkingResource {
 
 	private static boolean MEMOIZE_DESCRIPTION = false;
+	private static final GamlSyntacticConverter SYNTACTIC_CONVERTER = new GamlSyntacticConverter();
+
 	ModelDescription description;
 	ISyntacticElement element;
 
@@ -85,7 +88,7 @@ public class GamlResource extends LazyLinkingResource {
 
 	public ISyntacticElement getSyntacticContents() {
 		if (element == null) {
-			setElement(GamlResourceServices.buildSyntacticContents(this));
+			setElement(buildSyntacticContents());
 		}
 		return element;
 	}
@@ -134,7 +137,7 @@ public class GamlResource extends LazyLinkingResource {
 
 	public void invalidate(final GamlResource r, final String s) {
 		GamlCompilationError error = null;
-		if (GamlResourceIndexer.equals(r.getURI(), getURI())) {
+		if (GamlResourceIndexer.INSTANCE.equals(r.getURI(), getURI())) {
 			error = new GamlCompilationError(s, IGamlIssue.GENERAL, r.getContents().get(0), false, false);
 		} else {
 			error = new GamlCompilationError(s, IGamlIssue.GENERAL, r.getURI(), false, false);
@@ -144,8 +147,9 @@ public class GamlResource extends LazyLinkingResource {
 	}
 
 	public ModelDescription buildCompleteDescription() {
-		if (MEMOIZE_DESCRIPTION && description != null) { return description; }
-		final LinkedHashMultimap<String, GamlResource> imports = GamlResourceIndexer.validateImportsOf(this);
+		if (MEMOIZE_DESCRIPTION && description != null)
+			return description;
+		final LinkedHashMultimap<String, GamlResource> imports = GamlResourceIndexer.INSTANCE.validateImportsOf(this);
 		if (hasErrors() || hasSemanticErrors()) {
 			setDescription(null);
 			return null;
@@ -217,8 +221,10 @@ public class GamlResource extends LazyLinkingResource {
 	}
 
 	private void setDescription(final ModelDescription model) {
-		if (!MEMOIZE_DESCRIPTION) { return; }
-		if (model == description) { return; }
+		if (!MEMOIZE_DESCRIPTION)
+			return;
+		if (model == description)
+			return;
 		if (description != null) {
 			description.dispose();
 		}
@@ -226,7 +232,8 @@ public class GamlResource extends LazyLinkingResource {
 	}
 
 	private void setElement(final ISyntacticElement model) {
-		if (model == element) { return; }
+		if (model == element)
+			return;
 		if (element != null) {
 			element.dispose();
 		}
@@ -262,7 +269,7 @@ public class GamlResource extends LazyLinkingResource {
 	@Override
 	protected void doLinking() {
 		// If the imports are not correctly updated, we cannot proceed
-		final EObject faulty = GamlResourceIndexer.updateImports(this);
+		final EObject faulty = GamlResourceIndexer.INSTANCE.updateImports(this);
 		if (faulty != null) {
 			System.out.println(getURI() + " cannot import " + faulty);
 			final EAttribute attribute = getContents().get(0) instanceof Model ? GamlPackage.Literals.IMPORT__IMPORT_URI
@@ -278,4 +285,7 @@ public class GamlResource extends LazyLinkingResource {
 		return !getErrors().isEmpty() || getParseResult().hasSyntaxErrors();
 	}
 
+	public ISyntacticElement buildSyntacticContents() {
+		return SYNTACTIC_CONVERTER.buildSyntacticContents(getParseResult().getRootASTElement(), null);
+	}
 }

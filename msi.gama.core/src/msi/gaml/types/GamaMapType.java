@@ -40,11 +40,19 @@ public class GamaMapType extends GamaContainerType<IMap> {
 		return staticCast(scope, obj, keyType, contentType, copy);
 	}
 
+	@Override
+	public int getNumberOfParameters() {
+		return 2;
+	}
+
 	public static IMap staticCast(final IScope scope, final Object obj, final IType keyType, final IType contentsType,
 			final boolean copy) {
-		if (obj == null) { return GamaMapFactory.create(keyType, contentsType); }
-		if (obj instanceof IAgent) { return new SavedAgent(scope, (IAgent) obj); }
-		if (obj instanceof IContainer) { return ((IContainer) obj).mapValue(scope, keyType, contentsType, copy); }
+		if (obj == null)
+			return GamaMapFactory.create(keyType, contentsType);
+		if (obj instanceof IAgent)
+			return new SavedAgent(scope, (IAgent) obj);
+		if (obj instanceof IContainer)
+			return ((IContainer) obj).mapValue(scope, keyType, contentsType, copy);
 		final IMap result = GamaMapFactory.create(keyType, contentsType);
 		result.setValueAtIndex(scope, obj, obj);
 		return result;
@@ -53,7 +61,8 @@ public class GamaMapType extends GamaContainerType<IMap> {
 	@Override
 	public IType keyTypeIfCasting(final IExpression exp) {
 		final IType itemType = exp.getGamlType();
-		if (itemType.isAgentType()) { return Types.get(STRING); }
+		if (itemType.isAgentType())
+			return Types.get(STRING);
 		switch (itemType.id()) {
 			case PAIR:
 			case MAP:
@@ -63,11 +72,10 @@ public class GamaMapType extends GamaContainerType<IMap> {
 			case GRAPH:
 				return Types.get(PAIR);
 			case LIST:
-				if (itemType.getContentType().id() == IType.PAIR) {
+				if (itemType.getContentType().id() == IType.PAIR)
 					return itemType.getContentType().getKeyType();
-				} else {
+				else
 					return itemType.getContentType();
-				}
 		}
 		return itemType;
 	}
@@ -75,14 +83,14 @@ public class GamaMapType extends GamaContainerType<IMap> {
 	@Override
 	public IType contentsTypeIfCasting(final IExpression exp) {
 		final IType itemType = exp.getGamlType();
-		if (itemType.isAgentType()) { return Types.NO_TYPE; }
+		if (itemType.isAgentType())
+			return Types.NO_TYPE;
 		switch (itemType.id()) {
 			case LIST:
-				if (itemType.getContentType().id() == IType.PAIR) {
+				if (itemType.getContentType().id() == IType.PAIR)
 					return itemType.getContentType().getContentType();
-				} else {
+				else
 					return itemType.getContentType();
-				}
 			case PAIR:
 			case GRAPH:
 			case MAP:

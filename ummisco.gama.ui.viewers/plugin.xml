@@ -30,7 +30,7 @@
             default="false"
             extensions="html, htm, HTML, HTM, svg, SVG"
             icon="platform:/plugin/ummisco.gama.ui.shared/icons/navigator/file.html2.png"
-            id="msi.gama.application.browser"
+            id="ummisco.gama.application.browser"
             name="HTML Viewer">
          <contentTypeBinding
                contentTypeId="msi.gama.gui.html.type">
@@ -41,7 +41,7 @@
             default="true"
             extensions="shp"
             icon="platform:/plugin/ummisco.gama.ui.shared/icons/navigator/file.shape2.png"
-            id="msi.gama.application.shape.viewer"
+            id="ummisco.gama.application.shape.viewer"
             name="ShapeFile Viewer">
          <contentTypeBinding
                contentTypeId="msi.gama.gui.shapefile.type">
@@ -52,7 +52,7 @@
             default="true"
             extensions="gz,osm,pbf,bz2"
             icon="platform:/plugin/ummisco.gama.ui.shared/icons/navigator/file.osm2.png"
-            id="msi.gama.application.osm.viewer"
+            id="ummisco.gama.application.osm.viewer"
             name="OSM Viewer">
          <contentTypeBinding
                contentTypeId="msi.gama.gui.osm.type">
