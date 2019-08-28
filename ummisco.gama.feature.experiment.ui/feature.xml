@@ -26,7 +26,7 @@
    </requires>
 
    <plugin
-         id="ummisco.gama.java2d"
+         id="ummisco.gama.display.java2d"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -40,7 +40,7 @@
          unpack="false"/>
 
    <plugin
-         id="ummisco.gama.opengl"
+         id="ummisco.gama.display.opengl"
          download-size="0"
          install-size="0"
          version="0.0.0"

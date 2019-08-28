@@ -50,6 +50,11 @@ public class ParametricFileType extends ParametricType {
 		return GamaGeometryFile.class.isAssignableFrom(support) || GamaImageFile.class.isAssignableFrom(support);
 	}
 
+	@Override
+	public int getNumberOfParameters() {
+		return bufferType.getNumberOfParameters();
+	}
+
 	public GamaGetter<IGamaFile<?, ?>> getBuilder() {
 		return builder;
 	}
@@ -67,26 +72,27 @@ public class ParametricFileType extends ParametricType {
 
 	@Override
 	public boolean equals(final Object c) {
-		if (c instanceof ParametricFileType) { return ((ParametricFileType) c).id() == id(); }
+		if (c instanceof ParametricFileType)
+			return ((ParametricFileType) c).id() == id();
 		return super.equals(c);
 	}
 
 	@Override
 	public IGamaFile<?, ?> cast(final IScope scope, final Object obj, final Object param, final IType<?> keyType,
 			final IType<?> contentType, final boolean copy) {
-		if (obj == null) { return null; }
+		if (obj == null)
+			return null;
 		if (obj instanceof IGamaFile) {
-			if (support.isInstance(obj)) {
+			if (support.isInstance(obj))
 				return (IGamaFile<?, ?>) obj;
-			} else {
+			else
 				return cast(scope, ((IGamaFile<?, ?>) obj).getPath(scope), param, keyType, contentType, copy);
-			}
 		}
 		if (obj instanceof String) {
-			if (param == null) { return createFile(scope, (String) obj, null); }
-			if (param instanceof IContainer.Modifiable) {
+			if (param == null)
+				return createFile(scope, (String) obj, null);
+			if (param instanceof IContainer.Modifiable)
 				return createFile(scope, (String) obj, (IModifiableContainer<?, ?, ?, ?>) param);
-			}
 		}
 		return null;
 	}

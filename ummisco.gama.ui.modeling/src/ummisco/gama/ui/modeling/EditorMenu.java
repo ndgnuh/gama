@@ -172,7 +172,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 
 				final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 				try {
-					GamlResourceIndexer.eraseIndex();
+					GamlResourceIndexer.INSTANCE.eraseIndex();
 					workspace.build(IncrementalProjectBuilder.CLEAN_BUILD, new NullProgressMonitor() {
 
 						@Override
@@ -350,7 +350,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 				public void process(final XtextResource resource) throws Exception {
 					final String platformString = resource.getURI().toPlatformString(true);
 					final URI uri = URI.createPlatformResourceURI(platformString, false);
-					map.addAll(GamlResourceIndexer.directImportersOf(uri));
+					map.addAll(GamlResourceIndexer.INSTANCE.directImportersOf(uri));
 				}
 			});
 			return map.items();

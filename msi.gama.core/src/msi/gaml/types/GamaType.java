@@ -68,6 +68,11 @@ public abstract class GamaType<Support> implements IType<Support> {
 	}
 
 	@Override
+	public int getNumberOfParameters() {
+		return 0;
+	}
+
+	@Override
 	public String getDocumentation() {
 		doc documentation;
 		documentation = getClass().getAnnotation(doc.class);

@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import msi.gama.common.interfaces.ItemList;
 import msi.gama.common.preferences.GamaPreferences;
@@ -45,7 +44,6 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class ErrorView extends ExpandableItemsView<GamaRuntimeException> implements IGamaView.Error {
 
-	public static String ID = IGui.ERROR_VIEW_ID;
 	int numberOfDisplayedErrors = GamaPreferences.Runtime.CORE_ERRORS_NUMBER.getValue();
 	boolean mostRecentFirst = GamaPreferences.Runtime.CORE_RECENT.getValue();
 

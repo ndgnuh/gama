@@ -56,10 +56,11 @@ public class GamlResourceDescriptionManager extends DefaultResourceDescriptionMa
 			for (final Delta d : deltas) {
 				deltaUris.add(GamlResourceServices.properlyEncodedURI(d.getUri()));
 			}
-			final Iterator<URI> it = GamlResourceIndexer.allImportsOf(newUri);
+			final Iterator<URI> it = GamlResourceIndexer.INSTANCE.allImportsOf(newUri);
 			while (it.hasNext()) {
 				final URI next = it.next();
-				if (deltaUris.contains(next)) { return true; }
+				if (deltaUris.contains(next))
+					return true;
 			}
 			return super.isAffected(deltas, candidate, context);
 		}

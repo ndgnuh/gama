@@ -129,8 +129,8 @@ public class FileMetaDataProvider implements IFileMetaDataProvider {
 		return null;
 	}
 
-	public static final QualifiedName CACHE_KEY = new QualifiedName("msi.gama.application", "metadata");
-	public static final QualifiedName CHANGE_KEY = new QualifiedName("msi.gama.application", "changed");
+	public static final QualifiedName CACHE_KEY = new QualifiedName("ummisco.gama.application", "metadata");
+	public static final QualifiedName CHANGE_KEY = new QualifiedName("ummisco.gama.application", "changed");
 	public static final String CSV_CT_ID = "msi.gama.gui.csv.type";
 	public static final String IMAGE_CT_ID = "msi.gama.gui.images.type";
 	public static final String GAML_CT_ID = "msi.gama.gui.gaml.type";
@@ -364,7 +364,7 @@ public class FileMetaDataProvider implements IFileMetaDataProvider {
 						} catch (final CoreException e) {
 							e.printStackTrace();
 						}
-						// GAMA.getGui().updateDecorator("msi.gama.application.decorator");
+						// GAMA.getGui().updateDecorator("ummisco.gama.application.decorator");
 					} finally {
 						processing.remove(element);
 					}

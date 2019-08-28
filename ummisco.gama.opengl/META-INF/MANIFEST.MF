@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OpenGL display for GAMA
-Bundle-SymbolicName: ummisco.gama.opengl;singleton:=true
+Bundle-SymbolicName: ummisco.gama.display.opengl;singleton:=true
 Bundle-Version: 1.9.0.qualifier
 Require-Bundle: msi.gama.ext,
  msi.gama.core;bundle-version="1.7.0",
@@ -10,7 +10,7 @@ Require-Bundle: msi.gama.ext,
  org.eclipse.ui;bundle-version="3.8.2",
  ummisco.gama.ui.shared,
  ummisco.gama.ui.experiment;bundle-version="1.7.0",
- msi.gama.application;bundle-version="1.7.0",
+ ummisco.gama.application;bundle-version="1.7.0",
  com.google.guava,
  ummisco.gama.annotations
 Bundle-ActivationPolicy: lazy
@@ -155,16 +155,16 @@ Export-Package:
  jogamp.opengl.windows.wgl,
  jogamp.opengl.windows.wgl.awt,
  jogamp.opengl.x11.glx,
- ummisco.gama.opengl,
- ummisco.gama.opengl.camera,
- ummisco.gama.opengl.files,
- ummisco.gama.opengl.renderer,
- ummisco.gama.opengl.renderer.caches,
- ummisco.gama.opengl.renderer.helpers,
- ummisco.gama.opengl.renderer.shaders,
- ummisco.gama.opengl.scene,
- ummisco.gama.opengl.scene.layers,
- ummisco.gama.opengl.view
+ ummisco.gama.display.opengl,
+ ummisco.gama.display.opengl.camera,
+ ummisco.gama.display.opengl.files,
+ ummisco.gama.display.opengl.renderer,
+ ummisco.gama.display.opengl.renderer.caches,
+ ummisco.gama.display.opengl.renderer.helpers,
+ ummisco.gama.display.opengl.renderer.shaders,
+ ummisco.gama.display.opengl.scene,
+ ummisco.gama.display.opengl.scene.layers,
+ ummisco.gama.display.opengl.view
 Bundle-ClassPath: .,
  gluegen-rt-natives-linux-amd64.jar,
  gluegen-rt-natives-macosx-universal.jar,

@@ -15,14 +15,15 @@ Require-Bundle: ummisco.gama.ui.shared,
  org.eclipse.ui.ide,
  org.eclipse.ui.navigator.resources,
  msi.gama.core,
- msi.gama.application,
- msi.gama.ext,
  org.eclipse.core.expressions,
  org.eclipse.team.ui,
  org.eclipse.compare,
  org.eclipse.ltk.core.refactoring,
  org.eclipse.ltk.ui.refactoring,
- com.google.guava
+ com.google.guava,
+ ummisco.gama.application;bundle-version="1.9.0",
+ msi.gama.ext;bundle-version="1.9.0",
+ msi.gama.lang.gaml;bundle-version="1.9.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: ummisco.gama.ui.commands,
  ummisco.gama.ui.metadata,

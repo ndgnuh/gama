@@ -15,13 +15,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.kernel.model.IModel;
 import msi.gama.lang.gaml.resource.GamlResource;
+import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
 import msi.gaml.compilation.IGamlModelBuilder;
 import msi.gaml.descriptions.ModelDescription;
@@ -47,7 +47,7 @@ public class GamlModelBuilder implements IGamlModelBuilder {
 	// }
 
 	public GamlModelBuilder() {
-		buildResourceSet = new SynchronizedXtextResourceSet();
+		buildResourceSet = GAML.getEcoreUtils().getResourceSet();
 	}
 
 	@Override
@@ -91,7 +91,8 @@ public class GamlModelBuilder implements IGamlModelBuilder {
 				if (errors != null) {
 					Iterables.addAll(errors, r.getValidationContext());
 				}
-				if (r.getValidationContext().hasErrors()) { return null; }
+				if (r.getValidationContext().hasErrors())
+					return null;
 				return model;
 			}
 		} finally {

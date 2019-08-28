@@ -36,10 +36,10 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IFileMetaDataProvider;
+import ummisco.gama.application.workspace.WorkspaceModelsManager;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.GamaNavigator;
@@ -64,7 +64,11 @@ public class RefreshHandler implements IRefreshHandler {
 
 	@Override
 	public void refreshNavigator() {
-		WorkbenchHelper.run(() -> getNavigator().getCommonViewer().refresh());
+		WorkbenchHelper.run(() -> {
+			getNavigator().getCommonViewer().refresh();
+			getNavigator().getCommonViewer().getControl().redraw();
+			getNavigator().getCommonViewer().getControl().update();
+		});
 	}
 
 	protected void simpleRefresh(final IResource resource, final IProgressMonitor monitor) throws CoreException {
@@ -137,7 +141,8 @@ public class RefreshHandler implements IRefreshHandler {
 								monitor.worked(1);
 							}
 						} catch (final CoreException e) {}
-						if (monitor != null && monitor.isCanceled()) { throw new OperationCanceledException(); }
+						if (monitor != null && monitor.isCanceled())
+							throw new OperationCanceledException();
 					}
 				} finally {
 					if (monitor != null) {
@@ -206,7 +211,8 @@ public class RefreshHandler implements IRefreshHandler {
 	}
 
 	void checkLocationDeleted(final IProject project) throws CoreException {
-		if (!project.exists()) { return; }
+		if (!project.exists())
+			return;
 		final IFileInfo location = IDEResourceInfoUtils.getFileInfo(project.getLocationURI());
 		if (!location.exists()) {
 			final String message = NLS.bind(IDEWorkbenchMessages.RefreshAction_locationDeletedMessage,

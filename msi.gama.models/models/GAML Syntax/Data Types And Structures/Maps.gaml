@@ -137,8 +137,8 @@ species combining_maps {
 		write sample(l1 - l2);
 		write sample(l1 inter l2);
 		write sample(l1 union l2);
-		map<string> l3 <- map<int, string>(l1 + l2);
-		write "map<string> l3 <- l1 + l2; " + sample(l3);
+		map<unknown,string> l3 <- map<int, string>(l1 + l2);
+		write "map<unknown,string> l3 <- l1 + l2; " + sample(l3);
 	}
 }
 
@@ -224,6 +224,8 @@ species modifying_maps {
 		// Removing values based on a criteria
 		m1 >>- m1 select (each > 1001);
 		write(sample(m1));
+		
+		text_file<string> ff;
 	}
 
 	}

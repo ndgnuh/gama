@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'ApplicationWorkbenchAdvisor.java, in plugin msi.gama.application, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'ApplicationWorkbenchAdvisor.java, in plugin ummisco.gama.application, is part of the source code of the GAMA
+ * modeling and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -17,9 +17,12 @@ import java.util.Arrays;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.IPreferencesService;
 import org.eclipse.swt.widgets.Display;
@@ -35,14 +38,15 @@ import org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor;
 import org.eclipse.ui.statushandlers.AbstractStatusHandler;
 import org.eclipse.ui.statushandlers.StatusAdapter;
 
-import msi.gama.application.workspace.WorkspaceManager;
-import msi.gama.application.workspace.WorkspaceModelsManager;
 import msi.gama.common.interfaces.IEventLayerDelegate;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.util.FileUtils;
 import msi.gama.outputs.layers.EventLayerStatement;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.concurrent.GamaExecutorService;
+import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.application.workspace.WorkspaceManager;
+import ummisco.gama.application.workspace.WorkspaceModelsManager;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.utils.PerspectiveHelper;
 import ummisco.gama.ui.utils.SwtGui;
@@ -103,7 +107,7 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 			final IDecoratorManager dm = configurer.getWorkbench().getDecoratorManager();
 			dm.setEnabled("org.eclipse.pde.ui.binaryProjectDecorator", false);
 			dm.setEnabled("org.eclipse.team.svn.ui.decorator.SVNLightweightDecorator", false);
-			dm.setEnabled("msi.gama.application.decorator", true);
+			dm.setEnabled("ummisco.gama.application.decorator", true);
 			dm.setEnabled("org.eclipse.ui.LinkedResourceDecorator", false);
 			dm.setEnabled("org.eclipse.ui.VirtualResourceDecorator", false);
 			dm.setEnabled("org.eclipse.xtext.builder.nature.overlay", false);
@@ -141,7 +145,29 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 			}
 		}
 		SwtGui.splash.close();
+		//
+		if (checkCopyOfBuiltInModels()) {
+			linkSampleModelsToWorkspace();
+		}
+		//
 		GAMA.getGui().updateExperimentState(null, SwtGui.NONE);
+	}
+
+	public static void linkSampleModelsToWorkspace() {
+
+		final WorkspaceJob job = new WorkspaceJob("Updating the Built-in Models Library") {
+
+			@Override
+			public IStatus runInWorkspace(final IProgressMonitor monitor) {
+				// DEBUG.OUT("Asynchronous link of models library...");
+				GAMA.getGui().refreshNavigator();
+				return GamaBundleLoader.ERRORED ? Status.CANCEL_STATUS : Status.OK_STATUS;
+			}
+
+		};
+		job.setUser(true);
+		job.schedule();
+
 	}
 
 	protected boolean checkCopyOfBuiltInModels() {
@@ -195,9 +221,6 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 		Job.getJobManager().suspend();
 		// super.preStartup();
 		/* Linking the stock models with the workspace if they are not already */
-		if (checkCopyOfBuiltInModels()) {
-			WorkspaceModelsManager.linkSampleModelsToWorkspace();
-		}
 
 	}
 

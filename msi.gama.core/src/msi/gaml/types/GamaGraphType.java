@@ -45,23 +45,29 @@ public class GamaGraphType extends GamaContainerType<IGraph> {
 		return staticCast(scope, obj, param, copy);
 	}
 
+	@Override
+	public int getNumberOfParameters() {
+		return 2;
+	}
+
 	public static IGraph staticCast(final IScope scope, final Object obj, final Object param, final boolean copy) {
 		// param = true : spatial.
 
-		if (obj == null) { return null; }
-		if (obj instanceof IGraph) { return (IGraph) obj; }
+		if (obj == null)
+			return null;
+		if (obj instanceof IGraph)
+			return (IGraph) obj;
 		final boolean spatial = param != null && Cast.asBool(scope, param);
 
-		if (obj instanceof IList) { return from(scope, (IList) obj, spatial); }
-		// List of agents, geometries...
+		if (obj instanceof IList)
+			return from(scope, (IList) obj, spatial);
 
-		if (obj instanceof VariableExpression) { // this may be a variable ?
+		if (obj instanceof VariableExpression)
 			// in this case, attempt to decode it !
 			return (IGraph) ((VariableExpression) obj).value(scope);
-		}
 
-		if (obj instanceof IMap) { return from(scope, (IMap) obj, spatial); }
-		// TODO Matrix, Pair ?
+		if (obj instanceof IMap)
+			return from(scope, (IMap) obj, spatial);
 
 		return null;
 	}

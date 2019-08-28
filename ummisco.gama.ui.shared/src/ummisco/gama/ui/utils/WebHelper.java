@@ -80,7 +80,7 @@ public class WebHelper {
 		}
 
 		try {
-			WorkbenchHelper.getPage().openEditor(input, "msi.gama.application.browser");
+			WorkbenchHelper.getPage().openEditor(input, "ummisco.gama.application.browser");
 		} catch (final PartInitException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +108,7 @@ public class WebHelper {
 		}
 
 		try {
-			WorkbenchHelper.getPage().openEditor(input, "msi.gama.application.browser");
+			WorkbenchHelper.getPage().openEditor(input, "ummisco.gama.application.browser");
 		} catch (final PartInitException e) {
 			e.printStackTrace();
 		}
@@ -118,7 +118,7 @@ public class WebHelper {
 	public static void openPage(final String string) {
 		try {
 			final IGamaView.Html view =
-					(Html) WorkbenchHelper.getPage().openEditor(new NullEditorInput(), "msi.gama.application.browser");
+					(Html) WorkbenchHelper.getPage().openEditor(new NullEditorInput(), "ummisco.gama.application.browser");
 			view.setUrl(string);
 		} catch (final PartInitException e) {
 			e.printStackTrace();

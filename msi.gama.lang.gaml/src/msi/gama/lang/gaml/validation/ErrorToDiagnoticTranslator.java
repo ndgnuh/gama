@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package msi.gama.lang.gaml.validation;
@@ -55,16 +55,14 @@ public class ErrorToDiagnoticTranslator {
 
 	public Diagnostic translate(final GamlCompilationError e, final GamlResource r, final CheckMode mode) {
 		final URI errorURI = e.getURI();
-		if (!GamlResourceIndexer.equals(errorURI, r.getURI())) {
-			//			final String uri = URI.decode(errorURI.toFileString());
+		if (!GamlResourceIndexer.INSTANCE.equals(errorURI, r.getURI())) {
+			// final String uri = URI.decode(errorURI.toFileString());
 			final String s = URI.decode(errorURI.lastSegment());
 			final EObject m = r.getContents().get(0);
 			final EObject eObject = findImportWith(m, s);
-			final EAttribute feature =
-					eObject instanceof Model ? GamlPackage.Literals.GAML_DEFINITION__NAME
-							: eObject instanceof HeadlessExperiment
-							? GamlPackage.Literals.HEADLESS_EXPERIMENT__IMPORT_URI
-									: GamlPackage.Literals.IMPORT__IMPORT_URI;
+			final EAttribute feature = eObject instanceof Model ? GamlPackage.Literals.GAML_DEFINITION__NAME
+					: eObject instanceof HeadlessExperiment ? GamlPackage.Literals.HEADLESS_EXPERIMENT__IMPORT_URI
+							: GamlPackage.Literals.IMPORT__IMPORT_URI;
 			return createDiagnostic(CheckMode.NORMAL_ONLY, Diagnostic.ERROR, e.toString() + " (in " + s + ")", eObject,
 					feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, e.getCode(), e.getData());
 		}
@@ -97,19 +95,18 @@ public class ErrorToDiagnoticTranslator {
 	}
 
 	private CheckType getType(final CheckMode mode) {
-		if (mode == CheckMode.FAST_ONLY) {
+		if (mode == CheckMode.FAST_ONLY)
 			return CheckType.FAST;
-		} else if (mode == CheckMode.EXPENSIVE_ONLY) {
+		else if (mode == CheckMode.EXPENSIVE_ONLY)
 			return CheckType.EXPENSIVE;
-		} else if (mode == CheckMode.ALL) {
+		else if (mode == CheckMode.ALL)
 			return CheckType.FAST;
-		} else if (mode == CheckMode.NORMAL_AND_FAST) {
+		else if (mode == CheckMode.NORMAL_AND_FAST)
 			return CheckType.FAST;
-		} else if (mode == CheckMode.NORMAL_ONLY) {
+		else if (mode == CheckMode.NORMAL_ONLY)
 			return CheckType.NORMAL;
-		} else {
+		else
 			return CheckType.FAST;
-		}
 	}
 
 	protected int toDiagnosticSeverity(final GamlCompilationError e) {
@@ -128,13 +125,11 @@ public class ErrorToDiagnoticTranslator {
 	private EObject findImportWith(final EObject m, final String s) {
 		if (m instanceof Model) {
 			for (final Import i : ((Model) m).getImports()) {
-				if (i.getImportURI().endsWith(s)) {
+				if (i.getImportURI().endsWith(s))
 					return i;
-				}
 			}
-		} else if (m instanceof ExperimentFileStructure) {
+		} else if (m instanceof ExperimentFileStructure)
 			return ((ExperimentFileStructure) m).getExp();
-		}
 		return m;
 	}
 

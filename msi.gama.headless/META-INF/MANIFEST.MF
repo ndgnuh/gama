@@ -8,9 +8,9 @@ Require-Bundle: msi.gama.core,
  msi.gama.lang.gaml,
  org.eclipse.core.runtime,
  msi.gama.ext,
- simtools.gaml.extensions.traffic,
- ummisco.gaml.extensions.maths,
- irit.gaml.extensions.database
+ simtools.gama.extensions.traffic,
+ ummisco.gama.extensions.maths,
+ irit.gama.extensions.database
 Bundle-ActivationPolicy: lazy
 Export-Package: 
  msi.gama.headless.common;uses:="msi.gama.headless.job",

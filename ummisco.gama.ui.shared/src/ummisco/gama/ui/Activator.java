@@ -11,6 +11,7 @@ package ummisco.gama.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import msi.gama.lang.gaml.GamlRuntimeModule;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.utils.SwtGui;
 
@@ -18,6 +19,8 @@ public class Activator extends AbstractUIPlugin {
 
 	public Activator() {
 		GAMA.setRegularGui(new SwtGui());
+		// Early activation in case of a UI, in order to be ready for the navigator
+		GamlRuntimeModule.staticInitialize();
 	}
 
 }

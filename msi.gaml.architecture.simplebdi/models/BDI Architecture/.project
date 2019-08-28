@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>BDI Architecture</name>
-	<comment>simplebdi plugin</comment>
+	<comment>bdi plugin</comment>
 	<projects>
 	</projects>
 	<buildSpec>

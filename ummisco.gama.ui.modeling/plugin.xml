@@ -433,7 +433,7 @@
           category="msi.gama.gui.category.gama"
           class="org.eclipse.ui.views.contentoutline.ContentOutline"
           icon="platform:/plugin/ummisco.gama.ui.shared/icons/view.outline2.png"
-          id="msi.gama.application.outline"
+          id="ummisco.gama.application.outline"
           name="Outline"
           restorable="true">
     </view>
@@ -442,7 +442,7 @@
           category="msi.gama.gui.category.gama"
           class="ummisco.gama.ui.views.SyntaxErrorsView"
           icon="platform:/plugin/ummisco.gama.ui.shared/icons/view.problems2.png"
-          id="msi.gama.application.problems"
+          id="ummisco.gama.application.problems"
           name="Validation"
           restorable="true">
     </view>
@@ -735,7 +735,7 @@
           <action
                 class="msi.gama.lang.gaml.ui.editor.DelegateForAllElements"
                 icon="platform:/plugin/ummisco.gama.ui.shared/icons/menu.searchtext2.png"
-                id="msi.gama.application.action1"
+                id="ummisco.gama.application.action1"
                 label="GAML elements in models..."
                 menubarPath="org.eclipse.search.menu/extraSearchGroup"
                 style="push"
@@ -746,7 +746,7 @@
     <extension
           point="org.eclipse.ui.perspectiveExtensions">
        <perspectiveExtension
-             targetID="msi.gama.application.perspectives.ModelingPerspective">
+             targetID="ummisco.gama.application.perspectives.ModelingPerspective">
           <view
                 closeable="false"
                 id="msi.gama.gui.view.GamaNavigator"
@@ -759,7 +759,7 @@
           </view>
           <view
                 closeable="true"
-                id="msi.gama.application.outline"
+                id="ummisco.gama.application.outline"
                 minimized="false"
                 moveable="true"
                 ratio="0.70"
@@ -769,25 +769,25 @@
           </view>
           <view
                 closeable="true"
-                id="msi.gama.application.problems"
+                id="ummisco.gama.application.problems"
                 minimized="false"
                 moveable="true"
                 relationship="stack"
-                relative="msi.gama.application.outline"
+                relative="ummisco.gama.application.outline"
                 visible="true">
           </view>
           <viewShortcut
-                id="msi.gama.application.outline">
+                id="ummisco.gama.application.outline">
           </viewShortcut>
           <viewShortcut
-                id="msi.gama.application.problems">
+                id="ummisco.gama.application.problems">
           </viewShortcut>
           <perspectiveShortcut
-                id="msi.gama.application.perspectives.SimulationPerspective">
+                id="ummisco.gama.application.perspectives.SimulationPerspective">
           </perspectiveShortcut>
           <view
                 closeable="true"
-                id="msi.gama.application.view.InteractiveConsoleView"
+                id="ummisco.gama.application.view.InteractiveConsoleView"
                 minimized="false"
                 moveable="true"
                 ratio="0.7"
@@ -798,7 +798,7 @@
                 visible="true">
           </view>
           <viewShortcut
-                id="msi.gama.application.view.InteractiveConsoleView">
+                id="ummisco.gama.application.view.InteractiveConsoleView">
           </viewShortcut>
        </perspectiveExtension>
     </extension>
@@ -808,7 +808,7 @@
              class="ummisco.gama.ui.perspective.ModelingPerspective"
              fixed="false"
              icon="platform:/plugin/ummisco.gama.ui.shared/icons/perspective.modeling2.png"
-             id="msi.gama.application.perspectives.ModelingPerspective"
+             id="ummisco.gama.application.perspectives.ModelingPerspective"
              name="Modeling">
           <description>
              The perspective used to edit GAMA models

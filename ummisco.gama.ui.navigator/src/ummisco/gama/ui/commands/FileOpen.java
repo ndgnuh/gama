@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import msi.gama.application.workspace.WorkspaceModelsManager;
 import msi.gama.common.GamlFileExtension;
+import ummisco.gama.application.workspace.WorkspaceModelsManager;
 
 /**
  * Opens a file

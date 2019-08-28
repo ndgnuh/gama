@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'ApplicationWorkbenchWindowAdvisor.java, in plugin msi.gama.application, is part of the source code of the GAMA
+ * 'ApplicationWorkbenchWindowAdvisor.java, in plugin ummisco.gama.application, is part of the source code of the GAMA
  * modeling and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -45,7 +45,7 @@ public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor
 
 		// Hack and workaround for the inability to find launcher icons...
 
-		final Bundle bundle = Platform.getBundle("msi.gama.application");
+		final Bundle bundle = Platform.getBundle("ummisco.gama.application");
 
 		final ImageDescriptor myImage =
 				ImageDescriptor.createFromURL(FileLocator.find(bundle, new Path("branding_icons/icon256.png"), null));

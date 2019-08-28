@@ -55,10 +55,9 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 				p = new ParametricType(t, kt, ct);
 				CACHE2.put(key, p);
 				// DEBUG.OUT("Size: " + CACHE2.size() + " | Saved Type = " + p);
-			} else {
+			} else
 				// DEBUG.OUT("Saved creations : " + savedTypes++);
 				return p;
-			}
 		}
 		return new ParametricType(t, kt, ct);
 	}
@@ -79,12 +78,16 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	}
 
 	@Override
+	public int getNumberOfParameters() {
+		return type.getNumberOfParameters();
+	}
+
+	@Override
 	public boolean equals(final Object other) {
-		if (other instanceof ParametricType) {
+		if (other instanceof ParametricType)
 			return type.equals(((ParametricType) other).getGamlType())
 					&& keyType.equals(((ParametricType) other).getKeyType())
 					&& contentsType.equals(((ParametricType) other).getContentType());
-		}
 		return false;
 	}
 
@@ -247,7 +250,8 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	@Override
 	public SpeciesDescription getDenotedSpecies() {
 		final SpeciesDescription result = type.getSpecies();
-		if (result != null) { return result; }
+		if (result != null)
+			return result;
 		return contentsType.getSpecies();
 	}
 
@@ -383,16 +387,14 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 				final IType<?> kt = keyType.findCommonSupertypeWith(pType.getKeyType());
 				final IType<?> ct = contentsType.findCommonSupertypeWith(pType.getContentType());
 				return (IType<? super IContainer<?, ?>>) GamaType.from(cType, kt, ct);
-			} else {
+			} else
 				return (IType<? super IContainer<?, ?>>) cType;
-			}
 		} else if (iType.isContainer()) {
 			final IType<?> cType = type.findCommonSupertypeWith(iType);
 			return (IType<? super IContainer<?, ?>>) cType;
 			// dont we need to use the key and contents type here ?
-		} else {
+		} else
 			return type.findCommonSupertypeWith(iType);
-		}
 	}
 
 	/**
@@ -428,10 +430,10 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	@Override
 	public String toString() {
 		if (type.id() == IType.LIST || type.id() == IType.MATRIX
-				|| type.id() == IType.CONTAINER && keyType == Types.NO_TYPE) {
+				|| type.id() == IType.CONTAINER && keyType == Types.NO_TYPE)
 			return type.toString() + "<" + contentsType.toString() + ">";
-		}
-		if (type.id() == IType.SPECIES) { return type.toString() + "<" + contentsType.toString() + ">"; }
+		if (type.id() == IType.SPECIES)
+			return type.toString() + "<" + contentsType.toString() + ">";
 		return type.toString() + "<" + keyType.toString() + ", " + contentsType.toString() + ">";
 	}
 
@@ -444,10 +446,10 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
 		if (type.id() == IType.LIST || type.id() == IType.MATRIX
-				|| type.id() == IType.CONTAINER && keyType == Types.NO_TYPE) {
+				|| type.id() == IType.CONTAINER && keyType == Types.NO_TYPE)
 			return type.toString() + "<" + contentsType.toString() + ">";
-		}
-		if (type.id() == IType.SPECIES) { return type.toString() + "<" + contentsType.toString() + ">"; }
+		if (type.id() == IType.SPECIES)
+			return type.toString() + "<" + contentsType.toString() + ">";
 		return type.toString() + "<" + keyType.serialize(includingBuiltIn) + ", "
 				+ contentsType.serialize(includingBuiltIn) + ">";
 	}
@@ -508,7 +510,8 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 		IType<?> kt = getKeyType();
 		IType<?> ct = sub1;
 		if (ct == Types.NO_TYPE) {
-			if (kt == Types.NO_TYPE) { return this; }
+			if (kt == Types.NO_TYPE)
+				return this;
 			ct = getContentType();
 		}
 		if (kt == Types.NO_TYPE) {
@@ -523,7 +526,8 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 		IType<?> kt = sub1;
 		IType<?> ct = sub2;
 		if (ct == Types.NO_TYPE) {
-			if (kt == Types.NO_TYPE) { return this; }
+			if (kt == Types.NO_TYPE)
+				return this;
 			ct = getContentType();
 		}
 		if (kt == Types.NO_TYPE) {

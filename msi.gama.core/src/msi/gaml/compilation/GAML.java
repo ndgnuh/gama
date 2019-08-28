@@ -59,18 +59,19 @@ import msi.gaml.operators.Strings;
  */
 public class GAML {
 
-	public static IExpressionFactory expressionFactory = null;
-	public static ModelFactory modelFactory = null;
-	private static IGamlResourceInfoProvider infoProvider = null;
-	private static IGamlEcoreUtils gamlEcoreUtils = null;
-	private static IGamlModelBuilder modelBuilder = null;
+	public volatile static IExpressionFactory expressionFactory = null;
+	public volatile static ModelFactory modelFactory = null;
+	private volatile static IGamlResourceInfoProvider infoProvider = null;
+	private volatile static IGamlEcoreUtils gamlEcoreUtils = null;
+	private volatile static IGamlModelBuilder modelBuilder = null;
 
 	public static <T> T notNull(final IScope scope, final T object) {
 		return notNull(scope, object, "Error: nil value detected");
 	}
 
 	public static <T> T notNull(final IScope scope, final T object, final String error) {
-		if (object == null) { throw GamaRuntimeException.error(error, scope); }
+		if (object == null)
+			throw GamaRuntimeException.error(error, scope);
 		return object;
 	}
 
@@ -79,7 +80,8 @@ public class GAML {
 	private static String[] REPLACEMENTS = { Strings.LN, Strings.LN, "", "", "", "", "", "", Strings.LN + "- ", "" };
 
 	public static String toText(final String s) {
-		if (s == null) { return ""; }
+		if (s == null)
+			return "";
 		return breakStringToLines(StringUtils.replaceEach(s, HTML_TAGS, REPLACEMENTS), 120, Strings.LN);
 	}
 
@@ -179,7 +181,8 @@ public class GAML {
 	public static String getDocumentationOn(final String query) {
 		final String keyword = StringUtils.removeEnd(StringUtils.removeStart(query.trim(), "#"), ":");
 		final Multimap<GamlIdiomsProvider<?>, IGamlDescription> results = GamlIdiomsProvider.forName(keyword);
-		if (results.isEmpty()) { return "No result found"; }
+		if (results.isEmpty())
+			return "No result found";
 		try (TextBuilder sb = TextBuilder.create()) {
 			final int max = results.keySet().stream().mapToInt(each -> each.name.length()).max().getAsInt();
 			final String separator = StringUtils.repeat("—", max + 6).concat(Strings.LN);
@@ -201,9 +204,8 @@ public class GAML {
 
 	@SuppressWarnings ("rawtypes")
 	public static <T extends IContainer> T emptyCheck(final IScope scope, final T container) {
-		if (notNull(scope, container).isEmpty(scope)) {
+		if (notNull(scope, container).isEmpty(scope))
 			throw GamaRuntimeException.error("Error: the container is empty", scope);
-		}
 		return container;
 	}
 
@@ -228,12 +230,13 @@ public class GAML {
 	}
 
 	public static Object evaluateExpression(final String expression, final IAgent a) throws GamaRuntimeException {
-		if (a == null) { return null; }
-		if (expression == null || expression.isEmpty()) {
+		if (a == null)
+			return null;
+		if (expression == null || expression.isEmpty())
 			throw GamaRuntimeException.error("Enter a valid expression", a.getScope());
-		}
 		final IExpression expr = compileExpression(expression, a, true);
-		if (expr == null) { return null; }
+		if (expr == null)
+			return null;
 		final IScope scope = a.getScope().copy("in temporary expression evaluator");
 		final Object o = scope.evaluate(expr, a).getValue();
 		GAMA.releaseScope(scope);
@@ -242,14 +245,16 @@ public class GAML {
 
 	public static IExpression compileExpression(final String expression, final IAgent agent,
 			final boolean onlyExpression) throws GamaRuntimeException {
-		if (agent == null) { throw GamaRuntimeException.error("Agent is nil", GAMA.getRuntimeScope()); }
+		if (agent == null)
+			throw GamaRuntimeException.error("Agent is nil", GAMA.getRuntimeScope());
 		final IExecutionContext tempContext = agent.getScope().getExecutionContext();
 		return compileExpression(expression, agent, tempContext, onlyExpression);
 	}
 
 	public static IExpression compileExpression(final String expression, final IAgent agent,
 			final IExecutionContext tempContext, final boolean onlyExpression) throws GamaRuntimeException {
-		if (agent == null) { throw GamaRuntimeException.error("Agent is nil", tempContext.getScope()); }
+		if (agent == null)
+			throw GamaRuntimeException.error("Agent is nil", tempContext.getScope());
 		final IDescription context = agent.getSpecies().getDescription();
 		try {
 			return getExpressionFactory().createExpr(expression, context, tempContext);
@@ -261,22 +266,24 @@ public class GAML {
 				} catch (final Throwable e2) {
 					throw GamaRuntimeException.create(e2, tempContext.getScope());
 				}
-			} else {
+			} else
 				throw GamaRuntimeException.create(e, tempContext.getScope());
-			}
 		}
 	}
 
 	public static ModelDescription getModelContext() {
-		if (GAMA.getFrontmostController() == null) { return null; }
+		if (GAMA.getFrontmostController() == null)
+			return null;
 		return (ModelDescription) GAMA.getFrontmostController().getExperiment().getModel().getDescription();
 	}
 
 	public static ExperimentDescription getExperimentContext(final IAgent a) {
-		if (a == null) { return null; }
+		if (a == null)
+			return null;
 		final IScope scope = a.getScope();
 		final ITopLevelAgent agent = scope.getExperiment();
-		if (agent == null) { return null; }
+		if (agent == null)
+			return null;
 		return (ExperimentDescription) agent.getSpecies().getDescription();
 	}
 
@@ -321,7 +328,8 @@ public class GAML {
 	 * @return
 	 */
 	public static IModel findModelIn(final Object object) {
-		if (object instanceof IModel) { return (IModel) object; }
+		if (object instanceof IModel)
+			return (IModel) object;
 		if (object instanceof IFile) {
 			final IFile file = (IFile) object;
 			try {

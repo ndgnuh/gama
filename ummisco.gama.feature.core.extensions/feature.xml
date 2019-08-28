@@ -26,51 +26,51 @@
    </requires>
 
    <plugin
-         id="irit.gaml.extensions.database"
+         id="irit.gama.extensions.database"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="msi.gaml.extensions.fipa"
+         id="ummisco.gama.extensions.fipa"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="simtools.gaml.extensions.traffic"
+         id="simtools.gama.extensions.traffic"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="msi.gaml.architecture.simplebdi"
+         id="miat.gama.extensions.bdi"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="ummisco.gaml.extensions.maths"
+         id="ummisco.gama.extensions.maths"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="simtools.gaml.extensions.physics"
+         id="simtools.gama.extensions.physics"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="ummisco.gama.network"
+         id="ummisco.gama.extensions.network"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="ummisco.gama.serialize"
+         id="irit.gama.extensions.serialize"
          download-size="0"
          install-size="0"
          version="0.0.0"/>

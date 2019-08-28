@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.commands;
@@ -20,10 +20,10 @@ import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 
+import msi.gama.common.interfaces.IGui;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.utils.WorkbenchHelper;
-import ummisco.gama.ui.views.ErrorView;
 
 public class ShowErrors extends AbstractHandler implements IElementUpdater {
 
@@ -34,9 +34,9 @@ public class ShowErrors extends AbstractHandler implements IElementUpdater {
 				HandlerUtil.getActiveWorkbenchWindowChecked(event).getService(ICommandService.class);
 		service.refreshElements(event.getCommand().getId(), null);
 		if (GamaPreferences.Runtime.CORE_SHOW_ERRORS.getValue()) {
-			GAMA.getGui().showView(null, ErrorView.ID, null, IWorkbenchPage.VIEW_VISIBLE);
+			GAMA.getGui().showView(null, IGui.ERROR_VIEW_ID, null, IWorkbenchPage.VIEW_VISIBLE);
 		} else {
-			WorkbenchHelper.hideView(ErrorView.ID);
+			WorkbenchHelper.hideView(IGui.ERROR_VIEW_ID);
 		}
 		return null;
 	}
