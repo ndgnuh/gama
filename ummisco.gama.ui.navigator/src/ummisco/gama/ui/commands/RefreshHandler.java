@@ -37,11 +37,9 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
 import msi.gama.common.interfaces.IGui;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.file.IFileMetaDataProvider;
 import ummisco.gama.application.workspace.WorkspaceModelsManager;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.GamaNavigator;
 import ummisco.gama.ui.navigator.contents.NavigatorRoot;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
@@ -163,7 +161,7 @@ public class RefreshHandler implements IRefreshHandler {
 					monitor.beginTask("Refreshing GAMA Workspace: recreating files metadata", 1000);
 					for (final IResource r : resources) {
 						r.accept(proxy -> {
-							final IFileMetaDataProvider provider = GAMA.getGui().getMetaDataProvider();
+							final FileMetaDataProvider provider = FileMetaDataProvider.getInstance();
 							final IResource file = proxy.requestResource();
 							provider.storeMetaData(file, null, true);
 							provider.getMetaData(file, false, true);

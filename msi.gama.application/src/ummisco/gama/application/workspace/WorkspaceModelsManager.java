@@ -35,7 +35,7 @@ import org.osgi.framework.Bundle;
 import com.google.common.collect.Multimap;
 import msi.gama.common.util.FileUtils;
 import msi.gama.runtime.GAMA;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 import ummisco.gama.dev.utils.DEBUG;
 
 /**

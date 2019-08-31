@@ -49,20 +49,22 @@ public class SnapshotMaker {
 		if (snapshot == null) {
 			snapshot = surface.getImage(width, height);
 		}
-		if (!scope.interrupted())
+		if (!scope.interrupted()) {
 			saveSnapshot(scope, snapshot, output);
+		}
 	}
 
 	/**
 	 * Save this surface into an image passed as a parameter
-	 * 
+	 *
 	 * @param scope
 	 * @param image
 	 */
 	public final void saveSnapshot(final IScope scope, final BufferedImage image, final IDisplayOutput output) {
 		// Intentionnaly passing GAMA.getRuntimeScope() to errors in order to
 		// prevent the exceptions from being masked.
-		if (image == null) { return; }
+		if (image == null)
+			return;
 		try {
 			Files.newFolder(scope, IDisplaySurface.SNAPSHOT_FOLDER_NAME);
 		} catch (final GamaRuntimeException e1) {

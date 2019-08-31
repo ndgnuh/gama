@@ -11,10 +11,10 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 
-import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IGamaFileMetaData;
 import msi.gaml.statements.test.AbstractSummary;
 import msi.gaml.statements.test.CompoundSummary;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.resources.GamaFonts;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
@@ -80,21 +80,23 @@ public class WrappedProject extends WrappedContainer<IProject> implements IAdapt
 			return;
 		}
 
-		if (getPlugin() != null && !getPlugin().isEmpty())
+		if (getPlugin() != null && !getPlugin().isEmpty()) {
 			sb.append(getPlugin()).append(", ");
+		}
 		if (isTestProject()) {
 			getTestSuffix(sb);
-		} else
+		} else {
 			super.getSuffix(sb);
+		}
 	}
 
 	private void getTestSuffix(final StringBuilder sb) {
 		final org.eclipse.emf.common.util.URI emfURI =
 				org.eclipse.emf.common.util.URI.createPlatformResourceURI(URI.encode(getName()), false);
 		final String result = getSuffixOfTestSummary(emfURI);
-		if (result.isEmpty())
+		if (result.isEmpty()) {
 			super.getSuffix(sb);
-		else {
+		} else {
 			sb.append(result);
 		}
 	}
@@ -120,11 +122,12 @@ public class WrappedProject extends WrappedContainer<IProject> implements IAdapt
 
 	String getPlugin() {
 		if (plugin == null) {
-			final IGamaFileMetaData data = GAMA.getGui().getMetaDataProvider().getMetaData(getResource(), false, false);
+			final IGamaFileMetaData data = FileMetaDataProvider.getInstance().getMetaData(getResource(), false, false);
 			if (data != null) {
 				setPlugin(data.getSuffix());
-			} else
+			} else {
 				setPlugin("");
+			}
 		}
 		return plugin;
 	}

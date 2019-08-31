@@ -16,28 +16,6 @@
       </implementation>
    </extension>
    <extension
-         name="csv"
-         point="gama.create">
-      <implementation
-            class="msi.gaml.statements.CreateFromCSVDelegate"
-            description="Create agents from CSV files">
-      </implementation>
-   </extension>
-   <extension
-         name="shapes"
-         point="gama.create">
-      <implementation
-            class="msi.gaml.statements.CreateFromGeometriesDelegate">
-      </implementation>
-   </extension>
-   <extension
-         point="gama.create">
-      <implementation
-            class="msi.gaml.statements.CreateFromGridFileDelegate"
-            description="Create agents from a grid file">
-      </implementation>
-   </extension>
-   <extension
          point="gama.create">
       <implementation
             class="msi.gaml.statements.CreateFromNullDelegate"

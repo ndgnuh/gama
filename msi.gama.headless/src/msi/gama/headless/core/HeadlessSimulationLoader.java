@@ -20,13 +20,13 @@ import com.google.inject.Injector;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.model.IModel;
-import msi.gama.lang.gaml.GamlStandaloneSetup;
 import msi.gama.precompiler.GamlProperties;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
 import one.util.streamex.StreamEx;
+import ummisco.gama.GamlStandaloneSetup;
 import ummisco.gama.dev.utils.DEBUG;
 
 public class HeadlessSimulationLoader {
@@ -102,9 +102,11 @@ public class HeadlessSimulationLoader {
 	 */
 	public static synchronized IModel loadModel(final File myFile, final List<GamlCompilationError> errors,
 			final GamlProperties metaProperties) throws IOException, GamaHeadlessException {
-		if (myFile == null) { throw new IOException("Model file is null"); }
+		if (myFile == null)
+			throw new IOException("Model file is null");
 		final String fileName = myFile.getAbsolutePath();
-		if (!myFile.exists()) { throw new IOException("Model file does not exist: " + fileName); }
+		if (!myFile.exists())
+			throw new IOException("Model file does not exist: " + fileName);
 		DEBUG.LOG(fileName + " model is being compiled...");
 
 		final IModel model = GAML.compile(URI.createFileURI(fileName), errors);

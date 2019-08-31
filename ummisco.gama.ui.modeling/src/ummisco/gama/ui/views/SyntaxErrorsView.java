@@ -46,7 +46,7 @@ public class SyntaxErrorsView extends MarkerSupportView implements IToolbarDecor
 	final BuildPreferenceChangeListener listener;
 
 	public SyntaxErrorsView() {
-		super("msi.gama.lang.gaml.ui.error.generator");
+		super("ummisco.gama.gaml.ui.error.generator");
 		listener = new BuildPreferenceChangeListener(this);
 		GamaPreferences.Modeling.WARNINGS_ENABLED.addChangeListener(listener);
 		GamaPreferences.Modeling.INFO_ENABLED.addChangeListener(listener);

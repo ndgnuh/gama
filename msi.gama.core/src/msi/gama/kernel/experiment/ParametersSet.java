@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * msi.gama.kernel.experiment.ParametersSet.java, in plugin msi.gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * msi.gama.kernel.experiment.ParametersSet.java, in plugin msi.gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gama.kernel.experiment;
 
@@ -16,16 +16,15 @@ import java.util.Map;
 
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.file.GamaFile;
+import msi.gama.util.file.IGamaFile;
 
 /**
  * The Class ParametersSet.
  */
-@SuppressWarnings({ "rawtypes" })
+@SuppressWarnings ({ "rawtypes" })
 public class ParametersSet extends HashMap<String, Object> {
 
-	public ParametersSet() {
-	}
+	public ParametersSet() {}
 
 	public ParametersSet(final ParametersSet solution) {
 		this.putAll(solution);
@@ -59,8 +58,8 @@ public class ParametersSet extends HashMap<String, Object> {
 		// Special case for files as they are not invariant. Their contents must
 		// be invalidated before they are loaded
 		// again in a simulation. See Issue 812.
-		if (o instanceof GamaFile) {
-			((GamaFile) o).invalidateContents();
+		if (o instanceof IGamaFile) {
+			((IGamaFile) o).invalidateContents();
 		}
 		return super.put(s, o);
 	}

@@ -15,7 +15,7 @@ import java.io.IOException;
 import msi.gama.ext.graphstream.FileSink;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.file.GamaFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gama.util.graph.GraphUtilsGraphStream;
 import msi.gama.util.graph.IGraph;
 
@@ -29,7 +29,7 @@ public abstract class GraphStreamWriterAbstract implements IGraphWriter {
 	/**
 	 * Saves a graph using Graphstream....
 	 */
-	private void saveGraphWithGraphstreamToFile(final IScope scope, final IGraph thegraph, final GamaFile gamaFile,
+	private void saveGraphWithGraphstreamToFile(final IScope scope, final IGraph thegraph, final IGamaFile gamaFile,
 			final String outputFilename, final FileSink sink) {
 
 		try {
@@ -45,7 +45,8 @@ public abstract class GraphStreamWriterAbstract implements IGraphWriter {
 	public abstract FileSink getFileSink();
 
 	@Override
-	public void writeGraph(final IScope scope, final IGraph gamaGraph, final GamaFile gamaFile, final String filename) {
+	public void writeGraph(final IScope scope, final IGraph gamaGraph, final IGamaFile gamaFile,
+			final String filename) {
 		saveGraphWithGraphstreamToFile(scope, gamaGraph, gamaFile, filename, getFileSink());
 	}
 

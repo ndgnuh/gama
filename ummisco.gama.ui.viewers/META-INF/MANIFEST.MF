@@ -17,8 +17,8 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.ui.ide,
  org.eclipse.ui.browser;bundle-version="3.4.300",
  ummisco.gama.ui.shared,
- ummisco.gama.application,
- ummisco.gama.ui.navigator;bundle-version="1.7.0"
+ ummisco.gama.ui.navigator;bundle-version="1.7.0",
+ ummisco.gama.extensions.files
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: ummisco.gama.ui.viewers
 Export-Package: ummisco.gama.ui.viewers.csv,

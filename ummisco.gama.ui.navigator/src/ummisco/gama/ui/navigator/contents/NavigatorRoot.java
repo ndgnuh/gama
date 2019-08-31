@@ -20,8 +20,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
-import msi.gama.common.GamlFileExtension;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
+import ummisco.gama.file.gaml.GamlFileExtension;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 

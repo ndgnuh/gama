@@ -15,6 +15,7 @@ Bundle-Version: 1.9.0.qualifier
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: ummisco.gama.application;singleton:=true
 Export-Package: ummisco.gama.application;uses:="org.eclipse.ui,org.eclipse.equinox.app",
+ ummisco.gama.application.bundles,
  ummisco.gama.application.projects,
  ummisco.gama.application.workspace
 Bundle-ClassPath: .

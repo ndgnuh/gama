@@ -12,8 +12,8 @@ package ummisco.gama.ui.factories;
 import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
-import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import ummisco.gama.ui.commands.RuntimeExceptionHandler;
+import ummisco.gama.ui.interfaces.IRuntimeExceptionHandler;
 
 public class RuntimeExceptionHandlerFactory extends AbstractServiceFactory {
 

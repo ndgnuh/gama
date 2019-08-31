@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import msi.gama.common.interfaces.ISkill;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
+import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IDescription.DescriptionVisitor;
@@ -46,7 +47,7 @@ public class GamaSkillRegistry {
 		if (children != null) {
 			for (final IDescription d : children) {
 				d.setOriginName("skill " + name);
-				d.setDefiningPlugin(GamaBundleLoader.CURRENT_PLUGIN_NAME);
+				d.setDefiningPlugin(AbstractGamlAdditions.CURRENT_PLUGIN_NAME);
 			}
 		}
 		final SkillDescription sd = new SkillDescription(name, support, children, plugin);
@@ -65,7 +66,8 @@ public class GamaSkillRegistry {
 
 	public SkillDescription get(final Class clazz) {
 		final String name = classSkillNames.get(clazz);
-		if (name == null) { return null; }
+		if (name == null)
+			return null;
 		return skills.get(name);
 	}
 
@@ -92,7 +94,8 @@ public class GamaSkillRegistry {
 	}
 
 	public Collection<String> getSkillNames() {
-		if (skillNames != null) { return skillNames; }
+		if (skillNames != null)
+			return skillNames;
 		final Set<String> result = new LinkedHashSet();
 		for (final String s : getAllSkillNames()) {
 			final SkillDescription c = skills.get(s);
@@ -105,7 +108,8 @@ public class GamaSkillRegistry {
 	}
 
 	public Collection<String> getArchitectureNames() {
-		if (architectureNames != null) { return architectureNames; }
+		if (architectureNames != null)
+			return architectureNames;
 		final Set<String> result = new LinkedHashSet();
 		for (final String s : getAllSkillNames()) {
 			final SkillDescription c = skills.get(s);
@@ -120,13 +124,15 @@ public class GamaSkillRegistry {
 
 	public Iterable<? extends IDescription> getVariablesForSkill(final String s) {
 		final SkillDescription sd = skills.get(s);
-		if (sd == null) { return Collections.EMPTY_LIST; }
+		if (sd == null)
+			return Collections.EMPTY_LIST;
 		return sd.getOwnAttributes();
 	}
 
 	public Iterable<? extends IDescription> getActionsForSkill(final String s) {
 		final SkillDescription sd = skills.get(s);
-		if (sd == null) { return Collections.EMPTY_LIST; }
+		if (sd == null)
+			return Collections.EMPTY_LIST;
 		return sd.getOwnActions();
 	}
 

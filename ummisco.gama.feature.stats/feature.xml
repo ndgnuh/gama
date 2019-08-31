@@ -27,7 +27,7 @@ Aditional library:
    </url>
 
    <plugin
-         id="ummisco.gaml.extensions.stats"
+         id="ummisco.gama.extensions.stats"
          download-size="0"
          install-size="0"
          version="0.0.0"

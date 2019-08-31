@@ -66,9 +66,9 @@ import org.eclipse.ui.dialogs.ContainerGenerator;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 
-import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IGamaFileMetaData;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.metadata.ImageDataLoader;
 import ummisco.gama.ui.resources.GamaColors;
@@ -98,9 +98,8 @@ public class ImageViewer extends EditorPart
 	@Override
 	public void init(final IEditorSite site, final IEditorInput input) throws PartInitException {
 		// we need either an IStorage or an input that can return an ImageData
-		if (!(input instanceof IStorageEditorInput) && input.getAdapter(ImageData.class) == null) {
+		if (!(input instanceof IStorageEditorInput) && input.getAdapter(ImageData.class) == null)
 			throw new PartInitException("Unable to read input: " + input); //$NON-NLS-1$
-		}
 		setSite(site);
 		setInput(input, false);
 	}
@@ -154,12 +153,13 @@ public class ImageViewer extends EditorPart
 	 * Get the IFile corresponding to the specified editor input, or null for none.
 	 */
 	IFile getFileFor(final IEditorInput input) {
-		if (input instanceof IFileEditorInput) {
+		if (input instanceof IFileEditorInput)
 			return ((IFileEditorInput) input).getFile();
-		} else if (input instanceof IStorageEditorInput) {
+		else if (input instanceof IStorageEditorInput) {
 			try {
 				final IStorage storage = ((IStorageEditorInput) input).getStorage();
-				if (storage instanceof IFile) { return (IFile) storage; }
+				if (storage instanceof IFile)
+					return (IFile) storage;
 			} catch (final CoreException ignore) {
 				// intentionally blank
 			}
@@ -170,7 +170,7 @@ public class ImageViewer extends EditorPart
 	void displayInfoString() {
 		final GamaUIColor color = IGamaColors.OK;
 		final IGamaFileMetaData md =
-				GAMA.getGui().getMetaDataProvider().getMetaData(getFileFor(getEditorInput()), false, true);
+				FileMetaDataProvider.getInstance().getMetaData(getFileFor(getEditorInput()), false, true);
 		final String result = md == null ? "" : md.getSuffix();
 		toolbar.button(color, result,
 				e -> getEditorSite().getActionBars().getGlobalActionHandler(ActionFactory.PROPERTIES.getId()).run(),
@@ -292,7 +292,8 @@ public class ImageViewer extends EditorPart
 	void startImageLoad() {
 		// skip if the UI hasn't been initialized yet, because
 		// createPartControl() will do this
-		if (imageCanvas == null) { return; }
+		if (imageCanvas == null)
+			return;
 		// clear out the current image
 		final Runnable r = () -> {
 			if (image != null) {
@@ -430,18 +431,21 @@ public class ImageViewer extends EditorPart
 			d.setOriginalName(initialFileName.toPortableString(), origImageType);
 		}
 		d.create();
-		if (d.open() != Window.OK) { return; }
+		if (d.open() != Window.OK)
+			return;
 
 		// get the selected file path
 		IPath path = d.getResult();
-		if (path == null) { return; }
+		if (path == null)
+			return;
 		// add a file extension if there isn't one
 		if (path.getFileExtension() == null) {
 			path = path.addFileExtension(d.getSaveAsImageExt());
 		}
 
 		final IFile dest = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		if (dest == null || origFile != null && dest.equals(origFile)) { return; }
+		if (dest == null || origFile != null && dest.equals(origFile))
+			return;
 		final int imageType = d.getSaveAsImageType();
 
 		// create a scheduling rule for the file edit/creation
@@ -467,9 +471,8 @@ public class ImageViewer extends EditorPart
 					throws CoreException, InvocationTargetException, InterruptedException {
 				try {
 					if (dest.exists()) {
-						if (!dest.getWorkspace().validateEdit(new IFile[] { dest }, getSite().getShell()).isOK()) {
+						if (!dest.getWorkspace().validateEdit(new IFile[] { dest }, getSite().getShell()).isOK())
 							return;
-						}
 					}
 					saveTo(imageData, dest, imageType, monitor);
 				} catch (final IOException ex) {
@@ -515,7 +518,8 @@ public class ImageViewer extends EditorPart
 			if (!dest.getParent().exists()) {
 				final ContainerGenerator gen = new ContainerGenerator(dest.getFullPath().removeLastSegments(1));
 				gen.generateContainer(m.split(500));
-				if (monitor.isCanceled()) { throw new InterruptedException(); }
+				if (monitor.isCanceled())
+					throw new InterruptedException();
 			}
 			final ImageLoader loader = new ImageLoader();
 			loader.data = new ImageData[] { imageData };
@@ -594,7 +598,8 @@ public class ImageViewer extends EditorPart
 	 * @return { SWT.IMAGE_* type, width, height } or null for no image
 	 */
 	public int[] getCurrentImageInformation() {
-		if (imageData != null) { return new int[] { imageData.type, imageData.width, imageData.height }; }
+		if (imageData != null)
+			return new int[] { imageData.type, imageData.width, imageData.height };
 		return null;
 	}
 

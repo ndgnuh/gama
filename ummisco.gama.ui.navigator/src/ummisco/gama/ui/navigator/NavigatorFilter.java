@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 import ummisco.gama.ui.navigator.contents.WrappedFolder;
 

@@ -32,7 +32,7 @@ import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaListFactory;
-import msi.gama.util.file.csv.CsvWriter;
+import msi.gama.util.file.CsvWriter;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.factories.DescriptionFactory;
@@ -149,7 +149,8 @@ public class MonitorOutput extends AbstractValuedDisplayOutput {
 	@Override
 	public boolean step(final IScope scope) {
 		getScope().setCurrentSymbol(this);
-		if (getScope().interrupted()) { return false; }
+		if (getScope().interrupted())
+			return false;
 		if (getValue() != null) {
 			try {
 				lastValue = getValue().value(getScope());
@@ -204,8 +205,10 @@ public class MonitorOutput extends AbstractValuedDisplayOutput {
 	}
 
 	public void saveHistory() {
-		if (getScope() == null) { return; }
-		if (history == null || history.isEmpty()) { return; }
+		if (getScope() == null)
+			return;
+		if (history == null || history.isEmpty())
+			return;
 		Files.newFolder(getScope(), monitorFolder);
 		String file =
 				monitorFolder + "/" + "monitor_" + getName() + "_cycle_" + getScope().getClock().getCycle() + ".csv";

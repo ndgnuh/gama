@@ -18,23 +18,17 @@ import org.eclipse.osgi.service.datalocation.Location;
 import msi.gama.common.util.MemoryUtils;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.concurrent.GamaExecutorService;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.operators.Dates;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 import ummisco.gama.application.workspace.WorkspaceManager;
 
 /** This class controls all aspects of the application's execution */
 public class Application implements IApplication {
 
+	final Object[] result = { 0 };
+
 	@Override
 	public Object start(final IApplicationContext context) throws Exception {
-		MemoryUtils.initialize();
-		// This is where a branch to headless should (or could) be made
-		GamaBundleLoader.loadUI();
-
-		final Object check = WorkspaceManager.checkWorkspace();
-		if ( EXIT_OK.equals(check) )
-			return EXIT_OK;
-
 		/*
 		 * Early build of various GAML/GAMA contributions
 		 */
@@ -43,9 +37,22 @@ public class Application implements IApplication {
 		GAMA.initializeAtStartup("Initializing execution services", () -> {
 			GamaExecutorService.startUp();
 		});
+		GAMA.initializeAtStartup("Initializing memory management", () -> {
+			MemoryUtils.initialize();
+		});
 		GAMA.initializeAtStartup("Initializing date management", () -> {
 			Dates.initialize();
 		});
+		GAMA.initializeAtStartup("Checking workspace", () -> {
+			result[0] = WorkspaceManager.checkWorkspace();
+		});
+
+		if ( EXIT_OK.equals(result[0]) )
+			return EXIT_OK;
+
+		// This is where a branch to headless should (or could) be made
+		GamaBundleLoader.loadUI();
+
 		try {
 			if ( GAMA.getGui().runUI() == 1 /* PlatformUI.RETURN_RESTART */ )
 				return IApplication.EXIT_RESTART;

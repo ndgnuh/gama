@@ -24,9 +24,9 @@ import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.statements.test.TestState;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 
 public class ModelLibraryTester extends AbstractModelLibraryRunner {
 

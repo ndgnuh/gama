@@ -26,6 +26,7 @@ import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.statements.test.WithTestSummary;
 import one.util.streamex.StreamEx;
+import ummisco.gama.file.gaml.GamlFileExtension;
 import ummisco.gama.ui.utils.SwtGui;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -34,7 +35,8 @@ public class TestsRunner {
 	public static CompoundSummary<TestExperimentSummary, ?> LAST_RUN;
 
 	public static void start() {
-		if (SwtGui.ALL_TESTS_RUNNING) { return; }
+		if (SwtGui.ALL_TESTS_RUNNING)
+			return;
 
 		LAST_RUN = new CompoundSummary<>();
 
@@ -42,7 +44,7 @@ public class TestsRunner {
 		final IScope scope = GAMA.getRuntimeScope();
 		final IGamaView.Test testView = gui.openTestView(scope, true);
 		final List<IFile> testFiles = StreamEx.of(getWorkspace().getRoot().getProjects())
-				.filter(TestsRunner::isInteresting).flatCollection(p -> GAML.getAllGamaFilesInProject(p)).toList();
+				.filter(TestsRunner::isInteresting).flatCollection(p -> getAllGamaFilesInProject(p)).toList();
 		final int size = testFiles.size();
 		final int[] i = { 1 };
 
@@ -63,6 +65,21 @@ public class TestsRunner {
 
 	}
 
+	public static List<IFile> getAllGamaFilesInProject(final IProject project) {
+		final ArrayList<IFile> allGamaFiles = new ArrayList<>();
+		try {
+			if (project != null) {
+				project.accept(iR -> {
+					if (GamlFileExtension.isAny(iR.getName())) {
+						allGamaFiles.add((IFile) iR.requestResource());
+					}
+					return true;
+				}, IResource.FILE);
+			}
+		} catch (final CoreException e) {}
+		return allGamaFiles;
+	}
+
 	/**
 	 * Run the tests declared in a model (or a file or an URI).
 	 *
@@ -72,10 +89,12 @@ public class TestsRunner {
 	private static List<TestExperimentSummary> runTests(final Object object) {
 		// final StringBuilder sb = new StringBuilder();
 		final IModel model = GAML.findModelIn(object);
-		if (model == null) { return null; }
+		if (model == null)
+			return null;
 		final List<String> testExpNames = ((ModelDescription) model.getDescription()).getExperimentNames().stream()
 				.filter(e -> model.getExperiment(e).isTest()).collect(Collectors.toList());
-		if (testExpNames.isEmpty()) { return null; }
+		if (testExpNames.isEmpty())
+			return null;
 		final List<TestExperimentSummary> result = new ArrayList<>();
 		for (final String expName : testExpNames) {
 			final IExperimentPlan exp = GAMA.runModel(model, expName, true);
@@ -92,23 +111,27 @@ public class TestsRunner {
 	}
 
 	private static boolean isInteresting(final IProject p) {
-		if (p == null || !p.exists() || !p.isAccessible()) { return false; }
+		if (p == null || !p.exists() || !p.isAccessible())
+			return false;
 		// If it is contained in one of the built-in tests projects, return true
 		try {
-			if (p.getDescription().hasNature(WorkbenchHelper.TEST_NATURE)) { return true; }
+			if (p.getDescription().hasNature(WorkbenchHelper.TEST_NATURE))
+				return true;
 		} catch (final CoreException e) {
 			return false;
 		}
 		if (GamaPreferences.Runtime.USER_TESTS.getValue()) {
 			// If it is not in user defined projects, return false
 			try {
-				if (p.getDescription().hasNature(WorkbenchHelper.BUILTIN_NATURE)) { return false; }
+				if (p.getDescription().hasNature(WorkbenchHelper.BUILTIN_NATURE))
+					return false;
 			} catch (final CoreException e) {
 				return false;
 			}
 			// We try to find in the project a folder called 'tests'
 			final IResource r = p.findMember("tests");
-			if (r != null && r.exists() && r.isAccessible() && r.getType() == IResource.FOLDER) { return true; }
+			if (r != null && r.exists() && r.isAccessible() && r.getType() == IResource.FOLDER)
+				return true;
 		}
 		return false;
 	}

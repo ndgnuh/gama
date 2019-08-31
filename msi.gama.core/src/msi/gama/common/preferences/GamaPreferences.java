@@ -45,7 +45,6 @@ import msi.gama.util.GamaColor;
 import msi.gama.util.GamaDate;
 import msi.gama.util.GamaFont;
 import msi.gama.util.GamaMapFactory;
-import msi.gama.util.file.GamaFile;
 import msi.gama.util.file.GenericFile;
 import msi.gama.util.file.IGamaFile;
 import msi.gaml.compilation.kernel.GamaMetaModel;
@@ -706,7 +705,7 @@ public class GamaPreferences {
 				store.put(key, toJavaString((String) value));
 				break;
 			case IType.FILE:
-				store.put(key, ((GamaFile) value).getPath(null));
+				store.put(key, ((IGamaFile) value).getPath(null));
 				break;
 			case IType.COLOR:
 				final int code = ((GamaColor) value).getRGB();

@@ -10,8 +10,17 @@
  ********************************************************************************************************/
 package msi.gama.util.file;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import org.locationtech.jts.geom.CoordinateFilter;
+
+import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.metamodel.shape.GamaPoint;
+import msi.gama.metamodel.shape.IShape;
+import msi.gama.metamodel.topology.projection.IProjection;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.getter;
 import msi.gama.precompiler.GamlAnnotations.variable;
@@ -22,6 +31,7 @@ import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.IAddressableContainer;
 import msi.gama.util.IList;
 import msi.gama.util.IModifiableContainer;
+import msi.gama.util.matrix.IMatrix;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.IType;
 
@@ -144,6 +154,52 @@ public interface IGamaFile<C extends IModifiableContainer, Contents>
 	default boolean containsKey(final IScope scope, final Object o) {
 		final C contents = getContents(scope);
 		return contents != null && contents.contains(scope, o);
+	}
+
+	File getFile(IScope scope);
+
+	void invalidateContents();
+
+	interface Gis extends IGamaFile<IList<IShape>, IShape> {
+		// The code to force reading the GIS data as already projected
+		int ALREADY_PROJECTED_CODE = 0;
+		CoordinateFilter ZERO_Z = coord -> ((GamaPoint) coord).z = 0;
+
+		IProjection getGis(final IScope scope);
+	}
+
+	interface Geom extends IGamaFile<IList<IShape>, IShape> {
+
+		IShape getGeometry(final IScope scope);
+
+		AxisAngle getInitRotation();
+
+		boolean is2D();
+	}
+
+	interface Image extends IGamaFile<IMatrix<Integer>, Integer> {
+
+		BufferedImage getImage(IScope scope, boolean b);
+
+		String getGeoDataFile(IScope scope);
+
+		int getFrameCount();
+
+		int getAverageDelay();
+
+		boolean isAnimated();
+	}
+
+	public interface Grid extends Gis {
+
+		int getNbRows(IScope scope);
+
+		int getNbCols(IScope scope);
+
+		int getNbBands();
+
+		Double valueOf(IScope scope, GamaPoint location);
+
 	}
 
 }

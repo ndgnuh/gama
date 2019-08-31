@@ -2,11 +2,12 @@ package ummisco.gama.ui.navigator.contents;
 
 import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.ast.ISyntacticElement;
+import ummisco.gama.ui.interfaces.IGamlLabelProvider;
 
 public class WrappedExperimentContent extends WrappedSyntacticContent {
 
 	public WrappedExperimentContent(final WrappedGamaFile file, final ISyntacticElement e) {
-		super(file, e, GAMA.getGui().getGamlLabelProvider().getText(e));
+		super(file, e, GAMA.getGui().getUIService(IGamlLabelProvider.class).getText(e));
 	}
 
 	@Override

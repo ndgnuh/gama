@@ -20,16 +20,13 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import msi.gama.common.interfaces.IConsoleDisplayer;
 import msi.gama.common.interfaces.IDisplayCreator;
-import msi.gama.common.interfaces.IDisplayCreator.DisplayDescription;
 import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGamlLabelProvider;
 import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.IStatusDisplayer;
 import msi.gama.kernel.experiment.IExperimentPlan;
@@ -44,10 +41,7 @@ import msi.gama.outputs.LayeredDisplayOutput;
 import msi.gama.outputs.display.NullDisplaySurface;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaColor;
-import msi.gama.util.file.IFileMetaDataProvider;
-import msi.gama.util.file.IGamaFileMetaData;
 import msi.gaml.architecture.user.UserPanelStatement;
-import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.types.IType;
@@ -149,16 +143,15 @@ public class HeadlessListener implements IGui {
 	// @SuppressWarnings ("rawtypes") static Map<String, Class> displayClasses = null;
 
 	@Override
-	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output, final Object... objects) {
+	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output) {
 
 		IDisplaySurface surface = null;
 		final IDisplayCreator creator = DISPLAYS.get("image");
 		if (creator != null) {
 			surface = creator.create(output);
 			surface.outputReloaded();
-		} else {
+		} else
 			return new NullDisplaySurface();
-		}
 		return surface;
 	}
 
@@ -192,64 +185,6 @@ public class HeadlessListener implements IGui {
 	public void updateSpeedDisplay(final IScope scope, final Double d, final boolean notify) {}
 
 	/**
-	 * Method getMetaDataProvider()
-	 *
-	 * @see msi.gama.common.interfaces.IGui#getMetaDataProvider()
-	 */
-	@Override
-	public IFileMetaDataProvider getMetaDataProvider() {
-		return new IFileMetaDataProvider() {
-
-			@Override
-			public void storeMetaData(final IResource file, final IGamaFileMetaData data, final boolean immediately) {}
-
-			@Override
-			public IGamaFileMetaData getMetaData(final Object element, final boolean includeOutdated,
-					final boolean immediately) {
-				return new IGamaFileMetaData() {
-
-					@Override
-					public boolean hasFailed() {
-						return false;
-					}
-
-					@Override
-					public String toPropertyString() {
-						return "";
-					}
-
-					@Override
-					public void setModificationStamp(final long modificationStamp) {}
-
-					@Override
-					public Object getThumbnail() {
-						return "";
-					}
-
-					@Override
-					public String getSuffix() {
-						return "";
-					}
-
-					@Override
-					public void appendSuffix(final StringBuilder sb) {}
-
-					@Override
-					public long getModificationStamp() {
-						return 0;
-					}
-
-					@Override
-					public String getDocumentation() {
-						return "";
-					}
-				};
-			}
-
-		};
-	}
-
-	/**
 	 * Method closeSimulationViews()
 	 *
 	 * @see msi.gama.common.interfaces.IGui#closeSimulationViews(boolean)
@@ -257,16 +192,6 @@ public class HeadlessListener implements IGui {
 	@Override
 	public void closeSimulationViews(final IScope scope, final boolean andOpenModelingPerspective,
 			final boolean immediately) {}
-
-	/**
-	 * Method getDisplayDescriptionFor()
-	 *
-	 * @see msi.gama.common.interfaces.IGui#getDisplayDescriptionFor(java.lang.String)
-	 */
-	@Override
-	public DisplayDescription getDisplayDescriptionFor(final String name) {
-		return new DisplayDescription(null, "display", "msi.gama.core");
-	}
 
 	/**
 	 * Method getFrontmostSimulationState()
@@ -418,22 +343,6 @@ public class HeadlessListener implements IGui {
 
 	@Override
 	public void setMouseLocationInModel(final GamaPoint modelCoordinates) {}
-
-	@Override
-	public IGamlLabelProvider getGamlLabelProvider() {
-		return new IGamlLabelProvider() {
-
-			@Override
-			public String getText(final ISyntacticElement element) {
-				return "";
-			}
-
-			@Override
-			public Object getImage(final ISyntacticElement element) {
-				return null;
-			}
-		};
-	}
 
 	@Override
 	public void exit() {

@@ -18,31 +18,29 @@ import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.Scaling3D;
 import msi.gama.common.interfaces.IGraphics;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.file.GamaFile;
-import msi.gama.util.file.GamaGisFile;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes" })
 class FileExecuter extends DrawExecuter {
 
-	private final GamaFile constImg;
+	private final IGamaFile constImg;
 
 	FileExecuter(final IExpression item) throws GamaRuntimeException {
 		super(item);
-		constImg = item.isConst() ? (GamaFile) Types.FILE.cast(null, item.getConstValue(), null, false) : null;
+		constImg = item.isConst() ? (IGamaFile) Types.FILE.cast(null, item.getConstValue(), null, false) : null;
 	}
 
 	@Override
 	Rectangle2D executeOn(final IScope scope, final IGraphics g, final DrawingData data) throws GamaRuntimeException {
-		final GamaFile file = constImg == null ? (GamaFile) item.value(scope) : constImg;
-		if (file == null) { return null; }
-		final FileDrawingAttributes attributes =
-				computeAttributes(scope, data, file instanceof GamaImageFile, file instanceof GamaGisFile, g.is2D());
+		final IGamaFile file = constImg == null ? (IGamaFile) item.value(scope) : constImg;
+		if (file == null)
+			return null;
+		final FileDrawingAttributes attributes = computeAttributes(scope, data, file instanceof IGamaFile.Image,
+				file instanceof IGamaFile.Gis, g.is2D());
 
 		// XXX EXPERIMENTAL See Issue #1521
 		if (GamaPreferences.Displays.DISPLAY_ONLY_VISIBLE.getValue()
@@ -54,7 +52,8 @@ class FileExecuter extends DrawExecuter {
 				expected.expandBy(size.getX() / 2, size.getY() / 2);
 				final Envelope visible = g.getVisibleRegion();
 				if (visible != null) {
-					if (!visible.intersects(expected)) { return null; }
+					if (!visible.intersects(expected))
+						return null;
 				}
 			}
 			// XXX EXPERIMENTAL

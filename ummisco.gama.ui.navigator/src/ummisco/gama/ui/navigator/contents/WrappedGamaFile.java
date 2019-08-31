@@ -1,6 +1,6 @@
 package ummisco.gama.ui.navigator.contents;
 
-import static msi.gama.common.GamlFileExtension.isExperiment;
+import static ummisco.gama.file.gaml.GamlFileExtension.isExperiment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,16 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 
-import msi.gama.common.GamlFileExtension;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.GAMA;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
-import msi.gama.util.file.GamlFileInfo;
 import msi.gama.util.file.IGamaFileMetaData;
-import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.descriptions.IExpressionDescription;
+import ummisco.gama.file.gaml.GamlFileExtension;
+import ummisco.gama.file.gaml.GamlFileInfo;
+import ummisco.gama.file.gaml.GamlResourceInfoProvider;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.NavigatorContentProvider;
 import ummisco.gama.ui.resources.GamaIcons;
 
@@ -62,7 +62,8 @@ public class WrappedGamaFile extends WrappedFile {
 
 	@Override
 	public Object[] getNavigatorChildren() {
-		if (NavigatorContentProvider.FILE_CHILDREN_ENABLED) { return getFileChildren(); }
+		if (NavigatorContentProvider.FILE_CHILDREN_ENABLED)
+			return getFileChildren();
 		return EMPTY;
 	}
 
@@ -94,11 +95,12 @@ public class WrappedGamaFile extends WrappedFile {
 	}
 
 	public boolean hasTag(final String tag) {
-		final IGamaFileMetaData metaData = GAMA.getGui().getMetaDataProvider().getMetaData(getResource(), false, false);
+		final IGamaFileMetaData metaData = FileMetaDataProvider.getInstance().getMetaData(getResource(), false, false);
 		// DEBUG.LOG("Tags of " + getName() + ": " + ((GamlFileInfo) metaData).getTags());
 		if (metaData instanceof GamlFileInfo) {
 			for (final String t : ((GamlFileInfo) metaData).getTags()) {
-				if (t.contains(tag)) { return true; }
+				if (t.contains(tag))
+					return true;
 			}
 		}
 		return false;
@@ -106,12 +108,13 @@ public class WrappedGamaFile extends WrappedFile {
 
 	@Override
 	public Object[] getFileChildren() {
-		final IGamaFileMetaData metaData = GAMA.getGui().getMetaDataProvider().getMetaData(getResource(), false, false);
+		final IGamaFileMetaData metaData = FileMetaDataProvider.getInstance().getMetaData(getResource(), false, false);
 		if (metaData instanceof GamlFileInfo) {
 			final GamlFileInfo info = (GamlFileInfo) metaData;
 			final List<VirtualContent<?>> l = new ArrayList<>();
 			final String path = getResource().getFullPath().toOSString();
-			final ISyntacticElement element = GAML.getContents(URI.createPlatformResourceURI(path, true));
+			final ISyntacticElement element =
+					GamlResourceInfoProvider.INSTANCE.getContents(URI.createPlatformResourceURI(path, true));
 			if (element != null) {
 				if (!GamlFileExtension.isExperiment(path)) {
 					l.add(new WrappedModelContent(this, element));
@@ -148,8 +151,10 @@ public class WrappedGamaFile extends WrappedFile {
 
 	public int getURIProblem(final URI uri) {
 
-		if (uri == null) { return -1; }
-		if (uriProblems == null) { return -1; }
+		if (uri == null)
+			return -1;
+		if (uriProblems == null)
+			return -1;
 		final String fragment = uri.toString();
 		final int[] severity = new int[] { -1 };
 		uriProblems.forEachPair((s, arg1) -> {

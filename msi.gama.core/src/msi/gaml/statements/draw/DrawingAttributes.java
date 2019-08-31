@@ -23,7 +23,7 @@ import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaMaterial;
-import msi.gama.util.file.GamaGifFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.operators.IUnits;
 
 public class DrawingAttributes {
@@ -82,7 +82,8 @@ public class DrawingAttributes {
 	}
 
 	public void setLighting(final Boolean lighting) {
-		if (lighting == null) { return; }
+		if (lighting == null)
+			return;
 		this.lighting = lighting;
 	}
 
@@ -108,7 +109,8 @@ public class DrawingAttributes {
 	 * @return
 	 */
 	public Double getAngle() {
-		if (getRotation() == null) { return null; }
+		if (getRotation() == null)
+			return null;
 		return getRotation().angle;
 	}
 
@@ -177,21 +179,27 @@ public class DrawingAttributes {
 	}
 
 	public void setRotation(final AxisAngle rotation) {
-		if (rotation == null) { return; }
+		if (rotation == null)
+			return;
 		this.rotation = rotation;
 	}
 
 	public void setHeight(final Double depth) {
-		if (depth == null) { return; }
+		if (depth == null)
+			return;
 		this.depth = depth;
 	}
 
 	public GamaColor getColor() {
-		if (selected) { return SELECTED_COLOR; }
-		if (highlight != null) { return highlight; }
-		if (empty) { return null; }
+		if (selected)
+			return SELECTED_COLOR;
+		if (highlight != null)
+			return highlight;
+		if (empty)
+			return null;
 		if (fill == null) {
-			if (textures != null) { return TEXTURED_COLOR; }
+			if (textures != null)
+				return TEXTURED_COLOR;
 			// Always returns the color as we are solid; so null cannot be an option
 			// see issue #2724
 			return GamaPreferences.Displays.CORE_COLOR.getValue();
@@ -202,7 +210,8 @@ public class DrawingAttributes {
 	}
 
 	public GamaColor getBorder() {
-		if (empty && border == null) { return fill; }
+		if (empty && border == null)
+			return fill;
 		return border;
 	}
 
@@ -243,26 +252,33 @@ public class DrawingAttributes {
 	}
 
 	public boolean isAnimated() {
-		if (!useCache()) { return true; }
-		if (textures == null) { return false; }
+		if (!useCache())
+			return true;
+		if (textures == null)
+			return false;
 		final Object o = textures.get(0);
-		if (!(o instanceof GamaGifFile)) { return false; }
-		return true;
+		if (!(o instanceof IGamaFile.Image))
+			return false;
+		return ((IGamaFile.Image) o).isAnimated();
 	}
 
 	public int getFrameCount() {
-		if (textures == null) { return 1; }
+		if (textures == null)
+			return 1;
 		final Object o = textures.get(0);
-		if (!(o instanceof GamaGifFile)) { return 1; }
-		return ((GamaGifFile) o).getFrameCount();
+		if (!(o instanceof IGamaFile.Image))
+			return 1;
+		return ((IGamaFile.Image) o).getFrameCount();
 
 	}
 
 	public int getAverageDelay() {
-		if (textures == null) { return 0; }
+		if (textures == null)
+			return 0;
 		final Object o = textures.get(0);
-		if (!(o instanceof GamaGifFile)) { return 0; }
-		return ((GamaGifFile) o).getAverageDelay();
+		if (!(o instanceof IGamaFile.Image))
+			return 0;
+		return ((IGamaFile.Image) o).getAverageDelay();
 
 	}
 

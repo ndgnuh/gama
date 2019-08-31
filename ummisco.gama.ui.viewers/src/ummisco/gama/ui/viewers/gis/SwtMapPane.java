@@ -53,6 +53,7 @@ import org.opengis.geometry.Envelope;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
 
+import msi.gama.common.interfaces.IGui;
 import ummisco.gama.ui.viewers.gis.geotools.styling.Utils;
 
 /**
@@ -196,9 +197,8 @@ public class SwtMapPane extends Canvas
 	 *             if layerTable is null
 	 */
 	public void setMapLayerTable(final MapLayerComposite layerTable) {
-		if (layerTable == null) {
+		if (layerTable == null)
 			throw new IllegalArgumentException("The argument must not be null"); //$NON-NLS-1$
-		}
 
 		this.layerTable = layerTable;
 	}
@@ -341,18 +341,17 @@ public class SwtMapPane extends Canvas
 	 */
 	public void setDisplayArea(final Envelope envelope) {
 		if (content != null) {
-			if (curPaintArea == null || curPaintArea.isEmpty()) {
+			if (curPaintArea == null || curPaintArea.isEmpty())
 				return;
-			} else {
+			else {
 				doSetDisplayArea(envelope);
 				if (!isDisposed()) {
 					redraw();
 				}
 			}
 
-		} else {
+		} else
 			throw new IllegalStateException("Map context must be set before setting the display area");
-		}
 	}
 
 	/**
@@ -395,7 +394,8 @@ public class SwtMapPane extends Canvas
 	 * @todo My logic here seems overly complex - I'm sure there must be a simpler way for the map pane to handle this.
 	 */
 	private boolean equalsFullExtent(final Envelope envelope) {
-		if (fullExtent == null || envelope == null) { return false; }
+		if (fullExtent == null || envelope == null)
+			return false;
 
 		final double TOL = 1.0e-6d * (fullExtent.getWidth() + fullExtent.getHeight());
 
@@ -404,13 +404,15 @@ public class SwtMapPane extends Canvas
 			touch = true;
 		}
 		if (Math.abs(envelope.getMaximum(0) - fullExtent.getMaximum(0)) < TOL) {
-			if (touch) { return true; }
+			if (touch)
+				return true;
 		}
 		if (Math.abs(envelope.getMinimum(1) - fullExtent.getMinimum(1)) < TOL) {
 			touch = true;
 		}
 		if (Math.abs(envelope.getMaximum(1) - fullExtent.getMaximum(1)) < TOL) {
-			if (touch) { return true; }
+			if (touch)
+				return true;
 		}
 
 		return false;
@@ -452,11 +454,10 @@ public class SwtMapPane extends Canvas
 	 * @return a copy of the screen to world coordinate transform
 	 */
 	public AffineTransform getScreenToWorldTransform() {
-		if (screenToWorld != null) {
+		if (screenToWorld != null)
 			return new AffineTransform(screenToWorld);
-		} else {
+		else
 			return null;
-		}
 	}
 
 	/**
@@ -473,11 +474,10 @@ public class SwtMapPane extends Canvas
 	 * @return a copy of the world to screen coordinate transform
 	 */
 	public AffineTransform getWorldToScreenTransform() {
-		if (worldToScreen != null) {
+		if (worldToScreen != null)
 			return new AffineTransform(worldToScreen);
-		} else {
+		else
 			return null;
-		}
 	}
 
 	/**
@@ -508,7 +508,8 @@ public class SwtMapPane extends Canvas
 	 */
 	private void afterImageMove() {
 		final ReferencedEnvelope env = content.getViewport().getBounds();
-		if (env == null) { return; }
+		if (env == null)
+			return;
 		final int dx = imageOrigin.x;
 		final int dy = imageOrigin.y;
 		final DirectPosition2D newPos = new DirectPosition2D(dx, dy);
@@ -722,12 +723,12 @@ public class SwtMapPane extends Canvas
 		curPaintArea = getVisibleRect();
 
 		// DEBUG.LOG("event: " + event.type);
-		if (event.type == SWT.MouseDown) {
+		if (event.type == IGui.MouseDown) {
 			startX = event.x;
 			startY = event.y;
 			// start mouse activity
 			mouseDown = true;
-		} else if (event.type == SWT.MouseUp) {
+		} else if (event.type == IGui.MouseUp) {
 			endX = event.x;
 			endY = event.y;
 
@@ -767,7 +768,8 @@ public class SwtMapPane extends Canvas
 				return;
 			}
 
-			if (curPaintArea == null || content == null || renderer == null) { return; }
+			if (curPaintArea == null || content == null || renderer == null)
+				return;
 
 			if (content.layers().size() == 0) {
 				// if no layers available, return only if there are also no
@@ -779,7 +781,8 @@ public class SwtMapPane extends Canvas
 			}
 
 			final ReferencedEnvelope mapAOI = content.getViewport().getBounds();
-			if (mapAOI == null) { return; }
+			if (mapAOI == null)
+				return;
 
 			if (redrawBaseImage) {
 

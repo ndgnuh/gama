@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import msi.gama.common.interfaces.IGui;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
@@ -89,7 +90,7 @@ public class MatrixEditorDialog extends Dialog {
 		final TableEditor editor = new TableEditor(table);
 		editor.horizontalAlignment = SWT.LEFT;
 		editor.grabHorizontal = true;
-		table.addListener(SWT.MouseDown, event -> {
+		table.addListener(IGui.MouseDown, event -> {
 			final Rectangle clientArea = table.getClientArea();
 			final Point pt = new Point(event.x, event.y);
 			int index1 = table.getTopIndex();
@@ -134,7 +135,8 @@ public class MatrixEditorDialog extends Dialog {
 						visible = true;
 					}
 				}
-				if (!visible) { return; }
+				if (!visible)
+					return;
 				index1++;
 			}
 		});
@@ -232,13 +234,12 @@ public class MatrixEditorDialog extends Dialog {
 	}
 
 	private IMatrix createMatrix(final int rows, final int cols) {
-		if (data instanceof GamaIntMatrix) {
+		if (data instanceof GamaIntMatrix)
 			return new GamaIntMatrix(cols, rows);
-		} else if (data instanceof GamaFloatMatrix) {
+		else if (data instanceof GamaFloatMatrix)
 			return new GamaFloatMatrix(cols, rows);
-		} else {
+		else
 			return new GamaObjectMatrix(cols, rows, data.getGamlType().getContentType());
-		}
 
 	}
 

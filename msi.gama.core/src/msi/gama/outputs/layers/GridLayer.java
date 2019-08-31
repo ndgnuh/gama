@@ -24,7 +24,7 @@ import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.IScope;
 import msi.gama.util.Collector;
 import msi.gama.util.GamaColor;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.statements.draw.FieldDrawingAttributes;
 
 public class GridLayer extends AbstractLayer {
@@ -46,7 +46,8 @@ public class GridLayer extends AbstractLayer {
 	@Override
 	public Rectangle2D focusOn(final IShape geometry, final IDisplaySurface s) {
 		final IAgent a = geometry.getAgent();
-		if (a == null || a.getSpecies() != getData().getGrid().getCellSpecies()) { return null; }
+		if (a == null || a.getSpecies() != getData().getGrid().getCellSpecies())
+			return null;
 		return super.focusOn(a, s);
 	}
 
@@ -65,7 +66,7 @@ public class GridLayer extends AbstractLayer {
 		}
 
 		final double[] gridValueMatrix = data.getElevationMatrix(scope);
-		final GamaImageFile textureFile = data.textureFile();
+		final IGamaFile.Image textureFile = data.textureFile();
 		final FieldDrawingAttributes attributes =
 				new FieldDrawingAttributes(getName(), lineColor, gridValueMatrix == null);
 		attributes.grayScaled = data.isGrayScaled();

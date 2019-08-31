@@ -11,10 +11,10 @@ package ummisco.gama.ui.views.displays;
 
 import java.util.function.Consumer;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 
 import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.interfaces.IGui;
 import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.utils.WorkbenchHelper;
@@ -82,7 +82,7 @@ public class LayeredDisplayMultiListener {
 		lastEnterTime = System.currentTimeMillis();
 		lastEnterPosition = new Point(x, y);
 		// DEBUG.LOG("Mouse entering " + e);
-		surface.dispatchMouseEvent(SWT.MouseEnter);
+		surface.dispatchMouseEvent(IGui.MouseEnter);
 	}
 
 	public void mouseExit(final int x, final int y, final boolean modifier, final int button) {
@@ -93,7 +93,7 @@ public class LayeredDisplayMultiListener {
 		if (button > 0)
 			return;
 		// DEBUG.LOG("Mouse exiting " + e);
-		surface.dispatchMouseEvent(SWT.MouseExit);
+		surface.dispatchMouseEvent(IGui.MouseExit);
 		// if (!view.isFullScreen() && WorkaroundForIssue1353.isInstalled()) {
 		// suppressNextEnter = true;
 		// DEBUG.LOG("Invoking WorkaroundForIssue1353");
@@ -106,7 +106,7 @@ public class LayeredDisplayMultiListener {
 		if (button > 0)
 			return;
 		// DEBUG.LOG("Mouse hovering on " + view.getPartName());
-		surface.dispatchMouseEvent(SWT.MouseHover);
+		surface.dispatchMouseEvent(IGui.MouseHover);
 	}
 
 	public void mouseMove(final int x, final int y, final boolean modifier) {
@@ -117,10 +117,10 @@ public class LayeredDisplayMultiListener {
 
 		if (mouseIsDown) {
 			surface.draggedTo(x, y);
-			surface.dispatchMouseEvent(SWT.DragDetect);
+			surface.dispatchMouseEvent(IGui.DragDetect);
 		} else {
 			setMousePosition(x, y);
-			surface.dispatchMouseEvent(SWT.MouseMove);
+			surface.dispatchMouseEvent(IGui.MouseMove);
 		}
 
 	}
@@ -151,7 +151,7 @@ public class LayeredDisplayMultiListener {
 			return;
 		mouseIsDown = true;
 		// DEBUG.LOG("Mouse down on " + view.getPartName());
-		surface.dispatchMouseEvent(SWT.MouseDown);
+		surface.dispatchMouseEvent(IGui.MouseDown);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class LayeredDisplayMultiListener {
 		// if (!view.isFullScreen() && WorkaroundForIssue1353.isInstalled()) {
 		// WorkaroundForIssue1353.showShell();
 		// }
-		surface.dispatchMouseEvent(SWT.MouseUp);
+		surface.dispatchMouseEvent(IGui.MouseUp);
 	}
 
 	public void menuDetected(final int x, final int y) {
@@ -193,7 +193,7 @@ public class LayeredDisplayMultiListener {
 	public void dragDetected() {
 		// DEBUG.LOG("Mouse drag detected on " + view.getPartName());
 		// surface.draggedTo(e.x, e.y);
-		surface.dispatchMouseEvent(SWT.DragDetect);
+		surface.dispatchMouseEvent(IGui.DragDetect);
 	}
 
 	public void focusGained() {

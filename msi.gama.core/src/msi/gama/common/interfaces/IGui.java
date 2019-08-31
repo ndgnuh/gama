@@ -29,7 +29,6 @@ import msi.gama.outputs.LayeredDisplayOutput;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaMapFactory;
-import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.types.IType;
@@ -48,6 +47,15 @@ public interface IGui {
 	int INFORM = 2;
 	int NEUTRAL = 3;
 	int USER = 4;
+
+	// Equivalence of SWT constants
+	int MouseDown = 3;
+	int MouseUp = 4;
+	int MouseMove = 5;
+	int MouseEnter = 6;
+	int MouseExit = 7;
+	int DragDetect = 29;
+	int MouseHover = 32;
 
 	Map<String, DisplayDescription> DISPLAYS = GamaMapFactory.createUnordered();
 	String MONITOR_VIEW_ID = "ummisco.gama.application.view.MonitorView";
@@ -97,7 +105,7 @@ public interface IGui {
 
 	boolean openSimulationPerspective(IModel model, String experimentId);
 
-	IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output, final Object... args);
+	IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output);
 
 	Map<String, Object> openUserInputDialog(IScope scope, String title, Map<String, Object> initialValues,
 			Map<String, IType<?>> types);
@@ -122,11 +130,7 @@ public interface IGui {
 
 	void updateSpeedDisplay(IScope scope, Double d, boolean notify);
 
-	IFileMetaDataProvider getMetaDataProvider();
-
 	void closeSimulationViews(IScope scope, boolean andOpenModelingPerspective, boolean immediately);
-
-	DisplayDescription getDisplayDescriptionFor(final String name);
 
 	String getExperimentState(String uid);
 
@@ -153,8 +157,6 @@ public interface IGui {
 	GamaPoint getMouseLocationInModel();
 
 	void setMouseLocationInModel(GamaPoint modelCoordinates);
-
-	IGamlLabelProvider getGamlLabelProvider();
 
 	<T> T getUIService(Class<T> clazz);
 

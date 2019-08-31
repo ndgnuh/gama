@@ -341,7 +341,6 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 							IGamlIssue.UNKNOWN_KEYWORD, TYPE);
 					return;
 				}
-				;
 			} else {
 				if (isOpenGLDefault) {
 					d.setFacet(TYPE, LabelExpressionDescription.create(LayeredDisplayData.OPENGL));
@@ -416,12 +415,14 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 	@Override
 	public boolean init(final IScope scope) throws GamaRuntimeException {
 		final boolean result = super.init(scope);
-		if (!result) { return false; }
+		if (!result)
+			return false;
 		data.initWith(getScope(), description);
 
 		for (final ILayerStatement layer : getLayers()) {
 			layer.setDisplayOutput(this);
-			if (!getScope().init(layer).passed()) { return false; }
+			if (!getScope().init(layer).passed())
+				return false;
 		}
 
 		final IExpression sync = getFacet("synchronized");
@@ -444,7 +445,8 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 
 	@Override
 	public void update() throws GamaRuntimeException {
-		if (surface == null) { return; }
+		if (surface == null)
+			return;
 		data.update(getScope(), description.getFacets());
 
 		if (overlayInfo != null) {
@@ -457,7 +459,8 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 
 	@Override
 	public void dispose() {
-		if (disposed) { return; }
+		if (disposed)
+			return;
 		setSynchronized(false);
 		super.dispose();
 		if (surface != null) {
@@ -476,17 +479,18 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 		if (scope.getExperiment().isHeadless()) {
 			// If in headless mode, we need to get the 'image' surface
 			data.setDisplayType(IKeyword.IMAGE);
-		} else if (data.isOpenGL()) {
-			// The surface will be crezated later
+		} else if (data.isOpenGL())
+			// The surface will be created later
 			return;
-		}
 		surface = scope.getGui().getDisplaySurfaceFor(this);
 	}
 
 	@Override
 	public String getViewId() {
-		if (data.isOpenGL2()) { return IGui.GL_LAYER_VIEW_ID2; }
-		if (data.isOpenGL()) { return IGui.GL_LAYER_VIEW_ID; }
+		if (data.isOpenGL2())
+			return IGui.GL_LAYER_VIEW_ID2;
+		if (data.isOpenGL())
+			return IGui.GL_LAYER_VIEW_ID;
 		return IGui.LAYER_VIEW_ID;
 	}
 
@@ -537,7 +541,8 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput {
 	public void setPaused(final boolean paused) {
 		final boolean wasPaused = isPaused();
 		super.setPaused(paused);
-		if (surface == null) { return; }
+		if (surface == null)
+			return;
 		if (data.isOpenGL()) {
 			((IDisplaySurface.OpenGL) surface).setPaused(paused);
 		}

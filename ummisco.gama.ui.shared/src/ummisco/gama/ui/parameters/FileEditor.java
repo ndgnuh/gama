@@ -67,7 +67,7 @@ public class FileEditor extends AbstractEditor<IGamaFile> {
 			modifyAndDisplayValue(file);
 		}
 	}
-	
+
 	@Override
 	protected GridData getParameterGridData() {
 		final GridData d = new GridData(SWT.FILL, SWT.TOP, true, false);

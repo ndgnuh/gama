@@ -3,7 +3,7 @@ package ummisco.gama.ui.navigator.contents;
 import static org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE;
 import static org.eclipse.core.resources.IResourceChangeEvent.PRE_CLOSE;
 import static org.eclipse.core.resources.IResourceChangeEvent.PRE_DELETE;
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.getContentTypeId;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.getContentTypeId;
 import static ummisco.gama.ui.utils.WorkbenchHelper.BUILTIN_NATURE;
 import static ummisco.gama.ui.utils.WorkbenchHelper.PLUGIN_NATURE;
 import static ummisco.gama.ui.utils.WorkbenchHelper.TEST_NATURE;
@@ -42,14 +42,12 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-import msi.gama.common.GamlFileExtension;
 import msi.gama.common.util.FileUtils;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.statements.test.CompoundSummary;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.file.gaml.GamlFileExtension;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.commands.TestsRunner;
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class ResourceManager implements IResourceChangeListener, IResourceDeltaVisitor, ISelectionChangedListener {
@@ -274,7 +272,7 @@ public class ResourceManager implements IResourceChangeListener, IResourceDeltaV
 			case IResource.FOLDER:
 				folderAdded((IFolder) res);
 		}
-		final IFileMetaDataProvider provider = GAMA.getGui().getMetaDataProvider();
+		final FileMetaDataProvider provider = FileMetaDataProvider.getInstance();
 		provider.storeMetaData(res, null, true);
 		provider.getMetaData(res, false, true);
 

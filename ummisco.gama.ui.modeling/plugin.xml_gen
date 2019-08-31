@@ -4,48 +4,48 @@
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
 			extensions="gaml,experiment"
-			id="msi.gama.lang.gaml.Gaml"
+			id="ummisco.gama.Gaml"
 			name="Gaml Editor">
 		</editor>
 	</extension>
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
 			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-			commandId="msi.gama.lang.gaml.Gaml.validate">
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="ummisco.gama.Gaml.validate">
 		<activeWhen>
 			<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 			</reference>
 		</activeWhen>
 		</handler>
 		<!-- copy qualified name -->
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
 			<activeWhen>
-				<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened" />
+				<reference definitionId="ummisco.gama.Gaml.Editor.opened" />
 			</activeWhen>
 		</handler>
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
 			<activeWhen>
 				<and>
-					<reference definitionId="msi.gama.lang.gaml.Gaml.XtextEditor.opened" />
+					<reference definitionId="ummisco.gama.Gaml.XtextEditor.opened" />
 					<iterate>
 						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 					</iterate>
@@ -54,22 +54,22 @@
 		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
-		<definition id="msi.gama.lang.gaml.Gaml.Editor.opened">
+		<definition id="ummisco.gama.Gaml.Editor.opened">
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="msi.gama.lang.gaml.Gaml"
+						value="ummisco.gama.Gaml"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
 		</definition>
-		<definition id="msi.gama.lang.gaml.Gaml.XtextEditor.opened">
+		<definition id="ummisco.gama.Gaml.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="msi.gama.lang.gaml.Gaml"
+						value="ummisco.gama.Gaml"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
@@ -78,33 +78,33 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="msi.gama.lang.gaml.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="ummisco.gama.Gaml"
 			name="Gaml">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 		</page>
 		<page
-			category="msi.gama.lang.gaml.Gaml"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="msi.gama.lang.gaml.Gaml.coloring"
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="ummisco.gama.Gaml.coloring"
 			name="Syntax Coloring">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 		</page>
 		<page
-			category="msi.gama.lang.gaml.Gaml"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-			id="msi.gama.lang.gaml.Gaml.templates"
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="ummisco.gama.Gaml.templates"
 			name="Templates">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 		</page>
 	</extension>
 	<extension
 			point="org.eclipse.ui.propertyPages">
 		<page
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="msi.gama.lang.gaml.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="ummisco.gama.Gaml"
 			name="Gaml">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -114,14 +114,14 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="msi.gama.lang.gaml.ui.keyword_Gaml"
+			id="ummisco.gama.ui.keyword_Gaml"
 			label="Gaml"/>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
 	<command
 			description="Trigger expensive validation"
-			id="msi.gama.lang.gaml.Gaml.validate"
+			id="ummisco.gama.Gaml.validate"
 			name="Validate">
 	</command>
 	<!-- copy qualified name -->
@@ -142,12 +142,12 @@
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.edit">
 			 <command
-				 commandId="msi.gama.lang.gaml.Gaml.validate"
+				 commandId="ummisco.gama.Gaml.validate"
 				 style="push"
 				 tooltip="Trigger expensive validation">
 			<visibleWhen checkEnabled="false">
 				<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 				</reference>
 			</visibleWhen>
 		</command>
@@ -157,7 +157,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened" />
+					<reference definitionId="ummisco.gama.Gaml.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -165,7 +165,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened" />
+					<reference definitionId="ummisco.gama.Gaml.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -174,7 +174,7 @@
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
-						<reference definitionId="msi.gama.lang.gaml.Gaml.XtextEditor.opened" />
+						<reference definitionId="ummisco.gama.Gaml.XtextEditor.opened" />
 						<iterate>
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
@@ -187,7 +187,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					<reference definitionId="ummisco.gama.Gaml.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -195,11 +195,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
 			commandId="org.eclipse.xtext.ui.editor.FindReferences">
 			<activeWhen>
 				<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -208,7 +208,7 @@
 		<content-type
 			base-type="org.eclipse.core.runtime.text"
 			file-extensions="gaml,experiment"
-			id="msi.gama.lang.gaml.Gaml.contenttype"
+			id="ummisco.gama.Gaml.contenttype"
 			name="Gaml File"
 			priority="normal">
 		</content-type>
@@ -217,30 +217,30 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="gaml">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
 			uriExtension="gaml">
 		</resourceServiceProvider>
 	</extension>
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="experiment">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
 			uriExtension="experiment">
 		</resourceServiceProvider>
 	</extension>
-	<!-- marker definitions for msi.gama.lang.gaml.Gaml -->
+	<!-- marker definitions for ummisco.gama.Gaml -->
 	<extension
 			id="gaml.check.fast"
 			name="Gaml Problem"
@@ -262,27 +262,36 @@
 		<super type="org.eclipse.xtext.ui.check.expensive"/>
 		<persistent value="true"/>
 	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="ummisco.gama.Gaml.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
+		</page>
+	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
 			fileExtensions="gaml,experiment"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="msi.gama.lang.gaml.Gaml"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="msi.gama.lang.gaml.Gaml.compiler.preferencePage"
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="ummisco.gama.Gaml.compiler.preferencePage"
 			name="Compiler">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.ui.propertyPages">
 		<page
-			category="msi.gama.lang.gaml.Gaml"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="msi.gama.lang.gaml.Gaml.compiler.propertyPage"
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="ummisco.gama.Gaml.compiler.propertyPage"
 			name="Compiler">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -293,20 +302,20 @@
 		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
 			<command
 				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
-				id="msi.gama.lang.gaml.Gaml.OpenGeneratedCode"
+				id="ummisco.gama.Gaml.OpenGeneratedCode"
 				style="push">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened" />
+					<reference definitionId="ummisco.gama.Gaml.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
 			<activeWhen>
-				<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened" />
+				<reference definitionId="ummisco.gama.Gaml.Editor.opened" />
 			</activeWhen>
 		</handler>
 	</extension>
@@ -314,11 +323,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -338,16 +347,16 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="msi.gama.lang.gaml.Gaml.Editor.opened"/>
+					<reference definitionId="ummisco.gama.Gaml.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-	<!-- quickfix marker resolution generator for msi.gama.lang.gaml.Gaml -->
+	<!-- quickfix marker resolution generator for ummisco.gama.Gaml -->
 	<extension
 			point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="ummisco.gama.ui.modeling.gaml.check.fast">
 			<attribute
 				name="FIXABLE_KEY"
@@ -355,7 +364,7 @@
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="ummisco.gama.ui.modeling.gaml.check.normal">
 			<attribute
 				name="FIXABLE_KEY"
@@ -363,7 +372,7 @@
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="ummisco.gama.ui.modeling.gaml.check.expensive">
 			<attribute
 				name="FIXABLE_KEY"
@@ -374,11 +383,11 @@
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+					definitionId="ummisco.gama.Gaml.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -390,7 +399,7 @@
 				style="push">
 				<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="msi.gama.lang.gaml.Gaml.Editor.opened">
+						definitionId="ummisco.gama.Gaml.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -398,34 +407,34 @@
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="msi.gama.lang.gaml.Gaml"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-			id="msi.gama.lang.gaml.Gaml.refactoring"
+			category="ummisco.gama.Gaml"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="ummisco.gama.Gaml.refactoring"
 			name="Refactoring">
-			<keywordReference id="msi.gama.lang.gaml.ui.keyword_Gaml"/>
+			<keywordReference id="ummisco.gama.ui.keyword_Gaml"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.compare.contentViewers">
-		<viewer id="msi.gama.lang.gaml.Gaml.compare.contentViewers"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+		<viewer id="ummisco.gama.Gaml.compare.contentViewers"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="gaml,experiment">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="msi.gama.lang.gaml.Gaml.contenttype"
-			contentViewerId="msi.gama.lang.gaml.Gaml.compare.contentViewers" />
+			contentTypeId="ummisco.gama.Gaml.contenttype"
+			contentViewerId="ummisco.gama.Gaml.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
-		<viewer id="msi.gama.lang.gaml.Gaml.compare.contentMergeViewers"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+		<viewer id="ummisco.gama.Gaml.compare.contentMergeViewers"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="gaml,experiment" label="Gaml Compare">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="msi.gama.lang.gaml.Gaml.contenttype"
-			contentMergeViewerId="msi.gama.lang.gaml.Gaml.compare.contentMergeViewers" />
+			contentTypeId="ummisco.gama.Gaml.contenttype"
+			contentMergeViewerId="ummisco.gama.Gaml.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider id="msi.gama.lang.gaml.Gaml.editors.documentProviders"
-			class="msi.gama.lang.gaml.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+		<provider id="ummisco.gama.Gaml.editors.documentProviders"
+			class="ummisco.gama.ui.GamlExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
 			extensions="gaml,experiment">
 		</provider>
 	</extension>

@@ -37,6 +37,7 @@ import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.ILayer;
 import msi.gama.common.util.PlatformUtils;
 import msi.gama.metamodel.agent.IAgent;
+import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.outputs.layers.AgentLayer;
 import msi.gama.outputs.layers.GraphicLayer;
 import msi.gama.outputs.layers.GridLayer;
@@ -263,7 +264,7 @@ public class DisplaySurfaceMenu {
 
 	@SuppressWarnings ("unused")
 	public Menu buildROIMenu(final int x, final int y, final Collection<IAgent> agents,
-			final Map<String, Runnable> actions, final Map<String, Image> images) {
+			final Map<String, Runnable> actions, final Map<String, String> images) {
 
 		prepareNewMenu(swtControl, x, y, true);
 		fill(menu, -1, false, true, agents);
@@ -271,7 +272,7 @@ public class DisplaySurfaceMenu {
 		for (final String s : actions.keySet()) {
 			final MenuItem mu = new MenuItem(menu, SWT.PUSH, i++);
 			mu.setText(s);
-			mu.setImage(images.get(s));
+			mu.setImage(GamaIcons.create(images.get(s)).image());
 			mu.addSelectionListener(new SelectionListener() {
 
 				@Override
@@ -295,6 +296,29 @@ public class DisplaySurfaceMenu {
 			menu.dispose();
 		}
 		menu = null;
+	}
+
+	public void openROIMenu(final GamaPoint p, final Collection<IAgent> agents, final Map<String, Runnable> actions,
+			final Map<String, String> images, final Runnable whenShown, final Runnable whenHidden) {
+		WorkbenchHelper.run(() -> {
+			final Menu menu = buildROIMenu((int) p.x, (int) p.y, agents, actions, images);
+			menu.addMenuListener(new MenuListener() {
+
+				@Override
+				public void menuHidden(final MenuEvent e) {
+					// Will be run after the selection
+					WorkbenchHelper.asyncRun(whenHidden);
+				}
+
+				@Override
+				public void menuShown(final MenuEvent e) {
+					whenShown.run();
+				}
+			});
+
+			menu.setVisible(true);
+		});
+
 	}
 
 }

@@ -52,9 +52,7 @@ import msi.gama.common.interfaces.IGamaView.Error;
 import msi.gama.common.interfaces.IGamaView.Parameters;
 import msi.gama.common.interfaces.IGamaView.Test;
 import msi.gama.common.interfaces.IGamaView.User;
-import msi.gama.common.interfaces.IGamlLabelProvider;
 import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import msi.gama.common.interfaces.IStatusDisplayer;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.experiment.ExperimentAgent;
@@ -75,11 +73,11 @@ import msi.gama.runtime.ISimulationStateProvider;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IMap;
-import msi.gama.util.file.IFileMetaDataProvider;
 import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.compilation.Symbol;
 import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.types.IType;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.ApplicationWorkbenchAdvisor;
 import ummisco.gama.ui.GamaUIPreferences;
@@ -89,6 +87,7 @@ import ummisco.gama.ui.dialogs.Messages;
 import ummisco.gama.ui.interfaces.IDisplayLayoutManager;
 import ummisco.gama.ui.interfaces.IOpenGLInitializer;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
+import ummisco.gama.ui.interfaces.IRuntimeExceptionHandler;
 import ummisco.gama.ui.interfaces.ISpeedDisplayer;
 import ummisco.gama.ui.interfaces.IUserDialogFactory;
 import ummisco.gama.ui.parameters.EditorsDialog;
@@ -267,17 +266,13 @@ public class SwtGui implements IGui {
 	}
 
 	@Override
-	public DisplayDescription getDisplayDescriptionFor(final String name) {
-		return DISPLAYS.get(name);
-	}
-
-	@Override
-	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output, final Object... args) {
+	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output) {
 		IDisplaySurface surface = null;
 		final String keyword = output.getData().getDisplayType();
-		final DisplayDescription creator = DISPLAYS.get(keyword);
+		GamaBundleLoader.loadAllDisplays();
+		DisplayDescription creator = DISPLAYS.get(keyword);
 		if (creator != null) {
-			surface = creator.create(output, args);
+			surface = creator.create(output);
 			surface.outputReloaded();
 		} else
 			throw GamaRuntimeException.error("Display " + keyword + " is not defined anywhere.", output.getScope());
@@ -541,21 +536,6 @@ public class SwtGui implements IGui {
 			WorkbenchHelper.asyncRun(() -> speedStatus.setInit(d, notify));
 
 		}
-	}
-
-	/**
-	 * Method getMetaDataProvider()
-	 *
-	 * @see msi.gama.common.interfaces.IGui#getMetaDataProvider()
-	 */
-	@Override
-	public IFileMetaDataProvider getMetaDataProvider() {
-		return getUIService(IFileMetaDataProvider.class);
-	}
-
-	@Override
-	public IGamlLabelProvider getGamlLabelProvider() {
-		return getUIService(IGamlLabelProvider.class);
 	}
 
 	@Override

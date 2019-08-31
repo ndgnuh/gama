@@ -21,15 +21,15 @@ import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaMaterial;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class ShapeDrawingAttributes extends FileDrawingAttributes {
 
 	public ShapeDrawingAttributes(final Scaling3D size, final Double depth, final AxisAngle rotation,
 			final GamaPoint location, final Boolean empty, final GamaColor color, /* final List<GamaColor> colors, */
-			final GamaColor border, final List<GamaImageFile> textures, final GamaMaterial material, final IAgent agent,
-			final ShapeType type, final Double lineWidth, final Boolean lighting) {
+			final GamaColor border, final List<IGamaFile.Image> textures, final GamaMaterial material,
+			final IAgent agent, final ShapeType type, final Double lineWidth, final Boolean lighting) {
 		super(size, rotation, location, color, border, agent, lineWidth, false, lighting);
 		setHeight(depth);
 		setEmpty(empty);
@@ -58,8 +58,8 @@ public class ShapeDrawingAttributes extends FileDrawingAttributes {
 
 	public ShapeDrawingAttributes(final IShape shape, final IAgent agent, final GamaColor color, final GamaColor border,
 			final ShapeType type, final Double lineWidth) {
-		this(null, null, null, shape.getLocation(), color == null, color, /* null, */ border, null, null,
-				agent, type, lineWidth, null);
+		this(null, null, null, shape.getLocation(), color == null, color, /* null, */ border, null, null, agent, type,
+				lineWidth, null);
 	}
 
 }

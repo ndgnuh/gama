@@ -39,7 +39,7 @@ import msi.gama.metamodel.topology.ITopology;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.expressions.IExpression;
 
 class ShapeExecuter extends DrawExecuter {
@@ -85,10 +85,12 @@ class ShapeExecuter extends DrawExecuter {
 	@Override
 	Rectangle2D executeOn(final IScope scope, final IGraphics gr, final DrawingData data) throws GamaRuntimeException {
 		final IShape shape = constantShape == null ? asGeometry(scope, item.value(scope), false) : constantShape;
-		if (shape == null) { return null; }
+		if (shape == null)
+			return null;
 		final DrawingAttributes attributes = computeAttributes(scope, data, shape);
 		Geometry gg = shape.getInnerGeometry();
-		if (gg == null) { return null; }
+		if (gg == null)
+			return null;
 		final ICoordinates ic = getContourCoordinates(gg);
 		ic.ensureClockwiseness();
 
@@ -125,8 +127,8 @@ class ShapeExecuter extends DrawExecuter {
 			try {
 				final Envelope visible = gr.getVisibleRegion();
 				if (visible != null) {
-					if (!visible.intersects(e)) { return null; }
-					// XXX EXPERIMENTAL
+					if (!visible.intersects(e))
+						return null;
 				}
 			} finally {
 				e.dispose();
@@ -144,8 +146,8 @@ class ShapeExecuter extends DrawExecuter {
 		if (depth == null) {
 			depth = shape.getDepth();
 		}
-		final DrawingAttributes attributes = new ShapeDrawingAttributes(of(data.size.get()), depth,
-				data.rotation.get(), data.getLocation(), data.empty.get(), data.color.get(), /* data.getColors(), */
+		final DrawingAttributes attributes = new ShapeDrawingAttributes(of(data.size.get()), depth, data.rotation.get(),
+				data.getLocation(), data.empty.get(), data.color.get(), /* data.getColors(), */
 				data.border.get(), data.texture.get(), data.material.get(), scope.getAgent(),
 				shape.getGeometricalType(), data.lineWidth.get(), data.lighting.get());
 		return attributes;
@@ -157,17 +159,17 @@ class ShapeExecuter extends DrawExecuter {
 	 */
 	@SuppressWarnings ({ "unchecked", "rawtypes" })
 	private void addTextures(final IScope scope, final DrawingAttributes attributes) {
-		if (attributes.getTextures() == null) { return; }
+		if (attributes.getTextures() == null)
+			return;
 		attributes.getTextures().replaceAll((s) -> {
-			GamaImageFile image = null;
-			if (s instanceof GamaImageFile) {
-				image = (GamaImageFile) s;
+			IGamaFile.Image image = null;
+			if (s instanceof IGamaFile.Image) {
+				image = (IGamaFile.Image) s;
 			} else if (s instanceof String) {
-				image = (GamaImageFile) createFile(scope, (String) s, null);
+				image = (IGamaFile.Image) createFile(scope, (String) s, null);
 			}
-			if (image == null || !image.exists(scope)) {
+			if (image == null || !image.exists(scope))
 				throw new GamaRuntimeFileException(scope, "Texture file not found: " + s);
-			}
 			return image;
 
 		});
@@ -196,7 +198,8 @@ class ShapeExecuter extends DrawExecuter {
 	private Geometry addArrows(final IScope scope, final Geometry g1, final Boolean fill) {
 		final GamaPoint[] points = getPointsOf(g1);
 		final int size = points.length;
-		if (size < 2) { return g1; }
+		if (size < 2)
+			return g1;
 		tempArrowList.clear();
 		tempArrowList.add(g1);
 		Geometry end = null, begin = null;

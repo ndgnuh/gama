@@ -19,13 +19,13 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 
-import msi.gama.runtime.GAMA;
-import msi.gama.util.file.GamaCSVFile.CSVInfo;
+import msi.gama.util.file.CsvWriter;
+import msi.gama.util.file.CsvWriter.Letters;
 import msi.gama.util.file.IGamaFileMetaData;
-import msi.gama.util.file.csv.CsvReader;
-import msi.gama.util.file.csv.CsvWriter;
-import msi.gama.util.file.csv.CsvWriter.Letters;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.file.csv.CsvReader;
+import ummisco.gama.file.csv.GamaCSVFile.CSVInfo;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -81,7 +81,8 @@ public class CSVModel implements IRowChangesListener {
 
 	public void setCustomDelimiter(final char c) {
 		final CSVInfo info = getInfo();
-		if (c == info.delimiter) { return; }
+		if (c == info.delimiter)
+			return;
 		info.delimiter = c;
 		saveMetaData();
 	}
@@ -279,7 +280,8 @@ public class CSVModel implements IRowChangesListener {
 	public int findRow(final CSVRow findRow) {
 		for (int i = 0; i <= getArrayRows(true).length; i++) {
 			final CSVRow row = getRowAt(i);
-			if (row.equals(findRow)) { return i; }
+			if (row.equals(findRow))
+				return i;
 		}
 		return -1;
 	}
@@ -335,10 +337,9 @@ public class CSVModel implements IRowChangesListener {
 	 *
 	 */
 	public void removeRow(final CSVRow row) {
-		if (!rows.remove(row)) {
+		if (!rows.remove(row))
 			return;
-			// TODO return error message
-		}
+		// TODO return error message
 		final CSVInfo info = getInfo();
 		info.rows--;
 		saveMetaData();
@@ -399,7 +400,8 @@ public class CSVModel implements IRowChangesListener {
 	 * @param colIndex
 	 */
 	public void removeColumn(final String columnName) {
-		if (columnName == null) { return; }
+		if (columnName == null)
+			return;
 		final List<String> cols = Arrays.asList(getInfo().headers);
 		final int colIndex = cols.indexOf(columnName);
 		removeColumn(colIndex);
@@ -473,12 +475,12 @@ public class CSVModel implements IRowChangesListener {
 	 */
 	public CSVInfo getInfo() {
 		if (currentInfo == null) {
-			final IGamaFileMetaData metaData = GAMA.getGui().getMetaDataProvider().getMetaData(file, false, true);
+			final IGamaFileMetaData metaData = FileMetaDataProvider.getInstance().getMetaData(file, false, true);
 			if (metaData instanceof CSVInfo) {
 				currentInfo = (CSVInfo) metaData;
 			} else {
-				GAMA.getGui().getMetaDataProvider().storeMetaData(file, null, true);
-				currentInfo = (CSVInfo) GAMA.getGui().getMetaDataProvider().getMetaData(file, false, true);
+				FileMetaDataProvider.getInstance().storeMetaData(file, null, true);
+				currentInfo = (CSVInfo) FileMetaDataProvider.getInstance().getMetaData(file, false, true);
 			}
 		}
 		return currentInfo;

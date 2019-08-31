@@ -37,7 +37,6 @@ import msi.gama.outputs.LayeredDisplayData.Changes;
 import msi.gama.outputs.display.AWTDisplayGraphics;
 import msi.gama.outputs.display.LayerManager;
 import msi.gama.outputs.layers.IEventLayerListener;
-import msi.gama.precompiler.GamlAnnotations.display;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
@@ -45,7 +44,7 @@ import msi.gama.util.GamaListFactory;
 import msi.gama.util.IList;
 import msi.gaml.operators.Files;
 
-@display ("image")
+// Now deprecated @display ("image")
 public class ImageDisplaySurface implements IDisplaySurface {
 
 	private final LayeredDisplayOutput output;
@@ -59,8 +58,8 @@ public class ImageDisplaySurface implements IDisplaySurface {
 	protected IScope scope;
 	private final LayeredDisplayData data;
 
-	public ImageDisplaySurface(final Object... args) {
-		output = (LayeredDisplayOutput) args[0];
+	public ImageDisplaySurface(final LayeredDisplayOutput args) {
+		output = args;
 		data = output.getData();
 
 	}
@@ -121,7 +120,8 @@ public class ImageDisplaySurface implements IDisplaySurface {
 	}
 
 	public boolean resizeImage(final int newWidth, final int newHeight, final boolean force) {
-		if (!force && width == newWidth && height == newHeight) { return false; }
+		if (!force && width == newWidth && height == newHeight)
+			return false;
 		this.width = newWidth;
 		this.height = newHeight;
 		final Image copy = buffImage;
@@ -143,7 +143,8 @@ public class ImageDisplaySurface implements IDisplaySurface {
 	}
 
 	private void drawAllDisplays() {
-		if (displayGraphics == null) { return; }
+		if (displayGraphics == null)
+			return;
 		displayGraphics.fillBackground(data.getBackgroundColor(), 1);
 		manager.drawLayersOn(displayGraphics);
 	}

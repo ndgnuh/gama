@@ -803,11 +803,6 @@
    <extension
          point="org.eclipse.ui.services">
       <serviceFactory
-            factoryClass="ummisco.gama.ui.navigator.MetaDataServiceFactory">
-         <service
-               serviceClass="msi.gama.util.file.IFileMetaDataProvider"></service>
-      </serviceFactory>
-      <serviceFactory
             factoryClass="ummisco.gama.ui.commands.RefreshServiceFactory">
          <service
                serviceClass="ummisco.gama.ui.interfaces.IRefreshHandler">

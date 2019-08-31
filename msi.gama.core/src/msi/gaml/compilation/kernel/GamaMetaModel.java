@@ -28,6 +28,7 @@ import msi.gama.common.interfaces.IKeyword;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.model.GamlModelSpecies;
 import msi.gama.metamodel.population.IPopulation;
+import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.compilation.IAgentConstructor;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.PlatformSpeciesDescription;
@@ -58,7 +59,7 @@ public class GamaMetaModel {
 
 		public SpeciesProto(final String name, final Class clazz, final IAgentConstructor helper,
 				final String[] skills) {
-			plugin = GamaBundleLoader.CURRENT_PLUGIN_NAME;
+			plugin = AbstractGamlAdditions.CURRENT_PLUGIN_NAME;
 			this.name = name;
 			this.clazz = clazz;
 			this.helper = helper;
@@ -165,9 +166,8 @@ public class GamaMetaModel {
 
 	public PlatformSpeciesDescription getPlatformSpeciesDescription() {
 		final IType platform = Types.get(IKeyword.PLATFORM);
-		if (platform != null && platform != Types.NO_TYPE) {
+		if (platform != null && platform != Types.NO_TYPE)
 			return (PlatformSpeciesDescription) platform.getSpecies();
-		}
 		return null;
 	}
 

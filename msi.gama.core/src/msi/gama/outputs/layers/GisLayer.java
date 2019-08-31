@@ -21,11 +21,13 @@ import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaColor;
-import msi.gama.util.file.GamaShapeFile;
+import msi.gama.util.file.IGamaFile;
+import msi.gama.util.file.IGamaFile.Gis;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.statements.draw.DrawingAttributes;
 import msi.gaml.statements.draw.ShapeDrawingAttributes;
+import msi.gaml.types.GamaFileType;
 import msi.gaml.types.IType;
 
 public class GisLayer extends AbstractLayer {
@@ -56,19 +58,22 @@ public class GisLayer extends AbstractLayer {
 	}
 
 	public List<IShape> buildGisLayer(final IScope scope) throws GamaRuntimeException {
-		final GamaShapeFile file = getShapeFile(scope);
-		if (file == null) { return null; }
+		final IGamaFile.Gis file = getShapeFile(scope);
+		if (file == null)
+			return null;
 		return file.getContents(scope);
 	}
 
-	private GamaShapeFile getShapeFile(final IScope scope) {
-		if (gisExpression == null) { return null; }
+	private IGamaFile.Gis getShapeFile(final IScope scope) {
+		if (gisExpression == null)
+			return null;
 		if (gisExpression.getGamlType().id() == IType.STRING) {
 			final String fileName = Cast.asString(scope, gisExpression.value(scope));
-			return new GamaShapeFile(scope, fileName);
+			return (Gis) GamaFileType.createFile(scope, fileName, null);
 		}
 		final Object o = gisExpression.value(scope);
-		if (o instanceof GamaShapeFile) { return (GamaShapeFile) o; }
+		if (o instanceof IGamaFile.Gis)
+			return (IGamaFile.Gis) o;
 		return null;
 	}
 

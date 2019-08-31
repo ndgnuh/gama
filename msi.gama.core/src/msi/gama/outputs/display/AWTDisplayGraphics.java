@@ -58,9 +58,7 @@ import msi.gama.outputs.layers.OverlayLayer;
 import msi.gama.outputs.layers.charts.ChartOutput;
 import msi.gama.runtime.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.file.GamaFile;
-import msi.gama.util.file.GamaGeometryFile;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.operators.Cast;
 import msi.gaml.operators.Maths;
 import msi.gaml.statements.draw.DrawingAttributes;
@@ -155,22 +153,26 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 	@Override
 	public Rectangle2D drawField(final double[] fieldValues, final FieldDrawingAttributes attributes) {
 		final List<?> textures = attributes.getTextures();
-		if (textures == null) { return null; }
+		if (textures == null)
+			return null;
 		final Object image = textures.get(0);
-		if (image instanceof GamaFile) { return drawFile((GamaFile<?, ?>) image, attributes); }
-		if (image instanceof BufferedImage) { return drawImage((BufferedImage) image, attributes); }
+		if (image instanceof IGamaFile)
+			return drawFile((IGamaFile<?, ?>) image, attributes);
+		if (image instanceof BufferedImage)
+			return drawImage((BufferedImage) image, attributes);
 		return null;
 	}
 
 	@Override
-	public Rectangle2D drawFile(final GamaFile<?, ?> file, final DrawingAttributes attributes) {
+	public Rectangle2D drawFile(final IGamaFile<?, ?> file, final DrawingAttributes attributes) {
 		final IScope scope = surface.getScope();
-		if (file instanceof GamaImageFile) {
-			return drawImage(((GamaImageFile) file).getImage(scope, attributes.useCache()), attributes);
-		}
-		if (!(file instanceof GamaGeometryFile)) { return null; }
+		if (file instanceof IGamaFile.Image)
+			return drawImage(((IGamaFile.Image) file).getImage(scope, attributes.useCache()), attributes);
+		if (!(file instanceof IGamaFile.Geom))
+			return null;
 		IShape shape = Cast.asGeometry(scope, file);
-		if (shape == null) { return null; }
+		if (shape == null)
+			return null;
 		final AxisAngle rotation = attributes.getRotation();
 		shape = new GamaShape(shape, null, rotation, attributes.getLocation(), attributes.getSize(), true);
 		final GamaColor c = attributes.getColor();
@@ -288,7 +290,8 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 
 	@Override
 	public Rectangle2D drawShape(final Geometry geometry, final DrawingAttributes attributes) {
-		if (geometry == null) { return null; }
+		if (geometry == null)
+			return null;
 		if (geometry instanceof GeometryCollection) {
 			final Rectangle2D result = new Rectangle2D.Double();
 			GeometryUtils.applyToInnerGeometries(geometry, (g) -> result.add(drawShape(g, attributes)));
@@ -338,7 +341,8 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 		// The image contains the dimensions of the grid.
 		final double stepx = (double) getLayerWidth() / (double) image.getWidth();
 		final double stepy = (double) getLayerHeight() / (double) image.getHeight();
-		if (stepx < 2 || stepy < 2) { return; }
+		if (stepx < 2 || stepy < 2)
+			return;
 		final Line2D line = new Line2D.Double();
 		currentRenderer.setColor(lineColor);
 		for (double step = 0.0, end = getLayerWidth(); step < end + 1; step += stepx) {
@@ -362,7 +366,8 @@ public class AWTDisplayGraphics extends AbstractDisplayGraphics implements Point
 	}
 
 	private void highlightRectangleInPixels(final Rectangle2D r) {
-		if (r == null) { return; }
+		if (r == null)
+			return;
 		final Stroke oldStroke = currentRenderer.getStroke();
 		currentRenderer.setStroke(new BasicStroke(5));
 		final Color old = currentRenderer.getColor();

@@ -40,7 +40,6 @@ import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.ISymbol;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.dev.utils.DEBUG.RunnableWithException;
@@ -99,7 +98,8 @@ public class GAMA {
 			final IExperimentPlan existingExperiment = controller.getExperiment();
 			if (existingExperiment != null) {
 				controller.getScheduler().pause();
-				if (!getGui().confirmClose(existingExperiment)) { return null; }
+				if (!getGui().confirmClose(existingExperiment))
+					return null;
 			}
 		}
 		controller = newExperiment.getController();
@@ -122,12 +122,12 @@ public class GAMA {
 
 	public static IExperimentPlan runModel(final Object object, final String exp, final boolean headless) {
 		final IModel model = GAML.findModelIn(object);
-		if (model == null) { return null; }
-		if (headless) {
+		if (model == null)
+			return null;
+		if (headless)
 			return addHeadlessExperiment(model, exp, null, null);
-		} else {
+		else
 			return runGuiExperiment(exp, model);
-		}
 	}
 
 	// /**
@@ -155,9 +155,8 @@ public class GAMA {
 
 		final ExperimentPlan currentExperiment = (ExperimentPlan) model.getExperiment(expName);
 
-		if (currentExperiment == null) {
+		if (currentExperiment == null)
 			throw GamaRuntimeException.error("Experiment " + expName + " cannot be created", getRuntimeScope());
-		}
 		currentExperiment.setHeadless(true);
 		for (final Map.Entry<String, Object> entry : params.entrySet()) {
 
@@ -185,7 +184,8 @@ public class GAMA {
 	// }
 
 	public static void closeExperiment(final IExperimentPlan experiment) {
-		if (experiment == null) { return; }
+		if (experiment == null)
+			return;
 		closeController(experiment.getController());
 	}
 
@@ -199,7 +199,8 @@ public class GAMA {
 	}
 
 	private static void closeController(final IExperimentController controller) {
-		if (controller == null) { return; }
+		if (controller == null)
+			return;
 		stopBenchmark(controller.getExperiment());
 		controller.close();
 		controllers.remove(controller);
@@ -213,21 +214,22 @@ public class GAMA {
 
 	public static SimulationAgent getSimulation() {
 		final IExperimentController controller = getFrontmostController();
-		if (controller == null || controller.getExperiment() == null) { return null; }
+		if (controller == null || controller.getExperiment() == null)
+			return null;
 		return controller.getExperiment().getCurrentSimulation();
 	}
 
 	public static IExperimentPlan getExperiment() {
 		final IExperimentController controller = getFrontmostController();
-		if (controller == null) { return null; }
+		if (controller == null)
+			return null;
 		return controller.getExperiment();
 	}
 
 	public static IModel getModel() {
 		final IExperimentController controller = getFrontmostController();
-		if (controller == null || controller.getExperiment() == null) {
+		if (controller == null || controller.getExperiment() == null)
 			return GamaMetaModel.INSTANCE.getAbstractModelSpecies();
-		}
 		return controller.getExperiment().getModel();
 	}
 
@@ -241,9 +243,8 @@ public class GAMA {
 			final boolean shouldStopSimulation) {
 		final IExperimentController controller = getFrontmostController();
 		if (controller == null || controller.getExperiment() == null || controller.isDisposing()
-				|| controller.getExperiment().getAgent() == null) {
+				|| controller.getExperiment().getAgent() == null)
 			return false;
-		}
 		// DEBUG.LOG("report error : " + g.getMessage());
 		// Returns whether or not to continue
 		if (!(g instanceof GamaRuntimeFileException) && scope != null && !scope.reportErrors()) {
@@ -283,12 +284,13 @@ public class GAMA {
 			scope.setCurrentError(g);
 		}
 		final boolean isInTryMode = scope != null && scope.isInTryMode();
-		if (isInTryMode) {
+		if (isInTryMode)
 			throw g;
-		} else {
+		else {
 			final boolean shouldStop = !reportError(scope, g, shouldStopSimulation);
 			if (shouldStop) {
-				if (isInHeadLessMode()) { throw g; }
+				if (isInHeadLessMode())
+					throw g;
 				pauseFrontmostExperiment();
 				throw g;
 			}
@@ -340,7 +342,8 @@ public class GAMA {
 
 	public static boolean isPaused() {
 		final IExperimentController controller = getFrontmostController();
-		if (controller == null || controller.getExperiment() == null) { return true; }
+		if (controller == null || controller.getExperiment() == null)
+			return true;
 		return controller.getScheduler().paused;
 
 	}
@@ -359,25 +362,29 @@ public class GAMA {
 
 	private static IScope copyRuntimeScope(final String additionalName) {
 		final IScope scope = getRuntimeScope();
-		if (scope != null) { return scope.copy(additionalName); }
+		if (scope != null)
+			return scope.copy(additionalName);
 		return null;
 	}
 
 	public static IScope getRuntimeScope() {
 		// If GAMA has not yet been loaded, we return null
-		if (!GamaBundleLoader.LOADED) { return null; }
 		final IExperimentController controller = getFrontmostController();
-		if (controller == null || controller.getExperiment() == null) { return getPlatformAgent().getScope(); }
+		if (controller == null || controller.getExperiment() == null)
+			return getPlatformAgent().getScope();
 		final ExperimentAgent a = controller.getExperiment().getAgent();
-		if (a == null || a.dead()) { return controller.getExperiment().getExperimentScope(); }
+		if (a == null || a.dead())
+			return controller.getExperiment().getExperimentScope();
 		final SimulationAgent s = a.getSimulation();
-		if (s == null || s.dead()) { return a.getScope(); }
+		if (s == null || s.dead())
+			return a.getScope();
 		return s.getScope();
 	}
 
 	public static RandomUtils getCurrentRandom() {
 		final IScope scope = getRuntimeScope();
-		if (scope == null) { return new RandomUtils(); }
+		if (scope == null)
+			return new RandomUtils();
 		return scope.getRandom();
 	}
 
@@ -417,11 +424,10 @@ public class GAMA {
 
 	public static IGui getGui() {
 		// either a headless listener or a fully configured gui
-		if (isInHeadlessMode || regularGui == null) {
+		if (isInHeadlessMode || regularGui == null)
 			return headlessGui;
-		} else {
+		else
 			return regularGui;
-		}
 	}
 
 	public static IGui getHeadlessGui() {
@@ -485,9 +491,12 @@ public class GAMA {
 	 *
 	 */
 	public static StopWatch benchmark(final IScope scope, final Object symbol) {
-		if (benchmarkAgent == null || symbol == null || scope == null) { return StopWatch.NULL; }
-		if (symbol instanceof IBenchmarkable) { return benchmarkAgent.record(scope, (IBenchmarkable) symbol); }
-		if (symbol instanceof ISymbol) { return benchmarkAgent.record(scope, ((ISymbol) symbol).getDescription()); }
+		if (benchmarkAgent == null || symbol == null || scope == null)
+			return StopWatch.NULL;
+		if (symbol instanceof IBenchmarkable)
+			return benchmarkAgent.record(scope, (IBenchmarkable) symbol);
+		if (symbol instanceof ISymbol)
+			return benchmarkAgent.record(scope, ((ISymbol) symbol).getDescription());
 		return StopWatch.NULL;
 	}
 

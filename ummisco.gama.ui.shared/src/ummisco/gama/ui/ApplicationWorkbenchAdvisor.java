@@ -44,7 +44,7 @@ import msi.gama.common.util.FileUtils;
 import msi.gama.outputs.layers.EventLayerStatement;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.concurrent.GamaExecutorService;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 import ummisco.gama.application.workspace.WorkspaceManager;
 import ummisco.gama.application.workspace.WorkspaceModelsManager;
 import ummisco.gama.dev.utils.DEBUG;

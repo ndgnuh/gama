@@ -1,10 +1,10 @@
 package ummisco.gama.ui.navigator.contents;
 
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.SHAPEFILE_CT_ID;
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.SHAPEFILE_SUPPORT_CT_ID;
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.getContentTypeId;
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.isSupport;
-import static ummisco.gama.ui.metadata.FileMetaDataProvider.shapeFileSupportedBy;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.SHAPEFILE_CT_ID;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.SHAPEFILE_SUPPORT_CT_ID;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.getContentTypeId;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.isSupport;
+import static ummisco.gama.file.metadata.FileMetaDataProvider.shapeFileSupportedBy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 
-import msi.gama.runtime.GAMA;
 import msi.gama.util.file.IGamaFileMetaData;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
+import ummisco.gama.application.bundles.GamaBundleLoader;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.navigator.NavigatorContentProvider;
 import ummisco.gama.ui.resources.GamaFonts;
@@ -69,7 +69,8 @@ public class WrappedFile extends WrappedResource<WrappedResource<?, ?>, IFile> {
 
 	@Override
 	public WrappedResource<?, ?> getParent() {
-		if (fileParent != null) { return fileParent; }
+		if (fileParent != null)
+			return fileParent;
 		return super.getParent();
 	}
 
@@ -86,7 +87,8 @@ public class WrappedFile extends WrappedResource<WrappedResource<?, ?>, IFile> {
 	@Override
 	public Object[] getNavigatorChildren() {
 		if (NavigatorContentProvider.FILE_CHILDREN_ENABLED) {
-			if (isGamaFile() || isShapeFile) { return getFileChildren(); }
+			if (isGamaFile() || isShapeFile)
+				return getFileChildren();
 		}
 		return EMPTY;
 	}
@@ -129,7 +131,7 @@ public class WrappedFile extends WrappedResource<WrappedResource<?, ?>, IFile> {
 	@Override
 	public void getSuffix(final StringBuilder sb) {
 		if (GamaUIPreferences.NAVIGATOR_METADATA.getValue()) {
-			final IGamaFileMetaData data = GAMA.getGui().getMetaDataProvider().getMetaData(getResource(), false, true);
+			final IGamaFileMetaData data = FileMetaDataProvider.getInstance().getMetaData(getResource(), false, true);
 			if (data != null) {
 				data.appendSuffix(sb);
 			}

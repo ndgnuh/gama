@@ -28,7 +28,7 @@
    </requires>
 
    <plugin
-         id="ummisco.gaml.extensions.sound"
+         id="ummisco.gama.extensions.sound"
          download-size="0"
          install-size="0"
          version="0.0.0"/>

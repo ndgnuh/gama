@@ -65,7 +65,7 @@ import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaMapFactory;
 import msi.gama.util.IContainer;
 import msi.gama.util.IList;
-import msi.gama.util.file.GamaGridFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gama.util.graph.AbstractGraphNodeAgent;
 import msi.gaml.compilation.IAgentConstructor;
 import msi.gaml.descriptions.ActionDescription;
@@ -555,7 +555,7 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 		final boolean usesVN = exp == null || Cast.asInt(scope, exp.value(scope)) == 4;
 		final boolean isHexagon = exp != null && Cast.asInt(scope, exp.value(scope)) == 6;
 		exp = species.getFacet(FILES);
-		IList<GamaGridFile> files = null;
+		IList<IGamaFile.Grid> files = null;
 		if (exp != null) {
 			files = Cast.asList(scope, exp.value(scope));
 		}
@@ -565,7 +565,7 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 					optimizer);
 		} else {
 			exp = species.getFacet(FILE);
-			final GamaGridFile file = (GamaGridFile) (exp != null ? exp.value(scope) : null);
+			final IGamaFile.Grid file = (IGamaFile.Grid) (exp != null ? exp.value(scope) : null);
 			if (file == null) {
 				result = new GridTopology(scope, host, rows, columns, isTorus, usesVN, isHexagon, horizontalOrientation,
 						useIndividualShapes, useNeighborsCache, optimizer);

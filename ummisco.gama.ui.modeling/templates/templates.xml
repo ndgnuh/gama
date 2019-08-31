@@ -2,7 +2,7 @@
 <templates>
 <template 	id="Global"
 			name="global"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define the global section"
 			autoinsert="true"
 			deleted="false"
@@ -12,7 +12,7 @@
 }</template>
 <template 	id="Species"
 			name="species"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define a species"
 			autoinsert="true"
 			deleted="false"
@@ -22,7 +22,7 @@ ${cursor}
 }</template>
 <template 	id="Species"
 			name="grid"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define a grid"
 			autoinsert="true"
 			deleted="false"
@@ -32,7 +32,7 @@ ${cursor}
 }</template>
 <template 	id="Experiment.Gui"
 			name="gui_experiment"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="Define a new experiment with a graphical user interface"
 			autoinsert="true"
 			deleted="false"
@@ -63,7 +63,7 @@ ${cursor}
 }</template>
 <template 	id="Experiment.Batch"
 			name="batch_experiment_with_display"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="Define a batch experiment with a permanent user interface"
 			autoinsert="true"
 			deleted="false"
@@ -86,7 +86,7 @@ ${cursor}
 }</template>
 <template 	id="Experiment.Batch"
 			name="batch_experiment"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="Define a batch experiment with no user interface"
 			autoinsert="true"
 			deleted="false"
@@ -103,7 +103,7 @@ ${cursor}
 }</template>
 <template 	id="Definition.Attribute"
 			name="var"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define a variable"
 			autoinsert="true"
 			deleted="false"
@@ -111,7 +111,7 @@ ${cursor}
 >${type} ${var_name} &lt;- ${expr} ;</template>
 <template 	id="Definition.Attribute"
 			name="const"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define a constant"
 			autoinsert="true"
 			deleted="false"
@@ -119,7 +119,7 @@ ${cursor}
 >${type} ${var_name} &lt;- ${expr} const: true;</template>
 <template 	id="Statement.Do"
 			name="do"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="do action w/o arguments"
 			autoinsert="true"
 			deleted="false"
@@ -128,7 +128,7 @@ ${cursor}
 
 <template 	id="Statement.Do"
 			name="do"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="do action with one argument"
 			autoinsert="true"
 			deleted="false"
@@ -137,7 +137,7 @@ ${cursor}
 
 <template 	id="Statement.If"
 			name="if"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="if w/o else"
 			autoinsert="true"
 			deleted="false"
@@ -148,7 +148,7 @@ ${cursor}
 
 <template 	id="Statement.If"
 			name="if-else"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="if/else statement"
 			autoinsert="true"
 			deleted="false"
@@ -161,7 +161,7 @@ ${cursor}
 
 <template 	id="Statement.Loop"
 			name="loop-times"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="loop a defined number of times"
 			autoinsert="true"
 			deleted="false"
@@ -172,7 +172,7 @@ ${cursor}
 
 <template 	id="Statement.Loop"
 			name="loop-while"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="loop-while statement"
 			autoinsert="true"
 			deleted="false"
@@ -183,7 +183,7 @@ ${cursor}
 
 <template 	id="Statement.Loop"
 			name="loop-over"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="loop-over statement"
 			autoinsert="true"
 			deleted="false"
@@ -194,7 +194,7 @@ ${cursor}
 
 <template 	id="Statement.Loop"
 			name="loop-from-to"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="loop-from-to statement"
 			autoinsert="true"
 			deleted="false"
@@ -204,7 +204,7 @@ ${cursor}
 }</template>
 <template 	id="Statement.Loop"
 			name="loop-from-to-step"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="loop-from-to-step statement"
 			autoinsert="true"
 			deleted="false"
@@ -214,7 +214,7 @@ ${cursor}
 }</template>
 <template 	id="Statement.Create"
 			name="create"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="create agents"
 			autoinsert="true"
 			deleted="false"
@@ -223,7 +223,7 @@ ${cursor}
 
 <template 	id="Statement.Create"
 			name="create"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="create agents (and return the result)"
 			autoinsert="true"
 			deleted="false"
@@ -231,7 +231,7 @@ ${cursor}
 >create ${species_name} number: ${int_expr} returns: ${a_temp_var} ;</template>
 <template 	id="Statement.Create"
 			name="create"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="create agents from a shape file"
 			autoinsert="true"
 			deleted="false"
@@ -239,7 +239,7 @@ ${cursor}
 >create ${species_name} from: shape_file(${file_name}) returns: ${a_temp_var} ;</template>
 <template 	id="Statement.Set"
 			name="set"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="assign a value to a variable"
 			autoinsert="true"
 			deleted="false"
@@ -248,7 +248,7 @@ ${cursor}
 
 <template 	id="Statement.Let"
 			name="let"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="define a temporary variable"
 			autoinsert="true"
 			deleted="false"
@@ -257,7 +257,7 @@ ${cursor}
 
 <template 	id="Statement.Ask"
 			name="ask"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="ask statement"
 			autoinsert="true"
 			deleted="false"
@@ -268,7 +268,7 @@ ${cursor}
 
 <template 	id="Statement.Ask"
 			name="ask"
-			context="msi.gama.lang.gaml.Gaml.Model"
+			context="ummisco.gama.gaml.Gaml.Model"
 			description="ask statement (with casting)"
 			autoinsert="true"
 			deleted="false"

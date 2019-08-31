@@ -11,8 +11,8 @@ package ummisco.gama.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import msi.gama.lang.gaml.GamlRuntimeModule;
 import msi.gama.runtime.GAMA;
+import ummisco.gama.GamlRuntimeModule;
 import ummisco.gama.ui.utils.SwtGui;
 
 public class Activator extends AbstractUIPlugin {

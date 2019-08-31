@@ -63,7 +63,7 @@ import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaPair;
 import msi.gama.util.IContainer;
 import msi.gama.util.IList;
-import msi.gama.util.file.GamaGeometryFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.operators.Maths;
 import msi.gaml.operators.Spatial;
 import msi.gaml.species.ISpecies;
@@ -106,14 +106,14 @@ public class GamaGeometryType extends GamaType<IShape> {
 			return geometriesToGeometry(scope, scope.getAgent().getPopulationFor((ISpecies) obj));
 		}
 		if (obj instanceof GamaPair) { return pairToGeometry(scope, (GamaPair) obj); }
-		if (obj instanceof GamaGeometryFile) { return ((GamaGeometryFile) obj).getGeometry(scope); }
+		if (obj instanceof IGamaFile.Geom) { return ((IGamaFile.Geom) obj).getGeometry(scope); }
 		if (obj instanceof IContainer) {
 			if (isPoints(scope, (IContainer) obj)) { return pointsToGeometry(scope, (IContainer<?, GamaPoint>) obj); }
 			return geometriesToGeometry(scope, (IContainer) obj);
 		}
 		if (obj instanceof String) {
 			// Try to decode a WKT representation (the format outputted by the
-			// conversion of geometries to strings)
+			// conversion of geometries to strings) 
 			try {
 				final Geometry g = SHAPE_READER.read((String) obj);
 				return new GamaShape(g);

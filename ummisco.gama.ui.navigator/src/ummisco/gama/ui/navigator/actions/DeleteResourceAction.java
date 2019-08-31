@@ -34,7 +34,7 @@ import org.eclipse.ui.internal.ide.IIDEHelpContextIds;
 import org.eclipse.ui.internal.ide.actions.LTKLauncher;
 import org.eclipse.ui.part.FileEditorInput;
 
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.contents.LinkedFile;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 import ummisco.gama.ui.utils.WorkbenchHelper;

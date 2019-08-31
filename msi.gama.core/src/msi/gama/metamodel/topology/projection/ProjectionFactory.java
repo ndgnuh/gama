@@ -28,7 +28,7 @@ import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaMapFactory;
-import msi.gama.util.file.GamaGisFile;
+import msi.gama.util.file.IGamaFile;
 import si.uom.SI;
 
 /**
@@ -52,7 +52,8 @@ public class ProjectionFactory {
 	public CoordinateReferenceSystem targetCRS;
 
 	public void setWorldProjectionEnv(final IScope scope, final Envelope3D env) {
-		if (world != null) { return; }
+		if (world != null)
+			return;
 		world = new WorldProjection(scope, null, env, this);
 		// ((WorldProjection) world).updateTranslations(env);
 	}
@@ -62,7 +63,8 @@ public class ProjectionFactory {
 			final double latitude) {
 		// If we already know in which CRS we project the data in GAMA, no need to recompute it. This information is
 		// normally wiped when an experiment is disposed
-		if (targetCRS != null) { return; }
+		if (targetCRS != null)
+			return;
 		try {
 			if (!GamaPreferences.External.LIB_TARGETED.getValue()) {
 				targetCRS = computeDefaultCRS(scope, GamaPreferences.External.LIB_TARGET_CRS.getValue(), true);
@@ -105,7 +107,8 @@ public class ProjectionFactory {
 	}
 
 	public CoordinateReferenceSystem getSaveCRS(final IScope scope) {
-		if (GamaPreferences.External.LIB_USE_DEFAULT.getValue()) { return getWorld().getInitialCRS(scope); }
+		if (GamaPreferences.External.LIB_USE_DEFAULT.getValue())
+			return getWorld().getInitialCRS(scope);
 		return computeDefaultCRS(scope, GamaPreferences.External.LIB_OUTPUT_CRS.getValue(), false);
 	}
 
@@ -114,7 +117,8 @@ public class ProjectionFactory {
 	}
 
 	public CoordinateReferenceSystem getCRS(final IScope scope, final int code, final boolean longitudeFirst) {
-		if (code == GamaGisFile.ALREADY_PROJECTED_CODE) { return getTargetCRS(scope); }
+		if (code == IGamaFile.Gis.ALREADY_PROJECTED_CODE)
+			return getTargetCRS(scope);
 		return getCRS(scope, EPSGPrefix + code, longitudeFirst);
 	}
 
@@ -169,9 +173,11 @@ public class ProjectionFactory {
 	public IProjection fromParams(final IScope scope, final Map<String, Object> params, final Envelope3D env) {
 		final Boolean lonFirst = params.containsKey("longitudeFirst") ? (Boolean) params.get("longitudeFirst") : true;
 		final Object crs = params.get("crs");
-		if (crs instanceof String) { return fromCRS(scope, getCRS(scope, (String) crs, lonFirst), env); }
+		if (crs instanceof String)
+			return fromCRS(scope, getCRS(scope, (String) crs, lonFirst), env);
 		final Object srid = params.get("srid");
-		if (srid instanceof String) { return fromCRS(scope, getCRS(scope, (String) srid, lonFirst), env); }
+		if (srid instanceof String)
+			return fromCRS(scope, getCRS(scope, (String) srid, lonFirst), env);
 		return fromCRS(scope, getDefaultInitialCRS(scope), env);
 	}
 
@@ -185,9 +191,8 @@ public class ProjectionFactory {
 			}
 			world = new WorldProjection(scope, crs, env, this);
 			return world;
-		} else {
+		} else
 			return new Projection(scope, world, crs, env, this);
-		}
 	}
 
 	public IProjection forSavingWith(final IScope scope, final Integer epsgCode) throws FactoryException {
@@ -238,19 +243,17 @@ public class ProjectionFactory {
 						+ " does not correspond to a known EPSG code. Try to change it in Gama > Preferences... > External",
 						scope);
 			}
-		} else {
+		} else
 			return getTargetCRS(scope);
-		}
 	}
 
 	public void testConsistency(final IScope scope, final CoordinateReferenceSystem crs, final Envelope env) {
 		if (!(crs instanceof ProjectedCRS)) {
-			if (env.getHeight() > 180 || env.getWidth() > 180) {
+			if (env.getHeight() > 180 || env.getWidth() > 180)
 				throw GamaRuntimeException.error(
 						"Inconsistency between the data and the CRS: The CRS " + crs
 								+ " corresponds to a not projected one, whereas the data seem to be already projected.",
 						scope);
-			}
 		}
 	}
 

@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TypedListener;
 
+import msi.gama.common.interfaces.IGui;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.GamaFonts;
@@ -87,22 +88,22 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	@Override
 	public void handleEvent(final Event e) {
 		switch (e.type) {
-			case SWT.MouseExit:
+			case IGui.MouseExit:
 				doHover(false);
 				break;
-			case SWT.MouseMove:
+			case IGui.MouseMove:
 				break;
-			case SWT.MouseEnter:
-			case SWT.MouseHover:
+			case IGui.MouseEnter:
+			case IGui.MouseHover:
 				doHover(true);
 				e.doit = true;
 				break;
-			case SWT.MouseUp:
+			case IGui.MouseUp:
 				if (e.button == 1 && getClientArea().contains(e.x, e.y)) {
 					doButtonUp();
 				}
 				break;
-			case SWT.MouseDown:
+			case IGui.MouseDown:
 				if (e.button == 1 && getClientArea().contains(e.x, e.y)) {
 					doButtonDown();
 				}
@@ -118,12 +119,14 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	 * @param listener
 	 */
 	public void addSelectionListener(final SelectionListener listener) {
-		if (listener == null) { return; }
+		if (listener == null)
+			return;
 		addListener(SWT.Selection, new TypedListener(listener));
 	}
 
 	public void doButtonDown() {
-		if (!enabled) { return; }
+		if (!enabled)
+			return;
 		down = true;
 		if (!isDisposed()) {
 			redraw();
@@ -131,7 +134,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	}
 
 	private void doButtonUp() {
-		if (!enabled) { return; }
+		if (!enabled)
+			return;
 		final Event e = new Event();
 		e.item = this;
 		e.widget = this;
@@ -214,7 +218,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	}
 
 	private int drawImage(final GC gc, final int x, final int y) {
-		if (getImage() == null) { return x; }
+		if (getImage() == null)
+			return x;
 		gc.drawImage(getImage(), x, y);
 		return x + getImage().getBounds().width + imagePadding;
 	}
@@ -253,7 +258,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	}
 
 	public String newText() {
-		if (text == null) { return null; }
+		if (text == null)
+			return null;
 		final int parentWidth = getParent().getBounds().width;
 		final int width = computeMinWidth();
 		if (parentWidth < width) {
@@ -285,7 +291,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	 * @param image
 	 */
 	public FlatButton setImage(final Image image) {
-		if (this.image == image) { return this; }
+		if (this.image == image)
+			return this;
 		this.image = image;
 		redraw();
 		return this;
@@ -310,20 +317,22 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	}
 
 	public FlatButton setText(final String text) {
-		if (text == null) { return this; }
-		if (text.equals(this.text)) { return this; }
+		if (text == null)
+			return this;
+		if (text.equals(this.text))
+			return this;
 		this.text = text;
 		redraw();
 		return this;
 	}
 
 	private void addListeners() {
-		addListener(SWT.MouseDown, this);
-		addListener(SWT.MouseExit, this);
-		addListener(SWT.MouseEnter, this);
-		addListener(SWT.MouseHover, this);
-		addListener(SWT.MouseUp, this);
-		addListener(SWT.MouseMove, this);
+		addListener(IGui.MouseDown, this);
+		addListener(IGui.MouseExit, this);
+		addListener(IGui.MouseEnter, this);
+		addListener(IGui.MouseHover, this);
+		addListener(IGui.MouseUp, this);
+		addListener(IGui.MouseMove, this);
 	}
 
 	@Override
@@ -334,12 +343,12 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 			if (enabled) {
 				addListeners();
 			} else {
-				removeListener(SWT.MouseDown, (Listener) this);
-				removeListener(SWT.MouseExit, (Listener) this);
-				removeListener(SWT.MouseEnter, (Listener) this);
-				removeListener(SWT.MouseHover, (Listener) this);
-				removeListener(SWT.MouseUp, (Listener) this);
-				removeListener(SWT.MouseMove, (Listener) this);
+				removeListener(IGui.MouseDown, (Listener) this);
+				removeListener(IGui.MouseExit, (Listener) this);
+				removeListener(IGui.MouseEnter, (Listener) this);
+				removeListener(IGui.MouseHover, (Listener) this);
+				removeListener(IGui.MouseUp, (Listener) this);
+				removeListener(IGui.MouseMove, (Listener) this);
 			}
 			redraw();
 		}
@@ -355,7 +364,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	}
 
 	public FlatButton small() {
-		if (height == 20) { return this; }
+		if (height == 20)
+			return this;
 		height = 20;
 		redraw();
 		return this;
@@ -364,7 +374,8 @@ public class FlatButton extends Canvas implements PaintListener, Listener {
 	public FlatButton setColor(final GamaUIColor c) {
 		final RGB oldColorCode = colorCode;
 		final RGB newColorCode = c.getRGB();
-		if (newColorCode.equals(oldColorCode)) { return this; }
+		if (newColorCode.equals(oldColorCode))
+			return this;
 		colorCode = c.getRGB();
 		redraw();
 		return this;

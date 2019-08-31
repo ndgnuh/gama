@@ -10,41 +10,44 @@
  ********************************************************************************************************/
 package msi.gama.common.interfaces;
 
-import msi.gama.outputs.IDisplayOutput;
+import java.lang.reflect.Constructor;
+
+import msi.gama.outputs.LayeredDisplayOutput;
 import msi.gama.outputs.display.NullDisplaySurface;
+import msi.gama.precompiler.GamlAnnotations.doc;
 
 @FunctionalInterface
 public interface IDisplayCreator {
 
 	public static class DisplayDescription implements IDisplayCreator, IGamlDescription {
 
-		private final IDisplayCreator original;
-		private final String name, plugin;
+		private Constructor<IDisplaySurface> constructor;
+		private final String name, plugin, documentation;
 
-		public DisplayDescription(final IDisplayCreator original, final String name, final String plugin) {
-			this.original = original;
+		public DisplayDescription(final Class<IDisplaySurface> clazz, final String name, final String plugin) {
+			try {
+				constructor = clazz.getConstructor(LayeredDisplayOutput.class);
+			} catch (NoSuchMethodException | SecurityException e) {}
 			this.name = name;
 			this.plugin = plugin;
-		}
-
-		/**
-		 * Method create()
-		 *
-		 * @see msi.gama.common.interfaces.IDisplayCreator#create(java.lang.Object[])
-		 */
-		@Override
-		public IDisplaySurface create(final Object... args) {
-			if (original != null) { return original.create(args); }
-			return new NullDisplaySurface();
-		}
-
-		public IDisplaySurface create(final IDisplayOutput output, final Object... args) {
-			final Object[] params = new Object[args.length + 1];
-			params[0] = output;
-			for (int i = 0; i < args.length; i++) {
-				params[i + 1] = args[i];
+			doc doc = clazz.getDeclaredAnnotation(doc.class);
+			if (doc != null) {
+				documentation = doc.value();
+			} else {
+				documentation = name + " display";
 			}
-			return create(params);
+		}
+
+		@Override
+		public IDisplaySurface create(final LayeredDisplayOutput output) {
+			if (constructor != null) {
+				try {
+					return constructor.newInstance(output);
+				} catch (Exception e1) {
+
+				}
+			}
+			return new NullDisplaySurface();
 		}
 
 		/**
@@ -92,7 +95,7 @@ public interface IDisplayCreator {
 		 */
 		@Override
 		public String getDocumentation() {
-			return "";
+			return documentation;
 		}
 
 		/**
@@ -107,6 +110,6 @@ public interface IDisplayCreator {
 
 	}
 
-	IDisplaySurface create(Object... args);
+	IDisplaySurface create(LayeredDisplayOutput output);
 
 }

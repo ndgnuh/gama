@@ -48,9 +48,10 @@ import org.opengis.feature.type.PropertyDescriptor;
 
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
 import msi.gama.runtime.GAMA;
-import msi.gama.util.file.GamaShapeFile;
-import msi.gama.util.file.GamaShapeFile.ShapeInfo;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.file.GamaShapeFile;
+import ummisco.gama.file.GamaShapeFile.ShapeInfo;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.controls.FlatButton;
 import ummisco.gama.ui.menus.GamaMenu;
@@ -108,7 +109,7 @@ public class ShapeFileViewer extends GISFileViewer implements IToolbarDecoratedV
 		GamaUIColor color;
 
 		final GamaShapeFile.ShapeInfo info =
-				(ShapeInfo) GAMA.getGui().getMetaDataProvider().getMetaData(file, false, true);
+				(ShapeInfo) FileMetaDataProvider.getInstance().getMetaData(file, false, true);
 		if (info == null) {
 			s = "Error in reading file information";
 			color = IGamaColors.ERROR;
@@ -243,20 +244,21 @@ public class ShapeFileViewer extends GISFileViewer implements IToolbarDecoratedV
 	}
 
 	public Mode determineMode(final SimpleFeatureType schema, final String def) {
-		if (schema == null) {
+		if (schema == null)
 			return Mode.NONE;
-		} else if (SLDs.isLine(schema)) {
+		else if (SLDs.isLine(schema))
 			return Mode.LINE;
-		} else if (SLDs.isPolygon(schema)) {
+		else if (SLDs.isPolygon(schema))
 			return Mode.POLYGON;
-		} else if (SLDs.isPoint(schema)) {
+		else if (SLDs.isPoint(schema))
 			return Mode.POINT;
-		} else { // default
-			if (def.equals("Polygon")) {
+		else { // default
+			if (def.equals("Polygon"))
 				return Mode.POLYGON;
-			} else if (def.equals("Line")) {
+			else if (def.equals("Line"))
 				return Mode.LINE;
-			} else if (def.equals("Point")) { return Mode.POINT; }
+			else if (def.equals("Point"))
+				return Mode.POINT;
 		}
 		return Mode.ALL; // we are a generic geometry
 	}
@@ -268,11 +270,10 @@ public class ShapeFileViewer extends GISFileViewer implements IToolbarDecoratedV
 	 */
 	@Override
 	public String[] getColorLabels() {
-		if (mode == Mode.POLYGON || mode == Mode.ALL) {
+		if (mode == Mode.POLYGON || mode == Mode.ALL)
 			return new String[] { "Set line color...", "Set fill color..." };
-		} else {
+		else
 			return new String[] { "Set line color..." };
-		}
 	}
 
 	/**

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="gama.display">
+      <implementation
+            class="ummisco.gama.display.java2d.Java2DDisplaySurface"
+            keyword="java2D">
+      </implementation>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="msi.gama.gui.category.gama"
+            class="ummisco.gama.display.java2d.AWTDisplayView"
+            icon="platform:/plugin/ummisco.gama.ui.shared/icons/view.display2.png"
+            id="ummisco.gama.application.view.LayeredDisplayView"
+            name="Display"
+            restorable="false">
+      </view>
+   </extension>
+
+</plugin>

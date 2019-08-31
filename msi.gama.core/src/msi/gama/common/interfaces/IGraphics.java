@@ -21,10 +21,9 @@ import org.locationtech.jts.geom.Geometry;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.outputs.layers.OverlayLayer;
 import msi.gama.outputs.layers.charts.ChartOutput;
-import msi.gama.util.file.GamaFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gaml.statements.draw.DrawingAttributes;
 import msi.gaml.statements.draw.FieldDrawingAttributes;
-import msi.gaml.statements.draw.DrawingAttributes;
 import msi.gaml.statements.draw.TextDrawingAttributes;
 
 /**
@@ -59,7 +58,7 @@ public interface IGraphics {
 
 	int getDisplayHeight();
 
-	Rectangle2D drawFile(GamaFile<?, ?> file, DrawingAttributes attributes);
+	Rectangle2D drawFile(IGamaFile<?, ?> file, DrawingAttributes attributes);
 
 	Rectangle2D drawField(final double[] values, final FieldDrawingAttributes attributes);
 

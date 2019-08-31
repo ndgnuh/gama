@@ -19,10 +19,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
-import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import ummisco.gama.ui.interfaces.IRuntimeExceptionHandler;
 
 public class RuntimeExceptionHandler extends Job implements IRuntimeExceptionHandler {
 

@@ -18,6 +18,7 @@ import java.util.Set;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -41,71 +42,32 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.Pref;
-import msi.gama.lang.gaml.indexer.GamlResourceIndexer;
-import msi.gama.lang.gaml.resource.GamlResource;
-import msi.gama.lang.gaml.ui.editor.GamlEditor;
-import msi.gama.lang.gaml.ui.reference.BuiltinReferenceMenu;
-import msi.gama.lang.gaml.ui.reference.ColorReferenceMenu;
-import msi.gama.lang.gaml.ui.reference.OperatorsReferenceMenu;
-import msi.gama.lang.gaml.ui.reference.TemplateReferenceMenu;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.Collector;
-import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.ast.ISyntacticElement;
+import ummisco.gama.file.gaml.GamlFileExtension;
+import ummisco.gama.gaml.indexer.GamlResourceIndexer;
+import ummisco.gama.gaml.resource.GamlResource;
+import ummisco.gama.ui.editor.GamlEditor;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
 import ummisco.gama.ui.menus.GamaMenu;
+import ummisco.gama.ui.reference.BuiltinReferenceMenu;
+import ummisco.gama.ui.reference.ColorReferenceMenu;
+import ummisco.gama.ui.reference.OperatorsReferenceMenu;
+import ummisco.gama.ui.reference.TemplateReferenceMenu;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaIcons;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 public class EditorMenu extends ContributionItem implements IWorkbenchContribution {
 
-	// private static EditorMenu INSTANCE;
-
-	// MenuItem mark;
 	Pref<Boolean> markPref;
 
 	public EditorMenu() {
 		super();
-		// INSTANCE = this;
 	}
 
-	// public static EditorMenu getInstance() {
-	// return INSTANCE;
-	// }
-
-	// public void editorChanged() {
-	// line.setSelection(getEditor().isLineNumberRulerVisible());
-	// folding.setSelection(getEditor().isRangeIndicatorEnabled());
-	// box.setSelection(getEditor().isDecorationEnabled());
-	// initializePreferences();
-	// mark.setSelection(markPref.getValue());
-	// }
-
 	private void initializePreferences() {
-		// if (markPref == null) {
-		// markPref = GamaPreferences.get("pref_editor_mark_occurrences", Boolean.class);
-		// // final IPreferenceChangeListener<Boolean> change = new IPreferenceChangeListener<Boolean>() {
-		// //
-		// // @Override
-		// // public boolean beforeValueChange(final Boolean newValue) {
-		// // return true;
-		// // }
-		// //
-		// // @Override
-		// // public void afterValueChange(final Boolean newValue) {
-		// // mark.setSelection(newValue);
-		// // }
-		// // };
-		// // markPref.addChangeListener(change);
-		// // final IPreferenceStore store = getEditor().getAdvancedPreferenceStore();
-		// // store.addPropertyChangeListener(event -> {
-		// // final String id = event.getProperty();
-		// // if (id.equals(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_LINE_NUMBER_RULER)) {
-		// // line.setSelection((Boolean) event.getNewValue());
-		// // }
-		// // });
-		// }
 
 	}
 
@@ -260,7 +222,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 				final IProject proj = myFile.getProject();
 				// AD Addresses Issue 796 by passing null to the "without"
 				// parameter
-				final List<URI> resources = GAML.getAllGamaURIsInProject(proj);
+				final List<URI> resources = getAllGamaURIsInProject(proj);
 				final ResourceSet rs = editor.resourceSetProvider.get(proj);
 				for (final URI uri : resources) {
 					final GamlResource xr = (GamlResource) rs.getResource(uri, true);
@@ -282,6 +244,22 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 			}
 		});
 		return map;
+	}
+
+	public static List<URI> getAllGamaURIsInProject(final IProject project) {
+		final ArrayList<URI> allGamaFiles = new ArrayList<>();
+		try {
+			if (project != null) {
+				project.accept(iR -> {
+					if (GamlFileExtension.isAny(iR.getName())) {
+						final URI uri = URI.createPlatformResourceURI(iR.requestFullPath().toString(), true);
+						allGamaFiles.add(uri);
+					}
+					return true;
+				}, IResource.FILE);
+			}
+		} catch (final CoreException e) {}
+		return allGamaFiles;
 	}
 
 	/**
@@ -369,7 +347,7 @@ public class EditorMenu extends ContributionItem implements IWorkbenchContributi
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				try {
-					WorkbenchHelper.runCommand("msi.gama.lang.gaml.Gaml.validate");
+					WorkbenchHelper.runCommand("ummisco.gama.gaml.Gaml.validate");
 				} catch (final ExecutionException e1) {
 					e1.printStackTrace();
 				}

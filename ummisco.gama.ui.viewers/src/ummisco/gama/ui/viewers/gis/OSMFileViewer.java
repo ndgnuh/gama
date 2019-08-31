@@ -49,7 +49,7 @@ import org.opengis.feature.simple.SimpleFeatureType;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.file.GamaOsmFile;
+import ummisco.gama.file.GamaOsmFile;
 import ummisco.gama.ui.controls.FlatButton;
 import ummisco.gama.ui.menus.GamaMenu;
 import ummisco.gama.ui.resources.GamaColors;
@@ -218,7 +218,8 @@ public class OSMFileViewer extends GISFileViewer {
 	public void saveAsCSV() {
 
 		final Layer layer = mapLayerTable.getMapLayerTableViewer().getSelectedMapLayer();
-		if (layer == null) { return; }
+		if (layer == null)
+			return;
 		final HashSet<String> atts = new HashSet<>();
 
 		final String layerName = layer.getFeatureSource().getName().toString();

@@ -889,7 +889,7 @@
                <test
                      forcePluginActivation="true"
                      property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-                     value="msi.gama.lang.gaml.Gaml">
+                     value="ummisco.gama.gaml.Gaml">
                </test>
             </with>
          </and>
@@ -1117,7 +1117,7 @@
       <serviceFactory
             factoryClass="ummisco.gama.ui.factories.RuntimeExceptionHandlerFactory">
          <service
-               serviceClass="msi.gama.common.interfaces.IRuntimeExceptionHandler">
+               serviceClass="ummisco.gama.ui.interfaces.IRuntimeExceptionHandler">
          </service>
       </serviceFactory>
    </extension>

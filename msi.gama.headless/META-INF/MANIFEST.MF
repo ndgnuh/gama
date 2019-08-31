@@ -5,12 +5,13 @@ Bundle-SymbolicName: msi.gama.headless;singleton:=true
 Bundle-Version: 1.9.0.qualifier
 Bundle-Activator: msi.gama.headless.runtime.Activator
 Require-Bundle: msi.gama.core,
- msi.gama.lang.gaml,
+ ummisco.gama.gaml,
  org.eclipse.core.runtime,
  msi.gama.ext,
  simtools.gama.extensions.traffic,
  ummisco.gama.extensions.maths,
- irit.gama.extensions.database
+ irit.gama.extensions.database,
+ ummisco.gama.application;bundle-version="1.9.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: 
  msi.gama.headless.common;uses:="msi.gama.headless.job",

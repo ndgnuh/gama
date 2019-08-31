@@ -35,13 +35,11 @@ public class GamaFolderFile extends GamaFile<IList<String>, String> {
 
 	@Override
 	protected void checkValidity(final IScope scope) throws GamaRuntimeException {
-		if (!getFile(scope).isDirectory()) {
+		if (!getFile(scope).isDirectory())
 			throw GamaRuntimeException.error(getFile(scope).getAbsolutePath() + "is not a folder", scope);
-		}
-		if (!getFile(scope).exists()) {
+		if (!getFile(scope).exists())
 			throw GamaRuntimeException.error("The folder " + getFile(scope).getAbsolutePath()
 					+ " does not exist. Please use 'new_folder' instead", scope);
-		}
 	}
 
 	@Override
@@ -67,7 +65,8 @@ public class GamaFolderFile extends GamaFile<IList<String>, String> {
 	 */
 	@Override
 	protected void fillBuffer(final IScope scope) throws GamaRuntimeException {
-		if (getBuffer() != null) { return; }
+		if (getBuffer() != null)
+			return;
 		final String[] list = getFile(scope).list();
 		final IList<String> result =
 				list == null ? GamaListFactory.EMPTY_LIST : createWithoutCasting(Types.STRING, list);

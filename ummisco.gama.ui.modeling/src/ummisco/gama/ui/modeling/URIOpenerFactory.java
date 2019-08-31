@@ -17,7 +17,7 @@ public class URIOpenerFactory extends AbstractServiceFactory implements IModelEd
 	final IURIEditorOpener opener;
 
 	public URIOpenerFactory() {
-		final Injector injector = ModelingActivator.getInstance().getInjector("msi.gama.lang.gaml.Gaml");
+		final Injector injector = ModelingActivator.getInstance().getInjector("ummisco.gama.gaml.Gaml");
 		opener = injector.getInstance(IURIEditorOpener.class);
 	}
 

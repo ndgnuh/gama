@@ -9,7 +9,6 @@ import java.util.Map;
 
 import msi.gama.precompiler.GamlAnnotations.action;
 import msi.gama.precompiler.GamlAnnotations.constant;
-import msi.gama.precompiler.GamlAnnotations.display;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.experiment;
 import msi.gama.precompiler.GamlAnnotations.factory;
@@ -27,12 +26,14 @@ import msi.gama.precompiler.tests.TestProcessor;
 public interface Constants {
 
 	static String capitalizeFirstLetter(final String original) {
-		if (original == null || original.length() == 0) { return original; }
+		if (original == null || original.length() == 0)
+			return original;
 		return original.substring(0, 1).toUpperCase() + original.substring(1);
 	}
 
 	static String capitalizeAllWords(final String str) {
-		if (str == null || str.length() == 0) { return str; }
+		if (str == null || str.length() == 0)
+			return str;
 		final int strLen = str.length();
 		final StringBuffer buffer = new StringBuffer(strLen);
 		boolean capitalizeNext = true;
@@ -91,7 +92,7 @@ public interface Constants {
 
 	List<String> ss1 = Arrays.asList("const", "true", "false", "name", "type");
 	List<String> ss2 = Arrays.asList("CONST", "TRUE", "FALSE", "NAME", "TYPE");
-	Map<String, String> CLASS_NAMES = new HashMap<String, String>() {
+	Map<String, String> CLASS_NAMES = new HashMap<>() {
 		{
 			put("IAgent", "IA");
 			put("IGamlAgent", "IG");
@@ -131,7 +132,7 @@ public interface Constants {
 
 		}
 	};
-	Map<String, String> RETURN_WHEN_NULL = new HashMap<String, String>() {
+	Map<String, String> RETURN_WHEN_NULL = new HashMap<>() {
 		{
 			put(DOUBLE, " 0d");
 			put(INTEGER, " 0");
@@ -139,7 +140,7 @@ public interface Constants {
 		}
 	};
 
-	Map<String, String> CHECK_PRIM = new HashMap<String, String>() {
+	Map<String, String> CHECK_PRIM = new HashMap<>() {
 		{
 			put("int", INTEGER);
 			put("short", INTEGER);
@@ -153,7 +154,7 @@ public interface Constants {
 	String PACKAGE_NAME = "gaml.additions";
 
 	Map<Class<? extends Annotation>, IProcessor<?>> processors =
-			new LinkedHashMap<Class<? extends Annotation>, IProcessor<?>>() {
+			new LinkedHashMap<>() {
 				{
 					// Order is important
 					// Doc built first, so that test generation can happen subsequently
@@ -168,7 +169,7 @@ public interface Constants {
 					put(file.class, new FileProcessor());
 					put(action.class, new ActionProcessor());
 					put(skill.class, new SkillProcessor());
-					put(display.class, new DisplayProcessor());
+					// put(display.class, new DisplayProcessor());
 					put(experiment.class, new ExperimentProcessor());
 					put(constant.class, new ConstantProcessor());
 					// TestProcessor actually processes both @tests and @test annotations

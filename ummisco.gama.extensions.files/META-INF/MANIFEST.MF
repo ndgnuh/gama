@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Extensions of GAML with several file types
+Bundle-SymbolicName: ummisco.gama.extensions.files;singleton:=true
+Bundle-Version: 1.9.0.qualifier
+Require-Bundle: msi.gama.core;bundle-version="1.6.0",
+ msi.gama.ext;bundle-version="1.0.0",
+ org.eclipse.core.resources,
+ org.eclipse.core.contenttype,
+ ummisco.gama.gaml,
+ org.apache.commons.compress
+Bundle-ClassPath: .
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: msi.gaml.extensions.fipa
+Export-Package: ummisco.gama.file,
+ ummisco.gama.file.csv,
+ ummisco.gama.file.gaml,
+ ummisco.gama.file.json,
+ ummisco.gama.file.metadata
+Import-Package: org.apache.commons.compress.compressors,
+ org.apache.commons.lang,
+ org.eclipse.core.runtime;version="3.5.0"
+

@@ -19,14 +19,12 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Multimap;
 
-import msi.gama.common.GamlFileExtension;
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.experiment.ITopLevelAgent;
@@ -37,9 +35,6 @@ import msi.gama.runtime.IExecutionContext;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.IContainer;
-import msi.gama.util.file.GamlFileInfo;
-import msi.gama.util.file.IGamlResourceInfoProvider;
-import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
@@ -61,7 +56,7 @@ public class GAML {
 
 	public volatile static IExpressionFactory expressionFactory = null;
 	public volatile static ModelFactory modelFactory = null;
-	private volatile static IGamlResourceInfoProvider infoProvider = null;
+	// private volatile static IGamlResourceInfoProvider infoProvider = null;
 	private volatile static IGamlEcoreUtils gamlEcoreUtils = null;
 	private volatile static IGamlModelBuilder modelBuilder = null;
 
@@ -287,9 +282,9 @@ public class GAML {
 		return (ExperimentDescription) agent.getSpecies().getDescription();
 	}
 
-	public static void registerInfoProvider(final IGamlResourceInfoProvider info) {
-		infoProvider = info;
-	}
+	// public static void registerInfoProvider(final IGamlResourceInfoProvider info) {
+	// infoProvider = info;
+	// }
 
 	public static void registerGamlEcoreUtils(final IGamlEcoreUtils utils) {
 		gamlEcoreUtils = utils;
@@ -303,13 +298,13 @@ public class GAML {
 		return gamlEcoreUtils;
 	}
 
-	public static GamlFileInfo getInfo(final URI uri, final long stamp) {
-		return infoProvider.getInfo(uri, stamp);
-	}
-
-	public static ISyntacticElement getContents(final URI uri) {
-		return infoProvider.getContents(uri);
-	}
+	// public static GamlFileInfo getInfo(final URI uri, final long stamp) {
+	// return infoProvider.getInfo(uri, stamp);
+	// }
+	//
+	// public static ISyntacticElement getContents(final URI uri) {
+	// return infoProvider.getContents(uri);
+	// }
 
 	public static IModel compile(final URI uri, final List<GamlCompilationError> errors) {
 		return modelBuilder.compile(uri, errors);
@@ -356,37 +351,6 @@ public class GAML {
 		}
 
 		return null;
-	}
-
-	public static List<IFile> getAllGamaFilesInProject(final IProject project) {
-		final ArrayList<IFile> allGamaFiles = new ArrayList<>();
-		try {
-			if (project != null) {
-				project.accept(iR -> {
-					if (GamlFileExtension.isAny(iR.getName())) {
-						allGamaFiles.add((IFile) iR.requestResource());
-					}
-					return true;
-				}, IResource.FILE);
-			}
-		} catch (final CoreException e) {}
-		return allGamaFiles;
-	}
-
-	public static List<URI> getAllGamaURIsInProject(final IProject project) {
-		final ArrayList<URI> allGamaFiles = new ArrayList<>();
-		try {
-			if (project != null) {
-				project.accept(iR -> {
-					if (GamlFileExtension.isAny(iR.getName())) {
-						final URI uri = URI.createPlatformResourceURI(iR.requestFullPath().toString(), true);
-						allGamaFiles.add(uri);
-					}
-					return true;
-				}, IResource.FILE);
-			}
-		} catch (final CoreException e) {}
-		return allGamaFiles;
 	}
 
 }

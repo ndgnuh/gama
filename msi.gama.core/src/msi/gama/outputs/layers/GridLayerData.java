@@ -24,13 +24,12 @@ import msi.gama.common.util.ImageUtils;
 import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix;
 import msi.gama.metamodel.topology.grid.IGrid;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.util.GamaColor;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gama.util.matrix.GamaFloatMatrix;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
@@ -45,7 +44,7 @@ public class GridLayerData extends LayerData {
 	Boolean turnGridOn;
 	private final boolean shouldComputeImage;
 	Attribute<GamaColor> line;
-	Attribute<GamaImageFile> texture;
+	Attribute<IGamaFile.Image> texture;
 	Attribute<double[]> elevation;
 	Attribute<Boolean> triangulation;
 	Attribute<Boolean> grayscale;
@@ -69,11 +68,10 @@ public class GridLayerData extends LayerData {
 					case IType.INT:
 						return grid.getGridValueOf(scope, exp);
 					case IType.BOOL:
-						if ((Boolean) exp.value(scope)) {
+						if ((Boolean) exp.value(scope))
 							return grid.getGridValue();
-						} else {
+						else
 							return null;
-						}
 				}
 			}
 			return null;
@@ -83,11 +81,10 @@ public class GridLayerData extends LayerData {
 		text = create(IKeyword.TEXT, Types.BOOL, false);
 		texture = create(IKeyword.TEXTURE, (scope, exp) -> {
 			final Object result = exp.value(scope);
-			if (result instanceof GamaImageFile) {
-				return (GamaImageFile) exp.value(scope);
-			} else {
+			if (result instanceof IGamaFile.Image)
+				return (IGamaFile.Image) exp.value(scope);
+			else
 				throw GamaRuntimeException.error("The texture of grids must be an image file", scope);
-			}
 		}, Types.FILE, null, null);
 	}
 
@@ -95,9 +92,10 @@ public class GridLayerData extends LayerData {
 	public void compute(final IScope scope, final IGraphics g) throws GamaRuntimeException {
 		if (grid == null) {
 			final IPopulation<? extends IAgent> gridPop = scope.getAgent().getPopulationFor(name);
-			if (gridPop == null) {
+			if (gridPop == null)
 				throw error("No grid species named " + name + " can be found", scope);
-			} else if (!gridPop.isGrid()) { throw error("Species named " + name + " is not a grid", scope); }
+			else if (!gridPop.isGrid())
+				throw error("Species named " + name + " is not a grid", scope);
 			grid = (IGrid) gridPop.getTopology().getPlaces();
 			// final Envelope env = grid.getEnvironmentFrame().getEnvelope();
 			final Envelope env2 = scope.getSimulation().getEnvelope();
@@ -127,7 +125,7 @@ public class GridLayerData extends LayerData {
 		return text.get();
 	}
 
-	public GamaImageFile textureFile() {
+	public IGamaFile.Image textureFile() {
 		return texture.get();
 	}
 

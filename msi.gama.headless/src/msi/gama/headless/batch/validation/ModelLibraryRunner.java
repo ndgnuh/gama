@@ -21,8 +21,8 @@ import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.model.IModel;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.descriptions.ModelDescription;
+import ummisco.gama.application.bundles.GamaBundleLoader;
 
 public class ModelLibraryRunner extends AbstractModelLibraryRunner {
 

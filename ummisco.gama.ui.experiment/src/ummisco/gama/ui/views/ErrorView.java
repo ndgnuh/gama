@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IRuntimeExceptionHandler;
 import msi.gama.common.interfaces.ItemList;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
@@ -36,6 +35,7 @@ import msi.gama.runtime.exceptions.GamaRuntimeException;
 import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.commands.RuntimeExceptionHandler;
 import ummisco.gama.ui.controls.ParameterExpandItem;
+import ummisco.gama.ui.interfaces.IRuntimeExceptionHandler;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 import ummisco.gama.ui.resources.GamaFonts;

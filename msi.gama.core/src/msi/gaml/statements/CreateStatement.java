@@ -333,7 +333,8 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 		protected void serializeArgs(final SymbolDescription s, final StringBuilder sb, final boolean ncludingBuiltIn) {
 			final StatementDescription desc = (StatementDescription) s;
 			final Facets args = desc.getPassedArgs();
-			if (args == null || args.isEmpty()) { return; }
+			if (args == null || args.isEmpty())
+				return;
 			sb.append("with: [");
 			args.forEachFacet((name, exp) -> {
 				sb.append(name).append("::").append(exp.serialize(false));
@@ -395,7 +396,8 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 
 	IPopulation findPopulation(final IScope scope) {
 		final IAgent executor = scope.getAgent();
-		if (species == null) { return executor.getPopulationFor(description.getSpeciesContext().getName()); }
+		if (species == null)
+			return executor.getPopulationFor(description.getSpeciesContext().getName());
 		ISpecies s = Cast.asSpecies(scope, species.value(scope));
 		if (s == null) {// A last attempt in order to fix #2466
 			final String potentialSpeciesName = species.getDenotedType().getSpeciesName();
@@ -403,10 +405,9 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 				s = scope.getModel().getSpecies(potentialSpeciesName);
 			}
 		}
-		if (s == null) {
+		if (s == null)
 			throw GamaRuntimeException.error("No population of " + species.serialize(false)
 					+ " is accessible in the context of " + executor + ".", scope);
-		}
 		IPopulation pop = executor.getPopulationFor(s);
 		// hqnghi population of micro-model's experiment is not exist, we
 		// must create the new one
@@ -427,14 +428,14 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 
 		// First, we compute the number of agents to create
 		final Integer max = number == null ? null : Cast.asInt(scope, number.value(scope));
-		if (from == null && max != null && max <= 0) { return GamaListFactory.EMPTY_LIST; }
+		if (from == null && max != null && max <= 0)
+			return GamaListFactory.EMPTY_LIST;
 
 		// Next, we compute the species to instantiate
 		final IPopulation pop = findPopulation(scope);
 		// A check is made in order to address issues #2621 and #2611
-		if (pop == null || pop.getSpecies() == null) {
+		if (pop == null || pop.getSpecies() == null)
 			throw GamaRuntimeException.error("Impossible to determine the species of the agents to create", scope);
-		}
 		checkPopulationValidity(pop, scope);
 
 		// We grab whatever initial values are defined (from CSV, GIS, or user)
@@ -461,13 +462,13 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 	 * @throws GamaRuntimeException
 	 */
 	private void checkPopulationValidity(final IPopulation pop, final IScope scope) throws GamaRuntimeException {
-		if (pop instanceof SimulationPopulation && !(scope.getAgent() instanceof ExperimentAgent)) {
+		if (pop instanceof SimulationPopulation && !(scope.getAgent() instanceof ExperimentAgent))
 			throw error("Simulations can only be created within experiments", scope);
-		}
 		final SpeciesDescription sd = pop.getSpecies().getDescription();
 		final String error = sd.isAbstract() ? "abstract"
 				: sd.isMirror() ? "a mirror" : sd.isBuiltIn() ? "built-in" : sd.isGrid() ? "a grid" : null;
-		if (error != null) { throw error(sd.getName() + "is " + error + " and cannot be instantiated.", scope); }
+		if (error != null)
+			throw error(sd.getName() + "is " + error + " and cannot be instantiated.", scope);
 	}
 
 	private Object getSource(final IScope scope) {
@@ -482,7 +483,8 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 
 	private IList<? extends IAgent> createAgents(final IScope scope, final IPopulation<? extends IAgent> population,
 			final List<Map<String, Object>> inits) {
-		if (population == null) { return GamaListFactory.EMPTY_LIST; }
+		if (population == null)
+			return GamaListFactory.EMPTY_LIST;
 		// final boolean hasSequence = sequence != null && !sequence.isEmpty();
 		boolean shouldBeScheduled = false;
 		// If we create simulations within a single experiment, we must schedule
@@ -533,7 +535,8 @@ public class CreateStatement extends AbstractStatementSequence implements IState
 
 	// TODO Call it before calling the ICreateDelegate createFrom method !
 	public void fillWithUserInit(final IScope scope, final Map values) {
-		if (init == null) { return; }
+		if (init == null)
+			return;
 		scope.pushReadAttributes(values);
 		try {
 			init.forEachFacet((k, v) -> {

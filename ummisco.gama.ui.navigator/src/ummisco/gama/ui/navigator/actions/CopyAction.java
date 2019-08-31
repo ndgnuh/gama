@@ -30,7 +30,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 import org.eclipse.ui.part.ResourceTransfer;
 
 import msi.gama.common.util.TextBuilder;
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.contents.ResourceManager;
 
 /**

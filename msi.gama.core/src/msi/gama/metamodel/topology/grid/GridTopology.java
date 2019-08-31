@@ -32,7 +32,7 @@ import msi.gama.util.Collector;
 import msi.gama.util.GamaListFactory;
 import msi.gama.util.ICollector;
 import msi.gama.util.IList;
-import msi.gama.util.file.GamaGridFile;
+import msi.gama.util.file.IGamaFile;
 import msi.gama.util.path.GamaSpatialPath;
 import msi.gaml.types.GamaGeometryType;
 import msi.gaml.types.Types;
@@ -81,7 +81,7 @@ public class GridTopology extends AbstractTopology {
 
 	}
 
-	public GridTopology(final IScope scope, final IShape environment, final GamaGridFile file, final boolean isTorus,
+	public GridTopology(final IScope scope, final IShape environment, final IGamaFile.Grid file, final boolean isTorus,
 			final boolean usesVN, final boolean useIndividualShapes, final boolean useNeighborsCache,
 			final String optimizer) throws GamaRuntimeException {
 		super(scope, environment, null);
@@ -91,7 +91,7 @@ public class GridTopology extends AbstractTopology {
 		// root.setTorus(isTorus);
 	}
 
-	public GridTopology(final IScope scope, final IShape environment, final IList<GamaGridFile> files,
+	public GridTopology(final IScope scope, final IShape environment, final IList<IGamaFile.Grid> files,
 			final boolean isTorus, final boolean usesVN, final boolean useIndividualShapes,
 			final boolean useNeighborsCache, final String optimizer) throws GamaRuntimeException {
 		super(scope, environment, null);
@@ -185,14 +185,16 @@ public class GridTopology extends AbstractTopology {
 	 */
 	@Override
 	public Double distanceBetween(final IScope scope, final IShape source, final IShape target) {
-		if (!isValidGeometry(scope, source) || !isValidGeometry(scope, target)) { return Double.MAX_VALUE; }
+		if (!isValidGeometry(scope, source) || !isValidGeometry(scope, target))
+			return Double.MAX_VALUE;
 		// TODO null or Double.MAX_VALUE ?
 		return (double) getPlaces().manhattanDistanceBetween(source, target);
 	}
 
 	@Override
 	public Double distanceBetween(final IScope scope, final GamaPoint source, final GamaPoint target) {
-		if (!isValidLocation(scope, source) || !isValidLocation(scope, target)) { return Double.MAX_VALUE; }
+		if (!isValidLocation(scope, source) || !isValidLocation(scope, target))
+			return Double.MAX_VALUE;
 		// TODO null or Double.MAX_VALUE ?
 		return (double) getPlaces().manhattanDistanceBetween(source, target);
 	}
@@ -218,9 +220,9 @@ public class GridTopology extends AbstractTopology {
 		// agents
 		if (filter.getSpecies() == getPlaces().getCellSpecies()) {
 			// case where the filter is the complete population set
-			if (filter instanceof IPopulationSet) {
+			if (filter instanceof IPopulationSet)
 				return placesConcerned;
-			} else {
+			else {
 				// otherwise, we return only the accepted cells
 				try (ICollector<IAgent> agents = Collector.newSet()) {
 					for (final IAgent ag : placesConcerned) {

@@ -2,11 +2,11 @@
  *
  * msi.gama.outputs.layers.ImageLayer.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
  * simulation platform (v. 1.8)
- * 
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package msi.gama.outputs.layers;
 
@@ -18,8 +18,8 @@ import msi.gama.common.interfaces.IGraphics;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
-import msi.gama.util.file.GamaFile;
-import msi.gama.util.file.GamaImageFile;
+import msi.gama.util.file.IGamaFile;
+import msi.gama.util.file.IGamaFile.Image;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.statements.draw.FileDrawingAttributes;
@@ -36,7 +36,7 @@ public class ImageLayer extends AbstractLayer {
 
 	// Cache a copy of both to avoid reloading them each time.
 	Envelope3D env;
-	GamaImageFile cachedFile;
+	IGamaFile.Image cachedFile;
 	IExpression file;
 	boolean isPotentiallyVariable;
 	boolean isFile;
@@ -60,21 +60,24 @@ public class ImageLayer extends AbstractLayer {
 		}
 	}
 
-	private GamaImageFile createFileFromFileExpression(final IScope scope) {
-		final GamaFile<?, ?> result = (GamaFile<?, ?>) file.value(scope);
+	private IGamaFile.Image createFileFromFileExpression(final IScope scope) {
+		final IGamaFile<?, ?> result = (IGamaFile<?, ?>) file.value(scope);
 		return verifyFile(scope, result);
 	}
 
-	private GamaImageFile createFileFromString(final IScope scope, final String imageFileName) {
-		final GamaImageFile result = GamaFileType.createImageFile(scope, imageFileName, null);
+	private IGamaFile.Image createFileFromString(final IScope scope, final String imageFileName) {
+		final IGamaFile.Image result = (Image) GamaFileType.createFile(scope, imageFileName, null);
 		return verifyFile(scope, result);
 	}
 
-	private GamaImageFile verifyFile(final IScope scope, final GamaFile<?, ?> input) {
-		if (input == cachedFile) { return cachedFile; }
-		if (input == null) { throw error("Not a file: " + file.serialize(false), scope); }
-		if (!(input instanceof GamaImageFile)) { throw error("Not an image:" + input.getPath(scope), scope); }
-		final GamaImageFile result = (GamaImageFile) input;
+	private IGamaFile.Image verifyFile(final IScope scope, final IGamaFile<?, ?> input) {
+		if (input == cachedFile)
+			return cachedFile;
+		if (input == null)
+			throw error("Not a file: " + file.serialize(false), scope);
+		if (!(input instanceof IGamaFile.Image))
+			throw error("Not an image:" + input.getPath(scope), scope);
+		final IGamaFile.Image result = (IGamaFile.Image) input;
 		try {
 			result.getImage(scope, !getData().getRefresh());
 		} catch (final GamaRuntimeFileException ex) {
@@ -87,20 +90,22 @@ public class ImageLayer extends AbstractLayer {
 		return result;
 	}
 
-	private Envelope3D computeEnvelope(final IScope scope, final GamaImageFile file) {
+	private Envelope3D computeEnvelope(final IScope scope, final IGamaFile.Image file) {
 		return file.getGeoDataFile(scope) != null ? file.computeEnvelope(scope) : scope.getSimulation().getEnvelope();
 	}
 
-	protected GamaImageFile buildImage(final IScope scope) {
-		if (!isPotentiallyVariable) { return cachedFile; }
+	protected IGamaFile.Image buildImage(final IScope scope) {
+		if (!isPotentiallyVariable)
+			return cachedFile;
 		return isFile ? createFileFromFileExpression(scope)
 				: createFileFromString(scope, Cast.asString(scope, file.value(scope)));
 	}
 
 	@Override
 	public void privateDraw(final IScope scope, final IGraphics dg) {
-		final GamaImageFile file = buildImage(scope);
-		if (file == null) { return; }
+		final IGamaFile.Image file = buildImage(scope);
+		if (file == null)
+			return;
 		final FileDrawingAttributes attributes = new FileDrawingAttributes(null, true);
 		attributes.setUseCache(!getData().getRefresh());
 		if (env != null) {
@@ -108,7 +113,7 @@ public class ImageLayer extends AbstractLayer {
 			if (dg.is2D()) {
 				loc = new GamaPoint(env.getMinX(), env.getMinY());
 			} else {
-				loc = new GamaPoint(env.getWidth() / 2+ env.getMinX(), env.getHeight() / 2 + env.getMinY());
+				loc = new GamaPoint(env.getWidth() / 2 + env.getMinX(), env.getHeight() / 2 + env.getMinY());
 			}
 			attributes.setLocation(loc);
 			attributes.setSize(Scaling3D.of(env.getWidth(), env.getHeight(), 0));
@@ -138,7 +143,8 @@ public class ImageLayer extends AbstractLayer {
 	}
 
 	public String getImageFileName(final IScope scope) {
-		if (cachedFile != null && !isPotentiallyVariable) { return cachedFile.getPath(scope); }
+		if (cachedFile != null && !isPotentiallyVariable)
+			return cachedFile.getPath(scope);
 		return "Unknown";
 	}
 

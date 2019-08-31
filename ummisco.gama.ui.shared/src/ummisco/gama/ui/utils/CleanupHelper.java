@@ -122,7 +122,7 @@ public class CleanupHelper {
 
 	static class RemoveUnwantedActionSets extends PerspectiveAdapter /* implements IStartup */ {
 
-		String[] TOOLBAR_ACTION_SETS_TO_REMOVE = new String[] { "org.eclipse", "msi.gama.lang.gaml.Gaml",
+		String[] TOOLBAR_ACTION_SETS_TO_REMOVE = new String[] { "org.eclipse", "ummisco.gama.gaml.Gaml",
 				"org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo" };
 		String[] MENUS_TO_REMOVE = new String[] { "org.eclipse.ui.run", "window", "navigate", "project" };
 

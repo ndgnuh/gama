@@ -50,8 +50,8 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
 import msi.gama.runtime.GAMA;
+import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.interfaces.IRefreshHandler;
-import ummisco.gama.ui.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.navigator.GamaNavigator;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 

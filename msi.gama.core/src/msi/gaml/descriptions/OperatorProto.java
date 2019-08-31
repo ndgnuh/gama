@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableSet;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.precompiler.GamlAnnotations.depends_on;
 import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.precompiler.GamlAnnotations.operator;
 import msi.gama.precompiler.GamlAnnotations.variable;
@@ -30,11 +31,10 @@ import msi.gama.precompiler.ISymbolKind;
 import msi.gama.precompiler.ITypeProvider;
 import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.compilation.GamaGetter;
 import msi.gaml.compilation.IValidator;
-import msi.gaml.compilation.annotations.depends_on;
 import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.kernel.GamaBundleLoader;
 import msi.gaml.expressions.BinaryOperator;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionCompiler;
@@ -80,16 +80,17 @@ public class OperatorProto extends AbstractProto {
 		try {
 			if (semanticValidator != null) {
 				final boolean semantic = semanticValidator.validate(context, currentEObject, exprs);
-				if (!semantic) { return null; }
+				if (!semantic)
+					return null;
 			}
 			switch (signature.size()) {
 				case 1:
-					if (isVarOrField) { return new TypeFieldExpression(this, context, exprs[0]); }
+					if (isVarOrField)
+						return new TypeFieldExpression(this, context, exprs[0]);
 					return UnaryOperator.create(this, context, exprs[0]);
 				case 2:
-					if (isVarOrField) {
+					if (isVarOrField)
 						return new BinaryOperator.BinaryVarOperator(this, context, exprs[0], (IVarExpression) exprs[1]);
-					}
 					return BinaryOperator.create(this, context, exprs);
 				default:
 					return NAryOperator.create(this, exprs);
@@ -153,7 +154,8 @@ public class OperatorProto extends AbstractProto {
 
 	private boolean[] computeLazyness(final AnnotatedElement method) {
 		final boolean[] result = new boolean[signature.size()];
-		if (result.length == 0) { return result; }
+		if (result.length == 0)
+			return result;
 		if (method instanceof Method) {
 			final Method m = (Method) method;
 			final Class[] classes = m.getParameterTypes();
@@ -176,7 +178,7 @@ public class OperatorProto extends AbstractProto {
 			final int keyTypeProvider, final int[] expectedContentType) {
 		this(name, method == null ? signature : method, helper, canBeConst, isVarOrField, Types.get(returnType),
 				new Signature(signature), lazy, typeProvider, contentTypeProvider, keyTypeProvider, ITypeProvider.NONE,
-				expectedContentType, GamaBundleLoader.CURRENT_PLUGIN_NAME);
+				expectedContentType, AbstractGamlAdditions.CURRENT_PLUGIN_NAME);
 	}
 
 	private OperatorProto(final OperatorProto op, final IType gamaType) {
@@ -187,22 +189,23 @@ public class OperatorProto extends AbstractProto {
 
 	@Override
 	public String getTitle() {
-		if (isVarOrField) {
+		if (isVarOrField)
 			return "field " + getName() + " of type " + returnType + ", for values of type "
 					+ signature.asPattern(false);
-		}
 		return "operator " + getName() + "(" + signature.asPattern(false) + "), returns " + returnType;
 	}
 
 	@Override
 	public String getDocumentation() {
-		if (!isVarOrField) { return super.getDocumentation(); }
+		if (!isVarOrField)
+			return super.getDocumentation();
 		final vars annot = getSupport().getAnnotation(vars.class);
 		if (annot != null) {
 			final variable[] allVars = annot.value();
 			for (final variable v : allVars) {
 				if (v.name().equals(getName())) {
-					if (v.doc().length > 0) { return v.doc()[0].value(); }
+					if (v.doc().length > 0)
+						return v.doc()[0].value();
 					break;
 				}
 			}
@@ -211,8 +214,10 @@ public class OperatorProto extends AbstractProto {
 	}
 
 	public void verifyExpectedTypes(final IDescription context, final IType<?> rightType) {
-		if (expectedContentType == null || expectedContentType.length == 0) { return; }
-		if (context == null) { return; }
+		if (expectedContentType == null || expectedContentType.length == 0)
+			return;
+		if (context == null)
+			return;
 		if (expectedContentType.length == 1 && iterator) {
 			final IType<?> expected = Types.get(expectedContentType[0]);
 			if (!rightType.isTranslatableInto(expected)) {
@@ -221,7 +226,8 @@ public class OperatorProto extends AbstractProto {
 			}
 		} else if (signature.isUnary()) {
 			for (final int element : expectedContentType) {
-				if (rightType.isTranslatableInto(Types.get(element))) { return; }
+				if (rightType.isTranslatableInto(Types.get(element)))
+					return;
 			}
 			context.error("Operator " + getName() + " expects arguments of type " + rightType, IGamlIssue.WRONG_TYPE);
 		}
@@ -233,18 +239,17 @@ public class OperatorProto extends AbstractProto {
 	}
 
 	public String getCategory() {
-		if (support == null) { return "Other"; }
-		final operator op = support.getAnnotation(operator.class);
-		if (op == null) // Happens sometimes for synthetic operators
-		{
+		if (support == null)
 			return "Other";
-		} else {
+		final operator op = support.getAnnotation(operator.class);
+		if (op == null)
+			return "Other";
+		else {
 			final String[] strings = op.category();
-			if (strings.length > 0) {
+			if (strings.length > 0)
 				return op.category()[0];
-			} else {
+			else
 				return "Other";
-			}
 		}
 	}
 
@@ -265,17 +270,15 @@ public class OperatorProto extends AbstractProto {
 		final int size = signature.size();
 		final String aName = getName();
 		if (size == 1 || size > 2) {
-			if (noMandatoryParenthesis.contains(aName)) {
+			if (noMandatoryParenthesis.contains(aName))
 				return aName + signature.asPattern(withVariables);
-			} else {
+			else
 				return aName + "(" + signature.asPattern(withVariables) + ")";
-			}
 		} else { // size == 2
-			if (binaries.contains(aName)) {
+			if (binaries.contains(aName))
 				return signature.get(0).asPattern() + " " + aName + " " + signature.get(1).asPattern();
-			} else {
+			else
 				return aName + "(" + signature.asPattern(withVariables) + ")";
-			}
 		}
 	}
 
@@ -290,7 +293,8 @@ public class OperatorProto extends AbstractProto {
 	}
 
 	public void collectImplicitVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
-		if (depends_on == null) { return; }
+		if (depends_on == null)
+			return;
 		for (final String s : depends_on) {
 			if (species.hasAttribute(s)) {
 				result.add(species.getAttribute(s));
@@ -301,7 +305,8 @@ public class OperatorProto extends AbstractProto {
 	@Override
 	public doc getDocAnnotation() {
 		doc d = super.getDocAnnotation();
-		if (d != null) { return d; }
+		if (d != null)
+			return d;
 		if (support != null && support.isAnnotationPresent(operator.class)) {
 			final operator op = support.getAnnotation(operator.class);
 			final doc[] docs = op.doc();

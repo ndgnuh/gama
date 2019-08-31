@@ -23,7 +23,8 @@ Require-Bundle: ummisco.gama.ui.shared,
  com.google.guava,
  ummisco.gama.application;bundle-version="1.9.0",
  msi.gama.ext;bundle-version="1.9.0",
- msi.gama.lang.gaml;bundle-version="1.9.0"
+ ummisco.gama.gaml;bundle-version="1.9.0",
+ ummisco.gama.extensions.files;bundle-version="1.9.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: ummisco.gama.ui.commands,
  ummisco.gama.ui.metadata,
