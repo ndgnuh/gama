@@ -170,6 +170,16 @@ public class SolveStatement extends AbstractStatement implements ISolvers {
 				desc.warning("This facet is deprecated and be removed soon, please use step_size instead",
 						IGamlIssue.GENERAL);
 			}
+			final IExpression integratedTimes = desc.getFacetExpr("integrated_times");
+			if (integratedTimes != null) {
+				desc.warning("This facet is deprecated and be removed soon, please use t[] instead",
+						IGamlIssue.GENERAL);
+			}
+			final IExpression integratedValues = desc.getFacetExpr("integrated_values");
+			if (integratedValues != null) {
+				desc.warning("This facet is deprecated and be removed soon, please use bracket notation instead, i.e S[], I[]",
+						IGamlIssue.GENERAL);
+			}
 			final IExpression method = desc.getFacetExpr(IKeyword.METHOD);
 			if (method != null && method.isConst() && method.isContextIndependant()) {
 				final String methodName = method.literalValue();

@@ -36,12 +36,10 @@ species userSIR {
 		diff(R,t) = (gamma * I);
 	}		
 	
-	reflex solving {		
-		list i_list;
-		list v_list ;
-		solve eqSIR method: "rk4" step_size: h integrated_times: i_list integrated_values: v_list;
-		write "i_list: " + i_list;
-		write "v_list:" + v_list;
+	reflex solving {	
+		solve eqSIR method: "rk4" step_size: h;
+		write "t list: " + t[];
+		write "s list:" + S[];
 	}
 
 }
