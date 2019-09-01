@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.views;
@@ -18,7 +18,6 @@ import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -37,19 +36,18 @@ import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
 import ummisco.gama.ui.views.toolbar.IToolbarDecoratedView;
 
-public class SyntaxErrorsView extends MarkerSupportView implements IToolbarDecoratedView {
+public class SyntaxErrorsView extends MarkerSupportView
+		implements IToolbarDecoratedView, IPreferenceAfterChangeListener<Boolean> {
 
 	protected Composite parent;
 	protected GamaToolbar2 toolbar;
 
 	ToolItem warningAction, infoAction;
-	final BuildPreferenceChangeListener listener;
 
 	public SyntaxErrorsView() {
 		super("ummisco.gama.gaml.ui.error.generator");
-		listener = new BuildPreferenceChangeListener(this);
-		GamaPreferences.Modeling.WARNINGS_ENABLED.addChangeListener(listener);
-		GamaPreferences.Modeling.INFO_ENABLED.addChangeListener(listener);
+		GamaPreferences.Modeling.WARNINGS_ENABLED.addChangeListener(this);
+		GamaPreferences.Modeling.INFO_ENABLED.addChangeListener(this);
 	}
 
 	@Override
@@ -61,26 +59,17 @@ public class SyntaxErrorsView extends MarkerSupportView implements IToolbarDecor
 	@Override
 	public void dispose() {
 		super.dispose();
-		GamaPreferences.Modeling.WARNINGS_ENABLED.removeChangeListener(listener);
-		GamaPreferences.Modeling.INFO_ENABLED.removeChangeListener(listener);
+		GamaPreferences.Modeling.WARNINGS_ENABLED.removeChangeListener(this);
+		GamaPreferences.Modeling.INFO_ENABLED.removeChangeListener(this);
 	}
 
-	public static class BuildPreferenceChangeListener implements IPreferenceAfterChangeListener<Boolean> {
-
-		SyntaxErrorsView view;
-
-		BuildPreferenceChangeListener(final SyntaxErrorsView v) {
-			view = v;
-		}
-
-		/**
-		 * @see msi.gama.common.preferences.IPreferenceChangeListener#afterValueChange(java.lang.Object)
-		 */
-		@Override
-		public void afterValueChange(final Boolean newValue) {
-			build();
-			view.checkActions();
-		}
+	/**
+	 * @see msi.gama.common.preferences.IPreferenceChangeListener#afterValueChange(java.lang.Object)
+	 */
+	@Override
+	public void afterValueChange(final Boolean newValue) {
+		build();
+		checkActions();
 	}
 
 	void checkActions() {
@@ -129,32 +118,19 @@ public class SyntaxErrorsView extends MarkerSupportView implements IToolbarDecor
 		new ConfigureContentsDialogHandler().execute(ev);
 	}
 
-	static private void doBuild(final IProgressMonitor monitor) {
-		try {
-			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-
-			// monitor.beginTask("Cleaning and building entire workspace", size);
-			// for (final IProject p : projects) {
-			// if (p.exists() && p.isAccessible()) {
-			// monitor.subTask("Building " + p.getName());
-			// p.build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
-			// monitor.worked(1);
-			// }
-			// }
-
-		} catch (final CoreException e) {
-			e.printStackTrace();
-		}
-	}
-
 	static void build() {
-
 		final ProgressMonitorDialog dialog = new ProgressMonitorDialog(WorkbenchHelper.getShell());
 		dialog.setBlockOnOpen(false);
 		dialog.setCancelable(false);
 		dialog.setOpenOnRun(true);
 		try {
-			dialog.run(true, false, monitor -> doBuild(monitor));
+			dialog.run(true, false, monitor -> {
+				try {
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.CLEAN_BUILD, monitor);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			});
 		} catch (InvocationTargetException | InterruptedException e1) {
 			e1.printStackTrace();
 		}

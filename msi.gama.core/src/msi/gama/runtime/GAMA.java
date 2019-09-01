@@ -158,17 +158,19 @@ public class GAMA {
 		if (currentExperiment == null)
 			throw GamaRuntimeException.error("Experiment " + expName + " cannot be created", getRuntimeScope());
 		currentExperiment.setHeadless(true);
-		for (final Map.Entry<String, Object> entry : params.entrySet()) {
+		if (params != null) {
+			for (final Map.Entry<String, Object> entry : params.entrySet()) {
 
-			final IParameter.Batch v = currentExperiment.getParameterByTitle(entry.getKey());
-			if (v != null) {
-				currentExperiment.setParameterValueByTitle(currentExperiment.getExperimentScope(), entry.getKey(),
-						entry.getValue());
-			} else {
-				currentExperiment.setParameterValue(currentExperiment.getExperimentScope(), entry.getKey(),
-						entry.getValue());
+				final IParameter.Batch v = currentExperiment.getParameterByTitle(entry.getKey());
+				if (v != null) {
+					currentExperiment.setParameterValueByTitle(currentExperiment.getExperimentScope(), entry.getKey(),
+							entry.getValue());
+				} else {
+					currentExperiment.setParameterValue(currentExperiment.getExperimentScope(), entry.getKey(),
+							entry.getValue());
+				}
+
 			}
-
 		}
 		currentExperiment.open(seed);
 		controllers.add(currentExperiment.getController());

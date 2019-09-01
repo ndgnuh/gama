@@ -117,9 +117,11 @@ public class ImageUtils {
 			throws IOException {
 		if (useCache) {
 			final BufferedImage image = cache.getIfPresent(fileName);
-			if (image != null) { return image; }
+			if (image != null)
+				return image;
 			final GifDecoder gif = gifCache.getIfPresent(fileName);
-			if (gif != null) { return gif.getImage(); }
+			if (gif != null)
+				return gif.getImage();
 		}
 		// final String s = scope != null ? FileUtils.constructAbsoluteFilePath(scope, fileName, true) : fileName;
 		final File f = new File(fileName);
@@ -129,20 +131,23 @@ public class ImageUtils {
 
 	public int getFrameCount(final String path) {
 		final GifDecoder gif = gifCache.getIfPresent(path);
-		if (gif == null) { return 1; }
+		if (gif == null)
+			return 1;
 		return gif.getFrameCount();
 	}
 
 	public int getDuration(final String path) {
 		final GifDecoder gif = gifCache.getIfPresent(path);
-		if (gif == null) { return 0; }
+		if (gif == null)
+			return 0;
 		return gif.getDuration();
 	}
 
 	private BufferedImage privateReadFromFile(final File file, final boolean forOpenGL) throws IOException {
 		// DEBUG.OUT("READING " + file.getName());
 		BufferedImage result = getNoImage();
-		if (file == null) { return result; }
+		if (file == null)
+			return result;
 		final String name = file.getName();
 		String ext = null;
 		if (name.contains(".")) {
@@ -218,7 +223,8 @@ public class ImageUtils {
 	}
 
 	public static BufferedImage createCompatibleImage(final int width, final int height, final boolean forOpenGL) {
-		if (forOpenGL) { return createPremultipliedBlankImage(width, height); }
+		if (forOpenGL)
+			return createPremultipliedBlankImage(width, height);
 		BufferedImage new_image = null;
 		if (NO_GRAPHICS_ENVIRONMENT || GAMA.isInHeadLessMode() || GraphicsEnvironment.isHeadless()) {
 			new_image = new BufferedImage(width != 0 ? width : 1024, height != 0 ? height : 1024,
@@ -230,12 +236,15 @@ public class ImageUtils {
 	}
 
 	public static BufferedImage toCompatibleImage(final BufferedImage image) {
-		if (NO_GRAPHICS_ENVIRONMENT || GAMA.isInHeadLessMode() || GraphicsEnvironment.isHeadless()) { return image; }
-
+		if (NO_GRAPHICS_ENVIRONMENT || GAMA.isInHeadLessMode() || GraphicsEnvironment.isHeadless())
+			return image;
+		if (image == null)
+			return null;
 		/*
 		 * if image is already compatible and optimized for current system settings, simply return it
 		 */
-		if (image.getColorModel().equals(getCachedGC().getColorModel())) { return image; }
+		if (image.getColorModel().equals(getCachedGC().getColorModel()))
+			return image;
 
 		// image is not optimized, so create a new image that is
 		final BufferedImage new_image =
@@ -322,7 +331,8 @@ public class ImageUtils {
 	}
 
 	public static BufferedImage resize(final BufferedImage snapshot, final int width, final int height) {
-		if (width == snapshot.getWidth() && height == snapshot.getHeight()) { return snapshot; }
+		if (width == snapshot.getWidth() && height == snapshot.getHeight())
+			return snapshot;
 		return resize(snapshot, width, height, RenderingHints.VALUE_INTERPOLATION_BILINEAR, false);
 	}
 

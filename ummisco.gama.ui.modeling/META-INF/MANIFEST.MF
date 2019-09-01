@@ -27,7 +27,8 @@ Require-Bundle: ummisco.gama.gaml;visibility:=reexport,
  msi.gama.ext,
  org.eclipse.ui.workbench,
  org.apache.commons.lang;bundle-version="2.6.0"
-Export-Package: ummisco.gama.ide.contentassist.antlr,
+Export-Package: ummisco.gama.ide,
+ ummisco.gama.ide.contentassist.antlr,
  ummisco.gama.ide.contentassist.antlr.internal,
  ummisco.gama.ui,
  ummisco.gama.ui.contentassist,
@@ -40,14 +41,15 @@ Export-Package: ummisco.gama.ide.contentassist.antlr,
  ummisco.gama.ui.hover,
  ummisco.gama.ui.labeling,
  ummisco.gama.ui.markers,
+ ummisco.gama.ui.modeling,
+ ummisco.gama.ui.modeling.internal,
  ummisco.gama.ui.outline,
+ ummisco.gama.ui.perspective,
  ummisco.gama.ui.quickfix,
  ummisco.gama.ui.reference,
  ummisco.gama.ui.templates,
- ummisco.gama.ui.modeling,
- ummisco.gama.ui.modeling.internal,
- ummisco.gama.ui.perspective,
- ummisco.gama.ui.views
+ ummisco.gama.ui.views,
+ ummisco.gama.validation
 Bundle-Activator: ummisco.gama.ui.modeling.internal.ModelingActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: ummisco.gama.ui.modeling
