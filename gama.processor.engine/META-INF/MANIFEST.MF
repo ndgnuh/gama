@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GAMA Processor
+Bundle-SymbolicName: gama.processor.engine;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Bundle-Vendor: UMMISCO & Partners
+Require-Bundle: gama.processor.annotations
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: msi.gama.processor
+Export-Package: gama.processor.engine,
+ gama.processor.engine.doc,
+ gama.processor.engine.tests

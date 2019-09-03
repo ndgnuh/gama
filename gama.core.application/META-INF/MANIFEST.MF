@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ActivationPolicy: lazy
+Bundle-Name: Main application
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.equinox.p2.core,
+ org.eclipse.equinox.p2.engine,
+ org.eclipse.equinox.p2.operations,
+ org.eclipse.equinox.p2.metadata.repository,
+ gama.core;bundle-version="1.7.0",
+ com.google.guava,
+ org.eclipse.core.expressions
+Bundle-Vendor: UMMISCO
+Bundle-Version: 2.0.0.qualifier
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: gama.core.application;singleton:=true
+Export-Package: gama.core.application;uses:="org.eclipse.ui,org.eclipse.equinox.app",
+ gama.core.application.bundles,
+ gama.core.application.projects,
+ gama.core.application.workspace
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: gama.application

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: GraphLayoutOperators
+Bundle-SymbolicName: simtools.graphanalysis;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Require-Bundle: msi.gama.core;bundle-version="1.7.0",
+ gama.core.ext;bundle-version="1.0.0"
+Bundle-ClassPath: .,
+ lib/gephi-toolkit.jar,
+ lib/gama.extensions.graph 2007-10-21/jars/gama.extensions.graph.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: simtools.graphanalysis

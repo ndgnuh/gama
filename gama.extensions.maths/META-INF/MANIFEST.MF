@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Maths
+Bundle-SymbolicName: gama.extensions.maths;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Require-Bundle: msi.gama.core;bundle-version="1.4.0",
+ gama.core.ext;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: gama.extensions.maths.ode.statements,
+ gama.extensions.maths.ode.utils.classicalEquations.epidemiology,
+ gama.extensions.maths.ode.utils.classicalEquations.populationDynamics,
+ gama.extensions.maths.ode.utils.solver,
+ gama.extensions.maths.pde.diffusion.statements
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: ummisco.gaml.extensions.maths
+

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Physics
+Bundle-SymbolicName: gama.extensions.physics;singleton:=true
+Bundle-Version: 2.0.0.qualifier
+Require-Bundle: msi.gama.core;bundle-version="1.4.0",
+ gama.core.ext;bundle-version="1.0.0"
+Bundle-ClassPath: .,
+ lib/jbullet.jar
+Export-Package: 
+ gama.extensions.physics
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: simtools.gaml.extensions.physics

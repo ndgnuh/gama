@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="gama.processor.engine/processor/GamaProcessor.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/gama.processor.engine/processor/Generate GamaProcessor.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/msi.gama.processor/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/gama.processor.annotations/.project"/>
+        <folder path="/gama.processor.engine/META-INF"/>
+        <file path="/gama.processor.engine/build.properties"/>
+        <file path="/gama.processor.annotations/pom.xml"/>
+        <file path="/gama.processor.engine/.DS_Store"/>
+        <file path="/gama.processor.annotations/.classpath"/>
+        <javaElement handleIdentifier="=gama.processor.engine/src&lt;gama.processor.engine.resources"/>
+        <file path="/gama.processor.annotations/build.properties"/>
+        <file path="/gama.processor.annotations/.DS_Store"/>
+        <file path="/gama.processor.engine/.gitignore"/>
+        <file path="/gama.processor.engine/.project"/>
+        <file path="/gama.processor.engine/plugin.xml"/>
+        <file path="/gama.processor.engine/pom.xml"/>
+        <file path="/gama.processor.engine/.classpath"/>
+    </selectedElements>
+</jardesc>

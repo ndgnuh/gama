@@ -2,7 +2,7 @@
 <feature
       id="ummisco.gama.feature.core"
       label="Core plugins of GAMA"
-      version="1.9.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="UMMISCO">
 
    <description url="http://gama-platform.org">

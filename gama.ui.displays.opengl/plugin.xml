@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension
+          point="org.eclipse.ui.views">
+       <view
+             allowMultiple="true"
+             category="gama.gui.category.gama"
+             class="gama.ui.displays.opengl.view.OpenGLDisplayView"
+             icon="platform:/plugin/gama.ui.experiment.shared/icons/view.display2.png"
+             id="gama.core.application.view.OpenGLDisplayView"
+             name="3D"
+             restorable="false">
+       </view>
+    </extension>    
+    <extension
+          point="org.eclipse.ui.services">
+       <serviceFactory
+             factoryClass="gama.ui.displays.opengl.view.OpenGLInitializer">
+          <service
+                serviceClass="gama.ui.experiment.interfaces.IOpenGLInitializer">
+          </service>
+       </serviceFactory>
+    </extension>
+    <extension
+          point="gama.display">
+       <implementation
+             class="gama.core.display.opengl.view.SWTOpenGLDisplaySurface"
+             keyword="opengl">
+       </implementation>
+    </extension>
+</plugin>

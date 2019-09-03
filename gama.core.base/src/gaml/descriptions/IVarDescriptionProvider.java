@@ -1,0 +1,28 @@
+/*******************************************************************************************************
+ *
+ * gaml.descriptions.IVarDescriptionProvider.java, in plugin gama.core,
+ * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
+ * 
+ * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
+ *
+ * Visit https://github.com/gama-platform/gama for license information and contacts.
+ * 
+ ********************************************************************************************************/
+package gaml.descriptions;
+
+import gaml.expressions.IExpression;
+
+public interface IVarDescriptionProvider {
+
+	/**
+	 * If asField is true, then should not return a GlobalVarExpression, but a normal var expression
+	 * 
+	 * @param name
+	 * @param asField
+	 * @return
+	 */
+	public abstract IExpression getVarExpr(final String name, boolean asField);
+
+	public boolean hasAttribute(String name);
+
+}

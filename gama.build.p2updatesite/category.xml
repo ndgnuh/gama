@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="GAMA Update Site">
+      Site containing updates to the GAMA platform software (see http://gama-platform.org)
+   </description>
+   <feature url="features/idees.gama.features.weka_0.0.0.jar" id="idees.gama.features.weka" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.audio_0.0.0.jar" id="ummisco.gama.feature.audio" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.models_0.0.0.jar" id="ummisco.gama.feature.models" version="0.0.0">
+      <category name="gama.models"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.stats_0.0.0.jar" id="ummisco.gama.feature.stats" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/simtools.graphlayout.feature_0.0.0.jar" id="simtools.graphlayout.feature" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.core.extensions_1.7.0.qualifier.jar" id="ummisco.gama.feature.core.extensions" version="0.0.0">
+      <category name="gama.core"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.experiment.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.experiment.ui" version="0.0.0">
+      <category name="gama.ui"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.modeling.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.modeling.ui" version="0.0.0">
+      <category name="gama.ui"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.core.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.core.ui" version="0.0.0">
+      <category name="gama.ui"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.core_1.7.0.qualifier.jar" id="ummisco.gama.feature.core" version="0.0.0">
+      <category name="gama.core"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.network_1.7.0.qualifier.jar" id="ummisco.gama.feature.network" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/ummisco.gama.feature.serialize_1.7.0.qualifier.jar" id="ummisco.gama.feature.serialize" version="0.0.0">
+      <category name="gama.optional"/>
+   </feature>
+   <feature url="features/idees.gama.features.weka_1.7.0.qualifier.jar" id="idees.gama.features.weka" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.core.extensions_1.7.0.qualifier.jar" id="ummisco.gama.feature.core.extensions" version="2.0.0.qualifier"/>
+   <feature url="features/simtools.graphlayout.feature_1.7.0.qualifier.jar" id="simtools.graphlayout.feature" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.core_1.7.0.qualifier.jar" id="ummisco.gama.feature.core" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.core.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.core.ui" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.models_1.7.0.qualifier.jar" id="ummisco.gama.feature.models" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.audio_1.7.0.qualifier.jar" id="ummisco.gama.feature.audio" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.dependencies_1.7.0.qualifier.jar" id="ummisco.gama.feature.dependencies" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.experiment.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.experiment.ui" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.modeling.ui_1.7.0.qualifier.jar" id="ummisco.gama.feature.modeling.ui" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.network_1.7.0.qualifier.jar" id="ummisco.gama.feature.network" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.serialize_1.7.0.qualifier.jar" id="ummisco.gama.feature.serialize" version="2.0.0.qualifier"/>
+   <feature url="features/ummisco.gama.feature.stats_1.7.0.qualifier.jar" id="ummisco.gama.feature.stats" version="2.0.0.qualifier"/>
+   <bundle id="idees.gama.weka" version="2.0.0.qualifier"/>
+   <bundle id="irit.gaml.extensions.database" version="2.0.0.qualifier"/>
+   <bundle id="irit.gaml.extensions.test" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.application" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.core" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.ext" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.headless" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.lang.gaml" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.models" version="2.0.0.qualifier"/>
+   <bundle id="msi.gama.processor" version="1.4.0"/>
+   <bundle id="msi.gaml.architecture.simplebdi" version="2.0.0.qualifier"/>
+   <bundle id="msi.gaml.extensions.fipa" version="2.0.0.qualifier"/>
+   <bundle id="simtools.gaml.extensions.physics" version="2.0.0.qualifier"/>
+   <bundle id="simtools.gaml.extensions.traffic" version="2.0.0.qualifier"/>
+   <bundle id="simtools.graphanalysis" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.annotations" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.java2d" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.network" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.opengl" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.serialize" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.ui.experiment" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.ui.modeling" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.ui.navigator" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.ui.shared" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gama.ui.viewers" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gaml.extensions.maths" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gaml.extensions.sound" version="2.0.0.qualifier"/>
+   <bundle id="ummisco.gaml.extensions.stats" version="2.0.0.qualifier"/>
+   <category-def name="gama.ui" label="UI components of GAMA"/>
+   <category-def name="gama.core" label="Core components of GAMA"/>
+   <category-def name="gama.optional" label="Optional components of GAMA"/>
+   <category-def name="gama.models" label="GAMA Models Library"/>
+</site>

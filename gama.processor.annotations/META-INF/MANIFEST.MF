@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Annotations shared by all GAMA plugins
+Bundle-SymbolicName: gama.processor.annotations
+Bundle-Version: 2.0.0.qualifier
+Bundle-Vendor: UMMISCO
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: gama.dev.utils,
+ gama.processor.annotations,
+ gama.processor.annotations.constants,
+ gama.processor.annotations.doc
+Automatic-Module-Name: ummisco.gama.annotations

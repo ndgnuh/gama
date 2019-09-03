@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="gama.ui.base.viewers.image.ImageViewer"
+            default="false"
+            extensions="JPG,jpg,JPEG,jpeg,PNG,png,BMP,bmp,TIFF,tiff,TIF,tif,ICO,ico,ASC,asc,PGM,pgm"
+            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.image2.png"
+            id="gama.gui.images.editor.ImageViewer"
+            name="Image Viewer">
+         <contentTypeBinding
+               contentTypeId="gama.gui.images.type">
+         </contentTypeBinding>
+      </editor>
+        <editor
+            class="gama.ui.base.viewers.csv.MultiPageCSVEditor"
+            default="true"
+            extensions="CSV,csv"
+            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.csv2.png"
+            id="gama.gui.csv.editor.CustomizableCSVEditor"
+            name="CSV Editor">
+         <contentTypeBinding
+               contentTypeId="gama.gui.csv.type">
+         </contentTypeBinding>
+      </editor>
+      <editor
+            class="gama.ui.base.viewers.html.HtmlViewer"
+            default="false"
+            extensions="html, htm, HTML, HTM, svg, SVG"
+            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.html2.png"
+            id="gama.core.application.browser"
+            name="HTML Viewer">
+         <contentTypeBinding
+               contentTypeId="gama.gui.html.type">
+         </contentTypeBinding>
+      </editor>
+      <editor
+            class="gama.ui.base.viewers.gis.ShapeFileViewer"
+            default="true"
+            extensions="shp"
+            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.shape2.png"
+            id="gama.core.application.shape.viewer"
+            name="ShapeFile Viewer">
+         <contentTypeBinding
+               contentTypeId="gama.gui.shapefile.type">
+         </contentTypeBinding>
+      </editor>
+      <editor
+            class="gama.ui.base.viewers.gis.OSMFileViewer"
+            default="true"
+            extensions="gz,osm,pbf,bz2"
+            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.osm2.png"
+            id="gama.core.application.osm.viewer"
+            name="OSM Viewer">
+         <contentTypeBinding
+               contentTypeId="gama.gui.osm.type">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+
+</plugin>

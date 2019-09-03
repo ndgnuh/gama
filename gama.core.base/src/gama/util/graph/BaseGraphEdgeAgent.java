@@ -1,0 +1,29 @@
+/*******************************************************************************************************
+ *
+ * gama.util.graph.BaseGraphEdgeAgent.java, in plugin gama.core,
+ * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
+ * 
+ * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
+ *
+ * Visit https://github.com/gama-platform/gama for license information and contacts.
+ * 
+ ********************************************************************************************************/
+package gama.util.graph;
+
+import gama.common.interfaces.IAgent;
+import gama.metamodel.population.IPopulation;
+import gama.processor.annotations.GamlAnnotations.doc;
+import gama.processor.annotations.GamlAnnotations.species;
+import gama.runtime.exceptions.GamaRuntimeException;
+
+@species (
+		name = "base_edge",
+		doc = @doc ("A built-in species for agents representing the edges of a graph, from which one can inherit"))
+@doc ("A built-in species for agents representing the edges of a graph, from which one can inherit")
+public class BaseGraphEdgeAgent extends AbstractGraphEdgeAgent {
+
+	public BaseGraphEdgeAgent(final IPopulation<? extends IAgent> s, final int index) throws GamaRuntimeException {
+		super(s, index);
+	}
+
+}
