@@ -12,7 +12,7 @@ package gama.ui.base.interfaces;
 
 import java.util.List;
 
-import msi.gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.exceptions.GamaRuntimeException;
 
 public interface IRuntimeExceptionHandler {
 

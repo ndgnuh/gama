@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'EcoreBasedExpressionDescription.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling
+ * 'EcoreBasedExpressionDescription.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -15,16 +15,16 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 
 import gama.core.lang.gaml.EGaml;
-import msi.gama.common.interfaces.ICollector;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.util.Collector;
-import msi.gaml.compilation.kernel.GamaSkillRegistry;
-import msi.gaml.descriptions.BasicExpressionDescription;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import ummisco.gama.gaml.Array;
-import ummisco.gama.gaml.Expression;
-import ummisco.gama.gaml.VariableRef;
+import gama.common.interfaces.ICollector;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.util.Collector;
+import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.descriptions.BasicExpressionDescription;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gama.core.lang.gaml.Array;
+import gama.core.lang.gaml.Expression;
+import gama.core.lang.gaml.VariableRef;
 
 /**
  * The class EcoreBasedExpressionDescription.

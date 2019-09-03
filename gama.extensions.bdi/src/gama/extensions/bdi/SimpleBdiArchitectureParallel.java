@@ -15,18 +15,18 @@ import java.util.List;
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.skill;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.concurrent.GamaExecutorService;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.descriptions.ConstantExpressionDescription;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.Maths;
-import msi.gaml.statements.AbstractStatement;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IStatement;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.concurrent.GamaExecutorService;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.descriptions.ConstantExpressionDescription;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.operators.Maths;
+import gaml.statements.AbstractStatement;
 
 @skill (
 		name = SimpleBdiArchitectureParallel.PARALLEL_BDI,

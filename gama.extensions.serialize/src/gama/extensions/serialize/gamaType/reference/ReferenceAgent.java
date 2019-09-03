@@ -7,26 +7,26 @@ import java.util.Map;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.ShapeType;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.BiConsumerWithPruning;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IMacroAgent;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.topology.ITopology;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.IMap;
-import msi.gaml.species.ISpecies;
-import msi.gaml.types.IType;
+import gama.common.geometry.Envelope3D;
+import gama.common.interfaces.BiConsumerWithPruning;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IMacroAgent;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.agent.SavedAgent;
+import gama.metamodel.population.IPopulation;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.metamodel.topology.ITopology;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gama.util.map.IMap;
+import gaml.species.ISpecies;
+import gaml.types.IType;
 
 public class ReferenceAgent implements IReference, IAgent {
 

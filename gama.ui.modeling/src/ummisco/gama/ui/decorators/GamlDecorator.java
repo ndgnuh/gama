@@ -9,10 +9,10 @@
  **********************************************************************************************/
 package ummisco.gama.ui.decorators;
 
+import static gama.ui.navigator.navigator.contents.VirtualContent.DESCRIPTORS;
 import static org.eclipse.core.resources.IMarker.PROBLEM;
 import static org.eclipse.core.resources.IResource.DEPTH_INFINITE;
 import static org.eclipse.jface.viewers.IDecoration.BOTTOM_LEFT;
-import static ummisco.gama.ui.navigator.contents.VirtualContent.DESCRIPTORS;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -21,7 +21,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 
 import gama.extensions.files.gaml.GamlFileExtension;
-import ummisco.gama.ui.navigator.contents.VirtualContent;
+import gama.ui.navigator.navigator.contents.VirtualContent;
 
 /**
  * Simple decorator for error and warning

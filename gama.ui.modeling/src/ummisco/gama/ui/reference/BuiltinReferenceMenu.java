@@ -22,17 +22,17 @@ import org.eclipse.swt.widgets.Menu;
 import com.google.common.collect.Lists;
 
 import gama.ui.base.resources.GamaIcons;
-import msi.gama.common.interfaces.INamed;
-import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.kernel.GamaSkillRegistry;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.descriptions.OperatorProto;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.descriptions.TypeDescription;
-import msi.gaml.descriptions.VariableDescription;
-import msi.gaml.types.Types;
+import gama.common.interfaces.INamed;
+import gaml.compilation.AbstractGamlAdditions;
+import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ModelDescription;
+import gaml.descriptions.OperatorProto;
+import gaml.descriptions.StatementDescription;
+import gaml.descriptions.SymbolProto;
+import gaml.descriptions.TypeDescription;
+import gaml.descriptions.VariableDescription;
+import gaml.types.Types;
 import ummisco.gama.ui.templates.GamlTemplateFactory;
 
 /**
@@ -260,7 +260,7 @@ public class BuiltinReferenceMenu extends GamlReferenceMenu {
 	protected void openView() {}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getImage()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getImage()
 	 */
 	@Override
 	protected Image getImage() {
@@ -268,7 +268,7 @@ public class BuiltinReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getTitle()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getTitle()
 	 */
 	@Override
 	protected String getTitle() {

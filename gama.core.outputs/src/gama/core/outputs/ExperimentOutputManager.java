@@ -10,9 +10,9 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
-import static msi.gama.common.interfaces.IKeyword.LAYOUT;
-import static msi.gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_LAYOUT;
-import static msi.gama.common.preferences.GamaPreferences.Displays.LAYOUTS;
+import static gama.common.interfaces.IKeyword.LAYOUT;
+import static gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_LAYOUT;
+import static gama.common.preferences.GamaPreferences.Displays.LAYOUTS;
 
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.ISymbolKind;
@@ -23,15 +23,15 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IOutput;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.types.IType;
 
 /**
  * The Class OutputManager.

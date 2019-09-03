@@ -11,11 +11,11 @@ import gama.processor.annotations.IOperatorCategory;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentAgent;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentAgent;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.types.IType;
 
 public class SubModel {
 

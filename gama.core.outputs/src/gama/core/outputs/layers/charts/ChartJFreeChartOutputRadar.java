@@ -22,9 +22,9 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.Dataset;
 
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
 
 public class ChartJFreeChartOutputRadar extends ChartJFreeChartOutput {
 

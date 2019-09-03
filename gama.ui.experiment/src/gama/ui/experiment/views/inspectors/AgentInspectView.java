@@ -35,15 +35,15 @@ import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
 import gama.ui.experiment.experiment.parameters.AgentAttributesEditorsList;
 import gama.ui.experiment.menus.AgentsMenu;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.kernel.experiment.ParameterAdapter;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutput;
+import gama.kernel.experiment.ParameterAdapter;
+import gama.runtime.scope.IScope;
+import gaml.types.Types;
 
 public class AgentInspectView extends AttributesEditorsView<IAgent>
 		implements IToolbarDecoratedView.Pausable /* implements GamaSelectionListener */ {

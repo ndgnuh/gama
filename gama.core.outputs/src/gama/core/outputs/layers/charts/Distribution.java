@@ -19,17 +19,17 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
-import msi.gama.common.interfaces.IContainer;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.Maths;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IContainer;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.operators.Cast;
+import gaml.operators.Maths;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes" })
 public class Distribution {

@@ -18,11 +18,11 @@ import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.Experiment;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.descriptions.ModelDescription;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
+import gaml.descriptions.ModelDescription;
 
 public class ModelLibraryRunner extends AbstractModelLibraryRunner {
 

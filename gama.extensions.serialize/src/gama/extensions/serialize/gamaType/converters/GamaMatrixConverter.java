@@ -22,8 +22,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaMatrixReducer;
-import msi.gama.util.matrix.GamaMatrix;
-import msi.gama.util.matrix.IMatrix;
+import gama.util.matrix.GamaMatrix;
+import gama.util.matrix.IMatrix;
 
 @SuppressWarnings({ "rawtypes" })
 public class GamaMatrixConverter implements Converter {

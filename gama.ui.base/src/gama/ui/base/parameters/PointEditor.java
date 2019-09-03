@@ -22,15 +22,15 @@ import org.eclipse.swt.widgets.Text;
 
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.common.util.StringUtils;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.common.util.StringUtils;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.scope.IScope;
+import gama.metamodel.shape.GamaPoint;
+import gaml.operators.Cast;
+import gaml.types.IType;
+import gaml.types.Types;
 
 public class PointEditor extends AbstractEditor<GamaPoint> implements VerifyListener {
 

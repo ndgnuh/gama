@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Widget;
 import gama.ui.base.controls.IPopupProvider.PopupText;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gaml.compilation.GAML;
+import gaml.compilation.GAML;
 
 /**
  * The class Popup2. An alternative to Popup, which uses JFace dialogs

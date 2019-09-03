@@ -34,11 +34,11 @@ import gama.ui.base.views.GamaViewPart;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
 
 public class ConsoleView extends GamaViewPart
 		implements IToolbarDecoratedView.Sizable, IToolbarDecoratedView.Pausable, IGamaView.Console {

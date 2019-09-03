@@ -20,13 +20,13 @@ import java.util.LinkedHashMap;
 
 import org.jfree.chart.JFreeChart;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IChartImageProvider;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IChartImageProvider;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 public abstract class ChartOutput implements IChartImageProvider {
 

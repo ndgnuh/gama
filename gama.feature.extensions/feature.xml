@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="gama.feature.extensions"
+      label="Core extensions of GAMA"
+      version="2.0.0.qualifier"
+      provider-name="UMMISCO - MIAT - IRIT - CTU">
+
+   <description url="http://gama-platform.org">
+      Direct extensions to the core of GAMA
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <update label="Gama 2.x Update Site" url="http://updates.gama-platform.org"/>
+   </url>
+
+   <requires>
+      <import feature="gama.feature.core" version="2.0.0.qualifier"/>
+   </requires>
+
+   <plugin
+         id="gama.extensions.bdi"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.database"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.files"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.fipa"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.graph"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.maths"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.network"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.physics"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.serialize"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.sound"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.stats"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.extensions.traffic"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

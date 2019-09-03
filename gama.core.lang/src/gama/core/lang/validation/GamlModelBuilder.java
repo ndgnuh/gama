@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlModelBuilder.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'GamlModelBuilder.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import com.google.common.collect.Iterables;
 
 import gama.core.lang.gaml.resource.GamlResource;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IModel;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.interfaces.IGamlModelBuilder;
-import msi.gaml.descriptions.ModelDescription;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IModel;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
+import gaml.compilation.interfaces.IGamlModelBuilder;
+import gaml.descriptions.ModelDescription;
 
 /**
  * Class GamlResourceBuilder.

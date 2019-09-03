@@ -24,8 +24,8 @@ import java.util.HashMap;
 
 import org.apache.commons.lang.StringUtils;
 
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * A stream based parser for parsing delimited text data from a file or a stream.

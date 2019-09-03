@@ -5,8 +5,6 @@ package gama.core.lang;
 
 import com.google.inject.Injector;
 
-import ummisco.gama.GamlStandaloneSetupGenerated;
-
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.
  */

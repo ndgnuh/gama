@@ -15,19 +15,19 @@ import gama.extensions.serialize.factory.StreamConverter;
 import gama.extensions.serialize.gamaType.converters.ConverterScope;
 import gama.extensions.serialize.gaml.ReverseOperators;
 import gama.processor.annotations.GamlAnnotations.experiment;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.common.util.RandomUtils;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.experiment.ExperimentPlan;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.tree.GamaNode;
-import msi.gama.util.tree.GamaTree;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.common.util.RandomUtils;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.experiment.ExperimentPlan;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.agent.SavedAgent;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.tree.GamaNode;
+import gama.util.tree.GamaTree;
 
 @experiment (IKeyword.MEMORIZE)
 public class ExperimentBackwardAgent extends ExperimentAgent {

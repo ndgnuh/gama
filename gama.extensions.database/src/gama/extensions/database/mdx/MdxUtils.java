@@ -13,9 +13,9 @@ package gama.extensions.database.mdx;
 import java.util.Map;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.util.FileUtils;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.util.FileUtils;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 public class MdxUtils {
 

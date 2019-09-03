@@ -3,9 +3,9 @@ package gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import gama.extensions.serialize.gamaType.reduced.GamaPathReducer;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.util.path.GamaPath;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.util.path.GamaPath;
 
 public class ReferencePath extends GamaPath implements IReference {
 

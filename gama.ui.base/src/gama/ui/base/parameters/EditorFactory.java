@@ -15,14 +15,14 @@ import org.eclipse.swt.widgets.Composite;
 
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.interfaces.IParameterEditor;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.kernel.experiment.ExperimentParameter;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.statements.UserCommandStatement;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.kernel.experiment.ExperimentParameter;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
+import gaml.statements.UserCommandStatement;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class EditorFactory {

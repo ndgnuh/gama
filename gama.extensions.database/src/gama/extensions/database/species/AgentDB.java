@@ -21,12 +21,12 @@ import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.species;
-import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gaml.types.IType;
+import gama.metamodel.agent.GamlAgent;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gaml.types.IType;
 
 /*
  * @Author TRUONG Minh Thai

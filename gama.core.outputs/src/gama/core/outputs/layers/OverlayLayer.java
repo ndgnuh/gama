@@ -12,15 +12,15 @@ package gama.core.outputs.layers;
 
 import java.awt.geom.Rectangle2D;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 /**
  * Class OverlayLayer.

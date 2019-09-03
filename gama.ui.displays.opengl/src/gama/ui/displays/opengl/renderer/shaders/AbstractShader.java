@@ -18,7 +18,7 @@ import javax.vecmath.Matrix4f;
 import com.jogamp.opengl.GL2;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaPoint;
 
 public abstract class AbstractShader {
 

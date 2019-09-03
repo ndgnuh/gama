@@ -23,16 +23,16 @@ import com.google.common.collect.Lists;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.INamed;
-import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.kernel.GamaSkillRegistry;
-import msi.gaml.descriptions.AbstractProto;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.OperatorProto;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.descriptions.TypeDescription;
-import msi.gaml.operators.Strings;
-import msi.gaml.types.Types;
+import gama.common.interfaces.INamed;
+import gaml.compilation.AbstractGamlAdditions;
+import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.descriptions.AbstractProto;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.OperatorProto;
+import gaml.descriptions.StatementDescription;
+import gaml.descriptions.TypeDescription;
+import gaml.operators.Strings;
+import gaml.types.Types;
 
 /**
  * The class GamlTemplateFactory.

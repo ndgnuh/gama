@@ -28,10 +28,10 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcce
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
 import gama.ui.base.resources.GamaColors;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.GamaPreferences.Modeling;
-import msi.gama.util.GamaFont;
-import msi.gaml.types.IType;
+import gama.common.preferences.GamaPreferences;
+import gama.common.preferences.GamaPreferences.Modeling;
+import gama.util.GamaFont;
+import gaml.types.IType;
 
 public class GamlHighlightingConfiguration extends DefaultHighlightingConfiguration {
 

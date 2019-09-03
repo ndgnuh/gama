@@ -26,10 +26,10 @@ import org.eclipse.ui.IWorkbenchSite;
 import gama.ui.base.controls.ITooltipDisplayer;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.Pref;
-import msi.gaml.types.IType;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.preferences.GamaPreferences;
+import gama.common.preferences.Pref;
+import gaml.types.IType;
 
 /**
  * The class GamaToolbarFactory.

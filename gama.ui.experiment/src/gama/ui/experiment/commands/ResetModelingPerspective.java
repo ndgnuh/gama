@@ -10,7 +10,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class ResetModelingPerspective extends AbstractHandler {
 

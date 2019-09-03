@@ -48,18 +48,18 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.experiment.ExperimentParameter;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.GamaStringType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
-import msi.gaml.variables.Variable;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.experiment.IParameter;
+import gama.common.util.StringUtils;
+import gama.kernel.experiment.ExperimentParameter;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.types.GamaStringType;
+import gaml.types.IType;
+import gaml.types.Types;
+import gaml.variables.Variable;
 
 public abstract class AbstractEditor<T>
 		implements SelectionListener, ModifyListener, Comparable<AbstractEditor<T>>, IParameterEditor<T> {

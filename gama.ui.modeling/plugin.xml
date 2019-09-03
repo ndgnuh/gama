@@ -255,7 +255,7 @@
 			type="experiment">
 		</parser>
 	</extension>
-	<!-- marker definitions for gama.core.gaml.Gaml -->
+	<!-- marker definitions for gama.core.lang.Gaml -->
 	<extension
 			id="gaml.check.fast"
 			name="Gaml Problem"
@@ -346,7 +346,7 @@
 			</command>
 		</menuContribution>
 	</extension>
-	<!-- quickfix marker resolution generator for gama.core.gaml.Gaml -->
+	<!-- quickfix marker resolution generator for gama.core.lang.Gaml -->
 	<extension
 			point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator

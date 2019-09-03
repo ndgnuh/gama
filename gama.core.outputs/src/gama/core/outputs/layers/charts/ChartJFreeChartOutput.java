@@ -29,11 +29,11 @@ import org.jfree.chart.renderer.AbstractRenderer;
 import org.jfree.chart.renderer.xy.XYErrorRenderer;
 import org.jfree.data.general.Dataset;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IKeyword;
+import gama.common.util.ImageUtils;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 public class ChartJFreeChartOutput extends ChartOutput implements ChartProgressListener {
 

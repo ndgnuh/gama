@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlFormatter.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'GamlFormatter.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -18,8 +18,8 @@ import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 
-import ummisco.gama.services.GamlGrammarAccess;
-import ummisco.gama.services.GamlGrammarAccess.BlockElements;
+import gama.core.lang.services.GamlGrammarAccess;
+import gama.core.lang.services.GamlGrammarAccess.BlockElements;
 
 /**
  * This class contains custom formatting description.

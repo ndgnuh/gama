@@ -18,14 +18,14 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.Injector;
 
-import gama.core.GamlStandaloneSetup;
+import gama.common.interfaces.IModel;
+import gama.common.preferences.GamaPreferences;
+import gama.core.lang.GamlStandaloneSetup;
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
 import one.util.streamex.StreamEx;
 
 public class HeadlessSimulationLoader {

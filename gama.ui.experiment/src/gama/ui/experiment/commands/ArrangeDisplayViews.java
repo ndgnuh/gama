@@ -11,9 +11,9 @@
 package gama.ui.experiment.commands;
 
 import static gama.ui.base.utils.WorkbenchHelper.findDisplay;
-import static msi.gama.common.interfaces.IKeyword.LAYOUT;
-import static msi.gaml.operators.Displays.HORIZONTAL;
-import static msi.gaml.operators.Displays.VERTICAL;
+import static gama.common.interfaces.IKeyword.LAYOUT;
+import static gaml.operators.Displays.HORIZONTAL;
+import static gaml.operators.Displays.VERTICAL;
 import static org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory.INSTANCE;
 import static org.eclipse.e4.ui.workbench.modeling.EModelService.IN_ACTIVE_PERSPECTIVE;
 
@@ -35,11 +35,11 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import gama.dev.utils.DEBUG;
 import gama.ui.base.utils.PerspectiveHelper;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.tree.GamaNode;
-import msi.gama.util.tree.GamaTree;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.GAMA;
+import gama.util.tree.GamaNode;
+import gama.util.tree.GamaTree;
 import one.util.streamex.StreamEx;
 
 @SuppressWarnings ({ "rawtypes" })

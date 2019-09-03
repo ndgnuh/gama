@@ -20,21 +20,21 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AspectStatement;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.AspectStatement;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @symbol (
 		name = "light",

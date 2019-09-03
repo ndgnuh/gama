@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaPoint;
 
 public class GamaPointConverter implements Converter {
 

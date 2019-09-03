@@ -1,13 +1,13 @@
 package gama.extensions.serialize.gamaType.reduced;
 
 import gama.extensions.serialize.gamaType.reference.ReferencePath;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.graph.IGraph;
-import msi.gama.util.list.IList;
-import msi.gama.util.path.GamaPath;
-import msi.gama.util.path.PathFactory;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.scope.IScope;
+import gama.util.graph.IGraph;
+import gama.util.list.IList;
+import gama.util.path.GamaPath;
+import gama.util.path.PathFactory;
 
 public class GamaPathReducer {
 

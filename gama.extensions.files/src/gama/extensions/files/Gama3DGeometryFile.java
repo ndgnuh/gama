@@ -15,16 +15,16 @@ import java.util.List;
 
 import org.locationtech.jts.geom.Geometry;
 
-import msi.gama.common.geometry.AxisAngle;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaPair;
-import msi.gaml.operators.Cast;
+import gama.common.geometry.AxisAngle;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.GeometryUtils;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaPair;
+import gaml.operators.Cast;
 
 public abstract class Gama3DGeometryFile extends GamaGeometryFile {
 

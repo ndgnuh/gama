@@ -35,19 +35,19 @@ import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.extensions.messaging.GamaMailbox;
-import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.extensions.messaging.MessagingSkill;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.GamaMessageType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.extensions.messaging.GamaMailbox;
+import gama.extensions.messaging.GamaMessage;
+import gama.extensions.messaging.MessagingSkill;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.operators.Cast;
+import gaml.types.GamaMessageType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * Agents capable of communicate are equipped with this skill. The CommunicatingSkill supplies the communicating agents

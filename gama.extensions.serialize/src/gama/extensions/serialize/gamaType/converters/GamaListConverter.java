@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaListReducer;
-import msi.gama.util.list.IList;
+import gama.util.list.IList;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaListConverter implements Converter {

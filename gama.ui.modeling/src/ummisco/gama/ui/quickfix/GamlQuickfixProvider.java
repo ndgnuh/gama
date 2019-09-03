@@ -20,8 +20,8 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 
-import msi.gama.common.interfaces.IGamlIssue;
-import ummisco.gama.ui.commands.FileOpener;
+import gama.common.interfaces.IGamlIssue;
+import gama.ui.navigator.commands.FileOpener;
 
 public class GamlQuickfixProvider extends DefaultQuickfixProvider {
 

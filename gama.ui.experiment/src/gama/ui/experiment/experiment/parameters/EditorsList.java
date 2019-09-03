@@ -17,9 +17,9 @@ import java.util.Map;
 
 import gama.ui.base.interfaces.IParameterEditor;
 import gama.ui.base.parameters.AbstractEditor;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.experiment.IExperimentDisplayable;
 
 public abstract class EditorsList<T> implements ItemList<T> {
 

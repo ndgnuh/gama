@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'BuiltinGlobalScopeProvider.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'BuiltinGlobalScopeProvider.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -42,24 +42,24 @@ import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.GamaPair;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.kernel.GamaMetaModel;
-import msi.gaml.compilation.kernel.GamaSkillRegistry;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.OperatorProto;
-import msi.gaml.expressions.IExpressionCompiler;
-import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.operators.IUnits;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
-import ummisco.gama.gaml.GamlDefinition;
-import ummisco.gama.gaml.GamlPackage;
+import gama.common.interfaces.IGamlDescription;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.GAMA;
+import gama.util.GamaPair;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.compilation.AbstractGamlAdditions;
+import gaml.compilation.kernel.GamaMetaModel;
+import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.OperatorProto;
+import gaml.expressions.IExpressionCompiler;
+import gaml.expressions.IExpressionFactory;
+import gaml.operators.IUnits;
+import gaml.types.IType;
+import gaml.types.Types;
+import gama.core.lang.gaml.GamlDefinition;
+import gama.core.lang.gaml.GamlPackage;
 
 /**
  * Global GAML scope provider supporting built-in definitions.

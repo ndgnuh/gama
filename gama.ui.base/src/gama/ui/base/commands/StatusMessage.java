@@ -10,9 +10,9 @@
  ********************************************************************************************************/
 package gama.ui.base.commands;
 
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.runtime.IStatusMessage;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.gui.IGui;
+import gama.runtime.IStatusMessage;
+import gama.util.GamaColor;
 
 public class StatusMessage implements IStatusMessage {
 

@@ -10,9 +10,9 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
-import msi.gama.common.interfaces.outputs.ILightData;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.outputs.ILightData;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.GamaColor;
 
 public class LightData implements ILightData {
 	int id;

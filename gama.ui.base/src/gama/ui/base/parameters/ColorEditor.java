@@ -26,12 +26,12 @@ import gama.ui.base.menus.GamaColorMenu.IColorRunnable;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.GamaColorType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.types.GamaColorType;
+import gaml.types.Types;
 
 public class ColorEditor extends AbstractEditor<Color> {
 

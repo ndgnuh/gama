@@ -34,8 +34,8 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.gui.IGui;
 
 /**
  * Instances of this class support the layout of selectable expand bar items.

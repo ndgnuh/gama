@@ -32,18 +32,18 @@ import gama.ui.base.views.ExpandableItemsView;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IValue;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.compilation.GAML;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IValue;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.util.TextBuilder;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.compilation.GAML;
+import gaml.expressions.IExpression;
+import gaml.expressions.IExpressionFactory;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * @author Alexis Drogoul

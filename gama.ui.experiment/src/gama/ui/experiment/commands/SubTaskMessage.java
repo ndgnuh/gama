@@ -10,9 +10,9 @@
  ********************************************************************************************************/
 package gama.ui.experiment.commands;
 
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.runtime.IStatusMessage;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.gui.IGui;
+import gama.runtime.IStatusMessage;
+import gama.util.GamaColor;
 
 /**
  * Class SubTaskMessage.

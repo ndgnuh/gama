@@ -13,23 +13,23 @@ package gama.core.outputs.layers;
 import java.awt.Color;
 import java.util.List;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.file.IGamaFile.Gis;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.ShapeDrawingAttributes;
-import msi.gaml.types.GamaFileType;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.preferences.GamaPreferences;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.file.IGamaFile;
+import gama.util.file.IGamaFile.Gis;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.ShapeDrawingAttributes;
+import gaml.types.GamaFileType;
+import gaml.types.IType;
 
 public class GisLayer extends AbstractLayer {
 

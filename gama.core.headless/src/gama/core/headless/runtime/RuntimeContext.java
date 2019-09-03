@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import gama.core.headless.core.GamaHeadlessException;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
 
 public interface RuntimeContext {
 	public IExperimentPlan buildExperimentPlan(String expName, IModel mdl);

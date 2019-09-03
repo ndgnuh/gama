@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gama.extensions.files;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.GamaFile;
-import msi.gama.util.graph.IGraph;
-import msi.gaml.types.IContainerType;
+import gama.common.geometry.Envelope3D;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.file.GamaFile;
+import gama.util.graph.IGraph;
+import gaml.types.IContainerType;
 
 public class GamaGraphFile extends GamaFile<IGraph<?, ?>, Object> {
 

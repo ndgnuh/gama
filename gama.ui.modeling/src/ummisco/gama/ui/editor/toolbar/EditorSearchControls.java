@@ -37,7 +37,7 @@ import org.eclipse.ui.swt.IFocusService;
 import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.views.toolbar.GamaToolbarSimple;
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 import ummisco.gama.ui.editor.GamlEditor;
 
 /**

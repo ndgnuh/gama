@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.GAML;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IOutput;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.compilation.GAML;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
 
 public abstract class AbstractValuedDisplayOutput extends AbstractDisplayOutput implements IOutput.Monitor {
 

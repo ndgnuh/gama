@@ -19,18 +19,18 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.util.FileUtils;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.statements.AbstractStatementSequence;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.util.FileUtils;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.statements.AbstractStatementSequence;
+import gaml.types.IType;
 
 @symbol (
 		name = IKeyword.START_SOUND,

@@ -10,8 +10,8 @@
  **********************************************************************************************/
 package gama.core.headless.job;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gaml.descriptions.IDescription;
+import gama.common.interfaces.IKeyword;
+import gaml.descriptions.IDescription;
 
 public class Output {
 	public static final int DEFAULT_WIDTH = 500;

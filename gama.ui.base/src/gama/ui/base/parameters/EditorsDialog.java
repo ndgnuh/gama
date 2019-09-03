@@ -27,8 +27,8 @@ import org.eclipse.swt.widgets.Shell;
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.IType;
+import gama.runtime.scope.IScope;
+import gaml.types.IType;
 
 /**
  * The class EditorsDialog.

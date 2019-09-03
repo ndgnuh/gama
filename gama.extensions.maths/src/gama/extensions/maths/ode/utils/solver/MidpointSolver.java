@@ -12,8 +12,8 @@ package gama.extensions.maths.ode.utils.solver;
 
 import org.apache.commons.math3.ode.nonstiff.MidpointIntegrator;
 
-import msi.gama.util.list.IList;
-import msi.gama.util.map.IMap;
+import gama.util.list.IList;
+import gama.util.map.IMap;
 
 public class MidpointSolver extends Solver {
 

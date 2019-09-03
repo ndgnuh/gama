@@ -15,13 +15,13 @@ import java.util.Collection;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.scene.AbstractObject;
 import gama.ui.displays.opengl.scene.GeometryObject;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.util.GamaColor;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.ShapeDrawingAttributes;
-import msi.gaml.types.GamaGeometryType;
+import gama.common.interfaces.IAgent;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.util.GamaColor;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.ShapeDrawingAttributes;
+import gaml.types.GamaGeometryType;
 
 public class FrameLayerObject extends StaticLayerObject.World {
 

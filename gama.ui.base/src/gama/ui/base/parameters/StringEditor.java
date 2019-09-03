@@ -14,11 +14,11 @@ import java.util.List;
 import org.eclipse.swt.widgets.Composite;
 
 import gama.ui.base.interfaces.EditorListener;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gaml.types.IType;
+import gaml.types.Types;
 
 public class StringEditor extends ExpressionBasedEditor<String> {
 

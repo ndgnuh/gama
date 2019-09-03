@@ -8,7 +8,7 @@
  */
 package gama.extensions.files.json;
 
-import msi.gama.common.util.TextBuilder;
+import gama.common.util.TextBuilder;
 
 /**
  * DeserializationException explains how and where the problem occurs in the source JSON text during deserialization.

@@ -19,7 +19,7 @@ import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.preferences.GamaPreferences;
 
 public class ErrorsPauseAndEdit extends AbstractHandler implements IElementUpdater {
 

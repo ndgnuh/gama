@@ -20,12 +20,12 @@ import static gama.ui.base.resources.GamaFonts.baseSize;
 import static gama.ui.base.resources.GamaFonts.getBaseFont;
 import static gama.ui.base.resources.GamaFonts.setLabelFont;
 import static gama.ui.base.resources.IGamaColors.WARNING;
-import static msi.gama.common.interfaces.gui.IGui.NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID;
-import static msi.gama.common.preferences.GamaPreferences.create;
-import static msi.gama.common.preferences.GamaPreferences.Interface.APPEARANCE;
-import static msi.gama.common.preferences.GamaPreferences.Interface.MENUS;
-import static msi.gama.common.preferences.GamaPreferences.Interface.NAME;
-import static msi.gama.util.GamaColor.getNamed;
+import static gama.common.interfaces.gui.IGui.NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID;
+import static gama.common.preferences.GamaPreferences.create;
+import static gama.common.preferences.GamaPreferences.Interface.APPEARANCE;
+import static gama.common.preferences.GamaPreferences.Interface.MENUS;
+import static gama.common.preferences.GamaPreferences.Interface.NAME;
+import static gama.util.GamaColor.getNamed;
 import static org.eclipse.ui.PlatformUI.getWorkbench;
 
 import org.eclipse.core.runtime.CoreException;
@@ -34,11 +34,11 @@ import org.eclipse.ui.IDecoratorManager;
 
 import gama.ui.base.menus.GamaColorMenu;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.Pref;
-import msi.gama.util.GamaColor;
-import msi.gama.util.GamaFont;
-import msi.gaml.types.IType;
+import gama.common.preferences.GamaPreferences;
+import gama.common.preferences.Pref;
+import gama.util.GamaColor;
+import gama.util.GamaFont;
+import gaml.types.IType;
 
 public class GamaUIPreferences {
 

@@ -36,13 +36,13 @@ import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.GamaViewPart;
 import gama.ui.base.views.toolbar.GamaToolbar2;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.architecture.user.UserInputStatement;
-import msi.gaml.architecture.user.UserPanelStatement;
-import msi.gaml.statements.UserCommandStatement;
+import gama.common.interfaces.IStatement;
+import gama.common.interfaces.gui.IGamaView;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.architecture.user.UserInputStatement;
+import gaml.architecture.user.UserPanelStatement;
+import gaml.statements.UserCommandStatement;
 
 public class UserControlView extends GamaViewPart implements IGamaView.User {
 

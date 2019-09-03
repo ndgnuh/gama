@@ -17,10 +17,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.MinimalAgent;
-import msi.gama.metamodel.agent.SavedAgent;
+import gama.common.interfaces.IAgent;
+import gama.metamodel.agent.GamlAgent;
+import gama.metamodel.agent.MinimalAgent;
+import gama.metamodel.agent.SavedAgent;
 
 public class GamaAgentConverterNetwork implements Converter {
 

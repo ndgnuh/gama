@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import gama.extensions.files.metadata.GamaFileMetaData;
-import msi.gama.common.util.TextBuilder;
+import gama.common.util.TextBuilder;
 
 public class GamlFileInfo extends GamaFileMetaData {
 

@@ -26,13 +26,13 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.skills.Skill;
-import msi.gaml.types.IType;
+import gama.common.geometry.GeometryUtils;
+import gama.common.interfaces.IAgent;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.skills.Skill;
+import gaml.types.IType;
 
 @vars ({ @variable (
 		name = "agents_on",

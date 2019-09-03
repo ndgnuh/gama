@@ -10,34 +10,34 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import static msi.gama.common.interfaces.IKeyword.FADING;
-import static msi.gama.common.interfaces.IKeyword.POSITION;
-import static msi.gama.common.interfaces.IKeyword.REFRESH;
-import static msi.gama.common.interfaces.IKeyword.SELECTABLE;
-import static msi.gama.common.interfaces.IKeyword.SIZE;
-import static msi.gama.common.interfaces.IKeyword.TRACE;
-import static msi.gama.common.interfaces.IKeyword.TRANSPARENCY;
-import static msi.gaml.types.Types.BOOL;
-import static msi.gaml.types.Types.FLOAT;
-import static msi.gaml.types.Types.INT;
-import static msi.gaml.types.Types.POINT;
+import static gama.common.interfaces.IKeyword.FADING;
+import static gama.common.interfaces.IKeyword.POSITION;
+import static gama.common.interfaces.IKeyword.REFRESH;
+import static gama.common.interfaces.IKeyword.SELECTABLE;
+import static gama.common.interfaces.IKeyword.SIZE;
+import static gama.common.interfaces.IKeyword.TRACE;
+import static gama.common.interfaces.IKeyword.TRANSPARENCY;
+import static gaml.types.Types.BOOL;
+import static gaml.types.Types.FLOAT;
+import static gaml.types.Types.INT;
+import static gaml.types.Types.POINT;
 
 import java.awt.Point;
 
 import org.locationtech.jts.geom.Envelope;
 
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerData;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.PixelUnitExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.draw.AttributeHolder;
-import msi.gaml.types.Types;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerData;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
+import gaml.expressions.PixelUnitExpression;
+import gaml.operators.Cast;
+import gaml.statements.draw.AttributeHolder;
+import gaml.types.Types;
 
 /**
  * Written by drogoul Modified on 16 nov. 2010

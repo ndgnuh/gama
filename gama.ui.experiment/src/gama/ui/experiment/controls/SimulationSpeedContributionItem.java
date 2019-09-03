@@ -26,9 +26,9 @@ import gama.ui.base.controls.SimpleSlider;
 import gama.ui.base.interfaces.ISpeedDisplayer;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.runtime.GAMA;
-import msi.gaml.operators.Maths;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.runtime.GAMA;
+import gaml.operators.Maths;
 
 /**
  * The class SimulationSpeedContributionItem.

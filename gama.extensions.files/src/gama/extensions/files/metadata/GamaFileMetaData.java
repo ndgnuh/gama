@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.lang.StringUtils;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.util.file.IGamaFileMetaData;
+import gama.util.file.IGamaFileMetaData;
 
 /**
  * Class GamaFileMetaInformation.

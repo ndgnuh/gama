@@ -16,13 +16,13 @@ import gama.core.headless.core.GamaHeadlessException;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.job.ExperimentJob;
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.kernel.experiment.ExperimentPlan;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.HeadlessListener;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.descriptions.IDescription;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.kernel.experiment.ExperimentPlan;
+import gama.runtime.GAMA;
+import gama.runtime.HeadlessListener;
+import gaml.compilation.GamlCompilationError;
+import gaml.descriptions.IDescription;
 
 public class LocalSimulationRuntime extends Observable implements SimulationRuntime, RuntimeContext {
 

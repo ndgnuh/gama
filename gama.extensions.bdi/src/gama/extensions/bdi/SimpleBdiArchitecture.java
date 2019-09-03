@@ -21,19 +21,19 @@ import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.architecture.reflex.ReflexArchitecture;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.operators.Maths;
-import msi.gaml.species.ISpecies;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IStatement;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.architecture.reflex.ReflexArchitecture;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.operators.Maths;
+import gaml.species.ISpecies;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @vars ({ @variable (
 		name = SimpleBdiArchitecture.PERSISTENCE_COEFFICIENT_PLANS,
@@ -432,9 +432,9 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 				BDIPlan _persistentTask = (BDIPlan) agent.getAttribute(CURRENT_PLAN);
 				Norm _persistentNorm = (Norm) agent.getAttribute(CURRENT_NORM);
 				// RANDOMLY REMOVE (last)INTENTION
-				Boolean flipResultintention = msi.gaml.operators.Random.opFlip(scope, persistenceCoefficientintention);
+				Boolean flipResultintention = gaml.operators.Random.opFlip(scope, persistenceCoefficientintention);
 				while (!flipResultintention && intentionBase.size() > 0) {
-					flipResultintention = msi.gaml.operators.Random.opFlip(scope, persistenceCoefficientintention);
+					flipResultintention = gaml.operators.Random.opFlip(scope, persistenceCoefficientintention);
 					if (intentionBase.size() > 0) {
 						final int toremove = intentionBase.size() - 1;
 						final Predicate previousint = intentionBase.get(toremove).getPredicate();
@@ -475,7 +475,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 				// _persistentTask = null;
 				// agent.setAttribute(CURRENT_PLAN, _persistentTask);
 				// }
-				final Boolean flipResult = msi.gaml.operators.Random.opFlip(scope, persistenceCoefficientPlans);
+				final Boolean flipResult = gaml.operators.Random.opFlip(scope, persistenceCoefficientPlans);
 
 				if (!flipResult) {
 					if (_persistentTask != null) {
@@ -556,7 +556,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 						result = _persistentNorm.getNormStatement().executeOn(scope);
 						boolean isExecuted = false;
 						if (_persistentNorm.getNormStatement().getExecutedExpression() != null) {
-							isExecuted = msi.gaml.operators.Cast.asBool(scope,
+							isExecuted = gaml.operators.Cast.asBool(scope,
 									_persistentNorm.getNormStatement().getExecutedExpression().value(scope));
 						}
 						if (this.iscurrentplaninstantaneous) {
@@ -574,7 +574,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 						result = _persistentTask.getPlanStatement().executeOn(scope);
 						boolean isExecuted = false;
 						if (_persistentTask.getPlanStatement().getExecutedExpression() != null) {
-							isExecuted = msi.gaml.operators.Cast.asBool(scope,
+							isExecuted = gaml.operators.Cast.asBool(scope,
 									_persistentTask.getPlanStatement().getExecutedExpression().value(scope));
 						}
 						if (this.iscurrentplaninstantaneous) {
@@ -632,12 +632,12 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 					priority_list[i] = desireBaseTest.get(i).getStrength();
 				}
 				final IList priorities = GamaListFactory.create(scope, Types.FLOAT, priority_list);
-				final int index_choice = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+				final int index_choice = gaml.operators.Random.opRndChoice(scope, priorities);
 				newIntention = desireBaseTest.get(index_choice);
 				newIntStrength = desireBaseTest.get(index_choice).getStrength();
 				if (desireBaseTest.size() > intentionBase.size()) {
 					while (intentionBase.contains(newIntention)) {
-						final int index_choice2 = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+						final int index_choice2 = gaml.operators.Random.opRndChoice(scope, priorities);
 						newIntention = desireBaseTest.get(index_choice2);
 						newIntStrength = desireBaseTest.get(index_choice2).getStrength();
 					}
@@ -782,12 +782,12 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 						priority_list[i] = obligationBaseTest.get(i).getStrength();
 					}
 					final IList priorities = GamaListFactory.create(scope, Types.FLOAT, priority_list);
-					final int index_choice = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+					final int index_choice = gaml.operators.Random.opRndChoice(scope, priorities);
 					newIntention = obligationBaseTest.get(index_choice);
 					newIntStrength = obligationBaseTest.get(index_choice).getStrength();
 					if (obligationBaseTest.size() > intentionBase.size()) {
 						while (intentionBase.contains(newIntention)) {
-							final int index_choice2 = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+							final int index_choice2 = gaml.operators.Random.opRndChoice(scope, priorities);
 							newIntention = obligationBaseTest.get(index_choice2);
 							newIntStrength = obligationBaseTest.get(index_choice2).getStrength();
 						}
@@ -915,7 +915,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 				.shuffle(new ArrayList(_plans))) {
 			final SimpleBdiPlanStatement statement = ((BDIPlan) BDIPlanstatement).getPlanStatement();
 			final boolean isContextConditionSatisfied = statement.getContextExpression() == null
-					|| msi.gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
+					|| gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
 			final boolean isIntentionConditionSatisfied = statement.getIntentionExpression() == null
 					|| statement.getIntentionExpression().value(scope) == null
 					|| ((Predicate) statement.getIntentionExpression().value(scope))
@@ -934,7 +934,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 					double currentPriority = 1.0;
 					if (statement.getFacet(SimpleBdiArchitecture.PRIORITY) != null) {
 						currentPriority =
-								msi.gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
+								gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
 					}
 
 					if (highestPriority < currentPriority) {
@@ -948,13 +948,13 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 			if (!temp_plan.isEmpty()) {
 				for (final Object statement : temp_plan) {
 					if (((BDIPlan) statement).getPlanStatement().hasFacet(PRIORITY)) {
-						priorities.add(msi.gaml.operators.Cast.asFloat(scope,
+						priorities.add(gaml.operators.Cast.asFloat(scope,
 								((BDIPlan) statement).getPlanStatement().getPriorityExpression().value(scope)));
 					} else {
 						priorities.add(1.0);
 					}
 				}
-				final int index_plan = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+				final int index_plan = gaml.operators.Random.opRndChoice(scope, priorities);
 				resultStatement = temp_plan.get(index_plan);
 			}
 		}
@@ -962,7 +962,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 		iscurrentplaninstantaneous = false;
 		if (resultStatement != null) {
 			if (resultStatement.getPlanStatement().getFacet(SimpleBdiArchitecture.INSTANTANEAOUS) != null) {
-				iscurrentplaninstantaneous = msi.gaml.operators.Cast.asBool(scope,
+				iscurrentplaninstantaneous = gaml.operators.Cast.asBool(scope,
 						resultStatement.getPlanStatement().getInstantaneousExpression().value(scope));
 			}
 		}
@@ -990,7 +990,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 		for (final Object Normstatement : scope.getSimulation().getRandomGenerator().shuffle(new ArrayList(_norms))) {
 			final NormStatement statement = ((Norm) Normstatement).getNormStatement();
 			final boolean isContextConditionSatisfied = statement.getContextExpression() == null
-					|| msi.gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
+					|| gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
 			boolean isIntentionConditionSatisfied = false;
 			if (statement.getIntentionExpression() != null && statement.getIntentionExpression().value(scope) != null) {
 				isIntentionConditionSatisfied = ((Predicate) statement.getIntentionExpression().value(scope))
@@ -1013,7 +1013,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 					double currentPriority = 1.0;
 					if (statement.getFacet(SimpleBdiArchitecture.PRIORITY) != null) {
 						currentPriority =
-								msi.gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
+								gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
 					}
 
 					if (highestPriority < currentPriority) {
@@ -1041,7 +1041,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 					double currentPriority = 1.0;
 					if (statement.getFacet(SimpleBdiArchitecture.PRIORITY) != null) {
 						currentPriority =
-								msi.gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
+								gaml.operators.Cast.asFloat(scope, statement.getPriorityExpression().value(scope));
 					}
 
 					if (highestPriority < currentPriority) {
@@ -1055,13 +1055,13 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 			if (!temp_norm.isEmpty()) {
 				for (final Object statement : temp_norm) {
 					if (((NormStatement) statement).hasFacet(PRIORITY)) {
-						priorities.add(msi.gaml.operators.Cast.asFloat(scope,
+						priorities.add(gaml.operators.Cast.asFloat(scope,
 								((SimpleBdiPlanStatement) statement).getPriorityExpression().value(scope)));
 					} else {
 						priorities.add(1.0);
 					}
 				}
-				final int index_plan = msi.gaml.operators.Random.opRndChoice(scope, priorities);
+				final int index_plan = gaml.operators.Random.opRndChoice(scope, priorities);
 				resultStatement = temp_norm.get(index_plan);
 			}
 		}
@@ -1069,7 +1069,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 		iscurrentplaninstantaneous = false;
 		if (resultStatement != null) {
 			if (resultStatement.getNormStatement().getFacet(SimpleBdiArchitecture.INSTANTANEAOUS) != null) {
-				iscurrentplaninstantaneous = msi.gaml.operators.Cast.asBool(scope,
+				iscurrentplaninstantaneous = gaml.operators.Cast.asBool(scope,
 						resultStatement.getNormStatement().getInstantaneousExpression().value(scope));
 			}
 		}
@@ -1181,7 +1181,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 			final SimpleBdiPlanStatement statement = ((BDIPlan) BDIPlanstatement).getPlanStatement();
 
 			if (statement.getContextExpression() != null
-					&& !msi.gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope))) {
+					&& !gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope))) {
 				continue;
 			}
 			if (currentIntention(scope) != null) {
@@ -1203,7 +1203,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 			final NormStatement statement = ((Norm) Normstatement).getNormStatement();
 
 			if (statement.getContextExpression() != null
-					&& !msi.gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope))) {
+					&& !gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope))) {
 				continue;
 			}
 			if (currentIntention(scope) != null) {
@@ -1343,7 +1343,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 
 		}
 		// if (cond instanceof String) {
-		// final Object res = msi.gaml.operators.System.opEvalGaml(scope,
+		// final Object res = gaml.operators.System.opEvalGaml(scope,
 		// (String) cond);
 		// if (Cast.asBool(scope, res) == false) {
 		// return true;
@@ -6085,7 +6085,7 @@ public class SimpleBdiArchitecture extends ReflexArchitecture {
 			final NormStatement statement = tempNorm.getNormStatement();
 			if (statement != null) {
 				final boolean isContextConditionSatisfied = statement.getContextExpression() == null
-						|| msi.gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
+						|| gaml.operators.Cast.asBool(scope, statement.getContextExpression().value(scope));
 				boolean isIntentionConditionSatisfied = false;
 				if (currentIntention(scope) == null || statement.getIntentionExpression() == null
 						|| statement.getIntentionExpression().value(scope) == null

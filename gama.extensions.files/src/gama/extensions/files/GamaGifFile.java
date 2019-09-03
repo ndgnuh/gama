@@ -14,11 +14,11 @@ import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.matrix.IMatrix;
-import msi.gaml.types.IType;
+import gama.common.util.ImageUtils;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.matrix.IMatrix;
+import gaml.types.IType;
 
 @file (
 		name = "gif",

@@ -19,11 +19,11 @@ import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.skill;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gaml.skills.Skill;
-import msi.gaml.types.IType;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gaml.skills.Skill;
+import gaml.types.IType;
 
 /*
  * @Author TRUONG Minh Thai

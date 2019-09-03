@@ -33,7 +33,7 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.views.toolbar.GamaToolbarFactory.ToggleAction;
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 
 /**
  * Class GamaToolbar. A declarative wrapper around 2 toolbars (left, right).

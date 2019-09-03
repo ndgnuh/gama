@@ -4,16 +4,16 @@ import static gama.ui.experiment.commands.ArrangeDisplayViews.DISPLAY_INDEX_KEY;
 import static gama.ui.experiment.commands.ArrangeDisplayViews.getDisplaysPlaceholder;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.valueOf;
-import static msi.gama.common.interfaces.IKeyword.LAYOUT;
-import static msi.gama.util.tree.GamaTree.withRoot;
-import static msi.gaml.operators.Displays.HORIZONTAL;
-import static msi.gaml.operators.Displays.STACK;
-import static msi.gaml.operators.Displays.VERTICAL;
-import static msi.gaml.operators.IUnits.horizontal;
-import static msi.gaml.operators.IUnits.none;
-import static msi.gaml.operators.IUnits.split;
-import static msi.gaml.operators.IUnits.stack;
-import static msi.gaml.operators.IUnits.vertical;
+import static gama.common.interfaces.IKeyword.LAYOUT;
+import static gama.util.tree.GamaTree.withRoot;
+import static gaml.operators.Displays.HORIZONTAL;
+import static gaml.operators.Displays.STACK;
+import static gaml.operators.Displays.VERTICAL;
+import static gaml.operators.IUnits.horizontal;
+import static gaml.operators.IUnits.none;
+import static gaml.operators.IUnits.split;
+import static gaml.operators.IUnits.stack;
+import static gaml.operators.IUnits.vertical;
 import static one.util.streamex.StreamEx.of;
 
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainer;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.tree.GamaNode;
-import msi.gama.util.tree.GamaTree;
+import gama.common.preferences.GamaPreferences;
+import gama.util.tree.GamaNode;
+import gama.util.tree.GamaTree;
 import one.util.streamex.IntStreamEx;
 
 public class LayoutTreeConverter {

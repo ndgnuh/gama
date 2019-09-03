@@ -53,12 +53,12 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.Selector;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.Pref;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.IType;
+import gama.common.preferences.GamaPreferences;
+import gama.common.preferences.Pref;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.GAMA;
+import gama.util.GamaColor;
+import gaml.types.IType;
 
 /**
  * Class GamaPreferencesView.

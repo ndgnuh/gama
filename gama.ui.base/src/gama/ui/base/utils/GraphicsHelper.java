@@ -20,7 +20,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.internal.DPIUtil;
 
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 
 /**
  * Utility class gathering some useful and general method. Mainly convert forth and back graphical stuff between awt and

@@ -16,15 +16,15 @@ import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.IDescription;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutput;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.IDescription;
 
 /**
  * The Class OutputManager.

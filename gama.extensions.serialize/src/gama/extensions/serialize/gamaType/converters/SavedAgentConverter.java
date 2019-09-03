@@ -20,10 +20,10 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.util.map.IMap;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.agent.SavedAgent;
+import gama.util.map.IMap;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class SavedAgentConverter implements Converter {

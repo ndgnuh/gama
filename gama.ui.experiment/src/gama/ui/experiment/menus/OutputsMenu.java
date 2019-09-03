@@ -11,13 +11,13 @@ import org.eclipse.swt.widgets.MenuItem;
 import com.google.common.collect.Iterables;
 
 import gama.ui.base.menus.GamaMenu;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
 
 public class OutputsMenu extends ContributionItem {
 

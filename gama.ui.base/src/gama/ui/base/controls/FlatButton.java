@@ -31,7 +31,7 @@ import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.gui.IGui;
 
 public class FlatButton extends Canvas implements PaintListener, Listener {
 

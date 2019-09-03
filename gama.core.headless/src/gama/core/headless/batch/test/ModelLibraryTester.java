@@ -14,19 +14,19 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Multimap;
 
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.preferences.GamaPreferences;
 import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.experiment.TestAgent;
-import msi.gama.runtime.GAMA;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.statements.test.TestState;
+import gama.kernel.experiment.TestAgent;
+import gama.runtime.GAMA;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
+import gaml.descriptions.ModelDescription;
+import gaml.statements.test.TestState;
 
 public class ModelLibraryTester extends AbstractModelLibraryRunner {
 
@@ -90,11 +90,13 @@ public class ModelLibraryTester extends AbstractModelLibraryRunner {
 		final List<GamlCompilationError> errors = new ArrayList<>();
 		try {
 			final IModel model = GAML.compile(p, errors);
-			if (model == null || model.getDescription() == null) { return; }
+			if (model == null || model.getDescription() == null)
+				return;
 			final List<String> testExpNames = ((ModelDescription) model.getDescription()).getExperimentNames().stream()
 					.filter(e -> model.getExperiment(e).isTest()).collect(Collectors.toList());
 
-			if (testExpNames.isEmpty()) { return; }
+			if (testExpNames.isEmpty())
+				return;
 			for (final String expName : testExpNames) {
 				final IExperimentPlan exp = GAMA.runModel(model, expName, true);
 				if (exp != null) {

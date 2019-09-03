@@ -23,11 +23,11 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import gama.ui.base.resources.GamaIcons;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.map.IMap;
-import msi.gaml.descriptions.OperatorProto;
-import msi.gaml.expressions.IExpressionCompiler;
-import msi.gaml.types.Signature;
+import gama.common.preferences.GamaPreferences;
+import gama.util.map.IMap;
+import gaml.descriptions.OperatorProto;
+import gaml.expressions.IExpressionCompiler;
+import gaml.types.Signature;
 import ummisco.gama.ui.templates.GamlTemplateFactory;
 
 /**
@@ -163,7 +163,7 @@ public class OperatorsReferenceMenu extends GamlReferenceMenu {
 	protected void openView() {}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getImage()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getImage()
 	 */
 	@Override
 	protected Image getImage() {
@@ -171,7 +171,7 @@ public class OperatorsReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getTitle()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getTitle()
 	 */
 	@Override
 	protected String getTitle() {

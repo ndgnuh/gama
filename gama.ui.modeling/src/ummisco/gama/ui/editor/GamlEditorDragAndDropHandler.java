@@ -40,11 +40,11 @@ import org.eclipse.ui.part.ResourceTransfer;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import gama.extensions.files.metadata.FileMetaDataProvider;
-import msi.gama.common.util.FileUtils;
-import msi.gama.common.util.PlatformUtils;
-import msi.gaml.operators.Strings;
-import msi.gaml.types.GamaFileType;
-import msi.gaml.types.ParametricFileType;
+import gama.common.util.FileUtils;
+import gama.common.util.PlatformUtils;
+import gaml.operators.Strings;
+import gaml.types.GamaFileType;
+import gaml.types.ParametricFileType;
 
 /**
  * The class GamlEditorDragAndDropHandler.

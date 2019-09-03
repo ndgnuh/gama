@@ -20,8 +20,8 @@ import org.eclipse.swt.widgets.TableItem;
 
 import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gaml.compilation.GamlIdiomsProvider;
+import gama.common.interfaces.IGamlDescription;
+import gaml.compilation.GamlIdiomsProvider;
 
 public class GamlAccessEntry {
 	boolean firstInCategory;

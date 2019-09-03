@@ -56,8 +56,8 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.util.FileUtils;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.util.FileUtils;
 import one.util.streamex.StreamEx;
 
 public class WorkbenchHelper {

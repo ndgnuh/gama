@@ -21,11 +21,11 @@ import gama.ui.base.interfaces.IAgentMenuFactory;
 import gama.ui.base.menus.MenuAction;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class AgentEditor extends ExpressionBasedEditor {

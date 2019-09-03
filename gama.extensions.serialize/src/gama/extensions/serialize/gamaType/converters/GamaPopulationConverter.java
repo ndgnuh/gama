@@ -16,9 +16,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.metamodel.population.GamaPopulation;
-import msi.gama.util.list.IList;
+import gama.common.interfaces.IAgent;
+import gama.metamodel.population.GamaPopulation;
+import gama.util.list.IList;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class GamaPopulationConverter implements Converter {

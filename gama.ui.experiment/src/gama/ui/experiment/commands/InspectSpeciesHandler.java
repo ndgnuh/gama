@@ -14,9 +14,9 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
 import gama.core.outputs.ValuedDisplayOutputFactory;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.species.ISpecies;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.species.ISpecies;
 
 public class InspectSpeciesHandler extends AbstractHandler { // NO_UCD (unused code)
 

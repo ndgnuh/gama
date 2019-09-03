@@ -23,10 +23,10 @@ import org.olap4j.OlapStatement;
 import org.olap4j.Position;
 import org.olap4j.metadata.Member;
 
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
 
 /*
  * @Author TRUONG Minh Thai Fredric AMBLARD Benoit GAUDOU Christophe Sibertin-BLANC

@@ -10,7 +10,8 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 
 import com.google.inject.Binder;
 
-import ummisco.gama.ide.contentassist.antlr.GamlParser;
+import gama.core.lang.ide.AbstractGamlIdeModule;
+import gama.core.lang.ide.contentassist.antlr.GamlParser;
 
 /**
  * Use this class to register ide components.

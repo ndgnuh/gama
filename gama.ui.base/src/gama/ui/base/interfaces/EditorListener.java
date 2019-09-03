@@ -12,7 +12,7 @@ package gama.ui.base.interfaces;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
-import msi.gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.exceptions.GamaRuntimeException;
 
 /**
  * Written by drogoul Modified on 27 mai 2011

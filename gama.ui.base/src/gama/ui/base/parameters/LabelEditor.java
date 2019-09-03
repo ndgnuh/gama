@@ -16,9 +16,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
 import gama.ui.base.interfaces.EditorListener;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
 
 public class LabelEditor extends AbstractEditor<String> {
 

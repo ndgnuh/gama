@@ -35,19 +35,19 @@ import gama.core.headless.runtime.RuntimeContext;
 import gama.core.headless.xml.Writer;
 import gama.core.headless.xml.XmlTAG;
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.GAML;
-import msi.gaml.descriptions.ExperimentDescription;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IModel;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.GAML;
+import gaml.descriptions.ExperimentDescription;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.expressions.IExpression;
+import gaml.expressions.IExpressionFactory;
+import gaml.operators.Cast;
+import gaml.types.Types;
 
 public class ExperimentJob implements IExperimentJob {
 

@@ -21,10 +21,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reference.ReferenceAgent;
-import msi.gama.metamodel.agent.AbstractAgent;
-import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.MinimalAgent;
-import msi.gama.metamodel.topology.grid.GamaSpatialMatrix.GridPopulation.MinimalGridAgent;
+import gama.metamodel.agent.AbstractAgent;
+import gama.metamodel.agent.GamlAgent;
+import gama.metamodel.agent.MinimalAgent;
+import gama.metamodel.topology.grid.GamaSpatialMatrix.GridPopulation.MinimalGridAgent;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaAgentConverter implements Converter {

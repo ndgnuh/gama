@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceProxy.java, in plugin gama.core.gaml, is part of the source code of the
+ * 'GamlResourceProxy.java, in plugin gama.core.lang, is part of the source code of the
  * GAMA modeling and simulation platform.
  * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *

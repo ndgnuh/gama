@@ -12,12 +12,12 @@ package gama.extensions.serialize.gamaType.reduced;
 import java.util.ArrayList;
 
 import gama.extensions.serialize.gamaType.reference.ReferenceList;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaListReducer {

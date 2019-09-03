@@ -15,21 +15,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IExecutable;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.common.util.Collector;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.ExecutionResult;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.species.ISpecies;
-import msi.gaml.statements.AspectStatement;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IExecutable;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.util.Collector;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.ExecutionResult;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.species.ISpecies;
+import gaml.statements.AspectStatement;
 
 /**
  * Written by drogoul Modified on 23 août 2008

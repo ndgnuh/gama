@@ -18,13 +18,13 @@ import java.util.Set;
 
 import gama.ui.base.interfaces.IParameterEditor;
 import gama.ui.base.parameters.EditorFactory;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
 
 public class AgentAttributesEditorsList extends EditorsList<IAgent> {
 

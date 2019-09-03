@@ -14,18 +14,18 @@ import java.util.Collections;
 import java.util.List;
 
 import gama.processor.annotations.GamlAnnotations.inside;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.Symbol;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IOutput;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.compilation.Symbol;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ModelDescription;
+import gaml.expressions.IExpression;
+import gaml.expressions.IExpressionFactory;
+import gaml.operators.Cast;
 
 /**
  * The Class AbstractOutput.

@@ -1,11 +1,10 @@
 /*********************************************************************************************
  *
- * 'GamaFoldingRegionProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the
- * GAMA modeling and simulation platform.
- * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamaFoldingRegionProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.editor.folding;
@@ -28,7 +27,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 
-import gama.core.gaml.EGaml;
+import gama.core.lang.gaml.EGaml;
 
 /**
  * The class GamaFoldingRegionProvider.

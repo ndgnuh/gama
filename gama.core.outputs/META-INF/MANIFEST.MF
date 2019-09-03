@@ -32,9 +32,9 @@ Export-Package: gama.core.outputs;
    msi.gaml.descriptions,
    msi.gama.metamodel.topology.grid",
  gama.core.outputs.layers.charts
-Require-Bundle: msi.gama.core;bundle-version="1.9.0",
- gama.core.ext;bundle-version="1.9.0",
+Require-Bundle: gama.core.ext;bundle-version="1.9.0",
  org.apache.commons.lang,
- org.eclipse.osgi
+ org.eclipse.osgi,
+ gama.core.base;bundle-version="2.0.0"
 Bundle-Activator: gama.core.outputs.OutputActivator
 

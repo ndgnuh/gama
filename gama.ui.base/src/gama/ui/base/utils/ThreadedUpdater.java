@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.progress.UIJob;
 
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.runtime.IUpdaterMessage;
-import msi.gama.runtime.IUpdaterTarget;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.runtime.IUpdaterMessage;
+import gama.runtime.IUpdaterTarget;
 
 /**
  * Class ThreadedUpdater.

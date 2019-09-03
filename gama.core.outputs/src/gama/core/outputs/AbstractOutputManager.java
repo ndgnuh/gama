@@ -18,15 +18,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.compilation.Symbol;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutput;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.runtime.scope.IScope;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.compilation.Symbol;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
 
 /**
  * Class AbstractOutputManager.

@@ -18,7 +18,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaPairReducer;
-import msi.gama.util.GamaPair;
+import gama.util.GamaPair;
 
 @SuppressWarnings({ "rawtypes" })
 public class GamaPairConverter implements Converter {

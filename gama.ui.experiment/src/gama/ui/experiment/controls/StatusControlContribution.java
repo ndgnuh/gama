@@ -32,19 +32,19 @@ import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.experiment.commands.SubTaskMessage;
 import gama.ui.experiment.commands.UserStatusMessage;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IExperimentAgent;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.kernel.simulation.SimulationClock;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IStatusMessage;
-import msi.gama.runtime.IUpdaterTarget;
-import msi.gaml.operators.Strings;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IExperimentAgent;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGui;
+import gama.common.util.TextBuilder;
+import gama.kernel.simulation.SimulationAgent;
+import gama.kernel.simulation.SimulationClock;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.GAMA;
+import gama.runtime.IStatusMessage;
+import gama.runtime.IUpdaterTarget;
+import gaml.operators.Strings;
 
 public class StatusControlContribution extends WorkbenchWindowControlContribution
 		implements IPopupProvider, IUpdaterTarget<IStatusMessage> {

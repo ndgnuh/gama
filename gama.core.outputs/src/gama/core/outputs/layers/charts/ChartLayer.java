@@ -13,11 +13,11 @@ package gama.core.outputs.layers.charts;
 import java.awt.geom.Rectangle2D;
 
 import gama.core.outputs.layers.AbstractLayer;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.IShape;
+import gama.runtime.scope.IScope;
 
 /**
  * Written by drogoul Modified on 1 avr. 2010

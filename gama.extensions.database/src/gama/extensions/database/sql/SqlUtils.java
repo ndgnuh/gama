@@ -20,14 +20,14 @@ import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKBReader;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.FileUtils;
-import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.IType;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.FileUtils;
+import gama.metamodel.topology.projection.IProjection;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.IType;
 
 /*
  * @Author TRUONG Minh Thai Fredric AMBLARD Benoit GAUDOU Christophe Sibertin-BLANC Created date: 19-Apr-2013 Modified:

@@ -10,13 +10,13 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.descriptions.IDescription;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.descriptions.IDescription;
 
 /**
  * The Class AbstractDisplayOutput.

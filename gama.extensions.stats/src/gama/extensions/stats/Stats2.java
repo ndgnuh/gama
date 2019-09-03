@@ -19,12 +19,12 @@ import gama.processor.annotations.IOperatorCategory;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.operator;
-import msi.gama.common.interfaces.IContainer;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.operators.Containers;
-import msi.gaml.operators.Stats;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IContainer;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.operators.Containers;
+import gaml.operators.Stats;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "rawtypes" })
 public class Stats2 extends Stats {

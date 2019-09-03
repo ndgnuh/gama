@@ -5,12 +5,12 @@ Bundle-Vendor: UMMISCO
 Bundle-Version: 2.0.0.qualifier
 Bundle-SymbolicName: gama.ui.modeling;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: gama.core.gaml;visibility:=reexport,
+Require-Bundle: gama.core.lang;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.ui.codetemplates.ui,
- gama.core;bundle-version="1.0.0",
+ gama.core.base;bundle-version="1.0.0",
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.ui.ide,
  org.eclipse.compare,
@@ -27,30 +27,12 @@ Require-Bundle: gama.core.gaml;visibility:=reexport,
  gama.core.ext,
  org.eclipse.ui.workbench,
  org.apache.commons.lang;bundle-version="2.6.0"
-Export-Package: gama.core.ide,
- gama.core.ide.contentassist.antlr,
- gama.core.ide.contentassist.antlr.internal,
- gama.ui.base,
- gama.ui.base.contentassist,
- gama.ui.base.decorators,
- gama.ui.base.editbox,
- gama.ui.base.editor,
- gama.ui.base.editor.folding,
- gama.ui.base.editor.toolbar,
- gama.ui.base.highlight,
- gama.ui.base.hover,
- gama.ui.base.labeling,
- gama.ui.base.markers,
- gama.ui.base.modeling,
- gama.ui.base.modeling.internal,
- gama.ui.base.outline,
- gama.ui.base.perspective,
- gama.ui.base.quickfix,
- gama.ui.base.reference,
- gama.ui.base.templates,
- gama.ui.base.views,
- gama.core.validation
 Bundle-Activator: gama.ui.base.modeling.internal.ModelingActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: gama.ui.base.modeling
 Import-Package: org.apache.log4j
+Export-Package: gama.core.lang.ide.contentassist.antlr,
+ gama.core.lang.ide.contentassist.antlr.internal,
+ gama.core.lang.ui.contentassist,
+ gama.ui.modeling.internal,
+ gama.core.lang.ui.quickfix

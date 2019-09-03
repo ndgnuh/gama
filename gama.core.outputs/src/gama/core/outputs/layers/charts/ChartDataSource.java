@@ -14,15 +14,15 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.list.IList;
-import msi.gama.util.matrix.GamaMatrix;
-import msi.gama.util.matrix.IMatrix;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IKeyword;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.scope.IScope;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.list.IList;
+import gama.util.matrix.GamaMatrix;
+import gama.util.matrix.IMatrix;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 @SuppressWarnings ({ "rawtypes" })
 public class ChartDataSource {

@@ -26,7 +26,7 @@ import gama.extensions.network.skills.INetworkSkill;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.IList;
-import msi.gaml.operators.Cast;
+import gaml.operators.Cast;
 
 public class UDPConnector extends Connector {
 

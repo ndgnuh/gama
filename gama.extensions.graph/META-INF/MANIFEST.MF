@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GraphLayoutOperators
-Bundle-SymbolicName: simtools.graphanalysis;singleton:=true
+Bundle-SymbolicName: gama.extensions.graph;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Require-Bundle: msi.gama.core;bundle-version="1.7.0",
+Require-Bundle: gama.core.base;bundle-version="1.7.0",
  gama.core.ext;bundle-version="1.0.0"
 Bundle-ClassPath: .,
  lib/gephi-toolkit.jar,

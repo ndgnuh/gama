@@ -13,7 +13,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class ShowInteractiveConsole extends AbstractHandler {
 

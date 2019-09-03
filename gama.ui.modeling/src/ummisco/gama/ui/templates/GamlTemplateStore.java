@@ -28,12 +28,12 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.OperatorProto;
-import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.expressions.IExpressionCompiler;
-import msi.gaml.operators.Strings;
-import msi.gaml.types.Signature;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.OperatorProto;
+import gaml.descriptions.SymbolProto;
+import gaml.expressions.IExpressionCompiler;
+import gaml.operators.Strings;
+import gaml.types.Signature;
 import ummisco.gama.ui.templates.GamlTemplateStore.GamlTemplateStoreProvider;
 
 /**

@@ -55,9 +55,9 @@ import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.utils.WebHelper;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.common.util.PlatformUtils;
-import msi.gama.runtime.GAMA;
+import gama.common.interfaces.IGamlDescription;
+import gama.common.util.PlatformUtils;
+import gama.runtime.GAMA;
 
 public class GamlSearchField {
 

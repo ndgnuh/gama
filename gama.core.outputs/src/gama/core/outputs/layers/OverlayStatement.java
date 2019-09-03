@@ -23,19 +23,19 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IOverlayInfo;
-import msi.gama.common.interfaces.outputs.IOverlayProvider;
-import msi.gama.runtime.IUpdaterTarget;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.IList;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayProvider;
+import gama.runtime.IUpdaterTarget;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.IList;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.types.IType;
 
 @symbol (
 		name = IKeyword.OVERLAY,

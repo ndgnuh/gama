@@ -36,14 +36,14 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.experiment.experiment.parameters.AgentAttributesEditorsList;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.architecture.user.UserInputStatement;
-import msi.gaml.architecture.user.UserPanelStatement;
-import msi.gaml.statements.UserCommandStatement;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IStatement;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gaml.architecture.user.UserInputStatement;
+import gaml.architecture.user.UserPanelStatement;
+import gaml.statements.UserCommandStatement;
 
 /**
  * The class EditorsDialog.

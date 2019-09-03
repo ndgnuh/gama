@@ -11,11 +11,11 @@ package gama.ui.base.parameters;
 
 import java.util.List;
 
-import msi.gama.kernel.experiment.ParameterAdapter;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.kernel.experiment.ParameterAdapter;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class InputParameter extends ParameterAdapter {

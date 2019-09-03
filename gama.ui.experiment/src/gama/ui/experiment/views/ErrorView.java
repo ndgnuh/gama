@@ -36,12 +36,12 @@ import gama.ui.base.utils.WebHelper;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.ExpandableItemsView;
 import gama.ui.experiment.commands.RuntimeExceptionHandler;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.TextBuilder;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
 
 public class ErrorView extends ExpandableItemsView<GamaRuntimeException> implements IGamaView.Error {
 

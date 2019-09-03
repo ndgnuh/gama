@@ -19,21 +19,19 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import org.locationtech.jts.geom.Geometry;
 import org.opengis.referencing.FactoryException;
 
+import gama.common.geometry.Envelope3D;
+import gama.common.preferences.GamaPreferences;
 import gama.dev.utils.DEBUG;
-
-import org.locationtech.jts.geom.Geometry;
-
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.metamodel.topology.projection.Projection;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.operators.Cast;
+import gama.metamodel.topology.projection.IProjection;
+import gama.metamodel.topology.projection.Projection;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.operators.Cast;
 
 /*
  * @Author TRUONG Minh Thai Fredric AMBLARD Benoit GAUDOU Christophe Sibertin-BLANC Created date: 19-Apr-2013 Modified:
@@ -255,10 +253,10 @@ public abstract class SqlConnection {
 	// public IList<IList<Object>> selectDB(String selectComm)
 	public IList<? super IList<? super IList>> selectDB(final IScope scope, final Connection conn,
 			final String selectComm) {
-		;
+
 		// ResultSet rs;
 		IList<? super IList<? super IList>> result =
-				GamaListFactory.create(msi.gaml.types.Types.LIST.of(msi.gaml.types.Types.LIST));
+				GamaListFactory.create(gaml.types.Types.LIST.of(gaml.types.Types.LIST));
 		// IList<? extends IList<? super IList>> result = new
 		// IList();
 
@@ -436,16 +434,16 @@ public abstract class SqlConnection {
 		// get Column type
 		final IList colTypes = (IList) IList.get(1);
 		final int index = colTypes.indexOf(GEOMETRYTYPE);
-		if (index < 0) {
+		if (index < 0)
 			return null;
-		} else {
+		else {
 			// Get ResultSet
 			final IList initValue = (IList) IList.get(2);
 			final int n = initValue.size();
 			// int max = number == null ? Integer.MAX_VALUE : numberOfAgents;
-			if (n == 0) {
+			if (n == 0)
 				return null;
-			} else {
+			else {
 				IList<Object> rowList = (IList<Object>) initValue.get(0);
 				Geometry geo = (Geometry) rowList.get(index);
 				envelope = Envelope3D.of(geo);
@@ -481,9 +479,8 @@ public abstract class SqlConnection {
 	public int insertDB(final IScope scope, final Connection conn, final String table_name, final IList<Object> cols,
 			final IList<Object> values) throws GamaRuntimeException {
 		int rec_no = -1;
-		if (values.size() != cols.size()) {
+		if (values.size() != cols.size())
 			throw new IndexOutOfBoundsException("Size of columns list and values list are not equal");
-		}
 		try (final Statement st = conn.createStatement();) {
 			// String sqlStr = getInsertString(gis, conn, table_name, cols,
 			// values);

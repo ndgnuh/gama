@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlSyntaxErrorMessageProvider.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling
+ * 'GamlSyntaxErrorMessageProvider.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -19,7 +19,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 
 import gama.core.lang.gaml.EGaml;
-import msi.gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IKeyword;
 
 /**
  * The class GamlSyntaxErrorMessageProvider.

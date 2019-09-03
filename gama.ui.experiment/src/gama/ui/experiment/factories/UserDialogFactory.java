@@ -14,8 +14,8 @@ import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
 import gama.ui.experiment.views.user.UserControlDialog;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.architecture.user.UserPanelStatement;
+import gama.runtime.scope.IScope;
+import gaml.architecture.user.UserPanelStatement;
 
 public class UserDialogFactory extends AbstractServiceFactory implements gama.ui.base.interfaces.IUserDialogFactory {
 

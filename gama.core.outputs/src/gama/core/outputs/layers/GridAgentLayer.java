@@ -12,20 +12,20 @@ package gama.core.outputs.layers;
 
 import java.awt.geom.Rectangle2D;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IExecutable;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerData;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.ExecutionResult;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.ShapeDrawingAttributes;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IExecutable;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerData;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.ExecutionResult;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.operators.Cast;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.ShapeDrawingAttributes;
 
 public class GridAgentLayer extends AgentLayer {
 

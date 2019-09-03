@@ -4,11 +4,11 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.interfaces.IValue;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IValue;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @vars ({ @variable (
 		name = "name",

@@ -7,7 +7,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.equinox.p2.engine,
  org.eclipse.equinox.p2.operations,
  org.eclipse.equinox.p2.metadata.repository,
- gama.core;bundle-version="1.7.0",
+ gama.core.base,
  com.google.guava,
  org.eclipse.core.expressions
 Bundle-Vendor: UMMISCO

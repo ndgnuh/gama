@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="gama.feature.core"
+      label="Core plugins of GAMA"
+      version="2.0.0.qualifier"
+      provider-name="UMMISCO - MIAT - IRIT - CTU">
+
+   <description url="http://gama-platform.org">
+      The core of the GAMA Modeling and Simulation Platform
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <update label="Gama 2.x Update Site" url="http://updates.gama-platform.org"/>
+   </url>
+
+   <plugin
+         id="gama.core.application"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.core.base"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.core.headless"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.core.lang"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="gama.core.outputs"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

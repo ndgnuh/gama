@@ -26,17 +26,17 @@ import gama.core.outputs.layers.ImageLayer;
 import gama.core.outputs.layers.OverlayLayer;
 import gama.core.outputs.layers.SpeciesLayer;
 import gama.core.outputs.layers.charts.ChartLayer;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.interfaces.outputs.ILayerManager;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerManager;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.IShape;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
 
 /**
  * Written by drogoul Modified on 23 janv. 2011

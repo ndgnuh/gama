@@ -20,7 +20,7 @@ import javax.sound.midi.Synthesizer;
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.skill;
-import msi.gaml.skills.Skill;
+import gaml.skills.Skill;
 
 @skill (
 		name = IPlayMusic.MUSIC_SKILL,

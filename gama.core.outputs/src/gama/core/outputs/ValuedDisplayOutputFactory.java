@@ -12,16 +12,16 @@ package gama.core.outputs;
 
 import java.util.Collection;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IMacroAgent;
-import msi.gama.common.interfaces.experiment.IExperimentAgent;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.model.GamlModelSpecies;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.descriptions.SpeciesDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.species.ISpecies;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IMacroAgent;
+import gama.common.interfaces.experiment.IExperimentAgent;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.model.GamlModelSpecies;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.descriptions.SpeciesDescription;
+import gaml.expressions.IExpression;
+import gaml.species.ISpecies;
 
 public class ValuedDisplayOutputFactory {
 

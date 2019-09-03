@@ -12,12 +12,12 @@ package gama.extensions.fipa;
 
 import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.setter;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.util.StringUtils;
-import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
+import gama.common.interfaces.IAgent;
+import gama.common.util.StringUtils;
+import gama.extensions.messaging.GamaMessage;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
 
 /**
  * The Class MessageProxy.

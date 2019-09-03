@@ -16,14 +16,14 @@ import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IConsoleDisplayer;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.gui.IGamaView.Console;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.GamaColor;
-import msi.gaml.operators.Strings;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IConsoleDisplayer;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.gui.IGamaView.Console;
+import gama.runtime.GAMA;
+import gama.util.GamaColor;
+import gaml.operators.Strings;
 
 public class ConsoleDisplayerFactory extends AbstractServiceFactory {
 

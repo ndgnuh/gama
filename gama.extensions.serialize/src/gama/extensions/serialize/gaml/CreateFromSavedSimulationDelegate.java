@@ -13,14 +13,14 @@ import com.thoughtworks.xstream.XStream;
 
 import gama.extensions.serialize.factory.StreamConverter;
 import gama.extensions.serialize.gamaType.converters.ConverterScope;
-import msi.gaml.statements.Arguments;
-import msi.gaml.statements.CreateStatement;
-import msi.gaml.types.IType;
+import gaml.statements.Arguments;
+import gaml.statements.CreateStatement;
+import gaml.types.IType;
 
-import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.Types;
+import gama.common.interfaces.ICreateDelegate;
+import gama.metamodel.agent.SavedAgent;
+import gama.runtime.scope.IScope;
+import gaml.types.Types;
 
 /**
  * Class CreateFromSavecSimulationDelegate.

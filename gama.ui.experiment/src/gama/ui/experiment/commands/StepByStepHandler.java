@@ -18,7 +18,7 @@ import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
 
 import gama.ui.base.bindings.GamaKeyBindings;
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class StepByStepHandler extends AbstractHandler implements IElementUpdater {
 

@@ -14,10 +14,10 @@ import static com.jogamp.opengl.glu.GLU.gluTessBeginContour;
 import static com.jogamp.opengl.glu.GLU.gluTessBeginPolygon;
 import static com.jogamp.opengl.glu.GLU.gluTessEndContour;
 import static com.jogamp.opengl.glu.GLU.gluTessEndPolygon;
-import static msi.gama.common.geometry.GeometryUtils.applyToInnerGeometries;
-import static msi.gama.common.geometry.GeometryUtils.getContourCoordinates;
-import static msi.gama.common.geometry.GeometryUtils.getYNegatedCoordinates;
-import static msi.gama.common.geometry.GeometryUtils.iterateOverTriangles;
+import static gama.common.geometry.GeometryUtils.applyToInnerGeometries;
+import static gama.common.geometry.GeometryUtils.getContourCoordinates;
+import static gama.common.geometry.GeometryUtils.getYNegatedCoordinates;
+import static gama.common.geometry.GeometryUtils.iterateOverTriangles;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -57,18 +57,18 @@ import gama.ui.displays.opengl.scene.ObjectDrawer;
 import gama.ui.displays.opengl.scene.ResourceDrawer;
 import gama.ui.displays.opengl.scene.StringDrawer;
 import jogamp.opengl.glu.tessellator.GLUtessellatorImpl;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.geometry.ICoordinates.VertexVisitor;
-import msi.gama.common.geometry.Rotation3D;
-import msi.gama.common.geometry.Scaling3D;
-import msi.gama.common.geometry.UnboundedCoordinateSequence;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.operators.Maths;
-import msi.gaml.statements.draw.DrawingAttributes;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.ICoordinates;
+import gama.common.geometry.ICoordinates.VertexVisitor;
+import gama.common.geometry.Rotation3D;
+import gama.common.geometry.Scaling3D;
+import gama.common.geometry.UnboundedCoordinateSequence;
+import gama.common.preferences.GamaPreferences;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.GAMA;
+import gama.util.file.IGamaFile;
+import gaml.operators.Maths;
+import gaml.statements.draw.DrawingAttributes;
 
 /**
  * A class that represents an intermediate state between the rendering and the opengl state. It captures all the

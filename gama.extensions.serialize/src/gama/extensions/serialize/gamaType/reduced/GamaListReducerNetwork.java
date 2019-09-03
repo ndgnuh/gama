@@ -9,10 +9,10 @@
  **********************************************************************************************/
 package gama.extensions.serialize.gamaType.reduced;
 
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.Types;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaListReducerNetwork extends GamaListReducer {

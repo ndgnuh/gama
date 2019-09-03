@@ -27,9 +27,9 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.internal.part.NullEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.gui.IGamaView.Html;
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.gui.IGamaView.Html;
+import gama.common.preferences.GamaPreferences;
 
 public class WebHelper {
 

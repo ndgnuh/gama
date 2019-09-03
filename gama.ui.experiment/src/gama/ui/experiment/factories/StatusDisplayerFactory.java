@@ -18,10 +18,10 @@ import gama.ui.base.utils.ThreadedUpdater;
 import gama.ui.experiment.commands.SubTaskMessage;
 import gama.ui.experiment.commands.UserStatusMessage;
 import gama.ui.experiment.controls.StatusControlContribution;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.gui.IStatusDisplayer;
-import msi.gama.runtime.IStatusMessage;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.gui.IStatusDisplayer;
+import gama.runtime.IStatusMessage;
+import gama.util.GamaColor;
 
 public class StatusDisplayerFactory extends AbstractServiceFactory {
 

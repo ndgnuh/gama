@@ -17,7 +17,7 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import gama.dev.utils.DEBUG;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 
 /**
  * Class WorkaroundForIssue1353. Only for MacOS X, Eclipse Mars and Java 1.7

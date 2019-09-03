@@ -12,14 +12,14 @@ package gama.core.outputs.layers;
 
 import java.awt.Color;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerData;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerData;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.types.Types;
 
 public class OverlayLayerData extends LayerData implements ILayerData.Overlay {
 

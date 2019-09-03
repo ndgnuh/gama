@@ -17,7 +17,7 @@ import gama.common.interfaces.IAgent;
 import gama.dev.utils.DEBUG;
 import gama.extensions.network.skills.INetworkSkill;
 import gama.util.list.IList;
-import msi.gaml.operators.Cast;
+import gaml.operators.Cast;
 
 public class MultiThreadedSocketServer extends Thread {
 

@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlDocumentationProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlDocumentationProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -17,33 +17,33 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.inject.Inject;
 
-import gama.core.gaml.EGaml;
-import gama.core.gaml.resource.GamlResourceServices;
-import gama.core.scoping.BuiltinGlobalScopeProvider;
+import gama.common.interfaces.IDocManager;
+import gama.common.interfaces.IGamlDescription;
+import gama.common.util.FileUtils;
+import gama.core.lang.gaml.EGaml;
+import gama.core.lang.gaml.resource.GamlResourceServices;
+import gama.core.lang.scoping.BuiltinGlobalScopeProvider;
 import gama.extensions.files.metadata.FileMetaDataProvider;
-import msi.gama.common.interfaces.IDocManager;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.common.util.FileUtils;
-import msi.gama.util.file.IGamaFileMetaData;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.FacetProto;
-import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.expressions.UnitConstantExpression;
-import msi.gaml.operators.IUnits;
-import msi.gaml.operators.Strings;
-import ummisco.gama.gaml.ActionRef;
-import ummisco.gama.gaml.Facet;
-import ummisco.gama.gaml.Function;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.S_Do;
-import ummisco.gama.gaml.S_Global;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.StringLiteral;
-import ummisco.gama.gaml.TypeRef;
-import ummisco.gama.gaml.UnitName;
-import ummisco.gama.gaml.VarDefinition;
-import ummisco.gama.gaml.VariableRef;
+import gama.util.file.IGamaFileMetaData;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.FacetProto;
+import gaml.descriptions.SymbolProto;
+import gaml.expressions.UnitConstantExpression;
+import gaml.operators.IUnits;
+import gaml.operators.Strings;
+import gama.core.lang.gaml.ActionRef;
+import gama.core.lang.gaml.Facet;
+import gama.core.lang.gaml.Function;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.S_Do;
+import gama.core.lang.gaml.S_Global;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.StringLiteral;
+import gama.core.lang.gaml.TypeRef;
+import gama.core.lang.gaml.UnitName;
+import gama.core.lang.gaml.VarDefinition;
+import gama.core.lang.gaml.VariableRef;
 import ummisco.gama.ui.editor.GamlHyperlinkDetector;
 
 public class GamlDocumentationProvider extends MultiLineCommentDocumentationProvider {

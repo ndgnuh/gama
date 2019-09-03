@@ -15,14 +15,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * The Class MessageBroker.

@@ -15,12 +15,12 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 import gama.ui.displays.opengl.OpenGL;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.IDisposable;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.FileDrawingAttributes;
+import gama.common.geometry.Envelope3D;
+import gama.common.interfaces.IDisposable;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.file.IGamaFile;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.FileDrawingAttributes;
 
 public abstract class AbstractObject<T, ATT extends DrawingAttributes> implements IDisposable {
 

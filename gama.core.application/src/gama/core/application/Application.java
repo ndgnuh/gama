@@ -20,7 +20,7 @@ import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.application.workspace.WorkspaceManager;
 import gama.runtime.GAMA;
 import gama.runtime.concurrent.GamaExecutorService;
-import msi.gaml.operators.Dates;
+import gaml.operators.Dates;
 
 /** This class controls all aspects of the application's execution */
 public class Application implements IApplication {

@@ -3,9 +3,9 @@ package gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 import java.util.List;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.population.IPopulation;
+import gama.common.interfaces.IAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.population.IPopulation;
 
 public class ReferenceToAgent {
 	List<String> species;

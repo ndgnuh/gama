@@ -9,9 +9,9 @@
  **********************************************************************************************/
 package gama.ui.base.interfaces;
 
-import msi.gama.common.interfaces.IScoped;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IScoped;
+import gama.common.interfaces.experiment.IParameter;
+import gaml.types.IType;
 
 /**
  * The class IParameterEditor.

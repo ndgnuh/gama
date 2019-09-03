@@ -11,10 +11,10 @@ import java.util.Objects;
 
 import gama.core.headless.core.GamaHeadlessException;
 import gama.core.headless.core.HeadlessSimulationLoader;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IModel;
-import msi.gaml.descriptions.ExperimentDescription;
-import msi.gaml.descriptions.ModelDescription;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IModel;
+import gaml.descriptions.ExperimentDescription;
+import gaml.descriptions.ModelDescription;
 
 public class JobPlan {
 

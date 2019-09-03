@@ -41,8 +41,8 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
+import gaml.operators.Cast;
+import gaml.types.IType;
 
 @vars ({ @variable (
 		name = INetworkSkill.NET_AGENT_NAME,

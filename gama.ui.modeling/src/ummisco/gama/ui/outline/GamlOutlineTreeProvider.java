@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlOutlineTreeProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlOutlineTreeProvider.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -16,22 +16,22 @@ import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 
 import com.google.inject.Inject;
 
-import gama.core.gaml.EGaml;
+import gama.common.interfaces.IKeyword;
+import gama.core.lang.gaml.EGaml;
 import gama.processor.annotations.ISymbolKind;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.SymbolProto;
-import ummisco.gama.gaml.Block;
-import ummisco.gama.gaml.ExperimentFileStructure;
-import ummisco.gama.gaml.HeadlessExperiment;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.S_Action;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.S_Experiment;
-import ummisco.gama.gaml.S_Global;
-import ummisco.gama.gaml.S_Species;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.util.GamlSwitch;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.SymbolProto;
+import gama.core.lang.gaml.Block;
+import gama.core.lang.gaml.ExperimentFileStructure;
+import gama.core.lang.gaml.HeadlessExperiment;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.S_Action;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.S_Experiment;
+import gama.core.lang.gaml.S_Global;
+import gama.core.lang.gaml.S_Species;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.util.GamlSwitch;
 import ummisco.gama.ui.labeling.GamlLabelProvider;
 
 /**
@@ -47,7 +47,7 @@ public class GamlOutlineTreeProvider extends BackgroundOutlineTreeProvider {
 	@Override
 	public void createChildren(final IOutlineNode parentNode, final EObject stm) {
 		if (stm != null && parentNode.hasChildren()) {
-			new GamlSwitch<Object>() {
+			new GamlSwitch<>() {
 
 				@Override
 				public Object caseModel(final Model stm) {
@@ -135,38 +135,47 @@ public class GamlOutlineTreeProvider extends BackgroundOutlineTreeProvider {
 	 * @return
 	 */
 	public static boolean isAttribute(final Statement s) {
-		if (!(s instanceof S_Definition)) { return false; }
+		if (!(s instanceof S_Definition))
+			return false;
 		final String key = EGaml.getInstance().getKeyOf(s);
-		if (IKeyword.ACTION.equals(key)) { return false; }
+		if (IKeyword.ACTION.equals(key))
+			return false;
 		// if (s.getBlock() != null && s.getBlock().getFunction() == null) { return false; }
 		final SymbolProto p = DescriptionFactory.getStatementProto(key, null);
-		if (p != null && p.getKind() == ISymbolKind.BATCH_METHOD) { return false; }
+		if (p != null && p.getKind() == ISymbolKind.BATCH_METHOD)
+			return false;
 		return true;
 	}
 
 	public static boolean isAction(final Statement s) {
-		if (!(s instanceof S_Definition)) { return false; }
-		if (s instanceof S_Action) { return true; }
+		if (!(s instanceof S_Definition))
+			return false;
+		if (s instanceof S_Action)
+			return true;
 		final String key = EGaml.getInstance().getKeyOf(s);
 		final SymbolProto p = DescriptionFactory.getStatementProto(key, null);
-		if (p != null && p.isTopLevel()) { return false; }
-		if (s.getKey() == null) { return true; }
+		if (p != null && p.isTopLevel())
+			return false;
+		if (s.getKey() == null)
+			return true;
 		return false;
 	}
 
 	@Override
 	protected Object getText(final Object modelElement) {
-		if (modelElement instanceof S_Global) { return null; }
+		if (modelElement instanceof S_Global)
+			return null;
 		return super.getText(modelElement);
 	}
 
 	@Override
 	protected boolean isLeaf(final EObject s) {
-		if (s instanceof S_Experiment) {
+		if (s instanceof S_Experiment)
 			return ((S_Experiment) s).getBlock() == null || ((S_Experiment) s).getBlock().getStatements().isEmpty();
-		} else if (s instanceof S_Species) {
+		else if (s instanceof S_Species)
 			return ((S_Species) s).getBlock() == null || ((S_Species) s).getBlock().getStatements().isEmpty();
-		} else if (s instanceof Model) { return ((Model) s).getBlock() == null; }
+		else if (s instanceof Model)
+			return ((Model) s).getBlock() == null;
 		return true;
 	}
 }

@@ -10,8 +10,8 @@
  **********************************************************************************************/
 package gama.ui.base.interfaces;
 
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.architecture.user.UserPanelStatement;
+import gama.runtime.scope.IScope;
+import gaml.architecture.user.UserPanelStatement;
 
 public interface IUserDialogFactory {
 

@@ -51,12 +51,12 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.data.xy.XYDataset;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
 
 public class ChartJFreeChartOutputHistogram extends ChartJFreeChartOutput {
 

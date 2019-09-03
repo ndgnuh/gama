@@ -12,8 +12,8 @@ package gama.extensions.graph.layout;
 
 import java.util.Map;
 
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.graph.GamaGraph;
+import gama.runtime.scope.IScope;
+import gama.util.graph.GamaGraph;
 
 /**
  * represents a "static" layout, that is a offline one, made to be ran in a run-once way.

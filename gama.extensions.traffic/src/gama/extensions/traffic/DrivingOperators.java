@@ -17,15 +17,15 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IContainer;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.graph.IGraph;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IContainer;
+import gama.metamodel.shape.IShape;
+import gama.metamodel.topology.graph.GamaSpatialGraph;
+import gama.runtime.scope.IScope;
+import gama.util.graph.IGraph;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.Types;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class DrivingOperators {

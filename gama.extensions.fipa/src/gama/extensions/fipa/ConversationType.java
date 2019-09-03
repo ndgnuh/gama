@@ -17,11 +17,11 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.type;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.GamaContainerType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.types.GamaContainerType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @type (
 		name = ConversationType.CONVERSATION_STR,

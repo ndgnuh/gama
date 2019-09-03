@@ -11,9 +11,9 @@ package gama.ui.base;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import gama.core.GamlRuntimeModule;
+import gama.core.lang.GamlRuntimeModule;
+import gama.runtime.GAMA;
 import gama.ui.base.utils.SwtGui;
-import msi.gama.runtime.GAMA;
 
 public class Activator extends AbstractUIPlugin {
 

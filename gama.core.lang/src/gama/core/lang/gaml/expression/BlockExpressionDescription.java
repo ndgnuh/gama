@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'BlockExpressionDescription.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'BlockExpressionDescription.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -9,14 +9,14 @@
  **********************************************************************************************/
 package gama.core.lang.gaml.expression;
 
-import msi.gaml.compilation.ast.ISyntacticElement;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.descriptions.SpeciesDescription;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.expressions.DenotedActionExpression;
-import msi.gaml.expressions.IExpression;
+import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.descriptions.SpeciesDescription;
+import gaml.descriptions.StatementDescription;
+import gaml.expressions.DenotedActionExpression;
+import gaml.expressions.IExpression;
 
 public class BlockExpressionDescription extends EcoreBasedExpressionDescription {
 

@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'ExpressionDescriptionBuilder.java, in plugin gama.core.gaml, is part of the source code of the
+ * 'ExpressionDescriptionBuilder.java, in plugin gama.core.lang, is part of the source code of the
  * GAMA modeling and simulation platform.
  * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
@@ -17,18 +17,18 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 
 import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.resource.GamlResourceServices;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gaml.compilation.ast.ISyntacticElement;
-import msi.gaml.descriptions.ConstantExpressionDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.operators.IUnits;
-import ummisco.gama.gaml.BooleanLiteral;
-import ummisco.gama.gaml.DoubleLiteral;
-import ummisco.gama.gaml.IntLiteral;
-import ummisco.gama.gaml.StringLiteral;
-import ummisco.gama.gaml.Unary;
-import ummisco.gama.gaml.UnitName;
-import ummisco.gama.gaml.util.GamlSwitch;
+import gama.common.interfaces.IKeyword;
+import gaml.compilation.ast.ISyntacticElement;
+import gaml.descriptions.ConstantExpressionDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.operators.IUnits;
+import gama.core.lang.gaml.BooleanLiteral;
+import gama.core.lang.gaml.DoubleLiteral;
+import gama.core.lang.gaml.IntLiteral;
+import gama.core.lang.gaml.StringLiteral;
+import gama.core.lang.gaml.Unary;
+import gama.core.lang.gaml.UnitName;
+import gama.core.lang.gaml.util.GamlSwitch;
 
 public class ExpressionDescriptionBuilder extends GamlSwitch<IExpressionDescription> {
 

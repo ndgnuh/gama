@@ -53,7 +53,7 @@ import gama.dev.utils.DEBUG;
 
 import org.locationtech.jts.util.Debug;
 
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class Application implements IApplication {
 

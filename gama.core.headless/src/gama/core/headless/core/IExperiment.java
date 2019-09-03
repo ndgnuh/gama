@@ -11,10 +11,10 @@
  **********************************************************************************************/
 package gama.core.headless.core;
 
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.kernel.simulation.SimulationAgent;
+import gaml.expressions.IExpression;
 
 public interface IExperiment { 
 	public IModel getModel();

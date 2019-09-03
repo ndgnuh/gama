@@ -20,18 +20,18 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IEventLayerDelegate;
-import msi.gama.common.interfaces.outputs.IEventLayerStatement;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IEventLayerDelegate;
+import gama.common.interfaces.outputs.IEventLayerStatement;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.StatementDescription;
+import gaml.expressions.IExpression;
+import gaml.types.IType;
 
 /**
  * Written by Marilleau Modified on 16 novembre 2012

@@ -18,7 +18,7 @@ import org.eclipse.ui.services.IServiceLocator;
 
 import gama.ui.base.menus.MenuAction;
 import gama.ui.experiment.menus.AgentsMenu;
-import msi.gama.common.interfaces.IAgent;
+import gama.common.interfaces.IAgent;
 
 public class AgentMenuFactory extends AbstractServiceFactory implements gama.ui.base.interfaces.IAgentMenuFactory {
 

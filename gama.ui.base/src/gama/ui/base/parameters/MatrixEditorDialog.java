@@ -30,14 +30,14 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.matrix.GamaFloatMatrix;
-import msi.gama.util.matrix.GamaIntMatrix;
-import msi.gama.util.matrix.GamaObjectMatrix;
-import msi.gama.util.matrix.IMatrix;
+import gama.common.interfaces.gui.IGui;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.matrix.GamaFloatMatrix;
+import gama.util.matrix.GamaIntMatrix;
+import gama.util.matrix.GamaObjectMatrix;
+import gama.util.matrix.IMatrix;
 
 @SuppressWarnings ({ "rawtypes" })
 public class MatrixEditorDialog extends Dialog {

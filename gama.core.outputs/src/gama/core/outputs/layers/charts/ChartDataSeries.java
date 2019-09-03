@@ -13,12 +13,12 @@ package gama.core.outputs.layers.charts;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.IList;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.IList;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 @SuppressWarnings ({ "rawtypes" })
 public class ChartDataSeries {

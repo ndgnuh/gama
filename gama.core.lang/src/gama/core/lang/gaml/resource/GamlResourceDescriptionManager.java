@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceDescriptionManager.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling
+ * 'GamlResourceDescriptionManager.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -24,8 +24,8 @@ import com.google.inject.Inject;
 
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.scoping.BuiltinGlobalScopeProvider;
-import msi.gama.common.interfaces.ICollector;
-import msi.gama.common.util.Collector;
+import gama.common.interfaces.ICollector;
+import gama.common.util.Collector;
 
 /**
  * The class GamlResourceDescriptionManager.

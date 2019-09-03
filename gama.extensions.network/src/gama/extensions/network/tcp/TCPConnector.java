@@ -25,7 +25,7 @@ import gama.extensions.network.common.GamaNetworkException;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.IList;
-import msi.gaml.operators.Cast;
+import gaml.operators.Cast;
 
 @SuppressWarnings ({ "unchecked" })
 public class TCPConnector extends Connector {

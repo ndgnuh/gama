@@ -10,7 +10,7 @@
  **********************************************************************************************/
 package gama.extensions.serialize.gamaType.converters;
 
-import msi.gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.GamaShape;
 
 import com.thoughtworks.xstream.converters.*;
 import com.thoughtworks.xstream.io.*;

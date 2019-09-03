@@ -21,8 +21,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
-import msi.gaml.types.GamaType;
-import msi.gaml.types.IType;
+import gaml.types.GamaType;
+import gaml.types.IType;
 
 public class GamaBasicTypeConverter implements Converter {
 

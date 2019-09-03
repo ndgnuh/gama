@@ -18,16 +18,16 @@ import org.apache.commons.math3.ode.sampling.StepInterpolator;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.maths.ode.statements.SystemOfEquationsStatement;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaPair;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.IMap;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
+import gama.common.interfaces.IAgent;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaPair;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gama.util.map.IMap;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 public abstract class Solver {
 

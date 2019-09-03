@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: FIPA-compliant Gama Extension
 Bundle-SymbolicName: gama.extensions.fipa;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Require-Bundle: msi.gama.core;bundle-version="1.6.0",
+Require-Bundle: gama.core.base;bundle-version="1.6.0",
  gama.core.ext;bundle-version="1.0.0"
 Export-Package: 
  gama.extensions.fipa

@@ -9,7 +9,7 @@ import com.jogamp.opengl.glu.GLU;
 
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import msi.gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.DrawingAttributes;
 
 public class PickingHelper extends AbstractRendererHelper {
 

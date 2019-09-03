@@ -15,7 +15,7 @@ import org.eclipse.ui.IPartService;
 import org.eclipse.ui.IWorkbenchPartReference;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 
 public class WorkaroundForIssue1594 {
 

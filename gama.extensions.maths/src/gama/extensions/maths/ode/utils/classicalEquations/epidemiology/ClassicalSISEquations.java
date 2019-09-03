@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gama.extensions.maths.ode.statements.SingleEquationStatement;
-import msi.gaml.compilation.GAML;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.ListExpression;
+import gaml.compilation.GAML;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.StatementDescription;
+import gaml.expressions.IExpression;
+import gaml.expressions.ListExpression;
 
 // SIS equation is defined by
 // diff(S,t) = -beta * S * I / N + gamma * I;

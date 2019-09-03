@@ -35,29 +35,29 @@ import org.eclipse.xtext.util.Tuples;
 
 import com.google.inject.Inject;
 
-import gama.core.gaml.EGaml;
-import gama.core.gaml.resource.GamlResourceServices;
+import gama.common.interfaces.IGamlDescription;
+import gama.core.lang.gaml.EGaml;
+import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.FacetProto;
-import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.expressions.UnitConstantExpression;
-import msi.gaml.operators.IUnits;
-import ummisco.gama.gaml.ActionDefinition;
-import ummisco.gama.gaml.ActionRef;
-import ummisco.gama.gaml.Facet;
-import ummisco.gama.gaml.Function;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.S_Do;
-import ummisco.gama.gaml.S_Global;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.TypeRef;
-import ummisco.gama.gaml.UnitFakeDefinition;
-import ummisco.gama.gaml.UnitName;
-import ummisco.gama.gaml.VarDefinition;
-import ummisco.gama.gaml.VariableRef;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.FacetProto;
+import gaml.descriptions.SymbolProto;
+import gaml.expressions.UnitConstantExpression;
+import gaml.operators.IUnits;
+import gama.core.lang.gaml.ActionDefinition;
+import gama.core.lang.gaml.ActionRef;
+import gama.core.lang.gaml.Facet;
+import gama.core.lang.gaml.Function;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.S_Do;
+import gama.core.lang.gaml.S_Global;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.TypeRef;
+import gama.core.lang.gaml.UnitFakeDefinition;
+import gama.core.lang.gaml.UnitName;
+import gama.core.lang.gaml.VarDefinition;
+import gama.core.lang.gaml.VariableRef;
 
 public class GamlHoverProvider extends DefaultEObjectHoverProvider {
 
@@ -189,9 +189,8 @@ public class GamlHoverProvider extends DefaultEObjectHoverProvider {
 						};
 				addLinkListener(iControl);
 				return iControl;
-			} else {
+			} else
 				return new DefaultInformationControl(parent, tooltipAffordanceString);
-			}
 		}
 	}
 
@@ -236,18 +235,19 @@ public class GamlHoverProvider extends DefaultEObjectHoverProvider {
 			final String model = ((Import) o).getName() != null ? "micro-model" : "model";
 			return "Import of the " + model + " defined in <b>" + uri + "</b>";
 		}
-		if (o instanceof S_Global) { return "Global definitions of " + getFirstLine(o.eContainer().eContainer()); }
+		if (o instanceof S_Global)
+			return "Global definitions of " + getFirstLine(o.eContainer().eContainer());
 		final Statement s = EGaml.getInstance().getStatement(o);
-		if (o instanceof TypeRef && s instanceof S_Definition && ((S_Definition) s).getTkey() == o) {
+		if (o instanceof TypeRef && s instanceof S_Definition && ((S_Definition) s).getTkey() == o)
 			return getFirstLine(s);
-		}
 		// Case of do xxx;
 		if (o instanceof VariableRef && o.eContainer() instanceof S_Do && ((S_Do) o.eContainer()).getExpr() == o) {
 			final VarDefinition vd = ((VariableRef) o).getRef();
 			final IGamlDescription description = GamlResourceServices.getResourceDocumenter().getGamlDocumentation(vd);
 			if (description != null) {
 				String result = description.getTitle();
-				if (result == null || result.isEmpty()) { return ""; }
+				if (result == null || result.isEmpty())
+					return "";
 				result = "<b>" + result + "</b>";
 				return result;
 			}
@@ -258,41 +258,47 @@ public class GamlHoverProvider extends DefaultEObjectHoverProvider {
 				final ActionDefinition def = ref.getRef();
 				if (def != null) {
 					final String temp = getFirstLine(def);
-					if (!temp.isEmpty()) { return temp; }
+					if (!temp.isEmpty())
+						return temp;
 				}
 			}
 		} else if (o instanceof UnitName) {
 			final UnitFakeDefinition fake = ((UnitName) o).getRef();
-			if (fake == null) { return "<b> Unknown unit or constant </b>"; }
+			if (fake == null)
+				return "<b> Unknown unit or constant </b>";
 			final UnitConstantExpression unit = IUnits.UNITS_EXPR.get(fake.getName());
-			if (unit == null) { return "<b> Unknown unit or constant </b>"; }
+			if (unit == null)
+				return "<b> Unknown unit or constant </b>";
 			return "<b>" + unit.getTitle() + "</b>";
 		}
 
 		final IGamlDescription description = GamlResourceServices.getResourceDocumenter().getGamlDocumentation(o);
 		if (description == null) {
-			if (o instanceof Facet) { return "<b>" + getFirstLineOf((Facet) o) + "</b>"; }
+			if (o instanceof Facet)
+				return "<b>" + getFirstLineOf((Facet) o) + "</b>";
 
 			if (s != null && DescriptionFactory.isStatementProto(EGaml.getInstance().getKeyOf(o))) {
-				if (s == o) { return ""; }
+				if (s == o)
+					return "";
 				return getFirstLine(s);
 			} else {
-				if (o instanceof TypeRef) {
+				if (o instanceof TypeRef)
 					return "Type " + EGaml.getInstance().getKeyOf(o);
-				} else {
+				else
 					return "";
-				}
 			}
 		} else {
 			String result = description.getTitle();
-			if (result == null || result.isEmpty()) { return ""; }
+			if (result == null || result.isEmpty())
+				return "";
 			result = "<b>" + result + "</b>";
 			return result;
 		}
 	}
 
 	private ActionRef getActionFrom(final Function f) {
-		if (f.getLeft() instanceof ActionRef) { return (ActionRef) f.getLeft(); }
+		if (f.getLeft() instanceof ActionRef)
+			return (ActionRef) f.getLeft();
 		return null;
 	}
 
@@ -309,7 +315,8 @@ public class GamlHoverProvider extends DefaultEObjectHoverProvider {
 		final SymbolProto p = DescriptionFactory.getProto(key, null);
 		if (p != null) {
 			final FacetProto f = p.getPossibleFacets().get(facetName);
-			if (f != null) { return f.getTitle(); }
+			if (f != null)
+				return f.getTitle();
 		}
 		return "Facet " + o.getKey();
 

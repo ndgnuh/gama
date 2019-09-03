@@ -20,7 +20,7 @@ import gama.ui.base.menus.GamaColorMenu;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.util.GamaColor;
+import gama.util.GamaColor;
 
 /**
  * Class FontSizer.

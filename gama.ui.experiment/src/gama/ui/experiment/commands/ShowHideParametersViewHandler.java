@@ -11,7 +11,7 @@
 package gama.ui.experiment.commands;
 
 import org.eclipse.core.commands.*;
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class ShowHideParametersViewHandler extends AbstractHandler {
 

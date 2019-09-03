@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResource.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'GamlResource.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -35,18 +35,18 @@ import com.google.common.collect.Multimaps;
 
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.parsing.GamlSyntacticConverter;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.runtime.scope.IExecutionContext;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.ast.ISyntacticElement;
-import msi.gaml.compilation.factories.ModelFactory;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.descriptions.ValidationContext;
-import ummisco.gama.gaml.GamlPackage;
-import ummisco.gama.gaml.Model;
+import gama.common.interfaces.IGamlIssue;
+import gama.runtime.scope.IExecutionContext;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
+import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.factories.ModelFactory;
+import gaml.descriptions.ModelDescription;
+import gaml.descriptions.ValidationContext;
+import gama.core.lang.gaml.GamlPackage;
+import gama.core.lang.gaml.Model;
 
 /*
  *

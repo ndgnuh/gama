@@ -21,16 +21,16 @@ import gama.dev.utils.DEBUG;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.GamaGeometryType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.geometry.GeometryUtils;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.IShape;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.GamaGeometryType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  *

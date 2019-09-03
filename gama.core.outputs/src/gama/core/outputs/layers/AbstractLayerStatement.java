@@ -14,16 +14,16 @@ import com.google.common.primitives.Ints;
 
 import gama.core.outputs.LayeredDisplayOutput;
 import gama.processor.annotations.GamlAnnotations.inside;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.Symbol;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.Symbol;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
 
 /**
  * Written by drogoul Modified on 9 nov. 2009

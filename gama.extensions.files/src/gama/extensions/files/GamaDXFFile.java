@@ -36,19 +36,19 @@ import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.operators.Containers;
-import msi.gaml.operators.Spatial;
-import msi.gaml.types.GamaGeometryType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.geometry.Envelope3D;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.operators.Containers;
+import gaml.operators.Spatial;
+import gaml.types.GamaGeometryType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * Written by drogoul Modified on 13 nov. 2011

@@ -1,20 +1,23 @@
 /*********************************************************************************************
- * 
  *
- * 'PerceiveStatement.java', in plugin 'gama.extensions.bdi', is part of the source code of the GAMA
- * modeling and simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
- * 
+ *
+ * 'PerceiveStatement.java', in plugin 'gama.extensions.bdi', is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
+ *
  * Visit https://code.google.com/p/gama-platform/ for license information and developers contact.
- * 
- * 
+ *
+ *
  **********************************************************************************************/
 
 package gama.extensions.bdi;
 
 import java.util.Iterator;
 
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IContainer;
+import gama.common.interfaces.IKeyword;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.IShape;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -22,25 +25,22 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IContainer;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.concurrent.GamaExecutorService;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.ExecutionResult;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AbstractStatementSequence;
-import msi.gaml.statements.RemoteSequence;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
+import gama.runtime.concurrent.GamaExecutorService;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.ExecutionResult;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.AbstractStatementSequence;
+import gaml.statements.RemoteSequence;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @symbol (
 		name = { PerceiveStatement.PERCEIVE },
@@ -185,7 +185,7 @@ public class PerceiveStatement extends AbstractStatementSequence {
 						IList temp = GamaListFactory.create();
 						final double dist = Cast.asFloat(scope, inArg);
 						if (obj instanceof IContainer) {
-							temp = msi.gaml.operators.Spatial.Queries.at_distance(scope, (IContainer) obj,
+							temp = gaml.operators.Spatial.Queries.at_distance(scope, (IContainer) obj,
 									Cast.asFloat(scope, inArg));
 						} else if (obj instanceof IAgent) {
 							if (ag.euclidianDistanceTo((IAgent) obj) <= dist) {
@@ -195,11 +195,11 @@ public class PerceiveStatement extends AbstractStatementSequence {
 						GamaExecutorService.execute(scope, sequence, temp.listValue(scope, Types.AGENT, false), null);
 						return this;
 
-					} else if (inArg instanceof msi.gaml.types.GamaGeometryType || inArg instanceof GamaShape) {
+					} else if (inArg instanceof gaml.types.GamaGeometryType || inArg instanceof GamaShape) {
 						IList temp = GamaListFactory.create();
 						final IShape geom = Cast.asGeometry(scope, inArg);
 						if (obj instanceof IContainer) {
-							temp = msi.gaml.operators.Spatial.Queries.overlapping(scope, (IContainer) obj,
+							temp = gaml.operators.Spatial.Queries.overlapping(scope, (IContainer) obj,
 									Cast.asGeometry(scope, inArg));
 						} else if (obj instanceof IAgent) {
 							if (geom.intersects((IShape) obj)) {
@@ -217,7 +217,8 @@ public class PerceiveStatement extends AbstractStatementSequence {
 							while (runners.hasNext()
 									&& (result = scope.execute(sequence, runners.next(), null)).passed()) {}
 						}
-						if (result != null) { return result.getValue(); }
+						if (result != null)
+							return result.getValue();
 					}
 				}
 			}

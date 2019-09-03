@@ -24,12 +24,12 @@ import gama.ui.base.controls.SimpleSlider;
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.common.util.StringUtils;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.common.util.StringUtils;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
 
 /**
  * A slider for choosing values between a max and a min, with an optional step

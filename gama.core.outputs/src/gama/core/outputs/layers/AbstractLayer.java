@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.interfaces.outputs.ILayerData;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerData;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 /**
  * Written by drogoul Modified on 9 nov. 2009

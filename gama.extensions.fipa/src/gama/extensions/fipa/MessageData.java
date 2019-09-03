@@ -10,8 +10,8 @@
  **********************************************************************************************/
 package gama.extensions.fipa;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.util.list.IList;
+import gama.common.interfaces.IAgent;
+import gama.util.list.IList;
 
 /**
  * The Message class represents the piece of information transfered between agents capable of communicating.

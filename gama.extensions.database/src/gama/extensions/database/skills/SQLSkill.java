@@ -24,14 +24,14 @@ import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.skill;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gama.util.matrix.GamaObjectMatrix;
-import msi.gama.util.matrix.IMatrix;
-import msi.gaml.skills.Skill;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gama.util.matrix.GamaObjectMatrix;
+import gama.util.matrix.IMatrix;
+import gaml.skills.Skill;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /*
  * @Author TRUONG Minh Thai

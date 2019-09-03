@@ -45,11 +45,11 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.experiment.menus.AgentsMenu;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.util.PlatformUtils;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.util.PlatformUtils;
+import gama.metamodel.shape.GamaPoint;
 
 public class DisplaySurfaceMenu {
 

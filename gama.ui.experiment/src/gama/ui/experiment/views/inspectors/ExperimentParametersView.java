@@ -9,8 +9,8 @@
  **********************************************************************************************/
 package gama.ui.experiment.views.inspectors;
 
-import static msi.gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_LAYOUT;
-import static msi.gama.common.preferences.GamaPreferences.Displays.LAYOUTS;
+import static gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_LAYOUT;
+import static gama.common.preferences.GamaPreferences.Displays.LAYOUTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +28,14 @@ import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.experiment.commands.ArrangeDisplayViews;
 import gama.ui.experiment.experiment.parameters.EditorsList;
 import gama.ui.experiment.experiment.parameters.ExperimentsParametersList;
-import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.GAMA;
-import msi.gaml.operators.IUnits;
+import gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.gui.IGui;
+import gama.kernel.experiment.ParametersSet;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.GAMA;
+import gaml.operators.IUnits;
 
 public class ExperimentParametersView extends AttributesEditorsView<String> implements IGamaView.Parameters {
 

@@ -9,8 +9,8 @@ import org.eclipse.swt.widgets.Control;
 import gama.ui.base.controls.FlatButton;
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaFonts;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 public abstract class AbstractStatementEditor<T> extends AbstractEditor<Object> {
 

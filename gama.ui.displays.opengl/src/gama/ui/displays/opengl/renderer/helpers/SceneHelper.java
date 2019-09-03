@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.scene.ModelScene;
-import msi.gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayer;
 
 /**
  * Class SceneHelper. Manages the interactions between the updating and the rendering tasks by keeping hold of three

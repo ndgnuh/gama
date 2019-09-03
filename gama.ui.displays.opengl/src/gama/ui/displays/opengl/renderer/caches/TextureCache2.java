@@ -29,8 +29,8 @@ import com.jogamp.opengl.util.texture.TextureData;
 import com.jogamp.opengl.util.texture.awt.AWTTextureIO;
 
 import gama.ui.displays.opengl.OpenGL;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.ImageUtils;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.ImageUtils;
 
 public class TextureCache2 implements ITextureCache {
 

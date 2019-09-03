@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.core.outputs.LayeredDisplayOutput.java, in plugin msi.gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.core.outputs.LayeredDisplayOutput.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -16,12 +16,20 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayProvider;
+import gama.common.preferences.GamaPreferences;
 import gama.core.outputs.LayeredDisplayOutput.DisplaySerializer;
 import gama.core.outputs.LayeredDisplayOutput.InfoValidator;
 import gama.core.outputs.layers.AbstractLayerStatement;
 import gama.core.outputs.layers.OverlayStatement;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -29,31 +37,23 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.common.interfaces.outputs.IOverlayInfo;
-import msi.gama.common.interfaces.outputs.IOverlayProvider;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.annotations.serializer;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.descriptions.LabelExpressionDescription;
-import msi.gaml.descriptions.SymbolDescription;
-import msi.gaml.descriptions.SymbolSerializer;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.Facets;
-import msi.gaml.types.IType;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.annotations.serializer;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.descriptions.LabelExpressionDescription;
+import gaml.descriptions.SymbolDescription;
+import gaml.descriptions.SymbolSerializer;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.Facets;
+import gaml.types.IType;
 
 /**
  * The Class LayerDisplayOutput.
@@ -337,7 +337,7 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput implements IDisp
 			if (type != null) {
 				// Addresses and fixes Issue 833.
 				final String s = type.getExpression().literalValue();
-				if (!IGui.DISPLAYS.containsKey(s) && !msi.gama.runtime.GAMA.isInHeadLessMode()) {
+				if (!IGui.DISPLAYS.containsKey(s) && !gama.runtime.GAMA.isInHeadLessMode()) {
 					// In headless mode, all displays should be accepted
 					d.error(s + " is not a valid display type. Valid types are:" + IGui.DISPLAYS.keySet(),
 							IGamlIssue.UNKNOWN_KEYWORD, TYPE);

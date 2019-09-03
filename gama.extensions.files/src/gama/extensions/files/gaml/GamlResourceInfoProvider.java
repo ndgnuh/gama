@@ -29,11 +29,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import gama.core.lang.gaml.indexer.GamlResourceIndexer;
+import gama.core.lang.gaml.resource.GamlResource;
 import gama.dev.utils.DEBUG;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.ast.ISyntacticElement;
-import ummisco.gama.gaml.indexer.GamlResourceIndexer;
-import ummisco.gama.gaml.resource.GamlResource;
+import gaml.compilation.GAML;
+import gaml.compilation.ast.ISyntacticElement;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamlResourceInfoProvider {

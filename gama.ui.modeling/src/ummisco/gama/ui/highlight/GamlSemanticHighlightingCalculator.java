@@ -42,18 +42,18 @@ import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.inject.Inject;
 
-import gama.core.gaml.EGaml;
-import msi.gama.common.util.StringUtils;
-import ummisco.gama.gaml.ArgumentDefinition;
-import ummisco.gama.gaml.ArgumentPair;
-import ummisco.gama.gaml.Facet;
-import ummisco.gama.gaml.GamlPackage;
-import ummisco.gama.gaml.Parameter;
-import ummisco.gama.gaml.Pragma;
-import ummisco.gama.gaml.S_Assignment;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.StringLiteral;
+import gama.common.util.StringUtils;
+import gama.core.lang.gaml.EGaml;
+import gama.core.lang.gaml.ArgumentDefinition;
+import gama.core.lang.gaml.ArgumentPair;
+import gama.core.lang.gaml.Facet;
+import gama.core.lang.gaml.GamlPackage;
+import gama.core.lang.gaml.Parameter;
+import gama.core.lang.gaml.Pragma;
+import gama.core.lang.gaml.S_Assignment;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.StringLiteral;
 
 /**
  *
@@ -73,7 +73,8 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 	@Override
 	public void provideHighlightingFor(final XtextResource resource, final IHighlightedPositionAcceptor arg1,
 			final CancelIndicator arg2) {
-		if (resource == null) { return; }
+		if (resource == null)
+			return;
 		acceptor = arg1;
 		final TreeIterator<EObject> root = resource.getAllContents();
 		while (root.hasNext()) {
@@ -91,7 +92,8 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 	}
 
 	void process(final EObject object) {
-		if (object == null) { return; }
+		if (object == null)
+			return;
 		process(object, object.eClass());
 	}
 
@@ -173,7 +175,8 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 		// second one, etc.
 		if (obj != null && s != null) {
 			INode n = NodeModelUtils.getNode(obj);
-			if (n == null) { return false; }
+			if (n == null)
+				return false;
 			if (position > -1) {
 				int i = 0;
 				for (final ILeafNode node : n.getLeafNodes()) {
@@ -201,10 +204,12 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 	}
 
 	private final boolean setStyle(final EObject obj, final String s, final String text, final boolean all) {
-		if (text == null) { return false; }
+		if (text == null)
+			return false;
 		if (obj != null && s != null) {
 			INode n = NodeModelUtils.getNode(obj);
-			if (n == null) { return false; }
+			if (n == null)
+				return false;
 			for (final ILeafNode node : n.getLeafNodes()) {
 				if (!node.isHidden()) {
 					final String sNode = StringUtils.toJavaString(NodeModelUtils.getTokenText(node));
@@ -222,10 +227,14 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 	}
 
 	boolean equalsFaceOrString(final String text, final String s) {
-		if (s.equals(text)) { return true; }
-		if (s.equals(text + ":")) { return true; }
-		if (s.equals("\"" + text + "\"")) { return true; }
-		if (s.equals("\'" + text + "\'")) { return true; }
+		if (s.equals(text))
+			return true;
+		if (s.equals(text + ":"))
+			return true;
+		if (s.equals("\"" + text + "\""))
+			return true;
+		if (s.equals("\'" + text + "\'"))
+			return true;
 		return false;
 	}
 

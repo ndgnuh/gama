@@ -27,7 +27,7 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.common.interfaces.ItemList;
+import gama.common.interfaces.ItemList;
 
 /**
  * Instances of this class represent a selectable user interface object that represents a expandable item in a expand

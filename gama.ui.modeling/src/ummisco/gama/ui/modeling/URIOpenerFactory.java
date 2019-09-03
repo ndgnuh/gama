@@ -10,7 +10,7 @@ import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import com.google.inject.Injector;
 
 import gama.ui.base.utils.IModelEditor;
-import ummisco.gama.ui.modeling.internal.ModelingActivator;
+import gama.ui.modeling.internal.ModelingActivator;
 
 public class URIOpenerFactory extends AbstractServiceFactory implements IModelEditor {
 
@@ -36,8 +36,8 @@ public class URIOpenerFactory extends AbstractServiceFactory implements IModelEd
 	}
 
 	/**
-	 * @see gama.ui.base.utils.IModelEditor#open(org.eclipse.emf.common.util.URI, org.eclipse.emf.ecore.EReference,
-	 *      int, boolean)
+	 * @see gama.ui.base.utils.IModelEditor#open(org.eclipse.emf.common.util.URI, org.eclipse.emf.ecore.EReference, int,
+	 *      boolean)
 	 */
 	@Override
 	public IEditorPart open(final URI referenceOwnerURI, final EReference reference, final int indexInList,

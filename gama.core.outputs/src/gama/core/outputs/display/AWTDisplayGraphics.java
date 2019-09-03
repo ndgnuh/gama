@@ -50,21 +50,21 @@ import org.locationtech.jts.geom.Lineal;
 import org.locationtech.jts.geom.Puntal;
 import org.locationtech.jts.geom.ShapeType;
 
-import msi.gama.common.geometry.AxisAngle;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.common.interfaces.outputs.IChartImageProvider;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.Maths;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.FieldDrawingAttributes;
-import msi.gaml.statements.draw.ShapeDrawingAttributes;
-import msi.gaml.statements.draw.TextDrawingAttributes;
+import gama.common.geometry.AxisAngle;
+import gama.common.geometry.GeometryUtils;
+import gama.common.interfaces.outputs.IChartImageProvider;
+import gama.common.interfaces.outputs.ILayer;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.IShape;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.file.IGamaFile;
+import gaml.operators.Cast;
+import gaml.operators.Maths;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.FieldDrawingAttributes;
+import gaml.statements.draw.ShapeDrawingAttributes;
+import gaml.statements.draw.TextDrawingAttributes;
 
 /**
  *

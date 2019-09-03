@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Gama (runtime)" uid="ummisco.gama.application.runtime.product" id="ummisco.gama.application.runtime" application="ummisco.gama.application.GamaApplication" version="1.9.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Gama (runtime)" uid="gama.application.runtime.product" id="ummisco.gama.application.runtime" application="ummisco.gama.application.GamaApplication" version="2.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="branding_icons/icon128.png"/>
@@ -270,9 +270,9 @@ openFile
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="5" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <property name="org.eclipse.update.reconcile" value="false" />
       <property name="version" value="1.9" />
       <property name="eclipse.buildId" value="${build.id}" />
-      <property name="org.eclipse.update.reconcile" value="false" />
    </configurations>
 
    <repositories>

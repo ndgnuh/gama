@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Control;
 
 import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IDisplaySurface;
 
 public class SWTLayeredDisplayMultiListener implements MenuDetectListener, MouseListener, MouseMoveListener,
 		MouseTrackListener, MouseWheelListener, KeyListener, DragDetectListener, FocusListener {

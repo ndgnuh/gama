@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.ui.displays.opengl.scene;
 
-import msi.gaml.statements.draw.TextDrawingAttributes;
+import gaml.statements.draw.TextDrawingAttributes;
 
 public class StringObject extends AbstractObject<String, TextDrawingAttributes> {
 

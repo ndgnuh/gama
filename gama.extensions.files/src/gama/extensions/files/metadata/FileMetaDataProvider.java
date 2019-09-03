@@ -50,8 +50,8 @@ import gama.extensions.files.csv.GamaCSVFile.CSVInfo;
 import gama.extensions.files.gaml.GamlFileExtension;
 import gama.extensions.files.gaml.GamlFileInfo;
 import gama.extensions.files.gaml.GamlResourceInfoProvider;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.util.file.IGamaFileMetaData;
+import gama.common.util.ImageUtils;
+import gama.util.file.IGamaFileMetaData;
 
 /**
  * Class FileMetaDataProvider.

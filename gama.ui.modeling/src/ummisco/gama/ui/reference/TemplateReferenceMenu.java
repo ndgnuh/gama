@@ -29,7 +29,7 @@ import org.eclipse.ui.PartInitException;
 import gama.dev.utils.DEBUG;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gaml.operators.Strings;
+import gaml.operators.Strings;
 import ummisco.gama.ui.editor.GamlEditor;
 
 /**
@@ -281,7 +281,7 @@ public class TemplateReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getImage()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getImage()
 	 */
 	@Override
 	protected Image getImage() {
@@ -289,7 +289,7 @@ public class TemplateReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getTitle()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getTitle()
 	 */
 	@Override
 	protected String getTitle() {

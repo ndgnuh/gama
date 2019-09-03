@@ -15,17 +15,17 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IExecutable;
-import msi.gama.common.interfaces.IMacroAgent;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.ExecutionResult;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.species.ISpecies;
-import msi.gaml.statements.AspectStatement;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IExecutable;
+import gama.common.interfaces.IMacroAgent;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.ExecutionResult;
+import gama.runtime.scope.IScope;
+import gaml.species.ISpecies;
+import gaml.statements.AspectStatement;
 
 /**
  * Written by drogoul Modified on 23 août 2008

@@ -12,7 +12,7 @@ package gama.ui.displays.opengl.renderer.caches;
 
 import static com.google.common.cache.CacheBuilder.newBuilder;
 import static java.util.concurrent.TimeUnit.MINUTES;
-import static msi.gama.common.geometry.GeometryUtils.getTypeOf;
+import static gama.common.geometry.GeometryUtils.getTypeOf;
 import static org.locationtech.jts.geom.ShapeType.CIRCLE;
 import static org.locationtech.jts.geom.ShapeType.CONE;
 import static org.locationtech.jts.geom.ShapeType.CUBE;
@@ -44,14 +44,14 @@ import com.jogamp.opengl.util.texture.Texture;
 import gama.extensions.files.GamaObjFile;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.ICoordinates;
+import gama.common.preferences.GamaPreferences;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
 
 public class GeometryCache {
 

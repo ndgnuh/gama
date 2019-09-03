@@ -20,13 +20,13 @@ import gama.extensions.serialize.factory.StreamConverter;
 import gama.extensions.serialize.gamaType.converters.ConverterScope;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.operator;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.util.FileUtils;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.util.FileUtils;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.agent.SavedAgent;
+import gama.runtime.scope.IScope;
 
 public class ReverseOperators {
 

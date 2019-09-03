@@ -34,8 +34,8 @@ import java.util.List;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultDirectedGraph;
 
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 /**
  * The Class FIPAProtocol.

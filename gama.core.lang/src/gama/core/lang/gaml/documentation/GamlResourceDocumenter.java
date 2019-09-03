@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceDocumenter.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'GamlResourceDocumenter.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -21,12 +21,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IDocManager;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.util.map.IMap;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IDescription.DescriptionVisitor;
-import msi.gaml.descriptions.ModelDescription;
+import gama.common.interfaces.IDocManager;
+import gama.common.interfaces.IGamlDescription;
+import gama.util.map.IMap;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IDescription.DescriptionVisitor;
+import gaml.descriptions.ModelDescription;
 
 /**
  * Class GamlResourceDocManager.

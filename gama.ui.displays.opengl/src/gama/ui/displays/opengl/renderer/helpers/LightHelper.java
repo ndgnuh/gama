@@ -19,10 +19,10 @@ import com.jogamp.opengl.util.gl2.GLUT;
 import gama.core.outputs.LightData;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.ILightData;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.ILightData;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.GamaColor;
 
 public class LightHelper extends AbstractRendererHelper {
 

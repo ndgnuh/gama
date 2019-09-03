@@ -11,9 +11,9 @@ package gama.extensions.files.json;
 import java.util.Collection;
 import java.util.Iterator;
 
-import msi.gama.common.util.TextBuilder;
-import msi.gama.util.list.GamaList;
-import msi.gaml.types.Types;
+import gama.common.util.TextBuilder;
+import gama.util.list.GamaList;
+import gaml.types.Types;
 
 /**
  * GamaJsonList is a GAMA compatible implementation of a json array

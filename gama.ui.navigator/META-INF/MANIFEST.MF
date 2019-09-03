@@ -14,7 +14,6 @@ Require-Bundle: gama.ui.base,
  org.eclipse.ui.workbench,
  org.eclipse.ui.ide,
  org.eclipse.ui.navigator.resources,
- gama.core,
  org.eclipse.core.expressions,
  org.eclipse.team.ui,
  org.eclipse.compare,
@@ -23,15 +22,11 @@ Require-Bundle: gama.ui.base,
  com.google.guava,
  gama.core.application;bundle-version="1.9.0",
  gama.core.ext;bundle-version="1.9.0",
- gama.core.gaml;bundle-version="1.9.0",
- gama.extensions.files;bundle-version="1.9.0"
+ gama.core.lang;bundle-version="1.9.0",
+ gama.extensions.files;bundle-version="1.9.0",
+ gama.core.base;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: gama.ui.base.commands,
- gama.ui.base.metadata,
- gama.ui.base.navigator,
- gama.ui.base.navigator.actions,
- gama.ui.base.navigator.contents,
- gama.ui.base.navigator.properties,
- gama.ui.base.wizards
 Import-Package: org.eclipse.core.filesystem
 Automatic-Module-Name: gama.ui.base.navigator
+Export-Package: gama.ui.navigator.commands,
+ gama.ui.navigator.navigator.contents

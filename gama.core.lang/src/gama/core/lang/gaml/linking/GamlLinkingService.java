@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlLinkingService.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'GamlLinkingService.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -29,9 +29,9 @@ import com.google.inject.Inject;
 
 import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.resource.GamlResource;
-import msi.gama.runtime.scope.IExecutionContext;
-import ummisco.gama.gaml.GamlDefinition;
-import ummisco.gama.gaml.GamlPackage;
+import gama.runtime.scope.IExecutionContext;
+import gama.core.lang.gaml.GamlDefinition;
+import gama.core.lang.gaml.GamlPackage;
 
 /**
  * The class GamlLinkingService.

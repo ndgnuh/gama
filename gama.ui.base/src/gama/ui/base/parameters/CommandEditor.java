@@ -9,9 +9,9 @@ import gama.ui.base.interfaces.EditorListener.Command;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.statements.UserCommandStatement;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.statements.UserCommandStatement;
 
 public class CommandEditor extends AbstractStatementEditor<UserCommandStatement> {
 

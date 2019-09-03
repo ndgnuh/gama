@@ -26,25 +26,25 @@ import org.locationtech.jts.geom.Envelope;
 
 import gama.core.outputs.display.AWTDisplayGraphics;
 import gama.core.outputs.display.LayerManager;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplayDataListener;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IEventLayerListener;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.interfaces.outputs.ILayerManager;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.operators.Files;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayDataListener;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IEventLayerListener;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerManager;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.ImageUtils;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.operators.Files;
 
 // Now deprecated @display ("image")
 public class ImageDisplaySurface implements IDisplaySurface {

@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.extensions.files;
 
-import static msi.gama.common.geometry.GeometryUtils.GEOMETRY_FACTORY;
+import static gama.common.geometry.GeometryUtils.GEOMETRY_FACTORY;
 
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.LinearRing;
@@ -18,17 +18,17 @@ import org.locationtech.jts.geom.MultiPolygon;
 import org.locationtech.jts.geom.Polygon;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.util.Collector;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.metamodel.topology.projection.ProjectionFactory;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.types.GamaGeometryType;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.GeometryUtils;
+import gama.common.geometry.ICoordinates;
+import gama.common.util.Collector;
+import gama.metamodel.shape.IShape;
+import gama.metamodel.topology.projection.IProjection;
+import gama.metamodel.topology.projection.ProjectionFactory;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
+import gaml.types.GamaGeometryType;
 
 /**
  * Class GamaGisFile.

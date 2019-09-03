@@ -25,16 +25,16 @@ import gama.ui.base.controls.ITooltipDisplayer;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.GAML;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.types.GamaStringType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.util.StringUtils;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.GAML;
+import gaml.expressions.IExpression;
+import gaml.types.GamaStringType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class ExpressionControl implements /* IPopupProvider, */SelectionListener, ModifyListener, FocusListener {

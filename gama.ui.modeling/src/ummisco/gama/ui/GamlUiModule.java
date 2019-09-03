@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlUiModule.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlUiModule.java, in plugin gama.ui.base.modeling, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -60,15 +60,16 @@ import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
 
-import gama.core.GamlRuntimeModule;
-import gama.core.gaml.parsing.GamlSyntaxErrorMessageProvider;
-import gama.core.gaml.resource.GamlEncodingProvider;
+import gama.common.preferences.GamaPreferences;
+import gama.core.lang.GamlRuntimeModule;
+import gama.core.lang.gaml.parsing.GamlSyntaxErrorMessageProvider;
+import gama.core.lang.gaml.resource.GamlEncodingProvider;
+import gama.core.lang.ide.contentassist.antlr.GamlParser;
+import gama.core.lang.ui.AbstractGamlUiModule;
 import gama.ui.base.interfaces.IGamlLabelProvider;
 import gama.ui.base.utils.GamlReferenceSearch;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.GamaColor;
-import msi.gama.util.GamaFont;
-import ummisco.gama.ide.contentassist.antlr.GamlParser;
+import gama.util.GamaColor;
+import gama.util.GamaFont;
 import ummisco.gama.ui.contentassist.GamlTemplateProposalProvider;
 import ummisco.gama.ui.decorators.GamlImageHelper;
 import ummisco.gama.ui.decorators.GamlMarkerUpdater;

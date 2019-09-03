@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.ToolItem;
 import gama.ui.base.menus.GamaColorMenu;
 import gama.ui.base.menus.GamaColorMenu.IColorRunnable;
 import gama.ui.base.resources.GamaIcons;
-import msi.gama.util.GamaColor;
+import gama.util.GamaColor;
 
 /**
  * The class EditToolbarColorMenu.
@@ -75,7 +75,7 @@ public class ColorReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getImage()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getImage()
 	 */
 	@Override
 	protected Image getImage() {
@@ -83,7 +83,7 @@ public class ColorReferenceMenu extends GamlReferenceMenu {
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.reference.GamlReferenceMenu#getTitle()
+	 * @see gama.core.lang.ui.reference.GamlReferenceMenu#getTitle()
 	 */
 	@Override
 	protected String getTitle() {

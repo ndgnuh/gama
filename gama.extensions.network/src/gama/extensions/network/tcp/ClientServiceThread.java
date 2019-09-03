@@ -21,7 +21,7 @@ import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
-import msi.gaml.types.Types;
+import gaml.types.Types;
 
 public class ClientServiceThread extends Thread {
 	private Socket myClientSocket;

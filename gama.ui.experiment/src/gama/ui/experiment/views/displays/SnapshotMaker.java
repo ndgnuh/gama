@@ -11,16 +11,16 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.FileUtils;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.operators.Files;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.FileUtils;
+import gama.common.util.ImageUtils;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.operators.Files;
 
 public class SnapshotMaker {
 

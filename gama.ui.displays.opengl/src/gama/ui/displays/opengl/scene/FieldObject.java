@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.ui.displays.opengl.scene;
 
-import msi.gaml.statements.draw.FieldDrawingAttributes;
+import gaml.statements.draw.FieldDrawingAttributes;
 
 public class FieldObject extends AbstractObject<double[], FieldDrawingAttributes> {
 

@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlLinkingErrorMessageProvider.java, in plugin gama.core.gaml, is part of the source code of the
+ * 'GamlLinkingErrorMessageProvider.java, in plugin gama.core.lang, is part of the source code of the
  * GAMA modeling and simulation platform.
  * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
@@ -18,12 +18,12 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 
-import ummisco.gama.gaml.ActionRef;
-import ummisco.gama.gaml.EquationRef;
-import ummisco.gama.gaml.SkillRef;
-import ummisco.gama.gaml.TypeRef;
-import ummisco.gama.gaml.VariableRef;
-import ummisco.gama.gaml.util.GamlSwitch;
+import gama.core.lang.gaml.ActionRef;
+import gama.core.lang.gaml.EquationRef;
+import gama.core.lang.gaml.SkillRef;
+import gama.core.lang.gaml.TypeRef;
+import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.util.GamlSwitch;
 
 public class GamlLinkingErrorMessageProvider extends LinkingDiagnosticMessageProvider {
 

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Eclipse-BundleShape: dir
-Bundle-Name: msi.gama.documentation
-Bundle-SymbolicName: msi.gama.documentation;singleton:=true
+Bundle-Name: Documentation build
+Bundle-SymbolicName: gama.build.documentation;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .,
  libs/jdom-2.0.1.jar,

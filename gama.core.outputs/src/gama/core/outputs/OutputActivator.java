@@ -1,12 +1,12 @@
 package gama.core.outputs;
-import static msi.gama.kernel.experiment.ExperimentOutputsFactory.setExperimentOutputManagerSupplier;
-import static msi.gama.kernel.experiment.ExperimentOutputsFactory.setFileOutputSupplier;
-import static msi.gama.kernel.experiment.ExperimentOutputsFactory.setSimulationOutputManagerSupplier;
+import static gama.kernel.experiment.ExperimentOutputsFactory.setExperimentOutputManagerSupplier;
+import static gama.kernel.experiment.ExperimentOutputsFactory.setFileOutputSupplier;
+import static gama.kernel.experiment.ExperimentOutputsFactory.setSimulationOutputManagerSupplier;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class OutputActivator implements BundleActivator {
 

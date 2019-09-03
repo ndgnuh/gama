@@ -27,11 +27,11 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import com.google.inject.Inject;
 
-import msi.gama.common.util.FileUtils;
-import ummisco.gama.gaml.HeadlessExperiment;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.StringLiteral;
-import ummisco.gama.ui.commands.FileOpener;
+import gama.common.util.FileUtils;
+import gama.ui.navigator.commands.FileOpener;
+import gama.core.lang.gaml.HeadlessExperiment;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.StringLiteral;
 
 /**
  * Represents an implementation of interface <code>{@link IHyperlinkDetector}</code> to find and convert

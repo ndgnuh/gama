@@ -15,7 +15,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import gama.ui.base.views.toolbar.Selector;
-import msi.gaml.compilation.GAML;
+import gaml.compilation.GAML;
 import ummisco.gama.ui.editor.GamlEditor;
 
 /**

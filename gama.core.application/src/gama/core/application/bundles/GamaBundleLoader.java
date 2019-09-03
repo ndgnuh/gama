@@ -28,18 +28,18 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import gama.common.interfaces.ICreateDelegate;
 import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.interfaces.outputs.IEventLayerDelegate;
 import gama.common.interfaces.outputs.IEventLayerStatement;
-import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import gama.dev.utils.DEBUG;
 import gama.runtime.GAMA;
-import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.interfaces.IGamlAdditions;
-import msi.gaml.compilation.kernel.GamaClassLoader;
-import msi.gaml.compilation.kernel.GamaMetaModel;
-import msi.gaml.statements.CreateStatement;
-import msi.gaml.types.Types;
+import gaml.compilation.AbstractGamlAdditions;
+import gaml.compilation.interfaces.IGamlAdditions;
+import gaml.compilation.kernel.GamaClassLoader;
+import gaml.compilation.kernel.GamaMetaModel;
+import gaml.statements.CreateStatement;
+import gaml.types.Types;
 
 /**
  * The class GamaBundleLoader.
@@ -68,8 +68,8 @@ public class GamaBundleLoader {
 	public volatile static boolean LOADED = false;
 	public volatile static boolean ERRORED = false;
 	public volatile static Exception LAST_EXCEPTION = null;
-	public static final Bundle CORE_PLUGIN = Platform.getBundle("gama.core");
-	public static final Bundle CORE_MODELS = Platform.getBundle("gama.models");
+	public static final Bundle CORE_PLUGIN = Platform.getBundle("gama.core.base");
+	public static final Bundle CORE_MODELS = Platform.getBundle("gama.core.models");
 	public static final String CORE_TESTS = "tests";
 	public static final String ADDITIONS = "gaml.additions.GamlAdditions";
 	public static final String GRAMMAR_EXTENSION_DEPRECATED = "gaml.grammar.addition";

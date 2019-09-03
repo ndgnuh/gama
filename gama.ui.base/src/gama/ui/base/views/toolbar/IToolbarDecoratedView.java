@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbenchSite;
 
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplayOutput;
 
 /**
  * Class IToolbarDecoratedView.

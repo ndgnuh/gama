@@ -16,9 +16,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.runtime.scope.IScope;
 
 public class GamaScopeConverter implements Converter {
 

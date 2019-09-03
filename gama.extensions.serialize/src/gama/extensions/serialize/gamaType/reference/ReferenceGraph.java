@@ -3,11 +3,11 @@ package gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import gama.extensions.serialize.gamaType.reduced.GamaGraphReducer;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.common.interfaces.IReference.AgentAttribute;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.util.graph.GamaGraph;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IReference;
+import gama.common.interfaces.IReference.AgentAttribute;
+import gama.kernel.simulation.SimulationAgent;
+import gama.util.graph.GamaGraph;
+import gaml.types.Types;
 
 public class ReferenceGraph extends GamaGraph implements IReference {
 //	IAgent agt;

@@ -3,9 +3,9 @@ package gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import gama.extensions.serialize.gamaType.reduced.GamaMapReducer;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.util.map.GamaMap;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.util.map.GamaMap;
 
 public class ReferenceMap extends GamaMap implements IReference {
 

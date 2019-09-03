@@ -17,17 +17,17 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Set;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerData;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.common.util.Collector;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.statements.draw.FieldDrawingAttributes;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerData;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.util.Collector;
+import gama.metamodel.shape.IShape;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.file.IGamaFile;
+import gaml.statements.draw.FieldDrawingAttributes;
 
 public class GridLayer extends AbstractLayer {
 

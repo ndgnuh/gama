@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlScopeProvider.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'GamlScopeProvider.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -27,7 +27,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
-import msi.gama.common.util.Collector;
+import gama.common.util.Collector;
 
 /**
  * This class contains custom scoping description.

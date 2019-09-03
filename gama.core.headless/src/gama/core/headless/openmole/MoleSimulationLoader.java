@@ -17,8 +17,8 @@ import java.util.List;
 import gama.core.headless.core.GamaHeadlessException;
 import gama.core.headless.core.GamlProperties;
 import gama.core.headless.core.HeadlessSimulationLoader;
-import msi.gama.common.interfaces.IModel;
-import msi.gaml.compilation.GamlCompilationError;
+import gama.common.interfaces.IModel;
+import gaml.compilation.GamlCompilationError;
 
 public abstract class MoleSimulationLoader {
 

@@ -1,23 +1,23 @@
 package gama.extensions.bdi;
 
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AbstractStatement;
-import msi.gaml.types.IType;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.AbstractStatement;
+import gaml.types.IType;
 
 @symbol (
 		name = EnforcementStatement.ENFORCEMENT,
@@ -223,7 +223,7 @@ public class EnforcementStatement extends AbstractStatement {
 				}
 				if (lawToTest != null) {
 					if (lawToTest.getContextExpression() == null
-							|| msi.gaml.operators.Cast.asBool(scope, lawToTest.getContextExpression().value(scope))) {
+							|| gaml.operators.Cast.asBool(scope, lawToTest.getContextExpression().value(scope))) {
 						if (lawToTest.getBeliefExpression() == null
 								|| lawToTest.getBeliefExpression().value(scope) == null
 								|| SimpleBdiArchitecture.hasBelief(scope, new MentalState("Belief",

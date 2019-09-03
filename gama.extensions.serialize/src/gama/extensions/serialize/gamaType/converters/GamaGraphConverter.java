@@ -22,8 +22,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaGraphReducer;
-import msi.gama.util.graph.GamaGraph;
-import msi.gama.util.graph.IGraph;
+import gama.util.graph.GamaGraph;
+import gama.util.graph.IGraph;
 
 @SuppressWarnings({ "rawtypes" })
 public class GamaGraphConverter implements Converter {

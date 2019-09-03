@@ -19,20 +19,20 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.SkillDescription;
-import msi.gaml.descriptions.SpeciesDescription;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AbstractStatementSequence;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.SkillDescription;
+import gaml.descriptions.SpeciesDescription;
+import gaml.descriptions.StatementDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.AbstractStatementSequence;
+import gaml.types.IType;
 
 @symbol(name = { SimpleBdiArchitecture.PLAN }, kind = ISymbolKind.BEHAVIOR, with_sequence = true, concept = {
 		IConcept.BDI })

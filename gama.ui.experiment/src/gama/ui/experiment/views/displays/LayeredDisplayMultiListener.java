@@ -14,10 +14,10 @@ import java.util.function.Consumer;
 import org.eclipse.swt.graphics.Point;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.util.PlatformUtils;
-import msi.gama.runtime.GAMA;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.util.PlatformUtils;
+import gama.runtime.GAMA;
 
 public class LayeredDisplayMultiListener {
 

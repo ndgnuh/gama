@@ -15,8 +15,8 @@ import java.awt.Font;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 import gama.ui.displays.opengl.OpenGL;
-import msi.gama.common.geometry.AxisAngle;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.geometry.AxisAngle;
+import gama.metamodel.shape.GamaPoint;
 
 /**
  *

@@ -25,7 +25,7 @@ import gama.dev.utils.DEBUG;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.displays.java2d.Java2DDisplaySurface;
 import gama.ui.displays.java2d.WorkaroundForIssue2476;
-import msi.gama.common.util.PlatformUtils;
+import gama.common.util.PlatformUtils;
 
 public abstract class SwingControl extends Composite {
 

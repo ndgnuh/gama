@@ -13,11 +13,11 @@ package gama.ui.displays.opengl.scene;
 import java.awt.Color;
 
 import gama.ui.displays.opengl.OpenGL;
-import msi.gama.common.geometry.AxisAngle;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.Scaling3D;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.file.IGamaFile;
+import gama.common.geometry.AxisAngle;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.Scaling3D;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.file.IGamaFile;
 
 public class ResourceDrawer extends ObjectDrawer<ResourceObject> {
 

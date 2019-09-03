@@ -40,8 +40,8 @@ import gama.ui.base.controls.IPopupProvider;
 import gama.ui.base.controls.Popup2;
 import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gaml.compilation.GamlIdiomsProvider;
+import gama.common.interfaces.IGamlDescription;
+import gaml.compilation.GamlIdiomsProvider;
 
 public abstract class GamlAccessContents implements IPopupProvider {
 

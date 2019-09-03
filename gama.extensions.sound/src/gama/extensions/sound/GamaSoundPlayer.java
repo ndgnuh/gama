@@ -17,10 +17,10 @@ import javazoom.jlgui.basicplayer.BasicPlayer;
 import javazoom.jlgui.basicplayer.BasicPlayerEvent;
 import javazoom.jlgui.basicplayer.BasicPlayerException;
 import javazoom.jlgui.basicplayer.BasicPlayerListener;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 public class GamaSoundPlayer {
 

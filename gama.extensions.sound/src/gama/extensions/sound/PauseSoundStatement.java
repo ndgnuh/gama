@@ -15,15 +15,15 @@ import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.statements.AbstractStatementSequence;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.statements.AbstractStatementSequence;
 
 @symbol (
 		name = IKeyword.PAUSE_SOUND,

@@ -17,26 +17,26 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplayDataListener;
-import msi.gama.common.interfaces.outputs.ILightData;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.GamaListFactory;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.Facets;
-import msi.gaml.types.Types;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.ICoordinates;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayDataListener;
+import gama.common.interfaces.outputs.ILightData;
+import gama.common.preferences.GamaPreferences;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.GamaListFactory;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ModelDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.Facets;
+import gaml.types.Types;
 
 /**
  */

@@ -10,16 +10,16 @@
  **********************************************************************************************/
 package gama.core.headless.core;
 
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.GAML;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.outputs.IOutput;
+import gama.kernel.experiment.ParametersSet;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.GAML;
+import gaml.expressions.IExpression;
 
 public class Experiment implements IExperiment {
 

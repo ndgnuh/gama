@@ -9,7 +9,7 @@
  **********************************************************************************************/
 package gama.ui.base.menus;
 
-import static msi.gama.util.GamaColor.colors;
+import static gama.util.GamaColor.colors;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +33,7 @@ import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.Selector;
-import msi.gama.util.GamaColor;
+import gama.util.GamaColor;
 
 /**
  * The class EditToolbarColorMenu.

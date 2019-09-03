@@ -10,15 +10,15 @@
  ********************************************************************************************************/
 package gama.ui.displays.opengl.scene.layers;
 
-import static msi.gama.common.geometry.Rotation3D.MINUS_I;
-import static msi.gama.common.geometry.Rotation3D.PLUS_J;
-import static msi.gama.common.geometry.Scaling3D.of;
-import static msi.gama.util.GamaColor.getNamed;
-import static msi.gaml.operators.IUnits.bottom_center;
-import static msi.gaml.operators.IUnits.left_center;
-import static msi.gaml.operators.IUnits.top_center;
-import static msi.gaml.types.GamaGeometryType.buildCone3D;
-import static msi.gaml.types.GamaGeometryType.buildLineCylinder;
+import static gama.common.geometry.Rotation3D.MINUS_I;
+import static gama.common.geometry.Rotation3D.PLUS_J;
+import static gama.common.geometry.Scaling3D.of;
+import static gama.util.GamaColor.getNamed;
+import static gaml.operators.IUnits.bottom_center;
+import static gaml.operators.IUnits.left_center;
+import static gaml.operators.IUnits.top_center;
+import static gaml.types.GamaGeometryType.buildCone3D;
+import static gaml.types.GamaGeometryType.buildLineCylinder;
 
 import java.util.Collection;
 
@@ -28,12 +28,12 @@ import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.scene.AbstractObject;
 import gama.ui.displays.opengl.scene.StringObject;
-import msi.gama.common.geometry.AxisAngle;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.util.GamaColor;
-import msi.gama.util.GamaFont;
-import msi.gaml.statements.draw.TextDrawingAttributes;
+import gama.common.geometry.AxisAngle;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaShape;
+import gama.util.GamaColor;
+import gama.util.GamaFont;
+import gaml.statements.draw.TextDrawingAttributes;
 
 public class AxesLayerObject extends StaticLayerObject.World {
 

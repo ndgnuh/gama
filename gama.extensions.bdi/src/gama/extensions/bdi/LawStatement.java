@@ -11,16 +11,16 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.System;
-import msi.gaml.statements.AbstractStatement;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.operators.System;
+import gaml.statements.AbstractStatement;
+import gaml.types.IType;
 
 // Définition des lois pour créer des obligations sur le modèle des rêgles d'inférences avec en supplément un seuil
 // d'obéissance

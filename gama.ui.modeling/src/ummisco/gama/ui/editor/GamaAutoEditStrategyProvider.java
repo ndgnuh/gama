@@ -13,7 +13,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.ui.editor.autoedit.CompoundMultiLineTerminalsEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.preferences.GamaPreferences;
 
 /**
  * The class GamaAutoEditStrategyProvider.

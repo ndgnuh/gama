@@ -9,8 +9,8 @@
  **********************************************************************************************/
 package gama.ui.experiment.views.displays;
 
-import static msi.gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_BORDER;
-import static msi.gama.common.preferences.GamaPreferences.Runtime.CORE_SYNC;
+import static gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_BORDER;
+import static gama.common.preferences.GamaPreferences.Runtime.CORE_SYNC;
 
 import java.awt.Color;
 
@@ -37,13 +37,13 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.GamaViewPart;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.ILayerManager;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayerManager;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
 
 public abstract class LayeredDisplayView extends GamaViewPart
 		implements IToolbarDecoratedView.Pausable, IToolbarDecoratedView.Zoomable, IGamaView.Display {

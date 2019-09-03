@@ -9,9 +9,9 @@
  **********************************************************************************************/
 package gama.extensions.serialize.gamaType.reduced;
 
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.types.GamaFileType;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
+import gaml.types.GamaFileType;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaFileReducer {

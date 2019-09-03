@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceValidator.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'GamlResourceValidator.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.core.lang.gaml.resource.GamlResourceServices;
-import msi.gama.common.util.Collector;
+import gama.common.util.Collector;
 
 public class GamlResourceValidator implements IResourceValidator {
 

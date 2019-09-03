@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gama.ui.displays.opengl.scene;
 
-import static msi.gama.common.geometry.GeometryUtils.GEOMETRY_FACTORY;
-import static msi.gama.common.geometry.GeometryUtils.applyToInnerGeometries;
-import static msi.gama.common.geometry.GeometryUtils.getContourCoordinates;
-import static msi.gama.common.geometry.GeometryUtils.getHolesNumber;
-import static msi.gama.common.geometry.GeometryUtils.getTypeOf;
-import static msi.gama.common.geometry.GeometryUtils.getYNegatedCoordinates;
+import static gama.common.geometry.GeometryUtils.GEOMETRY_FACTORY;
+import static gama.common.geometry.GeometryUtils.applyToInnerGeometries;
+import static gama.common.geometry.GeometryUtils.getContourCoordinates;
+import static gama.common.geometry.GeometryUtils.getHolesNumber;
+import static gama.common.geometry.GeometryUtils.getTypeOf;
+import static gama.common.geometry.GeometryUtils.getYNegatedCoordinates;
 
 import java.awt.Color;
 
@@ -27,14 +27,14 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.ShapeType;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.geometry.Rotation3D;
-import msi.gama.common.geometry.Scaling3D.Heterogeneous;
-import msi.gama.common.geometry.UnboundedCoordinateSequence;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.GamaGeometryType;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.ICoordinates;
+import gama.common.geometry.Rotation3D;
+import gama.common.geometry.Scaling3D.Heterogeneous;
+import gama.common.geometry.UnboundedCoordinateSequence;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.GamaColor;
+import gaml.types.GamaGeometryType;
 
 /**
  *

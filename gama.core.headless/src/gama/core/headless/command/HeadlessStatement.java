@@ -21,12 +21,12 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AbstractStatement;
-import msi.gaml.types.IType;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.descriptions.IDescription;
+import gaml.operators.Cast;
+import gaml.statements.AbstractStatement;
+import gaml.types.IType;
 
 @symbol (
 		name = IKeywords.RUNSIMULARTION,

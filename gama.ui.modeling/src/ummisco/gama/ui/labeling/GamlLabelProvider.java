@@ -23,22 +23,22 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import gama.core.gaml.EGaml;
+import gama.common.interfaces.IKeyword;
+import gama.core.lang.gaml.EGaml;
 import gama.ui.base.interfaces.IGamlLabelProvider;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gaml.compilation.ast.ISyntacticElement;
-import ummisco.gama.gaml.Expression;
-import ummisco.gama.gaml.Facet;
-import ummisco.gama.gaml.HeadlessExperiment;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.S_Declaration;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.S_Experiment;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.StringLiteral;
-import ummisco.gama.gaml.VarDefinition;
-import ummisco.gama.gaml.VariableRef;
+import gaml.compilation.ast.ISyntacticElement;
+import gama.core.lang.gaml.Expression;
+import gama.core.lang.gaml.Facet;
+import gama.core.lang.gaml.HeadlessExperiment;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.S_Declaration;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.S_Experiment;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.StringLiteral;
+import gama.core.lang.gaml.VarDefinition;
+import gama.core.lang.gaml.VariableRef;
 import ummisco.gama.ui.outline.GamlOutlineTreeProvider;
 
 /**
@@ -89,9 +89,12 @@ public class GamlLabelProvider extends DefaultEObjectLabelProvider implements IG
 		text = key;
 		key = null;
 		if (ele instanceof Statement) {
-			if (text.equals(IKeyword.PARAMETER)) { return parameterText((Statement) ele); }
-			if (GamlOutlineTreeProvider.isAttribute((Statement) ele)) { return attributeText((S_Definition) ele); }
-			if (GamlOutlineTreeProvider.isAction((Statement) ele)) { return actionText((Statement) ele); }
+			if (text.equals(IKeyword.PARAMETER))
+				return parameterText((Statement) ele);
+			if (GamlOutlineTreeProvider.isAttribute((Statement) ele))
+				return attributeText((S_Definition) ele);
+			if (GamlOutlineTreeProvider.isAction((Statement) ele))
+				return actionText((Statement) ele);
 			String name = EGaml.getInstance().getNameOf(ele);
 			if (name == null) {
 				final Expression expr = ((Statement) ele).getExpr();
@@ -222,7 +225,8 @@ public class GamlLabelProvider extends DefaultEObjectLabelProvider implements IG
 				break;
 			}
 		}
-		if (type == null) { return "_gui.png"; }
+		if (type == null)
+			return "_gui.png";
 		return typeImage(EGaml.getInstance().toString(type.getExpr()));
 	}
 
@@ -235,20 +239,22 @@ public class GamlLabelProvider extends DefaultEObjectLabelProvider implements IG
 				break;
 			}
 		}
-		if (type == null) { return "_batch.png"; }
+		if (type == null)
+			return "_batch.png";
 		return typeImage(EGaml.getInstance().toString(type.getExpr()));
 	}
 
 	// Statement : keyword.value
 	public String image(final Statement ele) {
 		final String kw = EGaml.getInstance().getKeyOf(ele);
-		if (kw == null) { return null; }
-		if (kw.equals(IKeyword.PARAMETER)) { return parameterImage(ele); }
+		if (kw == null)
+			return null;
+		if (kw.equals(IKeyword.PARAMETER))
+			return parameterImage(ele);
 		if (kw.equals(IKeyword.VAR) || kw.equals(IKeyword.CONST)) {
 			for (final Facet f : EGaml.getInstance().getFacetsOf(ele)) {
-				if (EGaml.getInstance().getKeyOf(f).startsWith(IKeyword.TYPE)) {
+				if (EGaml.getInstance().getKeyOf(f).startsWith(IKeyword.TYPE))
 					return typeImage(EGaml.getInstance().getKeyOf(f.getExpr()));
-				}
 			}
 		}
 		return typeImage(kw);
@@ -267,11 +273,11 @@ public class GamlLabelProvider extends DefaultEObjectLabelProvider implements IG
 					}
 				}
 			}
-			if (var == null) { return "_parameter.png"; }
+			if (var == null)
+				return "_parameter.png";
 			return "_" + var + ".png";
-		} else {
+		} else
 			return "_parameter.png";
-		}
 	}
 
 	public String typeImage(final String string) {

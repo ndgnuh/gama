@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'DocumentationNode.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'DocumentationNode.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -17,7 +17,7 @@ import java.io.OutputStream;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
-import msi.gama.common.interfaces.IGamlDescription;
+import gama.common.interfaces.IGamlDescription;
 
 public class DocumentationNode implements IGamlDescription {
 

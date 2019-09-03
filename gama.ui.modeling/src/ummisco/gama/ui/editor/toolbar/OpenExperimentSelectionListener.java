@@ -15,11 +15,11 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import gama.ui.base.controls.FlatButton;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.Selector;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.GAML;
+import gama.common.interfaces.IModel;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.compilation.GAML;
 import ummisco.gama.ui.editor.GamlEditor;
 import ummisco.gama.ui.editor.GamlEditorState;
 

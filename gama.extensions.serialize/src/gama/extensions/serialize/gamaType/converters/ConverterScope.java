@@ -10,8 +10,8 @@
  **********************************************************************************************/
 package gama.extensions.serialize.gamaType.converters;
 
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.scope.IScope;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.scope.IScope;
 
 public class ConverterScope {
 	SimulationAgent simAgt;

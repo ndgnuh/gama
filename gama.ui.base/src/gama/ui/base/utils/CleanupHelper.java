@@ -44,7 +44,7 @@ import org.eclipse.ui.wizards.IWizardCategory;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 
 import gama.ui.base.resources.GamaIcons;
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class CleanupHelper {
 

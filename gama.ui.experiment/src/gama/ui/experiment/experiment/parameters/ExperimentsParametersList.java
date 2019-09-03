@@ -17,15 +17,15 @@ import gama.ui.base.interfaces.IParameterEditor;
 import gama.ui.base.interfaces.EditorListener.Command;
 import gama.ui.base.parameters.AbstractEditor;
 import gama.ui.base.parameters.EditorFactory;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.UserCommandStatement;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.operators.Cast;
+import gaml.statements.UserCommandStatement;
+import gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes" })
 public class ExperimentsParametersList extends EditorsList<String> {

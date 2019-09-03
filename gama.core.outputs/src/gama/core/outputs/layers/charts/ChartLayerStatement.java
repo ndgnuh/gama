@@ -26,21 +26,21 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.IList;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.AbstractStatementSequence;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IStatement;
+import gama.common.preferences.GamaPreferences;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.IList;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.AbstractStatementSequence;
+import gaml.types.IType;
 
 /**
  * Written by drogoul Modified on 9 nov. 2009

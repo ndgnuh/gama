@@ -10,22 +10,22 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import static msi.gama.runtime.exceptions.GamaRuntimeException.error;
+import static gama.runtime.exceptions.GamaRuntimeException.error;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.geometry.Scaling3D;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.file.IGamaFile.Image;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.draw.FileDrawingAttributes;
-import msi.gaml.types.GamaFileType;
-import msi.gaml.types.Types;
+import gama.common.geometry.Envelope3D;
+import gama.common.geometry.Scaling3D;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
+import gama.util.file.IGamaFile.Image;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.draw.FileDrawingAttributes;
+import gaml.types.GamaFileType;
+import gaml.types.Types;
 
 /**
  * Written by drogoul Modified on 9 nov. 2009

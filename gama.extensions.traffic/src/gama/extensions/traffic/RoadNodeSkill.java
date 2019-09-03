@@ -20,9 +20,9 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.interfaces.IAgent;
-import msi.gaml.skills.Skill;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gaml.skills.Skill;
+import gaml.types.IType;
 
 @vars ({ @variable (
 		name = "roads_in",

@@ -15,12 +15,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import gama.extensions.serialize.gamaType.reference.ReferenceMap;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.scope.IScope;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamaMapReducer {

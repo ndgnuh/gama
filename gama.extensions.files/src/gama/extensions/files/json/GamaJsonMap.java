@@ -11,9 +11,9 @@ package gama.extensions.files.json;
 import java.util.Iterator;
 import java.util.Map;
 
-import msi.gama.common.util.TextBuilder;
-import msi.gama.util.map.GamaMap;
-import msi.gaml.types.Types;
+import gama.common.util.TextBuilder;
+import gama.util.map.GamaMap;
+import gaml.types.Types;
 
 /**
  * GamaJsonMap is a GAMA compatible implementation of a json object

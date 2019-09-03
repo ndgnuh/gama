@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'EGaml.getInstance().java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'EGaml.getInstance().java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -23,55 +23,55 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gaml.compilation.ast.SyntacticFactory;
-import msi.gaml.compilation.interfaces.IGamlEcoreUtils;
-import ummisco.gama.gaml.ActionRef;
-import ummisco.gama.gaml.ArgumentDefinition;
-import ummisco.gama.gaml.ArgumentPair;
-import ummisco.gama.gaml.Array;
-import ummisco.gama.gaml.BinaryOperator;
-import ummisco.gama.gaml.Block;
-import ummisco.gama.gaml.EquationRef;
-import ummisco.gama.gaml.Expression;
-import ummisco.gama.gaml.ExpressionList;
-import ummisco.gama.gaml.Facet;
-import ummisco.gama.gaml.Function;
-import ummisco.gama.gaml.GamlDefinition;
-import ummisco.gama.gaml.GamlFactory;
-import ummisco.gama.gaml.GamlPackage;
-import ummisco.gama.gaml.HeadlessExperiment;
-import ummisco.gama.gaml.If;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.Parameter;
-import ummisco.gama.gaml.Point;
-import ummisco.gama.gaml.S_Action;
-import ummisco.gama.gaml.S_Assignment;
-import ummisco.gama.gaml.S_Definition;
-import ummisco.gama.gaml.S_DirectAssignment;
-import ummisco.gama.gaml.S_Display;
-import ummisco.gama.gaml.S_Equations;
-import ummisco.gama.gaml.S_Experiment;
-import ummisco.gama.gaml.S_If;
-import ummisco.gama.gaml.SkillRef;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.StringLiteral;
-import ummisco.gama.gaml.TerminalExpression;
-import ummisco.gama.gaml.TypeRef;
-import ummisco.gama.gaml.Unary;
-import ummisco.gama.gaml.UnitName;
-import ummisco.gama.gaml.VariableRef;
-import ummisco.gama.gaml.impl.ActionArgumentsImpl;
-import ummisco.gama.gaml.impl.BlockImpl;
-import ummisco.gama.gaml.impl.ExpressionListImpl;
-import ummisco.gama.gaml.impl.HeadlessExperimentImpl;
-import ummisco.gama.gaml.impl.ModelImpl;
-import ummisco.gama.gaml.impl.S_ActionImpl;
-import ummisco.gama.gaml.impl.S_EquationsImpl;
-import ummisco.gama.gaml.impl.S_IfImpl;
-import ummisco.gama.gaml.impl.StatementImpl;
-import ummisco.gama.gaml.util.GamlSwitch;
+import gama.common.interfaces.IKeyword;
+import gama.util.map.GamaMapFactory;
+import gaml.compilation.ast.SyntacticFactory;
+import gaml.compilation.interfaces.IGamlEcoreUtils;
+import gama.core.lang.gaml.ActionRef;
+import gama.core.lang.gaml.ArgumentDefinition;
+import gama.core.lang.gaml.ArgumentPair;
+import gama.core.lang.gaml.Array;
+import gama.core.lang.gaml.BinaryOperator;
+import gama.core.lang.gaml.Block;
+import gama.core.lang.gaml.EquationRef;
+import gama.core.lang.gaml.Expression;
+import gama.core.lang.gaml.ExpressionList;
+import gama.core.lang.gaml.Facet;
+import gama.core.lang.gaml.Function;
+import gama.core.lang.gaml.GamlDefinition;
+import gama.core.lang.gaml.GamlFactory;
+import gama.core.lang.gaml.GamlPackage;
+import gama.core.lang.gaml.HeadlessExperiment;
+import gama.core.lang.gaml.If;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.Parameter;
+import gama.core.lang.gaml.Point;
+import gama.core.lang.gaml.S_Action;
+import gama.core.lang.gaml.S_Assignment;
+import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.S_DirectAssignment;
+import gama.core.lang.gaml.S_Display;
+import gama.core.lang.gaml.S_Equations;
+import gama.core.lang.gaml.S_Experiment;
+import gama.core.lang.gaml.S_If;
+import gama.core.lang.gaml.SkillRef;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.StringLiteral;
+import gama.core.lang.gaml.TerminalExpression;
+import gama.core.lang.gaml.TypeRef;
+import gama.core.lang.gaml.Unary;
+import gama.core.lang.gaml.UnitName;
+import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.impl.ActionArgumentsImpl;
+import gama.core.lang.gaml.impl.BlockImpl;
+import gama.core.lang.gaml.impl.ExpressionListImpl;
+import gama.core.lang.gaml.impl.HeadlessExperimentImpl;
+import gama.core.lang.gaml.impl.ModelImpl;
+import gama.core.lang.gaml.impl.S_ActionImpl;
+import gama.core.lang.gaml.impl.S_EquationsImpl;
+import gama.core.lang.gaml.impl.S_IfImpl;
+import gama.core.lang.gaml.impl.StatementImpl;
+import gama.core.lang.gaml.util.GamlSwitch;
 
 /**
  * The class EGaml.getInstance(). A stateless class, bunch of utilities to work with the various GAML statements and

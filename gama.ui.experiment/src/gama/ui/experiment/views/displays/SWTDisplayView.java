@@ -12,7 +12,7 @@ package gama.ui.experiment.views.displays;
 import org.eclipse.swt.widgets.Control;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.runtime.scope.IScope;
+import gama.runtime.scope.IScope;
 
 /**
  * Class OpenGLLayeredDisplayView.

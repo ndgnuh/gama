@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package gama.ui.displays.opengl.scene;
 
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.statements.draw.DrawingAttributes;
+import gama.util.file.IGamaFile;
+import gaml.statements.draw.DrawingAttributes;
 
 public class ResourceObject extends AbstractObject<IGamaFile.Geom, DrawingAttributes> {
 

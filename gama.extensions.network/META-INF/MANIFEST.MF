@@ -30,7 +30,7 @@ Export-Package: gama.extensions.network.common;
    ummisco.gama.network.common",
  org.eclipse.paho.client.mqttv3,
  org.eclipse.paho.client.mqttv3.persist
-Require-Bundle: gama.core;bundle-version="1.7.0",
+Require-Bundle: gama.core.base;bundle-version="1.7.0",
  gama.extensions.serialize;bundle-version="1.7.0"
 Bundle-ClassPath: .,
  ext/org.eclipse.paho.client.mqttv3-1.0.2-3.jar

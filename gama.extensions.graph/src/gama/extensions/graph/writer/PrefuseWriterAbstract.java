@@ -11,11 +11,11 @@
 package gama.extensions.graph.writer;
 
 import gama.extensions.graph.util.GraphUtilsPrefuse;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.graph.IGraph;
-import msi.gama.util.graph.writer.IGraphWriter;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
+import gama.util.graph.IGraph;
+import gama.util.graph.writer.IGraphWriter;
 import prefuse.data.Graph;
 import prefuse.data.io.DataIOException;
 import prefuse.data.io.GraphWriter;

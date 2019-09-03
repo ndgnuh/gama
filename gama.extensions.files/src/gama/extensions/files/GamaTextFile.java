@@ -20,18 +20,18 @@ import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.GamaFile;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.operators.Strings;
-import msi.gaml.statements.Facets;
-import msi.gaml.types.IContainerType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.geometry.Envelope3D;
+import gama.common.util.TextBuilder;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.file.GamaFile;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.operators.Strings;
+import gaml.statements.Facets;
+import gaml.types.IContainerType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @file (
 		name = "text",

@@ -5,8 +5,8 @@ import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.ui.generator.*
 import java.util.*
 
-var runtimeProject = "gama.core.gaml"
-var ideProjectName = "gama.core.ui.modeling"
+var runtimeProject = "gama.core.lang"
+var ideProjectName = "gama.ui.modeling"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -25,7 +25,7 @@ Workflow {
 	component = XtextGenerator {
 		configuration = {
 			project = model.project.StandardProjectConfig {
-				baseName = "gama.core.gaml"
+				baseName = "gama.core.lang"
 				rootPath = ".."
 				
 				runtime = {
@@ -53,7 +53,7 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
-			name = "gama.core.Gaml"
+			name = "gama.core.lang.Gaml"
 			fileExtensions = "gaml,experiment"
 			validator = {
 				generatePropertyPage = true

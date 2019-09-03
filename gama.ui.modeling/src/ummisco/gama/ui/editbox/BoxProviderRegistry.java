@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import ummisco.gama.ui.modeling.internal.ModelingActivator;
+import gama.ui.modeling.internal.ModelingActivator;
 
 @SuppressWarnings ({ "rawtypes" })
 public class BoxProviderRegistry {

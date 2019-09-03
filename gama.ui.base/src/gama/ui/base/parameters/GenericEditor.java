@@ -12,11 +12,11 @@ package gama.ui.base.parameters;
 import org.eclipse.swt.widgets.Composite;
 
 import gama.ui.base.interfaces.EditorListener;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.GamaType;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gaml.types.GamaType;
+import gaml.types.IType;
 
 public class GenericEditor<T> extends ExpressionBasedEditor<T> {
 

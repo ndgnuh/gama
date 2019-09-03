@@ -12,7 +12,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaPathReducer;
-import msi.gama.util.path.GamaPath;
+import gama.util.path.GamaPath;
 
 @SuppressWarnings({ "rawtypes" , "unchecked" })
 public class GamaPathConverter implements Converter {

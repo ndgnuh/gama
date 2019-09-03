@@ -19,10 +19,10 @@ import org.eclipse.swt.widgets.ToolItem;
 
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaIcons;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 public abstract class NumberEditor<T extends Number> extends ExpressionBasedEditor<T> {
 

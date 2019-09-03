@@ -13,8 +13,8 @@ import gama.ui.displays.opengl.camera.CameraArcBall;
 import gama.ui.displays.opengl.camera.FreeFlyCamera;
 import gama.ui.displays.opengl.camera.ICamera;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.geometry.Envelope3D;
+import gama.metamodel.shape.GamaPoint;
 
 public class CameraHelper extends AbstractRendererHelper implements ICamera {
 	public final static GamaPoint UNDEFINED = new GamaPoint();

@@ -1,13 +1,12 @@
 /*********************************************************************************************
- * 
  *
- * 'MainGenerateWiki.java', in plugin 'msi.gama.documentation', is part of the source code of the 
- * GAMA modeling and simulation platform.
- * (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
- * 
+ *
+ * 'MainGenerateWiki.java', in plugin 'msi.gama.documentation', is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
+ *
  * Visit https://code.google.com/p/gama-platform/ for license information and developers contact.
- * 
- * 
+ *
+ *
  **********************************************************************************************/
 package msi.gama.doc;
 
@@ -19,7 +18,7 @@ import msi.gama.doc.util.UnifyDoc;
 
 public class MainGenerateWiki {
 
-	public static void main(final String[] args) { 
+	public static void main(final String[] args) {
 		try {
 			// build the file keywords.xml
 			GenerateCategoryXML.GenerateKeywordsXML();
@@ -32,7 +31,7 @@ public class MainGenerateWiki {
 			System.out.println("DONE");
 
 			System.out.print("Merge all the docGAMA.xml files................");
-			UnifyDoc.unify((args.length > 0) ? (args[0].equals("-online") ? false : true) : true);
+			UnifyDoc.unify(args.length > 0 ? args[0].equals("-online") ? false : true : true);
 			System.out.println("DONE");
 
 			System.out.print(

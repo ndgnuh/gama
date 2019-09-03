@@ -1,12 +1,12 @@
 /*********************************************************************************************
- * 
+ *
  *
  * 'XmlToTestGAML.java', in plugin 'msi.gama.documentation', is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
- * 
+ *
  * Visit https://code.google.com/p/gama-platform/ for license information and developers contact.
- * 
- * 
+ *
+ *
  **********************************************************************************************/
 package msi.gama.doc.transform;
 
@@ -211,7 +211,7 @@ public class XmlToTestGAML {
 		}
 
 		private HashMap<String, String> initProperNameOperatorMap() {
-			final HashMap<String, String> hm = new HashMap<String, String>();
+			final HashMap<String, String> hm = new HashMap<>();
 			hm.put("*", "Multiply");
 			hm.put("-", "Minus");
 			hm.put("/", "Divide");
@@ -234,11 +234,10 @@ public class XmlToTestGAML {
 		}
 
 		public String getProperOperatorName(final String opName) {
-			if (properNameOperatorMap.containsKey(opName)) {
+			if (properNameOperatorMap.containsKey(opName))
 				return properNameOperatorMap.get(opName);
-			} else {
+			else
 				return opName;
-			}
 		}
 	}
 }

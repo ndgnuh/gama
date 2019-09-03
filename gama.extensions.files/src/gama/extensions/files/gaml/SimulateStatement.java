@@ -17,13 +17,13 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.statements.AbstractStatementSequence;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.scope.IScope;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.statements.AbstractStatementSequence;
+import gaml.types.IType;
 
 @symbol(name = "simulate", kind = ISymbolKind.SINGLE_STATEMENT, with_sequence = false, concept = {})
 @facets(value = { @facet(name = "comodel", type = { IType.FILE }, optional = false),

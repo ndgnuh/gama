@@ -17,15 +17,15 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.util.FileUtils;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.Files;
-import msi.gaml.operators.Strings;
+import gama.common.interfaces.IKeyword;
+import gama.common.util.FileUtils;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.operators.Files;
+import gaml.operators.Strings;
 
 public class ChartDataSet {
 

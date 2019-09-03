@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Control;
 
 import gama.ui.base.menus.GamaMenu;
 import gama.ui.base.views.toolbar.Selector;
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 import ummisco.gama.ui.editor.GamlEditor;
 import ummisco.gama.ui.editor.GamlEditorState;
 

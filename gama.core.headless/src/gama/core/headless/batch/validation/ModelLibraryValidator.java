@@ -15,8 +15,8 @@ import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamlCompilationError;
+import gaml.compilation.GAML;
+import gaml.compilation.GamlCompilationError;
 
 public class ModelLibraryValidator extends AbstractModelLibraryRunner {
 

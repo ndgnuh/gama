@@ -29,21 +29,21 @@ import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.SwtGui;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IMacroAgent;
-import msi.gama.common.interfaces.IStatement;
-import msi.gama.common.interfaces.experiment.ITopLevelAgent;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.kernel.simulation.SimulationPopulation;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.ExecutionResult;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.statements.Arguments;
-import msi.gaml.statements.UserCommandStatement;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IMacroAgent;
+import gama.common.interfaces.IStatement;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.preferences.GamaPreferences;
+import gama.kernel.simulation.SimulationAgent;
+import gama.kernel.simulation.SimulationPopulation;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.GAMA;
+import gama.runtime.scope.ExecutionResult;
+import gama.runtime.scope.IScope;
+import gaml.statements.Arguments;
+import gaml.statements.UserCommandStatement;
 
 public class AgentsMenu extends ContributionItem {
 

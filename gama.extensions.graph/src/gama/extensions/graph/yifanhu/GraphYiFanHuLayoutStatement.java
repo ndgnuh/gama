@@ -10,14 +10,14 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.graph.IGraph;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.graph.IGraph;
+import gaml.descriptions.IDescription;
+import gaml.operators.Cast;
+import gaml.types.IType;
 
 @symbol (
 		name = "layout_yifanhu",

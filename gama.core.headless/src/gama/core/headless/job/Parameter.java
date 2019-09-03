@@ -11,11 +11,11 @@
 package gama.core.headless.job;
 
 import gama.core.headless.common.DataType;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IModel;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IModel;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.types.IType;
 
 public class Parameter {
 

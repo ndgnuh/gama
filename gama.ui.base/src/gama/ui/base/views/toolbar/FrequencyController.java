@@ -15,9 +15,9 @@ import org.eclipse.swt.widgets.ToolItem;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView.StateListener;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutput;
+import gama.common.preferences.GamaPreferences;
 
 /**
  * The class SnapshotItem.

@@ -11,11 +11,11 @@ import org.gephi.project.api.ProjectController;
 import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
 
-import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.graph.IGraph;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.statements.AbstractStatement;
+import gama.metamodel.agent.GamlAgent;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.graph.IGraph;
+import gaml.descriptions.IDescription;
+import gaml.statements.AbstractStatement;
 
 public abstract class AbstractGraphLayoutStatement extends AbstractStatement {
 

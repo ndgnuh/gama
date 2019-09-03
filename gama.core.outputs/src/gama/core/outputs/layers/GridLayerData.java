@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import static msi.gama.runtime.exceptions.GamaRuntimeException.error;
+import static gama.runtime.exceptions.GamaRuntimeException.error;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -18,23 +18,23 @@ import java.util.Collection;
 
 import org.locationtech.jts.geom.Envelope;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.common.util.ImageUtils;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.topology.grid.GamaSpatialMatrix;
-import msi.gama.metamodel.topology.grid.IGrid;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.matrix.GamaFloatMatrix;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.util.ImageUtils;
+import gama.metamodel.population.IPopulation;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.topology.grid.GamaSpatialMatrix;
+import gama.metamodel.topology.grid.IGrid;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.file.IGamaFile;
+import gama.util.matrix.GamaFloatMatrix;
+import gaml.operators.Cast;
+import gaml.types.IType;
+import gaml.types.Types;
 
 public class GridLayerData extends LayerData {
 

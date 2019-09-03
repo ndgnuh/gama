@@ -16,10 +16,10 @@ import java.util.Map;
 import org.eclipse.ui.AbstractSourceProvider;
 import org.eclipse.ui.ISources;
 
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.ISimulationStateProvider;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.gui.IGui;
+import gama.runtime.GAMA;
+import gama.runtime.ISimulationStateProvider;
 
 public class SimulationStateProvider extends AbstractSourceProvider implements ISimulationStateProvider {
 

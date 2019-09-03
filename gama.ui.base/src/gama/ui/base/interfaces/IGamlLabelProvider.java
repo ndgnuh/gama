@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.ui.base.interfaces;
 
-import msi.gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.ast.ISyntacticElement;
 
 public interface IGamlLabelProvider {
 

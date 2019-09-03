@@ -20,11 +20,11 @@ import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.base.utils.GraphicsHelper;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.renderer.helpers.CameraHelper;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gaml.operators.Maths;
+import gama.common.geometry.Envelope3D;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.preferences.GamaPreferences;
+import gama.metamodel.shape.GamaPoint;
+import gaml.operators.Maths;
 
 public abstract class AbstractCamera implements ICamera {
 

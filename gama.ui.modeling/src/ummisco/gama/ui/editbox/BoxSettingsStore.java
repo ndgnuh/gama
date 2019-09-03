@@ -18,7 +18,7 @@ import java.util.StringTokenizer;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import ummisco.gama.ui.modeling.internal.ModelingActivator;
+import gama.ui.modeling.internal.ModelingActivator;
 
 public class BoxSettingsStore {
 

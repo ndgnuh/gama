@@ -12,9 +12,9 @@ package gama.ui.displays.opengl.scene;
 
 import org.locationtech.jts.geom.Geometry;
 
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gaml.statements.draw.DrawingAttributes;
+import gama.common.geometry.GeometryUtils;
+import gama.metamodel.shape.GamaPoint;
+import gaml.statements.draw.DrawingAttributes;
 
 public class GeometryObject extends AbstractObject<Geometry, DrawingAttributes> {
 

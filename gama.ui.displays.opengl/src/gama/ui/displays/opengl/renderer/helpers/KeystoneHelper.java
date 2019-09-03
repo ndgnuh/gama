@@ -18,11 +18,11 @@ import gama.ui.displays.opengl.renderer.shaders.AbstractPostprocessingShader;
 import gama.ui.displays.opengl.renderer.shaders.AbstractShader;
 import gama.ui.displays.opengl.renderer.shaders.FrameBufferObject;
 import gama.ui.displays.opengl.renderer.shaders.KeystoneShaderProgram;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.geometry.Scaling3D;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.GamaColor.NamedGamaColor;
+import gama.common.geometry.ICoordinates;
+import gama.common.geometry.Scaling3D;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.GamaColor.NamedGamaColor;
 
 public class KeystoneHelper extends AbstractRendererHelper {
 

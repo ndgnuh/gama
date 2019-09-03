@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'DocumentationTask.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and simulation
+ * 'DocumentationTask.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
  * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -13,8 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import gama.dev.utils.DEBUG;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.util.map.IMap;
+import gama.common.interfaces.IGamlDescription;
+import gama.util.map.IMap;
 
 class DocumentationTask {
 	final EObject object;

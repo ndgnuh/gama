@@ -3,8 +3,6 @@
  */
 package gama.core.lang.validation;
 
-import ummisco.gama.validation.AbstractGamlValidator;
-
 /**
  * This class contains custom validation rules.
  *

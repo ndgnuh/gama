@@ -36,19 +36,19 @@ import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.types.GamaGeometryType;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.geometry.Envelope3D;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.GamaShape;
+import gama.metamodel.shape.IShape;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.file.IGamaFile;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.types.GamaGeometryType;
+import gaml.types.IType;
+import gaml.types.Types;
 
 @file (
 		name = "grid",

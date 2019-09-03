@@ -27,18 +27,18 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.outputs.IOutput;
-import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.factories.DescriptionFactory;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.outputs.IOutput;
+import gama.kernel.experiment.ParametersSet;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.GAML;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.types.IType;
 
 /**
  * The Class AbstractFileOutput.

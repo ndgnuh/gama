@@ -21,12 +21,12 @@ import org.eclipse.swt.widgets.DateTime;
 
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaDate;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gama.util.GamaDate;
+import gaml.types.IType;
+import gaml.types.Types;
 
 public class DateEditor extends AbstractEditor<GamaDate> {
 

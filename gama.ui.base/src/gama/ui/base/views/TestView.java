@@ -9,8 +9,8 @@
  **********************************************************************************************/
 package gama.ui.base.views;
 
-import static msi.gama.common.preferences.GamaPreferences.Runtime.FAILED_TESTS;
-import static msi.gama.common.preferences.GamaPreferences.Runtime.TESTS_SORTED;
+import static gama.common.preferences.GamaPreferences.Runtime.FAILED_TESTS;
+import static gama.common.preferences.GamaPreferences.Runtime.TESTS_SORTED;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,16 +36,16 @@ import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.GamaColor;
-import msi.gaml.statements.test.AbstractSummary;
-import msi.gaml.statements.test.CompoundSummary;
-import msi.gaml.statements.test.TestExperimentSummary;
-import msi.gaml.statements.test.TestState;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.TextBuilder;
+import gama.runtime.GAMA;
+import gama.util.GamaColor;
+import gaml.statements.test.AbstractSummary;
+import gaml.statements.test.CompoundSummary;
+import gaml.statements.test.TestExperimentSummary;
+import gaml.statements.test.TestState;
 
 public class TestView extends ExpandableItemsView<AbstractSummary<?>> implements IGamaView.Test {
 

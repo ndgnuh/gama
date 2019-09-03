@@ -33,8 +33,8 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import gama.common.preferences.GamaPreferences;
 
 public class SyntaxErrorsView extends MarkerSupportView
 		implements IToolbarDecoratedView, IPreferenceAfterChangeListener<Boolean> {

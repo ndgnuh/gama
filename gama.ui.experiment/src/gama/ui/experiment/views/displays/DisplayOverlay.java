@@ -43,14 +43,14 @@ import gama.dev.utils.DEBUG;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IOverlayInfo;
-import msi.gama.common.interfaces.outputs.IOverlayProvider;
-import msi.gama.runtime.IUpdaterTarget;
-import msi.gaml.operators.Maths;
+import gama.common.geometry.Envelope3D;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayProvider;
+import gama.runtime.IUpdaterTarget;
+import gaml.operators.Maths;
 
 /**
  * The class DisplayOverlay.

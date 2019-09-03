@@ -53,11 +53,11 @@ import org.jfree.data.xy.XYIntervalDataItem;
 import org.jfree.data.xy.XYIntervalSeries;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.expressions.IExpression;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
 
 public class ChartJFreeChartOutputScatter extends ChartJFreeChartOutput {
 

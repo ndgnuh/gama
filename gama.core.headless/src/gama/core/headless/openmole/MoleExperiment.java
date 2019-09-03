@@ -14,11 +14,11 @@ package gama.core.headless.openmole;
 
 
 import gama.core.headless.core.Experiment;
-import msi.gama.common.interfaces.IModel;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IModel;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gaml.expressions.IExpression;
+import gaml.expressions.IExpressionFactory;
+import gaml.types.Types;
 
 public class MoleExperiment extends Experiment implements IMoleExperiment {
 	MoleExperiment(final IModel mdl) {

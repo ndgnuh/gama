@@ -14,8 +14,8 @@ import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.events.MouseWheelListener;
 
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.geometry.Envelope3D;
+import gama.metamodel.shape.GamaPoint;
 
 /**
  * Class ICamera.

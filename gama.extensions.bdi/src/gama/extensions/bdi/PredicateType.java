@@ -5,10 +5,10 @@ import java.util.Map;
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.type;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.types.GamaType;
-import msi.gaml.types.IType;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.types.GamaType;
+import gaml.types.IType;
 
 @SuppressWarnings("unchecked")
 @type(name = "predicate", id = PredicateType.id, wraps = { Predicate.class }, concept = { IConcept.TYPE, IConcept.BDI })

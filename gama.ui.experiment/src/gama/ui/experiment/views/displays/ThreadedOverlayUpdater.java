@@ -10,8 +10,8 @@
 package gama.ui.experiment.views.displays;
 
 import gama.ui.base.utils.ThreadedUpdater;
-import msi.gama.common.interfaces.outputs.IOverlayInfo;
-import msi.gama.common.interfaces.outputs.IOverlayProvider;
+import gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayProvider;
 
 public class ThreadedOverlayUpdater extends ThreadedUpdater<IOverlayInfo> implements IOverlayProvider<IOverlayInfo> {
 

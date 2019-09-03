@@ -12,14 +12,14 @@ package gama.core.outputs.layers.charts;
 
 import java.util.HashMap;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.compilation.GAML;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.operators.Random;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.compilation.GAML;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.operators.Random;
+import gaml.types.Types;
 
 public class ChartDataSourceUnique extends ChartDataSource {
 

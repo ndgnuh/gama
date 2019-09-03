@@ -22,10 +22,10 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.gl2.GLUT;
 
 import gama.ui.displays.opengl.OpenGL;
-import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.file.IGamaFile;
+import gama.common.geometry.GeometryUtils;
+import gama.common.geometry.ICoordinates;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.file.IGamaFile;
 
 /**
  *

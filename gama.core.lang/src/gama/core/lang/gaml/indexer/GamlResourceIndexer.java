@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceIndexer.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'GamlResourceIndexer.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -36,14 +36,14 @@ import com.google.inject.Singleton;
 
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.core.lang.gaml.resource.GamlResourceServices;
-import msi.gama.common.interfaces.BiConsumerWithPruning;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import ummisco.gama.gaml.ExperimentFileStructure;
-import ummisco.gama.gaml.GamlPackage;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.impl.ModelImpl;
+import gama.common.interfaces.BiConsumerWithPruning;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gama.core.lang.gaml.ExperimentFileStructure;
+import gama.core.lang.gaml.GamlPackage;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.impl.ModelImpl;
 
 @Singleton
 @SuppressWarnings ({ "unchecked", "rawtypes" })
@@ -279,7 +279,7 @@ public class GamlResourceIndexer {
 	}
 
 	/**
-	 * @see gama.core.gaml.indexer.IModelIndexer#allImportsOf(org.eclipse.emf.common.util.URI)
+	 * @see gama.core.lang.indexer.IModelIndexer#allImportsOf(org.eclipse.emf.common.util.URI)
 	 */
 	public Iterator<URI> allImportsOf(final URI uri) {
 		if (!indexes(uri))

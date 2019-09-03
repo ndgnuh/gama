@@ -21,7 +21,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.serialize.gamaType.reduced.GamaFileReducer;
-import msi.gama.util.file.IGamaFile;
+import gama.util.file.IGamaFile;
 
 public class GamaFileConverter implements Converter {
 	// private final static String TAG = "GamaFile";

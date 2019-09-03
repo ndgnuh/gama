@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 
 import com.google.inject.Singleton;
 
-import msi.gama.common.preferences.GamaPreferences;
+import gama.common.preferences.GamaPreferences;
 
 /**
  * The class GamlMarkOccurrenceActionContributor.

@@ -21,12 +21,12 @@ import gama.ui.base.controls.SwitchButton;
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gaml.types.IType;
+import gaml.types.Types;
 
 public class BooleanEditor extends AbstractEditor<Boolean> {
 

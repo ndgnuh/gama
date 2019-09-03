@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'ErrorToDiagnoticTranslator.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'ErrorToDiagnoticTranslator.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -26,15 +26,15 @@ import com.google.inject.Singleton;
 
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
-import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.descriptions.ValidationContext;
-import ummisco.gama.gaml.ExperimentFileStructure;
-import ummisco.gama.gaml.GamlPackage;
-import ummisco.gama.gaml.HeadlessExperiment;
-import ummisco.gama.gaml.Import;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.Statement;
-import ummisco.gama.gaml.impl.StatementImpl;
+import gaml.compilation.GamlCompilationError;
+import gaml.descriptions.ValidationContext;
+import gama.core.lang.gaml.ExperimentFileStructure;
+import gama.core.lang.gaml.GamlPackage;
+import gama.core.lang.gaml.HeadlessExperiment;
+import gama.core.lang.gaml.Import;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.Statement;
+import gama.core.lang.gaml.impl.StatementImpl;
 
 @Singleton
 public class ErrorToDiagnoticTranslator {

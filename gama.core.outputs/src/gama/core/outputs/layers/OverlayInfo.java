@@ -1,6 +1,6 @@
 package gama.core.outputs.layers;
 
-import msi.gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayInfo;
 
 public class OverlayInfo implements IOverlayInfo {
 

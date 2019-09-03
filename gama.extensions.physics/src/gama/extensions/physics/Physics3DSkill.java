@@ -15,8 +15,8 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gaml.skills.Skill;
-import msi.gaml.types.IType;
+import gaml.skills.Skill;
+import gaml.types.IType;
 
 @vars ({ @variable (
 		name = "mass",

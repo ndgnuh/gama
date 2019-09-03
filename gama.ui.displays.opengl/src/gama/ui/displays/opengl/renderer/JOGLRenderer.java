@@ -34,18 +34,18 @@ import gama.ui.displays.opengl.renderer.helpers.SceneHelper;
 import gama.ui.displays.opengl.renderer.helpers.KeystoneHelper.Pass;
 import gama.ui.displays.opengl.scene.ModelScene;
 import gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface;
-import msi.gama.common.interfaces.outputs.IChartImageProvider;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.util.GamaColor;
-import msi.gama.util.file.IGamaFile;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.FieldDrawingAttributes;
-import msi.gaml.statements.draw.FileDrawingAttributes;
-import msi.gaml.statements.draw.ShapeDrawingAttributes;
-import msi.gaml.statements.draw.TextDrawingAttributes;
-import msi.gaml.types.GamaGeometryType;
+import gama.common.interfaces.outputs.IChartImageProvider;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayer;
+import gama.metamodel.shape.GamaPoint;
+import gama.util.GamaColor;
+import gama.util.file.IGamaFile;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.FieldDrawingAttributes;
+import gaml.statements.draw.FileDrawingAttributes;
+import gaml.statements.draw.ShapeDrawingAttributes;
+import gaml.statements.draw.TextDrawingAttributes;
+import gaml.types.GamaGeometryType;
 
 /**
  * This class plays the role of Renderer and IGraphics. Class JOGLRenderer.

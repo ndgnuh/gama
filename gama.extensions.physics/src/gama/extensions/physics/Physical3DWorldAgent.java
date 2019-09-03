@@ -32,20 +32,20 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.MinimalAgent;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.IMap;
-import msi.gaml.operators.Cast;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IKeyword;
+import gama.metamodel.agent.MinimalAgent;
+import gama.metamodel.population.IPopulation;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gama.util.map.IMap;
+import gaml.operators.Cast;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /*
  * species: The PhysicalWorldAgent is defined in this class. PhysicalWorldAgent supports the action

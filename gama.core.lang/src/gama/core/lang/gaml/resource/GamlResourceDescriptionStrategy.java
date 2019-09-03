@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceDescriptionStrategy.java, in plugin gama.core.gaml, is part of the source code of the
+ * 'GamlResourceDescriptionStrategy.java, in plugin gama.core.lang, is part of the source code of the
  * GAMA modeling and simulation platform.
  * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
@@ -17,11 +17,11 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
 
-import ummisco.gama.gaml.ActionArguments;
-import ummisco.gama.gaml.ArgumentDefinition;
-import ummisco.gama.gaml.Block;
-import ummisco.gama.gaml.Model;
-import ummisco.gama.gaml.Statement;
+import gama.core.lang.gaml.ActionArguments;
+import gama.core.lang.gaml.ArgumentDefinition;
+import gama.core.lang.gaml.Block;
+import gama.core.lang.gaml.Model;
+import gama.core.lang.gaml.Statement;
 
 /**
  * The class GamlResourceDescriptionManager.

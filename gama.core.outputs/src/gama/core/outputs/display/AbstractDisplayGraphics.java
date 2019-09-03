@@ -15,11 +15,11 @@ import java.awt.geom.Rectangle2D;
 import org.locationtech.jts.geom.Envelope;
 
 import gama.core.outputs.layers.OverlayLayer;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.metamodel.shape.GamaPoint;
 
 public abstract class AbstractDisplayGraphics implements IGraphics {
 

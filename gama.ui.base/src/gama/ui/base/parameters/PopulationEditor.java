@@ -19,12 +19,12 @@ import org.eclipse.swt.widgets.Text;
 
 import gama.core.outputs.ValuedDisplayOutputFactory;
 import gama.ui.base.interfaces.EditorListener;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.IContainer;
-import msi.gama.common.interfaces.experiment.IParameter;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.species.ISpecies;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IContainer;
+import gama.common.interfaces.experiment.IParameter;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.scope.IScope;
+import gaml.species.ISpecies;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class PopulationEditor extends AbstractEditor<IContainer> {

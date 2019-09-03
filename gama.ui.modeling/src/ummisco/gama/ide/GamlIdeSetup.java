@@ -3,13 +3,13 @@
  */
 package ummisco.gama.ide;
 
+import org.eclipse.xtext.util.Modules2;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import gama.core.GamlRuntimeModule;
-import gama.core.GamlStandaloneSetup;
-
-import org.eclipse.xtext.util.Modules2;
+import gama.core.lang.GamlRuntimeModule;
+import gama.core.lang.GamlStandaloneSetup;
 
 /**
  * Initialization support for running Xtext languages as language servers.
@@ -20,5 +20,5 @@ public class GamlIdeSetup extends GamlStandaloneSetup {
 	public Injector createInjector() {
 		return Guice.createInjector(Modules2.mixin(new GamlRuntimeModule(), new GamlIdeModule()));
 	}
-	
+
 }

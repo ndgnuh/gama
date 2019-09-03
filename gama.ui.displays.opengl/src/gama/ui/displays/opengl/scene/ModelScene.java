@@ -20,13 +20,13 @@ import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.scene.layers.AxesLayerObject;
 import gama.ui.displays.opengl.scene.layers.FrameLayerObject;
 import gama.ui.displays.opengl.scene.layers.LayerObject;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.util.file.IGamaFile;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.statements.draw.DrawingAttributes;
-import msi.gaml.statements.draw.FieldDrawingAttributes;
-import msi.gaml.statements.draw.TextDrawingAttributes;
+import gama.common.interfaces.outputs.ILayer;
+import gama.util.file.IGamaFile;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.statements.draw.DrawingAttributes;
+import gaml.statements.draw.FieldDrawingAttributes;
+import gaml.statements.draw.TextDrawingAttributes;
 
 /**
  *

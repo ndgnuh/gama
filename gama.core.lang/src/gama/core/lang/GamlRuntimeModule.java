@@ -32,11 +32,10 @@ import gama.core.lang.gaml.resource.GamlResourceDescriptionStrategy;
 import gama.core.lang.validation.ErrorToDiagnoticTranslator;
 import gama.core.lang.validation.GamlModelBuilder;
 import gama.core.lang.validation.GamlResourceValidator;
-import msi.gama.runtime.GAMA;
-import msi.gaml.compilation.GAML;
-import msi.gaml.expressions.GamlExpressionFactory;
-import msi.gaml.expressions.IExpressionCompiler;
-import ummisco.gama.AbstractGamlRuntimeModule;
+import gama.runtime.GAMA;
+import gaml.compilation.GAML;
+import gaml.expressions.GamlExpressionFactory;
+import gaml.expressions.IExpressionCompiler;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.

@@ -33,16 +33,16 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.common.interfaces.experiment.IExperimentPlan;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
-import msi.gama.common.interfaces.outputs.IOutputManager;
-import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.population.IPopulation;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
 
 /**
  * @author drogoul

@@ -10,10 +10,10 @@
 package gama.extensions.serialize.gamaType.reduced;
 
 import gama.extensions.serialize.gamaType.reference.ReferencePair;
-import msi.gama.common.interfaces.IReference;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.util.GamaPair;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IReference;
+import gama.kernel.simulation.SimulationAgent;
+import gama.util.GamaPair;
+import gaml.types.IType;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class GamaPairReducer {

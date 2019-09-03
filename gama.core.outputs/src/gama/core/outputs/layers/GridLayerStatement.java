@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import static msi.gaml.expressions.IExpressionFactory.TRUE_EXPR;
+import static gaml.expressions.IExpressionFactory.TRUE_EXPR;
 
 import gama.core.outputs.layers.GridLayerStatement.GridLayerSerializer;
 import gama.core.outputs.layers.GridLayerStatement.GridLayerValidator;
@@ -23,22 +23,22 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.annotations.serializer;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.SpeciesDescription;
-import msi.gaml.descriptions.StatementDescription;
-import msi.gaml.descriptions.SymbolDescription;
-import msi.gaml.descriptions.SymbolSerializer;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gaml.compilation.GAML;
+import gaml.compilation.annotations.serializer;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.SpeciesDescription;
+import gaml.descriptions.StatementDescription;
+import gaml.descriptions.SymbolDescription;
+import gaml.descriptions.SymbolSerializer;
+import gaml.expressions.IExpression;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * Written by drogoul Modified on 9 nov. 2009

@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.Map;
 
 import gama.extensions.files.csv.GamaCSVFile;
-import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.list.IList;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.matrix.IMatrix;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Cast;
-import msi.gaml.statements.Arguments;
-import msi.gaml.statements.CreateStatement;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.ICreateDelegate;
+import gama.runtime.scope.IScope;
+import gama.util.list.IList;
+import gama.util.map.GamaMapFactory;
+import gama.util.matrix.IMatrix;
+import gaml.expressions.IExpression;
+import gaml.operators.Cast;
+import gaml.statements.Arguments;
+import gaml.statements.CreateStatement;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * Class CreateFromDatabaseDelegate.

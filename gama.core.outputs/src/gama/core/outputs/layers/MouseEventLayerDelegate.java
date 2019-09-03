@@ -15,10 +15,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.outputs.IEventLayerDelegate;
-import msi.gama.common.interfaces.outputs.IEventLayerStatement;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IEventLayerDelegate;
+import gama.common.interfaces.outputs.IEventLayerStatement;
+import gama.runtime.scope.IScope;
 
 public class MouseEventLayerDelegate implements IEventLayerDelegate {
 

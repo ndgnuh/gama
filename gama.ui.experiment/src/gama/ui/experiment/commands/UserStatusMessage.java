@@ -11,8 +11,8 @@
 package gama.ui.experiment.commands;
 
 import gama.ui.base.commands.StatusMessage;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.gui.IGui;
+import gama.util.GamaColor;
 
 /**
  * Class UserStatusMessage.

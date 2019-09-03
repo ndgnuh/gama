@@ -127,9 +127,9 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		for (final String element : EXPLICIT_IMPORTS) {
 			sb.append(ln).append("import ").append(element).append(";");
 		}
-		sb.append(ln).append("import static msi.gaml.operators.Cast.*;");
-		sb.append(ln).append("import static msi.gaml.operators.Spatial.*;");
-		sb.append(ln).append("import static msi.gama.common.interfaces.IKeyword.*;");
+		sb.append(ln).append("import static gaml.operators.Cast.*;");
+		sb.append(ln).append("import static gaml.operators.Spatial.*;");
+		sb.append(ln).append("import static gama.common.interfaces.IKeyword.*;");
 		sb.append(ln).append("	@SuppressWarnings({ \"rawtypes\", \"unchecked\", \"unused\" })");
 		sb.append(ln).append(ln).append("public class GamlAdditions extends msi.gaml.compilation.AbstractGamlAdditions")
 				.append(" {");

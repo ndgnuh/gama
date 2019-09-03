@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
-import static msi.gama.common.interfaces.IKeyword.LAYOUT;
+import static gama.common.interfaces.IKeyword.LAYOUT;
 
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.ISymbolKind;
@@ -21,11 +21,11 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gaml.compilation.Symbol;
-import msi.gaml.compilation.interfaces.ISymbol;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.types.IType;
+import gama.common.interfaces.IKeyword;
+import gaml.compilation.Symbol;
+import gaml.compilation.interfaces.ISymbol;
+import gaml.descriptions.IDescription;
+import gaml.types.IType;
 
 /**
  * The Class LayoutStatement.

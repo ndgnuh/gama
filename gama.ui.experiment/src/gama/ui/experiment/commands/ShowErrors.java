@@ -21,9 +21,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGui;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.GAMA;
+import gama.common.interfaces.gui.IGui;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.GAMA;
 
 public class ShowErrors extends AbstractHandler implements IElementUpdater {
 

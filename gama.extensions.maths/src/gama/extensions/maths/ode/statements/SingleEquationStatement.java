@@ -9,14 +9,14 @@
  **********************************************************************************************/
 package gama.extensions.maths.ode.statements;
 
-import static msi.gama.common.interfaces.IKeyword.DIF2;
-import static msi.gama.common.interfaces.IKeyword.DIFF;
-import static msi.gama.common.interfaces.IKeyword.EQUATION;
-import static msi.gama.common.interfaces.IKeyword.EQUATION_LEFT;
-import static msi.gama.common.interfaces.IKeyword.EQUATION_OP;
-import static msi.gama.common.interfaces.IKeyword.EQUATION_RIGHT;
-import static msi.gama.common.interfaces.IKeyword.SOLVE;
-import static msi.gama.common.interfaces.IKeyword.ZERO;
+import static gama.common.interfaces.IKeyword.DIF2;
+import static gama.common.interfaces.IKeyword.DIFF;
+import static gama.common.interfaces.IKeyword.EQUATION;
+import static gama.common.interfaces.IKeyword.EQUATION_LEFT;
+import static gama.common.interfaces.IKeyword.EQUATION_OP;
+import static gama.common.interfaces.IKeyword.EQUATION_RIGHT;
+import static gama.common.interfaces.IKeyword.SOLVE;
+import static gama.common.interfaces.IKeyword.ZERO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,24 +36,24 @@ import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gaml.compilation.annotations.serializer;
-import msi.gaml.compilation.annotations.validator;
-import msi.gaml.compilation.interfaces.IDescriptionValidator;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.IExpressionDescription;
-import msi.gaml.descriptions.SymbolDescription;
-import msi.gaml.descriptions.SymbolSerializer;
-import msi.gaml.expressions.AbstractNAryOperator;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.expressions.IOperator;
-import msi.gaml.expressions.IVarExpression;
-import msi.gaml.statements.AbstractStatement;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.IGamlIssue;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
+import gama.util.map.GamaMapFactory;
+import gaml.compilation.annotations.serializer;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.descriptions.SymbolDescription;
+import gaml.descriptions.SymbolSerializer;
+import gaml.expressions.AbstractNAryOperator;
+import gaml.expressions.IExpression;
+import gaml.expressions.IOperator;
+import gaml.expressions.IVarExpression;
+import gaml.statements.AbstractStatement;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  *

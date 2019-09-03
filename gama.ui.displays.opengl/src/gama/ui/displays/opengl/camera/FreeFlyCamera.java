@@ -13,10 +13,10 @@ import org.eclipse.swt.SWT;
 
 import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gaml.operators.Maths;
+import gama.common.geometry.Envelope3D;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.metamodel.shape.GamaPoint;
+import gaml.operators.Maths;
 
 public class FreeFlyCamera extends AbstractCamera {
 

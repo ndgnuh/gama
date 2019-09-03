@@ -16,9 +16,9 @@ import org.eclipse.core.commands.ExecutionException;
 
 import gama.ui.base.utils.PerspectiveHelper;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.util.TextBuilder;
-import msi.gama.util.tree.GamaNode;
-import msi.gama.util.tree.GamaTree;
+import gama.common.util.TextBuilder;
+import gama.util.tree.GamaNode;
+import gama.util.tree.GamaTree;
 
 public class CopyLayout extends AbstractHandler {
 

@@ -10,9 +10,9 @@ import gama.ui.displays.opengl.renderer.helpers.LightHelper;
 import gama.ui.displays.opengl.renderer.helpers.PickingHelper;
 import gama.ui.displays.opengl.renderer.helpers.SceneHelper;
 import gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IGraphics;
-import msi.gama.metamodel.shape.GamaPoint;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.metamodel.shape.GamaPoint;
 
 public interface IOpenGLRenderer extends GLEventListener, IGraphics.ThreeD {
 

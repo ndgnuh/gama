@@ -100,26 +100,26 @@ import com.google.common.collect.ObjectArrays;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import gama.core.gaml.resource.GamlResourceServices;
-import gama.core.validation.IGamlBuilderListener;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import gama.common.preferences.GamaPreferences;
+import gama.common.util.PlatformUtils;
+import gama.core.lang.gaml.resource.GamlResourceServices;
+import gama.core.lang.validation.IGamlBuilderListener;
 import gama.extensions.files.gaml.GamlFileExtension;
 import gama.ui.base.controls.FlatButton;
 import gama.ui.base.resources.GamaColors;
+import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.IGamaIcons;
-import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
 import gama.ui.base.views.toolbar.Selector;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.util.PlatformUtils;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ValidationContext;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ValidationContext;
 import ummisco.gama.ui.decorators.GamlAnnotationImageProvider;
 import ummisco.gama.ui.editbox.BoxDecorator;
 import ummisco.gama.ui.editbox.BoxDecoratorPartListener;
@@ -561,7 +561,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editbox.IBoxEnabledEditor#getDecorator()
+	 * @see gama.core.lang.ui.editbox.IBoxEnabledEditor#getDecorator()
 	 */
 	public BoxDecorator getDecorator() {
 		if (decorator == null) {
@@ -571,7 +571,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editbox.IBoxEnabledEditor#createDecorator(gama.core.gaml.ui.editbox.IBoxProvider)
+	 * @see gama.core.lang.ui.editbox.IBoxEnabledEditor#createDecorator(gama.core.gaml.ui.editbox.IBoxProvider)
 	 */
 	public void createDecorator() {
 		if (decorator != null)
@@ -590,7 +590,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editbox.IBoxEnabledEditor#decorate()
+	 * @see gama.core.lang.ui.editbox.IBoxEnabledEditor#decorate()
 	 */
 	public void decorate(final boolean doIt) {
 		if (doIt) {
@@ -665,7 +665,7 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editor.IGamlEditor#openEditTemplateDialog()
+	 * @see gama.core.lang.ui.editor.IGamlEditor#openEditTemplateDialog()
 	 */
 	public boolean openEditTemplateDialog(final TemplatePersistenceData data, final boolean edit) {
 		final GamlEditTemplateDialog d = getTemplateFactory().createDialog(data, edit, getEditorSite().getShell());
@@ -677,14 +677,14 @@ public class GamlEditor extends XtextEditor implements IGamlBuilderListener, ITo
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editor.IGamlEditor#getNewTemplateId(java.lang.String)
+	 * @see gama.core.lang.ui.editor.IGamlEditor#getNewTemplateId(java.lang.String)
 	 */
 	public String getNewTemplateId(final String path) {
 		return getTemplateStore().getNewIdFromId(path);
 	}
 
 	/**
-	 * @see gama.core.gaml.ui.editor.IGamlEditor#applyTemplate(org.eclipse.jface.text.templates.Template)
+	 * @see gama.core.lang.ui.editor.IGamlEditor#applyTemplate(org.eclipse.jface.text.templates.Template)
 	 */
 
 	public void applyTemplateAtTheEnd(final Template t) {

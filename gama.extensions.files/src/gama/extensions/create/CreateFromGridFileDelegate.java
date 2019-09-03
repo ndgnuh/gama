@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 import gama.extensions.files.GamaGridFile;
-import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.scope.IScope;
-import msi.gaml.statements.Arguments;
-import msi.gaml.statements.CreateStatement;
-import msi.gaml.types.IType;
-import msi.gaml.types.Types;
+import gama.common.interfaces.ICreateDelegate;
+import gama.common.interfaces.IKeyword;
+import gama.metamodel.shape.IShape;
+import gama.runtime.scope.IScope;
+import gaml.statements.Arguments;
+import gaml.statements.CreateStatement;
+import gaml.types.IType;
+import gaml.types.Types;
 
 /**
  * Class CreateFromDatabaseDelegate.

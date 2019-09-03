@@ -1,6 +1,6 @@
 /*********************************************************************************************
  *
- * 'GamlResourceServices.java, in plugin gama.core.gaml, is part of the source code of the GAMA modeling and
+ * 'GamlResourceServices.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
@@ -35,15 +35,15 @@ import com.google.common.collect.Iterables;
 import gama.core.lang.gaml.documentation.GamlResourceDocumenter;
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.validation.IGamlBuilderListener;
-import msi.gama.common.interfaces.IDocManager;
-import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.GAMA;
-import msi.gama.util.map.GamaMapFactory;
-import msi.gama.util.map.IMap;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ModelDescription;
-import msi.gaml.descriptions.ValidationContext;
+import gama.common.interfaces.IDocManager;
+import gama.common.interfaces.IGamlDescription;
+import gama.common.interfaces.IKeyword;
+import gama.runtime.GAMA;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ModelDescription;
+import gaml.descriptions.ValidationContext;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamlResourceServices {

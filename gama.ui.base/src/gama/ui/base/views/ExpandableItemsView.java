@@ -24,8 +24,8 @@ import gama.ui.base.controls.ParameterExpandBar;
 import gama.ui.base.controls.ParameterExpandItem;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.util.GamaColor;
+import gama.common.interfaces.ItemList;
+import gama.util.GamaColor;
 
 public abstract class ExpandableItemsView<T> extends GamaViewPart implements ItemList<T> {
 

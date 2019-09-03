@@ -14,8 +14,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.interfaces.gui.IGamaView;
-import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.outputs.IDisplayOutput;
 
 /**
  * Class OutputPartsManager.

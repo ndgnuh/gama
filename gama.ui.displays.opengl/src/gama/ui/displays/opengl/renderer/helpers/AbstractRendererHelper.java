@@ -6,7 +6,7 @@ import com.jogamp.opengl.GLAutoDrawable;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface;
-import msi.gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplayData;
 
 public abstract class AbstractRendererHelper {
 

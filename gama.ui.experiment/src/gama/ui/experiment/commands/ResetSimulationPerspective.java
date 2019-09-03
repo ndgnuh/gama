@@ -19,7 +19,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.internal.WorkbenchPage;
 
-import msi.gama.runtime.GAMA;
+import gama.runtime.GAMA;
 
 public class ResetSimulationPerspective extends AbstractHandler { // NO_UCD (unused code)
 

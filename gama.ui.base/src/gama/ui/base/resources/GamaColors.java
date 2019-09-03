@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.util.GamaColor;
+import gama.util.GamaColor;
 
 /**
  * Class GamaIcons.

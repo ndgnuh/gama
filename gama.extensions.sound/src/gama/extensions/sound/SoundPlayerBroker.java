@@ -15,10 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import msi.gama.common.interfaces.IAgent;
-import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.runtime.scope.IScope;
+import gama.common.interfaces.IAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 
 public class SoundPlayerBroker {
 

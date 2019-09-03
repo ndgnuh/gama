@@ -39,22 +39,22 @@ import gama.ui.base.parameters.PointEditor;
 import gama.ui.base.parameters.StringEditor;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.ItemList;
-import msi.gama.common.interfaces.outputs.IDisplayData;
-import msi.gama.common.interfaces.outputs.IDisplaySurface;
-import msi.gama.common.interfaces.outputs.ILayer;
-import msi.gama.common.interfaces.outputs.ILayerStatement;
-import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.scope.IScope;
-import msi.gama.util.GamaColor;
-import msi.gama.util.list.GamaListFactory;
-import msi.gama.util.list.IList;
-import msi.gaml.expressions.IExpression;
-import msi.gaml.operators.Strings;
-import msi.gaml.types.Types;
+import gama.common.geometry.ICoordinates;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.GAMA;
+import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.list.GamaListFactory;
+import gama.util.list.IList;
+import gaml.expressions.IExpression;
+import gaml.operators.Strings;
+import gaml.types.Types;
 
 /**
  * Class LayerSideControls.

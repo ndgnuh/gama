@@ -20,9 +20,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
 import gama.ui.base.interfaces.IRuntimeExceptionHandler;
-import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.runtime.GAMA;
-import msi.gama.runtime.exceptions.GamaRuntimeException;
+import gama.common.preferences.GamaPreferences;
+import gama.runtime.GAMA;
+import gama.runtime.exceptions.GamaRuntimeException;
 
 public class RuntimeExceptionHandler extends Job implements IRuntimeExceptionHandler {
 

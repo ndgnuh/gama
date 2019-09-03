@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
-import msi.gama.common.util.TextBuilder;
+import gama.common.util.TextBuilder;
 
 /**
  * Jsoner provides JSON utilities for escaping strings to be JSON compatible, thread safe parsing (RFC 4627) JSON

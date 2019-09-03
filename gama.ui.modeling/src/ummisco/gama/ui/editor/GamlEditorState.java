@@ -20,9 +20,9 @@ import com.google.common.collect.Iterables;
 
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import msi.gaml.descriptions.ExperimentDescription;
-import msi.gaml.descriptions.IDescription;
-import msi.gaml.descriptions.ValidationContext;
+import gaml.descriptions.ExperimentDescription;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.ValidationContext;
 
 public class GamlEditorState {
 
