@@ -13,11 +13,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import msi.gama.kernel.experiment.IExperimentDisplayable;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.operators.Cast;
 import msi.gaml.statements.UserCommandStatement;

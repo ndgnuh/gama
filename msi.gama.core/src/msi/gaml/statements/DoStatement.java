@@ -14,21 +14,14 @@ import java.util.Set;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
-import msi.gama.runtime.ExecutionResult;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.IDescriptionValidator;
+import msi.gama.runtime.scope.ExecutionResult;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.annotations.serializer;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.interfaces.IDescriptionValidator;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;
@@ -38,12 +31,20 @@ import msi.gaml.descriptions.StatementDescription;
 import msi.gaml.descriptions.SymbolDescription;
 import msi.gaml.descriptions.SymbolSerializer.StatementSerializer;
 import msi.gaml.expressions.IExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.Strings;
 import msi.gaml.species.ISpecies;
 import msi.gaml.statements.DoStatement.DoSerializer;
 import msi.gaml.statements.DoStatement.DoValidator;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Written by drogoul Modified on 7 févr. 2010
@@ -195,7 +196,7 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 		/**
 		 * Method validate()
 		 *
-		 * @see msi.gaml.compilation.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
+		 * @see msi.gaml.compilation.interfaces.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
 		 */
 		@Override
 		public void validate(final StatementDescription desc) {

@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import msi.gama.common.util.TextBuilder;
-import msi.gama.util.GamaList;
+import msi.gama.util.list.GamaList;
 import msi.gaml.types.Types;
 
 /**

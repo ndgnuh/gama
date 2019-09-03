@@ -18,20 +18,20 @@ import java.util.Calendar;
 
 import irit.gama.extensions.database.sql.SqlConnection;
 import irit.gama.extensions.database.sql.SqlUtils;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.arg;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gama.util.matrix.GamaObjectMatrix;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.skills.Skill;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.arg;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 /*
  * @Author TRUONG Minh Thai

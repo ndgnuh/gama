@@ -16,7 +16,7 @@ import org.opengis.referencing.operation.MathTransform;
 import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Class IProjection.

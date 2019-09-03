@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import msi.gama.util.GamaMapFactory;
+import msi.gama.util.map.GamaMapFactory;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamaTree<T> {

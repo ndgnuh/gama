@@ -27,8 +27,8 @@ import org.eclipse.swt.widgets.Text;
 
 import msi.gama.common.util.StringUtils;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.compilation.GAML;
 
 /**

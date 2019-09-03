@@ -18,8 +18,8 @@ import org.w3c.dom.NodeList;
 
 import msi.gama.doc.websiteGen.utilClasses.ConceptManager;
 import msi.gama.doc.websiteGen.utilClasses.ConceptManager.WebsitePart;
+import ummisco.gama.processor.doc.Constants;
 import msi.gama.doc.websiteGen.utilClasses.Utils;
-import msi.gama.precompiler.doc.utils.Constants;
 
 public class CheckConcepts {
 	// this class will check if all the concepts present in the documentations

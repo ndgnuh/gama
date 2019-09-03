@@ -14,17 +14,17 @@ import cern.jet.math.Arithmetic;
 import cern.jet.stat.Descriptive;
 import cern.jet.stat.Gamma;
 import cern.jet.stat.Probability;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.operators.Containers;
 import msi.gaml.operators.Stats;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.operator;
 
 @SuppressWarnings ({ "rawtypes" })
 public class Stats2 extends Stats {

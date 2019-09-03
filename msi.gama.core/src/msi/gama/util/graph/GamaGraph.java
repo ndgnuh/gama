@@ -39,24 +39,24 @@ import org.jgrapht.alg.util.Pair;
 import org.jgrapht.graph.AsUndirectedGraph;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.util.Collector;
 import msi.gama.common.util.StringUtils;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.graph.FloydWarshallShortestPathsGAMA;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph.VertexRelationship;
 import msi.gama.metamodel.topology.graph.NBAStarPathfinder;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
 import msi.gama.util.graph.GraphEvent.GraphEventType;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.GamaFloatMatrix;
 import msi.gama.util.matrix.GamaIntMatrix;
 import msi.gama.util.matrix.GamaMatrix;
@@ -365,7 +365,7 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 	/**
 	 * Method removeIndexes()
 	 *
-	 * @see msi.gama.util.IContainer.Modifiable#removeIndexes(msi.gama.runtime.IScope, msi.gama.util.IContainer)
+	 * @see msi.gama.common.interfaces.IContainer.Modifiable#removeIndexes(msi.gama.runtime.scope.IScope, msi.gama.common.interfaces.IContainer)
 	 */
 	@Override
 	public void removeIndexes(final IScope scope, final IContainer<?, ?> index) {
@@ -1458,7 +1458,7 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 	/**
 	 * Method buildValue()
 	 *
-	 * @see msi.gama.util.IContainer.Modifiable#buildValue(msi.gama.runtime.IScope, java.lang.Object,
+	 * @see msi.gama.common.interfaces.IContainer.Modifiable#buildValue(msi.gama.runtime.scope.IScope, java.lang.Object,
 	 *      msi.gaml.types.IContainerType)
 	 */
 	@Override
@@ -1483,7 +1483,7 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 	/**
 	 * Method buildValues()
 	 *
-	 * @see msi.gama.util.IContainer.Modifiable#buildValues(msi.gama.runtime.IScope, msi.gama.util.IContainer,
+	 * @see msi.gama.common.interfaces.IContainer.Modifiable#buildValues(msi.gama.runtime.scope.IScope, msi.gama.common.interfaces.IContainer,
 	 *      msi.gaml.types.IContainerType)
 	 */
 	@Override
@@ -1506,7 +1506,7 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 	/**
 	 * Method buildIndex()
 	 *
-	 * @see msi.gama.util.IContainer.Modifiable#buildIndex(msi.gama.runtime.IScope, java.lang.Object,
+	 * @see msi.gama.common.interfaces.IContainer.Modifiable#buildIndex(msi.gama.runtime.scope.IScope, java.lang.Object,
 	 *      msi.gaml.types.IContainerType)
 	 */
 	@Override

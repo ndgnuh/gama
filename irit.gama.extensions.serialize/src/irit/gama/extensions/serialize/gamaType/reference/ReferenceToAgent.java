@@ -3,8 +3,8 @@ package irit.gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 import java.util.List;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 
 public class ReferenceToAgent {

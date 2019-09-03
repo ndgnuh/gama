@@ -11,7 +11,7 @@
 package ummisco.gama.extensions.network.common;
 
 import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class LocalMessage implements ConnectorMessage {
 	private Object internalMessage;

@@ -38,10 +38,10 @@ import org.eclipse.ui.internal.ide.application.IDEWorkbenchAdvisor;
 import org.eclipse.ui.statushandlers.AbstractStatusHandler;
 import org.eclipse.ui.statushandlers.StatusAdapter;
 
-import msi.gama.common.interfaces.IEventLayerDelegate;
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IEventLayerDelegate;
+import msi.gama.common.interfaces.outputs.IEventLayerStatement;
 import msi.gama.common.util.FileUtils;
-import msi.gama.outputs.layers.EventLayerStatement;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import ummisco.gama.application.bundles.GamaBundleLoader;
@@ -133,9 +133,9 @@ public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {
 				&& !args[0].contains("--launcher.defaultAction"))
 			return;
 		if (args.length >= 1) {
-
+			// TODO AD Integration of .gamr files should be much better..
 			if (args[args.length - 1].endsWith(".gamr")) {
-				for (final IEventLayerDelegate delegate : EventLayerStatement.delegates) {
+				for (final IEventLayerDelegate delegate : IEventLayerStatement.DELEGATES) {
 					if (delegate.acceptSource(null, "launcher")) {
 						delegate.createFrom(null, args[args.length - 1], null);
 					}

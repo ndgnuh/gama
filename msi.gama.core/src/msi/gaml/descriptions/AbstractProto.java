@@ -16,8 +16,8 @@ import java.util.Collections;
 
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.usage;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Class AbstractProto.

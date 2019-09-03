@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.expressions.IExpressionCompiler;
 import msi.gaml.types.Signature;

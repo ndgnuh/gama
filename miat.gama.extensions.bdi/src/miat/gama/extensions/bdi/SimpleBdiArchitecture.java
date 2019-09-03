@@ -13,27 +13,27 @@ package miat.gama.extensions.bdi;
 import java.util.ArrayList;
 import java.util.List;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.arg;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.IConcept;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.architecture.reflex.ReflexArchitecture;
-import msi.gaml.compilation.ISymbol;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.operators.Maths;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IStatement;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.arg;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.skill;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 @vars ({ @variable (
 		name = SimpleBdiArchitecture.PERSISTENCE_COEFFICIENT_PLANS,

@@ -3,8 +3,8 @@ package ummisco.gama.extensions.network.tcp;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.extensions.network.common.CommandMessage;
 import ummisco.gama.extensions.network.common.Connector;
 import ummisco.gama.extensions.network.common.GamaNetworkException;

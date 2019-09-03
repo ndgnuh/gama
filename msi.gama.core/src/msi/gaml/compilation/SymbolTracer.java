@@ -12,7 +12,8 @@ package msi.gaml.compilation;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 

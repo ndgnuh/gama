@@ -11,11 +11,11 @@
 package msi.gaml.statements;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.*;
 import msi.gaml.descriptions.IDescription;
+import ummisco.gama.processor.*;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * Written by drogoul Modified on 8 févr. 2010

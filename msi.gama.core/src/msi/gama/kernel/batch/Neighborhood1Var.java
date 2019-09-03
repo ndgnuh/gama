@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import msi.gama.kernel.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 public class Neighborhood1Var extends Neighborhood {
 

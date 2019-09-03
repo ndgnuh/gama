@@ -12,7 +12,7 @@ package prefuse.layout;
 
 import java.util.Map;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
 
 /**

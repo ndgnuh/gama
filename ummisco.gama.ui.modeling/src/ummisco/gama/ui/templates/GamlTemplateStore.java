@@ -27,13 +27,13 @@ import com.google.inject.ProvidedBy;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
-import msi.gama.precompiler.GamlAnnotations.usage;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SymbolProto;
 import msi.gaml.expressions.IExpressionCompiler;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.Strings;
 import msi.gaml.types.Signature;
+import ummisco.gama.processor.GamlAnnotations.usage;
 import ummisco.gama.ui.templates.GamlTemplateStore.GamlTemplateStoreProvider;
 
 /**

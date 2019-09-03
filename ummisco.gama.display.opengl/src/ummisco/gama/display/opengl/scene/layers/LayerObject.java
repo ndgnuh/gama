@@ -20,17 +20,16 @@ import com.google.common.collect.ImmutableList;
 import com.jogamp.opengl.GL2;
 
 import msi.gama.common.geometry.Scaling3D;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.ICollector;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.ILayer;
+import msi.gama.common.interfaces.outputs.ILayer;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.outputs.layers.OverlayLayer;
-import msi.gama.runtime.IScope;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.ICollector;
 import msi.gama.util.file.IGamaFile;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.PixelUnitExpression;
@@ -47,6 +46,7 @@ import ummisco.gama.display.opengl.scene.FieldObject;
 import ummisco.gama.display.opengl.scene.GeometryObject;
 import ummisco.gama.display.opengl.scene.ResourceObject;
 import ummisco.gama.display.opengl.scene.StringObject;
+import ummisco.gama.outputs.layers.OverlayLayer;
 
 /**
  * Class LayerObject.

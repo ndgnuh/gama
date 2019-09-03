@@ -10,26 +10,26 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ISkill;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.IDescriptionValidator.NullValidator;
-import msi.gaml.compilation.IGamaHelper;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.interfaces.IGamaHelper;
+import msi.gaml.compilation.interfaces.ISymbol;
+import msi.gaml.compilation.interfaces.IDescriptionValidator.NullValidator;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.PrimitiveDescription;
 import msi.gaml.species.AbstractSpecies;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * The Class ActionCommand.

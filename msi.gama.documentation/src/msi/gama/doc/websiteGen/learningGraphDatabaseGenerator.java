@@ -7,7 +7,7 @@ import org.w3c.dom.NodeList;
 
 import msi.gama.doc.websiteGen.utilClasses.LearningConcept;
 import msi.gama.doc.websiteGen.utilClasses.Topic;
-import msi.gama.precompiler.doc.utils.Constants;
+import ummisco.gama.processor.doc.Constants;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;

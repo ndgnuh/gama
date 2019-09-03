@@ -11,11 +11,11 @@
 package msi.gaml.expressions;
 
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 public class TypeFieldExpression extends UnaryOperator {
 

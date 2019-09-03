@@ -25,9 +25,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import msi.gama.doc.util.PrepareEnv;
-import msi.gama.precompiler.doc.utils.Constants;
-import msi.gama.precompiler.doc.utils.XMLElements;
-import msi.gama.precompiler.doc.utils.XMLUtils;
+import ummisco.gama.processor.doc.Constants;
+import ummisco.gama.processor.doc.XMLElements;
+import ummisco.gama.processor.doc.XMLUtils;
 
 public class XmlToTestGAML {
 

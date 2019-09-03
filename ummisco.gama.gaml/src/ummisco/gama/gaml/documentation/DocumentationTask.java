@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 import ummisco.gama.dev.utils.DEBUG;
 
 class DocumentationTask {

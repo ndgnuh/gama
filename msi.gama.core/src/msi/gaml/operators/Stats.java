@@ -27,29 +27,20 @@ import org.apache.commons.math3.stat.descriptive.moment.Skewness;
 
 import com.google.common.collect.Ordering;
 
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.no_test;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.GamlAnnotations.test;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
 import msi.gama.util.GamaRegression;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.GamaMatrix;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
@@ -58,6 +49,15 @@ import rcaller.RCaller;
 import rcaller.RCode;
 import rcaller.exception.ExecutionException;
 import rcaller.exception.ParseException;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.no_test;
+import ummisco.gama.processor.GamlAnnotations.operator;
+import ummisco.gama.processor.GamlAnnotations.test;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Written by drogoul Modified on 15 janv. 2011

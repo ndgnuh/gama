@@ -13,8 +13,8 @@ import java.util.function.Consumer;
 
 import org.eclipse.swt.graphics.Point;
 
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.utils.WorkbenchHelper;

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.util.Collector;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 
 public class NoCacheNeighborhood implements INeighborhood {
 

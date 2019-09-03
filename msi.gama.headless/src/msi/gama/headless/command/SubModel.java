@@ -3,19 +3,19 @@ package msi.gama.headless.command;
 import java.io.File;
 import java.io.IOException;
 
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
 import msi.gama.headless.core.Experiment;
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
-import msi.gama.kernel.experiment.IExperimentAgent;
-import msi.gama.kernel.model.IModel;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.no_test;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.no_test;
+import ummisco.gama.processor.GamlAnnotations.operator;
 
 public class SubModel {
 

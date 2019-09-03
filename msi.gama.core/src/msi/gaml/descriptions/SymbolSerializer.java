@@ -20,7 +20,7 @@ import com.google.common.collect.Iterables;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.common.util.StringUtils;
-import msi.gaml.factories.DescriptionFactory;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.Facets;
 

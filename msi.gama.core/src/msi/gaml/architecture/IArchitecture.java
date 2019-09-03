@@ -10,13 +10,13 @@
  ********************************************************************************************************/
 package msi.gaml.architecture;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.ISkill;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IStatement;
 
 /**
  * Written by drogoul Modified on 12 sept. 2010

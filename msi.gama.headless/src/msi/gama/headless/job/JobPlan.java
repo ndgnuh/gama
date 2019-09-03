@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Objects;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModel;
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
-import msi.gama.kernel.model.IModel;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.ModelDescription;
 

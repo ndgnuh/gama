@@ -12,12 +12,12 @@ package msi.gama.metamodel.topology.filter;
 
 import java.util.Collection;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
 import msi.gaml.species.ISpecies;
 
 public class Different implements IAgentFilter {

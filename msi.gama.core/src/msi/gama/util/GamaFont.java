@@ -14,19 +14,19 @@ import java.awt.Font;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.IValue;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.no_test;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.no_test;
+import ummisco.gama.processor.GamlAnnotations.operator;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Class GamaFont. A simple wrapper on an AWT Font
@@ -104,7 +104,7 @@ public class GamaFont extends Font implements IValue {
 	 * Method stringValue(). Outputs to a format that is usable by
 	 * Font.decode(String);
 	 * 
-	 * @see msi.gama.common.interfaces.IValue#stringValue(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IValue#stringValue(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public String stringValue(final IScope scope) throws GamaRuntimeException {
@@ -125,7 +125,7 @@ public class GamaFont extends Font implements IValue {
 	/**
 	 * Method copy()
 	 * 
-	 * @see msi.gama.common.interfaces.IValue#copy(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IValue#copy(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public IValue copy(final IScope scope) throws GamaRuntimeException {

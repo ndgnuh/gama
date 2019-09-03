@@ -10,21 +10,21 @@
  ********************************************************************************************************/
 package msi.gama.extensions.messaging;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.arg;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gaml.skills.Skill;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.arg;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
+import ummisco.gama.processor.GamlAnnotations.skill;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 @skill(name = MessagingSkill.SKILL_NAME)
 @doc("A simple skill that provides agents with a mailbox than can be filled with messages")

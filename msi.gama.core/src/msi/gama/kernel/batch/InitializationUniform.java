@@ -16,9 +16,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.batch.Initialization;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 public class InitializationUniform implements Initialization {
 

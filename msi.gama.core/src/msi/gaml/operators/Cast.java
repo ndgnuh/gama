@@ -10,29 +10,21 @@
  ********************************************************************************************************/
 package msi.gaml.operators;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModel;
 import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.model.IModel;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.GamlAnnotations.test;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaListFactory;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
 import msi.gama.util.graph.IGraph;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.species.ISpecies;
@@ -51,6 +43,14 @@ import msi.gaml.types.GamaTopologyType;
 import msi.gaml.types.GamaType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.operator;
+import ummisco.gama.processor.GamlAnnotations.test;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Written by drogoul Modified on 15 d�c. 2010

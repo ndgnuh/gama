@@ -29,32 +29,18 @@ import org.jgrapht.alg.interfaces.MaximumFlowAlgorithm.MaximumFlow;
 import org.locationtech.jts.geom.Coordinate;
 
 import msi.gama.common.geometry.GeometryUtils;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.ICollector;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph.VertexRelationship;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.no_test;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.GamlAnnotations.test;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
-import msi.gama.util.GamaList;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaPair;
-import msi.gama.util.ICollector;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
 import msi.gama.util.file.IGamaFile;
 import msi.gama.util.graph.GamaGraph;
 import msi.gama.util.graph.GraphAlgorithmsHandmade;
@@ -64,6 +50,11 @@ import msi.gama.util.graph.layout.LayoutCircle;
 import msi.gama.util.graph.layout.LayoutForceDirected;
 import msi.gama.util.graph.layout.LayoutGrid;
 import msi.gama.util.graph.loader.GraphLoader;
+import msi.gama.util.list.GamaList;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.GamaFloatMatrix;
 import msi.gama.util.matrix.GamaIntMatrix;
 import msi.gama.util.matrix.GamaMatrix;
@@ -75,6 +66,15 @@ import msi.gaml.types.GamaGraphType;
 import msi.gaml.types.GamaPathType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.no_test;
+import ummisco.gama.processor.GamlAnnotations.operator;
+import ummisco.gama.processor.GamlAnnotations.test;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Written by drogoul Modified on 13 avr. 2011
@@ -197,7 +197,7 @@ public class Graphs {
 
 		/**
 		 * @throws GamaRuntimeException
-		 * @see msi.gama.util.graph.GamaSpatialGraph.VertexRelationship#related(msi.gama.interfaces.IScope,
+		 * @see msi.gama.util.graph.GamaSpatialGraph.VertexRelationship#related(msi.gama.runtime.scope.interfaces.IScope,
 		 *      msi.gama.interfaces.IGeometry, msi.gama.interfaces.IGeometry)
 		 */
 		@Override

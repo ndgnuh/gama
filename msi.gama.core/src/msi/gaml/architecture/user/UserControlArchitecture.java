@@ -12,19 +12,19 @@ package msi.gaml.architecture.user;
 
 import java.util.ArrayList;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.architecture.finite_state_machine.FsmArchitecture;
 import msi.gaml.architecture.finite_state_machine.FsmStateStatement;
 import msi.gaml.species.ISpecies;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 @vars (@variable (
 		name = IKeyword.USER_CONTROLLED,

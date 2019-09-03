@@ -22,18 +22,18 @@ import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.util.GamaMapFactory;
-import msi.gaml.compilation.ISymbol;
-import msi.gaml.compilation.ISymbolConstructor;
-import msi.gaml.compilation.IValidator;
-import msi.gaml.factories.DescriptionFactory;
-import msi.gaml.factories.SymbolFactory;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.factories.SymbolFactory;
+import msi.gaml.compilation.interfaces.ISymbol;
+import msi.gaml.compilation.interfaces.ISymbolConstructor;
+import msi.gaml.compilation.interfaces.IValidator;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * Written by drogoul Modified on 8 févr. 2010

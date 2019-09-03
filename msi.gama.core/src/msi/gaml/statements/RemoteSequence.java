@@ -10,10 +10,10 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 
 public class RemoteSequence extends AbstractStatementSequence {

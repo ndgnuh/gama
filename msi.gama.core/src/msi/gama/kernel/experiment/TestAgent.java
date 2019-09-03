@@ -18,18 +18,20 @@ import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IStatement;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.experiment;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.AbstractExpression;
 import msi.gaml.expressions.IExpression;
-import msi.gaml.statements.IStatement;
 import msi.gaml.statements.test.TestExperimentSummary;
 import msi.gaml.statements.test.TestStatement;
 import msi.gaml.statements.test.WithTestSummary;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.experiment;
 
 @experiment (IKeyword.TEST)
 @doc ("Experiments supporting the collection of success or failure of tests. Can be used in GUI or headless")

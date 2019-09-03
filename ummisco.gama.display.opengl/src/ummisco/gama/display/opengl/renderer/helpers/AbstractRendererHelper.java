@@ -3,7 +3,7 @@ package ummisco.gama.display.opengl.renderer.helpers;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 
-import msi.gama.outputs.LayeredDisplayData;
+import msi.gama.common.interfaces.outputs.IDisplayData;
 import ummisco.gama.display.opengl.OpenGL;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.display.opengl.view.SWTOpenGLDisplaySurface;
@@ -20,7 +20,7 @@ public abstract class AbstractRendererHelper {
 		return renderer;
 	}
 
-	protected LayeredDisplayData getData() {
+	protected IDisplayData getData() {
 		return renderer.getData();
 	}
 

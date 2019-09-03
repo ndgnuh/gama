@@ -14,8 +14,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 
 /**

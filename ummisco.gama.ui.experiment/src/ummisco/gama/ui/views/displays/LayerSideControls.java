@@ -22,27 +22,27 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import msi.gama.common.geometry.ICoordinates;
-import msi.gama.common.interfaces.IDisplaySurface;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.common.interfaces.ILayer;
 import msi.gama.common.interfaces.ItemList;
+import msi.gama.common.interfaces.outputs.IDisplayData;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.ILayer;
+import msi.gama.common.interfaces.outputs.ILayerStatement;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.LayeredDisplayData;
-import msi.gama.outputs.layers.AgentLayerStatement;
-import msi.gama.outputs.layers.GridLayer;
-import msi.gama.outputs.layers.ILayerStatement;
-import msi.gama.outputs.layers.ImageLayer;
-import msi.gama.outputs.layers.ImageLayerStatement;
-import msi.gama.outputs.layers.SpeciesLayerStatement;
-import msi.gama.outputs.layers.charts.ChartLayerStatement;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Strings;
 import msi.gaml.types.Types;
+import ummisco.gama.outputs.layers.AgentLayerStatement;
+import ummisco.gama.outputs.layers.GridLayer;
+import ummisco.gama.outputs.layers.ImageLayer;
+import ummisco.gama.outputs.layers.ImageLayerStatement;
+import ummisco.gama.outputs.layers.SpeciesLayerStatement;
+import ummisco.gama.outputs.layers.charts.ChartLayerStatement;
 import ummisco.gama.ui.controls.ParameterExpandBar;
 import ummisco.gama.ui.controls.ParameterExpandItem;
 import ummisco.gama.ui.interfaces.EditorListener;
@@ -125,7 +125,7 @@ public class LayerSideControls {
 		final Composite contents = createContentsComposite(viewer);
 		final IDisplaySurface ds = view.getDisplaySurface();
 		final IScope scope = ds.getScope();
-		final LayeredDisplayData data = ds.getData();
+		final IDisplayData data = ds.getData();
 		EditorFactory.create(scope, contents, "View as wireframe", data.isWireframe(),
 				(EditorListener<Boolean>) val -> {
 					ds.runAndUpdate(() -> {
@@ -158,7 +158,7 @@ public class LayerSideControls {
 		final Composite contents = createContentsComposite(viewer);
 		final IDisplaySurface ds = view.getDisplaySurface();
 		final IScope scope = ds.getScope();
-		final LayeredDisplayData data = ds.getData();
+		final IDisplayData data = ds.getData();
 
 		EditorFactory.create(scope, contents, "FreeFly Camera", !data.isArcBallCamera(),
 				(EditorListener<Boolean>) val -> {
@@ -179,7 +179,8 @@ public class LayerSideControls {
 
 		preset = EditorFactory.choose(scope, contents, "Preset camera:", "Choose...", true, view.getCameraNames(),
 				(EditorListener<String>) newValue -> {
-					if (newValue.isEmpty()) { return; }
+					if (newValue.isEmpty())
+						return;
 					data.setPresetCamera(newValue);
 					ds.updateDisplay(true);
 				});
@@ -255,7 +256,7 @@ public class LayerSideControls {
 		final Composite contents = createContentsComposite(viewer);
 		final IDisplaySurface ds = view.getDisplaySurface();
 		final IScope scope = ds.getScope();
-		final LayeredDisplayData data = ds.getData();
+		final IDisplayData data = ds.getData();
 
 		final PointEditor[] point = new PointEditor[4];
 		final ICoordinates points = data.getKeystone();
@@ -309,7 +310,7 @@ public class LayerSideControls {
 		final Composite contents = createContentsComposite(viewer);
 		final IDisplaySurface ds = view.getDisplaySurface();
 		final IScope scope = ds.getScope();
-		final LayeredDisplayData data = ds.getData();
+		final IDisplayData data = ds.getData();
 		final BooleanEditor antialias = EditorFactory.create(scope, contents, "Antialias:", data.isAntialias(),
 				(EditorListener<Boolean>) newValue -> {
 					data.setAntialias(newValue);
@@ -343,7 +344,7 @@ public class LayerSideControls {
 					(EditorListener<Boolean>) val -> {
 						ds.runAndUpdate(() -> {
 							data.setContinuousRotation(val);
-							;
+
 						});
 
 					});
@@ -428,7 +429,7 @@ public class LayerSideControls {
 					updateIfPaused(layer, container);
 				});
 
-		switch (definition.getType(container.getOutput())) {
+		switch (definition.getType(container.getOutput().getData().isOpenGL())) {
 
 			case GRID: {
 				EditorFactory.create(container.getScope(), compo, "Draw grid:",
@@ -516,7 +517,7 @@ public class LayerSideControls {
 
 	}
 
-	private void copyCameraAndKeystoneDefinition(final IScope scope, final LayeredDisplayData data) {
+	private void copyCameraAndKeystoneDefinition(final IScope scope, final IDisplayData data) {
 		final String toCopy = cameraDefinitionToCopy() + " " + Strings.LN
 				+ (data.isKeystoneDefined() ? keystoneDefinitionToCopy(scope, data) : "");
 		WorkbenchHelper.copy(toCopy);
@@ -532,7 +533,7 @@ public class LayerSideControls {
 		return text;
 	}
 
-	private String keystoneDefinitionToCopy(final IScope scope, final LayeredDisplayData data) {
+	private String keystoneDefinitionToCopy(final IScope scope, final IDisplayData data) {
 		final IList<GamaPoint> pp = GamaListFactory.create(scope, Types.POINT, data.getKeystone().toCoordinateArray());
 		final String text = IKeyword.KEYSTONE + ": " + pp.serialize(false);
 		return text;

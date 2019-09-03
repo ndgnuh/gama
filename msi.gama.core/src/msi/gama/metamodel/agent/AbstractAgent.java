@@ -20,28 +20,30 @@ import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IMacroAgent;
+import msi.gama.common.interfaces.IModel;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.kernel.model.IModel;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.arg;
-import msi.gama.precompiler.GamlAnnotations.doc;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.operators.Cast;
 import msi.gaml.species.ISpecies;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 import msi.gaml.variables.IVariable;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.arg;
+import ummisco.gama.processor.GamlAnnotations.doc;
 
 /**
  *
@@ -461,7 +463,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * Method getPopulationFor()
 	 *
-	 * @see msi.gama.metamodel.agent.IAgent#getPopulationFor(msi.gaml.species.ISpecies)
+	 * @see msi.gama.common.interfaces.IAgent#getPopulationFor(msi.gaml.species.ISpecies)
 	 */
 	@Override
 	public IPopulation<? extends IAgent> getPopulationFor(final ISpecies microSpecies) {
@@ -480,7 +482,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * Method getPopulationFor()
 	 *
-	 * @see msi.gama.metamodel.agent.IAgent#getPopulationFor(java.lang.String)
+	 * @see msi.gama.common.interfaces.IAgent#getPopulationFor(java.lang.String)
 	 */
 	@Override
 	public IPopulation<? extends IAgent> getPopulationFor(final String speciesName) {
@@ -571,7 +573,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * Method get()
 	 *
-	 * @see msi.gama.util.IContainer.Addressable#get(msi.gama.runtime.IScope, java.lang.Object)
+	 * @see msi.gama.common.interfaces.IContainer.Addressable#get(msi.gama.runtime.scope.IScope, java.lang.Object)
 	 */
 	@Override
 	public Object get(final IScope scope, final String index) throws GamaRuntimeException {
@@ -582,7 +584,7 @@ public abstract class AbstractAgent implements IAgent {
 	/**
 	 * Method getFromIndicesList()
 	 *
-	 * @see msi.gama.util.IContainer.Addressable#getFromIndicesList(msi.gama.runtime.IScope, msi.gama.util.IList)
+	 * @see msi.gama.common.interfaces.IContainer.Addressable#getFromIndicesList(msi.gama.runtime.scope.IScope, msi.gama.util.list.IList)
 	 */
 	@Override
 	public Object getFromIndicesList(final IScope scope, final IList<String> indices) throws GamaRuntimeException {

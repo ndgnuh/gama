@@ -25,24 +25,26 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.common.collect.Multimap;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.kernel.experiment.ITopLevelAgent;
-import msi.gama.kernel.model.IModel;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IExecutionContext;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IExecutionContext;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.factories.ModelFactory;
+import msi.gaml.compilation.interfaces.IGamlEcoreUtils;
+import msi.gaml.compilation.interfaces.IGamlModelBuilder;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.expressions.GamlExpressionFactory;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionFactory;
-import msi.gaml.factories.DescriptionFactory;
-import msi.gaml.factories.ModelFactory;
 import msi.gaml.operators.Strings;
 
 /**

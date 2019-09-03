@@ -9,13 +9,6 @@
    <extension-point id="gama.models" name="Allow plugins to add sample models to GAMA" schema="schema/gama.models.exsd"/>
    <extension-point id="gama.experiment" name="Implementations of IExperimentAgent" schema="schema/gama.experiment.exsd"/>
    <extension
-         point="gama.display">
-      <implementation
-            class="msi.gama.outputs.ImageDisplaySurface"
-            keyword="image">
-      </implementation>
-   </extension>
-   <extension
          point="gama.create">
       <implementation
             class="msi.gaml.statements.CreateFromNullDelegate"
@@ -37,12 +30,6 @@
       <implementation
             class="msi.gama.kernel.experiment.BatchAgent"
             keyword="batch">
-      </implementation>
-   </extension>
-   <extension
-         point="gama.event_layer">
-      <implementation
-            class="msi.gama.outputs.layers.MouseEventLayerDelegate">
       </implementation>
    </extension>
    <extension

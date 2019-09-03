@@ -4,9 +4,9 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketTimeoutException;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.extensions.network.common.ConnectorMessage;
 import ummisco.gama.extensions.network.common.MessageFactory;

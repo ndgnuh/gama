@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package irit.gama.extensions.serialize.experiment;
@@ -14,20 +14,20 @@ import com.thoughtworks.xstream.XStream;
 import irit.gama.extensions.serialize.factory.StreamConverter;
 import irit.gama.extensions.serialize.gamaType.converters.ConverterScope;
 import irit.gama.extensions.serialize.gaml.ReverseOperators;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.experiment.ExperimentPlan;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.outputs.IOutputManager;
-import msi.gama.precompiler.GamlAnnotations.experiment;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
+import ummisco.gama.processor.GamlAnnotations.experiment;
 
 @experiment (IKeyword.MEMORIZE)
 public class ExperimentBackwardAgent extends ExperimentAgent {
@@ -42,8 +42,8 @@ public class ExperimentBackwardAgent extends ExperimentAgent {
 
 	/**
 	 * Redefinition of the callback method
-	 * 
-	 * @see msi.gama.metamodel.agent.GamlAgent#_init_(msi.gama.runtime.IScope)
+	 *
+	 * @see msi.gama.metamodel.agent.GamlAgent#_init_(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object _init_(final IScope scope) {
@@ -136,7 +136,7 @@ public class ExperimentBackwardAgent extends ExperimentAgent {
 	public boolean canStepBack() {
 
 		final int current_cycle = getSimulation().getCycle(this.getScope());
-		return (current_cycle > 0) ? true : false;
+		return current_cycle > 0 ? true : false;
 		// return currentNode != null && currentNode.getParent() != null;
 	}
 

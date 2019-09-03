@@ -10,27 +10,26 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
-import static msi.gama.precompiler.ITypeProvider.ALL;
-import static msi.gama.precompiler.ITypeProvider.CONTENT_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.DENOTED_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.FIRST_CONTENT_TYPE_OR_TYPE;
-import static msi.gama.precompiler.ITypeProvider.FLOAT_IN_CASE_OF_INT;
-import static msi.gama.precompiler.ITypeProvider.INDEXED_TYPES;
-import static msi.gama.precompiler.ITypeProvider.KEY_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.SECOND_CONTENT_TYPE_OR_TYPE;
-import static msi.gama.precompiler.ITypeProvider.SECOND_DENOTED_TYPE;
-import static msi.gama.precompiler.ITypeProvider.TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.WRAPPED;
+import static ummisco.gama.processor.ITypeProvider.ALL;
+import static ummisco.gama.processor.ITypeProvider.CONTENT_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.DENOTED_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.FIRST_CONTENT_TYPE_OR_TYPE;
+import static ummisco.gama.processor.ITypeProvider.FLOAT_IN_CASE_OF_INT;
+import static ummisco.gama.processor.ITypeProvider.INDEXED_TYPES;
+import static ummisco.gama.processor.ITypeProvider.KEY_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.SECOND_CONTENT_TYPE_OR_TYPE;
+import static ummisco.gama.processor.ITypeProvider.SECOND_DENOTED_TYPE;
+import static ummisco.gama.processor.ITypeProvider.TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.WRAPPED;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.Predicate;
 
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.GamaGetter;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.GamaGetter;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
@@ -38,6 +37,7 @@ import msi.gaml.types.GamaType;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.ITypeProvider;
 
 /**
  * AbstractBinaryOperator

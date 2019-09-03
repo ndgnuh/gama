@@ -9,7 +9,7 @@
  **********************************************************************************************/
 package ummisco.gama.ui;
 
-import static msi.gama.common.interfaces.IGui.NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID;
+import static msi.gama.common.interfaces.gui.IGui.NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID;
 import static msi.gama.common.preferences.GamaPreferences.create;
 import static msi.gama.common.preferences.GamaPreferences.Interface.APPEARANCE;
 import static msi.gama.common.preferences.GamaPreferences.Interface.MENUS;

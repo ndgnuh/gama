@@ -31,12 +31,11 @@ import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveListener;
 import org.eclipse.ui.IWorkbenchPage;
 
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IDisplayDataListener;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.PlatformUtils;
-import msi.gama.outputs.LayeredDisplayData.Changes;
-import msi.gama.outputs.LayeredDisplayData.DisplayDataListener;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
@@ -51,7 +50,7 @@ import ummisco.gama.ui.views.toolbar.GamaCommand;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;
 
-public class LayeredDisplayDecorator implements DisplayDataListener {
+public class LayeredDisplayDecorator implements IDisplayDataListener {
 
 	protected SWTLayeredDisplayMultiListener keyAndMouseListener;
 	protected DisplaySurfaceMenu menuManager;

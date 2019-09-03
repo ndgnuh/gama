@@ -20,8 +20,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import msi.gama.common.interfaces.IGamlable;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.types.Types;
 
 /**

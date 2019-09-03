@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'SwingControl.java, in plugin ummisco.gama.display.java2d, is part of the source code of the GAMA modeling and simulation
- * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'SwingControl.java, in plugin ummisco.gama.display.java2d, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -11,8 +11,8 @@ package ummisco.gama.display.java2d.swing;
 
 import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Panel;
 
-import javax.swing.JApplet;
 import javax.swing.LayoutFocusTraversalPolicy;
 
 import org.eclipse.swt.SWT;
@@ -33,7 +33,7 @@ public abstract class SwingControl extends Composite {
 		DEBUG.ON();
 	}
 
-	JApplet applet;
+	Panel applet;
 	Frame frame;
 	boolean populated = false;
 
@@ -69,13 +69,13 @@ public abstract class SwingControl extends Composite {
 			populated = true;
 			frame = SWT_AWT.new_Frame(this);
 			EventQueue.invokeLater(() -> {
-				applet = new JApplet();
+				applet = new Panel();
 				if (PlatformUtils.isWindows()) {
 					applet.setFocusTraversalPolicy(new LayoutFocusTraversalPolicy());
 				}
 				frame.add(applet);
 				final Java2DDisplaySurface surface = createSwingComponent();
-				applet.getRootPane().getContentPane().add(surface);
+				applet.add(surface);
 				WorkaroundForIssue2476.installOn(applet, surface);
 				WorkbenchHelper.asyncRun(() -> SwingControl.this.getParent().layout(true, true));
 			});
@@ -104,7 +104,7 @@ public abstract class SwingControl extends Composite {
 		super.setBounds(x, y, width, height);
 	}
 
-	public JApplet getTopLevelContainer() {
+	public Panel getTopLevelContainer() {
 		return applet;
 	}
 

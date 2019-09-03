@@ -35,8 +35,8 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Singleton;
 
 import msi.gama.common.interfaces.BiConsumerWithPruning;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import ummisco.gama.gaml.ExperimentFileStructure;
 import ummisco.gama.gaml.GamlPackage;
 import ummisco.gama.gaml.Import;

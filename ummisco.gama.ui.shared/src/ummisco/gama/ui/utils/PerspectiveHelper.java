@@ -33,9 +33,9 @@ import org.eclipse.ui.internal.WorkbenchWindow;
 import org.eclipse.ui.internal.registry.PerspectiveDescriptor;
 import org.eclipse.ui.internal.registry.PerspectiveRegistry;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.gui.IGui;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.model.IModel;
 
 public class PerspectiveHelper {
 

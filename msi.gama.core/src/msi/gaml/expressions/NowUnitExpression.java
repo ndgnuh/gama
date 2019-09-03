@@ -12,7 +12,7 @@ package msi.gaml.expressions;
 
 import java.time.LocalDateTime;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaDate;
 import msi.gaml.types.Types;
 

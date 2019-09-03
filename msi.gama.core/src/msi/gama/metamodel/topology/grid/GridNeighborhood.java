@@ -12,9 +12,9 @@ package msi.gama.metamodel.topology.grid;
 
 import java.util.Set;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
-import msi.gama.util.Collector;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.util.Collector;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Written by drogoul Modified on 8 mars 2011

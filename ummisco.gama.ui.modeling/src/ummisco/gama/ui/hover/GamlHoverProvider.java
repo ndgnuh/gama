@@ -36,10 +36,10 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.inject.Inject;
 
 import msi.gama.common.interfaces.IGamlDescription;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.FacetProto;
 import msi.gaml.descriptions.SymbolProto;
 import msi.gaml.expressions.UnitConstantExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.IUnits;
 import ummisco.gama.gaml.EGaml;
 import ummisco.gama.gaml.ActionDefinition;

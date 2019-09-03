@@ -15,13 +15,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
-import msi.gama.runtime.ExecutionResult;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.ExecutionResult;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 /**
  * The class SortedTasksArchitecture. In this architecture, the tasks are all executed in the order specified by their

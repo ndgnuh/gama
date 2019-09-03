@@ -10,10 +10,10 @@
  ********************************************************************************************************/
 package msi.gaml.skills;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.ISkill;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.SkillDescription;
 
 public class Skill implements ISkill {

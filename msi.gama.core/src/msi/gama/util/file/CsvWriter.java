@@ -457,14 +457,6 @@ public class CsvWriter implements Closeable {
 			throw new IOException("This instance of the CsvWriter class has already been closed.");
 	}
 
-	/**
-	 *
-	 */
-	@Override
-	protected void finalize() {
-		close(false);
-	}
-
 	public static class Letters {
 
 		public static final char LF = '\n';

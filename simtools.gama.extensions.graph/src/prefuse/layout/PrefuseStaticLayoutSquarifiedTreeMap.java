@@ -14,8 +14,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import prefuse.action.layout.Layout;
 import prefuse.action.layout.graph.SquarifiedTreeMapLayout;
 

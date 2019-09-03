@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package ummisco.gama.ui.commands;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
 import msi.gama.util.GamaColor;
 
 /**

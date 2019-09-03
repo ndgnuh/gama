@@ -13,18 +13,9 @@ package msi.gaml.architecture.user;
 import java.util.List;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
@@ -32,6 +23,15 @@ import msi.gaml.operators.Cast;
 import msi.gaml.statements.AbstractPlaceHolderStatement;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * Written by drogoul Modified on 7 févr. 2010
@@ -213,7 +213,7 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	/**
 	 * Method setUnitLabel()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#setUnitLabel(java.lang.String)
+	 * @see msi.gama.common.interfaces.experiment.IParameter#setUnitLabel(java.lang.String)
 	 */
 	@Override
 	public void setUnitLabel(final String label) {}
@@ -221,7 +221,7 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	/**
 	 * Method isDefined()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#isDefined()
+	 * @see msi.gama.common.interfaces.experiment.IParameter#isDefined()
 	 */
 	@Override
 	public boolean isDefined() {
@@ -231,7 +231,7 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	/**
 	 * Method setDefined()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#setDefined(boolean)
+	 * @see msi.gama.common.interfaces.experiment.IParameter#setDefined(boolean)
 	 */
 	@Override
 	public void setDefined(final boolean b) {}

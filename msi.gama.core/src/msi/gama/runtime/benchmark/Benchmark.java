@@ -13,9 +13,9 @@ package msi.gama.runtime.benchmark;
 import java.util.concurrent.ConcurrentHashMap;
 
 import msi.gama.common.interfaces.IBenchmarkable;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.runtime.benchmark.Benchmark.ScopeRecord;
+import msi.gama.runtime.scope.IScope;
 
 public class Benchmark extends ConcurrentHashMap<IScope, ScopeRecord> {
 

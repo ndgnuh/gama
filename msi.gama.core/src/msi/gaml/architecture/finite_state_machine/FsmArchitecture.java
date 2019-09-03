@@ -12,25 +12,25 @@ package msi.gaml.architecture.finite_state_machine;
 
 import java.util.Map;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.architecture.reflex.ReflexArchitecture;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IStatement;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
+import ummisco.gama.processor.GamlAnnotations.skill;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Written by drogoul Modified on 12 sept. 2010

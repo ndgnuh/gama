@@ -17,10 +17,10 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.IConcept;
 import msi.gaml.skills.Skill;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 @skill (
 		name = IPlayMusic.MUSIC_SKILL,

@@ -10,11 +10,11 @@
  ********************************************************************************************************/
 package msi.gaml.variables;
 
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
 
 /**
  * @author drogoul

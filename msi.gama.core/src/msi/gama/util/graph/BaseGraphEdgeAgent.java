@@ -10,11 +10,11 @@
  ********************************************************************************************************/
 package msi.gama.util.graph;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.species;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.species;
 
 @species (
 		name = "base_edge",

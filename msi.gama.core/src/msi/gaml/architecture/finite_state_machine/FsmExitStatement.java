@@ -10,15 +10,15 @@
  ********************************************************************************************************/
 package msi.gaml.architecture.finite_state_machine;
 
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.*;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.statements.AbstractStatementSequence;
+import ummisco.gama.processor.*;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 @symbol(name = FsmStateStatement.EXIT,
 	kind = ISymbolKind.SEQUENCE_STATEMENT,

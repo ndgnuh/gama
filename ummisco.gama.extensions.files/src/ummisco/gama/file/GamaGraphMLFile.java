@@ -11,8 +11,8 @@
 package ummisco.gama.file;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.IGraph;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.Types;

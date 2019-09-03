@@ -12,10 +12,10 @@ import org.locationtech.jts.geom.Geometry;
 import irit.gama.extensions.database.sql.SqlConnection;
 import msi.gama.common.interfaces.ICreateDelegate;
 import msi.gama.metamodel.shape.GamaShape;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.statements.Arguments;
 import msi.gaml.statements.CreateStatement;
@@ -48,7 +48,7 @@ public class CreateFromDatabaseDelegate implements ICreateDelegate {
 	 *
 	 * @author thai.truongminh@gmail.com
 	 * @since 04-09-2012
-	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.IScope, java.util.List, int,
+	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.scope.IScope, java.util.List, int,
 	 *      java.lang.Object)
 	 */
 	@Override

@@ -26,16 +26,16 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.UIJob;
 
-import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.IOutputManager;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.controls.ITooltipDisplayer;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
@@ -189,7 +189,8 @@ public abstract class GamaViewPart extends ViewPart
 	public void createPartControl(final Composite composite) {
 		this.rootComposite = composite;
 		composite.addDisposeListener(this);
-		if (needsOutput() && getOutput() == null) { return; }
+		if (needsOutput() && getOutput() == null)
+			return;
 		this.setParentComposite(GamaToolbarFactory.createToolbars(this, composite));
 		ownCreatePartControl(getParentComposite());
 		// activateContext();
@@ -225,13 +226,15 @@ public abstract class GamaViewPart extends ViewPart
 
 	@Override
 	public IDisplayOutput getOutput() {
-		if (outputs.isEmpty()) { return null; }
+		if (outputs.isEmpty())
+			return null;
 		return outputs.get(0);
 	}
 
 	@Override
 	public void addOutput(final IDisplayOutput out) {
-		if (out == null) { return; }
+		if (out == null)
+			return;
 		if (!outputs.contains(out)) {
 			outputs.add(out);
 		} else {
@@ -269,7 +272,8 @@ public abstract class GamaViewPart extends ViewPart
 	 */
 	@Override
 	public void stopDisplayingTooltips() {
-		if (toolbar == null || toolbar.isDisposed()) { return; }
+		if (toolbar == null || toolbar.isDisposed())
+			return;
 		if (toolbar.hasTooltip()) {
 			toolbar.wipe(SWT.LEFT, false);
 		}
@@ -277,7 +281,8 @@ public abstract class GamaViewPart extends ViewPart
 
 	@Override
 	public void displayTooltip(final String text, final GamaUIColor color) {
-		if (toolbar == null || toolbar.isDisposed()) { return; }
+		if (toolbar == null || toolbar.isDisposed())
+			return;
 		toolbar.tooltip(text, color, SWT.LEFT);
 	}
 
@@ -322,7 +327,8 @@ public abstract class GamaViewPart extends ViewPart
 		String overlay = over;
 		int start = s;
 		int end = e;
-		if (str == null) { return null; }
+		if (str == null)
+			return null;
 		if (overlay == null) {
 			overlay = "";
 		}

@@ -24,10 +24,10 @@ import org.eclipse.ui.console.IOConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 import org.eclipse.ui.internal.console.IOConsoleViewer;
 
-import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IGamaView;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.experiment.ITopLevelAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;

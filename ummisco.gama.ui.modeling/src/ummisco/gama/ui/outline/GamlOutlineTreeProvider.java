@@ -17,9 +17,8 @@ import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import com.google.inject.Inject;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.ISymbolKind;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.factories.DescriptionFactory;
 import ummisco.gama.gaml.EGaml;
 import ummisco.gama.gaml.Block;
 import ummisco.gama.gaml.ExperimentFileStructure;
@@ -32,6 +31,7 @@ import ummisco.gama.gaml.S_Global;
 import ummisco.gama.gaml.S_Species;
 import ummisco.gama.gaml.Statement;
 import ummisco.gama.gaml.util.GamlSwitch;
+import ummisco.gama.processor.ISymbolKind;
 import ummisco.gama.ui.labeling.GamlLabelProvider;
 
 /**

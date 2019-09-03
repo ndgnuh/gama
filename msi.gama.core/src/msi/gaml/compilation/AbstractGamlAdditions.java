@@ -16,6 +16,7 @@ import static msi.gama.common.interfaces.IKeyword._DOT;
 import static msi.gaml.expressions.IExpressionCompiler.OPERATORS;
 
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,19 +33,23 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
-import msi.gama.common.interfaces.IExperimentAgentCreator;
-import msi.gama.common.interfaces.IExperimentAgentCreator.ExperimentAgentDescription;
 import msi.gama.common.interfaces.ISkill;
+import msi.gama.common.interfaces.experiment.IExperimentAgentCreator;
+import msi.gama.common.interfaces.experiment.IExperimentAgentCreator.ExperimentAgentDescription;
 import msi.gama.common.util.JavaUtils;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
 import msi.gama.util.file.IGamaFile;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.compilation.annotations.serializer;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.factories.SymbolFactory;
+import msi.gaml.compilation.interfaces.GamaGetter;
+import msi.gaml.compilation.interfaces.IAgentConstructor;
+import msi.gaml.compilation.interfaces.IGamaHelper;
+import msi.gaml.compilation.interfaces.IGamlAdditions;
+import msi.gaml.compilation.interfaces.ISymbolConstructor;
+import msi.gaml.compilation.interfaces.IValidator;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import msi.gaml.compilation.kernel.GamaSkillRegistry;
 import msi.gaml.descriptions.FacetProto;
@@ -60,13 +65,15 @@ import msi.gaml.descriptions.TypeDescription;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionCompiler;
-import msi.gaml.factories.DescriptionFactory;
-import msi.gaml.factories.SymbolFactory;
 import msi.gaml.types.GamaFileType;
 import msi.gaml.types.IType;
 import msi.gaml.types.ParametricFileType;
 import msi.gaml.types.Signature;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  *
@@ -170,12 +177,13 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 		final serializer s = (serializer) c.getAnnotation(serializer.class);
 		try {
 			if (v != null) {
-				validator2 = v.value().newInstance();
+				validator2 = v.value().getConstructor().newInstance();
 			}
 			if (s != null) {
-				serializer2 = s.value().newInstance();
+				serializer2 = s.value().getConstructor().newInstance();
 			}
-		} catch (InstantiationException | IllegalAccessException e) {}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {}
 
 		final Collection<String> keywords;
 		if (ISymbolKind.Variable.KINDS.contains(sKind)) {
@@ -360,7 +368,7 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 
 	private String getVarDoc(final String name, final Class<?> clazz) {
 		final vars vars = clazz.getAnnotationsByType(vars.class)[0];
-		for (final msi.gama.precompiler.GamlAnnotations.variable v : vars.value()) {
+		for (final ummisco.gama.processor.GamlAnnotations.variable v : vars.value()) {
 			if (v.name().equals(name)) {
 				final doc[] docs = v.doc();
 				// final String d = "";

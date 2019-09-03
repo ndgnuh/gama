@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.common.base.Objects;
 
-import msi.gama.util.GamaMapFactory;
+import msi.gama.util.map.GamaMapFactory;
 import one.util.streamex.StreamEx;
 
 /**

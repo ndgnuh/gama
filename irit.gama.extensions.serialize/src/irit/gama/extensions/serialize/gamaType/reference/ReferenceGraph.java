@@ -3,9 +3,9 @@ package irit.gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import irit.gama.extensions.serialize.gamaType.reduced.GamaGraphReducer;
+import msi.gama.common.interfaces.IReference;
+import msi.gama.common.interfaces.IReference.AgentAttribute;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.util.IReference;
-import msi.gama.util.IReference.AgentAttribute;
 import msi.gama.util.graph.GamaGraph;
 import msi.gaml.types.Types;
 

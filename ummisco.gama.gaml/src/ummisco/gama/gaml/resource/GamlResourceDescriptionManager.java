@@ -22,8 +22,8 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.inject.Inject;
 
-import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
+import msi.gama.common.interfaces.ICollector;
+import msi.gama.common.util.Collector;
 import ummisco.gama.gaml.indexer.GamlResourceIndexer;
 import ummisco.gama.scoping.BuiltinGlobalScopeProvider;
 

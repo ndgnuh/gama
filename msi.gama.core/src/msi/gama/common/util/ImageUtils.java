@@ -40,7 +40,7 @@ import com.sun.media.jai.codec.FileSeekableStream;
 
 import it.geosolutions.jaiext.ConcurrentOperationRegistry;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.dev.utils.DEBUG;
 
 public class ImageUtils {

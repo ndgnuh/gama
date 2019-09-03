@@ -16,13 +16,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import msi.gama.common.interfaces.IPreferenceChangeListener;
+import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaMapFactory;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 

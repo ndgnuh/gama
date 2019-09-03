@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package ummisco.gama.ui.commands;
 
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IStatusMessage;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.runtime.IStatusMessage;
 import msi.gama.util.GamaColor;
 
 /**
@@ -41,7 +41,7 @@ public class SubTaskMessage implements IStatusMessage {
 	/**
 	 * Method getText()
 	 * 
-	 * @see msi.gama.common.interfaces.IStatusMessage#getText()
+	 * @see msi.gama.runtime.IStatusMessage#getText()
 	 */
 	@Override
 	public String getText() {
@@ -51,7 +51,7 @@ public class SubTaskMessage implements IStatusMessage {
 	/**
 	 * Method getCode()
 	 * 
-	 * @see msi.gama.common.interfaces.IStatusMessage#getCode()
+	 * @see msi.gama.runtime.IStatusMessage#getCode()
 	 */
 	@Override
 	public int getCode() {
@@ -69,7 +69,7 @@ public class SubTaskMessage implements IStatusMessage {
 	/**
 	 * Method getColor()
 	 * 
-	 * @see msi.gama.common.interfaces.IStatusMessage#getColor()
+	 * @see msi.gama.runtime.IStatusMessage#getColor()
 	 */
 	@Override
 	public GamaColor getColor() {

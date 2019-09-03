@@ -14,9 +14,9 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 
+import msi.gama.common.interfaces.ICollector;
 import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
+import msi.gama.common.util.Collector;
 import msi.gaml.compilation.kernel.GamaSkillRegistry;
 import msi.gaml.descriptions.BasicExpressionDescription;
 import msi.gaml.descriptions.IDescription;

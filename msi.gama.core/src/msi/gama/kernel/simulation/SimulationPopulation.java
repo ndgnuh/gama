@@ -15,21 +15,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.experiment.ExperimentPlan;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.continuous.AmorphousTopology;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gama.runtime.concurrent.GamaExecutorService.Caller;
 import msi.gama.runtime.concurrent.SimulationRunner;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.species.ISpecies;
 import msi.gaml.variables.IVariable;
 
@@ -53,7 +53,7 @@ public class SimulationPopulation extends GamaPopulation<SimulationAgent> {
 	/**
 	 * Method fireAgentRemoved()
 	 *
-	 * @see msi.gama.metamodel.population.GamaPopulation#fireAgentRemoved(msi.gama.metamodel.agent.IAgent)
+	 * @see msi.gama.metamodel.population.GamaPopulation#fireAgentRemoved(msi.gama.common.interfaces.IAgent)
 	 */
 	@Override
 	protected void fireAgentRemoved(final IScope scope, final IAgent agent) {

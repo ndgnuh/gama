@@ -14,10 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import msi.gama.common.interfaces.IModel;
 import msi.gama.headless.core.GamaHeadlessException;
+import msi.gama.headless.core.GamlProperties;
 import msi.gama.headless.core.HeadlessSimulationLoader;
-import msi.gama.kernel.model.IModel;
-import msi.gama.precompiler.GamlProperties;
 import msi.gaml.compilation.GamlCompilationError;
 
 public abstract class MoleSimulationLoader {

@@ -17,8 +17,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import msi.gama.precompiler.doc.utils.Constants;
-import msi.gama.precompiler.doc.utils.OSUtils;
+import ummisco.gama.processor.doc.Constants;
+import ummisco.gama.processor.doc.OSUtils;
 
 public class ConvertToPDF {
 

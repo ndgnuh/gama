@@ -10,28 +10,28 @@
  ********************************************************************************************************/
 package msi.gama.util.matrix;
 
+import msi.gama.common.interfaces.IAddressableContainer;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModifiableContainer;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.precompiler.GamlAnnotations.test;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IOperatorCategory;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IAddressableContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IModifiableContainer;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gaml.types.IType;
 import one.util.streamex.StreamEx;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IOperatorCategory;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.operator;
+import ummisco.gama.processor.GamlAnnotations.test;
+import ummisco.gama.processor.GamlAnnotations.usage;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Written by drogoul Modified on 15 d�c. 2010

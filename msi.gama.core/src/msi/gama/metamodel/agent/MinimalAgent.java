@@ -17,21 +17,22 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.species;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
+import msi.gama.util.list.IList;
 import msi.gaml.species.GamlSpecies;
 import msi.gaml.species.ISpecies;
 import msi.gaml.types.GamaGeometryType;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.species;
 
 @species (
 		name = IKeyword.AGENT,
@@ -209,7 +210,7 @@ public class MinimalAgent extends AbstractAgent {
 	 * implementation is provided in this class as well (equivalent to a super.init())
 	 *
 	 * @see GamlAgent#_init_()
-	 * @see msi.gama.common.interfaces.IStepable#step(msi.gama.runtime.IScope)
+	 * @see msi.gama.runtime.IStepable#step(msi.gama.runtime.scope.IScope)
 	 * @warning This method should NOT be overriden (except for some rare occasions like in SimulationAgent). Always
 	 *          override _init_(IScope) instead.
 	 */
@@ -228,7 +229,7 @@ public class MinimalAgent extends AbstractAgent {
 	 * implementation is provided in this class as well (equivalent to a super.doStep());
 	 *
 	 * @see GamlAgent#_step_()
-	 * @see msi.gama.common.interfaces.IStepable#step(msi.gama.runtime.IScope)
+	 * @see msi.gama.runtime.IStepable#step(msi.gama.runtime.scope.IScope)
 	 * @warning This method should NOT be overriden (except for some rare occasions like in SimulationAgent). Always
 	 *          override _step_(IScope) instead.
 	 */

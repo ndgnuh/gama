@@ -18,7 +18,8 @@ import java.util.Set;
 import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
@@ -26,11 +27,10 @@ import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ISpatialIndex;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gama.util.path.GamaSpatialPath;
 import msi.gama.util.path.PathFactory;
 import msi.gaml.operators.Maths;
@@ -94,7 +94,7 @@ public class AmorphousTopology implements ITopology {
 	public void initialize(final IScope scope, final IPopulation<? extends IAgent> pop) throws GamaRuntimeException {}
 
 	/**
-	 * @see msi.gama.environment.ITopology#updateAgent(msi.gama.interfaces.IAgent, boolean, msi.gama.util.GamaPoint,
+	 * @see msi.gama.environment.ITopology#updateAgent(msi.gama.common.interfaces.interfaces.IAgent, boolean, msi.gama.util.GamaPoint,
 	 *      org.locationtech.jts.geom.Envelope)
 	 */
 	// @Override
@@ -116,7 +116,7 @@ public class AmorphousTopology implements ITopology {
 	}
 
 	/**
-	 * @see msi.gama.environment.ITopology#removeAgent(msi.gama.interfaces.IAgent)
+	 * @see msi.gama.environment.ITopology#removeAgent(msi.gama.common.interfaces.interfaces.IAgent)
 	 */
 	@Override
 	public void removeAgent(final IAgent agent) {}

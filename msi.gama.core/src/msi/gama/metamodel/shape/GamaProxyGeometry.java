@@ -20,13 +20,13 @@ import org.locationtech.jts.geom.ShapeType;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.interfaces.BiConsumerWithPruning;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 
@@ -104,7 +104,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method stringValue()
 	 *
-	 * @see msi.gama.common.interfaces.IValue#stringValue(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IValue#stringValue(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public String stringValue(final IScope scope) throws GamaRuntimeException {
@@ -121,7 +121,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method copy()
 	 *
-	 * @see msi.gama.common.interfaces.IValue#copy(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IValue#copy(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public IShape copy(final IScope scope) throws GamaRuntimeException {
@@ -213,7 +213,7 @@ public abstract class GamaProxyGeometry implements IShape, Cloneable {
 	/**
 	 * Method setAgent()
 	 *
-	 * @see msi.gama.metamodel.shape.IShape#setAgent(msi.gama.metamodel.agent.IAgent)
+	 * @see msi.gama.metamodel.shape.IShape#setAgent(msi.gama.common.interfaces.IAgent)
 	 */
 	@Override
 	public void setAgent(final IAgent agent) {

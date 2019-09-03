@@ -19,12 +19,14 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.MemoryUtils;
 import msi.gama.common.util.RandomUtils;
-import msi.gama.kernel.experiment.IExperimentAgent;
-import msi.gama.kernel.experiment.ITopLevelAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.kernel.simulation.SimulationClock;
 import msi.gama.metamodel.agent.GamlAgent;
@@ -32,28 +34,26 @@ import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.continuous.AmorphousTopology;
-import msi.gama.outputs.IOutputManager;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.species;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.ExecutionScope;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.ExecutionScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.IList;
+import msi.gama.util.list.IList;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Containers;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 import one.util.streamex.StreamEx;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.species;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 @species (
 		name = IKeyword.PLATFORM,
@@ -222,7 +222,8 @@ public class PlatformAgent extends GamlAgent implements ITopLevelAgent, IExpress
 
 	@Override
 	public IOutputManager getOutputManager() {
-		if (getExperiment() != null) { return getExperiment().getOutputManager(); }
+		if (getExperiment() != null)
+			return getExperiment().getOutputManager();
 		return null;
 	}
 
@@ -253,7 +254,8 @@ public class PlatformAgent extends GamlAgent implements ITopLevelAgent, IExpress
 
 	@Override
 	public IExperimentAgent getExperiment() {
-		if (GAMA.getExperiment() != null) { return GAMA.getExperiment().getAgent(); }
+		if (GAMA.getExperiment() != null)
+			return GAMA.getExperiment().getAgent();
 		return null;
 	}
 

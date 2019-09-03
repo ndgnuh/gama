@@ -21,12 +21,12 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.common.geometry.ICoordinates;
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.projection.IProjection;
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 import msi.gaml.types.GamaGeometryType;
 

@@ -23,20 +23,20 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.file;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFile;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.file;
 
 /**
  * Class GamaXMLFile. TODO: Everything ! What kind of buffer should be returned from here ? The current implementation
@@ -95,7 +95,7 @@ public class GamaXMLFile extends GamaFile<IMap<String, String>, String> {
 	/**
 	 * Method computeEnvelope()
 	 *
-	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.IScope)
+	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Envelope3D computeEnvelope(final IScope scope) {
@@ -105,7 +105,7 @@ public class GamaXMLFile extends GamaFile<IMap<String, String>, String> {
 	/**
 	 * Method fillBuffer()
 	 *
-	 * @see ummisco.gama.file.GamaFile#fillBuffer(msi.gama.runtime.IScope)
+	 * @see ummisco.gama.file.GamaFile#fillBuffer(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	protected void fillBuffer(final IScope scope) throws GamaRuntimeException {

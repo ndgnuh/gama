@@ -27,7 +27,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
-import msi.gama.util.Collector;
+import msi.gama.common.util.Collector;
 
 /**
  * This class contains custom scoping description.

@@ -13,9 +13,9 @@ package msi.gaml.statements.draw;
 import java.awt.geom.Rectangle2D;
 
 import msi.gama.common.geometry.Scaling3D;
-import msi.gama.common.interfaces.IGraphics;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.outputs.IGraphics;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 

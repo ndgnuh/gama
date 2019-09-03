@@ -14,7 +14,7 @@ import java.util.Map;
 
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.ITyped;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;

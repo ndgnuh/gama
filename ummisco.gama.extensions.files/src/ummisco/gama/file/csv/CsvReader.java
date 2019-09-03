@@ -104,11 +104,14 @@ public class CsvReader {
 	 *            The {@link java.nio.charset.Charset Charset} to use while parsing the data.
 	 */
 	public CsvReader(final String fileName, final char delimiter, final Charset charset) throws FileNotFoundException {
-		if (fileName == null) { throw new IllegalArgumentException("Parameter fileName can not be null."); }
+		if (fileName == null)
+			throw new IllegalArgumentException("Parameter fileName can not be null.");
 
-		if (charset == null) { throw new IllegalArgumentException("Parameter charset can not be null."); }
+		if (charset == null)
+			throw new IllegalArgumentException("Parameter charset can not be null.");
 
-		if (!new File(fileName).exists()) { throw new FileNotFoundException("File " + fileName + " does not exist."); }
+		if (!new File(fileName).exists())
+			throw new FileNotFoundException("File " + fileName + " does not exist.");
 
 		this.fileName = fileName;
 		this.userSettings.Delimiter = delimiter;
@@ -151,7 +154,8 @@ public class CsvReader {
 	 *            The character to use as the column delimiter.
 	 */
 	public CsvReader(final Reader inputStream, final char delimiter) {
-		if (inputStream == null) { throw new IllegalArgumentException("Parameter inputStream can not be null."); }
+		if (inputStream == null)
+			throw new IllegalArgumentException("Parameter inputStream can not be null.");
 
 		this.inputStream = inputStream;
 		this.userSettings.Delimiter = delimiter;
@@ -335,9 +339,8 @@ public class CsvReader {
 	 *                When an illegal value is specified for escapeMode.
 	 */
 	public void setEscapeMode(final int escapeMode) throws IllegalArgumentException {
-		if (escapeMode != ESCAPE_MODE_DOUBLED && escapeMode != ESCAPE_MODE_BACKSLASH) {
+		if (escapeMode != ESCAPE_MODE_DOUBLED && escapeMode != ESCAPE_MODE_BACKSLASH)
 			throw new IllegalArgumentException("Parameter escapeMode must be a valid value.");
-		}
 
 		userSettings.EscapeMode = escapeMode;
 	}
@@ -413,7 +416,8 @@ public class CsvReader {
 	public String[] getHeaders() throws IOException {
 		checkClosed();
 
-		if (headersHolder.Headers == null) { return null; }
+		if (headersHolder.Headers == null)
+			return null;
 		// use clone here to prevent the outside code from
 		// setting values on the array directly, which would
 		// throw off the index lookup based on header name
@@ -460,7 +464,8 @@ public class CsvReader {
 	public String get(final int columnIndex) throws IOException {
 		checkClosed();
 
-		if (columnIndex > -1 && columnIndex < columnsCount) { return values[columnIndex]; }
+		if (columnIndex > -1 && columnIndex < columnsCount)
+			return values[columnIndex];
 		return "";
 	}
 
@@ -1427,7 +1432,8 @@ public class CsvReader {
 
 		final Object indexValue = headersHolder.IndexByName.get(headerName);
 
-		if (indexValue != null) { return ((Integer) indexValue).intValue(); }
+		if (indexValue != null)
+			return ((Integer) indexValue).intValue();
 		return -1;
 	}
 
@@ -1533,7 +1539,8 @@ public class CsvReader {
 	 *                Thrown if this object has already been closed.
 	 */
 	private void checkClosed() throws IOException {
-		if (closed) { throw new IOException("This instance of the CsvReader class has already been closed."); }
+		if (closed)
+			throw new IOException("This instance of the CsvReader class has already been closed.");
 	}
 
 	/**
@@ -1617,7 +1624,7 @@ public class CsvReader {
 
 		public static final char CR = '\r';
 
-		public static final char QUOTE = '"';
+		// public static final char QUOTE = '"';
 
 		public static final char COMMA = ',';
 

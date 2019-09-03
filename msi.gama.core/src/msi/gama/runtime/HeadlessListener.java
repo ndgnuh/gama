@@ -23,23 +23,22 @@ import java.util.logging.Logger;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import msi.gama.common.interfaces.IConsoleDisplayer;
-import msi.gama.common.interfaces.IDisplayCreator;
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IStatusDisplayer;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.experiment.ITopLevelAgent;
-import msi.gama.kernel.model.IModel;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IConsoleDisplayer;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.gui.IStatusDisplayer;
+import msi.gama.common.interfaces.outputs.IDisplayCreator;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.LayeredDisplayOutput;
-import msi.gama.outputs.display.NullDisplaySurface;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.architecture.user.UserPanelStatement;
 import msi.gaml.operators.Strings;
@@ -143,7 +142,7 @@ public class HeadlessListener implements IGui {
 	// @SuppressWarnings ("rawtypes") static Map<String, Class> displayClasses = null;
 
 	@Override
-	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output) {
+	public IDisplaySurface getDisplaySurfaceFor(final IDisplayOutput.Layered output) {
 
 		IDisplaySurface surface = null;
 		final IDisplayCreator creator = DISPLAYS.get("image");
@@ -151,7 +150,7 @@ public class HeadlessListener implements IGui {
 			surface = creator.create(output);
 			surface.outputReloaded();
 		} else
-			return new NullDisplaySurface();
+			return IDisplaySurface.NULL;
 		return surface;
 	}
 
@@ -179,7 +178,7 @@ public class HeadlessListener implements IGui {
 	/**
 	 * Method updateSpeedDisplay()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#updateSpeedDisplay(java.lang.Double)
+	 * @see msi.gama.common.interfaces.gui.IGui#updateSpeedDisplay(java.lang.Double)
 	 */
 	@Override
 	public void updateSpeedDisplay(final IScope scope, final Double d, final boolean notify) {}
@@ -187,7 +186,7 @@ public class HeadlessListener implements IGui {
 	/**
 	 * Method closeSimulationViews()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#closeSimulationViews(boolean)
+	 * @see msi.gama.common.interfaces.gui.IGui#closeSimulationViews(boolean)
 	 */
 	@Override
 	public void closeSimulationViews(final IScope scope, final boolean andOpenModelingPerspective,
@@ -196,7 +195,7 @@ public class HeadlessListener implements IGui {
 	/**
 	 * Method getFrontmostSimulationState()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#getExperimentState()
+	 * @see msi.gama.common.interfaces.gui.IGui#getExperimentState()
 	 */
 	@Override
 	public String getExperimentState(final String uid) {
@@ -206,7 +205,7 @@ public class HeadlessListener implements IGui {
 	/**
 	 * Method updateSimulationState()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#updateExperimentState(java.lang.String)
+	 * @see msi.gama.common.interfaces.gui.IGui#updateExperimentState(java.lang.String)
 	 */
 	@Override
 	public void updateExperimentState(final IScope scope, final String state) {}
@@ -214,7 +213,7 @@ public class HeadlessListener implements IGui {
 	/**
 	 * Method updateSimulationState()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#updateExperimentState()
+	 * @see msi.gama.common.interfaces.gui.IGui#updateExperimentState()
 	 */
 	@Override
 	public void updateExperimentState(final IScope scope) {}

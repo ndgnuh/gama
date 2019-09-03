@@ -21,34 +21,34 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IGamlIssue;
+import msi.gama.common.interfaces.IMacroAgent;
 import msi.gama.common.interfaces.ISkill;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
 import msi.gama.metamodel.agent.MinimalAgent;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix.GridPopulation.GamlGridAgent;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix.GridPopulation.MinimalGridAgent;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.architecture.reflex.AbstractArchitecture;
 import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.IAgentConstructor;
-import msi.gaml.compilation.IGamaHelper;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.interfaces.IAgentConstructor;
+import msi.gaml.compilation.interfaces.IGamaHelper;
 import msi.gaml.compilation.kernel.GamaSkillRegistry;
 import msi.gaml.expressions.DenotedActionExpression;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.ListExpression;
 import msi.gaml.expressions.SkillConstantExpression;
 import msi.gaml.expressions.SpeciesConstantExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.GamaType;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ITypeProvider;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class SpeciesDescription extends TypeDescription {

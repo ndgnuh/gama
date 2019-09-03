@@ -13,7 +13,7 @@ package msi.gama.common.interfaces;
 import java.util.List;
 import java.util.Map;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.statements.Arguments;
 import msi.gaml.statements.CreateStatement;
 import msi.gaml.types.IType;

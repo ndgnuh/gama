@@ -19,13 +19,13 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.ICollector;
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
-import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
+import msi.gama.runtime.scope.IScope;
 
 public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compound {
 

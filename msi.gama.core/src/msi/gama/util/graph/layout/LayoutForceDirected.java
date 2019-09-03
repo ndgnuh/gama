@@ -7,8 +7,8 @@ import org.jgrapht.Graph;
 
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
 import msi.gaml.operators.Containers;
 import msi.gaml.operators.Points;
 import msi.gaml.operators.Spatial.Punctal;

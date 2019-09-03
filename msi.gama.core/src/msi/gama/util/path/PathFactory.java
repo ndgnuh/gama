@@ -18,9 +18,9 @@ import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.metamodel.topology.graph.GraphTopology;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.IGraph;
+import msi.gama.util.list.IList;
 
 public class PathFactory {
 

@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gaml.types;
 
-import msi.gama.runtime.IScope;
-import msi.gama.util.IContainer;
+import msi.gama.common.interfaces.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 
 /**

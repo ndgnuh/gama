@@ -28,7 +28,8 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.e4.ui.workbench,
  org.eclipse.ui.ide.application,
  ummisco.gama.gaml;bundle-version="1.9.0",
- ummisco.gama.extensions.files;bundle-version="1.9.0";visibility:=reexport
+ ummisco.gama.extensions.files;bundle-version="1.9.0";visibility:=reexport,
+ ummisco.gama.outputs;bundle-version="1.9.0"
 Export-Package: ummisco.gama.ui,
  ummisco.gama.ui.access,
  ummisco.gama.ui.bindings,

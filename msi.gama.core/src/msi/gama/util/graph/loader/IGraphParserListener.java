@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package msi.gama.util.graph.loader;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public interface IGraphParserListener {
 

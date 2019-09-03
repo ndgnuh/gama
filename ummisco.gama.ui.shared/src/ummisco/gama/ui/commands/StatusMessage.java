@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package ummisco.gama.ui.commands;
 
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IStatusMessage;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.runtime.IStatusMessage;
 import msi.gama.util.GamaColor;
 
 public class StatusMessage implements IStatusMessage {
@@ -44,7 +44,7 @@ public class StatusMessage implements IStatusMessage {
 	/**
 	 * Method getColor()
 	 * 
-	 * @see msi.gama.common.interfaces.IStatusMessage#getColor()
+	 * @see msi.gama.runtime.IStatusMessage#getColor()
 	 */
 	@Override
 	public GamaColor getColor() {

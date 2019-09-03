@@ -6,7 +6,11 @@ Bundle-Version: 1.9.0.qualifier
 Require-Bundle: msi.gama.core;bundle-version="1.4.0",
  msi.gama.ext;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: ummisco.gama.extensions.maths.ode.statements
+Export-Package: ummisco.gama.extensions.maths.ode.statements,
+ ummisco.gama.extensions.maths.ode.utils.classicalEquations.epidemiology,
+ ummisco.gama.extensions.maths.ode.utils.classicalEquations.populationDynamics,
+ ummisco.gama.extensions.maths.ode.utils.solver,
+ ummisco.gama.extensions.maths.pde.diffusion.statements
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: ummisco.gaml.extensions.maths
 

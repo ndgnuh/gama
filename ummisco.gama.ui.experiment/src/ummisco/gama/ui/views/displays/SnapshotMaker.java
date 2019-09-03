@@ -10,15 +10,15 @@ import javax.imageio.ImageIO;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 
-import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IDisplayData;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.FileUtils;
 import msi.gama.common.util.ImageUtils;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.LayeredDisplayData;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.operators.Files;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -28,7 +28,7 @@ public class SnapshotMaker {
 		if (output == null || surface == null || composite == null)
 			return;
 		final IScope scope = surface.getScope();
-		final LayeredDisplayData data = surface.getData();
+		final IDisplayData data = surface.getData();
 		final int w = (int) data.getImageDimension().getX();
 		final int h = (int) data.getImageDimension().getY();
 		final int width = w == -1 ? surface.getWidth() : w;

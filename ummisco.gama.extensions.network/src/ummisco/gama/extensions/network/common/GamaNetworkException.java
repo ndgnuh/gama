@@ -9,8 +9,8 @@
  **********************************************************************************************/
 package ummisco.gama.extensions.network.common;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 public class GamaNetworkException extends GamaRuntimeException {
 

@@ -11,8 +11,8 @@ package ummisco.gama.extensions.maths.ode.utils.solver;
 
 import org.apache.commons.math3.ode.nonstiff.AdamsBashforthIntegrator;
 
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 
 public class AdamsBashforthSolver extends Solver {
 

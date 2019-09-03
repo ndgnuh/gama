@@ -12,27 +12,18 @@ package msi.gaml.species;
 
 import java.util.Collection;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.IDescriptionValidator;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.interfaces.IDescriptionValidator;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
@@ -41,6 +32,15 @@ import msi.gaml.species.GamlSpecies.SpeciesValidator;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import one.util.streamex.StreamEx;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * The Class GamlSpecies. A species specified by GAML attributes
@@ -235,7 +235,7 @@ public class GamlSpecies extends AbstractSpecies {
 		/**
 		 * Method validate()
 		 *
-		 * @see msi.gaml.compilation.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
+		 * @see msi.gaml.compilation.interfaces.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
 		 */
 		@Override
 		public void validate(final IDescription desc) {
@@ -410,7 +410,7 @@ public class GamlSpecies extends AbstractSpecies {
 	/**
 	 * Method accept()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, msi.gama.metamodel.shape.IShape)
 	 */
 	@Override
@@ -434,7 +434,7 @@ public class GamlSpecies extends AbstractSpecies {
 	/**
 	 * Method filter()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, java.util.Collection)
 	 */
 	@Override
@@ -448,7 +448,7 @@ public class GamlSpecies extends AbstractSpecies {
 	/**
 	 * Method getType()
 	 *
-	 * @see msi.gama.util.IContainer#getGamlType()
+	 * @see msi.gama.common.interfaces.IContainer#getGamlType()
 	 */
 	@Override
 	public IContainerType<?> getGamlType() {

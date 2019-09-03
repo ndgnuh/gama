@@ -22,18 +22,18 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IExecutionContext;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IExecutionContext;
+import msi.gama.util.map.IMap;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.StringBasedExpressionDescription;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.IUnits;
 import msi.gaml.statements.ActionStatement;
 import msi.gaml.statements.Arguments;

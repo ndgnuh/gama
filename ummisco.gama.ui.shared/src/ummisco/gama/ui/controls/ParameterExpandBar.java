@@ -30,8 +30,8 @@ import org.eclipse.swt.widgets.Widget;
 
 import com.google.common.base.Objects;
 
-import msi.gama.common.interfaces.IGui;
 import msi.gama.common.interfaces.ItemList;
+import msi.gama.common.interfaces.gui.IGui;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.resources.IGamaIcons;

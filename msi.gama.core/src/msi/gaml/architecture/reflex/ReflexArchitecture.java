@@ -15,17 +15,17 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
-import msi.gama.runtime.ExecutionResult;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.ISymbol;
-import msi.gaml.statements.IStatement;
+import msi.gama.runtime.scope.ExecutionResult;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 /**
  * Written by drogoul Modified on 12 sept. 2010

@@ -10,24 +10,24 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
-import static msi.gama.precompiler.ITypeProvider.CONTENT_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.DENOTED_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.FIRST_CONTENT_TYPE_OR_TYPE;
-import static msi.gama.precompiler.ITypeProvider.FIRST_ELEMENT_CONTENT_TYPE;
-import static msi.gama.precompiler.ITypeProvider.FLOAT_IN_CASE_OF_INT;
-import static msi.gama.precompiler.ITypeProvider.KEY_TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.TYPE_AT_INDEX;
-import static msi.gama.precompiler.ITypeProvider.WRAPPED;
+import static ummisco.gama.processor.ITypeProvider.CONTENT_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.DENOTED_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.FIRST_CONTENT_TYPE_OR_TYPE;
+import static ummisco.gama.processor.ITypeProvider.FIRST_ELEMENT_CONTENT_TYPE;
+import static ummisco.gama.processor.ITypeProvider.FLOAT_IN_CASE_OF_INT;
+import static ummisco.gama.processor.ITypeProvider.KEY_TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.TYPE_AT_INDEX;
+import static ummisco.gama.processor.ITypeProvider.WRAPPED;
 
 import java.util.Collection;
 import java.util.function.Predicate;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamaGetter;
+import msi.gaml.compilation.interfaces.GamaGetter;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;

@@ -10,11 +10,12 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.Symbol;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.StatementDescription;
 

@@ -11,7 +11,7 @@ package ummisco.gama.extensions.network.common;
 
 import irit.gama.extensions.serialize.factory.StreamConverter;
 import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class CompositeGamaMessage extends GamaMessage {
 	protected Object deserializeContent;

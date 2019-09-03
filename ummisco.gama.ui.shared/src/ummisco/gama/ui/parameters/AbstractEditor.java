@@ -40,14 +40,14 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.common.util.StringUtils;
 import msi.gama.kernel.experiment.ExperimentParameter;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.GamaStringType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import irit.gama.extensions.serialize.gamaType.reduced.GamaMapReducer;
 import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 
 @SuppressWarnings ({ "rawtypes" })
 public class GamaMapConverter implements Converter {

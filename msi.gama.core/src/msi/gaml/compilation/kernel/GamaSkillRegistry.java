@@ -22,8 +22,8 @@ import java.util.Set;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.ISkill;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.IDescription;

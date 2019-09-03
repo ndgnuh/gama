@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.apache.commons.math3.ode.nonstiff.LutherIntegrator;
 
-import msi.gama.util.IMap;
-import msi.gama.util.IList;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 
 public class LutherSolver extends Solver {
 

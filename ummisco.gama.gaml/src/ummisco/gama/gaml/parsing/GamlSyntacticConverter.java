@@ -73,18 +73,17 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.util.Collector;
+import msi.gama.common.util.Collector;
 import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.compilation.ast.SyntacticFactory;
 import msi.gaml.compilation.ast.SyntacticModelElement;
 import msi.gaml.compilation.ast.SyntacticModelElement.SyntacticExperimentModelElement;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.ConstantExpressionDescription;
 import msi.gaml.descriptions.IExpressionDescription;
 import msi.gaml.descriptions.LabelExpressionDescription;
 import msi.gaml.descriptions.OperatorExpressionDescription;
 import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.statements.Facets;
 import ummisco.gama.gaml.EGaml;
 import ummisco.gama.gaml.expression.ExpressionDescriptionBuilder;
@@ -117,6 +116,7 @@ import ummisco.gama.gaml.TypeRef;
 import ummisco.gama.gaml.VariableRef;
 import ummisco.gama.gaml.impl.ModelImpl;
 import ummisco.gama.gaml.resource.GamlResourceServices;
+import ummisco.gama.processor.ISymbolKind;
 
 /**
  *

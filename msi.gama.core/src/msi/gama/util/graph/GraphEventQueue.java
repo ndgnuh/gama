@@ -13,8 +13,8 @@ package msi.gama.util.graph;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Receives graph events and stores them. Notably enables to update the graph only after the step of the simulation, not

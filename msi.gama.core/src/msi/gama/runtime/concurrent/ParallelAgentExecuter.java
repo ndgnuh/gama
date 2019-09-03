@@ -12,10 +12,10 @@ package msi.gama.runtime.concurrent;
 
 import java.util.Spliterator;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.statements.IExecutable;
+import msi.gama.runtime.scope.IScope;
 
 public class ParallelAgentExecuter extends ParallelAgentRunner<Object> {
 

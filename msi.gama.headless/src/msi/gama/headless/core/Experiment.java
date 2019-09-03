@@ -10,16 +10,14 @@
  **********************************************************************************************/
 package msi.gama.headless.core;
 
-import msi.gama.kernel.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.outputs.AbstractOutputManager;
-import msi.gama.outputs.IOutput;
-import msi.gama.outputs.MonitorOutput;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.GAML;
 import msi.gaml.expressions.IExpression;
 
@@ -108,18 +106,15 @@ public class Experiment implements IExperiment {
 
 	@Override
 	public Object getOutput(final String parameterName) {
-		final IOutput output =
-				((AbstractOutputManager) currentSimulation.getOutputManager()).getOutputWithOriginalName(parameterName);
+		final IOutput output = currentSimulation.getOutputManager().getOutputWithOriginalName(parameterName);
 		// System.out.
-		if (output == null) {
+		if (output == null)
 			throw GamaRuntimeException.error("Output does not exist: " + parameterName, currentSimulation.getScope());
-		}
-		if (!(output instanceof MonitorOutput)) {
+		if (!(output instanceof IOutput.Monitor))
 			throw GamaRuntimeException.error("Output " + parameterName + " is not an alphanumeric data.",
 					currentSimulation.getScope());
-		}
 		output.update();
-		return ((MonitorOutput) output).getLastValue();
+		return ((IOutput.Monitor) output).getLastValue();
 	}
 
 	@Override
@@ -127,9 +122,8 @@ public class Experiment implements IExperiment {
 		// this.currentExperiment.getSimulationOutputs().step(this.getScope());
 		final Object res =
 				this.currentExperiment.getCurrentSimulation().getDirectVarValue(this.getScope(), parameterName);
-		if (res == null) {
+		if (res == null)
 			throw GamaRuntimeException.error("Output unresolved: " + parameterName, currentSimulation.getScope());
-		}
 		return res;
 	}
 
@@ -141,7 +135,8 @@ public class Experiment implements IExperiment {
 	@Override
 	public boolean isInterrupted() {
 		final SimulationAgent sim = currentExperiment.getCurrentSimulation();
-		if (currentExperiment.isBatch() && sim == null) { return false; }
+		if (currentExperiment.isBatch() && sim == null)
+			return false;
 		return sim == null || sim.dead() || sim.getScope().interrupted();
 	}
 

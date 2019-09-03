@@ -17,16 +17,16 @@ import com.thoughtworks.xstream.XStream;
 
 import irit.gama.extensions.serialize.factory.StreamConverter;
 import irit.gama.extensions.serialize.gamaType.converters.ConverterScope;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.util.FileUtils;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.operator;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.operator;
 
 public class ReverseOperators {
 

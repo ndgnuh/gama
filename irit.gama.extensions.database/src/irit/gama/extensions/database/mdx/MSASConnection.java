@@ -17,8 +17,8 @@ import java.sql.SQLException;
 import org.olap4j.OlapConnection;
 import org.olap4j.OlapWrapper;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 class MSASConnection extends MdxConnection {
 

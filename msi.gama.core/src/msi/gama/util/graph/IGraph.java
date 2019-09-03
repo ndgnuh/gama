@@ -18,22 +18,22 @@ import org.jgrapht.DirectedGraph;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.WeightedGraph;
 
+import msi.gama.common.interfaces.IAddressableContainer;
+import msi.gama.common.interfaces.IContainer;
+import msi.gama.common.interfaces.IModifiableContainer;
 import msi.gama.metamodel.topology.graph.FloydWarshallShortestPathsGAMA;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IAddressableContainer;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IModifiableContainer;
+import msi.gama.util.list.IList;
 import msi.gama.util.path.IPath;
 import msi.gaml.operators.Graphs;
 import msi.gaml.species.ISpecies;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Written by drogoul Modified on 24 nov. 2011

@@ -21,9 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import msi.gama.common.interfaces.INamed;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.ISymbolKind;
 import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.compilation.kernel.GamaSkillRegistry;
 import msi.gaml.descriptions.AbstractProto;
@@ -33,6 +30,9 @@ import msi.gaml.descriptions.StatementDescription;
 import msi.gaml.descriptions.TypeDescription;
 import msi.gaml.operators.Strings;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * The class GamlTemplateFactory.

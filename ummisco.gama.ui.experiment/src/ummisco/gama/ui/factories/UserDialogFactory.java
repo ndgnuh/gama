@@ -13,7 +13,7 @@ package ummisco.gama.ui.factories;
 import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.architecture.user.UserPanelStatement;
 import ummisco.gama.ui.views.user.UserControlDialog;
 

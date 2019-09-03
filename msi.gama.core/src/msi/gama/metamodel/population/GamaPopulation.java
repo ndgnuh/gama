@@ -41,9 +41,11 @@ import java.util.function.Predicate;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
+import msi.gama.common.interfaces.IMacroAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.GamaShape;
 import msi.gama.metamodel.shape.IShape;
@@ -56,25 +58,23 @@ import msi.gama.metamodel.topology.graph.GraphTopology;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix;
 import msi.gama.metamodel.topology.grid.GridTopology;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.benchmark.StopWatch;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaList;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 import msi.gama.util.graph.AbstractGraphNodeAgent;
-import msi.gaml.compilation.IAgentConstructor;
+import msi.gama.util.list.GamaList;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gaml.compilation.interfaces.IAgentConstructor;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.TypeDescription;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.types.GamaTopologyType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
@@ -771,7 +771,7 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 	/**
 	 * Method accept()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, msi.gama.metamodel.shape.IShape)
 	 */
 	@Override
@@ -793,7 +793,7 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 	/**
 	 * Method filter()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, java.util.Collection)
 	 */
 	@Override

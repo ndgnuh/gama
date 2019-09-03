@@ -20,11 +20,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import ummisco.gama.ui.controls.SimpleSlider;
 import ummisco.gama.ui.interfaces.EditorListener;

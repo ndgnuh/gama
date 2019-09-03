@@ -14,8 +14,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;
 import msi.gaml.descriptions.SymbolDescription;
@@ -40,7 +41,8 @@ public abstract class Symbol implements ISymbol {
 
 	@Override
 	public URI getURI() {
-		if (description == null) { return null; }
+		if (description == null)
+			return null;
 		final EObject object = description.getUnderlyingElement();
 		return object == null ? null : EcoreUtil.getURI(object);
 	}
@@ -67,19 +69,22 @@ public abstract class Symbol implements ISymbol {
 
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		if (description == null) { return ""; }
+		if (description == null)
+			return "";
 		return description.serialize(includingBuiltIn);
 	}
 
 	@Override
 	public String getKeyword() {
-		if (description == null) { return null; }
+		if (description == null)
+			return null;
 		return description.getKeyword();
 	}
 
 	@Override
 	public final IExpression getFacet(final String... keys) {
-		if (description == null) { return null; }
+		if (description == null)
+			return null;
 		return description.getFacetExpr(keys);
 	}
 
@@ -88,8 +93,7 @@ public abstract class Symbol implements ISymbol {
 	}
 
 	@SuppressWarnings ("unchecked")
-	public final <T> T getFacetValue(final IScope scope, final String key, final T defaultValue)
-			throws GamaRuntimeException {
+	public final <T> T getFacetValue(final IScope scope, final String key, final T defaultValue) {
 		final IExpression exp = getFacet(key);
 		return (T) (exp == null ? defaultValue : exp.value(scope));
 	}
@@ -104,7 +108,8 @@ public abstract class Symbol implements ISymbol {
 	}
 
 	protected void setFacet(final String key, final IExpressionDescription expr) {
-		if (description == null) { return; }
+		if (description == null)
+			return;
 		description.setFacet(key, expr);
 	}
 

@@ -20,7 +20,7 @@ import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.ui.utils.WorkbenchHelper;

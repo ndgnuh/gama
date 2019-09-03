@@ -142,14 +142,14 @@ public class BoxProvider {
 	}
 
 	public BoxBuilder createBoxBuilder(final String name) {
-		Class c = null;
+		Class<?> c = null;
 		if (name != null && builders != null) {
 			c = builders.get(name);
 		}
 		if (c == null)
 			return new BoxBuilder();
 		try {
-			return (BoxBuilder) c.newInstance();
+			return (BoxBuilder) c.getConstructor().newInstance();
 		} catch (final Exception e) {
 			// EditBox.logError(this, "Cannot create box builder: " + name, e);
 		}

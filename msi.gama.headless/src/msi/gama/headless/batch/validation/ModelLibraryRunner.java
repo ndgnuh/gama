@@ -13,12 +13,12 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Multimap;
 
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.headless.batch.AbstractModelLibraryRunner;
 import msi.gama.headless.core.Experiment;
 import msi.gama.headless.core.HeadlessSimulationLoader;
 import msi.gama.headless.runtime.SystemLogger;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.model.IModel;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
 import msi.gaml.descriptions.ModelDescription;

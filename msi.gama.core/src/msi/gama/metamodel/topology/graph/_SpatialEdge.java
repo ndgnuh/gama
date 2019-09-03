@@ -15,8 +15,8 @@ import org.locationtech.jts.geom.Coordinate;
 import msi.gama.common.util.StringUtils;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph._Edge;
 
 public class _SpatialEdge extends _Edge<IShape, IShape> {

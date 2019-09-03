@@ -12,16 +12,11 @@ package msi.gaml.statements;
 
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.compilation.IDescriptionValidator;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.annotations.serializer;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.interfaces.IDescriptionValidator;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.StatementDescription;
 import msi.gaml.descriptions.StatementWithChildrenDescription;
@@ -29,6 +24,11 @@ import msi.gaml.descriptions.SymbolDescription;
 import msi.gaml.descriptions.SymbolSerializer;
 import msi.gaml.statements.BreakStatement.BreakSerializer;
 import msi.gaml.statements.BreakStatement.BreakValidator;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * The class BreakCommand.
@@ -63,7 +63,7 @@ public class BreakStatement extends AbstractStatement {
 		/**
 		 * Method validate()
 		 *
-		 * @see msi.gaml.compilation.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
+		 * @see msi.gaml.compilation.interfaces.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
 		 */
 		@Override
 		public void validate(final StatementDescription description) {
@@ -85,7 +85,7 @@ public class BreakStatement extends AbstractStatement {
 	}
 
 	/**
-	 * @see msi.gaml.commands.AbstractCommand#privateExecuteIn(msi.gama.runtime.IScope)
+	 * @see msi.gaml.commands.AbstractCommand#privateExecuteIn(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	protected Object privateExecuteIn(final IScope scope) throws GamaRuntimeException {

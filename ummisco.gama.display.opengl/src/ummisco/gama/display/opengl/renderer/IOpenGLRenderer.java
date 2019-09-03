@@ -3,9 +3,9 @@ package ummisco.gama.display.opengl.renderer;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 
-import msi.gama.common.interfaces.IGraphics;
+import msi.gama.common.interfaces.outputs.IDisplayData;
+import msi.gama.common.interfaces.outputs.IGraphics;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.LayeredDisplayData;
 import ummisco.gama.display.opengl.OpenGL;
 import ummisco.gama.display.opengl.renderer.helpers.CameraHelper;
 import ummisco.gama.display.opengl.renderer.helpers.KeystoneHelper;
@@ -43,7 +43,7 @@ public interface IOpenGLRenderer extends GLEventListener, IGraphics.ThreeD {
 
 	SceneHelper getSceneHelper();
 
-	default LayeredDisplayData getData() {
+	default IDisplayData getData() {
 		return getSurface().getData();
 	}
 

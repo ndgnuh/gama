@@ -17,14 +17,14 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.kernel.experiment.BatchAgent;
 import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
-import msi.gaml.compilation.IAgentConstructor;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
+import msi.gaml.compilation.interfaces.IAgentConstructor;
 import msi.gaml.statements.Facets;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })

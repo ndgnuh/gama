@@ -17,10 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.precompiler.GamlAnnotations.constant;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.IConstantCategory;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaDate;
 import msi.gama.util.GamaMaterial;
@@ -29,6 +25,10 @@ import msi.gaml.expressions.UnitConstantExpression;
 import msi.gaml.types.GamaDateType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.IConstantCategory;
+import ummisco.gama.processor.GamlAnnotations.constant;
+import ummisco.gama.processor.GamlAnnotations.doc;
 
 public interface IUnits {
 

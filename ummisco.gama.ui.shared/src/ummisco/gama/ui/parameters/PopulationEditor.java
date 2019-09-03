@@ -17,13 +17,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.outputs.ValuedDisplayOutputFactory;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.species.ISpecies;
+import ummisco.gama.outputs.ValuedDisplayOutputFactory;
 import ummisco.gama.ui.interfaces.EditorListener;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })

@@ -15,21 +15,26 @@ import static java.util.Objects.hash;
 import java.util.Map;
 import java.util.Objects;
 
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.util.StringUtils;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.GamaMatrixType;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * The Class GamaPair.
@@ -143,7 +148,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method get()
 	 *
-	 * @see msi.gama.util.IContainer#get(msi.gama.runtime.IScope, java.lang.Object)
+	 * @see msi.gama.common.interfaces.IContainer#get(msi.gama.runtime.scope.IScope, java.lang.Object)
 	 */
 	@Override
 	public Object get(final IScope scope, final Integer index) throws GamaRuntimeException {
@@ -153,7 +158,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method getFromIndicesList()
 	 *
-	 * @see msi.gama.util.IContainer#getFromIndicesList(msi.gama.runtime.IScope, msi.gama.util.IList)
+	 * @see msi.gama.common.interfaces.IContainer#getFromIndicesList(msi.gama.runtime.scope.IScope, msi.gama.util.list.IList)
 	 */
 	@Override
 	public Object getFromIndicesList(final IScope scope, final IList indices) throws GamaRuntimeException {
@@ -163,7 +168,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method contains()
 	 *
-	 * @see msi.gama.util.IContainer#contains(msi.gama.runtime.IScope, java.lang.Object)
+	 * @see msi.gama.common.interfaces.IContainer#contains(msi.gama.runtime.scope.IScope, java.lang.Object)
 	 */
 	@Override
 	public boolean contains(final IScope scope, final Object o) throws GamaRuntimeException {
@@ -173,7 +178,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method firstValue()
 	 *
-	 * @see msi.gama.util.IContainer#firstValue(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#firstValue(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object firstValue(final IScope scope) throws GamaRuntimeException {
@@ -183,7 +188,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method lastValue()
 	 *
-	 * @see msi.gama.util.IContainer#lastValue(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#lastValue(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object lastValue(final IScope scope) throws GamaRuntimeException {
@@ -193,7 +198,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method length()
 	 *
-	 * @see msi.gama.util.IContainer#length(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#length(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public int length(final IScope scope) {
@@ -203,7 +208,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method isEmpty()
 	 *
-	 * @see msi.gama.util.IContainer#isEmpty(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#isEmpty(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public boolean isEmpty(final IScope scope) {
@@ -213,7 +218,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method reverse()
 	 *
-	 * @see msi.gama.util.IContainer#reverse(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#reverse(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public IContainer reverse(final IScope scope) throws GamaRuntimeException {
@@ -223,7 +228,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method anyValue()
 	 *
-	 * @see msi.gama.util.IContainer#anyValue(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#anyValue(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object anyValue(final IScope scope) {
@@ -234,7 +239,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method listValue()
 	 *
-	 * @see msi.gama.util.IContainer#listValue(msi.gama.runtime.IScope, msi.gaml.types.IType)
+	 * @see msi.gama.common.interfaces.IContainer#listValue(msi.gama.runtime.scope.IScope, msi.gaml.types.IType)
 	 */
 	@Override
 	public IList listValue(final IScope scope, final IType contentType, final boolean copy) {
@@ -245,7 +250,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method matrixValue()
 	 *
-	 * @see msi.gama.util.IContainer#matrixValue(msi.gama.runtime.IScope, msi.gaml.types.IType)
+	 * @see msi.gama.common.interfaces.IContainer#matrixValue(msi.gama.runtime.scope.IScope, msi.gaml.types.IType)
 	 */
 	@Override
 	public IMatrix matrixValue(final IScope scope, final IType contentType, final boolean copy) {
@@ -255,7 +260,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method matrixValue()
 	 *
-	 * @see msi.gama.util.IContainer#matrixValue(msi.gama.runtime.IScope, msi.gaml.types.IType,
+	 * @see msi.gama.common.interfaces.IContainer#matrixValue(msi.gama.runtime.scope.IScope, msi.gaml.types.IType,
 	 *      msi.gama.metamodel.shape.GamaPoint)
 	 */
 	@Override
@@ -266,7 +271,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method mapValue()
 	 *
-	 * @see msi.gama.util.IContainer#mapValue(msi.gama.runtime.IScope, msi.gaml.types.IType, msi.gaml.types.IType)
+	 * @see msi.gama.common.interfaces.IContainer#mapValue(msi.gama.runtime.scope.IScope, msi.gaml.types.IType, msi.gaml.types.IType)
 	 */
 	@Override
 	public IMap mapValue(final IScope scope, final IType keyType, final IType contentType, final boolean copy) {
@@ -278,7 +283,7 @@ public class GamaPair<K, V>
 	/**
 	 * Method iterable()
 	 *
-	 * @see msi.gama.util.IContainer#iterable(msi.gama.runtime.IScope)
+	 * @see msi.gama.common.interfaces.IContainer#iterable(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public java.lang.Iterable iterable(final IScope scope) {

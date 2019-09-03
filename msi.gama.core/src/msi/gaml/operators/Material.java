@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gaml.operators;
 
-import msi.gama.precompiler.GamlAnnotations.*;
 import msi.gama.util.*;
+import ummisco.gama.processor.GamlAnnotations.*;
 
 /**
  * Written by mazarsju

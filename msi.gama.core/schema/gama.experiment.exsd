@@ -62,7 +62,7 @@
                   Class that implements IExperimentAgent in the plugin
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":msi.gama.kernel.experiment.IExperimentAgent"/>
+                  <meta.attribute kind="java" basedOn=":msi.gama.common.interfaces.experiment.IExperimentAgent"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -7,8 +7,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.ToolBar;
 
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.statements.test.AbstractSummary;
 import msi.gaml.statements.test.AssertionSummary;
 import msi.gaml.statements.test.TestState;

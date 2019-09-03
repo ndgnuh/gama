@@ -11,7 +11,7 @@ package ummisco.gama.ui.views.displays;
 
 import org.eclipse.swt.widgets.Control;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 /**

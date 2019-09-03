@@ -1099,13 +1099,13 @@
       <serviceFactory
             factoryClass="ummisco.gama.ui.factories.StatusDisplayerFactory">
          <service
-               serviceClass="msi.gama.common.interfaces.IStatusDisplayer">
+               serviceClass="msi.gama.common.interfaces.gui.IStatusDisplayer">
          </service>
       </serviceFactory>
       <serviceFactory
             factoryClass="ummisco.gama.ui.factories.ConsoleDisplayerFactory">
          <service
-               serviceClass="msi.gama.common.interfaces.IConsoleDisplayer">
+               serviceClass="msi.gama.common.interfaces.gui.IConsoleDisplayer">
          </service>
       </serviceFactory>
       <serviceFactory

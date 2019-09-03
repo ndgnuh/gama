@@ -16,9 +16,9 @@ import com.jogamp.opengl.GLRunnable;
 import com.jogamp.opengl.glu.GLU;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.outputs.IDisplayData;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.LayeredDisplayData;
 import msi.gaml.operators.Maths;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;
@@ -104,7 +104,7 @@ public abstract class AbstractCamera implements ICamera {
 
 	@Override
 	public void update() {
-		final LayeredDisplayData data = renderer.getData();
+		final IDisplayData data = renderer.getData();
 		cameraInteraction = !data.cameraInteractionDisabled();
 		updateSphericalCoordinatesFromLocations();
 		if (initialized) {

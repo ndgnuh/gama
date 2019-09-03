@@ -12,10 +12,10 @@ package msi.gama.util.graph;
 
 import java.util.Collection;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Syncs a graph with two populations of agents (one for edges, one for nodes).

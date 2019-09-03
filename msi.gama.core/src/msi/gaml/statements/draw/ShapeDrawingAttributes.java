@@ -16,7 +16,7 @@ import org.locationtech.jts.geom.ShapeType;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Scaling3D;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;

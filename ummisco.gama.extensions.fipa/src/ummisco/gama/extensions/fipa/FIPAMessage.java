@@ -10,14 +10,14 @@
  **********************************************************************************************/
 package ummisco.gama.extensions.fipa;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.util.StringUtils;
 import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
 
 /**
  * The Class MessageProxy.

@@ -16,7 +16,8 @@ import static one.util.streamex.StreamEx.of;
 import java.util.Collections;
 import java.util.List;
 
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.batch.Selection;
+import msi.gama.runtime.scope.IScope;
 
 public class SelectionBest implements Selection {
 

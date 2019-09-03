@@ -20,12 +20,12 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.common.util.StringUtils;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.IScope;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

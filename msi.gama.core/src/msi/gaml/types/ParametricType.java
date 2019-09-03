@@ -20,14 +20,14 @@ import org.apache.commons.lang.StringUtils;
 
 import com.google.common.cache.Cache;
 
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.processor.ISymbolKind;
 
 /**
  * Class ParametricType. A class that allows to build composed types with a content type and a key type
@@ -114,7 +114,7 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	/**
 	 * Method cast()
 	 *
-	 * @see msi.gaml.types.IType#cast(msi.gama.runtime.IScope, java.lang.Object, java.lang.Object, msi.gaml.types.IType,
+	 * @see msi.gaml.types.IType#cast(msi.gama.runtime.scope.IScope, java.lang.Object, java.lang.Object, msi.gaml.types.IType,
 	 *      msi.gaml.types.IType)
 	 */
 	@Override
@@ -337,7 +337,7 @@ public class ParametricType implements IContainerType<IContainer<?, ?>> {
 	/**
 	 * Method canBeTypeOf()
 	 *
-	 * @see msi.gaml.types.IType#canBeTypeOf(msi.gama.runtime.IScope, java.lang.Object)
+	 * @see msi.gaml.types.IType#canBeTypeOf(msi.gama.runtime.scope.IScope, java.lang.Object)
 	 */
 	@Override
 	public boolean canBeTypeOf(final IScope s, final Object c) {

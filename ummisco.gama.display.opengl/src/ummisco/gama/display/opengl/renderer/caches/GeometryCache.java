@@ -47,7 +47,7 @@ import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 import ummisco.gama.display.opengl.OpenGL;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;

@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package msi.gama.runtime.exceptions;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class GamaAssertException extends GamaRuntimeException {
 

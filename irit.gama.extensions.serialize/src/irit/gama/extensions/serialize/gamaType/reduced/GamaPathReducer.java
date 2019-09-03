@@ -1,11 +1,11 @@
 package irit.gama.extensions.serialize.gamaType.reduced;
 
 import irit.gama.extensions.serialize.gamaType.reference.ReferencePath;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IList;
-import msi.gama.util.IReference;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.IGraph;
+import msi.gama.util.list.IList;
 import msi.gama.util.path.GamaPath;
 import msi.gama.util.path.PathFactory;
 

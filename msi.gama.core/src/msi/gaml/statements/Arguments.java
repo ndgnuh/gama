@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 
 /**
  * @author drogoul

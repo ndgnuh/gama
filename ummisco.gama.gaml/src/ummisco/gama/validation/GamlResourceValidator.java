@@ -24,7 +24,7 @@ import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
 
-import msi.gama.util.Collector;
+import msi.gama.common.util.Collector;
 import ummisco.gama.gaml.resource.GamlResource;
 import ummisco.gama.gaml.resource.GamlResourceServices;
 

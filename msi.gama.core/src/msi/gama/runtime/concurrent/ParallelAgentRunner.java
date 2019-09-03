@@ -14,11 +14,11 @@ import java.util.Spliterator;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gaml.statements.IExecutable;
+import msi.gama.runtime.scope.IScope;
 
 public abstract class ParallelAgentRunner<T> extends RecursiveTask<T> implements IExecutable {
 

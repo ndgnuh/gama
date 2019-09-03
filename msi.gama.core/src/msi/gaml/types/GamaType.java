@@ -15,22 +15,22 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
+import msi.gama.common.interfaces.ICollector;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IValue;
+import msi.gama.common.util.Collector;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.type;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.TypeDescription;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.type;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Written by drogoul Modified on 25 aout 2010

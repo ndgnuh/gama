@@ -12,20 +12,16 @@ package ummisco.gama.file.gaml;
 import org.eclipse.emf.common.util.URI;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.model.IModel;
-import msi.gama.outputs.IOutput;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.file;
-import msi.gama.precompiler.IConcept;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFile;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 import msi.gaml.compilation.GAML;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.expressions.IExpression;
@@ -33,6 +29,10 @@ import msi.gaml.operators.Cast;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.file;
 
 /**
  * Written by drogoul Modified on 13 nov. 2011

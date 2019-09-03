@@ -21,10 +21,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.kernel.experiment.IExperimentDisplayable;
-import msi.gama.kernel.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.gui.IGui;
 import msi.gama.kernel.experiment.ParametersSet;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.runtime.GAMA;

@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import msi.gama.common.interfaces.IBenchmarkable;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.common.util.FileUtils;
-import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.CsvWriter;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.tree.GamaTree.Order;
 import msi.gaml.operators.Files;
 import msi.gaml.types.Types;

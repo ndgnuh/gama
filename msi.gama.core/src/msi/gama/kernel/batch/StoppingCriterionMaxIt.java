@@ -12,6 +12,8 @@ package msi.gama.kernel.batch;
 
 import java.util.Map;
 
+import msi.gama.common.interfaces.batch.StoppingCriterion;
+
 public class StoppingCriterionMaxIt implements StoppingCriterion {
 
 	private final int maxIt;

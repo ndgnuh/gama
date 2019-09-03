@@ -11,8 +11,9 @@
 package msi.gama.metamodel.topology.grid;
 
 import java.util.Set;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Class INeighborhood.

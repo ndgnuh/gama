@@ -5,7 +5,7 @@ import java.util.List;
 
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.IGraph;
 import msi.gaml.operators.Maths;
 import msi.gaml.operators.Spatial;

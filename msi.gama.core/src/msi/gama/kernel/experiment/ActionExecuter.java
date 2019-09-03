@@ -13,8 +13,8 @@ package msi.gama.kernel.experiment;
 import java.util.ArrayList;
 import java.util.List;
 
-import msi.gama.runtime.IScope;
-import msi.gaml.statements.IExecutable;
+import msi.gama.common.interfaces.IExecutable;
+import msi.gama.runtime.scope.IScope;
 
 public class ActionExecuter {
 

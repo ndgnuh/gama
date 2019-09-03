@@ -176,7 +176,7 @@ saveSimu
         </internal>
       </msi.gama.util.GamaDate>
       <double>1.563710198281E12</double>
-      <msi.gama.util.GamaMap>
+      <msi.gama.util.map.GamaMap>
         <keysType class="msi.gaml.types.GamaAgentType">
           <GamaType>road</GamaType>
         </keysType>
@@ -245,41 +245,41 @@ saveSimu
             <double>40.0</double>
           </entry>
         </valuesMapReducer>
-      </msi.gama.util.GamaMap>
+      </msi.gama.util.map.GamaMap>
       <msi.gama.metamodel.topology.graph.GamaSpatialGraph>
         <nodeTypeGraphReducer class="msi.gaml.types.GamaGeometryType">
           <GamaType>geometry</GamaType>
         </nodeTypeGraphReducer>
-        <edgeTypeGraphReducer class="msi.gaml.types.GamaAgentType" reference="../../msi.gama.util.GamaMap/keysType"/>
-        <edgesGraphReducer class="msi.gama.util.GamaList">
+        <edgeTypeGraphReducer class="msi.gaml.types.GamaAgentType" reference="../../msi.gama.util.map.GamaMap/keysType"/>
+        <edgesGraphReducer class="msi.gama.util.list.GamaList">
           <valuesListReducer>
-            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
-            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
-            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
-            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
+            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
+            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
+            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
+            <msi.gama.metamodel.agent.GamlAgent reference="../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
           </valuesListReducer>
-          <contentTypeListReducer class="msi.gaml.types.GamaAgentType" reference="../../../msi.gama.util.GamaMap/keysType"/>
+          <contentTypeListReducer class="msi.gaml.types.GamaAgentType" reference="../../../msi.gama.util.map.GamaMap/keysType"/>
         </edgesGraphReducer>
-        <edgesWeightsGraphReducer class="msi.gama.util.GamaMap">
-          <keysType class="msi.gaml.types.GamaAgentType" reference="../../../msi.gama.util.GamaMap/keysType"/>
+        <edgesWeightsGraphReducer class="msi.gama.util.map.GamaMap">
+          <keysType class="msi.gaml.types.GamaAgentType" reference="../../../msi.gama.util.map.GamaMap/keysType"/>
           <dataType class="msi.gaml.types.GamaPairType">
             <GamaType>pair</GamaType>
           </dataType>
           <valuesMapReducer>
             <entry>
-              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
+              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
               <double>80.0</double>
             </entry>
             <entry>
-              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
+              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
               <double>40.0</double>
             </entry>
             <entry>
-              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
+              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
               <double>80.0</double>
             </entry>
             <entry>
-              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
+              <msi.gama.metamodel.agent.GamlAgent reference="../../../../../msi.gama.util.map.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
               <double>40.0</double>
             </entry>
           </valuesMapReducer>
@@ -517,7 +517,7 @@ saveSimu
                       </point>
                     </coordinates>
                   </geometry>
-                  <attributes class="msi.gama.util.GamaMap">
+                  <attributes class="msi.gama.util.map.GamaMap">
                     <keysType class="msi.gaml.types.GamaStringType">
                       <GamaType>string</GamaType>
                     </keysType>
@@ -553,19 +553,19 @@ saveSimu
                     <y>50.0</y>
                     <z>0.0</z>
                   </target>
-                  <edges class="msi.gama.util.GamaList">
+                  <edges class="msi.gama.util.list.GamaList">
                     <valuesListReducer>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
                     </valuesListReducer>
                     <contentTypeListReducer class="msi.gaml.types.GamaNoType" reference="../../../../../../../../../keysType"/>
                   </edges>
                 </msi.gama.util.path.GamaSpatialPath>
                 <double>5.0</double>
-                <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
+                <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
                 <msi.gama.metamodel.shape.GamaPoint reference="../msi.gama.metamodel.shape.GamaShape/geometry/coordinates/point"/>
-                <msi.gama.util.GamaMap reference="../../../../../../../../variables/data/msi.gama.util.GamaMap"/>
+                <msi.gama.util.map.GamaMap reference="../../../../../../../../variables/data/msi.gama.util.map.GamaMap"/>
                 <msi.gama.metamodel.shape.GamaPoint reference="../msi.gama.util.path.GamaSpatialPath/target"/>
                 <msi.gama.util.GamaColor_-NamedGamaColor>
                   <value>-16776961</value>
@@ -615,7 +615,7 @@ saveSimu
                       </point>
                     </coordinates>
                   </geometry>
-                  <attributes class="msi.gama.util.GamaMap">
+                  <attributes class="msi.gama.util.map.GamaMap">
                     <keysType class="msi.gaml.types.GamaStringType" reference="../../../../../../msi.gama.metamodel.agent.SavedAgent/variables/data/msi.gama.metamodel.shape.GamaShape/attributes/keysType"/>
                     <dataType class="msi.gaml.types.GamaNoType" reference="../../../../../../../../../keysType"/>
                     <valuesMapReducer>
@@ -649,38 +649,38 @@ saveSimu
                     <y>50.0</y>
                     <z>0.0</z>
                   </target>
-                  <edges class="msi.gama.util.GamaList">
+                  <edges class="msi.gama.util.list.GamaList">
                     <valuesListReducer>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
                     </valuesListReducer>
                     <contentTypeListReducer class="msi.gaml.types.GamaNoType" reference="../../../../../../../../../keysType"/>
                   </edges>
                 </msi.gama.util.path.GamaSpatialPath>
                 <double>1.6666666666666667</double>
-                <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
+                <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
                 <msi.gama.metamodel.shape.GamaPoint reference="../msi.gama.metamodel.shape.GamaShape/geometry/coordinates/point"/>
-                <msi.gama.util.GamaMap>
-                  <keysType class="msi.gaml.types.GamaAgentType" reference="../../../../../../../../../variables/data/msi.gama.util.GamaMap/keysType"/>
-                  <dataType class="msi.gaml.types.GamaFloatType" reference="../../../../../../../../../variables/data/msi.gama.util.GamaMap/dataType"/>
+                <msi.gama.util.map.GamaMap>
+                  <keysType class="msi.gaml.types.GamaAgentType" reference="../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/keysType"/>
+                  <dataType class="msi.gaml.types.GamaFloatType" reference="../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/dataType"/>
                   <valuesMapReducer>
                     <entry>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry/msi.gama.metamodel.agent.GamlAgent"/>
                       <double>80.0</double>
                     </entry>
                     <entry>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[2]/msi.gama.metamodel.agent.GamlAgent"/>
                       <double>40.0</double>
                     </entry>
                     <entry>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[3]/msi.gama.metamodel.agent.GamlAgent"/>
                       <double>80.0</double>
                     </entry>
                     <entry>
-                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
+                      <msi.gama.metamodel.agent.GamlAgent reference="../../../../../../../../../../../variables/data/msi.gama.util.map.GamaMap/valuesMapReducer/entry[4]/msi.gama.metamodel.agent.GamlAgent"/>
                       <double>40.0</double>
                     </entry>
                   </valuesMapReducer>
-                </msi.gama.util.GamaMap>
+                </msi.gama.util.map.GamaMap>
                 <msi.gama.metamodel.shape.GamaPoint reference="../msi.gama.util.path.GamaSpatialPath/target"/>
                 <msi.gama.util.GamaColor_-NamedGamaColor>
                   <value>-256</value>

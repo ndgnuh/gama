@@ -13,11 +13,11 @@ import java.util.List;
 
 import org.eclipse.swt.widgets.Composite;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.ExperimentParameter;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.statements.UserCommandStatement;
 import msi.gaml.types.IType;

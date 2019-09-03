@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package msi.gaml.types;
 
-import msi.gama.runtime.IScope;
-import msi.gama.util.IContainer;
-import msi.gama.util.IModifiableContainer;
+import msi.gama.common.interfaces.IContainer;
+import msi.gama.common.interfaces.IModifiableContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GenericFile;
 import msi.gama.util.file.IGamaFile;
-import msi.gaml.compilation.GamaGetter;
+import msi.gaml.compilation.interfaces.GamaGetter;
 import msi.gaml.expressions.IExpression;
 
 /**

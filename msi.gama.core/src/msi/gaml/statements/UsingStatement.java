@@ -12,20 +12,20 @@ package msi.gaml.statements;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.GamlAnnotations.usage;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
+import ummisco.gama.processor.GamlAnnotations.usage;
 
 /**
  * "using" is a statement that allows to set the topology to use by its
@@ -68,7 +68,7 @@ public class UsingStatement extends AbstractStatementSequence {
 	 * When entering the scope, the statement pushes the topology (if not null)
 	 * to it and remembers the one that was previously pushed.
 	 * 
-	 * @see msi.gaml.statements.AbstractStatementSequence#enterScope(msi.gama.runtime.IScope)
+	 * @see msi.gaml.statements.AbstractStatementSequence#enterScope(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public void enterScope(final IScope scope) {
@@ -83,7 +83,7 @@ public class UsingStatement extends AbstractStatementSequence {
 	 * When leaving the scope, the statement replaces its topology by the
 	 * previous one.
 	 * 
-	 * @see msi.gaml.statements.AbstractStatementSequence#leaveScope(msi.gama.runtime.IScope)
+	 * @see msi.gaml.statements.AbstractStatementSequence#leaveScope(msi.gama.runtime.scope.IScope)
 	 */
 
 	@Override

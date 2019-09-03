@@ -14,10 +14,10 @@ import java.time.DateTimeException;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import msi.gama.kernel.experiment.ITopLevelAgent;
-import msi.gama.kernel.model.IModel;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaDate;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.operators.Dates;

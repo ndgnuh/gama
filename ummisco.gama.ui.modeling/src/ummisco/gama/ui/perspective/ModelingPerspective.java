@@ -12,7 +12,7 @@ package ummisco.gama.ui.perspective;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
 
 public class ModelingPerspective implements IPerspectiveFactory {
 

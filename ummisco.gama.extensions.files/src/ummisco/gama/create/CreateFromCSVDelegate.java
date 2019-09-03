@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
@@ -52,7 +52,7 @@ public class CreateFromCSVDelegate implements ICreateDelegate {
 	 *
 	 * @author Alexis Drogoul
 	 * @since 04-09-2012
-	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.IScope, java.util.List, int,
+	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.scope.IScope, java.util.List, int,
 	 *      java.lang.Object)
 	 */
 	@SuppressWarnings ("rawtypes")

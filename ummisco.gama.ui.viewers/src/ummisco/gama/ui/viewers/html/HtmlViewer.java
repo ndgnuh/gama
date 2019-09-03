@@ -26,7 +26,7 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 
-import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.interfaces.gui.IGamaView;
 import ummisco.gama.ui.utils.WebHelper;
 import ummisco.gama.ui.views.toolbar.GamaToolbar2;
 import ummisco.gama.ui.views.toolbar.GamaToolbarFactory;

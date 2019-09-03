@@ -15,8 +15,8 @@ import java.util.Map;
 
 import msi.gama.common.util.FileUtils;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
 import msi.gaml.species.ISpecies;
 

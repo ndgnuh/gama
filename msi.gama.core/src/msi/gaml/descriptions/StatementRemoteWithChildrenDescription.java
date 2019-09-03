@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.Iterables;
 
-import msi.gaml.compilation.ISymbol;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.statements.Arguments;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.IType;

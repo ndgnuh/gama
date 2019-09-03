@@ -11,8 +11,8 @@
 package msi.gama.headless.job;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModel;
 import msi.gama.headless.common.DataType;
-import msi.gama.kernel.model.IModel;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;

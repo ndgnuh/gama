@@ -13,7 +13,7 @@ package ummisco.gama.display.opengl.renderer.helpers;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import msi.gama.common.interfaces.ILayer;
+import msi.gama.common.interfaces.outputs.ILayer;
 import ummisco.gama.display.opengl.OpenGL;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.display.opengl.scene.ModelScene;

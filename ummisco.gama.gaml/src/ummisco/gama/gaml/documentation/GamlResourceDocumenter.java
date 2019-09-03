@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import msi.gama.common.interfaces.IDocManager;
 import msi.gama.common.interfaces.IGamlDescription;
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IDescription.DescriptionVisitor;
 import msi.gaml.descriptions.ModelDescription;

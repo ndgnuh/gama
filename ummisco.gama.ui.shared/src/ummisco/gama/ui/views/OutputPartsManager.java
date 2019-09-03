@@ -4,7 +4,7 @@
  * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.views;
@@ -13,8 +13,8 @@ import org.eclipse.ui.IPartListener2;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
 /**

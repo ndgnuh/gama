@@ -12,9 +12,9 @@ package msi.gaml.expressions;
 
 import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.benchmark.StopWatch;
 import msi.gama.runtime.concurrent.GamaExecutorService;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 

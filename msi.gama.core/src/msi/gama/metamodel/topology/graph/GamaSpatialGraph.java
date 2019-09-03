@@ -20,23 +20,23 @@ import org.jgrapht.Graphs;
 
 import org.locationtech.jts.geom.Coordinate;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.util.StringUtils;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
 import msi.gama.util.graph.GraphEvent;
 import msi.gama.util.graph.GraphEvent.GraphEventType;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.graph.IGraph;
 import msi.gama.util.graph._Edge;
 import msi.gama.util.path.GamaSpatialPath;
@@ -396,7 +396,7 @@ public class GamaSpatialGraph extends GamaGraph<IShape, IShape>
 	/**
 	 * Method accept()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#accept(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, msi.gama.metamodel.shape.IShape)
 	 */
 	@Override
@@ -407,7 +407,7 @@ public class GamaSpatialGraph extends GamaGraph<IShape, IShape>
 	/**
 	 * Method filter()
 	 *
-	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.IScope,
+	 * @see msi.gama.metamodel.topology.filter.IAgentFilter#filter(msi.gama.runtime.scope.IScope,
 	 *      msi.gama.metamodel.shape.IShape, java.util.Collection)
 	 */
 	@Override

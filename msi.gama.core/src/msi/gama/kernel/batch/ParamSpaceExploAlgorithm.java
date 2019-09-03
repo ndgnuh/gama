@@ -15,23 +15,24 @@ import java.util.HashMap;
 import java.util.List;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.batch.IExploration;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.BatchAgent;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.experiment.IParameter;
 import msi.gama.kernel.experiment.ParameterAdapter;
 import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.ISymbolKind;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.GAMA.InScope;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.ISymbol;
 import msi.gaml.compilation.Symbol;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.inside;
 
 /**
  * The Class ParamSpaceExploAlgorithm.

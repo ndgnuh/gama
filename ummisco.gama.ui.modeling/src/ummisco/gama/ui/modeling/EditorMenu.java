@@ -42,8 +42,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.Pref;
+import msi.gama.common.util.Collector;
 import msi.gama.runtime.GAMA;
-import msi.gama.util.Collector;
 import msi.gaml.compilation.ast.ISyntacticElement;
 import ummisco.gama.file.gaml.GamlFileExtension;
 import ummisco.gama.gaml.indexer.GamlResourceIndexer;

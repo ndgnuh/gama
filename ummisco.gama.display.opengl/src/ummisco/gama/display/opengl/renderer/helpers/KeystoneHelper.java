@@ -13,8 +13,8 @@ import com.jogamp.opengl.util.gl2.GLUT;
 
 import msi.gama.common.geometry.ICoordinates;
 import msi.gama.common.geometry.Scaling3D;
+import msi.gama.common.interfaces.outputs.IDisplayData;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.LayeredDisplayData;
 import msi.gama.util.GamaColor.NamedGamaColor;
 import ummisco.gama.display.opengl.OpenGL;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;
@@ -141,7 +141,7 @@ public class KeystoneHelper extends AbstractRendererHelper {
 		final double labelHeightIn01 = pixelHeightIn01 * (18 + 20);
 		ICoordinates vertices;
 		if (!worldCorners) {
-			vertices = LayeredDisplayData.KEYSTONE_IDENTITY;
+			vertices = IDisplayData.KEYSTONE_IDENTITY;
 			// 0, 0, 0 | 0, 1, 0 | 1, 1, 0 | 1, 0, 0
 		} else {
 			vertices = ICoordinates.ofLength(4);
@@ -307,7 +307,7 @@ public class KeystoneHelper extends AbstractRendererHelper {
 	}
 
 	public void resetCorner(final int cornerId) {
-		setKeystoneCoordinates(cornerId, LayeredDisplayData.KEYSTONE_IDENTITY.at(cornerId));
+		setKeystoneCoordinates(cornerId, IDisplayData.KEYSTONE_IDENTITY.at(cornerId));
 		cornerSelected = -1;
 		cornerHovered = -1;
 	}

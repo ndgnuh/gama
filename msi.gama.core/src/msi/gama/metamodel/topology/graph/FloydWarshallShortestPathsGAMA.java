@@ -20,10 +20,10 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.util.Pair;
 import org.jgrapht.graph.GraphWalk;
 
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.matrix.GamaIntMatrix;
 
 // Copy of the jgrapht algorithm: just make it usable with GAMA undirected graph

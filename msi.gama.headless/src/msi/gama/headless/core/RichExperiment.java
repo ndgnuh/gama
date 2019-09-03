@@ -10,15 +10,12 @@
  **********************************************************************************************/
 package msi.gama.headless.core;
 
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.headless.common.DataType;
 import msi.gama.headless.job.ExperimentJob.ListenedVariable;
 import msi.gama.headless.job.ExperimentJob.OutputType;
-import msi.gama.kernel.model.IModel;
-import msi.gama.outputs.AbstractOutputManager;
-import msi.gama.outputs.FileOutput;
-import msi.gama.outputs.IOutput;
-import msi.gama.outputs.LayeredDisplayOutput;
-import msi.gama.outputs.MonitorOutput;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 
@@ -29,30 +26,32 @@ public class RichExperiment extends Experiment implements IRichExperiment {
 
 	@Override
 	public OutputType getTypeOf(final String name) {
-		if (currentExperiment == null) { return OutputType.OUTPUT; }
-		if (currentExperiment.hasVar(name)) { return OutputType.EXPERIMENT_ATTRIBUTE; }
-		if (currentExperiment.getModel().getSpecies().hasVar(name)) { return OutputType.SIMULATION_ATTRIBUTE; }
+		if (currentExperiment == null)
+			return OutputType.OUTPUT;
+		if (currentExperiment.hasVar(name))
+			return OutputType.EXPERIMENT_ATTRIBUTE;
+		if (currentExperiment.getModel().getSpecies().hasVar(name))
+			return OutputType.SIMULATION_ATTRIBUTE;
 		return OutputType.OUTPUT;
 	}
 
 	@Override
 	public RichOutput getRichOutput(final ListenedVariable v) {
 		final String parameterName = v.getName();
-		if (currentSimulation.dead()) { return null; }
-		final IOutput output =
-				((AbstractOutputManager) currentSimulation.getOutputManager()).getOutputWithOriginalName(parameterName);
-		if (output == null) {
+		if (currentSimulation.dead())
+			return null;
+		final IOutput output = currentSimulation.getOutputManager().getOutputWithOriginalName(parameterName);
+		if (output == null)
 			throw GamaRuntimeException.error("Output unresolved", currentExperiment.getExperimentScope());
-		}
 		output.update();
 
 		Object val = null;
 		DataType tpe = null;
 
-		if (output instanceof MonitorOutput) {
+		if (output instanceof IOutput.Monitor) {
 			// ((SimulationAgent)
 			// this.currentExperiment.getAgent().getSimulation()).getOutputManager().getOutputWithName(parameterName)
-			val = ((MonitorOutput) output).getLastValue();
+			val = ((IOutput.Monitor) output).getLastValue();
 			if (val instanceof Integer) {
 				tpe = DataType.INT;
 			} else if (val instanceof Double) {
@@ -63,11 +62,11 @@ public class RichExperiment extends Experiment implements IRichExperiment {
 				tpe = DataType.UNDEFINED;
 			}
 
-		} else if (output instanceof LayeredDisplayOutput) {
-			val = ((LayeredDisplayOutput) output).getImage(v.width, v.height);
+		} else if (output instanceof IDisplayOutput.Layered) {
+			val = ((IDisplayOutput.Layered) output).getImage(v.width, v.height);
 			tpe = DataType.DISPLAY2D;
-		} else if (output instanceof FileOutput) {
-			val = ((FileOutput) output).getFile();
+		} else if (output instanceof IOutput.FileBased) {
+			val = ((IOutput.FileBased) output).getFile();
 			tpe = DataType.DISPLAY2D;
 		}
 		return new RichOutput(parameterName, this.currentStep, val, tpe);

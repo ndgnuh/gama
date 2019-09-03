@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gaml.types;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IDisposable;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 

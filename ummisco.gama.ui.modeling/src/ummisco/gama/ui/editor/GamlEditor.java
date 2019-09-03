@@ -101,8 +101,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceAfterChangeListener;
 import msi.gama.common.util.PlatformUtils;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ValidationContext;

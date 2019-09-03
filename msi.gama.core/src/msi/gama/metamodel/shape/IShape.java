@@ -15,18 +15,18 @@ import org.locationtech.jts.geom.ShapeType;
 import org.locationtech.jts.io.WKTWriter;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IAttributed;
 import msi.gama.common.interfaces.ILocated;
 import msi.gama.common.interfaces.IValue;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Interface for objects that can be provided with a geometry (or which can be translated to a GamaGeometry)

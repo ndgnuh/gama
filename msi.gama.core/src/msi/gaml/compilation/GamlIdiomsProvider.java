@@ -24,6 +24,7 @@ import com.google.common.collect.Multimaps;
 
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.compilation.kernel.GamaSkillRegistry;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.FacetProto;
@@ -34,7 +35,6 @@ import msi.gaml.descriptions.SymbolProto;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.expressions.IExpressionCompiler;
 import msi.gaml.expressions.UnitConstantExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.operators.IUnits;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

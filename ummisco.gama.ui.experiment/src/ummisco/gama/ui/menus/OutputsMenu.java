@@ -10,13 +10,13 @@ import org.eclipse.swt.widgets.MenuItem;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.experiment.IExperimentPlan;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.IOutputManager;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class OutputsMenu extends ContributionItem {
 
@@ -37,9 +37,11 @@ public class OutputsMenu extends ContributionItem {
 	@Override
 	public void fill(final Menu main, final int index) {
 		IExperimentPlan exp = GAMA.getExperiment();
-		if (exp == null) return;
+		if (exp == null)
+			return;
 		ExperimentAgent agent = exp.getAgent();
-		if (agent == null) return;
+		if (agent == null)
+			return;
 		for (final SimulationAgent sim : agent.getSimulationPopulation()) {
 			managementSubMenu(main, sim.getScope(), sim.getOutputManager());
 		}
@@ -71,17 +73,20 @@ public class OutputsMenu extends ContributionItem {
 		item.setMenu(sub);
 		if (output.isOpen()) {
 			// menuItem(sub, e -> output.close(), null, "Close");
-			if (output.isPaused())
+			if (output.isPaused()) {
 				menuItem(sub, e -> output.setPaused(false), null, "Resume");
-			else
+			} else {
 				menuItem(sub, e -> output.setPaused(true), null, "Pause");
+			}
 			menuItem(sub, e -> output.update(), null, "Refresh");
-			if (output.isSynchronized())
+			if (output.isSynchronized()) {
 				menuItem(sub, e -> output.setSynchronized(false), null, "Unsynchronize");
-			else
+			} else {
 				menuItem(sub, e -> output.setSynchronized(true), null, "Synchronize");
-		} else
+			}
+		} else {
 			menuItem(sub, e -> manager.open(scope, output), null, "Reopen");
+		}
 
 	}
 
@@ -94,10 +99,12 @@ public class OutputsMenu extends ContributionItem {
 			final String prefix) {
 		final MenuItem result = new MenuItem(parent, SWT.PUSH);
 		result.setText(prefix);
-		if (listener != null)
+		if (listener != null) {
 			result.addSelectionListener(listener);
-		if (image != null)
+		}
+		if (image != null) {
 			result.setImage(image);
+		}
 		return result;
 	}
 }

@@ -17,21 +17,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.file;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFile;
 import msi.gama.util.file.IGamaFile;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.operators.Cast;
 import msi.gaml.operators.Strings;
 import msi.gaml.types.IContainerType;
@@ -40,6 +36,10 @@ import msi.gaml.types.Types;
 import rcaller.RCaller;
 import rcaller.RCode;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.file;
 
 @file (
 		name = "R",
@@ -278,7 +278,7 @@ public class GamaRFile extends GamaFile<IMap, Object> {
 	/**
 	 * Method getType()
 	 *
-	 * @see msi.gama.util.IContainer#getGamlType()
+	 * @see msi.gama.common.interfaces.IContainer#getGamlType()
 	 */
 	@Override
 	public IContainerType<IGamaFile> getGamlType() {

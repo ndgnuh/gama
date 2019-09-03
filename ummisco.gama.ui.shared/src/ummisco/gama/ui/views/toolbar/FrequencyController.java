@@ -12,9 +12,9 @@ package ummisco.gama.ui.views.toolbar;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ToolItem;
 
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.IOutput;
 import ummisco.gama.ui.resources.IGamaIcons;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 import ummisco.gama.ui.views.toolbar.IToolbarDecoratedView.StateListener;
@@ -105,9 +105,11 @@ public class FrequencyController implements StateListener {
 
 	@Override
 	public void updateToReflectState() {
-		if (view == null) { return; }
+		if (view == null)
+			return;
 		final IDisplayOutput output = view.getOutput();
-		if (output == null) { return; }
+		if (output == null)
+			return;
 
 		WorkbenchHelper.run(() -> {
 			internalChange = true;

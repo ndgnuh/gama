@@ -23,24 +23,25 @@ import java.util.function.Predicate;
 import org.apache.commons.lang.StringUtils;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.outputs.AbstractOutputManager;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.util.GamaMapFactory;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.IStatement;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.outputs.IOutputManager;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.species.GamlSpecies;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IStatement;
 import msi.gaml.statements.test.TestStatement;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 @symbol (
 		name = { IKeyword.MODEL },
@@ -147,7 +148,8 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 	}
 
 	protected void addExperiment(final IExperimentPlan exp) {
-		if (exp == null) { return; }
+		if (exp == null)
+			return;
 		experiments.put(exp.getName(), exp);
 		titledExperiments.put(exp.getFacet(IKeyword.TITLE).literalValue(), exp);
 		exp.setModel(this);
@@ -190,11 +192,10 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 
 	@Override
 	public ISpecies getSpecies(final String speciesName) {
-		if (speciesName == null) { return null; }
-		if (speciesName.equals(getName())) { return this; }
-		/*
-		 * the original is: return getAllSpecies().get(speciesName);
-		 */
+		if (speciesName == null)
+			return null;
+		if (speciesName.equals(getName()))
+			return this;
 
 		// hqnghi 11/Oct/13
 		// get experiementSpecies in any model
@@ -206,7 +207,8 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 					final ISpecies mm = entry.getValue();
 					if (mm instanceof GamlModelSpecies) {
 						sp = ((GamlModelSpecies) mm).getExperiment(speciesName);
-						if (sp != null) { return sp; }
+						if (sp != null)
+							return sp;
 					}
 				}
 			}
@@ -216,8 +218,10 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 
 	@Override
 	public ISpecies getSpecies(final String speciesName, final SpeciesDescription specDes) {
-		if (speciesName == null) { return null; }
-		if (speciesName.equals(getName())) { return this; }
+		if (speciesName == null)
+			return null;
+		if (speciesName.equals(getName()))
+			return this;
 		// hqnghi 11/Oct/13
 		// get experiementSpecies in any model
 		ISpecies sp = getExperiment(speciesName);
@@ -226,7 +230,8 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 				final ISpecies mm = entry.getValue();
 				if (mm instanceof GamlModelSpecies && specDes.getOriginName().equals(mm.getName())) {
 					sp = ((GamlModelSpecies) mm).getExperiment(speciesName);
-					if (sp != null) { return sp; }
+					if (sp != null)
+						return sp;
 				}
 			}
 		}
@@ -269,7 +274,7 @@ public class GamlModelSpecies extends GamlSpecies implements IModel {
 			if (s instanceof IExperimentPlan) {
 				theExperiments.add((IExperimentPlan) s);
 				it.remove();
-			} else if (s instanceof AbstractOutputManager) {
+			} else if (s instanceof IOutputManager) {
 				forExperiment.add(s);
 				it.remove();
 			}

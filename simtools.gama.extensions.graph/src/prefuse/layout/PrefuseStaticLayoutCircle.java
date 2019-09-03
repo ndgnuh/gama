@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import prefuse.action.layout.CircleLayout;
 import prefuse.action.layout.Layout;
 

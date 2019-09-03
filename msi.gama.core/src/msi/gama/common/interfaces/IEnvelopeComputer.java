@@ -11,7 +11,7 @@
 package msi.gama.common.interfaces;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public interface IEnvelopeComputer {
 

@@ -37,13 +37,16 @@ import org.locationtech.jts.operation.distance.DistanceOp;
 import com.google.common.collect.Ordering;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.ICollector;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IMacroAgent;
+import msi.gama.common.util.Collector;
 import msi.gama.common.util.JavaUtils;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.metamodel.agent.AbstractAgent;
 import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
@@ -52,17 +55,14 @@ import msi.gama.metamodel.shape.GamaShape;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.ICollector;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
 import msi.gama.util.file.IGamaFile;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gama.util.matrix.GamaMatrix;
 import msi.gama.util.matrix.IMatrix;
 import msi.gama.util.path.GamaSpatialPath;
@@ -2040,7 +2040,7 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 			/**
 			 * Method getExteriorRing()
 			 *
-			 * @see msi.gama.metamodel.shape.IShape#getExteriorRing(msi.gama.runtime.IScope)
+			 * @see msi.gama.metamodel.shape.IShape#getExteriorRing(msi.gama.runtime.scope.IScope)
 			 */
 			@Override
 			public GamaShape getExteriorRing(final IScope scope) {

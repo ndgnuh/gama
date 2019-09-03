@@ -41,13 +41,11 @@ import org.apache.commons.lang.StringUtils;
 
 import msi.gama.common.interfaces.IValue;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.TimeUnitConstantExpression;
 import msi.gaml.operators.Cast;
@@ -55,6 +53,10 @@ import msi.gaml.operators.Dates;
 import msi.gaml.types.GamaDateType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * The Class GamaDate. Immutable class that holds a date (based on JSR-310)

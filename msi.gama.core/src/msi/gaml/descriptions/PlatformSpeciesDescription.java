@@ -19,10 +19,10 @@ import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.preferences.Pref;
 import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.IAgentConstructor;
-import msi.gaml.compilation.IGamaHelper;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.interfaces.IAgentConstructor;
+import msi.gaml.compilation.interfaces.IGamaHelper;
 import msi.gaml.expressions.IExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.statements.Facets;
 
 public class PlatformSpeciesDescription extends SpeciesDescription {

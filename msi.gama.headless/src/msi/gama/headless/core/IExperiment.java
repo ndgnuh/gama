@@ -11,8 +11,8 @@
  **********************************************************************************************/
 package msi.gama.headless.core;
 
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.model.IModel;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gaml.expressions.IExpression;
 

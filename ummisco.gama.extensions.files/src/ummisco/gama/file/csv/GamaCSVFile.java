@@ -20,17 +20,13 @@ import org.apache.commons.lang.StringUtils;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.example;
-import msi.gama.precompiler.GamlAnnotations.file;
-import msi.gama.precompiler.IConcept;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFile;
 import msi.gama.util.file.IGamaFileMetaData;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gama.util.matrix.GamaFloatMatrix;
 import msi.gama.util.matrix.GamaIntMatrix;
 import msi.gama.util.matrix.GamaObjectMatrix;
@@ -42,6 +38,10 @@ import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.file.metadata.GamaFileMetaData;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.example;
+import ummisco.gama.processor.GamlAnnotations.file;
 
 /**
  * Class GamaCSVFile.
@@ -455,7 +455,7 @@ public class GamaCSVFile extends GamaFile<IMatrix<Object>, Object> {
 	/**
 	 * Method computeEnvelope()
 	 *
-	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.IScope)
+	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Envelope3D computeEnvelope(final IScope scope) {

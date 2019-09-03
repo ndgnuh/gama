@@ -19,9 +19,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DateTime;
 
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaDate;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

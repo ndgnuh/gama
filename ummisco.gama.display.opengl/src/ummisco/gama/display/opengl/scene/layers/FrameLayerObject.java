@@ -12,7 +12,7 @@ package ummisco.gama.display.opengl.scene.layers;
 
 import java.util.Collection;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.util.GamaColor;

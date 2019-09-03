@@ -13,9 +13,10 @@ package msi.gama.kernel.experiment;
 import java.util.List;
 import java.util.Set;
 
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.common.util.StringUtils;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.descriptions.SymbolDescription;
 import msi.gaml.types.IType;
@@ -152,7 +153,7 @@ public abstract class ParameterAdapter implements IParameter.Batch {
 	/**
 	 * Method setUnitLabel()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#setUnitLabel(java.lang.String)
+	 * @see msi.gama.common.interfaces.experiment.IParameter#setUnitLabel(java.lang.String)
 	 */
 	@Override
 	public void setUnitLabel(final String label) {

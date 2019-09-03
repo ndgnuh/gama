@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import msi.gama.runtime.IScope;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
 

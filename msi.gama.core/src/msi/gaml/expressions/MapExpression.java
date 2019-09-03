@@ -17,11 +17,11 @@ import java.util.function.Predicate;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaMapFactory;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IMap;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.compilation.GAML;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;

@@ -14,11 +14,11 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.Types;
 import ummisco.gama.extensions.network.common.ConnectorMessage;
 import ummisco.gama.extensions.network.common.MessageFactory;

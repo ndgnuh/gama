@@ -22,11 +22,10 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.swt.GLCanvas;
 
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.ILayer;
+import msi.gama.common.interfaces.outputs.IChartImageProvider;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.ILayer;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.display.AbstractDisplayGraphics;
-import msi.gama.outputs.layers.charts.ChartOutput;
 import msi.gama.util.GamaColor;
 import msi.gama.util.file.IGamaFile;
 import msi.gaml.statements.draw.DrawingAttributes;
@@ -44,6 +43,7 @@ import ummisco.gama.display.opengl.renderer.helpers.PickingHelper;
 import ummisco.gama.display.opengl.renderer.helpers.SceneHelper;
 import ummisco.gama.display.opengl.scene.ModelScene;
 import ummisco.gama.display.opengl.view.SWTOpenGLDisplaySurface;
+import ummisco.gama.outputs.display.AbstractDisplayGraphics;
 import ummisco.gama.ui.utils.GraphicsHelper;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 
@@ -164,7 +164,7 @@ public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRend
 	/**
 	 * Method endDrawingLayers()
 	 *
-	 * @see msi.gama.common.interfaces.IGraphics#endDrawingLayers()
+	 * @see msi.gama.common.interfaces.outputs.IGraphics#endDrawingLayers()
 	 */
 	@Override
 	public void endDrawingLayers() {
@@ -312,7 +312,7 @@ public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRend
 	}
 
 	@Override
-	public Rectangle2D drawChart(final ChartOutput chart) {
+	public Rectangle2D drawChart(final IChartImageProvider chart) {
 		final ModelScene scene = sceneHelper.getSceneToUpdate();
 		if (scene == null)
 			return null;

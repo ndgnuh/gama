@@ -15,9 +15,9 @@ import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.AbstractTopology;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
 import msi.gaml.operators.Maths;
 import msi.gaml.types.Types;
 

@@ -13,7 +13,8 @@ Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: msi.gaml.extensions.fipa
-Export-Package: ummisco.gama.file,
+Export-Package: ummisco.gama.create,
+ ummisco.gama.file,
  ummisco.gama.file.csv,
  ummisco.gama.file.gaml,
  ummisco.gama.file.json,

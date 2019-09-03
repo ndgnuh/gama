@@ -22,18 +22,18 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IStatusMessage;
-import msi.gama.common.interfaces.IUpdaterTarget;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IGui;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.kernel.experiment.IExperimentAgent;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.experiment.ITopLevelAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.kernel.simulation.SimulationClock;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.runtime.GAMA;
+import msi.gama.runtime.IStatusMessage;
+import msi.gama.runtime.IUpdaterTarget;
 import msi.gaml.operators.Strings;
 import ummisco.gama.ui.commands.StatusMessage;
 import ummisco.gama.ui.commands.SubTaskMessage;
@@ -324,7 +324,7 @@ public class StatusControlContribution extends WorkbenchWindowControlContributio
 	/**
 	 * Method resume()
 	 *
-	 * @see msi.gama.common.interfaces.IUpdaterTarget#resume()
+	 * @see msi.gama.runtime.IUpdaterTarget#resume()
 	 */
 	@Override
 	public void resume() {

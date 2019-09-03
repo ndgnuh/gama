@@ -27,14 +27,14 @@ import org.osgi.framework.BundleException;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.common.interfaces.IDisplayCreator.DisplayDescription;
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IEventLayerDelegate;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.outputs.layers.EventLayerStatement;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IEventLayerDelegate;
+import msi.gama.common.interfaces.outputs.IEventLayerStatement;
+import msi.gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import msi.gama.runtime.GAMA;
 import msi.gaml.compilation.AbstractGamlAdditions;
-import msi.gaml.compilation.IGamlAdditions;
+import msi.gaml.compilation.interfaces.IGamlAdditions;
 import msi.gaml.compilation.kernel.GamaClassLoader;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import msi.gaml.statements.CreateStatement;
@@ -186,7 +186,7 @@ public class GamaBundleLoader {
 			for ( final IConfigurationElement e : registry.getConfigurationElementsFor(EVENT_LAYER_EXTENSION) ) {
 				try {
 					// TODO Add the defining plug-in
-					EventLayerStatement.addDelegate((IEventLayerDelegate) e.createExecutableExtension("class"));
+					IEventLayerStatement.DELEGATES.add((IEventLayerDelegate) e.createExecutableExtension("class"));
 				} catch (final CoreException e1) {
 
 					ERR(ERROR_MESSAGE);

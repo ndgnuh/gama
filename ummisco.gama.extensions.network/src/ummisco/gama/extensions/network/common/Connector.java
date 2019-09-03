@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.Map;
 
 import irit.gama.extensions.serialize.factory.StreamConverter;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.extensions.messaging.GamaMessage;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import ummisco.gama.extensions.network.skills.INetworkSkill;
 
 public abstract class Connector implements IConnector {

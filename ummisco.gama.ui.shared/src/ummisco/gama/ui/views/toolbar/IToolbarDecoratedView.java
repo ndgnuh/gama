@@ -12,7 +12,7 @@ package ummisco.gama.ui.views.toolbar;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbenchSite;
 
-import msi.gama.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
 import ummisco.gama.ui.resources.GamaColors.GamaUIColor;
 
 /**
@@ -28,7 +28,7 @@ public interface IToolbarDecoratedView {
 
 	void createToolItems(GamaToolbar2 tb);
 
-	default void addStateListener(final StateListener listener) {};
+	default void addStateListener(final StateListener listener) {}
 
 	public interface StateListener {
 		void updateToReflectState();

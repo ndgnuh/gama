@@ -14,20 +14,20 @@ import java.util.Map;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.type;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
 import msi.gama.util.graph.GamaGraph;
 import msi.gama.util.graph.IGraph;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 import msi.gaml.expressions.VariableExpression;
 import msi.gaml.operators.Cast;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.type;
 
 @type (
 		name = IKeyword.GRAPH,

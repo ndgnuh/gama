@@ -3,9 +3,9 @@ package irit.gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import irit.gama.extensions.serialize.gamaType.reduced.GamaPairReducer;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IReference;
 import msi.gaml.types.Types;
 
 public class ReferencePair extends GamaPair<Object, Object> implements IReference {

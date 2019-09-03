@@ -10,15 +10,15 @@
 package irit.gama.extensions.serialize.gamaType.reduced;
 
 import irit.gama.extensions.serialize.gamaType.reference.ReferenceGraph;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
-import msi.gama.util.IReference;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.graph.GamaGraph;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.GamaGraphType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

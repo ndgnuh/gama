@@ -10,13 +10,13 @@
 package ummisco.gama.gaml.expression;
 
 import msi.gaml.compilation.ast.ISyntacticElement;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.StatementDescription;
 import msi.gaml.expressions.DenotedActionExpression;
 import msi.gaml.expressions.IExpression;
-import msi.gaml.factories.DescriptionFactory;
 
 public class BlockExpressionDescription extends EcoreBasedExpressionDescription {
 

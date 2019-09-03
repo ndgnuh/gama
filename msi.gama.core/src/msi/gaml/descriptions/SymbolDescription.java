@@ -22,15 +22,15 @@ import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.interfaces.IGamlIssue;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.ISymbol;
+import msi.gaml.compilation.factories.DescriptionFactory;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.expressions.IExpression;
-import msi.gaml.factories.DescriptionFactory;
 import msi.gaml.statements.Facets;
-import msi.gaml.statements.IStatement;
 import msi.gaml.types.GamaType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

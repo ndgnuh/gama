@@ -10,14 +10,14 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.GAML;
-import msi.gaml.compilation.GamaGetter;
+import msi.gaml.compilation.interfaces.GamaGetter;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.operators.Cast;

@@ -13,11 +13,11 @@ package msi.gama.metamodel.topology;
 import java.util.Collection;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 /**
  * Written by drogoul Modified on 23 f�vr. 2011

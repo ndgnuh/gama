@@ -18,10 +18,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gaml.operators.Cast;
 import ummisco.gama.extensions.network.common.Connector;
 import ummisco.gama.extensions.network.common.ConnectorMessage;

@@ -10,14 +10,14 @@
  ********************************************************************************************************/
 package msi.gama.util.file;
 
-import static msi.gama.util.GamaListFactory.createWithoutCasting;
+import static msi.gama.util.list.GamaListFactory.createWithoutCasting;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.operators.Files;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.IContainerType;

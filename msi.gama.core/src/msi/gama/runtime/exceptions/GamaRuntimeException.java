@@ -20,9 +20,9 @@ import org.eclipse.emf.ecore.EObject;
 
 import msi.gama.common.util.TextBuilder;
 import msi.gama.kernel.simulation.SimulationClock;
-import msi.gama.runtime.ExecutionScope;
-import msi.gama.runtime.IScope;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.ExecutionScope;
+import msi.gama.runtime.scope.IScope;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.operators.Strings;
 
 /**

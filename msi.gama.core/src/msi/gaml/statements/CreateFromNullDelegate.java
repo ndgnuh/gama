@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import msi.gama.common.interfaces.ICreateDelegate;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 
@@ -45,7 +45,7 @@ public class CreateFromNullDelegate implements ICreateDelegate {
 	 *
 	 * @author Alexis Drogoul
 	 * @since 04-09-2012
-	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.IScope, java.util.List, int,
+	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.scope.IScope, java.util.List, int,
 	 *      java.lang.Object)
 	 */
 	@Override

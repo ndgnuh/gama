@@ -17,25 +17,27 @@ import java.util.Map;
 
 import org.jfree.data.statistics.Statistics;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.kernel.batch.IExploration;
-import msi.gama.kernel.experiment.IParameter.Batch;
+import msi.gama.common.interfaces.batch.IExploration;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.IParameter.Batch;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.kernel.simulation.SimulationPopulation;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
-import msi.gama.outputs.FileOutput;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.experiment;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionFactory;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
 import msi.gaml.variables.IVariable;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.experiment;
 
 /**
  * Written by drogoul Modified on 28 mai 2011
@@ -138,7 +140,7 @@ public class BatchAgent extends ExperimentAgent {
 
 	public void memorizeFitnessAndCloseSimulation(final IAgent sim) {
 		final IExpression fitness = getSpecies().getExplorationAlgorithm().getFitnessExpression();
-		final FileOutput output = getSpecies().getLog();
+		final IOutput.FileBased output = getSpecies().getLog();
 		double lastFitnessValue = 0;
 		if (fitness != null) {
 			lastFitnessValue = Cast.asFloat(sim.getScope(), fitness.value(sim.getScope()));
@@ -154,7 +156,7 @@ public class BatchAgent extends ExperimentAgent {
 	 *
 	 * Method step()
 	 *
-	 * @see msi.gama.metamodel.agent.GamlAgent#step(msi.gama.runtime.IScope) This method, called once by the front
+	 * @see msi.gama.metamodel.agent.GamlAgent#step(msi.gama.runtime.scope.IScope) This method, called once by the front
 	 *      controller, actually serves as "launching" the batch process (entirely piloted by the exploration algorithm)
 	 */
 	@Override
@@ -183,7 +185,8 @@ public class BatchAgent extends ExperimentAgent {
 	public Double launchSimulationsWithSolution(final ParametersSet sol) throws GamaRuntimeException {
 		// We first reset the currentSolution and the fitness values
 		final SimulationPopulation pop = getSimulationPopulation();
-		if (pop == null) { return 0d; }
+		if (pop == null)
+			return 0d;
 		currentSolution = new ParametersSet(sol);
 		fitnessValues.clear();
 		runNumber = runNumber + 1;
@@ -268,7 +271,8 @@ public class BatchAgent extends ExperimentAgent {
 		super.step(getScope());
 
 		// If the agent is dead, we return immediately
-		if (dead) { return 0.0; }
+		if (dead)
+			return 0.0;
 		// We reset the experiment agent to erase traces of the current
 		// simulations if any
 		this.reset();
@@ -329,18 +333,22 @@ public class BatchAgent extends ExperimentAgent {
 			@Override
 			public String getUnitLabel(final IScope scope) {
 				final IExploration algo = getSpecies().getExplorationAlgorithm();
-				if (algo == null) { return ""; }
+				if (algo == null)
+					return "";
 				final ParametersSet solutions = algo.getBestSolution();
-				if (solutions == null) { return ""; }
+				if (solutions == null)
+					return "";
 				return "with " + solutions;
 			}
 
 			@Override
 			public String value() {
 				final IExploration algo = getSpecies().getExplorationAlgorithm();
-				if (algo == null) { return "-"; }
+				if (algo == null)
+					return "-";
 				final Double best = algo.getBestFitness();
-				if (best == null) { return "-"; }
+				if (best == null)
+					return "-";
 				return best.toString();
 			}
 
@@ -350,13 +358,15 @@ public class BatchAgent extends ExperimentAgent {
 
 			@Override
 			public String getUnitLabel(final IScope scope) {
-				if (lastSolution == null) { return ""; }
+				if (lastSolution == null)
+					return "";
 				return "with " + lastSolution.toString();
 			}
 
 			@Override
 			public String value() {
-				if (lastFitness == null) { return "-"; }
+				if (lastFitness == null)
+					return "-";
 				return lastFitness.toString();
 			}
 
@@ -367,7 +377,8 @@ public class BatchAgent extends ExperimentAgent {
 			@Override
 			public String value() {
 				final Map<String, IParameter.Batch> explorable = getSpecies().getExplorableParameters();
-				if (explorable.isEmpty()) { return "1"; }
+				if (explorable.isEmpty())
+					return "1";
 				String result = "";
 				int dim = 1;
 				for (final Map.Entry<String, IParameter.Batch> entry : explorable.entrySet()) {
@@ -382,7 +393,8 @@ public class BatchAgent extends ExperimentAgent {
 			}
 
 			int getExplorationDimension(final IParameter.Batch p) {
-				if (p.getAmongValue(getScope()) != null) { return p.getAmongValue(getScope()).size(); }
+				if (p.getAmongValue(getScope()) != null)
+					return p.getAmongValue(getScope()).size();
 				return (int) ((p.getMaxValue(getScope()).doubleValue() - p.getMinValue(getScope()).doubleValue())
 						/ p.getStepValue(getScope()).doubleValue()) + 1;
 			}

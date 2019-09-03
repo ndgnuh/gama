@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
-import msi.gama.common.interfaces.IGraphics;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.outputs.IGraphics;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.Types;
 
 public class ZoomUnitExpression extends UnitConstantExpression<Double> {

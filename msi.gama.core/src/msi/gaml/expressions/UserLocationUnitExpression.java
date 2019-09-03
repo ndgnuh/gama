@@ -11,7 +11,7 @@
 package msi.gaml.expressions;
 
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.Types;
 
 public class UserLocationUnitExpression extends UnitConstantExpression<GamaPoint> {

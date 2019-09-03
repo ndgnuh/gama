@@ -10,9 +10,9 @@
 package irit.gama.extensions.serialize.gamaType.reduced;
 
 import irit.gama.extensions.serialize.gamaType.reference.ReferencePair;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.util.GamaPair;
-import msi.gama.util.IReference;
 import msi.gaml.types.IType;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })

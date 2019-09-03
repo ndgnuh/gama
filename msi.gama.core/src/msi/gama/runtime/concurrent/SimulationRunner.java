@@ -18,7 +18,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 
-import msi.gama.kernel.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.kernel.simulation.SimulationPopulation;
 import msi.gama.runtime.concurrent.GamaExecutorService.Caller;

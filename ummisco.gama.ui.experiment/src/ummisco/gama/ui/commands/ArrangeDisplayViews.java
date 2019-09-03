@@ -32,7 +32,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
-import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.interfaces.gui.IGamaView;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.tree.GamaNode;

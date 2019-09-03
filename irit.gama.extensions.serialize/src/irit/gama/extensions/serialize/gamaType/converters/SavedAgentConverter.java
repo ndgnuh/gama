@@ -23,7 +23,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import msi.gama.kernel.experiment.ExperimentAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.metamodel.agent.SavedAgent;
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })
 public class SavedAgentConverter implements Converter {

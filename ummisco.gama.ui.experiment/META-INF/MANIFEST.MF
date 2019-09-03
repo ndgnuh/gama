@@ -20,7 +20,8 @@ Require-Bundle: ummisco.gama.application;bundle-version="1.7.0",
  org.apache.commons.lang,
  org.eclipse.ui,
  org.eclipse.core.expressions,
- org.eclipse.core.commands
+ org.eclipse.core.commands,
+ ummisco.gama.outputs;bundle-version="1.9.0"
 Export-Package: ummisco.gama.ui.commands,
  ummisco.gama.ui.controls,
  ummisco.gama.ui.experiment.parameters,

@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'WorkaroundForIssue2476.java, in plugin ummisco.gama.display.java2d, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'WorkaroundForIssue2476.java, in plugin ummisco.gama.display.java2d, is part of the source code of the GAMA modeling
+ * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -9,13 +9,12 @@
  **********************************************************************************************/
 package ummisco.gama.display.java2d;
 
+import java.awt.Panel;
 import java.awt.event.MouseMotionListener;
-
-import javax.swing.JApplet;
 
 import org.eclipse.swt.SWT;
 
-import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import msi.gama.common.util.PlatformUtils;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.dev.utils.DEBUG;
@@ -31,7 +30,7 @@ public class WorkaroundForIssue2476 {
 		GAMA.getGui().setMouseLocationInModel(surface.getModelCoordinates());
 	}
 
-	public static void installOn(final JApplet applet, final IDisplaySurface surface) {
+	public static void installOn(final Panel applet, final IDisplaySurface surface) {
 		// Install only on Linux
 		if (!PlatformUtils.isLinux())
 			return;

@@ -12,11 +12,11 @@ package irit.gama.extensions.serialize.gamaType.reduced;
 import java.util.ArrayList;
 
 import irit.gama.extensions.serialize.gamaType.reference.ReferenceList;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IReference;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.types.IType;
 
 @SuppressWarnings ({ "rawtypes" })

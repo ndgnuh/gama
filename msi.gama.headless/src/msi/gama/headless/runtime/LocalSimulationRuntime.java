@@ -11,13 +11,13 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
 import msi.gama.headless.common.Globals;
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
 import msi.gama.headless.job.ExperimentJob;
 import msi.gama.kernel.experiment.ExperimentPlan;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.HeadlessListener;
 import msi.gaml.compilation.GamlCompilationError;

@@ -32,8 +32,8 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import com.google.common.base.Function;
 import com.google.inject.Inject;
 
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.SymbolProto;
-import msi.gaml.factories.DescriptionFactory;
 import ummisco.gama.services.GamlGrammarAccess;
 import ummisco.gama.ui.labeling.GamlLabelProvider;
 

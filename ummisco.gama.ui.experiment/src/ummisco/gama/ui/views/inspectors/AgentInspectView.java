@@ -4,7 +4,7 @@
  * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package ummisco.gama.ui.views.inspectors;
@@ -24,16 +24,16 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Menu;
 
-import msi.gama.common.interfaces.IGui;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.kernel.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IOutput;
 import msi.gama.kernel.experiment.ParameterAdapter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.IOutput;
-import msi.gama.outputs.InspectDisplayOutput;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.Types;
+import ummisco.gama.outputs.InspectDisplayOutput;
 import ummisco.gama.ui.controls.FlatButton;
 import ummisco.gama.ui.controls.ParameterExpandBar;
 import ummisco.gama.ui.controls.ParameterExpandItem;
@@ -58,7 +58,8 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 			reset();
 			return;
 		}
-		if (!(output instanceof InspectDisplayOutput)) { return; }
+		if (!(output instanceof InspectDisplayOutput))
+			return;
 		final InspectDisplayOutput out = (InspectDisplayOutput) output;
 		final IAgent[] agents = out.getLastValue();
 		if (agents == null || agents.length == 0) {
@@ -144,7 +145,8 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 			// DEBUG.LOG("Asking to create the item " + agent.getName()
 			// + " in inspector");
 			final ParameterExpandItem item = createItem(getParentComposite(), agent, true, null);
-			if (item == null) { return false; }
+			if (item == null)
+				return false;
 			return true;
 		}
 		return false;
@@ -158,13 +160,15 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 
 	private List<IParameter> getParametersToInspect(final IAgent agent) {
 		final Map<String, String> names = getOutput().getAttributes();
-		if (names == null) { return new ArrayList<IParameter>(agent.getSpecies().getVars()); }
+		if (names == null)
+			return new ArrayList<>(agent.getSpecies().getVars());
 		final List<IParameter> params = new ArrayList<>();
 		for (final String s : names.keySet()) {
-			if (agent.getSpecies().getVar(s) != null)
+			if (agent.getSpecies().getVar(s) != null) {
 				params.add(agent.getSpecies().getVar(s));
-			else
+			} else {
 				params.add(buildAttribute(agent, s, names.get(s)));
+			}
 		}
 		return params;
 	}
@@ -233,7 +237,7 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 
 	/**
 	 * Method pauseChanged()
-	 * 
+	 *
 	 * @see ummisco.gama.ui.views.toolbar.IToolbarDecoratedView.Pausable#pauseChanged()
 	 */
 	@Override
@@ -241,7 +245,7 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 
 	/**
 	 * Method synchronizeChanged()
-	 * 
+	 *
 	 * @see ummisco.gama.ui.views.toolbar.IToolbarDecoratedView.Pausable#synchronizeChanged()
 	 */
 	@Override
@@ -249,7 +253,7 @@ public class AgentInspectView extends AttributesEditorsView<IAgent>
 
 	/**
 	 * Method handleMenu()
-	 * 
+	 *
 	 * @see msi.gama.common.interfaces.ItemList#handleMenu(java.lang.Object, int, int)
 	 */
 	@Override

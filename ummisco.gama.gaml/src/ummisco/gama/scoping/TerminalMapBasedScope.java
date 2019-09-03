@@ -20,7 +20,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
-import msi.gama.util.IMap;
+import msi.gama.util.map.IMap;
 
 public class TerminalMapBasedScope implements IScope {
 

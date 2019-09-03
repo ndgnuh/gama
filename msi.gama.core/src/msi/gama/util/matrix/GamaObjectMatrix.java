@@ -17,17 +17,17 @@ import org.apache.commons.lang.ArrayUtils;
 
 import com.google.common.collect.ImmutableList;
 
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.grid.GamaSpatialMatrix;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.GAMA.InScope;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.types.GamaMatrixType;
 import msi.gaml.types.GamaType;
 import msi.gaml.types.IType;

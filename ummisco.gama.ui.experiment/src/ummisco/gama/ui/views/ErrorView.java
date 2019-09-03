@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import msi.gama.common.interfaces.IGamaView;
 import msi.gama.common.interfaces.ItemList;
+import msi.gama.common.interfaces.gui.IGamaView;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.TextBuilder;
 import msi.gama.runtime.GAMA;

@@ -29,14 +29,14 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.ILayerManager;
-import msi.gama.kernel.experiment.ITopLevelAgent;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.LayeredDisplayOutput;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.ILayerManager;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
+import ummisco.gama.outputs.LayeredDisplayOutput;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.GamaIcons;
 import ummisco.gama.ui.resources.IGamaColors;
@@ -81,7 +81,8 @@ public abstract class LayeredDisplayView extends GamaViewPart
 
 	@Override
 	public boolean containsPoint(final int x, final int y) {
-		if (super.containsPoint(x, y)) { return true; }
+		if (super.containsPoint(x, y))
+			return true;
 		final Point o = getSurfaceComposite().toDisplay(0, 0);
 		final Point s = getSurfaceComposite().getSize();
 		return new Rectangle(o.x, o.y, s.x, s.y).contains(x, y);
@@ -110,7 +111,8 @@ public abstract class LayeredDisplayView extends GamaViewPart
 	}
 
 	public boolean isOpenGL() {
-		if (outputs.isEmpty()) { return false; }
+		if (outputs.isEmpty())
+			return false;
 		return getOutput().getData().isOpenGL();
 	}
 
@@ -124,7 +126,8 @@ public abstract class LayeredDisplayView extends GamaViewPart
 
 	@Override
 	public void ownCreatePartControl(final Composite c) {
-		if (getOutput() == null) { return; }
+		if (getOutput() == null)
+			return;
 		c.setLayout(emptyLayout());
 
 		// First create the sashform
@@ -183,23 +186,25 @@ public abstract class LayeredDisplayView extends GamaViewPart
 	protected abstract Composite createSurfaceComposite(Composite parent);
 
 	@Override
-	public LayeredDisplayOutput getOutput() {
-		return (LayeredDisplayOutput) super.getOutput();
+	public IDisplayOutput.Layered getOutput() {
+		return (IDisplayOutput.Layered) super.getOutput();
 	}
 
 	@Override
 	public IDisplaySurface getDisplaySurface() {
-		final LayeredDisplayOutput out = getOutput();
-		if (out != null) { return out.getSurface(); }
+		final IDisplayOutput.Layered out = getOutput();
+		if (out != null)
+			return out.getSurface();
 		return null;
 	}
 
 	@Override
 	public void widgetDisposed(final DisposeEvent e) {
-		if (disposed) { return; }
-		final LayeredDisplayOutput output = getOutput();
+		if (disposed)
+			return;
+		final IDisplayOutput.Layered output = getOutput();
 		if (output != null) {
-			output.getData().listeners.clear();
+			output.getData().clearListeners();
 			final IDisplaySurface s = output.getSurface();
 			if (isOpenGL() && s != null) {
 				s.dispose();
@@ -279,7 +284,8 @@ public abstract class LayeredDisplayView extends GamaViewPart
 
 			@Override
 			public IStatus runInUIThread(final IProgressMonitor monitor) {
-				if (getDisplaySurface() == null) { return Status.CANCEL_STATUS; }
+				if (getDisplaySurface() == null)
+					return Status.CANCEL_STATUS;
 				getDisplaySurface().updateDisplay(false);
 				return Status.OK_STATUS;
 			}
@@ -364,7 +370,8 @@ public abstract class LayeredDisplayView extends GamaViewPart
 
 	@Override
 	public void removeOutput(final IDisplayOutput output) {
-		if (output == null) { return; }
+		if (output == null)
+			return;
 		if (output == getOutput()) {
 			if (isFullScreen()) {
 				WorkbenchHelper.run(() -> toggleFullScreen());

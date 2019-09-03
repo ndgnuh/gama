@@ -12,7 +12,7 @@ package ummisco.gama.ui.parameters;
 import java.util.List;
 
 import msi.gama.kernel.experiment.ParameterAdapter;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

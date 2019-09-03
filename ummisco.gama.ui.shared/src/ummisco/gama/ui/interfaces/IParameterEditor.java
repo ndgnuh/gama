@@ -10,7 +10,7 @@
 package ummisco.gama.ui.interfaces;
 
 import msi.gama.common.interfaces.IScoped;
-import msi.gama.kernel.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gaml.types.IType;
 
 /**

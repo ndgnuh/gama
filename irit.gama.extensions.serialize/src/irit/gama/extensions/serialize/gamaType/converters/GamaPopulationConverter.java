@@ -15,9 +15,9 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.population.GamaPopulation;
-import msi.gama.util.IList;
+import msi.gama.util.list.IList;
 import ummisco.gama.dev.utils.DEBUG;
 
 @SuppressWarnings ({ "rawtypes", "unchecked" })

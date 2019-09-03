@@ -40,12 +40,12 @@ import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.IWorkbenchPartSite;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IOverlayProvider;
-import msi.gama.common.interfaces.IUpdaterTarget;
-import msi.gama.outputs.LayeredDisplayOutput;
-import msi.gama.outputs.layers.OverlayStatement.OverlayInfo;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IOverlayInfo;
+import msi.gama.common.interfaces.outputs.IOverlayProvider;
+import msi.gama.runtime.IUpdaterTarget;
 import msi.gaml.operators.Maths;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.ui.resources.GamaColors;
@@ -59,7 +59,7 @@ import ummisco.gama.ui.utils.WorkbenchHelper;
  * @since 19 august 2013
  *
  */
-public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
+public class DisplayOverlay implements IUpdaterTarget<IOverlayInfo> {
 
 	Label coord, zoom, left, center, right;
 	StringBuilder text = new StringBuilder();
@@ -110,7 +110,7 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	}
 
 	public DisplayOverlay(final LayeredDisplayView view, final Composite c,
-			final IOverlayProvider<OverlayInfo> provider) {
+			final IOverlayProvider<IOverlayInfo> provider) {
 		this.createExtraInfo = provider != null;
 		this.view = view;
 		final IPartService ps = ((IWorkbenchPart) view).getSite().getService(IPartService.class);
@@ -233,15 +233,14 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	private String getScaleRight() {
 		final double real = getValueOfOnePixelInModelUnits() * 100;
 		// DEBUG.LOG("GetScaleRight " + real);
-		if (real > 1000) {
+		if (real > 1000)
 			return String.format("%.1fkm", real / 1000d);
-		} else if (real < 0.001) {
+		else if (real < 0.001)
 			return String.format("%dmm", (int) real * 1000);
-		} else if (real < 0.01) {
+		else if (real < 0.01)
 			return String.format("%dcm", (int) (real * 100));
-		} else {
+		else
 			return String.format("%dm", (int) real);
-		}
 	}
 
 	Runnable doHide = () -> hide();
@@ -314,10 +313,12 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	}
 
 	public void update() {
-		if (isBusy) { return; }
+		if (isBusy)
+			return;
 		isBusy = true;
 		try {
-			if (getPopup().isDisposed()) { return; }
+			if (getPopup().isDisposed())
+				return;
 			if (!coord.isDisposed()) {
 				try {
 					text.setLength(0);
@@ -377,7 +378,8 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	 * @param createColor
 	 */
 	private void setForeground(final Label label, final Color color) {
-		if (label == null || label.isDisposed()) { return; }
+		if (label == null || label.isDisposed())
+			return;
 		final Color c = label.getForeground();
 		label.setForeground(color);
 		if (c != IGamaColors.WHITE.color() && c != color) {
@@ -391,9 +393,9 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	 * @see msi.gama.gui.swt.controls.IUpdaterTarget#updateWith(java.lang.Object)
 	 */
 	@Override
-	public void updateWith(final OverlayInfo m) {
-		final String[] infos = m.infos;
-		final List<int[]> colors = m.colors;
+	public void updateWith(final IOverlayInfo m) {
+		final String[] infos = m.getInfos();
+		final List<int[]> colors = m.getColors();
 		if (infos[0] != null) {
 			left.setText(infos[0]);
 			if (colors != null) {
@@ -419,7 +421,7 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	/**
 	 * Method getCurrentState()
 	 *
-	 * @see msi.gama.common.interfaces.IUpdaterTarget#getCurrentState()
+	 * @see msi.gama.runtime.IUpdaterTarget#getCurrentState()
 	 */
 	@Override
 	public int getCurrentState() {
@@ -429,7 +431,7 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	/**
 	 * Method resume()
 	 *
-	 * @see msi.gama.common.interfaces.IUpdaterTarget#resume()
+	 * @see msi.gama.runtime.IUpdaterTarget#resume()
 	 */
 	@Override
 	public void resume() {}
@@ -443,9 +445,11 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	// }
 
 	public void display() {
-		if (!isVisible()) { return; }
+		if (!isVisible())
+			return;
 		// We first verify that the popup is still ok
-		if (popup.isDisposed()) { return; }
+		if (popup.isDisposed())
+			return;
 		update();
 		relocate();
 		resize();
@@ -455,14 +459,16 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 	}
 
 	public void relocate() {
-		if (!isVisible()) { return; }
+		if (!isVisible())
+			return;
 		if (!popup.isDisposed()) {
 			popup.setLocation(getLocation());
 		}
 	}
 
 	public void resize() {
-		if (!isVisible()) { return; }
+		if (!isVisible())
+			return;
 		if (!popup.isDisposed()) {
 			final Point size = getSize();
 			popup.setSize(popup.computeSize(size.x, size.y));
@@ -514,9 +520,11 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 		final boolean[] result = new boolean[] { false };
 		WorkbenchHelper.run(() -> {
 			final IWorkbenchPartSite site = view.getSite();
-			if (site == null) { return; }
+			if (site == null)
+				return;
 			final Shell shell = site.getShell();
-			if (shell == null) { return; }
+			if (shell == null)
+				return;
 			final String text = shell.getText();
 			result[0] = text == null || text.isEmpty();
 		});
@@ -540,15 +548,17 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 
 	public double getValueOfOnePixelInModelUnits() {
 		final IDisplaySurface s = view.getDisplaySurface();
-		if (s == null) { return 1; }
+		if (s == null)
+			return 1;
 		final double displayWidth = s.getDisplayWidth();
 		final double envWidth = s.getEnvWidth();
 		return envWidth / displayWidth;
 	}
 
 	public void getOverlayCoordInfo(final StringBuilder sb) {
-		final LayeredDisplayOutput output = view.getOutput();
-		if (output == null) { return; }
+		final IDisplayOutput.Layered output = view.getOutput();
+		if (output == null)
+			return;
 		final boolean paused = output.isPaused();
 		final boolean synced = output.getData().isSynchronized();
 		final IDisplaySurface surface = view.getDisplaySurface();
@@ -565,7 +575,8 @@ public class DisplayOverlay implements IUpdaterTarget<OverlayInfo> {
 
 	public void getOverlayZoomInfo(final StringBuilder sb) {
 		final IDisplaySurface surface = view.getDisplaySurface();
-		if (surface == null) { return; }
+		if (surface == null)
+			return;
 		// if (CORE_SHOW_FPS.getValue()) {
 		sb.append(surface.getFPS());
 		sb.append(" fps | ");

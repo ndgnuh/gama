@@ -55,7 +55,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import msi.gama.common.interfaces.IGamaView;
+import msi.gama.common.interfaces.gui.IGamaView;
 import msi.gama.common.util.FileUtils;
 import one.util.streamex.StreamEx;
 import ummisco.gama.dev.utils.DEBUG;

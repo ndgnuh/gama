@@ -12,9 +12,9 @@ package ummisco.gama.ui.parameters;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Button;
 
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

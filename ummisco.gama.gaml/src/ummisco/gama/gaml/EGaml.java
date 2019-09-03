@@ -24,9 +24,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.util.GamaMapFactory;
-import msi.gaml.compilation.IGamlEcoreUtils;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.compilation.ast.SyntacticFactory;
+import msi.gaml.compilation.interfaces.IGamlEcoreUtils;
 import ummisco.gama.gaml.ActionRef;
 import ummisco.gama.gaml.ArgumentDefinition;
 import ummisco.gama.gaml.ArgumentPair;

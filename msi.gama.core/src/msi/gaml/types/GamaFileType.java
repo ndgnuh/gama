@@ -20,17 +20,17 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.type;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IModifiableContainer;
+import msi.gama.common.interfaces.IModifiableContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFolderFile;
 import msi.gama.util.file.IGamaFile;
-import msi.gaml.compilation.GamaGetter;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gaml.compilation.interfaces.GamaGetter;
 import msi.gaml.expressions.IExpression;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.type;
 
 /**
  * Written by drogoul Modified on 1st Aug. 2010 Modified on 30 Dec. 2013

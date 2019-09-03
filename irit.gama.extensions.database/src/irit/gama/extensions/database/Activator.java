@@ -8,8 +8,8 @@ import irit.gama.extensions.database.sql.SqlUtils;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
 import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.IMap;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class Activator implements BundleActivator {

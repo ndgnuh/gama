@@ -17,23 +17,23 @@ import org.locationtech.jts.geom.CoordinateFilter;
 
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAddressableContainer;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModifiableContainer;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IAddressableContainer;
-import msi.gama.util.IList;
-import msi.gama.util.IModifiableContainer;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gama.util.matrix.IMatrix;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Written by drogoul Modified on 14 nov. 2011

@@ -12,10 +12,10 @@ package msi.gama.metamodel.population;
 
 import java.util.Collection;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.metamodel.topology.filter.IAgentFilter;
-import msi.gama.runtime.IScope;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import one.util.streamex.StreamEx;
 
 /**

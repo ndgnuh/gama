@@ -15,27 +15,21 @@ import java.util.List;
 
 import com.google.common.base.Objects;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ISkill;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.benchmark.StopWatch;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gaml.compilation.IDescriptionValidator;
-import msi.gaml.compilation.IGamaHelper;
-import msi.gaml.compilation.ISymbol;
 import msi.gaml.compilation.Symbol;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.interfaces.IDescriptionValidator;
+import msi.gaml.compilation.interfaces.IGamaHelper;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.ConstantExpressionDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;
@@ -45,10 +39,16 @@ import msi.gaml.expressions.ListExpression;
 import msi.gaml.expressions.TimeUnitConstantExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.species.AbstractSpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.types.GamaListType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * The Class Var.
@@ -151,7 +151,7 @@ public class Variable extends Symbol implements IVariable {
 		/**
 		 * Method validate()
 		 *
-		 * @see msi.gaml.compilation.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
+		 * @see msi.gaml.compilation.interfaces.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
 		 */
 		@Override
 		public void validate(final IDescription vd) {
@@ -635,7 +635,7 @@ public class Variable extends Symbol implements IVariable {
 	/**
 	 * Method isDefined()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#isDefined()
+	 * @see msi.gama.common.interfaces.experiment.IParameter#isDefined()
 	 */
 	@Override
 	public boolean isDefined() {
@@ -645,7 +645,7 @@ public class Variable extends Symbol implements IVariable {
 	/**
 	 * Method setDefined()
 	 *
-	 * @see msi.gama.kernel.experiment.IParameter#setDefined(boolean)
+	 * @see msi.gama.common.interfaces.experiment.IParameter#setDefined(boolean)
 	 */
 	@Override
 	public void setDefined(final boolean b) {}

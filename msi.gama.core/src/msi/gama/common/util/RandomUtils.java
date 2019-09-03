@@ -16,10 +16,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import msi.gama.common.interfaces.ICollector;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.Collector;
-import msi.gama.util.ICollector;
 import msi.gama.util.random.CellularAutomatonRNG;
 import msi.gama.util.random.GamaRNG;
 import msi.gama.util.random.JavaRNG;

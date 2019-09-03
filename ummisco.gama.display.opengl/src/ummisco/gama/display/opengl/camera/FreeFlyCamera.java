@@ -12,8 +12,8 @@ package ummisco.gama.display.opengl.camera;
 import org.eclipse.swt.SWT;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.outputs.IDisplayData;
 import msi.gama.metamodel.shape.GamaPoint;
-import msi.gama.outputs.LayeredDisplayData;
 import msi.gaml.operators.Maths;
 import ummisco.gama.display.opengl.renderer.IOpenGLRenderer;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
@@ -106,7 +106,7 @@ public class FreeFlyCamera extends AbstractCamera {
 	@Override
 	public void initialize() {
 		upVector.setLocation(up);
-		final LayeredDisplayData data = getRenderer().getData();
+		final IDisplayData data = getRenderer().getData();
 		final double envWidth = data.getEnvWidth();
 		final double envHeight = data.getEnvHeight();
 		setPosition(envWidth / 2, -envHeight * 1.75, getRenderer().getMaxEnvDim());

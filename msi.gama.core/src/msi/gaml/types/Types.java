@@ -19,19 +19,19 @@ import java.util.Set;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gama.util.tree.GamaNode;
 import msi.gama.util.tree.GamaTree;
 import msi.gama.util.tree.GamaTree.Order;
 import msi.gaml.compilation.AbstractGamlAdditions;
+import msi.gaml.compilation.factories.DescriptionFactory;
 import msi.gaml.descriptions.ModelDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.ListExpression;
 import msi.gaml.expressions.MapExpression;
-import msi.gaml.factories.DescriptionFactory;
 
 /**
  * Written by drogoul Modified on 9 juin 2010

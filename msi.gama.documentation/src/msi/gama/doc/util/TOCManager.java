@@ -18,8 +18,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import msi.gama.precompiler.doc.utils.Constants;
-import msi.gama.precompiler.doc.utils.XMLUtils;
+import ummisco.gama.processor.doc.Constants;
+import ummisco.gama.processor.doc.XMLUtils;
 
 public class TOCManager {
 

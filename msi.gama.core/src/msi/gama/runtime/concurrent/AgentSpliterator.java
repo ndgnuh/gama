@@ -15,7 +15,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.metamodel.shape.IShape;
 
 public class AgentSpliterator implements Spliterator<IAgent> {

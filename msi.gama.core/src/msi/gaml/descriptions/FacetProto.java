@@ -16,11 +16,11 @@ import com.google.common.collect.ImmutableSet;
 
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
 
 public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 

@@ -13,13 +13,13 @@ package msi.gaml.architecture.weighted_tasks;
 import java.util.ArrayList;
 import java.util.List;
 
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
-import msi.gama.precompiler.IConcept;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.architecture.reflex.ReflexArchitecture;
-import msi.gaml.statements.IStatement;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 /**
  * The class WeightedTasksArchitecture. A simple architecture of competing tasks, where one can be active at a time.

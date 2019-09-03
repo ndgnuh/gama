@@ -13,11 +13,11 @@ package msi.gaml.descriptions;
 import java.util.Collection;
 import java.util.Set;
 
+import msi.gama.common.util.Collector;
 import msi.gama.common.util.StringUtils;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.Collector;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;

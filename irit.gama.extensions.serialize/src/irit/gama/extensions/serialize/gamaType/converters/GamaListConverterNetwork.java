@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import irit.gama.extensions.serialize.gamaType.reduced.GamaListReducerNetwork;
-import msi.gama.util.IList;
+import msi.gama.util.list.IList;
 import ummisco.gama.dev.utils.DEBUG;
 
 @SuppressWarnings ({ "rawtypes" })

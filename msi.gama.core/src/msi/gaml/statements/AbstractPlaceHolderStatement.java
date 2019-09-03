@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 
 public abstract class AbstractPlaceHolderStatement extends AbstractStatement {

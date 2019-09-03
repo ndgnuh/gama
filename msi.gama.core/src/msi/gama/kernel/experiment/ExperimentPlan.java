@@ -22,41 +22,35 @@ import java.util.Set;
 
 import com.google.common.collect.Iterables;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IGamlIssue;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IMacroAgent;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.batch.IExploration;
+import msi.gama.common.interfaces.experiment.IExperimentController;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.common.interfaces.outputs.IOutput;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.batch.BatchOutput;
 import msi.gama.kernel.batch.ExhaustiveSearch;
-import msi.gama.kernel.batch.IExploration;
 import msi.gama.kernel.experiment.ExperimentPlan.BatchValidator;
-import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.topology.continuous.AmorphousTopology;
-import msi.gama.outputs.ExperimentOutputManager;
-import msi.gama.outputs.FileOutput;
-import msi.gama.outputs.IOutputManager;
-import msi.gama.outputs.LayoutStatement;
-import msi.gama.outputs.SimulationOutputManager;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.facet;
-import msi.gama.precompiler.GamlAnnotations.facets;
-import msi.gama.precompiler.GamlAnnotations.inside;
-import msi.gama.precompiler.GamlAnnotations.symbol;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.ExecutionScope;
+import msi.gama.runtime.ExperimentController;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gaml.compilation.IDescriptionValidator;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.runtime.scope.ExecutionScope;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.compilation.annotations.validator;
+import msi.gaml.compilation.interfaces.IDescriptionValidator;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.compilation.kernel.GamaMetaModel;
 import msi.gaml.descriptions.ExperimentDescription;
 import msi.gaml.descriptions.IDescription;
@@ -66,6 +60,13 @@ import msi.gaml.species.GamlSpecies;
 import msi.gaml.species.ISpecies;
 import msi.gaml.types.IType;
 import msi.gaml.variables.IVariable;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.facet;
+import ummisco.gama.processor.GamlAnnotations.facets;
+import ummisco.gama.processor.GamlAnnotations.inside;
+import ummisco.gama.processor.GamlAnnotations.symbol;
 
 /**
  * Written by drogoul Modified on 28 mai 2011 Apr. 2013: Important modifications to enable running true experiment
@@ -186,7 +187,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 		/**
 		 * Method validate()
 		 *
-		 * @see msi.gaml.compilation.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
+		 * @see msi.gaml.compilation.interfaces.IDescriptionValidator#validate(msi.gaml.descriptions.IDescription)
 		 */
 		@Override
 		public void validate(final IDescription desc) {
@@ -215,8 +216,8 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	protected IExperimentController controller;
 	// An original copy of the simualtion outputs (which will be eventually
 	// duplicated in all the simulations)
-	protected SimulationOutputManager originalSimulationOutputs;
-	protected ExperimentOutputManager experimentOutputs;
+	protected IOutputManager.Simulation originalSimulationOutputs;
+	protected IOutputManager.Experiment experimentOutputs;
 	// private ItemList parametersEditors;
 	protected final Map<String, IParameter> parameters = GamaMapFactory.create();
 	protected final Map<String, IParameter.Batch> explorableParameters = GamaMapFactory.create();
@@ -224,7 +225,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	protected final Scope myScope = new Scope("in ExperimentPlan");
 	protected IModel model;
 	protected IExploration exploration;
-	private FileOutput log;
+	private IOutput.FileBased log;
 	private boolean isHeadless;
 	private final boolean keepSeed;
 	private final boolean keepSimulations;
@@ -428,7 +429,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	}
 
 	@Override
-	public final IOutputManager getExperimentOutputs() {
+	public final IOutputManager.Experiment getExperimentOutputs() {
 		return experimentOutputs;
 	}
 
@@ -437,19 +438,19 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 		super.setChildren(children);
 
 		BatchOutput fileOutputDescription = null;
-		LayoutStatement layout = null;
+		ISymbol layout = null;
 		for (final ISymbol s : children) {
-			if (s instanceof LayoutStatement) {
-				layout = (LayoutStatement) s;
+			if (IKeyword.LAYOUT.equals(s.getKeyword())) {
+				layout = s;
 			} else if (s instanceof IExploration) {
 				exploration = (IExploration) s;
 			} else if (s instanceof BatchOutput) {
 				fileOutputDescription = (BatchOutput) s;
-			} else if (s instanceof SimulationOutputManager) {
+			} else if (s instanceof IOutputManager.Simulation) {
 				if (originalSimulationOutputs != null) {
-					originalSimulationOutputs.setChildren((SimulationOutputManager) s);
+					originalSimulationOutputs.setChildren((IOutputManager.Simulation) s);
 				} else {
-					originalSimulationOutputs = (SimulationOutputManager) s;
+					originalSimulationOutputs = (IOutputManager.Simulation) s;
 				}
 			} else if (s instanceof IParameter.Batch) {
 				final IParameter.Batch pb = (IParameter.Batch) s;
@@ -466,19 +467,19 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 				if (!already) {
 					parameters.put(parameterName, p);
 				}
-			} else if (s instanceof ExperimentOutputManager) {
+			} else if (s instanceof IOutputManager.Experiment) {
 				if (experimentOutputs != null) {
-					experimentOutputs.setChildren((ExperimentOutputManager) s);
+					experimentOutputs.setChildren((IOutputManager.Experiment) s);
 				} else {
-					experimentOutputs = (ExperimentOutputManager) s;
+					experimentOutputs = (IOutputManager.Experiment) s;
 				}
 			}
 		}
 		if (originalSimulationOutputs == null) {
-			originalSimulationOutputs = SimulationOutputManager.createEmpty();
+			originalSimulationOutputs = ExperimentOutputsFactory.getSimulationOutputManager();
 		}
 		if (experimentOutputs == null) {
-			experimentOutputs = ExperimentOutputManager.createEmpty();
+			experimentOutputs = ExperimentOutputsFactory.getExperimentOutputManager();
 		}
 		if (experimentOutputs.getLayout() == null) {
 			if (layout != null) {
@@ -502,7 +503,8 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 			data = exploration.getFitnessExpression();
 		}
 		final String dataString = data == null ? "time" : data.serialize(false);
-		log = new FileOutput(output.getLiteral(IKeyword.TO), dataString, new ArrayList(parameters.keySet()), this);
+		log = ExperimentOutputsFactory.getFileOutput(output.getLiteral(IKeyword.TO), dataString,
+				new ArrayList(parameters.keySet()), this);
 	}
 
 	public synchronized void open(final Double seed) {
@@ -693,7 +695,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	}
 
 	@Override
-	public FileOutput getLog() {
+	public IOutput.FileBased getLog() {
 		return log;
 	}
 
@@ -711,7 +713,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	/**
 	 * Method getController()
 	 *
-	 * @see msi.gama.kernel.experiment.IExperimentPlan#getController()
+	 * @see msi.gama.common.interfaces.experiment.IExperimentPlan#getController()
 	 */
 	@Override
 	public IExperimentController getController() {
@@ -724,7 +726,7 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	/**
 	 * Method refreshAllOutputs()
 	 *
-	 * @see msi.gama.kernel.experiment.IExperimentPlan#refreshAllOutputs()
+	 * @see msi.gama.common.interfaces.experiment.IExperimentPlan#refreshAllOutputs()
 	 */
 	@Override
 	public void refreshAllOutputs() {
@@ -781,10 +783,10 @@ public class ExperimentPlan extends GamlSpecies implements IExperimentPlan {
 	/**
 	 * Method getOriginalSimulationOutputs()
 	 *
-	 * @see msi.gama.kernel.experiment.IExperimentPlan#getOriginalSimulationOutputs()
+	 * @see msi.gama.common.interfaces.experiment.IExperimentPlan#getOriginalSimulationOutputs()
 	 */
 	@Override
-	public IOutputManager getOriginalSimulationOutputs() {
+	public IOutputManager.Simulation getOriginalSimulationOutputs() {
 		return originalSimulationOutputs;
 	}
 

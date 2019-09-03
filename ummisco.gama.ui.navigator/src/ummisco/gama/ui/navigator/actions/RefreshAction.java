@@ -8,7 +8,7 @@
  *******************************************************************************/
 package ummisco.gama.ui.navigator.actions;
 
-import static msi.gama.common.interfaces.IGui.NAVIGATOR_VIEW_ID;
+import static msi.gama.common.interfaces.gui.IGui.NAVIGATOR_VIEW_ID;
 import static org.eclipse.core.resources.IResource.DEPTH_INFINITE;
 import static org.eclipse.core.resources.IResource.PROJECT;
 import static org.eclipse.core.resources.IResource.ROOT;

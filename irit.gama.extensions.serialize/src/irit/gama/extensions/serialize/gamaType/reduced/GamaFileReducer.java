@@ -9,7 +9,7 @@
  **********************************************************************************************/
 package irit.gama.extensions.serialize.gamaType.reduced;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 import msi.gaml.types.GamaFileType;
 

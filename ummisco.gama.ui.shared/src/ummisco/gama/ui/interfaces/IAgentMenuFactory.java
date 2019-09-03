@@ -14,7 +14,7 @@ import java.util.Collection;
 
 import org.eclipse.swt.widgets.Menu;
 
-import msi.gama.metamodel.agent.IAgent;
+import msi.gama.common.interfaces.IAgent;
 import ummisco.gama.ui.menus.MenuAction;
 
 public interface IAgentMenuFactory {

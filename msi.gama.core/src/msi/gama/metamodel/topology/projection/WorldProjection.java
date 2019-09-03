@@ -17,7 +17,7 @@ import org.locationtech.jts.geom.Geometry;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 import msi.gama.common.geometry.Envelope3D;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class WorldProjection extends Projection {
 

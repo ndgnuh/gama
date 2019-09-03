@@ -9,9 +9,9 @@
  **********************************************************************************************/
 package irit.gama.extensions.serialize.gamaType.reduced;
 
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import msi.gaml.types.Types;
 
 @SuppressWarnings ({ "rawtypes" })

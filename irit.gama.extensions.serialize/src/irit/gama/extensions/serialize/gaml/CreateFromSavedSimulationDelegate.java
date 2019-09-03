@@ -13,13 +13,13 @@ import com.thoughtworks.xstream.XStream;
 
 import irit.gama.extensions.serialize.factory.StreamConverter;
 import irit.gama.extensions.serialize.gamaType.converters.ConverterScope;
-import msi.gama.runtime.IScope;
 import msi.gaml.statements.Arguments;
 import msi.gaml.statements.CreateStatement;
 import msi.gaml.types.IType;
 
 import msi.gama.common.interfaces.ICreateDelegate;
 import msi.gama.metamodel.agent.SavedAgent;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.Types;
 
 /**
@@ -44,7 +44,7 @@ public class CreateFromSavedSimulationDelegate implements ICreateDelegate {
 	}
 
 	/**
-	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.IScope,
+	 * @see msi.gama.common.interfaces.ICreateDelegate#createFrom(msi.gama.runtime.scope.IScope,
 	 *      java.util.List, int, java.lang.Object)
 	 */
 	@Override

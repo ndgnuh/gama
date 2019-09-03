@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package prefuse.writer;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.IGamaFile;
 import msi.gama.util.graph.IGraph;
 import msi.gama.util.graph.writer.IGraphWriter;

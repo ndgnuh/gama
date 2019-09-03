@@ -15,11 +15,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import irit.gama.extensions.serialize.gamaType.reference.ReferenceMap;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
-import msi.gama.util.IReference;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.types.IType;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })

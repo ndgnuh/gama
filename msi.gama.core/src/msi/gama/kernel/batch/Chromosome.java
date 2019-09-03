@@ -14,10 +14,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import msi.gama.kernel.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.operators.Cast;
 import msi.gaml.types.IType;
 

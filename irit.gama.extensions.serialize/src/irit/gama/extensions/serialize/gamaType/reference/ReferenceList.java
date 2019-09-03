@@ -3,10 +3,10 @@ package irit.gama.extensions.serialize.gamaType.reference;
 import java.util.ArrayList;
 
 import irit.gama.extensions.serialize.gamaType.reduced.GamaListReducer;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IReference;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.util.GamaList;
-import msi.gama.util.IReference;
+import msi.gama.util.list.GamaList;
 
 public class ReferenceList extends GamaList implements IReference {
 

@@ -15,7 +15,7 @@ import java.util.Set;
 
 import org.jgrapht.util.ArrayUnenforcedSet;
 
-import msi.gama.util.Collector;
+import msi.gama.common.util.Collector;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class _Vertex<E, V> extends GraphObject<GamaGraph<E, V>, E, V> {

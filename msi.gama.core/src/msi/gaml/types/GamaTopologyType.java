@@ -10,8 +10,9 @@
  ********************************************************************************************************/
 package msi.gaml.types;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
@@ -20,15 +21,14 @@ import msi.gama.metamodel.topology.continuous.MultipleTopology;
 import msi.gama.metamodel.topology.graph.GamaSpatialGraph;
 import msi.gama.metamodel.topology.grid.GridTopology;
 import msi.gama.metamodel.topology.grid.IGrid;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.type;
-import msi.gama.precompiler.IConcept;
-import msi.gama.precompiler.ISymbolKind;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IContainer;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.operators.Cast;
 import msi.gaml.species.ISpecies;
+import ummisco.gama.processor.IConcept;
+import ummisco.gama.processor.ISymbolKind;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.type;
 
 /**
  * The type topology.
@@ -65,7 +65,7 @@ public class GamaTopologyType extends GamaType<ITopology> {
 	}
 
 	/**
-	 * @see msi.gama.internal.types.GamaType#cast(msi.gama.interfaces.IScope, java.lang.Object, java.lang.Object)
+	 * @see msi.gama.internal.types.GamaType#cast(msi.gama.runtime.scope.interfaces.IScope, java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public ITopology cast(final IScope scope, final Object obj, final Object param, final boolean copy)

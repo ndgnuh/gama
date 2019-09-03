@@ -55,7 +55,7 @@
                   Class that implements IEventLayerDelegate in the plugin
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":msi.gama.common.interfaces.IEventLayerDelegate"/>
+                  <meta.attribute kind="java" basedOn=":msi.gama.common.interfaces.outputs.IEventLayerDelegate"/>
                </appinfo>
             </annotation>
          </attribute>

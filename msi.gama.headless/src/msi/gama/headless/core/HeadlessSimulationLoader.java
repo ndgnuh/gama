@@ -18,9 +18,8 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.Injector;
 
+import msi.gama.common.interfaces.IModel;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.model.IModel;
-import msi.gama.precompiler.GamlProperties;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.GAML;

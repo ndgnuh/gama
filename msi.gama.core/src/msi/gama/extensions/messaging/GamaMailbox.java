@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gama.extensions.messaging;
 
-import msi.gama.runtime.IScope;
-import msi.gama.util.GamaList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaList;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 

@@ -14,7 +14,7 @@ import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import irit.gama.extensions.serialize.gamaType.converters.ConverterScope;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.compilation.kernel.GamaClassLoader;
 
 public abstract class StreamConverter {

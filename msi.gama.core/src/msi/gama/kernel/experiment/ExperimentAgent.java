@@ -17,48 +17,52 @@ import java.util.Map;
 
 import com.google.common.collect.Iterables;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.common.interfaces.experiment.IParameter.Batch;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.RandomUtils;
-import msi.gama.kernel.experiment.IParameter.Batch;
-import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.root.PlatformAgent;
 import msi.gama.kernel.simulation.SimulationAgent;
 import msi.gama.kernel.simulation.SimulationClock;
 import msi.gama.kernel.simulation.SimulationClock.ExperimentClock;
 import msi.gama.kernel.simulation.SimulationPopulation;
 import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.population.IPopulation;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.outputs.IOutputManager;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.arg;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.experiment;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.precompiler.GamlAnnotations.species;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.ExecutionScope;
+import msi.gama.runtime.ExperimentScheduler;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.ExecutionScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
-import msi.gama.util.IMap;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.types.GamaGeometryType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.arg;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.experiment;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
+import ummisco.gama.processor.GamlAnnotations.species;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  *
@@ -255,7 +259,7 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	/**
 	 * Redefinition of the callback method
 	 *
-	 * @see msi.gama.metamodel.agent.GamlAgent#_init_(msi.gama.runtime.IScope)
+	 * @see msi.gama.metamodel.agent.GamlAgent#_init_(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object _init_(final IScope scope) {
@@ -289,7 +293,7 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	/**
 	 * Method primDie()
 	 *
-	 * @see msi.gama.metamodel.agent.MinimalAgent#primDie(msi.gama.runtime.IScope)
+	 * @see msi.gama.metamodel.agent.MinimalAgent#primDie(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Object primDie(final IScope scope) throws GamaRuntimeException {
@@ -680,7 +684,7 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 		/**
 		 * Method getRandom()
 		 *
-		 * @see msi.gama.runtime.IScope#getRandom()
+		 * @see msi.gama.runtime.scope.IScope#getRandom()
 		 */
 		@Override
 		public RandomUtils getRandom() {
@@ -811,7 +815,7 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	/**
 	 * Method closeSimulation()
 	 *
-	 * @see msi.gama.kernel.experiment.IExperimentAgent#closeSimulation(msi.gama.kernel.simulation.SimulationAgent)
+	 * @see msi.gama.common.interfaces.experiment.IExperimentAgent#closeSimulation(msi.gama.kernel.simulation.SimulationAgent)
 	 */
 	@Override
 	public void closeSimulation(final SimulationAgent simulationAgent) {
@@ -826,10 +830,10 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 	/**
 	 * Method getOutputManager()
 	 *
-	 * @see msi.gama.kernel.experiment.ITopLevelAgent#getOutputManager()
+	 * @see msi.gama.common.interfaces.experiment.ITopLevelAgent#getOutputManager()
 	 */
 	@Override
-	public IOutputManager getOutputManager() {
+	public IOutputManager.Experiment getOutputManager() {
 		return getSpecies().getExperimentOutputs();
 	}
 

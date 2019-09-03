@@ -18,11 +18,11 @@ import java.net.URLDecoder;
 
 import com.google.common.collect.Iterables;
 
-import msi.gama.kernel.experiment.IExperimentAgent;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
+import msi.gama.runtime.scope.IScope;
 
 public class OldFileUtils {
 

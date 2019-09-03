@@ -24,10 +24,10 @@ import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 
 import msi.gama.metamodel.topology.projection.IProjection;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 import ummisco.gama.dev.utils.DEBUG;
 
 /*
@@ -52,24 +52,14 @@ class PostgresConnection extends SqlConnection {
 		Connection conn = null;
 		try {
 			if (vender.equalsIgnoreCase(POSTGRES) || vender.equalsIgnoreCase(POSTGIS)) {
-				Class.forName(POSTGRESDriver).newInstance();
+				Class.forName(POSTGRESDriver).getConstructor().newInstance();
 				conn = DriverManager.getConnection("jdbc:postgresql://" + url + ":" + port + "/" + dbName + "?user="
 						+ userName + "&password=" + password);
-			} else {
+			} else
 				throw new ClassNotFoundException("PostgresConnection.connectSQL: The " + vender + " is not supported!");
-			}
-		} catch (final ClassNotFoundException e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			throw new ClassNotFoundException(e.toString());
-		} catch (final InstantiationException e) {
-			e.printStackTrace();
-			throw new InstantiationException(e.toString());
-		} catch (final IllegalAccessException e) {
-			e.printStackTrace();
-			throw new IllegalAccessException(e.toString());
-		} catch (final SQLException e) {
-			e.printStackTrace();
-			throw new SQLException(e.toString());
 		}
 		return conn;
 
@@ -146,9 +136,8 @@ class PostgresConnection extends SqlConnection {
 		String colStr = "";
 		String valueStr = "";
 		// Check size of parameters
-		if (values.size() != col_no) {
+		if (values.size() != col_no)
 			throw new IndexOutOfBoundsException("Size of columns list and values list are not equal");
-		}
 		// Get column name
 		for (int i = 0; i < col_no; i++) {
 			if (i == col_no - 1) {
@@ -259,9 +248,8 @@ class PostgresConnection extends SqlConnection {
 			final IList<Object> col_Types = getColumnTypeName(rsmd);
 			final int col_no = col_Names.size();
 			// Check size of parameters
-			if (values.size() != col_Names.size()) {
+			if (values.size() != col_Names.size())
 				throw new IndexOutOfBoundsException("Size of columns list and values list are not equal");
-			}
 
 			// Insert command
 			// set parameter value

@@ -12,9 +12,9 @@ package msi.gaml.expressions;
 
 import org.eclipse.emf.ecore.EObject;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IExecutionContext;
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IExecutionContext;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.ConstantExpressionDescription;
 import msi.gaml.descriptions.IDescription;

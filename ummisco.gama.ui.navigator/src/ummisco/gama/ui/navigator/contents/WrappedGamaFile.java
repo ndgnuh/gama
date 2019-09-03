@@ -12,9 +12,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
 import msi.gama.util.file.IGamaFileMetaData;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.compilation.ast.ISyntacticElement;
 import msi.gaml.descriptions.IExpressionDescription;
 import ummisco.gama.file.gaml.GamlFileExtension;

@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package msi.gaml.expressions;
 
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.types.Types;
 
 public class CurrentErrorUnitExpression extends UnitConstantExpression<String> {

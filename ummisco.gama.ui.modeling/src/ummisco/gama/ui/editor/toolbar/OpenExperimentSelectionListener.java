@@ -12,8 +12,8 @@ package ummisco.gama.ui.editor.toolbar;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
+import msi.gama.common.interfaces.IModel;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.compilation.GAML;

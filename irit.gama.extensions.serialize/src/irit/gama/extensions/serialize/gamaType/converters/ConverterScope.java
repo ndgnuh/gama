@@ -11,7 +11,7 @@
 package irit.gama.extensions.serialize.gamaType.converters;
 
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class ConverterScope {
 	SimulationAgent simAgt;

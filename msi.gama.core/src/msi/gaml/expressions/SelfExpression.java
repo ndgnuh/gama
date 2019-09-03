@@ -13,7 +13,7 @@ package msi.gaml.expressions;
 import java.util.Collection;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.SpeciesDescription;
 import msi.gaml.descriptions.VariableDescription;
 import msi.gaml.types.IType;

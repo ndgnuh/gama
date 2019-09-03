@@ -13,8 +13,8 @@ package msi.gama.headless.openmole;
 
 
 
+import msi.gama.common.interfaces.IModel;
 import msi.gama.headless.core.Experiment;
-import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionFactory;

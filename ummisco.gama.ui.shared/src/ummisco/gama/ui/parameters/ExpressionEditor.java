@@ -13,7 +13,7 @@ package ummisco.gama.ui.parameters;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.types.IType;
 import ummisco.gama.ui.interfaces.EditorListener;

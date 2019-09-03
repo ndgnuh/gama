@@ -13,11 +13,11 @@ package ummisco.gama.file;
 import msi.gama.common.geometry.AxisAngle;
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.GamaFile;
 import msi.gama.util.file.IGamaFile;
+import msi.gama.util.list.IList;
 import msi.gaml.types.IContainerType;
 import msi.gaml.types.Types;
 
@@ -46,7 +46,7 @@ public abstract class GamaGeometryFile extends GamaFile<IList<IShape>, IShape> i
 	/**
 	 * Method computeEnvelope()
 	 *
-	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.IScope)
+	 * @see msi.gama.util.file.IGamaFile#computeEnvelope(msi.gama.runtime.scope.IScope)
 	 */
 	@Override
 	public Envelope3D computeEnvelope(final IScope scope) {

@@ -15,11 +15,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
-import msi.gama.common.interfaces.IConsoleDisplayer;
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGamaView.Console;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.kernel.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.gui.IConsoleDisplayer;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.gui.IGamaView.Console;
 import msi.gama.runtime.GAMA;
 import msi.gama.util.GamaColor;
 import msi.gaml.operators.Strings;

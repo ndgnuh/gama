@@ -11,7 +11,9 @@
 package msi.gama.kernel.batch;
 
 import java.util.*;
-import msi.gama.runtime.IScope;
+
+import msi.gama.common.interfaces.batch.Selection;
+import msi.gama.runtime.scope.IScope;
 
 public class SelectionRoulette implements Selection {
 

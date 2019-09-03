@@ -17,9 +17,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 
 import msi.gama.common.interfaces.IDisposable;
-import msi.gama.runtime.IExecutionContext;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IExecutionContext;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.descriptions.ActionDescription;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.IExpressionDescription;

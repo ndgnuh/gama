@@ -27,8 +27,8 @@ import org.eclipse.ui.ISources;
 import org.eclipse.ui.internal.views.markers.ConfigureContentsDialogHandler;
 import org.eclipse.ui.views.markers.MarkerSupportView;
 
+import msi.gama.common.interfaces.IPreferenceChangeListener.IPreferenceAfterChangeListener;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.common.preferences.IPreferenceChangeListener.IPreferenceAfterChangeListener;
 import ummisco.gama.ui.commands.TestsRunner;
 import ummisco.gama.ui.resources.IGamaColors;
 import ummisco.gama.ui.utils.WorkbenchHelper;
@@ -64,7 +64,7 @@ public class SyntaxErrorsView extends MarkerSupportView
 	}
 
 	/**
-	 * @see msi.gama.common.preferences.IPreferenceChangeListener#afterValueChange(java.lang.Object)
+	 * @see msi.gama.common.interfaces.IPreferenceChangeListener#afterValueChange(java.lang.Object)
 	 */
 	@Override
 	public void afterValueChange(final Boolean newValue) {

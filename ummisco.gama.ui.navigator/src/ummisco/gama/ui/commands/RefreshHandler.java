@@ -36,7 +36,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
-import msi.gama.common.interfaces.IGui;
+import msi.gama.common.interfaces.gui.IGui;
 import ummisco.gama.application.workspace.WorkspaceModelsManager;
 import ummisco.gama.file.metadata.FileMetaDataProvider;
 import ummisco.gama.ui.interfaces.IRefreshHandler;

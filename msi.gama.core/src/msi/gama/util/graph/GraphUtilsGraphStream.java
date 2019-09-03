@@ -16,15 +16,15 @@ import static msi.gama.runtime.exceptions.GamaRuntimeException.warning;
 import java.util.HashMap;
 import java.util.Map;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.ext.graphstream.Edge;
 import msi.gama.ext.graphstream.EdgeRejectedException;
 import msi.gama.ext.graphstream.Graph;
 import msi.gama.ext.graphstream.IdAlreadyInUseException;
 import msi.gama.ext.graphstream.MultiGraph;
 import msi.gama.ext.graphstream.Node;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 
 /**

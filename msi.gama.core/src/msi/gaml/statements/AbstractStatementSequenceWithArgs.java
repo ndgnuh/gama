@@ -10,10 +10,10 @@
  ********************************************************************************************************/
 package msi.gaml.statements;
 
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.IStatement.WithArgs;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
-import msi.gaml.statements.IStatement.WithArgs;
 
 /**
  * Class AbstractStatementSequenceWithArgs.
@@ -36,7 +36,7 @@ public class AbstractStatementSequenceWithArgs extends AbstractStatementSequence
 	/**
 	 * Method setFormalArgs()
 	 *
-	 * @see msi.gaml.statements.IStatement.WithArgs#setFormalArgs(msi.gaml.statements.Arguments)
+	 * @see msi.gama.common.interfaces.IStatement.WithArgs#setFormalArgs(msi.gaml.statements.Arguments)
 	 */
 	@Override
 	public void setFormalArgs(final Arguments args) {}
@@ -44,7 +44,7 @@ public class AbstractStatementSequenceWithArgs extends AbstractStatementSequence
 	/**
 	 * Method setRuntimeArgs()
 	 *
-	 * @see msi.gaml.statements.IStatement.WithArgs#setRuntimeArgs(msi.gaml.statements.Arguments)
+	 * @see msi.gama.common.interfaces.IStatement.WithArgs#setRuntimeArgs(msi.gaml.statements.Arguments)
 	 */
 	@Override
 	public void setRuntimeArgs(final IScope scope, final Arguments args) {

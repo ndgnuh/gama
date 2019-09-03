@@ -17,16 +17,17 @@ import java.util.Map;
 
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.IValue;
-import msi.gama.precompiler.GamlAnnotations.constant;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.IConstantCategory;
-import msi.gama.precompiler.constants.ColorCSS;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.IConstantCategory;
+import ummisco.gama.processor.GamlAnnotations.constant;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
+import ummisco.gama.processor.constants.ColorCSS;
 
 /**
  * The Class GamaColor. A simple wrapper on an AWT Color.

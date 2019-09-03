@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import msi.gama.common.interfaces.IDocManager;
 import msi.gama.common.interfaces.IGamlDescription;
 import msi.gama.common.preferences.GamaPreferences;
-import msi.gama.util.Collector;
+import msi.gama.common.util.Collector;
 import msi.gaml.compilation.GamlCompilationError;
 import one.util.streamex.StreamEx;
 

@@ -19,21 +19,21 @@ import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.ImmutableSet;
 
+import msi.gama.common.interfaces.ICollector;
 import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.util.Collector;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.ICollector;
+import msi.gama.common.util.Collector;
+import msi.gama.util.map.GamaMapFactory;
 import msi.gaml.compilation.AbstractGamlAdditions;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamaHelper;
-import msi.gaml.compilation.IGamaHelper;
+import msi.gaml.compilation.interfaces.IGamaHelper;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IVarExpression;
 import msi.gaml.statements.Facets;
 import msi.gaml.types.GamaIntegerType;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.processor.ITypeProvider;
 
 /**
  * Written by drogoul Modified on 16 mai 2010

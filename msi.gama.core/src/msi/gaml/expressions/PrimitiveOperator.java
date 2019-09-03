@@ -12,10 +12,11 @@ package msi.gaml.expressions;
 
 import java.util.Collection;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IStatement;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.descriptions.OperatorProto;
 import msi.gaml.descriptions.SpeciesDescription;
@@ -25,7 +26,6 @@ import msi.gaml.operators.Cast;
 import msi.gaml.operators.Strings;
 import msi.gaml.species.ISpecies;
 import msi.gaml.statements.Arguments;
-import msi.gaml.statements.IStatement;
 import msi.gaml.types.IType;
 
 /**

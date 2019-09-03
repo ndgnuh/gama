@@ -16,19 +16,19 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IContainer;
 import msi.gama.common.interfaces.IDisposable;
-import msi.gama.common.interfaces.IStepable;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
+import msi.gama.common.interfaces.IExecutable;
+import msi.gama.common.interfaces.IMacroAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.ITopology;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.IStepable;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.IContainer;
-import msi.gama.util.IList;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.list.IList;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.variables.IVariable;
 
 /**

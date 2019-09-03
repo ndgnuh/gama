@@ -5,9 +5,8 @@ Bundle-SymbolicName: ummisco.gama.annotations
 Bundle-Version: 1.9.0.qualifier
 Bundle-Vendor: UMMISCO
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: msi.gama.common.interfaces;uses:="msi.gama.precompiler",
- msi.gama.precompiler,
- msi.gama.precompiler.constants,
- msi.gama.precompiler.doc.utils;uses:="org.w3c.dom",
- ummisco.gama.dev.utils
+Export-Package: ummisco.gama.dev.utils,
+ ummisco.gama.processor,
+ ummisco.gama.processor.constants,
+ ummisco.gama.processor.doc
 Automatic-Module-Name: ummisco.gama.annotations

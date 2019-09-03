@@ -12,11 +12,11 @@ package msi.gama.kernel.batch;
 
 import java.util.List;
 
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.BatchAgent;
-import msi.gama.kernel.experiment.IParameter;
 import msi.gama.kernel.experiment.ParametersSet;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gaml.descriptions.IDescription;
 
 public abstract class LocalSearchAlgorithm extends ParamSpaceExploAlgorithm {

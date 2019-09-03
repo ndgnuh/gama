@@ -44,41 +44,40 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.util.PrefUtil;
 import org.eclipse.ui.services.ISourceProviderService;
 
-import msi.gama.common.interfaces.IConsoleDisplayer;
-import msi.gama.common.interfaces.IDisplayCreator.DisplayDescription;
-import msi.gama.common.interfaces.IDisplaySurface;
-import msi.gama.common.interfaces.IGamaView;
-import msi.gama.common.interfaces.IGamaView.Error;
-import msi.gama.common.interfaces.IGamaView.Parameters;
-import msi.gama.common.interfaces.IGamaView.Test;
-import msi.gama.common.interfaces.IGamaView.User;
-import msi.gama.common.interfaces.IGui;
-import msi.gama.common.interfaces.IStatusDisplayer;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.experiment.IExperimentController;
+import msi.gama.common.interfaces.experiment.IExperimentPlan;
+import msi.gama.common.interfaces.gui.IConsoleDisplayer;
+import msi.gama.common.interfaces.gui.IGamaView;
+import msi.gama.common.interfaces.gui.IGui;
+import msi.gama.common.interfaces.gui.IStatusDisplayer;
+import msi.gama.common.interfaces.gui.IGamaView.Error;
+import msi.gama.common.interfaces.gui.IGamaView.Parameters;
+import msi.gama.common.interfaces.gui.IGamaView.Test;
+import msi.gama.common.interfaces.gui.IGamaView.User;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IOutputManager;
+import msi.gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
+import msi.gama.common.interfaces.IModel;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.kernel.experiment.ExperimentAgent;
-import msi.gama.kernel.experiment.IExperimentController;
-import msi.gama.kernel.experiment.IExperimentPlan;
-import msi.gama.kernel.model.IModel;
 import msi.gama.kernel.simulation.SimulationAgent;
-import msi.gama.metamodel.agent.IAgent;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.outputs.ExperimentOutputManager;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.InspectDisplayOutput;
-import msi.gama.outputs.LayeredDisplayOutput;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.ISimulationStateProvider;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.runtime.scope.IScope;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.architecture.user.UserPanelStatement;
-import msi.gaml.compilation.Symbol;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.statements.test.CompoundSummary;
 import msi.gaml.types.IType;
 import ummisco.gama.application.bundles.GamaBundleLoader;
 import ummisco.gama.dev.utils.DEBUG;
+import ummisco.gama.outputs.InspectDisplayOutput;
 import ummisco.gama.ui.ApplicationWorkbenchAdvisor;
 import ummisco.gama.ui.GamaUIPreferences;
 import ummisco.gama.ui.PickWorkspaceDialog;
@@ -266,7 +265,7 @@ public class SwtGui implements IGui {
 	}
 
 	@Override
-	public IDisplaySurface getDisplaySurfaceFor(final LayeredDisplayOutput output) {
+	public IDisplaySurface getDisplaySurfaceFor(final IDisplayOutput.Layered output) {
 		IDisplaySurface surface = null;
 		final String keyword = output.getData().getDisplayType();
 		GamaBundleLoader.loadAllDisplays();
@@ -395,7 +394,7 @@ public class SwtGui implements IGui {
 	/**
 	 * Method setSelectedAgent()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#setSelectedAgent(msi.gama.metamodel.agent.IAgent)
+	 * @see msi.gama.common.interfaces.gui.IGui#setSelectedAgent(msi.gama.common.interfaces.IAgent)
 	 */
 	@Override
 	public void setSelectedAgent(final IAgent a) {
@@ -428,8 +427,8 @@ public class SwtGui implements IGui {
 			}
 			WorkbenchHelper.setWorkbenchWindowTitle(exp.getName() + " - " + exp.getModel().getFilePath());
 			final ExperimentAgent agent = exp.getAgent();
-			final ExperimentOutputManager manager = (ExperimentOutputManager) agent.getOutputManager();
-			Symbol layout = manager.getLayout();
+			final IOutputManager.Experiment manager = agent.getOutputManager();
+			ISymbol layout = manager.getLayout();
 			if (layout == null) {
 				layout = manager;
 			}
@@ -493,7 +492,7 @@ public class SwtGui implements IGui {
 	/**
 	 * Method cleanAfterExperiment()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#cleanAfterExperiment(msi.gama.kernel.experiment.IExperimentPlan)
+	 * @see msi.gama.common.interfaces.gui.IGui#cleanAfterExperiment(msi.gama.common.interfaces.experiment.IExperimentPlan)
 	 */
 	@Override
 	public void cleanAfterExperiment() {
@@ -527,7 +526,7 @@ public class SwtGui implements IGui {
 	/**
 	 * Method updateSpeedDisplay()
 	 *
-	 * @see msi.gama.common.interfaces.IGui#updateSpeedDisplay(java.lang.Double)
+	 * @see msi.gama.common.interfaces.gui.IGui#updateSpeedDisplay(java.lang.Double)
 	 */
 	@Override
 	public void updateSpeedDisplay(final IScope scope, final Double d, final boolean notify) {

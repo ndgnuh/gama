@@ -20,16 +20,20 @@ import java.util.Map.Entry;
 import org.locationtech.jts.geom.Geometry;
 
 import msi.gama.common.geometry.Envelope3D;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.common.interfaces.IExecutable;
 import msi.gama.common.interfaces.IKeyword;
+import msi.gama.common.interfaces.IMacroAgent;
+import msi.gama.common.interfaces.IReference;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
+import msi.gama.common.interfaces.experiment.ITopLevelAgent;
+import msi.gama.common.interfaces.outputs.IOutput;
+import msi.gama.common.interfaces.outputs.IOutputManager;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.common.util.RandomUtils;
 import msi.gama.kernel.experiment.ActionExecuter;
-import msi.gama.kernel.experiment.IExperimentAgent;
-import msi.gama.kernel.experiment.ITopLevelAgent;
 import msi.gama.kernel.root.PlatformAgent;
 import msi.gama.metamodel.agent.GamlAgent;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.metamodel.agent.IMacroAgent;
 import msi.gama.metamodel.agent.SavedAgent;
 import msi.gama.metamodel.population.GamaPopulation;
 import msi.gama.metamodel.population.IPopulation;
@@ -38,36 +42,31 @@ import msi.gama.metamodel.shape.IShape;
 import msi.gama.metamodel.topology.continuous.RootTopology;
 import msi.gama.metamodel.topology.projection.ProjectionFactory;
 import msi.gama.metamodel.topology.projection.WorldProjection;
-import msi.gama.outputs.IOutput;
-import msi.gama.outputs.IOutputManager;
-import msi.gama.outputs.SimulationOutputManager;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.getter;
-import msi.gama.precompiler.GamlAnnotations.setter;
-import msi.gama.precompiler.GamlAnnotations.species;
-import msi.gama.precompiler.GamlAnnotations.variable;
-import msi.gama.precompiler.GamlAnnotations.vars;
-import msi.gama.precompiler.ITypeProvider;
-import msi.gama.runtime.ExecutionScope;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.concurrent.GamaExecutorService;
 import msi.gama.runtime.concurrent.GamaExecutorService.Caller;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.ExecutionScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gama.util.GamaDate;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IReference;
-import msi.gaml.compilation.ISymbol;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gaml.compilation.interfaces.ISymbol;
 import msi.gaml.descriptions.IDescription;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.operators.Cast;
 import msi.gaml.operators.Spatial.Transformations;
 import msi.gaml.species.ISpecies;
-import msi.gaml.statements.IExecutable;
 import msi.gaml.types.GamaGeometryType;
 import msi.gaml.types.IType;
+import ummisco.gama.processor.ITypeProvider;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.getter;
+import ummisco.gama.processor.GamlAnnotations.setter;
+import ummisco.gama.processor.GamlAnnotations.species;
+import ummisco.gama.processor.GamlAnnotations.variable;
+import ummisco.gama.processor.GamlAnnotations.vars;
 
 /**
  * Defines an instance of a model (a simulation). Serves as the support for model species (whose metaclass is
@@ -184,7 +183,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	GamaColor color;
 
 	final IScope ownScope = new ExecutionScope(this);
-	private SimulationOutputManager outputs;
+	private IOutputManager.Simulation outputs;
 	final ProjectionFactory projectionFactory;
 	private Boolean scheduled = false;
 	private volatile boolean isOnUserHold;
@@ -255,7 +254,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@Override
 	public void setName(final String name) {
 		super.setName(name);
-		final SimulationOutputManager m = getOutputManager();
+		final IOutputManager.Simulation m = getOutputManager();
 		if (m != null) {
 			m.updateDisplayOutputsName(this);
 		}
@@ -598,7 +597,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 
 	}
 
-	public void setOutputs(final IOutputManager iOutputManager) {
+	public void setOutputs(final IOutputManager.Simulation iOutputManager) {
 		if (iOutputManager == null)
 			return;
 		// hqnghi push outputManager down to Simulation level
@@ -607,7 +606,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 			final IDescription des = ((ISymbol) iOutputManager).getDescription();
 			if (des == null)
 				return;
-			outputs = (SimulationOutputManager) des.compile();
+			outputs = (IOutputManager.Simulation) des.compile();
 			final Map<String, IOutput> mm = GamaMapFactory.create();
 			for (final Map.Entry<String, ? extends IOutput> entry : outputs.getOutputs().entrySet()) {
 				final IOutput output = entry.getValue();
@@ -628,13 +627,13 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 			outputs.clear();
 			outputs.putAll(mm);
 		} else {
-			outputs = (SimulationOutputManager) iOutputManager;
+			outputs = iOutputManager;
 		}
 		// end-hqnghi
 	}
 
 	@Override
-	public SimulationOutputManager getOutputManager() {
+	public IOutputManager.Simulation getOutputManager() {
 		return outputs;
 	}
 

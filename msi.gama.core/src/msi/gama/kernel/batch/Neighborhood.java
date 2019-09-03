@@ -11,9 +11,11 @@
 package msi.gama.kernel.batch;
 
 import java.util.List;
+
+import msi.gama.common.interfaces.experiment.IParameter;
 import msi.gama.kernel.experiment.*;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 
 public abstract class Neighborhood {
 

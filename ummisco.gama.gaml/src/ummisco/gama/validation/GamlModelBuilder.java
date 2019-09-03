@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import com.google.common.collect.Iterables;
 
 import msi.gama.common.interfaces.IGamlIssue;
-import msi.gama.kernel.model.IModel;
+import msi.gama.common.interfaces.IModel;
 import msi.gaml.compilation.GAML;
 import msi.gaml.compilation.GamlCompilationError;
-import msi.gaml.compilation.IGamlModelBuilder;
+import msi.gaml.compilation.interfaces.IGamlModelBuilder;
 import msi.gaml.descriptions.ModelDescription;
 import ummisco.gama.gaml.resource.GamlResource;
 

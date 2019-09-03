@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import msi.gama.common.util.Collector;
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.util.Collector;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IList;
 import msi.gama.util.graph.GamaGraph;
 import msi.gama.util.graph._Edge;
 import msi.gama.util.graph._Vertex;
+import msi.gama.util.list.IList;
+import msi.gama.util.map.GamaMapFactory;
 
 public class AStar<V, E> {
 

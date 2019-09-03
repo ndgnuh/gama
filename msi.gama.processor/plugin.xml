@@ -2,13 +2,13 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         id="msi.gama.precompiler.GamaProcessor"
-         name="msi.gama.precompiler.GamaProcessor"
+         id="ummisco.gama.processor.GamaProcessor"
+         name="ummisco.gama.processor.GamaProcessor"
          point="org.eclipse.jdt.apt.core.annotationProcessorFactory">
       <java6processors
             enableDefault="true">
          <java6processor
-               class="msi.gama.precompiler.GamaProcessor">
+               class="ummisco.gama.processor.GamaProcessor">
          </java6processor>
       </java6processors>
    </extension>

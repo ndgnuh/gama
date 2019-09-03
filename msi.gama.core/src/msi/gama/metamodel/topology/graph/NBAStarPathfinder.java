@@ -24,11 +24,11 @@ import java.util.Set;
 
 import msi.gama.metamodel.shape.GamaPoint;
 import msi.gama.metamodel.shape.IShape;
-import msi.gama.util.GamaListFactory;
-import msi.gama.util.IList;
 import msi.gama.util.graph.GamaGraph;
 import msi.gama.util.graph._Edge;
 import msi.gama.util.graph._Vertex;
+import msi.gama.util.list.GamaListFactory;
+import msi.gama.util.list.IList;
 
 /**
  * This pathfinding algorithm is due to Wim Pijls and Henk Post in "Yet another bidirectional algorithm for shortest

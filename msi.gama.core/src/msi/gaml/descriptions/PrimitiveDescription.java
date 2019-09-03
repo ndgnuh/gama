@@ -15,11 +15,11 @@ import java.lang.reflect.AccessibleObject;
 import org.eclipse.emf.ecore.EObject;
 
 import msi.gama.common.interfaces.IKeyword;
-import msi.gama.precompiler.GamlAnnotations.action;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gaml.compilation.IGamaHelper;
+import msi.gaml.compilation.interfaces.IGamaHelper;
 import msi.gaml.operators.Strings;
 import msi.gaml.statements.Facets;
+import ummisco.gama.processor.GamlAnnotations.action;
+import ummisco.gama.processor.GamlAnnotations.doc;
 
 @SuppressWarnings ({ "rawtypes" })
 public class PrimitiveDescription extends ActionDescription {

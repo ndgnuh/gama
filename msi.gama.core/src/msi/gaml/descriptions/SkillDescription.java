@@ -16,10 +16,10 @@ import java.util.Collections;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ISkill;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.precompiler.GamlAnnotations.doc;
-import msi.gama.precompiler.GamlAnnotations.skill;
 import msi.gaml.architecture.IArchitecture;
 import msi.gaml.skills.Skill;
+import ummisco.gama.processor.GamlAnnotations.doc;
+import ummisco.gama.processor.GamlAnnotations.skill;
 
 public class SkillDescription extends TypeDescription {
 

@@ -29,7 +29,7 @@ import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Control;
 
-import msi.gama.common.interfaces.IDisplaySurface;
+import msi.gama.common.interfaces.outputs.IDisplaySurface;
 import ummisco.gama.ui.bindings.GamaKeyBindings;
 import ummisco.gama.ui.utils.WorkbenchHelper;
 

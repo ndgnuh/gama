@@ -13,8 +13,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.util.IList;
+import msi.gama.common.interfaces.IAgent;
+import msi.gama.util.list.IList;
 import msi.gaml.operators.Cast;
 import ummisco.gama.dev.utils.DEBUG;
 import ummisco.gama.extensions.network.skills.INetworkSkill;

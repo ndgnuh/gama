@@ -16,12 +16,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IKeyword;
 import msi.gama.common.interfaces.ItemList;
-import msi.gama.kernel.experiment.IExperimentDisplayable;
-import msi.gama.kernel.experiment.IParameter;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.experiment.IExperimentDisplayable;
+import msi.gama.common.interfaces.experiment.IParameter;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import ummisco.gama.ui.interfaces.IParameterEditor;
 import ummisco.gama.ui.parameters.EditorFactory;

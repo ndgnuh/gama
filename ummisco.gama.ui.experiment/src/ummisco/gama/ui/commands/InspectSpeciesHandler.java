@@ -13,10 +13,10 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import msi.gama.outputs.ValuedDisplayOutputFactory;
 import msi.gama.runtime.GAMA;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
 import msi.gaml.species.ISpecies;
+import ummisco.gama.outputs.ValuedDisplayOutputFactory;
 
 public class InspectSpeciesHandler extends AbstractHandler { // NO_UCD (unused code)
 

@@ -21,20 +21,20 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import msi.gama.common.interfaces.IAgent;
 import msi.gama.common.interfaces.IValue;
 import msi.gama.common.interfaces.ItemList;
+import msi.gama.common.interfaces.outputs.IDisplayOutput;
 import msi.gama.common.util.TextBuilder;
-import msi.gama.metamodel.agent.IAgent;
-import msi.gama.outputs.IDisplayOutput;
-import msi.gama.outputs.MonitorOutput;
-import msi.gama.outputs.ValuedDisplayOutputFactory;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.GamaColor;
 import msi.gaml.compilation.GAML;
 import msi.gaml.expressions.IExpression;
 import msi.gaml.expressions.IExpressionFactory;
 import msi.gaml.types.IType;
 import msi.gaml.types.Types;
+import ummisco.gama.outputs.MonitorOutput;
+import ummisco.gama.outputs.ValuedDisplayOutputFactory;
 import ummisco.gama.ui.parameters.EditorFactory;
 import ummisco.gama.ui.resources.GamaColors;
 import ummisco.gama.ui.resources.IGamaColors;
@@ -259,7 +259,8 @@ public class MonitorView extends ExpandableItemsView<MonitorOutput> implements I
 	public Map<String, Runnable> handleMenu(final MonitorOutput data, final int x, final int y) {
 		final Map<String, Runnable> menu = new HashMap();
 		final IExpression exp = data.getValue();
-		if (exp == null) { return null; }
+		if (exp == null)
+			return null;
 		final IType<?> type = exp.getGamlType();
 		menu.put("Copy to clipboard", () -> {
 			WorkbenchHelper.copy(getValueAsString(data));

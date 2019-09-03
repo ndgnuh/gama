@@ -13,7 +13,8 @@ package msi.gama.kernel.batch;
 import java.util.HashSet;
 import java.util.Set;
 
-import msi.gama.runtime.IScope;
+import msi.gama.common.interfaces.batch.CrossOver;
+import msi.gama.runtime.scope.IScope;
 
 public class CrossOver1Pt implements CrossOver {
 

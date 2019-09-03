@@ -14,10 +14,10 @@ import org.locationtech.jts.geom.Geometry;
 
 import com.jogamp.opengl.GL2;
 
-import msi.gama.common.interfaces.ILayer;
-import msi.gama.util.GamaMapFactory;
-import msi.gama.util.IMap;
+import msi.gama.common.interfaces.outputs.ILayer;
 import msi.gama.util.file.IGamaFile;
+import msi.gama.util.map.GamaMapFactory;
+import msi.gama.util.map.IMap;
 import msi.gaml.statements.draw.DrawingAttributes;
 import msi.gaml.statements.draw.FieldDrawingAttributes;
 import msi.gaml.statements.draw.TextDrawingAttributes;

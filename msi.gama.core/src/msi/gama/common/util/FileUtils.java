@@ -52,14 +52,14 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
+import msi.gama.common.interfaces.IModel;
+import msi.gama.common.interfaces.experiment.IExperimentAgent;
 import msi.gama.common.preferences.GamaPreferences;
 import msi.gama.ext.webb.Webb;
 import msi.gama.ext.webb.WebbException;
-import msi.gama.kernel.experiment.IExperimentAgent;
-import msi.gama.kernel.model.IModel;
 import msi.gama.runtime.GAMA;
-import msi.gama.runtime.IScope;
 import msi.gama.runtime.exceptions.GamaRuntimeException;
+import msi.gama.runtime.scope.IScope;
 import msi.gama.util.file.CacheLocationProvider;
 import ummisco.gama.dev.utils.DEBUG;
 

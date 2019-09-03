@@ -16,7 +16,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import msi.gaml.compilation.IValidator;
+import msi.gaml.compilation.interfaces.IValidator;
 
 /**
  * Allows to declare a custom validator for Symbols and Operators. This validator, if declared on subclasses of Symbol,

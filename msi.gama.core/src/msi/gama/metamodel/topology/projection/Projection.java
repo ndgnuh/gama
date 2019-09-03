@@ -25,7 +25,7 @@ import org.locationtech.jts.geom.GeometryCollection;
 
 import msi.gama.common.geometry.Envelope3D;
 import msi.gama.common.geometry.GeometryUtils;
-import msi.gama.runtime.IScope;
+import msi.gama.runtime.scope.IScope;
 
 public class Projection implements IProjection {
 
