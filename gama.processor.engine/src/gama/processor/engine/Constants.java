@@ -87,8 +87,8 @@ public interface Constants {
 			ISYMBOL = "ISymbol", IDESC = "IDescription", ISCOPE = "IScope", OBJECT = "Object", IVALUE = "IValue",
 			IEXPRESSION = "IExpression", INTEGER = "Integer", DOUBLE = "Double", BOOLEAN = "Boolean";
 
-	String[] EXPLICIT_IMPORTS = new String[] { "msi.gaml.operators.Random", "msi.gaml.operators.Maths",
-			"msi.gaml.operators.Points", "msi.gaml.operators.Spatial.Properties", "msi.gaml.operators.System" };
+	String[] EXPLICIT_IMPORTS = new String[] { "gaml.operators.Random", "gaml.operators.Maths", "gaml.operators.Points",
+			"gaml.operators.Spatial.Properties", "gaml.operators.System" };
 
 	List<String> ss1 = Arrays.asList("const", "true", "false", "name", "type");
 	List<String> ss2 = Arrays.asList("CONST", "TRUE", "FALSE", "NAME", "TYPE");
@@ -153,28 +153,27 @@ public interface Constants {
 
 	String PACKAGE_NAME = "gaml.additions";
 
-	Map<Class<? extends Annotation>, IProcessor<?>> processors =
-			new LinkedHashMap<>() {
-				{
-					// Order is important
-					// Doc built first, so that test generation can happen subsequently
-					put(doc.class, new DocProcessor());
-					// Then all the processors for specific annotations
-					put(type.class, new TypeProcessor());
-					put(factory.class, new FactoryProcessor());
-					put(species.class, new SpeciesProcessor());
-					put(symbol.class, new SymbolProcessor());
-					put(vars.class, new VarsProcessor());
-					put(operator.class, new OperatorProcessor());
-					put(file.class, new FileProcessor());
-					put(action.class, new ActionProcessor());
-					put(skill.class, new SkillProcessor());
-					// put(display.class, new DisplayProcessor());
-					put(experiment.class, new ExperimentProcessor());
-					put(constant.class, new ConstantProcessor());
-					// TestProcessor actually processes both @tests and @test annotations
-					put(tests.class, new TestProcessor());
-				}
-			};
+	Map<Class<? extends Annotation>, IProcessor<?>> processors = new LinkedHashMap<>() {
+		{
+			// Order is important
+			// Doc built first, so that test generation can happen subsequently
+			put(doc.class, new DocProcessor());
+			// Then all the processors for specific annotations
+			put(type.class, new TypeProcessor());
+			put(factory.class, new FactoryProcessor());
+			put(species.class, new SpeciesProcessor());
+			put(symbol.class, new SymbolProcessor());
+			put(vars.class, new VarsProcessor());
+			put(operator.class, new OperatorProcessor());
+			put(file.class, new FileProcessor());
+			put(action.class, new ActionProcessor());
+			put(skill.class, new SkillProcessor());
+			// put(display.class, new DisplayProcessor());
+			put(experiment.class, new ExperimentProcessor());
+			put(constant.class, new ConstantProcessor());
+			// TestProcessor actually processes both @tests and @test annotations
+			put(tests.class, new TestProcessor());
+		}
+	};
 
 }

@@ -27,6 +27,6 @@ Require-Bundle: gama.ui.base,
  gama.core.base;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.core.filesystem
-Automatic-Module-Name: gama.ui.base.navigator
+Automatic-Module-Name: gama.ui.navigator
 Export-Package: gama.ui.navigator.commands,
- gama.ui.navigator.navigator.contents
+ gama.ui.navigator.contents

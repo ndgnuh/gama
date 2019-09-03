@@ -179,4 +179,4 @@ Bundle-ClassPath: .,
  jogl-all.jar
 Bundle-Vendor: UMMISCO
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: gama.core.opengl
+Automatic-Module-Name: gama.ui.displays.opengl

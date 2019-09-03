@@ -25,7 +25,7 @@ public class FileProcessor extends ElementProcessor<file> {
 		toArrayOfStrings(f.extensions(), sb).append(");");
 		sb.append(in).append("_unary(S(").append(toJavaString("is_" + f.name()))
 				.append("),null,C(S),I(0),B,true,3,0,0,0,")
-				.append("(s,o)-> { return msi.gaml.types.GamaFileType.verifyExtension(").append(toJavaString(f.name()))
+				.append("(s,o)-> { return gaml.types.GamaFileType.verifyExtension(").append(toJavaString(f.name()))
 				.append(",(String)o);});");
 		for (final Element m : e.getEnclosedElements()) {
 			if (m.getKind() == ElementKind.CONSTRUCTOR) {

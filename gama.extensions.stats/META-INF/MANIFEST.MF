@@ -10,4 +10,4 @@ Export-Package: gama.extensions.stats
 Bundle-ClassPath: .,
  lib/colt.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: ummisco.gaml.extensions.stats
+Automatic-Module-Name: gama.extensions.stats

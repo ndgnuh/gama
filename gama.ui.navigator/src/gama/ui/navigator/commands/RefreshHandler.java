@@ -40,9 +40,9 @@ import gama.core.application.workspace.WorkspaceModelsManager;
 import gama.extensions.files.metadata.FileMetaDataProvider;
 import gama.ui.base.interfaces.IRefreshHandler;
 import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.navigator.navigator.GamaNavigator;
-import gama.ui.navigator.navigator.contents.NavigatorRoot;
-import gama.ui.navigator.navigator.contents.ResourceManager;
+import gama.ui.navigator.GamaNavigator;
+import gama.ui.navigator.contents.NavigatorRoot;
+import gama.ui.navigator.contents.ResourceManager;
 import gama.common.interfaces.gui.IGui;
 
 public class RefreshHandler implements IRefreshHandler {

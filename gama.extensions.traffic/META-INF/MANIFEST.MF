@@ -10,4 +10,4 @@ Export-Package: gama.extensions.traffic
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: simtools.gaml.extensions.traffic
+Automatic-Module-Name: gama.extensions.traffic

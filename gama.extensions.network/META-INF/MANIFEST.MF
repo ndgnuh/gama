@@ -35,5 +35,5 @@ Require-Bundle: gama.core.base;bundle-version="1.7.0",
 Bundle-ClassPath: .,
  ext/org.eclipse.paho.client.mqttv3-1.0.2-3.jar
 Bundle-ActivationPolicy: lazy
-Automatic-Module-Name: ummisco.gama.network
+Automatic-Module-Name: gama.extensions.network
  

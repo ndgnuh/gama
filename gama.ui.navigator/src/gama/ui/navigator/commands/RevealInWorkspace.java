@@ -12,9 +12,9 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import gama.ui.navigator.navigator.GamaNavigator;
-import gama.ui.navigator.navigator.contents.LinkedFile;
-import gama.ui.navigator.navigator.contents.WrappedFile;
+import gama.ui.navigator.GamaNavigator;
+import gama.ui.navigator.contents.LinkedFile;
+import gama.ui.navigator.contents.WrappedFile;
 
 public class RevealInWorkspace extends AbstractHandler implements IHandler {
 

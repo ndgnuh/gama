@@ -480,6 +480,7 @@ public abstract class GamaType<Support> implements IType<Support> {
 	 * @param obj
 	 * @return
 	 */
+	@SuppressWarnings ("unchecked")
 	public static <T> IType<T> of(final T obj) {
 		if (obj instanceof IValue)
 			return (IType<T>) ((IValue) obj).getGamlType();

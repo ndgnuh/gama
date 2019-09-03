@@ -9,4 +9,4 @@ Export-Package: gama.dev.utils,
  gama.processor.annotations,
  gama.processor.annotations.constants,
  gama.processor.annotations.doc
-Automatic-Module-Name: ummisco.gama.annotations
+Automatic-Module-Name: gama.processor.annotations

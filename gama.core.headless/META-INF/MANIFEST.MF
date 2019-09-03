@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Headless version of GAMA
 Bundle-SymbolicName: gama.core.headless;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Bundle-Activator: gama.headless.runtime.Activator
+Bundle-Activator: gama.core.headless.runtime.Activator
 Require-Bundle: gama.core.base,
  gama.core.lang,
  org.eclipse.core.runtime,
@@ -31,4 +31,4 @@ Export-Package:
  gama.core.headless.xml
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: gama.headless
+Automatic-Module-Name: gama.core.headless

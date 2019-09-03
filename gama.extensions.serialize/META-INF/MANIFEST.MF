@@ -38,4 +38,4 @@ Export-Package: com.thoughtworks.xstream,
 Import-Package: org.apache.commons.lang
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: ummisco.gama.serialize
+Automatic-Module-Name: gama.extensions.serialize

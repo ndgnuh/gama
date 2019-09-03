@@ -22,7 +22,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.navigator.navigator.contents.NavigatorRoot;
+import gama.ui.navigator.contents.NavigatorRoot;
 import gama.common.util.FileUtils;
 
 /**

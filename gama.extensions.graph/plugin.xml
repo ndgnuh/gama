@@ -3,7 +3,6 @@
 <plugin>
    <extension
          point="gaml.extension">
-
    </extension>
 
 </plugin>

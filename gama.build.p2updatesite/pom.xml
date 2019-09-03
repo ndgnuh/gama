@@ -4,12 +4,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>msi.gama</groupId>
-		<artifactId>msi.gama.parent</artifactId>
-		<version>1.7.0-SNAPSHOT</version>
-		<relativePath>../msi.gama.parent/</relativePath>
+		<groupId>gama</groupId>
+		<artifactId>gama.build.parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+		<relativePath>../gama.build.parent/</relativePath>
 	</parent>
-	<artifactId>msi.gama.p2updatesite</artifactId>
+	<artifactId>gama.build.p2updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
 
 	<distributionManagement>
@@ -96,5 +96,5 @@
 			</build>
 		</profile>
 	</profiles>
-	<groupId>msi.gama</groupId>
+	<groupId>gama</groupId>
 </project>

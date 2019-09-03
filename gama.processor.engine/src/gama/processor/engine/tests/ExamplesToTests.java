@@ -43,10 +43,8 @@ public class ExamplesToTests implements XMLElements {
 
 	public static final String ATT_NAME_FILE = "fileName";
 	static final TransformerFactory factoryT = TransformerFactory.newInstance();
-	static final URL OPERATORS_XSL = GamaProcessor.class.getClassLoader()
-			.getResource("msi/gama/precompiler/resources/testGaml-Operators-xml2test.xsl");
 	static final Transformer OPERATORS_TRANSFORMER;
-	static final HashMap<String, String> NAME_OPERATOR = new HashMap<String, String>() {
+	static final HashMap<String, String> NAME_OPERATOR = new HashMap<>() {
 		{
 			put("*", "Multiply");
 			put("-", "Minus");
@@ -71,6 +69,8 @@ public class ExamplesToTests implements XMLElements {
 
 	static {
 		Transformer transformer = null;
+		final URL OPERATORS_XSL = GamaProcessor.class.getClassLoader()
+				.getResource("gama/processor/engine/resources/testGaml-Operators-xml2test.xsl");
 		try (final InputStream xsl = OPERATORS_XSL.openStream();) {
 			final StreamSource stylesource = new StreamSource(xsl);
 			transformer = factoryT.newTransformer(stylesource);
@@ -86,13 +86,15 @@ public class ExamplesToTests implements XMLElements {
 	}
 
 	public static void createTests(final ProcessorContext context, final Document doc) {
-		if (doc == null || !doc.hasChildNodes()) { return; }
+		if (doc == null || !doc.hasChildNodes())
+			return;
 		final Document document = cleanDocumentTest(doc);
 		createOperatorsTests(context, document, OPERATORS_TRANSFORMER);
 	}
 
 	private static List<org.w3c.dom.Element> list(final NodeList nl) {
-		if (nl.getLength() == 0) { return Collections.EMPTY_LIST; }
+		if (nl.getLength() == 0)
+			return Collections.EMPTY_LIST;
 		final List<org.w3c.dom.Element> result = new ArrayList<>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			result.add((org.w3c.dom.Element) nl.item(i));
@@ -153,7 +155,8 @@ public class ExamplesToTests implements XMLElements {
 		documents.forEach((targetFile, doc) -> {
 			try (final Writer writer = context.createTestWriter(targetFile);) {
 				// If no writer can be created, just abort
-				if (writer == null) { return; }
+				if (writer == null)
+					return;
 				final Source source = new DOMSource(doc);
 				final Result result = new StreamResult(writer);
 				try {

@@ -22,14 +22,13 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
+import javax.tools.FileObject;
 
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.tests;
 import gama.processor.engine.doc.DocProcessor;
 import gama.processor.engine.tests.ExamplesToTests;
 import gama.processor.engine.tests.TestProcessor;
-
-import javax.tools.FileObject;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 @SupportedAnnotationTypes ({ "*" })
@@ -48,7 +47,6 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		final StringBuilder sb = new StringBuilder();
 		writeImmutableHeader(sb);
 		JAVA_HEADER = sb.toString();
-		// Arrays.sort(IMPORTS, (a, b) -> b.compareTo(a));
 	}
 
 	@Override
@@ -131,7 +129,7 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		sb.append(ln).append("import static gaml.operators.Spatial.*;");
 		sb.append(ln).append("import static gama.common.interfaces.IKeyword.*;");
 		sb.append(ln).append("	@SuppressWarnings({ \"rawtypes\", \"unchecked\", \"unused\" })");
-		sb.append(ln).append(ln).append("public class GamlAdditions extends msi.gaml.compilation.AbstractGamlAdditions")
+		sb.append(ln).append(ln).append("public class GamlAdditions extends gaml.compilation.AbstractGamlAdditions")
 				.append(" {");
 		sb.append(ln).append(tab);
 		sb.append("public void initialize() throws SecurityException, NoSuchMethodException {");

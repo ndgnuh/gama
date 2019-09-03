@@ -9,7 +9,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
 import gama.ui.base.resources.GamaIcons;
-import gama.ui.navigator.navigator.contents.ResourceManager;
+import gama.ui.navigator.contents.ResourceManager;
 
 public class ExportProjectWizard extends Wizard implements IExportWizard {
 

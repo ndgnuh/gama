@@ -12,5 +12,5 @@ Export-Package: gama.extensions.maths.ode.statements,
  gama.extensions.maths.ode.utils.solver,
  gama.extensions.maths.pde.diffusion.statements
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: ummisco.gaml.extensions.maths
+Automatic-Module-Name: gama.extensions.maths
 

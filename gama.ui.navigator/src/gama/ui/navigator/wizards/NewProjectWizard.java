@@ -38,7 +38,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.navigator.navigator.contents.ResourceManager;
+import gama.ui.navigator.contents.ResourceManager;
 import gama.common.util.FileUtils;
 
 public class NewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {

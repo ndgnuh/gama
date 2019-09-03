@@ -40,7 +40,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 import gama.runtime.GAMA;
-import gama.ui.navigator.navigator.contents.ResourceManager;
+import gama.ui.navigator.contents.ResourceManager;
 import gaml.operators.Strings;
 
 /**

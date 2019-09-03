@@ -7,7 +7,7 @@
              allowMultiple="true"
              category="gama.gui.category.gama"
              class="gama.ui.displays.opengl.view.OpenGLDisplayView"
-             icon="platform:/plugin/gama.ui.experiment.shared/icons/view.display2.png"
+             icon="platform:/plugin/gama.ui.base/icons/view.display2.png"
              id="gama.core.application.view.OpenGLDisplayView"
              name="3D"
              restorable="false">
@@ -18,7 +18,7 @@
        <serviceFactory
              factoryClass="gama.ui.displays.opengl.view.OpenGLInitializer">
           <service
-                serviceClass="gama.ui.experiment.interfaces.IOpenGLInitializer">
+                serviceClass="gama.ui.base.interfaces.IOpenGLInitializer">
           </service>
        </serviceFactory>
     </extension>

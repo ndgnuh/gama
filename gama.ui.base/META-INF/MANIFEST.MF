@@ -44,4 +44,4 @@ Export-Package: gama.ui.base,
  gama.ui.base.views,
  gama.ui.base.views.toolbar
 Bundle-Activator: gama.ui.base.Activator
-Automatic-Module-Name: gama.core.ui.shared
+Automatic-Module-Name: gama.ui.base

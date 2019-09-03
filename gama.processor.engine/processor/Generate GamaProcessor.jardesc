@@ -10,7 +10,7 @@
             <packagesToUnSeal/>
         </sealing>
     </manifest>
-    <selectedElements exportClassFiles="false" exportJavaFiles="false" exportOutputFolder="true">
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <file path="/gama.processor.annotations/.project"/>
         <folder path="/gama.processor.engine/META-INF"/>
         <file path="/gama.processor.engine/build.properties"/>

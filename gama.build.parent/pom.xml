@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>msi.gama</groupId>
-	<artifactId>msi.gama.parent</artifactId>
-	<version>1.7.0-SNAPSHOT</version>
+	<groupId>gama</groupId>
+	<artifactId>gama.build.parent</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<distributionManagement>
@@ -206,62 +206,55 @@
 
 		<!-- <module>../gama.target.platform</module> -->
 
+		<!-- EXT -->
+		
+		<module>../gama.core.ext</module>
+		<module>../gama.feature.dependencies</module>
+		
+		<!-- CORE -->
 
-		<module>../msi.gama.ext</module>
-		<module>../msi.gama.core</module>
-		<module>../ummisco.gama.gaml</module>
-		<module>../msi.gama.documentation</module>
-		<module>../ummisco.gama.ui.modeling</module>
-		<module>../ummisco.gama.ui.shared</module>
-		<module>../ummisco.gama.ui.navigator</module>
-		<module>../ummisco.gama.ui.experiment</module>
-
-		<module>../ummisco.gama.application</module>
-
-		<module>../ummisco.gama.feature.models</module>
-		<module>../ummisco.gama.feature.dependencies</module>
-
-
-		<module>../ummisco.gama.feature.core</module>
-		<module>../ummisco.gama.feature.core.extensions</module>
-		<module>../ummisco.gama.feature.core.ui</module>
-		<module>../ummisco.gama.feature.experiment.ui</module>
-		<module>../ummisco.gama.feature.modeling.ui</module>
-		<module>../ummisco.gama.feature.serialize</module>
-		<module>../ummisco.gama.feature.network</module>
-		<module>../ummisco.gama.extensions.files</module>
-		<module>../ummisco.gama.extensions.fipa</module>
-		<module>../msi.gama.headless</module>
-		<module>../simtools.gama.extensions.traffic</module>
-		<module>../simtools.gama.extensions.physics</module>
-
-
-		<module>../irit.gama.extensions.database</module>
-
-
-
-		<module>../msi.gama.models</module>
-		<module>../miat.gama.extensions.bdi</module>
-
-
-		<module>../simtools.graphanalysis.fr</module>
-		<module>../simtools.graphlayout.feature</module>
-
-		<module>../ummisco.gama.feature.audio</module>
-
-		<module>../ummisco.gama.feature.stats</module>
-
-		<module>../ummisco.gama.display.opengl</module>
-		<module>../ummisco.gama.display.java2d</module>
-		<module>../ummisco.gama.ui.viewers</module>
-		<module>../irit.gama.extensions.serialize</module>
-		<module>../ummisco.gama.extensions.network</module>
-		<module>../ummisco.gaml.extensions.maths</module>
-
-		<module>../ummisco.gama.extensions.sound</module>
-		<module>../ummisco.gama.extensions.stats</module>
-
-		<module>../ummisco.gama.product</module>
+		<module>../gama.core.base</module>
+		<module>../gama.core.lang</module>
+		<module>../gama.core.application</module>
+		<module>../gama.core.headless</module>
+		<module>../gama.feature.core</module>
+		
+		<!-- UI -->
+		
+		<module>../gama.build.documentation</module>
+		<module>../gama.ui.modeling</module>
+		<module>../gama.ui.base</module>
+		<module>../gama.ui.navigator</module>
+		<module>../gama.ui.experiment</module>
+		<module>../gama.ui.displays.opengl</module>
+		<module>../gama.ui.displays.java2d</module>
+		<module>../gama.ui.viewers</module>
+		<module>../gama.feature.ui</module>
+		
+		<!-- EXTENSIONS -->
+		
+		<module>../gama.extensions.files</module>
+		<module>../gama.extensions.fipa</module>
+		<module>../gama.extensions.traffic</module>
+		<module>../gama.extensions.physics</module>
+		<module>../gama.extensions.database</module>
+		<module>../gama.extensions.graph</module>
+		<module>../gama.extensions.bdi</module>
+		<module>../gama.extensions.serialize</module>
+		<module>../gama.extensions.network</module>
+		<module>../gama.extensions.maths</module>
+		<module>../gama.extensions.sound</module>
+		<module>../gama.extensions.stats</module>
+		<module>../gama.feature.extensions</module>
+		
+		<!-- MODELS -->
+		
+		<module>../gama.core.models</module>
+		<module>../gama.feature.models</module>
+		
+		<!-- PRODUCT -->
+		
+		<module>../gama.build.product</module>
 
 		<!-- <module>../msi.gama.p2updatesite</module> -->
 
@@ -376,8 +369,8 @@
 				<version>0.25.0</version>
 				<configuration>
 					<debug>false</debug>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 					<compilerArgument>-warn:+discouraged,forbidden</compilerArgument>
 					<useProjectSettings>false</useProjectSettings>
 					<generatedSourcesDirectory>${project.build.directory}</generatedSourcesDirectory>
@@ -390,8 +383,8 @@
 				<version>3.5.1</version>
 				<configuration>
 					<debug>false</debug>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
@@ -401,11 +394,11 @@
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 					<!--<compilerArgument>-proc:none</compilerArgument> -->
 					<annotationProcessors>
-						<annotationProcessor>msi.gama.precompiler.GamaProcessor</annotationProcessor>
+						<annotationProcessor>gama.processor.engine.GamaProcessor</annotationProcessor>
 					</annotationProcessors>
 				</configuration>
 				<dependencies>

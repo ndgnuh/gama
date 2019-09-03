@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.SpeciesConstantExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.SpeciesConstantExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -27,7 +27,7 @@ public class SpeciesConstantExpression extends ConstantExpression<ISpecies> {
 
 	String name;
 
-	public SpeciesConstantExpression(final String string, final IType t) {
+	public SpeciesConstantExpression(final String string, final IType<ISpecies> t) {
 		super(null, t, string);
 	}
 

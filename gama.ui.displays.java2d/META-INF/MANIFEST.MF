@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.swt,
  gama.ui.experiment,
  gama.core.application,
  gama.core.outputs
-Automatic-Module-Name: gama.core.display.java2d
+Automatic-Module-Name: gama.ui.displays.java2d
 Export-Package: gama.ui.displays.java2d,
  gama.ui.displays.java2d.swing;x-internal:=true

@@ -20,4 +20,4 @@ Export-Package: gama.core.application;uses:="org.eclipse.ui,org.eclipse.equinox.
  gama.core.application.workspace
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: gama.application
+Automatic-Module-Name: gama.core.application

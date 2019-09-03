@@ -106,14 +106,14 @@ public class ProcessorContext implements ProcessingEnvironment, RoundEnvironment
 
 	public TypeMirror getISkill() {
 		if (iSkill == null) {
-			iSkill = delegate.getElementUtils().getTypeElement("msi.gama.common.interfaces.ISkill").asType();
+			iSkill = delegate.getElementUtils().getTypeElement("gama.common.interfaces.ISkill").asType();
 		}
 		return iSkill;
 	}
 
 	TypeMirror getIAgent() {
 		if (iAgent == null) {
-			iAgent = delegate.getElementUtils().getTypeElement("msi.gama.common.interfaces.IAgent").asType();
+			iAgent = delegate.getElementUtils().getTypeElement("gama.common.interfaces.IAgent").asType();
 		}
 		return iAgent;
 	}
@@ -311,8 +311,8 @@ public class ProcessorContext implements ProcessingEnvironment, RoundEnvironment
 					+ "			<arguments>\n" + "			</arguments>\n" + "		</buildCommand>\n"
 					+ "	</buildSpec>\n" + "	<natures>\n"
 					+ "		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>\n"
-					+ "		<nature>msi.gama.application.gamaNature</nature>\n"
-					+ "		<nature>msi.gama.application.testNature</nature>\n" + "	</natures>\n"
+					+ "		<nature>gama.core.application.gamaNature</nature>\n"
+					+ "		<nature>gama.core.application.testNature</nature>\n" + "	</natures>\n"
 					+ "</projectDescription>\n" + "");
 		} catch (final IOException t) {
 			emitWarning("", t);

@@ -13,4 +13,4 @@ Export-Package: gama.extensions.database.mdx,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: gama.extensions.database.Activator
-Automatic-Module-Name: irit.gaml.extensions.database
+Automatic-Module-Name: gama.extensions.database

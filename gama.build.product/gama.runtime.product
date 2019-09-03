@@ -250,17 +250,15 @@ openFile
    </plugins>
 
    <features>
-      <feature id="ummisco.gama.feature.dependencies"/>
+      <feature id="gama.feature.dependencies" installMode="root"/>
       <feature id="org.eclipse.equinox.p2.core.feature"/>
       <feature id="org.eclipse.equinox.p2.extras.feature"/>
       <feature id="org.eclipse.equinox.p2.rcp.feature"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
-      <feature id="ummisco.gama.feature.core" installMode="root"/>
-      <feature id="ummisco.gama.feature.core.extensions" installMode="root"/>
-      <feature id="ummisco.gama.feature.core.ui" installMode="root"/>
-      <feature id="ummisco.gama.feature.models" installMode="root"/>
-      <feature id="ummisco.gama.feature.experiment.ui" installMode="root"/>
-      <feature id="ummisco.gama.feature.modeling.ui" installMode="root"/>
+      <feature id="gama.feature.core" installMode="root"/>
+      <feature id="gama.feature.extensions" installMode="root"/>
+      <feature id="gama.feature.models" installMode="root"/>
+      <feature id="gama.feature.ui" installMode="root"/>
    </features>
 
    <configurations>

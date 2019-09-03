@@ -27,7 +27,7 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
 import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.navigator.navigator.contents.ResourceManager;
+import gama.ui.navigator.contents.ResourceManager;
 
 public abstract class AbstractNewModelWizardPage extends WizardPage {
 

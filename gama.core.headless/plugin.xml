@@ -10,7 +10,7 @@
             thread="main"
             visible="true">
          <run
-               class="gama.headless.runtime.Application">
+               class="gama.core.headless.runtime.Application">
          </run>
       </application>
    </extension>

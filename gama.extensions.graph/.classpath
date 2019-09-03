@@ -11,7 +11,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/gephi-toolkit.jar"/>
 	<classpathentry kind="lib" path="lib/prefuse 2007-10-21/jars/prefuse.jar"/>
 	<classpathentry kind="output" path="bin"/>

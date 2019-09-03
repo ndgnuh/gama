@@ -40,4 +40,4 @@ Export-Package: gama.core.lang,
 Import-Package: org.apache.commons.lang;version="2.4.0",
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: msi.gama.lang.gaml
+Automatic-Module-Name: gama.core.lang

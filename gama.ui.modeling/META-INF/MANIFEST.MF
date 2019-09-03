@@ -27,9 +27,9 @@ Require-Bundle: gama.core.lang;visibility:=reexport,
  gama.core.ext,
  org.eclipse.ui.workbench,
  org.apache.commons.lang;bundle-version="2.6.0"
-Bundle-Activator: gama.ui.base.modeling.internal.ModelingActivator
+Bundle-Activator: gama.ui.modeling.internal.ModelingActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: gama.ui.base.modeling
+Automatic-Module-Name: gama.ui.modeling
 Import-Package: org.apache.log4j
 Export-Package: gama.core.lang.ide.contentassist.antlr,
  gama.core.lang.ide.contentassist.antlr.internal,

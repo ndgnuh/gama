@@ -3,8 +3,20 @@
  */
 package gama.core.lang;
 
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+import com.google.inject.name.Names;
+import gama.core.lang.generator.GamlGenerator;
+import gama.core.lang.parser.antlr.GamlAntlrTokenFileProvider;
+import gama.core.lang.parser.antlr.GamlParser;
+import gama.core.lang.parser.antlr.internal.InternalGamlLexer;
+import gama.core.lang.scoping.GamlScopeProvider;
+import gama.core.lang.serializer.GamlSemanticSequencer;
+import gama.core.lang.serializer.GamlSyntacticSequencer;
+import gama.core.lang.services.GamlGrammarAccess;
+import gama.core.lang.validation.GamlConfigurableIssueCodesProvider;
+import gama.core.lang.validation.GamlValidator;
 import java.util.Properties;
-
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.generator.IGenerator2;
@@ -40,178 +52,150 @@ import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 
-import com.google.inject.Binder;
-import com.google.inject.Provider;
-import com.google.inject.name.Names;
-
-import gama.core.lang.generator.GamlGenerator;
-import gama.core.lang.parser.antlr.GamlAntlrTokenFileProvider;
-import gama.core.lang.parser.antlr.GamlParser;
-import gama.core.lang.parser.antlr.internal.InternalGamlLexer;
-import gama.core.lang.scoping.GamlScopeProvider;
-import gama.core.lang.serializer.GamlSemanticSequencer;
-import gama.core.lang.serializer.GamlSyntacticSequencer;
-import gama.core.lang.services.GamlGrammarAccess;
-import gama.core.lang.validation.GamlConfigurableIssueCodesProvider;
-import gama.core.lang.validation.GamlValidator;
-
 /**
  * Manual modifications go to {@link GamlRuntimeModule}.
  */
-@SuppressWarnings ("all")
+@SuppressWarnings("all")
 public abstract class AbstractGamlRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
 	@Override
-	public void configure(final Binder binder) {
+	public void configure(Binder binder) {
 		properties = tryBindProperties(binder, "gama/core/lang/Gaml.properties");
 		super.configure(binder);
 	}
-
-	public void configureLanguageName(final Binder binder) {
+	
+	public void configureLanguageName(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("gama.core.lang.Gaml");
 	}
-
-	public void configureFileExtensions(final Binder binder) {
-		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null) {
-			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS))
-					.toInstance("gaml,experiment");
-		}
+	
+	public void configureFileExtensions(Binder binder) {
+		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
+			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("gaml,experiment");
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return GamlGrammarAccess.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
-	@Override
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return GamlSemanticSequencer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
 		return GamlSyntacticSequencer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
-	@Override
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IParser> bindIParser() {
 		return GamlParser.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	@Override
 	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
 		return AntlrTokenToStringConverter.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
 		return GamlAntlrTokenFileProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Class<? extends Lexer> bindLexer() {
 		return InternalGamlLexer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	@Override
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return AntlrTokenDefProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public Provider<? extends InternalGamlLexer> provideInternalGamlLexer() {
 		return LexerProvider.create(InternalGamlLexer.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public void configureRuntimeLexer(final Binder binder) {
-		binder.bind(Lexer.class).annotatedWith(Names.named(LexerBindings.RUNTIME)).to(InternalGamlLexer.class);
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalGamlLexer.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
-	@SingletonBinding (
-			eager = true)
+	@SingletonBinding(eager=true)
 	public Class<? extends GamlValidator> bindGamlValidator() {
 		return GamlValidator.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 	public Class<? extends ConfigurableIssueCodesProvider> bindConfigurableIssueCodesProvider() {
 		return GamlConfigurableIssueCodesProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return GamlScopeProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public void configureIScopeProviderDelegate(final Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(ImportedNamespaceAwareLocalScopeProvider.class);
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public void configureIgnoreCaseLinking(final Binder binder) {
+	public void configureIgnoreCaseLinking(Binder binder) {
 		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
-	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return DefaultDeclarativeQualifiedNameProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
-	@Override
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return StateBasedContainerManager.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
 		return ResourceSetBasedAllContainersStateProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
-	@Override
-	public void configureIResourceDescriptions(final Binder binder) {
+	public void configureIResourceDescriptions(Binder binder) {
 		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
-	public void configureIResourceDescriptionsPersisted(final Binder binder) {
-		binder.bind(IResourceDescriptions.class)
-				.annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS))
-				.to(ResourceSetBasedResourceDescriptions.class);
+	public void configureIResourceDescriptionsPersisted(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(ResourceSetBasedResourceDescriptions.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
 	public Class<? extends IGenerator2> bindIGenerator2() {
 		return GamlGenerator.class;
 	}
-
+	
 }

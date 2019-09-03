@@ -13,13 +13,13 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Multimap;
 
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.Experiment;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
-import gama.common.interfaces.IModel;
-import gama.common.interfaces.experiment.IExperimentPlan;
 import gaml.compilation.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.descriptions.ModelDescription;
@@ -105,7 +105,8 @@ public class ModelLibraryRunner extends AbstractModelLibraryRunner {
 
 	private void validateAndRun(final Map<String, Exception> executionErrors, final int[] countOfModelsValidated,
 			final int[] returnCode, final URL pathToModel, final boolean expGUIOnly, final int nbCycles) {
-		if (pathToModel.toString().contains("Database")) { return; }
+		if (pathToModel.toString().contains("Database"))
+			return;
 		System.out.println("========================================");
 
 		final List<GamlCompilationError> errors = new ArrayList<>();
@@ -123,6 +124,7 @@ public class ModelLibraryRunner extends AbstractModelLibraryRunner {
 			experiment = new Experiment(mdl);
 		} catch (final Exception ex) {
 			executionErrors.put(pathToModel.getPath() + "\n", ex);
+			return;
 		}
 
 		for (final String expName : ((ModelDescription) mdl.getDescription()).getExperimentNames()) {

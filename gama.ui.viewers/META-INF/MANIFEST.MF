@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.jface,
  gama.ui.navigator;bundle-version="1.7.0",
  gama.extensions.files
 Bundle-ActivationPolicy: lazy
-Automatic-Module-Name: gama.ui.base.viewers
+Automatic-Module-Name: gama.ui.viewers
 Export-Package: gama.ui.viewers.csv,
  gama.ui.viewers.csv.model,
  gama.ui.viewers.csv.text,

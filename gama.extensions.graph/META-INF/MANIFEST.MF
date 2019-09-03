@@ -3,10 +3,14 @@ Bundle-ManifestVersion: 2
 Bundle-Name: GraphLayoutOperators
 Bundle-SymbolicName: gama.extensions.graph;singleton:=true
 Bundle-Version: 2.0.0.qualifier
-Require-Bundle: gama.core.base;bundle-version="1.7.0",
- gama.core.ext;bundle-version="1.0.0"
-Bundle-ClassPath: .,
- lib/gephi-toolkit.jar,
- lib/gama.extensions.graph 2007-10-21/jars/gama.extensions.graph.jar
+Require-Bundle: gama.core.base,
+ gama.core.ext
+Bundle-ClassPath: lib/gephi-toolkit.jar,
+ lib/prefuse 2007-10-21/jars/prefuse.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Automatic-Module-Name: simtools.graphanalysis
+Automatic-Module-Name: gama.extensions.graph
+Bundle-ActivationPolicy: lazy
+Export-Package: gama.extensions.graph.layout,
+ gama.extensions.graph.util,
+ gama.extensions.graph.writer,
+ gama.extensions.graph.yifanhu

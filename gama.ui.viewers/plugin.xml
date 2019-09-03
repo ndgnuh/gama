@@ -4,10 +4,10 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="gama.ui.base.viewers.image.ImageViewer"
+            class="gama.ui.viewers.image.ImageViewer"
             default="false"
             extensions="JPG,jpg,JPEG,jpeg,PNG,png,BMP,bmp,TIFF,tiff,TIF,tif,ICO,ico,ASC,asc,PGM,pgm"
-            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.image2.png"
+            icon="platform:/plugin/gama.ui.base/icons/navigator/file.image2.png"
             id="gama.gui.images.editor.ImageViewer"
             name="Image Viewer">
          <contentTypeBinding
@@ -15,10 +15,10 @@
          </contentTypeBinding>
       </editor>
         <editor
-            class="gama.ui.base.viewers.csv.MultiPageCSVEditor"
+            class="gama.ui.viewers.csv.MultiPageCSVEditor"
             default="true"
             extensions="CSV,csv"
-            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.csv2.png"
+            icon="platform:/plugin/gama.ui.base/icons/navigator/file.csv2.png"
             id="gama.gui.csv.editor.CustomizableCSVEditor"
             name="CSV Editor">
          <contentTypeBinding
@@ -26,10 +26,10 @@
          </contentTypeBinding>
       </editor>
       <editor
-            class="gama.ui.base.viewers.html.HtmlViewer"
+            class="gama.ui.viewers.html.HtmlViewer"
             default="false"
             extensions="html, htm, HTML, HTM, svg, SVG"
-            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.html2.png"
+            icon="platform:/plugin/gama.ui.base/icons/navigator/file.html2.png"
             id="gama.core.application.browser"
             name="HTML Viewer">
          <contentTypeBinding
@@ -37,10 +37,10 @@
          </contentTypeBinding>
       </editor>
       <editor
-            class="gama.ui.base.viewers.gis.ShapeFileViewer"
+            class="gama.ui.viewers.gis.ShapeFileViewer"
             default="true"
             extensions="shp"
-            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.shape2.png"
+            icon="platform:/plugin/gama.ui.base/icons/navigator/file.shape2.png"
             id="gama.core.application.shape.viewer"
             name="ShapeFile Viewer">
          <contentTypeBinding
@@ -48,10 +48,10 @@
          </contentTypeBinding>
       </editor>
       <editor
-            class="gama.ui.base.viewers.gis.OSMFileViewer"
+            class="gama.ui.viewers.gis.OSMFileViewer"
             default="true"
             extensions="gz,osm,pbf,bz2"
-            icon="platform:/plugin/gama.ui.base.shared/icons/navigator/file.osm2.png"
+            icon="platform:/plugin/gama.ui.base/icons/navigator/file.osm2.png"
             id="gama.core.application.osm.viewer"
             name="OSM Viewer">
          <contentTypeBinding
