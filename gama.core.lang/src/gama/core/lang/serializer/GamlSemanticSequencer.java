@@ -9,4 +9,4 @@
  **********************************************************************************************/
 package gama.core.lang.serializer;
 
-public class GamlSemanticSequencer extends AbstractGamlSyntacticSequencer {}
+public class GamlSemanticSequencer extends AbstractGamlSemanticSequencer {}
