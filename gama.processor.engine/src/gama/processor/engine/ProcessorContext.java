@@ -41,13 +41,15 @@ import javax.xml.parsers.ParserConfigurationException;
 public class ProcessorContext implements ProcessingEnvironment, RoundEnvironment, Constants {
 	private final static boolean PRODUCES_DOC = true;
 	public static final Charset CHARSET = Charset.forName("UTF-8");
-	public static final String ADDITIONS = "gaml.additions.GamlAdditions";
+	public static final String ADDITIONS_PACKAGE_BASE = "gaml.additions";
+	public static final String ADDITIONS_CLASS_NAME = "GamlAdditions";
 	private final static boolean PRODUCES_WARNING = true;
 	public static final StandardLocation OUT = StandardLocation.SOURCE_OUTPUT;
 	private final ProcessingEnvironment delegate;
 	private RoundEnvironment round;
 	private TypeMirror iSkill, iAgent;
 	public volatile String currentPlugin;
+	public volatile String shortcut;
 	public List<String> roots;
 	public static final DocumentBuilder xmlBuilder;
 
@@ -247,13 +249,25 @@ public class ProcessorContext implements ProcessingEnvironment, RoundEnvironment
 		return null;
 	}
 
-	FileObject createSource() {
+	void initCurrentPlugin() {
 		try {
-			final FileObject obj = getFiler().createSourceFile(ADDITIONS, (Element[]) null);
-			// To accomodate for different classpaths in Maven and Eclipse
-			final String plugin2 = obj.toUri().toASCIIString().replace("/target/gaml/additions/GamlAdditions.java", "")
-					.replace("/gaml/gaml/additions/GamlAdditions.java", "");
+			final FileObject temp = getFiler().createSourceFile("gaml.additions.package-info", (Element[]) null);
+			emit(Kind.NOTE, "GAML Processor: creating " + temp.toUri(), (Element) null);
+			final String plugin2 = temp.toUri().toASCIIString().replace("/target/gaml/additions/package-info.java", "")
+					.replace("/gaml/gaml/additions/package-info.java", "");
 			currentPlugin = plugin2.substring(plugin2.lastIndexOf('/') + 1);
+			shortcut = currentPlugin.substring(currentPlugin.lastIndexOf('.') + 1);
+		} catch (IOException e) {
+			emitWarning("Exception raised while reading the current plugin name " + e.getMessage(), e);
+		}
+	}
+
+	FileObject createSource() {
+		initCurrentPlugin();
+		try {
+
+			final FileObject obj = getFiler().createSourceFile(
+					ADDITIONS_PACKAGE_BASE + "." + shortcut + "." + ADDITIONS_CLASS_NAME, (Element[]) null);
 			return obj;
 		} catch (final Exception e) {
 			emitWarning("Exception raised while creating the source file: " + e.getMessage(), e);

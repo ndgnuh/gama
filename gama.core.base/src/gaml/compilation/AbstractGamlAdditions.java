@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.compilation.AbstractGamlAdditions.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.compilation.AbstractGamlAdditions.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -37,10 +37,10 @@ import gama.common.interfaces.ISkill;
 import gama.common.interfaces.experiment.IExperimentAgentCreator;
 import gama.common.interfaces.experiment.IExperimentAgentCreator.ExperimentAgentDescription;
 import gama.common.util.JavaUtils;
-import gama.processor.annotations.ISymbolKind;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.ISymbolKind;
+import gama.processor.annotations.ITypeProvider;
 import gama.util.file.IGamaFile;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
@@ -58,6 +58,7 @@ import gaml.compilation.kernel.GamaMetaModel;
 import gaml.compilation.kernel.GamaSkillRegistry;
 import gaml.descriptions.FacetProto;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IDescription.DescriptionVisitor;
 import gaml.descriptions.OperatorProto;
 import gaml.descriptions.PrimitiveDescription;
 import gaml.descriptions.SkillDescription;
@@ -66,7 +67,6 @@ import gaml.descriptions.SymbolProto;
 import gaml.descriptions.SymbolSerializer;
 import gaml.descriptions.TypeDescription;
 import gaml.descriptions.VariableDescription;
-import gaml.descriptions.IDescription.DescriptionVisitor;
 import gaml.expressions.IExpression;
 import gaml.expressions.IExpressionCompiler;
 import gaml.types.GamaFileType;
@@ -91,7 +91,7 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 	private static Function<Class, Collection<IDescription>> INTO_DESCRIPTIONS = input -> ADDITIONS.get(input);
 	private final static Multimap<Class, OperatorProto> FIELDS = HashMultimap.create();
 	public final static Multimap<Integer, String> VARTYPE2KEYWORDS = HashMultimap.create();
-	public static String CURRENT_PLUGIN_NAME = "gama.core";
+	public static String CURRENT_PLUGIN_NAME = "gama.core.base";
 	// public final static Map<String, IGamaPopulationsLinker> POPULATIONS_LINKERS =
 	// new THashMap<>();
 	public final static Map<String, String> TEMPORARY_BUILT_IN_VARS_DOCUMENTATION = new HashMap<>();

@@ -1,9 +1,7 @@
 package gama.extensions.bdi;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import gama.common.interfaces.IAgent;
@@ -17,6 +15,7 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
+import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.types.IType;
 
@@ -211,7 +210,7 @@ public class Operators {
 	@no_test
 	public static Predicate addValues(final Predicate predicate, final IMap values) throws GamaRuntimeException {
 		final Predicate temp = predicate.copy();
-		final Map<String, Object> tempValues = temp.getValues();
+		final IMap<String, Object> tempValues = temp.getValues();
 		final Set<String> keys = values.keySet();
 		for (final String k : keys) {
 			tempValues.put(k, values.get(k));
@@ -256,7 +255,7 @@ public class Operators {
 		tempList.add(tempPred1);
 		tempList.add(tempPred2);
 		tempPred.setSubintentions(tempList);
-		final Map<String, Object> tempMap = new HashMap();
+		final IMap<String, Object> tempMap = GamaMapFactory.create();
 		tempMap.put("and", true);
 		tempPred.setValues(tempMap);
 		return tempPred;
@@ -281,7 +280,7 @@ public class Operators {
 		tempList.add(tempPred1);
 		tempList.add(tempPred2);
 		tempPred.setSubintentions(tempList);
-		final Map<String, Object> tempMap = new HashMap();
+		final IMap<String, Object> tempMap = GamaMapFactory.create();
 		tempMap.put("or", true);
 		tempPred.setValues(tempMap);
 		return tempPred;
@@ -368,7 +367,7 @@ public class Operators {
 					value = "get_values(pred1)",
 					isExecutable = false))
 	@no_test
-	public static Map<String, Object> getValues(final Predicate pred) {
+	public static IMap<String, Object> getValues(final Predicate pred) {
 		if (pred != null)
 			return pred.getValues();
 		else

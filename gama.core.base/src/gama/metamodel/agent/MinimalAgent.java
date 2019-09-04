@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.agent.MinimalAgent.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gama.metamodel.agent.MinimalAgent.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -103,7 +103,7 @@ public class MinimalAgent extends AbstractAgent {
 		} else {
 			// If the agent is different, we do not copy the attributes present in the shape passed as argument (see
 			// Issue #2053).
-			newLocalGeom = new GamaShape((Geometry) newGeometry.getInnerGeometry().clone());
+			newLocalGeom = new GamaShape(newGeometry.getInnerGeometry().copy());
 			newLocalGeom.copyShapeAttributesFrom(newGeometry);
 		}
 		topology.normalizeLocation(newGeomLocation, false);

@@ -92,7 +92,7 @@
             class="gama.ui.experiment.views.user.UserControlView"
             fastViewWidthRatio="0.2"
             icon="platform:/plugin/gama.ui.base/icons/view.panel2.png"
-            id="gama.views.userControlView"
+            id="gama.core.application.view.userControlView"
             name="User Control"
             restorable="false">
       </view>

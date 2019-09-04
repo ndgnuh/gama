@@ -62,16 +62,17 @@ public class GamaBundleLoader {
 
 	public static final String LINE =
 		"\n\n****************************************************************************************************\n\n";
-	public static final String ERROR_MESSAGE = LINE
-		+ "The initialization of GAML artefacts went wrong. If you use the developer version, please clean and recompile all plugins. \nOtherwise post an issue at https://github.com/gama-platform/gama/issues"
-		+ LINE;
+	public static final String ERROR_MESSAGE = LINE +
+		"The initialization of GAML artefacts went wrong. If you use the developer version, please clean and recompile all plugins. \nOtherwise post an issue at https://github.com/gama-platform/gama/issues" +
+		LINE;
 	public volatile static boolean LOADED = false;
 	public volatile static boolean ERRORED = false;
 	public volatile static Exception LAST_EXCEPTION = null;
 	public static final Bundle CORE_PLUGIN = Platform.getBundle("gama.core.base");
 	public static final Bundle CORE_MODELS = Platform.getBundle("gama.core.models");
 	public static final String CORE_TESTS = "tests";
-	public static final String ADDITIONS = "gaml.additions.GamlAdditions";
+	public static final String ADDITIONS_PACKAGE_BASE = "gaml.additions";
+	public static final String ADDITIONS_CLASS_NAME = "GamlAdditions";
 	public static final String GRAMMAR_EXTENSION_DEPRECATED = "gaml.grammar.addition";
 	public static final String GRAMMAR_EXTENSION = "gaml.extension";
 	public static final String CREATE_EXTENSION = "gama.create";
@@ -144,7 +145,7 @@ public class GamaBundleLoader {
 					preBuild(addition);
 				} catch (final Exception e1) {
 					ERR(ERROR_MESSAGE);
-					ERR("Error in loading plugin " + CORE_PLUGIN.getSymbolicName() + ": " + e1.getMessage());
+					ERR("Error in loading plugin " + addition.getSymbolicName() + ": " + e1.getMessage());
 					System.exit(0);
 					return;
 				}
@@ -234,14 +235,16 @@ public class GamaBundleLoader {
 	public static void preBuild(final Bundle bundle) throws Exception {
 
 		GAMA.initializeAtStartup("Loading " + bundle.getSymbolicName(), () -> {
+			String shortcut = bundle.getSymbolicName();
+			shortcut = shortcut.substring(shortcut.lastIndexOf('.') + 1);
 			GamaClassLoader.getInstance().addBundle(bundle);
 			Class<IGamlAdditions> gamlAdditions = null;
 			try {
-				gamlAdditions = (Class<IGamlAdditions>) bundle.loadClass(ADDITIONS);
+				gamlAdditions = (Class<IGamlAdditions>) bundle
+					.loadClass(ADDITIONS_PACKAGE_BASE + "." + shortcut + "." + ADDITIONS_CLASS_NAME);
 			} catch (final ClassNotFoundException e1) {
-				ERR(">> Impossible to load additions from " + bundle.toString() + " because of " + e1);
+				ERR(">> Impossible to load additions from " + bundle.getSymbolicName() + " because of " + e1);
 				throw e1;
-
 			}
 
 			IGamlAdditions add = null;
@@ -277,7 +280,7 @@ public class GamaBundleLoader {
 	}
 
 	public static void loadUI() {
-		final Bundle bundle = Platform.getBundle("ummisco.gama.ui.shared");
+		final Bundle bundle = Platform.getBundle("gama.ui.base");
 		GamaClassLoader.getInstance().addBundle(bundle);
 		try {
 			bundle.start();
@@ -286,6 +289,7 @@ public class GamaBundleLoader {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void loadAllDisplays() {
 		if ( DISPLAY_INITIALIZED )
 			return;

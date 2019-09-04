@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.SpeciesDescription.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.descriptions.SpeciesDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -719,7 +719,7 @@ public class SpeciesDescription extends TypeDescription {
 			control = GamaSkillRegistry.INSTANCE.get(REFLEX);
 			return;
 		}
-		Class<? extends ISkill> clazz = control.getJavaBase().getSuperclass();
+		Class<? extends ISkill> clazz = (Class<? extends ISkill>) control.getJavaBase().getSuperclass();
 		while (clazz != AbstractArchitecture.class) {
 			final SkillDescription sk = GamaSkillRegistry.INSTANCE.get(clazz);
 			if (sk != null) {

@@ -37,13 +37,12 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
+import gama.common.util.FileUtils;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.navigator.contents.ResourceManager;
-import gama.common.util.FileUtils;
 
 public class NewProjectWizard extends Wizard implements INewWizard, IExecutableExtension {
 
-	public static final String NATURE_ID = "gama.core.application.nature.gamaNature";
 	private NewProjectWizardPage wizardPage;
 	private IProject project;
 
@@ -62,7 +61,8 @@ public class NewProjectWizard extends Wizard implements INewWizard, IExecutableE
 	@Override
 	public boolean performFinish() {
 
-		if (project != null) { return true; }
+		if (project != null)
+			return true;
 
 		final boolean isTest = wizardPage.isTest();
 		final boolean createNewModel = wizardPage.createNewModel();
@@ -121,7 +121,8 @@ public class NewProjectWizard extends Wizard implements INewWizard, IExecutableE
 			final SubMonitor m = SubMonitor.convert(monitor, "", 2000);
 			proj.create(description, m.split(1000));
 
-			if (monitor.isCanceled()) { throw new OperationCanceledException(); }
+			if (monitor.isCanceled())
+				throw new OperationCanceledException();
 			proj.open(m.split(1000));
 
 			FileUtils.setValuesProjectDescription(proj, false, false, isTest, null);

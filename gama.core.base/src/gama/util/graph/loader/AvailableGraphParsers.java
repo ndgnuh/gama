@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.util.graph.loader.AvailableGraphParsers.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.util.graph.loader.AvailableGraphParsers.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -29,50 +29,49 @@ import gama.runtime.scope.IScope;
  */
 public class AvailableGraphParsers {
 
-	private static final Map<String, Class<? extends IGraphParser>> name2parser =
-			new HashMap<String, Class<? extends IGraphParser>>() {
+	private static final Map<String, Class<? extends IGraphParser>> name2parser = new HashMap<>() {
 
-				{
-					// we store both the default version (ex. forcedirected is implemented by default by prefuse,
-					// but also a prefixed version for disambiguation (like "prefuse.forcedirected")
+		{
+			// we store both the default version (ex. forcedirected is implemented by default by prefuse,
+			// but also a prefixed version for disambiguation (like "prefuse.forcedirected")
 
-					// default
-					put("pajek", GraphstreamGraphParserPajek.class);
-					put("net", GraphstreamGraphParserPajek.class);
-					put("lgl", GraphstreamGraphParserLGL.class);
-					put("dot", GraphstreamGraphParserDOT.class);
-					put("gexf", GraphstreamGraphParserGEXF.class);
-					put("graphml", GraphstreamGraphParserGraphML.class);
-					put("gml", GraphstreamGraphParserGraphML.class);
+			// default
+			put("pajek", GraphstreamGraphParserPajek.class);
+			put("net", GraphstreamGraphParserPajek.class);
+			put("lgl", GraphstreamGraphParserLGL.class);
+			put("dot", GraphstreamGraphParserDOT.class);
+			put("gexf", GraphstreamGraphParserGEXF.class);
+			put("graphml", GraphstreamGraphParserGraphML.class);
+			put("gml", GraphstreamGraphParserGraphML.class);
 
-					put("tlp", GraphstreamGraphParserTLP.class);
-					put("tulip", GraphstreamGraphParserTLP.class);
-					put("ncol", GraphstreamGraphParserNCOL.class);
-					put("edge", GraphstreamGraphParserEdge.class);
-					put("dgs", GraphstreamGraphParserDGS.class);
+			put("tlp", GraphstreamGraphParserTLP.class);
+			put("tulip", GraphstreamGraphParserTLP.class);
+			put("ncol", GraphstreamGraphParserNCOL.class);
+			put("edge", GraphstreamGraphParserEdge.class);
+			put("dgs", GraphstreamGraphParserDGS.class);
 
-					// graphstream
-					put("graphstream.pajek", GraphstreamGraphParserPajek.class);
-					put("graphstream.net", GraphstreamGraphParserPajek.class);
-					put("graphstream.lgl", GraphstreamGraphParserLGL.class);
-					put("graphstream.dot", GraphstreamGraphParserDOT.class);
-					put("graphstream.gexf", GraphstreamGraphParserGEXF.class);
-					put("graphstream.graphml", GraphstreamGraphParserGraphML.class);
-					put("graphstream.gml", GraphstreamGraphParserGraphML.class);
-					put("graphstream.tlp", GraphstreamGraphParserTLP.class);
-					put("graphstream.tulip", GraphstreamGraphParserTLP.class);
-					put("graphstream.ncol", GraphstreamGraphParserNCOL.class);
-					put("graphstream.edge", GraphstreamGraphParserEdge.class);
-					put("graphstream.dgs", GraphstreamGraphParserDGS.class);
+			// graphstream
+			put("graphstream.pajek", GraphstreamGraphParserPajek.class);
+			put("graphstream.net", GraphstreamGraphParserPajek.class);
+			put("graphstream.lgl", GraphstreamGraphParserLGL.class);
+			put("graphstream.dot", GraphstreamGraphParserDOT.class);
+			put("graphstream.gexf", GraphstreamGraphParserGEXF.class);
+			put("graphstream.graphml", GraphstreamGraphParserGraphML.class);
+			put("graphstream.gml", GraphstreamGraphParserGraphML.class);
+			put("graphstream.tlp", GraphstreamGraphParserTLP.class);
+			put("graphstream.tulip", GraphstreamGraphParserTLP.class);
+			put("graphstream.ncol", GraphstreamGraphParserNCOL.class);
+			put("graphstream.edge", GraphstreamGraphParserEdge.class);
+			put("graphstream.dgs", GraphstreamGraphParserDGS.class);
 
-				}
-			};
+		}
+	};
 
 	/**
 	 * contains the name of parsers for automatic detection. Should only contain each parser one time. Also, should be
 	 * provided in the relevant order (more frequent formats first).
 	 */
-	private static final List<String> parsersForAutomaticDetection = new LinkedList<String>() {
+	private static final List<String> parsersForAutomaticDetection = new LinkedList<>() {
 
 		{
 			add("pajek");
@@ -119,16 +118,13 @@ public class AvailableGraphParsers {
 		if (res == null) {
 			// no singleton created
 			final Class<? extends IGraphParser> classLayout = name2parser.get(name);
-			if (classLayout == null) {
+			if (classLayout == null)
 				throw error(
 						"unknown parser name: " + name + "; please choose one of " + getAvailableLoaders().toString(),
 						scope);
-			}
 			try {
-				res = classLayout.newInstance();
-			} catch (final InstantiationException e) {
-				throw GamaRuntimeException.create(e, scope);
-			} catch (final IllegalAccessException e) {
+				res = classLayout.getConstructor().newInstance();
+			} catch (final Exception e) {
 				throw GamaRuntimeException.create(e, scope);
 			}
 			name2singleton.put(name, res);

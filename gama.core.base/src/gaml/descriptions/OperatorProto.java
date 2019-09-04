@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.OperatorProto.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.descriptions.OperatorProto.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -23,13 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.dev.utils.DEBUG;
-import gama.processor.annotations.ISymbolKind;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.depends_on;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.ISymbolKind;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.AbstractGamlAdditions;
@@ -130,8 +130,8 @@ public class OperatorProto extends AbstractProto {
 		if (method != null) {
 			final validator val = method.getAnnotation(validator.class);
 			try {
-				tempValidator = val != null ? val.value().newInstance() : null;
-			} catch (InstantiationException | IllegalAccessException e) {
+				tempValidator = val != null ? val.value().getConstructor().newInstance() : null;
+			} catch (Exception e) {
 				DEBUG.ERR("Error in creating the validator for operator " + name + " on method " + method);
 			}
 			final depends_on d = method.getAnnotation(depends_on.class);

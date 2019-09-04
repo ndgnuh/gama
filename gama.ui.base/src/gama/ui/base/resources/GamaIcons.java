@@ -32,7 +32,7 @@ import gama.ui.base.utils.WorkbenchHelper;
  */
 public class GamaIcons {
 
-	public static final String PLUGIN_ID = "gama.ui.base.shared";
+	public static final String PLUGIN_ID = "gama.ui.base";
 
 	static private GamaIcons instance = new GamaIcons();
 

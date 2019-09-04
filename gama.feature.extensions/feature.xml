@@ -54,13 +54,6 @@
          unpack="false"/>
 
    <plugin
-         id="gama.extensions.graph"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="gama.extensions.maths"
          download-size="0"
          install-size="0"

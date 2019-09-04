@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.SkillDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.descriptions.SkillDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,6 +10,7 @@
  ********************************************************************************************************/
 package gaml.descriptions;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -37,7 +38,7 @@ public class SkillDescription extends TypeDescription {
 	}
 
 	@Override
-	public Class getJavaBase() {
+	public Class<? extends ISkill> getJavaBase() {
 		return javaBase;
 	}
 
@@ -58,7 +59,7 @@ public class SkillDescription extends TypeDescription {
 	}
 
 	@Override
-	public boolean visitChildren(final DescriptionVisitor visitor) {
+	public boolean visitChildren(final DescriptionVisitor<IDescription> visitor) {
 		return visitOwnChildren(visitor);
 	}
 
@@ -75,9 +76,10 @@ public class SkillDescription extends TypeDescription {
 	public Skill createInstance() {
 		Skill instance = null;
 		try {
-			instance = (Skill) getJavaBase().newInstance();
+			instance = (Skill) getJavaBase().getConstructor().newInstance();
 			instance.setDescription(this);
-		} catch (InstantiationException | IllegalAccessException e) {}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {}
 		return instance;
 	}
 
@@ -140,9 +142,11 @@ public class SkillDescription extends TypeDescription {
 
 	public String getDeprecated() {
 		final doc d = getDocAnnotation();
-		if (d == null) { return null; }
+		if (d == null)
+			return null;
 		final String s = d.deprecated();
-		if (s == null || s.isEmpty()) { return null; }
+		if (s == null || s.isEmpty())
+			return null;
 		return s;
 	}
 

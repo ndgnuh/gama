@@ -1546,10 +1546,10 @@ public class CsvReader {
 	/**
 	 *
 	 */
-	@Override
-	protected void finalize() {
-		close(false);
-	}
+	// @Override
+	// protected void finalize() {
+	// close(false);
+	// }
 
 	private class ComplexEscape {
 

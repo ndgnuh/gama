@@ -26,9 +26,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
-import gama.ui.base.utils.WorkbenchHelper;
 import gama.common.interfaces.IStartupProgress;
 import gama.runtime.GAMA;
+import gama.ui.base.utils.WorkbenchHelper;
 
 public class Splash implements IStartupProgress {
 
@@ -56,7 +56,7 @@ public class Splash implements IStartupProgress {
 					}
 
 				});
-				schedule(1000);
+				schedule(100);
 			}
 			return Status.OK_STATUS;
 		}
@@ -69,7 +69,7 @@ public class Splash implements IStartupProgress {
 
 	public ImageDescriptor getImageDescriptor() {
 		try {
-			return createFromURL(resolve(new URL("platform:/plugin/gama.ui.base.shared/welcome/splash3.png")));
+			return createFromURL(resolve(new URL("platform:/plugin/gama.ui.base/welcome/splash4.png")));
 		} catch (final IOException e) {
 			return null;
 		}

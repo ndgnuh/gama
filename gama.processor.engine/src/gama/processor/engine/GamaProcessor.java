@@ -118,7 +118,6 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 	}
 
 	protected static void writeImmutableHeader(final StringBuilder sb) {
-		sb.append("package ").append(PACKAGE_NAME).append(';');
 		for (final String element : IMPORTS) {
 			sb.append(ln).append("import ").append(element).append(".*;");
 		}
@@ -128,7 +127,7 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		sb.append(ln).append("import static gaml.operators.Cast.*;");
 		sb.append(ln).append("import static gaml.operators.Spatial.*;");
 		sb.append(ln).append("import static gama.common.interfaces.IKeyword.*;");
-		sb.append(ln).append("	@SuppressWarnings({ \"rawtypes\", \"unchecked\", \"unused\" })");
+		sb.append(ln).append("@SuppressWarnings({ \"rawtypes\", \"unchecked\", \"unused\" })");
 		sb.append(ln).append(ln).append("public class GamlAdditions extends gaml.compilation.AbstractGamlAdditions")
 				.append(" {");
 		sb.append(ln).append(tab);
@@ -149,7 +148,9 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 	}
 
 	public StringBuilder writeJavaBody() {
-		final StringBuilder sb = new StringBuilder(JAVA_HEADER);
+		final StringBuilder sb = new StringBuilder();
+		sb.append("package ").append(PACKAGE_NAME).append(".").append(context.shortcut).append(';');
+		sb.append(ln).append(JAVA_HEADER);
 		writeMutableHeader(sb);
 		processors.values().forEach(p -> {
 			if (p.outputToJava() && p.hasElements()) {

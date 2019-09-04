@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.util.graph.writer.AvailableGraphWriters.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.util.graph.writer.AvailableGraphWriters.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -28,7 +28,7 @@ import gama.runtime.scope.IScope;
 public class AvailableGraphWriters {
 
 	private static final Map<String, Class<? extends IGraphWriter>> name2writer =
-			new HashMap<String, Class<? extends IGraphWriter>>() {
+			new HashMap<>() {
 
 				{
 
@@ -96,14 +96,11 @@ public class AvailableGraphWriters {
 		if (res == null) {
 			// no singleton created
 			final Class<? extends IGraphWriter> classWriter = name2writer.get(name);
-			if (classWriter == null) {
+			if (classWriter == null)
 				throw error("Unknown writer: " + name + "; please choose one of " + getAvailableWriters(), scope);
-			}
 			try {
-				res = classWriter.newInstance();
-			} catch (final InstantiationException e) {
-				throw GamaRuntimeException.create(e, scope);
-			} catch (final IllegalAccessException e) {
+				res = classWriter.getConstructor().newInstance();
+			} catch (final Exception e) {
 				throw GamaRuntimeException.create(e, scope);
 			}
 			name2singleton.put(name, res);

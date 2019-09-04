@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.interfaces.IGui.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.common.interfaces.IGui.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -20,9 +20,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import gama.common.interfaces.outputs.IDisplayOutput;
 import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import gama.kernel.simulation.SimulationAgent;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
@@ -58,29 +58,28 @@ public interface IGui {
 	int MouseHover = 32;
 
 	Map<String, DisplayDescription> DISPLAYS = GamaMapFactory.createUnordered();
-	String MONITOR_VIEW_ID = "ummisco.gama.application.view.MonitorView";
-	String INTERACTIVE_CONSOLE_VIEW_ID = "ummisco.gama.application.view.InteractiveConsoleView";
-	String AGENT_VIEW_ID = "ummisco.gama.application.view.AgentInspectView";
-	String TABLE_VIEW_ID = "ummisco.gama.application.view.TableAgentInspectView";
-	String LAYER_VIEW_ID = "ummisco.gama.application.view.LayeredDisplayView";
-	String GL_LAYER_VIEW_ID = "ummisco.gama.application.view.OpenGLDisplayView";
-	String GL_LAYER_VIEW_ID2 = "ummisco.gama.application.view.OpenGLDisplayView2";
+	String MONITOR_VIEW_ID = "gama.core.application.view.MonitorView";
+	String INTERACTIVE_CONSOLE_VIEW_ID = "gama.core.application.view.InteractiveConsoleView";
+	String AGENT_VIEW_ID = "gama.core.application.view.AgentInspectView";
+	String TABLE_VIEW_ID = "gama.core.application.view.TableAgentInspectView";
+	String LAYER_VIEW_ID = "gama.core.application.view.LayeredDisplayView";
+	String GL_LAYER_VIEW_ID = "gama.core.application.view.OpenGLDisplayView";
+	String GL_LAYER_VIEW_ID2 = "gama.core.application.view.OpenGLDisplayView2";
 
-	String ERROR_VIEW_ID = "ummisco.gama.application.view.ErrorView";
-	String TEST_VIEW_ID = "ummisco.gama.application.view.TestView";
-	String PARAMETER_VIEW_ID = "ummisco.gama.application.view.ParameterView";
-
+	String ERROR_VIEW_ID = "gama.core.application.view.ErrorView";
+	String TEST_VIEW_ID = "gama.core.application.view.TestView";
+	String PARAMETER_VIEW_ID = "gama.core.application.view.ParameterView";
+	String CONSOLE_VIEW_ID = "gama.core.application.view.ConsoleView";
+	String USER_CONTROL_VIEW_ID = "gama.core.application.view.userControlView";
 	String NAVIGATOR_VIEW_ID = "gama.gui.view.GamaNavigator";
 	String NAVIGATOR_LIGHTWEIGHT_DECORATOR_ID = "gama.application.decorator";
-	String CONSOLE_VIEW_ID = "ummisco.gama.application.view.ConsoleView";
-	String USER_CONTROL_VIEW_ID = "gama.views.userControlView";
 
 	String PAUSED = "STOPPED";
 	String FINISHED = "FINISHED";
 	String RUNNING = "RUNNING";
 	String NOTREADY = "NOTREADY";
-
 	String NONE = "NONE";
+
 	String PERSPECTIVE_MODELING_ID = "gama.application.perspectives.ModelingPerspective";
 
 	IStatusDisplayer getStatus(IScope scope);

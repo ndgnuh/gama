@@ -62,7 +62,7 @@ public class WorkspaceManager {
 	public static String getCurrentGamaStampString() {
 		String gamaStamp = null;
 		try {
-			final URL tmpURL = new URL("platform:/plugin/gama.models/models/");
+			final URL tmpURL = new URL("platform:/plugin/gama.core.models/models/");
 			final URL resolvedFileURL = FileLocator.toFileURL(tmpURL);
 			// We need to use the 3-arg constructor of URI in order to properly escape file system chars
 			final URI resolvedURI = new URI(resolvedFileURL.getProtocol(), resolvedFileURL.getPath(), null).normalize();
@@ -164,23 +164,19 @@ public class WorkspaceManager {
 					}
 				}
 
-				if ( !f.exists() ) {
+				if ( !f.exists() )
 					return "The selected directory does not exist";
-				} else {
-					return null;
-				}
+				else return null;
 			}
 		}
 
-		if ( !f.canRead() ) {
+		if ( !f.canRead() )
 			// scope.getGui().debug("The selected directory is not readable");
 			return "The selected directory is not readable";
-		}
 
-		if ( !f.isDirectory() ) {
+		if ( !f.isDirectory() )
 			// scope.getGui().debug("The selected path is not a directory");
 			return "The selected path is not a directory";
-		}
 
 		testWorkspaceSanity(f);
 
@@ -198,16 +194,16 @@ public class WorkspaceManager {
 					} catch (final Exception err) {
 						return "Error creating directories, please check folder permissions";
 					}
-				} else {
-					return "Please select a directory for your workspace";
-				}
+				} else return "Please select a directory for your workspace";
 
-				if ( !wsTest.exists() ) { return "The selected directory does not exist"; }
+				if ( !wsTest.exists() )
+					return "The selected directory does not exist";
 
 				return null;
 			}
 		} else {
-			if ( !wsTest.exists() ) { return "The selected directory is not a workspace directory"; }
+			if ( !wsTest.exists() )
+				return "The selected directory is not a workspace directory";
 		}
 		final File dotFile = new File(workspaceLocation + File.separator + getModelIdentifier());
 		if ( !dotFile.exists() ) {
@@ -228,7 +224,8 @@ public class WorkspaceManager {
 		} else if ( cloning ) {
 			final boolean b = GAMA.getGui().confirm("Existing workspace",
 				"The path entered is a path to an existing workspace. All its contents will be erased and replaced by the current workspace contents. Proceed anyway ?");
-			if ( !b ) { return ""; }
+			if ( !b )
+				return "";
 		}
 		return null;
 	}
@@ -236,7 +233,8 @@ public class WorkspaceManager {
 	public static boolean testWorkspaceSanity(final File workspace) {
 		DEBUG.OUT("[GAMA] Checking for workspace sanity");
 		File[] files = workspace.listFiles((FileFilter) file -> file.getName().equals(".metadata"));
-		if ( files == null || files.length == 0 ) { return true; }
+		if ( files == null || files.length == 0 )
+			return true;
 		final File[] logs = files[0].listFiles((FileFilter) file -> file.getName().contains(".log"));
 		if ( logs != null ) {
 			for ( final File log : logs ) {
@@ -244,15 +242,21 @@ public class WorkspaceManager {
 			}
 		}
 		files = files[0].listFiles((FileFilter) file -> file.getName().equals(".plugins"));
-		if ( files == null ) { return false; }
-		if ( files.length == 0 ) { return true; }
+		if ( files == null )
+			return false;
+		if ( files.length == 0 )
+			return true;
 		files = files[0].listFiles((FileFilter) file -> file.getName().equals("org.eclipse.core.resources"));
-		if ( files == null ) { return false; }
-		if ( files.length == 0 ) { return true; }
+		if ( files == null )
+			return false;
+		if ( files.length == 0 )
+			return true;
 		files = files[0].listFiles((FileFilter) file -> file.getName().contains("snap"));
-		if ( files == null ) { return false; }
+		if ( files == null )
+			return false;
 		DEBUG.OUT("[GAMA] Workspace appears to be " + (files.length == 0 ? "clean" : "corrupted"));
-		if ( files.length == 0 ) { return true; }
+		if ( files.length == 0 )
+			return true;
 		if ( GAMA.getGui().confirm("Corrupted workspace",
 			"The workspace appears to be corrupted (due to a previous crash) or it is currently used by another instance of the platform. Would you like GAMA to clean it ? Once it is done, the platform will restart to complete the cleaning process.") ) {
 			for ( final File file : files ) {
@@ -358,7 +362,8 @@ public class WorkspaceManager {
 
 	public static Preferences getSystemWidePreferences() {
 		try {
-			if ( Preferences.userRoot().nodeExists("gama") ) { return Preferences.userRoot().node("gama"); }
+			if ( Preferences.userRoot().nodeExists("gama") )
+				return Preferences.userRoot().node("gama");
 		} catch (final BackingStoreException e1) {
 			e1.printStackTrace();
 		}

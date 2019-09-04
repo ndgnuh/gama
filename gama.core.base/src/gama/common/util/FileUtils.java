@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.util.FileUtils.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.common.util.FileUtils.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -73,11 +73,11 @@ import gama.util.file.CacheLocationProvider;
 @SuppressWarnings ("deprecation")
 public class FileUtils {
 
-	public final static String GAMA_NATURE = "gama.application.gamaNature";
+	public final static String GAMA_NATURE = "gama.core.application.gamaNature";
 	public final static String XTEXT_NATURE = "org.eclipse.xtext.ui.shared.xtextNature";
-	public final static String PLUGIN_NATURE = "gama.application.pluginNature";
-	public final static String TEST_NATURE = "gama.application.testNature";
-	public final static String BUILTIN_NATURE = "gama.application.builtinNature";
+	public final static String PLUGIN_NATURE = "gama.core.application.pluginNature";
+	public final static String TEST_NATURE = "gama.core.application.testNature";
+	public final static String BUILTIN_NATURE = "gama.core.application.builtinNature";
 
 	public static final QualifiedName BUILTIN_PROPERTY = new QualifiedName("gama.builtin", "models");
 	public static ThreadLocal<Webb> WEB = ThreadLocal.withInitial(() -> Webb.create());

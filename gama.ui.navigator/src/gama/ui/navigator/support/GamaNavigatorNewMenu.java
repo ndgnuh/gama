@@ -35,7 +35,7 @@ public class GamaNavigatorNewMenu extends GamaNavigatorMenu { // NO_UCD (unused 
 
 		@Override
 		public void widgetSelected(final SelectionEvent e) {
-			openWizard("msi.gama.gui.wizards.NewFileWizard", selection);
+			openWizard("gama.gui.wizards.NewFileWizard", selection);
 		}
 
 	};
@@ -44,7 +44,7 @@ public class GamaNavigatorNewMenu extends GamaNavigatorMenu { // NO_UCD (unused 
 
 		@Override
 		public void widgetSelected(final SelectionEvent e) {
-			openWizard("msi.gama.gui.wizards.NewExperimentWizard", selection);
+			openWizard("gama.gui.wizards.NewExperimentWizard", selection);
 		}
 
 	};
@@ -53,7 +53,7 @@ public class GamaNavigatorNewMenu extends GamaNavigatorMenu { // NO_UCD (unused 
 
 		@Override
 		public void widgetSelected(final SelectionEvent e) {
-			openWizard("msi.gama.gui.wizards.newProjectWizard", selection);
+			openWizard("gama.gui.wizards.newProjectWizard", selection);
 		}
 
 	};
@@ -70,7 +70,7 @@ public class GamaNavigatorNewMenu extends GamaNavigatorMenu { // NO_UCD (unused 
 
 		@Override
 		public void widgetSelected(final SelectionEvent e) {
-			openWizard("msi.gama.gui.wizards.NewTestExperimentWizard", selection);
+			openWizard("Ògama.gui.wizards.NewTestExperimentWizard", selection);
 		}
 
 	};
