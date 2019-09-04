@@ -13,7 +13,7 @@
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
-		<nature>gama.application.gamaNature</nature>
-		<nature>gama.application.testNature</nature>
+		<nature>gama.core.application.gamaNature</nature>
+		<nature>gama.core.application.testNature</nature>
 	</natures>
 </projectDescription>
