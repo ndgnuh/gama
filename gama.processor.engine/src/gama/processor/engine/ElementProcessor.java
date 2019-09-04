@@ -38,6 +38,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	static final Pattern CLASS_PARAM = Pattern.compile("<.*?>");
 	static final Pattern SINGLE_QUOTE = Pattern.compile("\"");
 	static final String QUOTE_MATCHER = Matcher.quoteReplacement("\\\"");
+	public static final Map<String, String> javaClassNamesToGamlTypes = new HashMap<>();
+	public static final Map<Integer, String> typeIndicesToGamlTypes = new HashMap<>();
 	protected String initializationMethodName;
 
 	public ElementProcessor() {}
@@ -320,6 +322,94 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 	protected String toBoolean(final boolean b) {
 		return b ? "T" : "F";
+	}
+
+	public static void addType(final String symbol, final int index, final Object... classes) {
+		typeIndicesToGamlTypes.put(index, symbol);
+		for (Object className : classes) {
+			javaClassNamesToGamlTypes.put(className.toString(), symbol);
+		}
+	}
+
+	public static String getProperType(final String rawName) {
+
+		// Get only the first <
+		final String[] splitByLeftBracket = rawName.split("<", 2);
+
+		// Stop criteria: no bracket
+		if (splitByLeftBracket.length == 1) {
+			String type = splitByLeftBracket[0];
+			if (javaClassNamesToGamlTypes.containsKey(type))
+				return javaClassNamesToGamlTypes.get(type);
+			else {
+				for (String key : javaClassNamesToGamlTypes.keySet()) {
+					if (key.endsWith(rawName) || rawName.endsWith(key))
+						return javaClassNamesToGamlTypes.get(key);
+				}
+			}
+
+			return "unknown";
+		} else if (splitByLeftBracket.length == 2) {
+			final String leftElement = getProperType(splitByLeftBracket[0]);
+
+			final String lastString = splitByLeftBracket[1];
+			splitByLeftBracket[1] = lastString.substring(0, lastString.length() - 1);
+
+			// Get only the first ","
+			final int comaIndex = findCentralComa(splitByLeftBracket[1]);
+			if (comaIndex > 0)
+				return leftElement + "<" + getProperType(splitByLeftBracket[1].substring(0, comaIndex)) + ","
+						+ getProperType(splitByLeftBracket[1].substring(comaIndex + 1)) + ">";
+			else
+				return leftElement + "<" + getProperType(splitByLeftBracket[1]) + ">";
+		} else
+			throw new IllegalArgumentException("getProperType has a not appropriate input");
+
+	}
+
+	public static int findCentralComa(final String s) {
+		int foundIndex = 0;
+
+		if (s.contains(",")) {
+			foundIndex = s.indexOf(",", 0);
+
+			do {
+				final String sLeft = s.substring(0, foundIndex);
+
+				if (sLeft.lastIndexOf("<") == -1 && sLeft.lastIndexOf(">") == -1)
+					return foundIndex;
+				else if (sLeft.lastIndexOf(">") > sLeft.lastIndexOf("<"))
+					return foundIndex;
+
+				foundIndex = s.indexOf(",", foundIndex + 1);
+
+			} while (foundIndex >= 0);
+			return -1;
+		}
+		return -1;
+	}
+
+	public static String getTypeString(final int type) {
+		String result = typeIndicesToGamlTypes.get(type);
+		if (result == null)
+			return "unknown";
+		return result;
+	}
+
+	public static String getTypeString(final int[] types) {
+		final StringBuilder s = new StringBuilder(30);
+		s.append(types.length < 2 ? "" : "any type in [");
+		for (int i = 0; i < types.length; i++) {
+			s.append(getTypeString(types[i]));
+
+			if (i != types.length - 1) {
+				s.append(", ");
+			}
+		}
+		if (types.length >= 2) {
+			s.append("]");
+		}
+		return s.toString();
 	}
 
 }

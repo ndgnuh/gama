@@ -98,9 +98,6 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		}
 		// We pass the current document of the documentation processor to avoir re-reading it
 		final DocProcessor dp = (DocProcessor) processors.get(doc.class);
-		// context.emit(Kind.NOTE,
-		// " GAML Tests: lone tests serialization took " + (System.currentTimeMillis() - begin) + "ms",
-		// (Element) null);
 		ExamplesToTests.createTests(context, dp.document);
 	}
 
