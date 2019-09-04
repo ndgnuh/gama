@@ -9,11 +9,11 @@ Require-Bundle: gama.core.ext,
  org.eclipse.swt,
  org.eclipse.ui;bundle-version="3.8.2",
  gama.ui.base,
- gama.ui.experiment;bundle-version="1.7.0",
- gama.core.application;bundle-version="1.7.0",
+ gama.ui.experiment,
+ gama.core.application,
  com.google.guava,
  gama.processor.annotations,
- gama.core.outputs;bundle-version="1.9.0"
+ gama.core.outputs
 Bundle-ActivationPolicy: lazy
 Import-Package: org.locationtech.jts.geom,
  org.apache.commons.lang;version="2.6.0",

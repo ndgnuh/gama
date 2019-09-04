@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.runtime.GAMA.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
- * platform (v. 1.8)
+ * gama.runtime.GAMA.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation platform
+ * (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -58,7 +58,7 @@ public class GAMA {
 		DEBUG.ON();
 	}
 
-	public final static String VERSION = "GAMA 1.9";
+	public final static String VERSION = "GAMA 2.0";
 	public static final String _WARNINGS = "warnings";
 	private static volatile PlatformAgent agent;
 	private static Benchmark benchmarkAgent;

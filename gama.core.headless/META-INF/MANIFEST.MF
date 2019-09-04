@@ -11,7 +11,7 @@ Require-Bundle: gama.core.base,
  gama.extensions.traffic,
  gama.extensions.maths,
  gama.extensions.database,
- gama.core.application;bundle-version="1.9.0",
+ gama.core.application,
  gama.core.base,
  gama.core.lang
 Bundle-ActivationPolicy: lazy
