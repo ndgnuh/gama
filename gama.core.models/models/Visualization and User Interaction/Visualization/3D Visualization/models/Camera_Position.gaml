@@ -20,7 +20,7 @@ species object skills:[moving]{
 		do wander;
 	}
 	aspect default {
-		draw sphere(1) at:location color:°white border:#gray;
+		draw sphere(1) at:location color:#white border:#gray;
     }
 }
 

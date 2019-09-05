@@ -232,7 +232,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getGamlDefinition()
    * @generated
    */
-  int GAML_DEFINITION = 37;
+  int GAML_DEFINITION = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -260,7 +260,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVarDefinition()
    * @generated
    */
-  int VAR_DEFINITION = 40;
+  int VAR_DEFINITION = 38;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -393,22 +393,13 @@ public interface GamlPackage extends EPackage
   int HEADLESS_EXPERIMENT__KEY = 0;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int HEADLESS_EXPERIMENT__FIRST_FACET = 1;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int HEADLESS_EXPERIMENT__NAME = 2;
+  int HEADLESS_EXPERIMENT__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Import URI</b></em>' attribute.
@@ -417,7 +408,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int HEADLESS_EXPERIMENT__IMPORT_URI = 3;
+  int HEADLESS_EXPERIMENT__IMPORT_URI = 2;
 
   /**
    * The feature id for the '<em><b>Facets</b></em>' containment reference list.
@@ -426,7 +417,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int HEADLESS_EXPERIMENT__FACETS = 4;
+  int HEADLESS_EXPERIMENT__FACETS = 3;
 
   /**
    * The feature id for the '<em><b>Block</b></em>' containment reference.
@@ -435,7 +426,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int HEADLESS_EXPERIMENT__BLOCK = 5;
+  int HEADLESS_EXPERIMENT__BLOCK = 4;
 
   /**
    * The number of structural features of the '<em>Headless Experiment</em>' class.
@@ -444,7 +435,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int HEADLESS_EXPERIMENT_FEATURE_COUNT = 6;
+  int HEADLESS_EXPERIMENT_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.StatementImpl <em>Statement</em>}' class.
@@ -466,22 +457,13 @@ public interface GamlPackage extends EPackage
   int STATEMENT__KEY = 0;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__FIRST_FACET = 1;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATEMENT__EXPR = 2;
+  int STATEMENT__EXPR = 1;
 
   /**
    * The feature id for the '<em><b>Facets</b></em>' containment reference list.
@@ -490,7 +472,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATEMENT__FACETS = 3;
+  int STATEMENT__FACETS = 2;
 
   /**
    * The feature id for the '<em><b>Block</b></em>' containment reference.
@@ -499,7 +481,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATEMENT__BLOCK = 4;
+  int STATEMENT__BLOCK = 3;
 
   /**
    * The number of structural features of the '<em>Statement</em>' class.
@@ -508,7 +490,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATEMENT_FEATURE_COUNT = 5;
+  int STATEMENT_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_GlobalImpl <em>SGlobal</em>}' class.
@@ -528,15 +510,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SGLOBAL__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SGLOBAL__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -592,15 +565,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SSPECIES__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSPECIES__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -667,15 +631,6 @@ public interface GamlPackage extends EPackage
   int SEXPERIMENT__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEXPERIMENT__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -740,15 +695,6 @@ public interface GamlPackage extends EPackage
   int SDO__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDO__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -802,15 +748,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SDECLARATION__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDECLARATION__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -877,15 +814,6 @@ public interface GamlPackage extends EPackage
   int SLOOP__KEY = SDECLARATION__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SLOOP__FIRST_FACET = SDECLARATION__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -948,15 +876,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SIF__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SIF__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1023,15 +942,6 @@ public interface GamlPackage extends EPackage
   int STRY__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRY__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1096,15 +1006,6 @@ public interface GamlPackage extends EPackage
   int SOTHER__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SOTHER__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1160,15 +1061,6 @@ public interface GamlPackage extends EPackage
   int SRETURN__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SRETURN__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1222,15 +1114,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SREFLEX__KEY = SDECLARATION__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SREFLEX__FIRST_FACET = SDECLARATION__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1295,15 +1178,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SDEFINITION__KEY = SDECLARATION__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDEFINITION__FIRST_FACET = SDECLARATION__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1388,15 +1262,6 @@ public interface GamlPackage extends EPackage
   int SASSIGNMENT__KEY = STATEMENT__KEY;
 
   /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SASSIGNMENT__FIRST_FACET = STATEMENT__FIRST_FACET;
-
-  /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1442,152 +1307,6 @@ public interface GamlPackage extends EPackage
   int SASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link gama.core.lang.gaml.impl.S_DirectAssignmentImpl <em>SDirect Assignment</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see gama.core.lang.gaml.impl.S_DirectAssignmentImpl
-   * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_DirectAssignment()
-   * @generated
-   */
-  int SDIRECT_ASSIGNMENT = 23;
-
-  /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__KEY = SASSIGNMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__FIRST_FACET = SASSIGNMENT__FIRST_FACET;
-
-  /**
-   * The feature id for the '<em><b>Expr</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__EXPR = SASSIGNMENT__EXPR;
-
-  /**
-   * The feature id for the '<em><b>Facets</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__FACETS = SASSIGNMENT__FACETS;
-
-  /**
-   * The feature id for the '<em><b>Block</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__BLOCK = SASSIGNMENT__BLOCK;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT__VALUE = SASSIGNMENT__VALUE;
-
-  /**
-   * The number of structural features of the '<em>SDirect Assignment</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDIRECT_ASSIGNMENT_FEATURE_COUNT = SASSIGNMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link gama.core.lang.gaml.impl.S_SetImpl <em>SSet</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see gama.core.lang.gaml.impl.S_SetImpl
-   * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Set()
-   * @generated
-   */
-  int SSET = 24;
-
-  /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__KEY = SASSIGNMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__FIRST_FACET = SASSIGNMENT__FIRST_FACET;
-
-  /**
-   * The feature id for the '<em><b>Expr</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__EXPR = SASSIGNMENT__EXPR;
-
-  /**
-   * The feature id for the '<em><b>Facets</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__FACETS = SASSIGNMENT__FACETS;
-
-  /**
-   * The feature id for the '<em><b>Block</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__BLOCK = SASSIGNMENT__BLOCK;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET__VALUE = SASSIGNMENT__VALUE;
-
-  /**
-   * The number of structural features of the '<em>SSet</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSET_FEATURE_COUNT = SASSIGNMENT_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_EquationsImpl <em>SEquations</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1595,7 +1314,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Equations()
    * @generated
    */
-  int SEQUATIONS = 25;
+  int SEQUATIONS = 23;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1605,15 +1324,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SEQUATIONS__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SEQUATIONS__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1677,7 +1387,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Solve()
    * @generated
    */
-  int SSOLVE = 26;
+  int SSOLVE = 24;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1687,15 +1397,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SSOLVE__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SSOLVE__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1741,7 +1442,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Display()
    * @generated
    */
-  int SDISPLAY = 27;
+  int SDISPLAY = 25;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1751,15 +1452,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SDISPLAY__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDISPLAY__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1814,7 +1506,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getspeciesOrGridDisplayStatement()
    * @generated
    */
-  int SPECIES_OR_GRID_DISPLAY_STATEMENT = 28;
+  int SPECIES_OR_GRID_DISPLAY_STATEMENT = 26;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -1824,15 +1516,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SPECIES_OR_GRID_DISPLAY_STATEMENT__KEY = STATEMENT__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SPECIES_OR_GRID_DISPLAY_STATEMENT__FIRST_FACET = STATEMENT__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -1878,7 +1561,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionArguments()
    * @generated
    */
-  int ACTION_ARGUMENTS = 29;
+  int ACTION_ARGUMENTS = 27;
 
   /**
    * The feature id for the '<em><b>Args</b></em>' containment reference list.
@@ -1906,7 +1589,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArgumentDefinition()
    * @generated
    */
-  int ARGUMENT_DEFINITION = 30;
+  int ARGUMENT_DEFINITION = 28;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1952,7 +1635,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getFacet()
    * @generated
    */
-  int FACET = 31;
+  int FACET = 29;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2007,7 +1690,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 32;
+  int EXPRESSION = 30;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -2026,7 +1709,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArgumentPair()
    * @generated
    */
-  int ARGUMENT_PAIR = 33;
+  int ARGUMENT_PAIR = 31;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2063,7 +1746,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getExpressionList()
    * @generated
    */
-  int EXPRESSION_LIST = 34;
+  int EXPRESSION_LIST = 32;
 
   /**
    * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
@@ -2091,7 +1774,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVariableRef()
    * @generated
    */
-  int VARIABLE_REF = 35;
+  int VARIABLE_REF = 33;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2119,7 +1802,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeInfo()
    * @generated
    */
-  int TYPE_INFO = 36;
+  int TYPE_INFO = 34;
 
   /**
    * The feature id for the '<em><b>First</b></em>' containment reference.
@@ -2156,7 +1839,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationDefinition()
    * @generated
    */
-  int EQUATION_DEFINITION = 38;
+  int EQUATION_DEFINITION = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2184,7 +1867,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeDefinition()
    * @generated
    */
-  int TYPE_DEFINITION = 39;
+  int TYPE_DEFINITION = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2212,7 +1895,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionDefinition()
    * @generated
    */
-  int ACTION_DEFINITION = 41;
+  int ACTION_DEFINITION = 39;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2240,7 +1923,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnitFakeDefinition()
    * @generated
    */
-  int UNIT_FAKE_DEFINITION = 42;
+  int UNIT_FAKE_DEFINITION = 40;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2268,7 +1951,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeFakeDefinition()
    * @generated
    */
-  int TYPE_FAKE_DEFINITION = 43;
+  int TYPE_FAKE_DEFINITION = 41;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2296,7 +1979,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionFakeDefinition()
    * @generated
    */
-  int ACTION_FAKE_DEFINITION = 44;
+  int ACTION_FAKE_DEFINITION = 42;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2324,7 +2007,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getSkillFakeDefinition()
    * @generated
    */
-  int SKILL_FAKE_DEFINITION = 45;
+  int SKILL_FAKE_DEFINITION = 43;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2352,7 +2035,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVarFakeDefinition()
    * @generated
    */
-  int VAR_FAKE_DEFINITION = 46;
+  int VAR_FAKE_DEFINITION = 44;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2380,7 +2063,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationFakeDefinition()
    * @generated
    */
-  int EQUATION_FAKE_DEFINITION = 47;
+  int EQUATION_FAKE_DEFINITION = 45;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2408,7 +2091,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTerminalExpression()
    * @generated
    */
-  int TERMINAL_EXPRESSION = 48;
+  int TERMINAL_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2436,7 +2119,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 49;
+  int STRING_LITERAL = 47;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2464,7 +2147,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Action()
    * @generated
    */
-  int SACTION = 50;
+  int SACTION = 48;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -2474,15 +2157,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SACTION__KEY = SDEFINITION__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SACTION__FIRST_FACET = SDEFINITION__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -2555,7 +2229,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Var()
    * @generated
    */
-  int SVAR = 51;
+  int SVAR = 49;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -2565,15 +2239,6 @@ public interface GamlPackage extends EPackage
    * @ordered
    */
   int SVAR__KEY = SDEFINITION__KEY;
-
-  /**
-   * The feature id for the '<em><b>First Facet</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__FIRST_FACET = SDEFINITION__FIRST_FACET;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -2646,7 +2311,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBinaryOperator()
    * @generated
    */
-  int BINARY_OPERATOR = 52;
+  int BINARY_OPERATOR = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2692,7 +2357,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIf()
    * @generated
    */
-  int IF = 53;
+  int IF = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2747,7 +2412,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnit()
    * @generated
    */
-  int UNIT = 54;
+  int UNIT = 52;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2793,7 +2458,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnary()
    * @generated
    */
-  int UNARY = 55;
+  int UNARY = 53;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2830,7 +2495,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getAccess()
    * @generated
    */
-  int ACCESS = 56;
+  int ACCESS = 54;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2876,7 +2541,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArray()
    * @generated
    */
-  int ARRAY = 57;
+  int ARRAY = 55;
 
   /**
    * The feature id for the '<em><b>Exprs</b></em>' containment reference.
@@ -2904,7 +2569,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getPoint()
    * @generated
    */
-  int POINT = 58;
+  int POINT = 56;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2959,7 +2624,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 59;
+  int FUNCTION = 57;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -3005,7 +2670,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 60;
+  int PARAMETER = 58;
 
   /**
    * The feature id for the '<em><b>Built In Facet Key</b></em>' attribute.
@@ -3051,7 +2716,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnitName()
    * @generated
    */
-  int UNIT_NAME = 61;
+  int UNIT_NAME = 59;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3079,7 +2744,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeRef()
    * @generated
    */
-  int TYPE_REF = 62;
+  int TYPE_REF = 60;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3116,7 +2781,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getSkillRef()
    * @generated
    */
-  int SKILL_REF = 63;
+  int SKILL_REF = 61;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3144,7 +2809,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionRef()
    * @generated
    */
-  int ACTION_REF = 64;
+  int ACTION_REF = 62;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3172,7 +2837,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationRef()
    * @generated
    */
-  int EQUATION_REF = 65;
+  int EQUATION_REF = 63;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -3200,7 +2865,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 66;
+  int INT_LITERAL = 64;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3228,7 +2893,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getDoubleLiteral()
    * @generated
    */
-  int DOUBLE_LITERAL = 67;
+  int DOUBLE_LITERAL = 65;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3256,7 +2921,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 68;
+  int BOOLEAN_LITERAL = 66;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3284,7 +2949,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getReservedLiteral()
    * @generated
    */
-  int RESERVED_LITERAL = 69;
+  int RESERVED_LITERAL = 67;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3517,17 +3182,6 @@ public interface GamlPackage extends EPackage
   EAttribute getHeadlessExperiment_Key();
 
   /**
-   * Returns the meta object for the attribute '{@link gama.core.lang.gaml.HeadlessExperiment#getFirstFacet <em>First Facet</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>First Facet</em>'.
-   * @see gama.core.lang.gaml.HeadlessExperiment#getFirstFacet()
-   * @see #getHeadlessExperiment()
-   * @generated
-   */
-  EAttribute getHeadlessExperiment_FirstFacet();
-
-  /**
    * Returns the meta object for the attribute '{@link gama.core.lang.gaml.HeadlessExperiment#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3591,17 +3245,6 @@ public interface GamlPackage extends EPackage
    * @generated
    */
   EAttribute getStatement_Key();
-
-  /**
-   * Returns the meta object for the attribute '{@link gama.core.lang.gaml.Statement#getFirstFacet <em>First Facet</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>First Facet</em>'.
-   * @see gama.core.lang.gaml.Statement#getFirstFacet()
-   * @see #getStatement()
-   * @generated
-   */
-  EAttribute getStatement_FirstFacet();
 
   /**
    * Returns the meta object for the containment reference '{@link gama.core.lang.gaml.Statement#getExpr <em>Expr</em>}'.
@@ -3820,26 +3463,6 @@ public interface GamlPackage extends EPackage
    * @generated
    */
   EReference getS_Assignment_Value();
-
-  /**
-   * Returns the meta object for class '{@link gama.core.lang.gaml.S_DirectAssignment <em>SDirect Assignment</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SDirect Assignment</em>'.
-   * @see gama.core.lang.gaml.S_DirectAssignment
-   * @generated
-   */
-  EClass getS_DirectAssignment();
-
-  /**
-   * Returns the meta object for class '{@link gama.core.lang.gaml.S_Set <em>SSet</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SSet</em>'.
-   * @see gama.core.lang.gaml.S_Set
-   * @generated
-   */
-  EClass getS_Set();
 
   /**
    * Returns the meta object for class '{@link gama.core.lang.gaml.S_Equations <em>SEquations</em>}'.
@@ -5021,14 +4644,6 @@ public interface GamlPackage extends EPackage
     EAttribute HEADLESS_EXPERIMENT__KEY = eINSTANCE.getHeadlessExperiment_Key();
 
     /**
-     * The meta object literal for the '<em><b>First Facet</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute HEADLESS_EXPERIMENT__FIRST_FACET = eINSTANCE.getHeadlessExperiment_FirstFacet();
-
-    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5077,14 +4692,6 @@ public interface GamlPackage extends EPackage
      * @generated
      */
     EAttribute STATEMENT__KEY = eINSTANCE.getStatement_Key();
-
-    /**
-     * The meta object literal for the '<em><b>First Facet</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATEMENT__FIRST_FACET = eINSTANCE.getStatement_FirstFacet();
 
     /**
      * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
@@ -5279,26 +4886,6 @@ public interface GamlPackage extends EPackage
      * @generated
      */
     EReference SASSIGNMENT__VALUE = eINSTANCE.getS_Assignment_Value();
-
-    /**
-     * The meta object literal for the '{@link gama.core.lang.gaml.impl.S_DirectAssignmentImpl <em>SDirect Assignment</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see gama.core.lang.gaml.impl.S_DirectAssignmentImpl
-     * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_DirectAssignment()
-     * @generated
-     */
-    EClass SDIRECT_ASSIGNMENT = eINSTANCE.getS_DirectAssignment();
-
-    /**
-     * The meta object literal for the '{@link gama.core.lang.gaml.impl.S_SetImpl <em>SSet</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see gama.core.lang.gaml.impl.S_SetImpl
-     * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Set()
-     * @generated
-     */
-    EClass SSET = eINSTANCE.getS_Set();
 
     /**
      * The meta object literal for the '{@link gama.core.lang.gaml.impl.S_EquationsImpl <em>SEquations</em>}' class.

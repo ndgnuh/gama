@@ -14,7 +14,6 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import gama.common.interfaces.IKeyword;
-import gaml.descriptions.ModelDescription;
 import gama.core.lang.gaml.Access;
 import gama.core.lang.gaml.ActionArguments;
 import gama.core.lang.gaml.ActionDefinition;
@@ -48,7 +47,6 @@ import gama.core.lang.gaml.S_Action;
 import gama.core.lang.gaml.S_Assignment;
 import gama.core.lang.gaml.S_Declaration;
 import gama.core.lang.gaml.S_Definition;
-import gama.core.lang.gaml.S_DirectAssignment;
 import gama.core.lang.gaml.S_Display;
 import gama.core.lang.gaml.S_Do;
 import gama.core.lang.gaml.S_Equations;
@@ -58,8 +56,6 @@ import gama.core.lang.gaml.S_If;
 import gama.core.lang.gaml.S_Loop;
 import gama.core.lang.gaml.S_Other;
 import gama.core.lang.gaml.S_Reflex;
-import gama.core.lang.gaml.S_Return;
-import gama.core.lang.gaml.S_Set;
 import gama.core.lang.gaml.S_Solve;
 import gama.core.lang.gaml.S_Species;
 import gama.core.lang.gaml.S_Var;
@@ -82,6 +78,7 @@ import gama.core.lang.gaml.VarFakeDefinition;
 import gama.core.lang.gaml.VariableRef;
 import gama.core.lang.gaml.speciesOrGridDisplayStatement;
 import gama.core.lang.gaml.util.GamlSwitch;
+import gaml.descriptions.ModelDescription;
 
 /**
  * GAML Qualified Name provider.
@@ -90,11 +87,12 @@ import gama.core.lang.gaml.util.GamlSwitch;
 public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractImpl {
 
 	private final static String NULL = "";
-	private final static GamlSwitch<String> SWITCH = new GamlSwitch<String>() {
+	private final static GamlSwitch<String> SWITCH = new GamlSwitch<>() {
 
 		@Override
 		public String caseS_Reflex(final S_Reflex s) {
-			if (s.getKey().equals(IKeyword.ASPECT)) { return s.getName(); }
+			if (s.getKey().equals(IKeyword.ASPECT))
+				return s.getName();
 			return NULL;
 		}
 
@@ -214,22 +212,7 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 		}
 
 		@Override
-		public String caseS_Return(final S_Return object) {
-			return NULL;
-		}
-
-		@Override
 		public String caseS_Assignment(final S_Assignment object) {
-			return NULL;
-		}
-
-		@Override
-		public String caseS_DirectAssignment(final S_DirectAssignment object) {
-			return NULL;
-		}
-
-		@Override
-		public String caseS_Set(final S_Set object) {
 			return NULL;
 		}
 
@@ -456,7 +439,8 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 	@Override
 	public QualifiedName getFullyQualifiedName(final EObject obj) {
 		final String string = SWITCH.doSwitch(obj);
-		if (string == null || string.isEmpty()) { return null; }
+		if (string == null || string.isEmpty())
+			return null;
 		return QualifiedName.create(string);
 
 	}

@@ -71,28 +71,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 
-import gama.core.lang.gaml.EGaml;
-import gama.core.lang.gaml.expression.ExpressionDescriptionBuilder;
-import gama.core.lang.gaml.resource.GamlResourceServices;
-import gama.processor.annotations.ISymbolKind;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.common.util.Collector;
-import gaml.compilation.ast.ISyntacticElement;
-import gaml.compilation.ast.SyntacticFactory;
-import gaml.compilation.ast.SyntacticModelElement;
-import gaml.compilation.ast.SyntacticModelElement.SyntacticExperimentModelElement;
-import gaml.compilation.factories.DescriptionFactory;
-import gaml.descriptions.ConstantExpressionDescription;
-import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.LabelExpressionDescription;
-import gaml.descriptions.OperatorExpressionDescription;
-import gaml.descriptions.SymbolProto;
-import gaml.statements.Facets;
 import gama.core.lang.gaml.Access;
 import gama.core.lang.gaml.ActionArguments;
 import gama.core.lang.gaml.ArgumentDefinition;
 import gama.core.lang.gaml.Block;
+import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.ExperimentFileStructure;
 import gama.core.lang.gaml.Expression;
 import gama.core.lang.gaml.ExpressionList;
@@ -116,7 +102,21 @@ import gama.core.lang.gaml.StandaloneBlock;
 import gama.core.lang.gaml.Statement;
 import gama.core.lang.gaml.TypeRef;
 import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.expression.ExpressionDescriptionBuilder;
 import gama.core.lang.gaml.impl.ModelImpl;
+import gama.core.lang.gaml.resource.GamlResourceServices;
+import gama.processor.annotations.ISymbolKind;
+import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.ast.SyntacticFactory;
+import gaml.compilation.ast.SyntacticModelElement;
+import gaml.compilation.ast.SyntacticModelElement.SyntacticExperimentModelElement;
+import gaml.compilation.factories.DescriptionFactory;
+import gaml.descriptions.ConstantExpressionDescription;
+import gaml.descriptions.IExpressionDescription;
+import gaml.descriptions.LabelExpressionDescription;
+import gaml.descriptions.OperatorExpressionDescription;
+import gaml.descriptions.SymbolProto;
+import gaml.statements.Facets;
 
 /**
  *
@@ -168,7 +168,8 @@ public class GamlSyntacticConverter {
 			convStatements(exp.getExperiment(), EGaml.getInstance().getStatementsOf(he.getBlock()), errors);
 			return exp;
 		}
-		if (!(root instanceof Model)) { return null; }
+		if (!(root instanceof Model))
+			return null;
 		final ModelImpl m = (ModelImpl) root;
 		final List<String> prgm = collectPragmas(m);
 		// final Object[] imps = collectImports(m);<>
@@ -200,12 +201,14 @@ public class GamlSyntacticConverter {
 	// }
 
 	private List<String> collectPragmas(final ModelImpl m) {
-		if (!m.eIsSet(GamlPackage.MODEL__PRAGMAS)) { return null; }
+		if (!m.eIsSet(GamlPackage.MODEL__PRAGMAS))
+			return null;
 		final List<Pragma> pragmas = m.getPragmas();
-		if (pragmas.isEmpty()) { return null; }
+		if (pragmas.isEmpty())
+			return null;
 		try (final Collector.AsList<String> result = Collector.newList()) {
-			for (int i = 0; i < pragmas.size(); i++) {
-				final String pragma = pragmas.get(i).getName();
+			for (Pragma pragma2 : pragmas) {
+				final String pragma = pragma2.getName();
 				result.add(pragma);
 			}
 			return result.items();
@@ -214,7 +217,8 @@ public class GamlSyntacticConverter {
 
 	private boolean doesNotDefineAttributes(final String keyword) {
 		final SymbolProto p = DescriptionFactory.getProto(keyword, null);
-		if (p == null) { return true; }
+		if (p == null)
+			return true;
 		final int kind = p.getKind();
 		return !STATEMENTS_WITH_ATTRIBUTES.contains(kind);
 	}
@@ -242,11 +246,9 @@ public class GamlSyntacticConverter {
 		// We catch its keyword
 		String keyword = EGaml.getInstance().getKeyOf(stm);
 
-		if (keyword == null) {
+		if (keyword == null)
 			throw new NullPointerException(
 					"Trying to convert a statement with a null keyword. Please debug to understand the cause.");
-		}
-
 		else {
 			keyword = convertKeyword(keyword, upper.getKeyword());
 		}
@@ -527,14 +529,14 @@ public class GamlSyntacticConverter {
 		}
 
 		// We add the "default" (or omissible) facet to the syntactic element
-		String def = stm.getFirstFacet();
-		if (def != null) {
-			if (def.endsWith(":")) {
-				def = def.substring(0, def.length() - 1);
-			}
-		} else {
-			def = DescriptionFactory.getOmissibleFacetForSymbol(keyword);
-		}
+		// String def = stm.getFirstFacet();
+		// if (def != null) {
+		// if (def.endsWith(":")) {
+		// def = def.substring(0, def.length() - 1);
+		// }
+		// } else {
+		String def = DescriptionFactory.getOmissibleFacetForSymbol(keyword);
+		// }
 		if (def != null && !def.isEmpty() && !elt.hasFacet(def)) {
 			final IExpressionDescription ed = findExpr(stm, errors);
 			if (ed != null) {
@@ -579,13 +581,15 @@ public class GamlSyntacticConverter {
 	}
 
 	private final IExpressionDescription convExpr(final EObject expr, final Set<Diagnostic> errors) {
-		if (expr == null) { return null; }
+		if (expr == null)
+			return null;
 		final IExpressionDescription result = builder.create(expr/* , errors */);
 		return result;
 	}
 
 	private final IExpressionDescription convExpr(final ISyntacticElement expr, final Set<Diagnostic> errors) {
-		if (expr == null) { return null; }
+		if (expr == null)
+			return null;
 		final IExpressionDescription result = builder.create(expr, errors);
 		return result;
 	}
@@ -603,12 +607,12 @@ public class GamlSyntacticConverter {
 				convertBlock(elt, b, errors);
 				return convExpr(elt, errors);
 			}
-			if (expr != null) {
+			if (expr != null)
 				return label ? convertToLabel(expr, EGaml.getInstance().getKeyOf(expr)) : convExpr(expr, errors);
-			}
 			final String name = facet.getName();
 			// TODO Verify the use of "facet"
-			if (name != null) { return convertToLabel(null, name); }
+			if (name != null)
+				return convertToLabel(null, name);
 		}
 		return null;
 	}
@@ -638,17 +642,21 @@ public class GamlSyntacticConverter {
 	}
 
 	private final IExpressionDescription findExpr(final Statement stm, final Set<Diagnostic> errors) {
-		if (stm == null) { return null; }
+		if (stm == null)
+			return null;
 		// The order below should be important
 		final String name = EGaml.getInstance().getNameOf(stm);
-		if (name != null) { return convertToLabel(stm, name); }
+		if (name != null)
+			return convertToLabel(stm, name);
 		final Expression expr = stm.getExpr();
-		if (expr != null) { return convExpr(expr, errors); }
+		if (expr != null)
+			return convExpr(expr, errors);
 		return null;
 	}
 
 	private final IExpressionDescription findExpr(final HeadlessExperiment stm, final Set<Diagnostic> errors) {
-		if (stm == null) { return null; }
+		if (stm == null)
+			return null;
 		// The order below should be important
 		return convertToLabel(stm, EGaml.getInstance().getNameOf(stm));
 

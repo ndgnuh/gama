@@ -542,25 +542,11 @@ ruleHeadlessExperiment returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='name:'
-				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getHeadlessExperimentAccess().getFirstFacetNameKeyword_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getHeadlessExperimentRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-				}
-			)
-		)?
-		(
-			(
 				(
 					{
-						newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getNameValid_IDParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getNameValid_IDParserRuleCall_1_0_0());
 					}
-					lv_name_2_1=ruleValid_ID
+					lv_name_1_1=ruleValid_ID
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getHeadlessExperimentRule());
@@ -568,14 +554,14 @@ ruleHeadlessExperiment returns [EObject current=null]
 						set(
 							$current,
 							"name",
-							lv_name_2_1,
+							lv_name_1_1,
 							"gama.core.lang.Gaml.Valid_ID");
 						afterParserOrEnumRuleCall();
 					}
 					    |
-					lv_name_2_2=RULE_STRING
+					lv_name_1_2=RULE_STRING
 					{
-						newLeafNode(lv_name_2_2, grammarAccess.getHeadlessExperimentAccess().getNameSTRINGTerminalRuleCall_2_0_1());
+						newLeafNode(lv_name_1_2, grammarAccess.getHeadlessExperimentAccess().getNameSTRINGTerminalRuleCall_1_0_1());
 					}
 					{
 						if ($current==null) {
@@ -584,22 +570,22 @@ ruleHeadlessExperiment returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"name",
-							lv_name_2_2,
+							lv_name_1_2,
 							"gama.core.lang.Gaml.STRING");
 					}
 				)
 			)
 		)
 		(
-			otherlv_3='model:'
+			otherlv_2='model:'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getHeadlessExperimentAccess().getModelKeyword_3_0());
+				newLeafNode(otherlv_2, grammarAccess.getHeadlessExperimentAccess().getModelKeyword_2_0());
 			}
 			(
 				(
-					lv_importURI_4_0=RULE_STRING
+					lv_importURI_3_0=RULE_STRING
 					{
-						newLeafNode(lv_importURI_4_0, grammarAccess.getHeadlessExperimentAccess().getImportURISTRINGTerminalRuleCall_3_1_0());
+						newLeafNode(lv_importURI_3_0, grammarAccess.getHeadlessExperimentAccess().getImportURISTRINGTerminalRuleCall_2_1_0());
 					}
 					{
 						if ($current==null) {
@@ -608,7 +594,7 @@ ruleHeadlessExperiment returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"importURI",
-							lv_importURI_4_0,
+							lv_importURI_3_0,
 							"gama.core.lang.Gaml.STRING");
 					}
 				)
@@ -617,9 +603,9 @@ ruleHeadlessExperiment returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getFacetsFacetParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getFacetsFacetParserRuleCall_3_0());
 				}
-				lv_facets_5_0=ruleFacet
+				lv_facets_4_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getHeadlessExperimentRule());
@@ -627,7 +613,7 @@ ruleHeadlessExperiment returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_5_0,
+						lv_facets_4_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -637,9 +623,9 @@ ruleHeadlessExperiment returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getBlockBlockParserRuleCall_5_0_0());
+						newCompositeNode(grammarAccess.getHeadlessExperimentAccess().getBlockBlockParserRuleCall_4_0_0());
 					}
-					lv_block_6_0=ruleBlock
+					lv_block_5_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getHeadlessExperimentRule());
@@ -647,16 +633,16 @@ ruleHeadlessExperiment returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_6_0,
+							lv_block_5_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_7=';'
+			otherlv_6=';'
 			{
-				newLeafNode(otherlv_7, grammarAccess.getHeadlessExperimentAccess().getSemicolonKeyword_5_1());
+				newLeafNode(otherlv_6, grammarAccess.getHeadlessExperimentAccess().getSemicolonKeyword_4_1());
 			}
 		)
 	)
@@ -822,23 +808,9 @@ ruleS_Species returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='name:'
+				lv_name_1_0=RULE_ID
 				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_SpeciesAccess().getFirstFacetNameKeyword_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_SpeciesRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-				}
-			)
-		)?
-		(
-			(
-				lv_name_2_0=RULE_ID
-				{
-					newLeafNode(lv_name_2_0, grammarAccess.getS_SpeciesAccess().getNameIDTerminalRuleCall_2_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getS_SpeciesAccess().getNameIDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -847,7 +819,7 @@ ruleS_Species returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_2_0,
+						lv_name_1_0,
 						"gama.core.lang.Gaml.ID");
 				}
 			)
@@ -855,9 +827,9 @@ ruleS_Species returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_SpeciesAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_SpeciesAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_SpeciesRule());
@@ -865,7 +837,7 @@ ruleS_Species returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -875,9 +847,9 @@ ruleS_Species returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_SpeciesAccess().getBlockBlockParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getS_SpeciesAccess().getBlockBlockParserRuleCall_3_0_0());
 					}
-					lv_block_4_0=ruleBlock
+					lv_block_3_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_SpeciesRule());
@@ -885,16 +857,16 @@ ruleS_Species returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_4_0,
+							lv_block_3_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_5=';'
+			otherlv_4=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_SpeciesAccess().getSemicolonKeyword_4_1());
+				newLeafNode(otherlv_4, grammarAccess.getS_SpeciesAccess().getSemicolonKeyword_3_1());
 			}
 		)
 	)
@@ -937,25 +909,11 @@ ruleS_Experiment returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='name:'
-				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_ExperimentAccess().getFirstFacetNameKeyword_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_ExperimentRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-				}
-			)
-		)?
-		(
-			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_ExperimentAccess().getNameValid_IDParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getS_ExperimentAccess().getNameValid_IDParserRuleCall_1_0_0());
 					}
-					lv_name_2_1=ruleValid_ID
+					lv_name_1_1=ruleValid_ID
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_ExperimentRule());
@@ -963,14 +921,14 @@ ruleS_Experiment returns [EObject current=null]
 						set(
 							$current,
 							"name",
-							lv_name_2_1,
+							lv_name_1_1,
 							"gama.core.lang.Gaml.Valid_ID");
 						afterParserOrEnumRuleCall();
 					}
 					    |
-					lv_name_2_2=RULE_STRING
+					lv_name_1_2=RULE_STRING
 					{
-						newLeafNode(lv_name_2_2, grammarAccess.getS_ExperimentAccess().getNameSTRINGTerminalRuleCall_2_0_1());
+						newLeafNode(lv_name_1_2, grammarAccess.getS_ExperimentAccess().getNameSTRINGTerminalRuleCall_1_0_1());
 					}
 					{
 						if ($current==null) {
@@ -979,7 +937,7 @@ ruleS_Experiment returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"name",
-							lv_name_2_2,
+							lv_name_1_2,
 							"gama.core.lang.Gaml.STRING");
 					}
 				)
@@ -988,9 +946,9 @@ ruleS_Experiment returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_ExperimentAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_ExperimentAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_ExperimentRule());
@@ -998,7 +956,7 @@ ruleS_Experiment returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -1008,9 +966,9 @@ ruleS_Experiment returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_ExperimentAccess().getBlockBlockParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getS_ExperimentAccess().getBlockBlockParserRuleCall_3_0_0());
 					}
-					lv_block_4_0=ruleBlock
+					lv_block_3_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_ExperimentRule());
@@ -1018,16 +976,16 @@ ruleS_Experiment returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_4_0,
+							lv_block_3_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_5=';'
+			otherlv_4=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_ExperimentAccess().getSemicolonKeyword_4_1());
+				newLeafNode(otherlv_4, grammarAccess.getS_ExperimentAccess().getSemicolonKeyword_3_1());
 			}
 		)
 	)
@@ -1198,28 +1156,9 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getFirstFacetFirstFacetKeyParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getExprExpressionParserRuleCall_1_0());
 				}
-				lv_firstFacet_1_0=ruleFirstFacetKey
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getS_1Expr_Facets_BlockOrEndRule());
-					}
-					set(
-						$current,
-						"firstFacet",
-						lv_firstFacet_1_0,
-						"gama.core.lang.Gaml.FirstFacetKey");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getExprExpressionParserRuleCall_2_0());
-				}
-				lv_expr_2_0=ruleExpression
+				lv_expr_1_0=ruleExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_1Expr_Facets_BlockOrEndRule());
@@ -1227,7 +1166,7 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 					set(
 						$current,
 						"expr",
-						lv_expr_2_0,
+						lv_expr_1_0,
 						"gama.core.lang.Gaml.Expression");
 					afterParserOrEnumRuleCall();
 				}
@@ -1236,9 +1175,9 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_1Expr_Facets_BlockOrEndRule());
@@ -1246,7 +1185,7 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -1256,9 +1195,9 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getBlockBlockParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getBlockBlockParserRuleCall_3_0_0());
 					}
-					lv_block_4_0=ruleBlock
+					lv_block_3_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_1Expr_Facets_BlockOrEndRule());
@@ -1266,16 +1205,16 @@ ruleS_1Expr_Facets_BlockOrEnd returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_4_0,
+							lv_block_3_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_5=';'
+			otherlv_4=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getSemicolonKeyword_4_1());
+				newLeafNode(otherlv_4, grammarAccess.getS_1Expr_Facets_BlockOrEndAccess().getSemicolonKeyword_3_1());
 			}
 		)
 	)
@@ -1318,24 +1257,10 @@ ruleS_Do returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='action:'
 				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_DoAccess().getFirstFacetActionKeyword_1_0());
+					newCompositeNode(grammarAccess.getS_DoAccess().getExprAbstractRefParserRuleCall_1_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_DoRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "action:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_DoAccess().getExprAbstractRefParserRuleCall_2_0());
-				}
-				lv_expr_2_0=ruleAbstractRef
+				lv_expr_1_0=ruleAbstractRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_DoRule());
@@ -1343,7 +1268,7 @@ ruleS_Do returns [EObject current=null]
 					set(
 						$current,
 						"expr",
-						lv_expr_2_0,
+						lv_expr_1_0,
 						"gama.core.lang.Gaml.AbstractRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -1352,9 +1277,9 @@ ruleS_Do returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_DoAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_DoAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_DoRule());
@@ -1362,7 +1287,7 @@ ruleS_Do returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -1372,9 +1297,9 @@ ruleS_Do returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DoAccess().getBlockBlockParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getS_DoAccess().getBlockBlockParserRuleCall_3_0_0());
 					}
-					lv_block_4_0=ruleBlock
+					lv_block_3_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_DoRule());
@@ -1382,16 +1307,16 @@ ruleS_Do returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_4_0,
+							lv_block_3_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_5=';'
+			otherlv_4=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_DoAccess().getSemicolonKeyword_4_1());
+				newLeafNode(otherlv_4, grammarAccess.getS_DoAccess().getSemicolonKeyword_3_1());
 			}
 		)
 	)
@@ -1518,24 +1443,10 @@ ruleS_If returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='condition:'
 				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_IfAccess().getFirstFacetConditionKeyword_1_0());
+					newCompositeNode(grammarAccess.getS_IfAccess().getExprExpressionParserRuleCall_1_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_IfRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "condition:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_IfAccess().getExprExpressionParserRuleCall_2_0());
-				}
-				lv_expr_2_0=ruleExpression
+				lv_expr_1_0=ruleExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_IfRule());
@@ -1543,7 +1454,7 @@ ruleS_If returns [EObject current=null]
 					set(
 						$current,
 						"expr",
-						lv_expr_2_0,
+						lv_expr_1_0,
 						"gama.core.lang.Gaml.Expression");
 					afterParserOrEnumRuleCall();
 				}
@@ -1552,9 +1463,9 @@ ruleS_If returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_IfAccess().getBlockBlockParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_IfAccess().getBlockBlockParserRuleCall_2_0());
 				}
-				lv_block_3_0=ruleBlock
+				lv_block_2_0=ruleBlock
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_IfRule());
@@ -1562,7 +1473,7 @@ ruleS_If returns [EObject current=null]
 					set(
 						$current,
 						"block",
-						lv_block_3_0,
+						lv_block_2_0,
 						"gama.core.lang.Gaml.Block");
 					afterParserOrEnumRuleCall();
 				}
@@ -1571,18 +1482,18 @@ ruleS_If returns [EObject current=null]
 		(
 			(
 				('else')=>
-				otherlv_4='else'
+				otherlv_3='else'
 				{
-					newLeafNode(otherlv_4, grammarAccess.getS_IfAccess().getElseKeyword_4_0());
+					newLeafNode(otherlv_3, grammarAccess.getS_IfAccess().getElseKeyword_3_0());
 				}
 			)
 			(
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getS_IfAccess().getElseS_IfParserRuleCall_4_1_0_0());
+							newCompositeNode(grammarAccess.getS_IfAccess().getElseS_IfParserRuleCall_3_1_0_0());
 						}
-						lv_else_5_1=ruleS_If
+						lv_else_4_1=ruleS_If
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getS_IfRule());
@@ -1590,15 +1501,15 @@ ruleS_If returns [EObject current=null]
 							set(
 								$current,
 								"else",
-								lv_else_5_1,
+								lv_else_4_1,
 								"gama.core.lang.Gaml.S_If");
 							afterParserOrEnumRuleCall();
 						}
 						    |
 						{
-							newCompositeNode(grammarAccess.getS_IfAccess().getElseBlockParserRuleCall_4_1_0_1());
+							newCompositeNode(grammarAccess.getS_IfAccess().getElseBlockParserRuleCall_3_1_0_1());
 						}
-						lv_else_5_2=ruleBlock
+						lv_else_4_2=ruleBlock
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getS_IfRule());
@@ -1606,7 +1517,7 @@ ruleS_If returns [EObject current=null]
 							set(
 								$current,
 								"else",
-								lv_else_5_2,
+								lv_else_4_2,
 								"gama.core.lang.Gaml.Block");
 							afterParserOrEnumRuleCall();
 						}
@@ -1811,24 +1722,10 @@ ruleS_Return returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='value:'
 				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_ReturnAccess().getFirstFacetValueKeyword_1_0());
+					newCompositeNode(grammarAccess.getS_ReturnAccess().getExprExpressionParserRuleCall_1_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_ReturnRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "value:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_ReturnAccess().getExprExpressionParserRuleCall_2_0());
-				}
-				lv_expr_2_0=ruleExpression
+				lv_expr_1_0=ruleExpression
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_ReturnRule());
@@ -1836,15 +1733,15 @@ ruleS_Return returns [EObject current=null]
 					set(
 						$current,
 						"expr",
-						lv_expr_2_0,
+						lv_expr_1_0,
 						"gama.core.lang.Gaml.Expression");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)?
-		otherlv_3=';'
+		otherlv_2=';'
 		{
-			newLeafNode(otherlv_3, grammarAccess.getS_ReturnAccess().getSemicolonKeyword_3());
+			newLeafNode(otherlv_2, grammarAccess.getS_ReturnAccess().getSemicolonKeyword_2());
 		}
 	)
 ;
@@ -1961,54 +1858,38 @@ ruleS_Reflex returns [EObject current=null]
 		)
 		(
 			(
-				(
-					lv_firstFacet_1_0='name:'
-					{
-						newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_ReflexAccess().getFirstFacetNameKeyword_1_0_0());
+				{
+					newCompositeNode(grammarAccess.getS_ReflexAccess().getNameValid_IDParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleValid_ID
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getS_ReflexRule());
 					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getS_ReflexRule());
-						}
-						setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-					}
-				)
-			)?
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getS_ReflexAccess().getNameValid_IDParserRuleCall_1_1_0());
-					}
-					lv_name_2_0=ruleValid_ID
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getS_ReflexRule());
-						}
-						set(
-							$current,
-							"name",
-							lv_name_2_0,
-							"gama.core.lang.Gaml.Valid_ID");
-						afterParserOrEnumRuleCall();
-					}
-				)
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"gama.core.lang.Gaml.Valid_ID");
+					afterParserOrEnumRuleCall();
+				}
 			)
 		)?
 		(
-			otherlv_3='when'
+			otherlv_2='when'
 			{
-				newLeafNode(otherlv_3, grammarAccess.getS_ReflexAccess().getWhenKeyword_2_0());
+				newLeafNode(otherlv_2, grammarAccess.getS_ReflexAccess().getWhenKeyword_2_0());
 			}
-			otherlv_4=':'
+			otherlv_3=':'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getS_ReflexAccess().getColonKeyword_2_1());
+				newLeafNode(otherlv_3, grammarAccess.getS_ReflexAccess().getColonKeyword_2_1());
 			}
 			(
 				(
 					{
 						newCompositeNode(grammarAccess.getS_ReflexAccess().getExprExpressionParserRuleCall_2_2_0());
 					}
-					lv_expr_5_0=ruleExpression
+					lv_expr_4_0=ruleExpression
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_ReflexRule());
@@ -2016,7 +1897,7 @@ ruleS_Reflex returns [EObject current=null]
 						set(
 							$current,
 							"expr",
-							lv_expr_5_0,
+							lv_expr_4_0,
 							"gama.core.lang.Gaml.Expression");
 						afterParserOrEnumRuleCall();
 					}
@@ -2028,7 +1909,7 @@ ruleS_Reflex returns [EObject current=null]
 				{
 					newCompositeNode(grammarAccess.getS_ReflexAccess().getBlockBlockParserRuleCall_3_0());
 				}
-				lv_block_6_0=ruleBlock
+				lv_block_5_0=ruleBlock
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_ReflexRule());
@@ -2036,7 +1917,7 @@ ruleS_Reflex returns [EObject current=null]
 					set(
 						$current,
 						"block",
-						lv_block_6_0,
+						lv_block_5_0,
 						"gama.core.lang.Gaml.Block");
 					afterParserOrEnumRuleCall();
 				}
@@ -2082,25 +1963,11 @@ ruleS_Definition returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='name:'
-				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_DefinitionAccess().getFirstFacetNameKeyword_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_DefinitionRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-				}
-			)
-		)?
-		(
-			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DefinitionAccess().getNameValid_IDParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getS_DefinitionAccess().getNameValid_IDParserRuleCall_1_0_0());
 					}
-					lv_name_2_1=ruleValid_ID
+					lv_name_1_1=ruleValid_ID
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_DefinitionRule());
@@ -2108,14 +1975,14 @@ ruleS_Definition returns [EObject current=null]
 						set(
 							$current,
 							"name",
-							lv_name_2_1,
+							lv_name_1_1,
 							"gama.core.lang.Gaml.Valid_ID");
 						afterParserOrEnumRuleCall();
 					}
 					    |
-					lv_name_2_2=RULE_STRING
+					lv_name_1_2=RULE_STRING
 					{
-						newLeafNode(lv_name_2_2, grammarAccess.getS_DefinitionAccess().getNameSTRINGTerminalRuleCall_2_0_1());
+						newLeafNode(lv_name_1_2, grammarAccess.getS_DefinitionAccess().getNameSTRINGTerminalRuleCall_1_0_1());
 					}
 					{
 						if ($current==null) {
@@ -2124,23 +1991,23 @@ ruleS_Definition returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"name",
-							lv_name_2_2,
+							lv_name_1_2,
 							"gama.core.lang.Gaml.STRING");
 					}
 				)
 			)
 		)
 		(
-			otherlv_3='('
+			otherlv_2='('
 			{
-				newLeafNode(otherlv_3, grammarAccess.getS_DefinitionAccess().getLeftParenthesisKeyword_3_0());
+				newLeafNode(otherlv_2, grammarAccess.getS_DefinitionAccess().getLeftParenthesisKeyword_2_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DefinitionAccess().getArgsActionArgumentsParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getS_DefinitionAccess().getArgsActionArgumentsParserRuleCall_2_1_0());
 					}
-					lv_args_4_0=ruleActionArguments
+					lv_args_3_0=ruleActionArguments
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_DefinitionRule());
@@ -2148,23 +2015,23 @@ ruleS_Definition returns [EObject current=null]
 						set(
 							$current,
 							"args",
-							lv_args_4_0,
+							lv_args_3_0,
 							"gama.core.lang.Gaml.ActionArguments");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_5=')'
+			otherlv_4=')'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_DefinitionAccess().getRightParenthesisKeyword_3_2());
+				newLeafNode(otherlv_4, grammarAccess.getS_DefinitionAccess().getRightParenthesisKeyword_2_2());
 			}
 		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_DefinitionAccess().getFacetsFacetParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getS_DefinitionAccess().getFacetsFacetParserRuleCall_3_0());
 				}
-				lv_facets_6_0=ruleFacet
+				lv_facets_5_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_DefinitionRule());
@@ -2172,7 +2039,7 @@ ruleS_Definition returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_6_0,
+						lv_facets_5_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -2182,9 +2049,9 @@ ruleS_Definition returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DefinitionAccess().getBlockBlockParserRuleCall_5_0_0());
+						newCompositeNode(grammarAccess.getS_DefinitionAccess().getBlockBlockParserRuleCall_4_0_0());
 					}
-					lv_block_7_0=ruleBlock
+					lv_block_6_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_DefinitionRule());
@@ -2192,16 +2059,16 @@ ruleS_Definition returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_7_0,
+							lv_block_6_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_8=';'
+			otherlv_7=';'
 			{
-				newLeafNode(otherlv_8, grammarAccess.getS_DefinitionAccess().getSemicolonKeyword_5_1());
+				newLeafNode(otherlv_7, grammarAccess.getS_DefinitionAccess().getSemicolonKeyword_4_1());
 			}
 		)
 	)
@@ -2246,24 +2113,10 @@ ruleS_Action returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_2_0='name:'
 				{
-					newLeafNode(lv_firstFacet_2_0, grammarAccess.getS_ActionAccess().getFirstFacetNameKeyword_2_0());
+					newCompositeNode(grammarAccess.getS_ActionAccess().getNameValid_IDParserRuleCall_2_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_ActionRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_2_0, "name:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_ActionAccess().getNameValid_IDParserRuleCall_3_0());
-				}
-				lv_name_3_0=ruleValid_ID
+				lv_name_2_0=ruleValid_ID
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_ActionRule());
@@ -2271,23 +2124,23 @@ ruleS_Action returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_3_0,
+						lv_name_2_0,
 						"gama.core.lang.Gaml.Valid_ID");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_4='('
+			otherlv_3='('
 			{
-				newLeafNode(otherlv_4, grammarAccess.getS_ActionAccess().getLeftParenthesisKeyword_4_0());
+				newLeafNode(otherlv_3, grammarAccess.getS_ActionAccess().getLeftParenthesisKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_ActionAccess().getArgsActionArgumentsParserRuleCall_4_1_0());
+						newCompositeNode(grammarAccess.getS_ActionAccess().getArgsActionArgumentsParserRuleCall_3_1_0());
 					}
-					lv_args_5_0=ruleActionArguments
+					lv_args_4_0=ruleActionArguments
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_ActionRule());
@@ -2295,23 +2148,23 @@ ruleS_Action returns [EObject current=null]
 						set(
 							$current,
 							"args",
-							lv_args_5_0,
+							lv_args_4_0,
 							"gama.core.lang.Gaml.ActionArguments");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
-			otherlv_6=')'
+			otherlv_5=')'
 			{
-				newLeafNode(otherlv_6, grammarAccess.getS_ActionAccess().getRightParenthesisKeyword_4_2());
+				newLeafNode(otherlv_5, grammarAccess.getS_ActionAccess().getRightParenthesisKeyword_3_2());
 			}
 		)?
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_ActionAccess().getFacetsFacetParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getS_ActionAccess().getFacetsFacetParserRuleCall_4_0());
 				}
-				lv_facets_7_0=ruleFacet
+				lv_facets_6_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_ActionRule());
@@ -2319,7 +2172,7 @@ ruleS_Action returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_7_0,
+						lv_facets_6_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -2329,9 +2182,9 @@ ruleS_Action returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_ActionAccess().getBlockBlockParserRuleCall_6_0_0());
+						newCompositeNode(grammarAccess.getS_ActionAccess().getBlockBlockParserRuleCall_5_0_0());
 					}
-					lv_block_8_0=ruleBlock
+					lv_block_7_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_ActionRule());
@@ -2339,16 +2192,16 @@ ruleS_Action returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_8_0,
+							lv_block_7_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_9=';'
+			otherlv_8=';'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getS_ActionAccess().getSemicolonKeyword_6_1());
+				newLeafNode(otherlv_8, grammarAccess.getS_ActionAccess().getSemicolonKeyword_5_1());
 			}
 		)
 	)
@@ -2398,24 +2251,10 @@ ruleS_Var returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_2_0='name:'
 				{
-					newLeafNode(lv_firstFacet_2_0, grammarAccess.getS_VarAccess().getFirstFacetNameKeyword_2_0());
+					newCompositeNode(grammarAccess.getS_VarAccess().getNameValid_IDParserRuleCall_2_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_VarRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_2_0, "name:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_VarAccess().getNameValid_IDParserRuleCall_3_0());
-				}
-				lv_name_3_0=ruleValid_ID
+				lv_name_2_0=ruleValid_ID
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_VarRule());
@@ -2423,7 +2262,7 @@ ruleS_Var returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_3_0,
+						lv_name_2_0,
 						"gama.core.lang.Gaml.Valid_ID");
 					afterParserOrEnumRuleCall();
 				}
@@ -2432,9 +2271,9 @@ ruleS_Var returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_VarAccess().getFacetsFacetParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getS_VarAccess().getFacetsFacetParserRuleCall_3_0());
 				}
-				lv_facets_4_0=ruleFacet
+				lv_facets_3_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_VarRule());
@@ -2442,15 +2281,15 @@ ruleS_Var returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_4_0,
+						lv_facets_3_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_5=';'
+		otherlv_4=';'
 		{
-			newLeafNode(otherlv_5, grammarAccess.getS_VarAccess().getSemicolonKeyword_5());
+			newLeafNode(otherlv_4, grammarAccess.getS_VarAccess().getSemicolonKeyword_4());
 		}
 	)
 ;
@@ -2471,52 +2310,16 @@ ruleS_Assignment returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		{
-			newCompositeNode(grammarAccess.getS_AssignmentAccess().getS_DirectAssignmentParserRuleCall_0());
-		}
-		this_S_DirectAssignment_0=ruleS_DirectAssignment
-		{
-			$current = $this_S_DirectAssignment_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getS_AssignmentAccess().getS_SetParserRuleCall_1());
-		}
-		this_S_Set_1=ruleS_Set
-		{
-			$current = $this_S_Set_1.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleS_DirectAssignment
-entryRuleS_DirectAssignment returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getS_DirectAssignmentRule()); }
-	iv_ruleS_DirectAssignment=ruleS_DirectAssignment
-	{ $current=$iv_ruleS_DirectAssignment.current; }
-	EOF;
-
-// Rule S_DirectAssignment
-ruleS_DirectAssignment returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DirectAssignmentAccess().getExprExpressionParserRuleCall_0_0_0());
+						newCompositeNode(grammarAccess.getS_AssignmentAccess().getExprExpressionParserRuleCall_0_0_0());
 					}
 					lv_expr_0_0=ruleExpression
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getS_DirectAssignmentRule());
+							$current = createModelElementForParent(grammarAccess.getS_AssignmentRule());
 						}
 						set(
 							$current,
@@ -2530,12 +2333,12 @@ ruleS_DirectAssignment returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DirectAssignmentAccess().getKey_AssignmentKeyParserRuleCall_0_1_0());
+						newCompositeNode(grammarAccess.getS_AssignmentAccess().getKey_AssignmentKeyParserRuleCall_0_1_0());
 					}
 					lv_key_1_0=rule_AssignmentKey
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getS_DirectAssignmentRule());
+							$current = createModelElementForParent(grammarAccess.getS_AssignmentRule());
 						}
 						set(
 							$current,
@@ -2549,12 +2352,12 @@ ruleS_DirectAssignment returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DirectAssignmentAccess().getValueExpressionParserRuleCall_0_2_0());
+						newCompositeNode(grammarAccess.getS_AssignmentAccess().getValueExpressionParserRuleCall_0_2_0());
 					}
 					lv_value_2_0=ruleExpression
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getS_DirectAssignmentRule());
+							$current = createModelElementForParent(grammarAccess.getS_AssignmentRule());
 						}
 						set(
 							$current,
@@ -2568,12 +2371,12 @@ ruleS_DirectAssignment returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DirectAssignmentAccess().getFacetsFacetParserRuleCall_0_3_0());
+						newCompositeNode(grammarAccess.getS_AssignmentAccess().getFacetsFacetParserRuleCall_0_3_0());
 					}
 					lv_facets_3_0=ruleFacet
 					{
 						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getS_DirectAssignmentRule());
+							$current = createModelElementForParent(grammarAccess.getS_AssignmentRule());
 						}
 						add(
 							$current,
@@ -2587,93 +2390,7 @@ ruleS_DirectAssignment returns [EObject current=null]
 		)
 		otherlv_4=';'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getS_DirectAssignmentAccess().getSemicolonKeyword_1());
-		}
-	)
-;
-
-// Entry rule entryRuleS_Set
-entryRuleS_Set returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getS_SetRule()); }
-	iv_ruleS_Set=ruleS_Set
-	{ $current=$iv_ruleS_Set.current; }
-	EOF;
-
-// Rule S_Set
-ruleS_Set returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				lv_key_0_0='set'
-				{
-					newLeafNode(lv_key_0_0, grammarAccess.getS_SetAccess().getKeySetKeyword_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_SetRule());
-					}
-					setWithLastConsumed($current, "key", lv_key_0_0, "set");
-				}
-			)
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_SetAccess().getExprExpressionParserRuleCall_1_0());
-				}
-				lv_expr_1_0=ruleExpression
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getS_SetRule());
-					}
-					set(
-						$current,
-						"expr",
-						lv_expr_1_0,
-						"gama.core.lang.Gaml.Expression");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		(
-			otherlv_2='value:'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getS_SetAccess().getValueKeyword_2_0());
-			}
-			    |
-			otherlv_3='<-'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getS_SetAccess().getLessThanSignHyphenMinusKeyword_2_1());
-			}
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_SetAccess().getValueExpressionParserRuleCall_3_0());
-				}
-				lv_value_4_0=ruleExpression
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getS_SetRule());
-					}
-					set(
-						$current,
-						"value",
-						lv_value_4_0,
-						"gama.core.lang.Gaml.Expression");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_5=';'
-		{
-			newLeafNode(otherlv_5, grammarAccess.getS_SetAccess().getSemicolonKeyword_4());
+			newLeafNode(otherlv_4, grammarAccess.getS_AssignmentAccess().getSemicolonKeyword_1());
 		}
 	)
 ;
@@ -2922,24 +2639,10 @@ ruleS_Solve returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='equation:'
 				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_SolveAccess().getFirstFacetEquationKeyword_1_0());
+					newCompositeNode(grammarAccess.getS_SolveAccess().getExprEquationRefParserRuleCall_1_0());
 				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_SolveRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "equation:");
-				}
-			)
-		)?
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getS_SolveAccess().getExprEquationRefParserRuleCall_2_0());
-				}
-				lv_expr_2_0=ruleEquationRef
+				lv_expr_1_0=ruleEquationRef
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_SolveRule());
@@ -2947,7 +2650,7 @@ ruleS_Solve returns [EObject current=null]
 					set(
 						$current,
 						"expr",
-						lv_expr_2_0,
+						lv_expr_1_0,
 						"gama.core.lang.Gaml.EquationRef");
 					afterParserOrEnumRuleCall();
 				}
@@ -2956,9 +2659,9 @@ ruleS_Solve returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_SolveAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_SolveAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_SolveRule());
@@ -2966,7 +2669,7 @@ ruleS_Solve returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -2976,9 +2679,9 @@ ruleS_Solve returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_SolveAccess().getBlockBlockParserRuleCall_4_0_0());
+						newCompositeNode(grammarAccess.getS_SolveAccess().getBlockBlockParserRuleCall_3_0_0());
 					}
-					lv_block_4_0=ruleBlock
+					lv_block_3_0=ruleBlock
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_SolveRule());
@@ -2986,16 +2689,16 @@ ruleS_Solve returns [EObject current=null]
 						set(
 							$current,
 							"block",
-							lv_block_4_0,
+							lv_block_3_0,
 							"gama.core.lang.Gaml.Block");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 			    |
-			otherlv_5=';'
+			otherlv_4=';'
 			{
-				newLeafNode(otherlv_5, grammarAccess.getS_SolveAccess().getSemicolonKeyword_4_1());
+				newLeafNode(otherlv_4, grammarAccess.getS_SolveAccess().getSemicolonKeyword_3_1());
 			}
 		)
 	)
@@ -3033,25 +2736,11 @@ ruleS_Display returns [EObject current=null]
 		)
 		(
 			(
-				lv_firstFacet_1_0='name:'
-				{
-					newLeafNode(lv_firstFacet_1_0, grammarAccess.getS_DisplayAccess().getFirstFacetNameKeyword_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getS_DisplayRule());
-					}
-					setWithLastConsumed($current, "firstFacet", lv_firstFacet_1_0, "name:");
-				}
-			)
-		)?
-		(
-			(
 				(
 					{
-						newCompositeNode(grammarAccess.getS_DisplayAccess().getNameValid_IDParserRuleCall_2_0_0());
+						newCompositeNode(grammarAccess.getS_DisplayAccess().getNameValid_IDParserRuleCall_1_0_0());
 					}
-					lv_name_2_1=ruleValid_ID
+					lv_name_1_1=ruleValid_ID
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getS_DisplayRule());
@@ -3059,14 +2748,14 @@ ruleS_Display returns [EObject current=null]
 						set(
 							$current,
 							"name",
-							lv_name_2_1,
+							lv_name_1_1,
 							"gama.core.lang.Gaml.Valid_ID");
 						afterParserOrEnumRuleCall();
 					}
 					    |
-					lv_name_2_2=RULE_STRING
+					lv_name_1_2=RULE_STRING
 					{
-						newLeafNode(lv_name_2_2, grammarAccess.getS_DisplayAccess().getNameSTRINGTerminalRuleCall_2_0_1());
+						newLeafNode(lv_name_1_2, grammarAccess.getS_DisplayAccess().getNameSTRINGTerminalRuleCall_1_0_1());
 					}
 					{
 						if ($current==null) {
@@ -3075,7 +2764,7 @@ ruleS_Display returns [EObject current=null]
 						setWithLastConsumed(
 							$current,
 							"name",
-							lv_name_2_2,
+							lv_name_1_2,
 							"gama.core.lang.Gaml.STRING");
 					}
 				)
@@ -3084,9 +2773,9 @@ ruleS_Display returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_DisplayAccess().getFacetsFacetParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getS_DisplayAccess().getFacetsFacetParserRuleCall_2_0());
 				}
-				lv_facets_3_0=ruleFacet
+				lv_facets_2_0=ruleFacet
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_DisplayRule());
@@ -3094,7 +2783,7 @@ ruleS_Display returns [EObject current=null]
 					add(
 						$current,
 						"facets",
-						lv_facets_3_0,
+						lv_facets_2_0,
 						"gama.core.lang.Gaml.Facet");
 					afterParserOrEnumRuleCall();
 				}
@@ -3103,9 +2792,9 @@ ruleS_Display returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getS_DisplayAccess().getBlockDisplayBlockParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getS_DisplayAccess().getBlockDisplayBlockParserRuleCall_3_0());
 				}
-				lv_block_4_0=ruledisplayBlock
+				lv_block_3_0=ruledisplayBlock
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getS_DisplayRule());
@@ -3113,7 +2802,7 @@ ruleS_Display returns [EObject current=null]
 					set(
 						$current,
 						"block",
-						lv_block_4_0,
+						lv_block_3_0,
 						"gama.core.lang.Gaml.displayBlock");
 					afterParserOrEnumRuleCall();
 				}
@@ -4096,90 +3785,6 @@ ruleFacet returns [EObject current=null]
 		this_FunctionFacet_5=ruleFunctionFacet
 		{
 			$current = $this_FunctionFacet_5.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
-// Entry rule entryRuleFirstFacetKey
-entryRuleFirstFacetKey returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getFirstFacetKeyRule()); }
-	iv_ruleFirstFacetKey=ruleFirstFacetKey
-	{ $current=$iv_ruleFirstFacetKey.current.getText(); }
-	EOF;
-
-// Rule FirstFacetKey
-ruleFirstFacetKey returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getDefinitionFacetKeyParserRuleCall_0());
-		}
-		this_DefinitionFacetKey_0=ruleDefinitionFacetKey
-		{
-			$current.merge(this_DefinitionFacetKey_0);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getTypeFacetKeyParserRuleCall_1());
-		}
-		this_TypeFacetKey_1=ruleTypeFacetKey
-		{
-			$current.merge(this_TypeFacetKey_1);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getSpecialFacetKeyParserRuleCall_2());
-		}
-		this_SpecialFacetKey_2=ruleSpecialFacetKey
-		{
-			$current.merge(this_SpecialFacetKey_2);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getVarFacetKeyParserRuleCall_3());
-		}
-		this_VarFacetKey_3=ruleVarFacetKey
-		{
-			$current.merge(this_VarFacetKey_3);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getActionFacetKeyParserRuleCall_4());
-		}
-		this_ActionFacetKey_4=ruleActionFacetKey
-		{
-			$current.merge(this_ActionFacetKey_4);
-		}
-		{
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getFirstFacetKeyAccess().getClassicFacetKeyParserRuleCall_5());
-		}
-		this_ClassicFacetKey_5=ruleClassicFacetKey
-		{
-			$current.merge(this_ClassicFacetKey_5);
-		}
-		{
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -6138,29 +5743,16 @@ ruleUnit returns [EObject current=null]
 				)
 				(
 					(
-						(
-							lv_op_2_1='\u00B0'
-							{
-								newLeafNode(lv_op_2_1, grammarAccess.getUnitAccess().getOpDegreeSignKeyword_1_0_1_0_0());
+						lv_op_2_0='#'
+						{
+							newLeafNode(lv_op_2_0, grammarAccess.getUnitAccess().getOpNumberSignKeyword_1_0_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getUnitRule());
 							}
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getUnitRule());
-								}
-								setWithLastConsumed($current, "op", lv_op_2_1, null);
-							}
-							    |
-							lv_op_2_2='#'
-							{
-								newLeafNode(lv_op_2_2, grammarAccess.getUnitAccess().getOpNumberSignKeyword_1_0_1_0_1());
-							}
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getUnitRule());
-								}
-								setWithLastConsumed($current, "op", lv_op_2_2, null);
-							}
-						)
+							setWithLastConsumed($current, "op", lv_op_2_0, "#");
+						}
 					)
 				)
 			)
@@ -6224,29 +5816,16 @@ ruleUnary returns [EObject current=null]
 				(
 					(
 						(
-							(
-								lv_op_2_1='\u00B0'
-								{
-									newLeafNode(lv_op_2_1, grammarAccess.getUnaryAccess().getOpDegreeSignKeyword_1_1_0_0_0_0());
+							lv_op_2_0='#'
+							{
+								newLeafNode(lv_op_2_0, grammarAccess.getUnaryAccess().getOpNumberSignKeyword_1_1_0_0_0());
+							}
+							{
+								if ($current==null) {
+									$current = createModelElement(grammarAccess.getUnaryRule());
 								}
-								{
-									if ($current==null) {
-										$current = createModelElement(grammarAccess.getUnaryRule());
-									}
-									setWithLastConsumed($current, "op", lv_op_2_1, null);
-								}
-								    |
-								lv_op_2_2='#'
-								{
-									newLeafNode(lv_op_2_2, grammarAccess.getUnaryAccess().getOpNumberSignKeyword_1_1_0_0_0_1());
-								}
-								{
-									if ($current==null) {
-										$current = createModelElement(grammarAccess.getUnaryRule());
-									}
-									setWithLastConsumed($current, "op", lv_op_2_2, null);
-								}
-							)
+								setWithLastConsumed($current, "op", lv_op_2_0, "#");
+							}
 						)
 					)
 					(

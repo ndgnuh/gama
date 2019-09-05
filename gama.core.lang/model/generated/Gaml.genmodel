@@ -33,7 +33,6 @@
     </genClasses>
     <genClasses ecoreClass="Gaml.ecore#//HeadlessExperiment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//HeadlessExperiment/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//HeadlessExperiment/firstFacet"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//HeadlessExperiment/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//HeadlessExperiment/importURI"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//HeadlessExperiment/facets"/>
@@ -41,7 +40,6 @@
     </genClasses>
     <genClasses ecoreClass="Gaml.ecore#//Statement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//Statement/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//Statement/firstFacet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//Statement/expr"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//Statement/facets"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//Statement/block"/>
@@ -68,8 +66,6 @@
     <genClasses ecoreClass="Gaml.ecore#//S_Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//S_Assignment/value"/>
     </genClasses>
-    <genClasses ecoreClass="Gaml.ecore#//S_DirectAssignment"/>
-    <genClasses ecoreClass="Gaml.ecore#//S_Set"/>
     <genClasses ecoreClass="Gaml.ecore#//S_Equations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//S_Equations/equations"/>
     </genClasses>

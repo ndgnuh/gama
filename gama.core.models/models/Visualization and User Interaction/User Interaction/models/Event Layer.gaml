@@ -20,7 +20,7 @@ global
 	//creation of the agents
 		create cell number: nbAgent
 		{
-			color <- °green;
+			color <- #green;
 		}
        create dummy number:1 returns: temp with: [dummyRadius :: radius];
        pointClicked <- first(temp);
@@ -35,7 +35,7 @@ global
 		list<cell> selected_agents <- cell overlapping (circle(10) at_location #user_location);
 		ask selected_agents
 		{
-			color <- color = °green ? °pink : °green;
+			color <- color = #green ? #pink : #green;
 		}
 
 	}

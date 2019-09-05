@@ -79,7 +79,7 @@ species animal{
 	action change_type(animal ani, string type){
 		remove ani from: positive_species;
 		remove ani from: negative_species;
-		remove key: ani from: interaction_coef;
+		interaction_coef[] >- ani;
 		if type = "positive" { positive_species <+ ani;}
 		if type = "negative" { negative_species <+ ani;}
 		if type != "neutral" {interaction_coef <+ ani::(rnd(100)/100);}
@@ -123,7 +123,7 @@ species solver_and_scheduler{
 					ask button where ((each.grid_x = selected_button.grid_y) or (each.grid_y = selected_button.grid_y)) {self.type <- "neutral";}
 					ask animal {
 						remove species_to_be_removed from: self.positive_species;
-						remove key: species_to_be_removed from: self.interaction_coef;
+						self.interaction_coef[] >- species_to_be_removed;
 					}
 					ask species_to_be_removed {do die;}
 					species_list[selected_button.grid_y - 1] <- nil;
@@ -232,7 +232,7 @@ grid button width:max_species+1 height:max_species+1
 experiment simulation type: gui autorun: true {
 	float minimum_cycle_duration <- 0.1;
 	output { 
-		layout value: horizontal([0::50,vertical([1::50,2::50])::50]) tabs:true;
+		layout "" value: horizontal([0::50,vertical([1::50,2::50])::50]) tabs:true;
 		display action_button name:"Interaction matrix" {
 			species button aspect:modern ;
 			event mouse_down action:activate_act;    

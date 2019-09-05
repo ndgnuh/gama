@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link gama.core.lang.gaml.impl.HeadlessExperimentImpl#getKey <em>Key</em>}</li>
- *   <li>{@link gama.core.lang.gaml.impl.HeadlessExperimentImpl#getFirstFacet <em>First Facet</em>}</li>
  *   <li>{@link gama.core.lang.gaml.impl.HeadlessExperimentImpl#getName <em>Name</em>}</li>
  *   <li>{@link gama.core.lang.gaml.impl.HeadlessExperimentImpl#getImportURI <em>Import URI</em>}</li>
  *   <li>{@link gama.core.lang.gaml.impl.HeadlessExperimentImpl#getFacets <em>Facets</em>}</li>
@@ -63,26 +62,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
    * @ordered
    */
   protected String key = KEY_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getFirstFacet() <em>First Facet</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFirstFacet()
-   * @generated
-   * @ordered
-   */
-  protected static final String FIRST_FACET_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getFirstFacet() <em>First Facet</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getFirstFacet()
-   * @generated
-   * @ordered
-   */
-  protected String firstFacet = FIRST_FACET_EDEFAULT;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -188,31 +167,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
     key = newKey;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, GamlPackage.HEADLESS_EXPERIMENT__KEY, oldKey, key));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getFirstFacet()
-  {
-    return firstFacet;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setFirstFacet(String newFirstFacet)
-  {
-    String oldFirstFacet = firstFacet;
-    firstFacet = newFirstFacet;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, GamlPackage.HEADLESS_EXPERIMENT__FIRST_FACET, oldFirstFacet, firstFacet));
   }
 
   /**
@@ -360,8 +314,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
     {
       case GamlPackage.HEADLESS_EXPERIMENT__KEY:
         return getKey();
-      case GamlPackage.HEADLESS_EXPERIMENT__FIRST_FACET:
-        return getFirstFacet();
       case GamlPackage.HEADLESS_EXPERIMENT__NAME:
         return getName();
       case GamlPackage.HEADLESS_EXPERIMENT__IMPORT_URI:
@@ -387,9 +339,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
     {
       case GamlPackage.HEADLESS_EXPERIMENT__KEY:
         setKey((String)newValue);
-        return;
-      case GamlPackage.HEADLESS_EXPERIMENT__FIRST_FACET:
-        setFirstFacet((String)newValue);
         return;
       case GamlPackage.HEADLESS_EXPERIMENT__NAME:
         setName((String)newValue);
@@ -421,9 +370,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
       case GamlPackage.HEADLESS_EXPERIMENT__KEY:
         setKey(KEY_EDEFAULT);
         return;
-      case GamlPackage.HEADLESS_EXPERIMENT__FIRST_FACET:
-        setFirstFacet(FIRST_FACET_EDEFAULT);
-        return;
       case GamlPackage.HEADLESS_EXPERIMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -452,8 +398,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
     {
       case GamlPackage.HEADLESS_EXPERIMENT__KEY:
         return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
-      case GamlPackage.HEADLESS_EXPERIMENT__FIRST_FACET:
-        return FIRST_FACET_EDEFAULT == null ? firstFacet != null : !FIRST_FACET_EDEFAULT.equals(firstFacet);
       case GamlPackage.HEADLESS_EXPERIMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case GamlPackage.HEADLESS_EXPERIMENT__IMPORT_URI:
@@ -479,8 +423,6 @@ public class HeadlessExperimentImpl extends MinimalEObjectImpl.Container impleme
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (key: ");
     result.append(key);
-    result.append(", firstFacet: ");
-    result.append(firstFacet);
     result.append(", name: ");
     result.append(name);
     result.append(", importURI: ");

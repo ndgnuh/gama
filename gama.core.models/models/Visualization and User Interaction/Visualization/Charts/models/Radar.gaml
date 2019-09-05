@@ -56,7 +56,7 @@ experiment "Different radars" type: gui
 		{
 			chart "datalist_bar" type: radar series_label_position: onchart
 			{
-				datalist legend: ["A", "B", "C"] accumulate_values: true value: [1 + sin(cycle), 1 + cos(100 * cycle), 1 + cos(100 * (cycle + 30))] color: [# green, # black, # purple];
+				datalist ["A", "B", "C"] accumulate_values: true value: [1 + sin(cycle), 1 + cos(100 * cycle), 1 + cos(100 * (cycle + 30))] color: [# green, # black, # purple];
 			}
 
 		}

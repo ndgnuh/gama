@@ -195,7 +195,7 @@ experiment exp {
 		display "Strings Java2D" type: opengl {
 			// #pixels (or #px) corresponds to the value of one pixel, depending on the display, zoom...
 			// So pixel is used to define the dimension of an overlay in order to keep it size constant.
-            overlay position: { 0, 0 } size: { 300 #pixels, 130 #px } background: #grey transparency: 0.2 border: #black rounded: true {
+            overlay "" position: { 0, 0 } size: { 300 #pixels, 130 #px } background: #grey transparency: 0.2 border: #black rounded: true {
             	// Constant contain useful information about the way of vizualising the simulation with: the camera location (#camera_location), 
             	// orientation (#camera_orientation) and target (#camera_target). 
                 draw "Camera location:  " + string(#camera_location with_precision 3) at:{10#px,20#px,0#px} color: #black font: my_font_plain;

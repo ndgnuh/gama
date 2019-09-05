@@ -75,7 +75,7 @@ species declaring_list_attributes {
 		// Some special casting operations are applied to specific types, like points...
 		write sample(list(any(my_agents).location));
 		// ... colors ...
-		write sample(list(°pink));
+		write sample(list(#pink));
 		// ... or strings
 		write sample(list("This is a string"));
 		
@@ -170,7 +170,7 @@ species modifying_lists {
 		l1 <+ 5;
 		write sample(l1);
 		// tired of writing lines of add ? The "all:" facet is here to serve:
-		add all: [6, 7, 8, 9] to: l1;
+		add [6, 7, 8, 9] to: l1 all:true;
 		// or, in a more compact way:
 		l1 <<+ [10,11,12,13];
 		write sample(l1);
@@ -212,7 +212,7 @@ species modifying_lists {
 		l1 >>- 2;
 		l1 >>- 1;
 		// or, written using the long syntactic form
-		remove all: 1 from: l1;
+		remove  1 from: l1 all: true;
 		write sample(l1);
 		// To remove all the elements present in a given container, the same syntax can be used
 		l1 >>- [0,3];

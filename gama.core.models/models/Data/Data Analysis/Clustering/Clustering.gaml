@@ -114,7 +114,7 @@ experiment clustering type: gui {
 		layout horizontal([1::5000,0::5000]) tabs:true editors: false;
 		display map_dbscan{
             //define a new overlay layer positioned at the coordinate half-space/0
-            overlay position: { world.shape.width/2, 0 } size: { 180 #px, 50 #px } background: #black transparency: 0.2 border: #black rounded: true
+            overlay "" position: { world.shape.width/2, 0 } size: { 180 #px, 50 #px } background: #black transparency: 0.2 border: #black rounded: true
             {
 					//draw square(5#px) at: { 0, 0 } color: #red border: #white;
                     draw string("DbScan") at: { world.shape.width/2 - 40, 20 } color: #blue font: font("SansSerif", 36, #bold); 
@@ -123,7 +123,7 @@ experiment clustering type: gui {
 			species dummy aspect: dbscan_aspect;
 		}
 		display map_kmeans{
-			overlay position: { world.shape.width/2, 0 } size: { 180 #px, 50 #px } background: #black transparency: 0.2 border: #black rounded: true
+			overlay "" position: { world.shape.width/2, 0 } size: { 180 #px, 50 #px } background: #black transparency: 0.2 border: #black rounded: true
             {
 					//draw square(5#px) at: { 0, 0 } color: #red border: #white;
                     draw string("K-means") at: { world.shape.width/2-45, 20 } color: #orange font: font("SansSerif", 36, #bold); 

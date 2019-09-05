@@ -60,7 +60,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_cumulative_chart" type: xy
 			{
-				datalist legend: ["A", "B", "C"] value:
+				datalist  ["A", "B", "C"] value:
 				[[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1], [cycle + 2, cycle - 2, cos(cycle * 100)]]
 				x_err_values: [3, 2, 10] y_err_values: [3, cos(cycle * 100), 2 * sin(cycle * 100)] marker_shape: marker_circle // same for all
 				color: [# green, # blue, # red];
@@ -72,7 +72,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_cumulative_chart" type: xy
 			{
-				datalist legend: ["A", "B"] value: [[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1]] marker_shape:
+				datalist  ["A", "B"] value: [[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1]] marker_shape:
 				marker_circle // same for all
 				color: [# green, # blue] style: line;
 			}
@@ -83,7 +83,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_non_cumulative_chart" type: xy
 			{
-				datalist legend: ["A", "B", "C"] value: [[10, 10], [12, 10], [20 + cycle, 10]] accumulate_values: false x_err_values: [3, 1, 2] y_err_values:
+				datalist  ["A", "B", "C"] value: [[10, 10], [12, 10], [20 + cycle, 10]] accumulate_values: false x_err_values: [3, 1, 2] y_err_values:
 				[[9, 20], [5, 11], [8, 10 + cycle / 2]] // different low/high values for yerr
 				marker_size: [1, cycle, 2] // size keyword instead of size in values
 				marker_shape: marker_circle // same for all

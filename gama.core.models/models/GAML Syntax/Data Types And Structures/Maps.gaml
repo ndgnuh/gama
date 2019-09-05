@@ -205,7 +205,7 @@ species modifying_maps {
 		// To remove keys instead, the same syntax can be used, but on the keys of the map (i.e. map[])
 		m1[] >- 1; // This will remove the (unique) pair whose key = 1
 		// The equivalent long syntax is
-		remove key: 1 from: m1;
+		//remove key: 1 from: m1;
 		// To remove a set of keys, the following syntax can be used
 		m1[] >>- [2,3,4];
  		// And to remove all the keys present in a given map (using the 'keys' attribute)

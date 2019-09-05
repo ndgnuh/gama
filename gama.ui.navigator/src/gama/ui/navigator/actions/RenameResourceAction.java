@@ -135,14 +135,14 @@ public class RenameResourceAction extends WorkspaceAction {
 	 */
 	private boolean checkReadOnlyAndNull(final IResource currentResource) {
 		// Do a quick read only and null check
-		if (currentResource == null) { return false; }
+		if (currentResource == null)
+			return false;
 
 		// Do a quick read only check
 		final ResourceAttributes attributes = currentResource.getResourceAttributes();
-		if (attributes != null && attributes.isReadOnly()) {
+		if (attributes != null && attributes.isReadOnly())
 			return MessageDialog.openQuestion(WorkbenchHelper.getShell(), CHECK_RENAME_TITLE,
 					MessageFormat.format(CHECK_RENAME_MESSAGE, new Object[] { currentResource.getName() }));
-		}
 
 		return true;
 	}
@@ -182,14 +182,13 @@ public class RenameResourceAction extends WorkspaceAction {
 		final IWorkspace workspace = IDEWorkbenchPlugin.getPluginWorkspace();
 		final IPath prefix = resource.getFullPath().removeLastSegments(1);
 		final IInputValidator validator = string -> {
-			if (resource.getName().equals(string)) {
+			if (resource.getName().equals(string))
 				return IDEWorkbenchMessages.RenameResourceAction_nameMustBeDifferent;
-			}
 			final IStatus status = workspace.validateName(string, resource.getType());
-			if (!status.isOK()) { return status.getMessage(); }
-			if (workspace.getRoot().exists(prefix.append(string))) {
+			if (!status.isOK())
+				return status.getMessage();
+			if (workspace.getRoot().exists(prefix.append(string)))
 				return IDEWorkbenchMessages.RenameResourceAction_nameExists;
-			}
 			return null;
 		};
 
@@ -198,7 +197,8 @@ public class RenameResourceAction extends WorkspaceAction {
 						IDEWorkbenchMessages.RenameResourceAction_inputDialogMessage, resource.getName(), validator);
 		dialog.setBlockOnOpen(true);
 		final int result = dialog.open();
-		if (result == Window.OK) { return dialog.getValue(); }
+		if (result == Window.OK)
+			return dialog.getValue();
 		return null;
 	}
 
@@ -208,14 +208,16 @@ public class RenameResourceAction extends WorkspaceAction {
 	@Override
 	public void run() {
 		final IResource currentResource = getCurrentResource();
-		if (currentResource == null || !currentResource.exists()) { return; }
-		if (LTKLauncher.openRenameWizard(getStructuredSelection())) { return; }
-		// Do a quick read only and null check
-		if (!checkReadOnlyAndNull(currentResource)) { return; }
-		final String newName = queryNewResourceName(currentResource);
-		if (newName == null || newName.equals("")) { //$NON-NLS-1$
+		if (currentResource == null || !currentResource.exists())
 			return;
-		}
+		if (LTKLauncher.openRenameWizard(null, getStructuredSelection()))
+			return;
+		// Do a quick read only and null check
+		if (!checkReadOnlyAndNull(currentResource))
+			return;
+		final String newName = queryNewResourceName(currentResource);
+		if (newName == null || newName.equals(""))
+			return;
 		newPath = currentResource.getFullPath().removeLastSegments(1).append(newName);
 		super.run();
 	}
@@ -227,7 +229,8 @@ public class RenameResourceAction extends WorkspaceAction {
 	 */
 	private IResource getCurrentResource() {
 		final List<?> resources = getSelectedResources();
-		if (resources.size() == 1) { return (IResource) resources.get(0); }
+		if (resources.size() == 1)
+			return (IResource) resources.get(0);
 		return null;
 
 	}
@@ -235,9 +238,8 @@ public class RenameResourceAction extends WorkspaceAction {
 	@Override
 	protected List<? extends IResource> getSelectedResources() {
 		final IStructuredSelection selection = getStructuredSelection();
-		if (selection.toList().stream().anyMatch(each -> (each instanceof LinkedFile))) {
+		if (selection.toList().stream().anyMatch(each -> (each instanceof LinkedFile)))
 			return Collections.EMPTY_LIST;
-		}
 		return super.getSelectedResources();
 	}
 
@@ -248,11 +250,14 @@ public class RenameResourceAction extends WorkspaceAction {
 	@Override
 	protected boolean updateSelection(final IStructuredSelection selection) {
 
-		if (selection.size() > 1) { return false; }
-		if (!super.updateSelection(selection)) { return false; }
+		if (selection.size() > 1)
+			return false;
+		if (!super.updateSelection(selection))
+			return false;
 
 		final IResource currentResource = getCurrentResource();
-		if (currentResource == null || !currentResource.exists()) { return false; }
+		if (currentResource == null || !currentResource.exists())
+			return false;
 
 		return true;
 	}

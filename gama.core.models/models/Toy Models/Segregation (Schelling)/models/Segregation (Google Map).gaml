@@ -88,8 +88,8 @@ experiment schelling type: gui {
 			}
 
 			chart "Global happiness and similarity" type: series background: #lightgray axes: #white position: { 0, 0.5 } size: { 1.0, 0.5 } x_range: 20 y_range: 20 {
-				data "happy" color: °blue value: (sum_happy_people / number_of_people) * 100 style: spline fill: false;
-				data "similarity" color: °red value: (sum_similar_neighbours / sum_total_neighbours) * 100 style: line fill: true ;
+				data "happy" color: #blue value: (sum_happy_people / number_of_people) * 100 style: spline fill: false;
+				data "similarity" color: #red value: (sum_similar_neighbours / sum_total_neighbours) * 100 style: line fill: true ;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'EGaml.getInstance().java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'EGaml.getInstance().java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -24,44 +24,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 
 import gama.common.interfaces.IKeyword;
-import gama.util.map.GamaMapFactory;
-import gaml.compilation.ast.SyntacticFactory;
-import gaml.compilation.interfaces.IGamlEcoreUtils;
-import gama.core.lang.gaml.ActionRef;
-import gama.core.lang.gaml.ArgumentDefinition;
-import gama.core.lang.gaml.ArgumentPair;
-import gama.core.lang.gaml.Array;
-import gama.core.lang.gaml.BinaryOperator;
-import gama.core.lang.gaml.Block;
-import gama.core.lang.gaml.EquationRef;
-import gama.core.lang.gaml.Expression;
-import gama.core.lang.gaml.ExpressionList;
-import gama.core.lang.gaml.Facet;
-import gama.core.lang.gaml.Function;
-import gama.core.lang.gaml.GamlDefinition;
-import gama.core.lang.gaml.GamlFactory;
-import gama.core.lang.gaml.GamlPackage;
-import gama.core.lang.gaml.HeadlessExperiment;
-import gama.core.lang.gaml.If;
-import gama.core.lang.gaml.Model;
-import gama.core.lang.gaml.Parameter;
-import gama.core.lang.gaml.Point;
-import gama.core.lang.gaml.S_Action;
-import gama.core.lang.gaml.S_Assignment;
-import gama.core.lang.gaml.S_Definition;
-import gama.core.lang.gaml.S_DirectAssignment;
-import gama.core.lang.gaml.S_Display;
-import gama.core.lang.gaml.S_Equations;
-import gama.core.lang.gaml.S_Experiment;
-import gama.core.lang.gaml.S_If;
-import gama.core.lang.gaml.SkillRef;
-import gama.core.lang.gaml.Statement;
-import gama.core.lang.gaml.StringLiteral;
-import gama.core.lang.gaml.TerminalExpression;
-import gama.core.lang.gaml.TypeRef;
-import gama.core.lang.gaml.Unary;
-import gama.core.lang.gaml.UnitName;
-import gama.core.lang.gaml.VariableRef;
 import gama.core.lang.gaml.impl.ActionArgumentsImpl;
 import gama.core.lang.gaml.impl.BlockImpl;
 import gama.core.lang.gaml.impl.ExpressionListImpl;
@@ -72,6 +34,9 @@ import gama.core.lang.gaml.impl.S_EquationsImpl;
 import gama.core.lang.gaml.impl.S_IfImpl;
 import gama.core.lang.gaml.impl.StatementImpl;
 import gama.core.lang.gaml.util.GamlSwitch;
+import gama.util.map.GamaMapFactory;
+import gaml.compilation.ast.SyntacticFactory;
+import gaml.compilation.interfaces.IGamlEcoreUtils;
 
 /**
  * The class EGaml.getInstance(). A stateless class, bunch of utilities to work with the various GAML statements and
@@ -184,8 +149,7 @@ public class EGaml implements IGamlEcoreUtils {
 	public Expression getExpressionAtKey(final EObject s, final String name) {
 		if (s == null || name == null)
 			return null;
-		if (name.equals("value") && s instanceof S_DirectAssignment)
-			return ((S_DirectAssignment) s).getValue();
+
 		final List<Facet> list = getFacetsOf(s);
 
 		for (final Facet f : list) {

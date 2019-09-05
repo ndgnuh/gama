@@ -60,16 +60,16 @@ global skills: [moving] control: fsm {
 	/**
 	 * UNITS
 	 */
-// The usage of units is improved ( "#" being replaced by "°"), and they can be combined
-	float c <- 10 °meter;
-	float speed <- 10 °meter / °sec;
+// The usage of units is improved ( "#" being replaced by "#"), and they can be combined
+	float c <- 10 #meter;
+	float speed <- 10 #meter / #sec;
 
 	// Attributes can (finally!) be named after unit names
 	float meter <- 10.0;
 
 	// Some mathematical constants have been introduced alongside units
-	float pi_4 <- °pi / 4;
-	float e <- °e;
+	float pi_4 <- #pi / 4;
+	float e <- #e;
 
 	/**
 	  * ACTIONS
@@ -107,9 +107,9 @@ global skills: [moving] control: fsm {
 		int t2 <- length(a1);
 
 		// Assigning a value to variables is also sporting a new syntax 
-		set t2 value: 100;
+		//set t2 value: 100;
 		// ... can be replaced by 
-		set t2 <- 100;
+		//set t2 <- 100;
 		// ... or even by
 		t2 <- 100;
 
@@ -300,8 +300,8 @@ global skills: [moving] control: fsm {
 
 		// special units (that take a value in the drawing scope) have been introduced to allow for a better control of the display
 		// This statement will draw a circle of radius 10 pixels, whatever the level of zoom and size of the display
-		draw circle(10 °px);
-		draw "Display dimensions: " + °display_width + " " + °display_height;
+		draw circle(10 #px);
+		draw "Display dimensions: " + #display_width + " " + #display_height;
 	}
 
 }

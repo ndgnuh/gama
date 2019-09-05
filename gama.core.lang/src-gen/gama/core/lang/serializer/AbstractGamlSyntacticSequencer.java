@@ -23,13 +23,11 @@ public abstract class AbstractGamlSyntacticSequencer extends AbstractSyntacticSe
 
 	protected GamlGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_S_Equations_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__;
-	protected AbstractElementAlias match_S_Set_LessThanSignHyphenMinusKeyword_2_1_or_ValueKeyword_2_0;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (GamlGrammarAccess) access;
 		match_S_Equations_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getS_EquationsAccess().getLeftCurlyBracketKeyword_3_0_0()), new TokenAlias(false, false, grammarAccess.getS_EquationsAccess().getRightCurlyBracketKeyword_3_0_2())), new TokenAlias(false, false, grammarAccess.getS_EquationsAccess().getSemicolonKeyword_3_1()));
-		match_S_Set_LessThanSignHyphenMinusKeyword_2_1_or_ValueKeyword_2_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getS_SetAccess().getLessThanSignHyphenMinusKeyword_2_1()), new TokenAlias(false, false, grammarAccess.getS_SetAccess().getValueKeyword_2_0()));
 	}
 	
 	@Override
@@ -46,8 +44,6 @@ public abstract class AbstractGamlSyntacticSequencer extends AbstractSyntacticSe
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_S_Equations_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__.equals(syntax))
 				emit_S_Equations_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_S_Set_LessThanSignHyphenMinusKeyword_2_1_or_ValueKeyword_2_0.equals(syntax))
-				emit_S_Set_LessThanSignHyphenMinusKeyword_2_1_or_ValueKeyword_2_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -61,17 +57,6 @@ public abstract class AbstractGamlSyntacticSequencer extends AbstractSyntacticSe
 	 *     name=Valid_ID (ambiguity) (rule end)
 	 */
 	protected void emit_S_Equations_SemicolonKeyword_3_1_or___LeftCurlyBracketKeyword_3_0_0_RightCurlyBracketKeyword_3_0_2__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     'value:' | '<-'
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     expr=Expression (ambiguity) value=Expression
-	 */
-	protected void emit_S_Set_LessThanSignHyphenMinusKeyword_2_1_or_ValueKeyword_2_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

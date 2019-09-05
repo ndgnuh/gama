@@ -26,7 +26,7 @@ global {
 		//create road agents using the shapefile and using the oneway column to check the orientation of the roads if there are directed
 		create road from: shape_file_roads with: [lanes::int(read("lanes")), oneway::string(read("oneway"))] {
 			geom_display <- shape + (2.5 * lanes);
-			maxspeed <- (lanes = 1 ? 30.0 : (lanes = 2 ? 50.0 : 70.0)) °km / °h;
+			maxspeed <- (lanes = 1 ? 30.0 : (lanes = 2 ? 50.0 : 70.0)) #km / #h;
 			switch oneway {
 				match "no" {
 					create road {

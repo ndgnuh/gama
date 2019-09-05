@@ -37,7 +37,7 @@ ExperimentFileStructure:
 ;
 
 HeadlessExperiment :
-	key=_ExperimentKey (firstFacet="name:")? name=(Valid_ID | STRING) ('model:' importURI=STRING) ? (facets+=Facet)* (block=Block | ';');
+	key=_ExperimentKey name=(Valid_ID | STRING) ('model:' importURI=STRING) ? (facets+=Facet)* (block=Block | ';');
 /**
  * Global statements
  */
@@ -51,10 +51,10 @@ S_Global :
 ;
 
 S_Species :
-	key=_SpeciesKey (firstFacet='name:')? name=ID (facets+=Facet)* (block=Block | ';');
+	key=_SpeciesKey name=ID (facets+=Facet)* (block=Block | ';');
 
 S_Experiment :
-	key=_ExperimentKey (firstFacet="name:")? name=(Valid_ID | STRING) (facets+=Facet)* (block=Block | ';');
+	key=_ExperimentKey name=(Valid_ID | STRING) (facets+=Facet)* (block=Block | ';');
 
 /**
  * Statements
@@ -64,16 +64,16 @@ Statement:
 	((=> S_Assignment | S_1Expr_Facets_BlockOrEnd | S_Other | S_Do | S_Return | S_Solve | S_If | S_Try | S_Equations))) | S_Display ;
 
 S_1Expr_Facets_BlockOrEnd returns Statement:
-	key=_1Expr_Facets_BlockOrEnd_Key (firstFacet=FirstFacetKey)? (expr=Expression) (facets+=Facet)* (block=Block | ";");
+	key=_1Expr_Facets_BlockOrEnd_Key (expr=Expression) (facets+=Facet)* (block=Block | ";");
 
 S_Do:
-	key=_DoKey (firstFacet="action:")? expr=AbstractRef (facets+=Facet)* (block=Block | ';');
+	key=_DoKey expr=AbstractRef (facets+=Facet)* (block=Block | ';');
 
 S_Loop:
 	key="loop" (name=ID)? (facets+=Facet)* block=Block;
 
 S_If:
-	key='if' (firstFacet="condition:")? expr=Expression block=Block (-> 'else' else=(S_If | Block))?;
+	key='if' expr=Expression block=Block (-> 'else' else=(S_If | Block))?;
 	
 S_Try:
 	key='try' block=Block (-> 'catch' catch=Block) ?
@@ -83,7 +83,7 @@ S_Other:
 	key=ID (facets+=Facet)* (block=Block | ';');
 
 S_Return:
-	key='return' (firstFacet="value:")? expr=Expression? ';';
+	key='return' expr=Expression? ';';
 
 
 	/*
@@ -93,29 +93,26 @@ S_Declaration:
 	->S_Definition | S_Species | S_Reflex | S_Action | S_Var | S_Loop ;
 
 S_Reflex:
-	key=_ReflexKey ((firstFacet="name:")? name=Valid_ID)? ("when"":" expr=Expression)? block=Block;
+	key=_ReflexKey ( name=Valid_ID)? ("when"":" expr=Expression)? block=Block;
 
 S_Definition:
-	tkey=(TypeRef) (firstFacet="name:")? name=(Valid_ID | STRING) ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
+	tkey=(TypeRef) name=(Valid_ID | STRING) ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
 
 S_Action returns S_Definition:
-	{S_Action} key="action" (firstFacet='name:')? name=Valid_ID ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
+	{S_Action} key="action" name=Valid_ID ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
 
 S_Var returns S_Definition:
-	{S_Var} key=_VarOrConstKey (firstFacet="name:")? name=Valid_ID (facets+=Facet)* ';';
+	{S_Var} key=_VarOrConstKey name=Valid_ID (facets+=Facet)* ';';
 
 
 	/*
  * ASSIGNMENTS
  */
-S_Assignment:
-	S_DirectAssignment | S_Set;
 
-S_DirectAssignment:
+
+S_Assignment:
 	(expr=Expression key=(_AssignmentKey) value=Expression (facets+=Facet)*) ';';
 
-S_Set:
-	key="set" expr=Expression ("value:" | "<-") value=Expression ";";
 
 S_Equations:
 	key=_EquationsKey name=Valid_ID (facets+=Facet)* ('{' (equations+=S_Equation ';')* '}' | ';');
@@ -124,7 +121,7 @@ S_Equation returns S_Assignment:
 	expr=(Function|VariableRef) key="=" value=Expression;
 
 S_Solve:
-	key=_SolveKey (firstFacet="equation:")? expr=EquationRef (facets+=Facet)* (block=Block | ';');
+	key=_SolveKey expr=EquationRef (facets+=Facet)* (block=Block | ';');
 
 
 
@@ -134,7 +131,7 @@ S_Solve:
  
 
 S_Display:
-	key="display" (firstFacet="name:")? name=(Valid_ID|STRING) (facets+=Facet)* block=displayBlock
+	key="display" name=(Valid_ID|STRING) (facets+=Facet)* block=displayBlock
 ;
 
 displayBlock returns Block:
@@ -202,13 +199,10 @@ ArgumentDefinition:
 Facet:
 	ActionFacet | DefinitionFacet  | ClassicFacet | TypeFacet | VarFacet | FunctionFacet  ;
 
-FirstFacetKey:
-	DefinitionFacetKey | TypeFacetKey  | SpecialFacetKey | VarFacetKey | ActionFacetKey | ClassicFacetKey ;
-
 ClassicFacetKey: (ID ':');
 
 DefinitionFacetKey:
-	"name:" | "returns:" ; /*| "var:" */
+	"name:" | "returns:" ; 
 
 TypeFacetKey:
 	("as:" | "of:" | "parent:" | "species:"|"type:");
@@ -323,11 +317,11 @@ Binary returns Expression:
 
 Unit returns Expression:
 	Unary
-	(({Unit.left=current} op=('°'|"#")) right=UnitRef)?;
+	(({Unit.left=current} op=("#")) right=UnitRef)?;
 
 Unary returns Expression:
 	Access |
-	{Unary} ((op=('°'|'#') right=UnitRef) | (op=('-' | '!' | 'my' | 'the' | 'not')
+	{Unary} ((op=('#') right=UnitRef) | (op=('-' | '!' | 'my' | 'the' | 'not')
 	right=Unary));
 
 Access returns Expression:
@@ -421,7 +415,6 @@ TerminalExpression:
 	StringLiteral |
 	{IntLiteral} op=INTEGER |
 	{DoubleLiteral} op=DOUBLE |
-	/*{ColorLiteral} op=COLOR |*/
 	{BooleanLiteral} op=BOOLEAN |
 	{ReservedLiteral} op=KEYWORD;
 	
@@ -440,9 +433,6 @@ terminal BOOLEAN:
 
 terminal ID:
 	('a'..'z' | 'A'..'Z' | '_' | '$') ('a'..'z' | 'A'..'Z' | '_' | '$' | '0'..'9')*;
-
-//terminal COLOR:
-//	'#' ('0'..'9' | 'A'..'F')+;
 
 terminal DOUBLE:
 	'1'..'9' ('0'..'9')* ('.' '0'..'9'+)? (('E' | 'e') ('+' | '-')? '0'..'9'+)? | '0' ('.' '0'..'9'+)? (('E' | 'e') ('+' |

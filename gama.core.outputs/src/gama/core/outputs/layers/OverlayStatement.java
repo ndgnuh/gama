@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IOverlayInfo;
+import gama.common.interfaces.outputs.IOverlayProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -23,10 +25,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IKeyword;
-import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.IOverlayInfo;
-import gama.common.interfaces.outputs.IOverlayProvider;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.IUpdaterTarget;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -46,11 +46,17 @@ import gaml.types.IType;
 @inside (
 		symbols = IKeyword.DISPLAY)
 @facets (
+		omissible = IKeyword.NAME,
 		value = { @facet (
 				name = IKeyword.ROUNDED,
 				type = IType.BOOL,
 				optional = true,
 				doc = @doc ("Whether or not the rectangular shape of the overlay should be rounded. True by default")),
+				@facet (
+						name = IKeyword.NAME,
+						type = IType.STRING,
+						optional = true,
+						doc = @doc ("This facet is required (since GAMA 2.0), although not used for the moment as only one overlay can be defined")),
 				@facet (
 						name = IKeyword.BORDER,
 						type = IType.COLOR,
@@ -97,7 +103,6 @@ import gaml.types.IType;
 						of = IType.COLOR,
 						optional = true,
 						doc = @doc ("the color(s) used to display the expressions given in the 'left', 'center' and 'right' facets")) })
-// ,omissible = IKeyword.LEFT)
 @doc (
 		value = "`" + IKeyword.OVERLAY
 				+ "` allows the modeler to display a line to the already existing bottom overlay, where the results of 'left', 'center' and 'right' facets, when they are defined, are displayed with the corresponding color if defined.",

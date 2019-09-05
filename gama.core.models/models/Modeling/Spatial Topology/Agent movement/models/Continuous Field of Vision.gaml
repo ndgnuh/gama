@@ -64,7 +64,7 @@ species people skills: [moving]{
 	}
 	//computation of the perceived area
 	reflex update_perception {
-		//the agent perceived a cone (with an amplitude of 60°) at a distance of  perception_distance (the intersection with the world shape is just to limit the perception to the world)
+		//the agent perceived a cone (with an amplitude of 60#) at a distance of  perception_distance (the intersection with the world shape is just to limit the perception to the world)
 		perceived_area <- (cone(heading-30,heading+30) intersection world.shape) intersection circle(perception_distance); 
 		
 		//if the perceived area is not nil, we use the masked_by operator to compute the visible area from the perceived area according to the obstacles

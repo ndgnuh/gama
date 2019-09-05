@@ -42,6 +42,15 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	public static final Map<Integer, String> typeIndicesToGamlTypes = new HashMap<>();
 	protected String initializationMethodName;
 
+	static {
+		// Initialize some types
+		typeIndicesToGamlTypes.put(-200, "label");
+		typeIndicesToGamlTypes.put(-201, "identifier");
+		typeIndicesToGamlTypes.put(-202, "type");
+		typeIndicesToGamlTypes.put(-203, "new variable");
+		typeIndicesToGamlTypes.put(-204, "new temporary variable");
+	}
+
 	public ElementProcessor() {}
 
 	protected void clean(final ProcessorContext context, final Map<String, StringBuilder> map) {
