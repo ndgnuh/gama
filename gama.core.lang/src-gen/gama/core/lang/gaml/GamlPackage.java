@@ -2222,88 +2222,6 @@ public interface GamlPackage extends EPackage
   int SACTION_FEATURE_COUNT = SDEFINITION_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link gama.core.lang.gaml.impl.S_VarImpl <em>SVar</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see gama.core.lang.gaml.impl.S_VarImpl
-   * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Var()
-   * @generated
-   */
-  int SVAR = 49;
-
-  /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__KEY = SDEFINITION__KEY;
-
-  /**
-   * The feature id for the '<em><b>Expr</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__EXPR = SDEFINITION__EXPR;
-
-  /**
-   * The feature id for the '<em><b>Facets</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__FACETS = SDEFINITION__FACETS;
-
-  /**
-   * The feature id for the '<em><b>Block</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__BLOCK = SDEFINITION__BLOCK;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__NAME = SDEFINITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>Tkey</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__TKEY = SDEFINITION__TKEY;
-
-  /**
-   * The feature id for the '<em><b>Args</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR__ARGS = SDEFINITION__ARGS;
-
-  /**
-   * The number of structural features of the '<em>SVar</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SVAR_FEATURE_COUNT = SDEFINITION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.BinaryOperatorImpl <em>Binary Operator</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2311,7 +2229,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBinaryOperator()
    * @generated
    */
-  int BINARY_OPERATOR = 50;
+  int BINARY_OPERATOR = 49;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2357,7 +2275,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIf()
    * @generated
    */
-  int IF = 51;
+  int IF = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2412,7 +2330,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnit()
    * @generated
    */
-  int UNIT = 52;
+  int UNIT = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2458,7 +2376,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnary()
    * @generated
    */
-  int UNARY = 53;
+  int UNARY = 52;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2495,7 +2413,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getAccess()
    * @generated
    */
-  int ACCESS = 54;
+  int ACCESS = 53;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2541,7 +2459,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArray()
    * @generated
    */
-  int ARRAY = 55;
+  int ARRAY = 54;
 
   /**
    * The feature id for the '<em><b>Exprs</b></em>' containment reference.
@@ -2569,7 +2487,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getPoint()
    * @generated
    */
-  int POINT = 56;
+  int POINT = 55;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2624,7 +2542,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 57;
+  int FUNCTION = 56;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2670,7 +2588,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 58;
+  int PARAMETER = 57;
 
   /**
    * The feature id for the '<em><b>Built In Facet Key</b></em>' attribute.
@@ -2716,7 +2634,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnitName()
    * @generated
    */
-  int UNIT_NAME = 59;
+  int UNIT_NAME = 58;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2744,7 +2662,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeRef()
    * @generated
    */
-  int TYPE_REF = 60;
+  int TYPE_REF = 59;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2781,7 +2699,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getSkillRef()
    * @generated
    */
-  int SKILL_REF = 61;
+  int SKILL_REF = 60;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2809,7 +2727,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionRef()
    * @generated
    */
-  int ACTION_REF = 62;
+  int ACTION_REF = 61;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2837,7 +2755,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationRef()
    * @generated
    */
-  int EQUATION_REF = 63;
+  int EQUATION_REF = 62;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2865,7 +2783,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 64;
+  int INT_LITERAL = 63;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2893,7 +2811,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getDoubleLiteral()
    * @generated
    */
-  int DOUBLE_LITERAL = 65;
+  int DOUBLE_LITERAL = 64;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2921,7 +2839,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 66;
+  int BOOLEAN_LITERAL = 65;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2949,7 +2867,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getReservedLiteral()
    * @generated
    */
-  int RESERVED_LITERAL = 67;
+  int RESERVED_LITERAL = 66;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3899,16 +3817,6 @@ public interface GamlPackage extends EPackage
    * @generated
    */
   EClass getS_Action();
-
-  /**
-   * Returns the meta object for class '{@link gama.core.lang.gaml.S_Var <em>SVar</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>SVar</em>'.
-   * @see gama.core.lang.gaml.S_Var
-   * @generated
-   */
-  EClass getS_Var();
 
   /**
    * Returns the meta object for class '{@link gama.core.lang.gaml.BinaryOperator <em>Binary Operator</em>}'.
@@ -5274,16 +5182,6 @@ public interface GamlPackage extends EPackage
      * @generated
      */
     EClass SACTION = eINSTANCE.getS_Action();
-
-    /**
-     * The meta object literal for the '{@link gama.core.lang.gaml.impl.S_VarImpl <em>SVar</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see gama.core.lang.gaml.impl.S_VarImpl
-     * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Var()
-     * @generated
-     */
-    EClass SVAR = eINSTANCE.getS_Var();
 
     /**
      * The meta object literal for the '{@link gama.core.lang.gaml.impl.BinaryOperatorImpl <em>Binary Operator</em>}' class.

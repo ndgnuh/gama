@@ -321,11 +321,6 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
         return createS_ActionAdapter();
       }
       @Override
-      public Adapter caseS_Var(S_Var object)
-      {
-        return createS_VarAdapter();
-      }
-      @Override
       public Adapter caseBinaryOperator(BinaryOperator object)
       {
         return createBinaryOperatorAdapter();
@@ -1168,21 +1163,6 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createS_ActionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.S_Var <em>SVar</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see gama.core.lang.gaml.S_Var
-   * @generated
-   */
-  public Adapter createS_VarAdapter()
   {
     return null;
   }

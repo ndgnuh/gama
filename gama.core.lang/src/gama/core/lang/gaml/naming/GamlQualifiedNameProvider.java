@@ -58,7 +58,6 @@ import gama.core.lang.gaml.S_Other;
 import gama.core.lang.gaml.S_Reflex;
 import gama.core.lang.gaml.S_Solve;
 import gama.core.lang.gaml.S_Species;
-import gama.core.lang.gaml.S_Var;
 import gama.core.lang.gaml.SkillFakeDefinition;
 import gama.core.lang.gaml.SkillRef;
 import gama.core.lang.gaml.Statement;
@@ -321,10 +320,10 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 			return object.getName();
 		}
 
-		@Override
-		public String caseS_Var(final S_Var object) {
-			return object.getName();
-		}
+		// @Override
+		// public String caseS_Var(final S_Var object) {
+		// return object.getName();
+		// }
 
 		@Override
 		public String caseIf(final If object) {

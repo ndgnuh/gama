@@ -903,16 +903,15 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cS_SpeciesParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cS_ReflexParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cS_ActionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cS_VarParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cS_LoopParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cS_LoopParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		///*
 		// * DECLARATIONS
 		// */ S_Declaration:
-		//	-> S_Definition | S_Species | S_Reflex | S_Action | S_Var | S_Loop;
+		//	-> S_Definition | S_Species | S_Reflex | S_Action | S_Loop;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//-> S_Definition | S_Species | S_Reflex | S_Action | S_Var | S_Loop
+		//-> S_Definition | S_Species | S_Reflex | S_Action | S_Loop
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//-> S_Definition
@@ -927,11 +926,8 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		//S_Action
 		public RuleCall getS_ActionParserRuleCall_3() { return cS_ActionParserRuleCall_3; }
 		
-		//S_Var
-		public RuleCall getS_VarParserRuleCall_4() { return cS_VarParserRuleCall_4; }
-		
 		//S_Loop
-		public RuleCall getS_LoopParserRuleCall_5() { return cS_LoopParserRuleCall_5; }
+		public RuleCall getS_LoopParserRuleCall_4() { return cS_LoopParserRuleCall_4; }
 	}
 	public class S_ReflexElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.S_Reflex");
@@ -1141,49 +1137,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//';'
 		public Keyword getSemicolonKeyword_5_1() { return cSemicolonKeyword_5_1; }
-	}
-	public class S_VarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.S_Var");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cS_VarAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cKeyAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cKey_VarOrConstKeyParserRuleCall_1_0 = (RuleCall)cKeyAssignment_1.eContents().get(0);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameValid_IDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Assignment cFacetsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cFacetsFacetParserRuleCall_3_0 = (RuleCall)cFacetsAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//S_Var S_Definition:
-		//	{S_Var} key=_VarOrConstKey name=Valid_ID facets+=Facet* ';';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{S_Var} key=_VarOrConstKey name=Valid_ID facets+=Facet* ';'
-		public Group getGroup() { return cGroup; }
-		
-		//{S_Var}
-		public Action getS_VarAction_0() { return cS_VarAction_0; }
-		
-		//key=_VarOrConstKey
-		public Assignment getKeyAssignment_1() { return cKeyAssignment_1; }
-		
-		//_VarOrConstKey
-		public RuleCall getKey_VarOrConstKeyParserRuleCall_1_0() { return cKey_VarOrConstKeyParserRuleCall_1_0; }
-		
-		//name=Valid_ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-		
-		//Valid_ID
-		public RuleCall getNameValid_IDParserRuleCall_2_0() { return cNameValid_IDParserRuleCall_2_0; }
-		
-		//facets+=Facet*
-		public Assignment getFacetsAssignment_3() { return cFacetsAssignment_3; }
-		
-		//Facet
-		public RuleCall getFacetsFacetParserRuleCall_3_0() { return cFacetsFacetParserRuleCall_3_0; }
-		
-		//';'
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	public class S_AssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.S_Assignment");
@@ -1822,33 +1775,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//"invoke"
 		public Keyword getInvokeKeyword_1() { return cInvokeKeyword_1; }
-	}
-	public class _VarOrConstKeyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml._VarOrConstKey");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cVarKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cConstKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cLetKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cArgKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		
-		//_VarOrConstKey:
-		//	"var" | "const" | "let" | "arg";
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"var" | "const" | "let" | "arg"
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//"var"
-		public Keyword getVarKeyword_0() { return cVarKeyword_0; }
-		
-		//"const"
-		public Keyword getConstKeyword_1() { return cConstKeyword_1; }
-		
-		//"let"
-		public Keyword getLetKeyword_2() { return cLetKeyword_2; }
-		
-		//"arg"
-		public Keyword getArgKeyword_3() { return cArgKeyword_3; }
 	}
 	public class _ReflexKeyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml._ReflexKey");
@@ -4242,18 +4168,16 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall c_SpeciesKeyParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall c_DoKeyParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall c_ReflexKeyParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall c_VarOrConstKeyParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall c_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall c_EquationsKeyParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cIDTerminalRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final RuleCall c_ExperimentKeyParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall c_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall c_EquationsKeyParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cIDTerminalRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall c_ExperimentKeyParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//Valid_ID:
-		//	_SpeciesKey | _DoKey | _ReflexKey | _VarOrConstKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID |
-		//	_ExperimentKey;
+		//	_SpeciesKey | _DoKey | _ReflexKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID | _ExperimentKey;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//_SpeciesKey | _DoKey | _ReflexKey | _VarOrConstKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID | _ExperimentKey
+		//_SpeciesKey | _DoKey | _ReflexKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID | _ExperimentKey
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//_SpeciesKey
@@ -4265,20 +4189,17 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		//_ReflexKey
 		public RuleCall get_ReflexKeyParserRuleCall_2() { return c_ReflexKeyParserRuleCall_2; }
 		
-		//_VarOrConstKey
-		public RuleCall get_VarOrConstKeyParserRuleCall_3() { return c_VarOrConstKeyParserRuleCall_3; }
-		
 		//_1Expr_Facets_BlockOrEnd_Key
-		public RuleCall get_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_4() { return c_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_4; }
+		public RuleCall get_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_3() { return c_1Expr_Facets_BlockOrEnd_KeyParserRuleCall_3; }
 		
 		//_EquationsKey
-		public RuleCall get_EquationsKeyParserRuleCall_5() { return c_EquationsKeyParserRuleCall_5; }
+		public RuleCall get_EquationsKeyParserRuleCall_4() { return c_EquationsKeyParserRuleCall_4; }
 		
 		//ID
-		public RuleCall getIDTerminalRuleCall_6() { return cIDTerminalRuleCall_6; }
+		public RuleCall getIDTerminalRuleCall_5() { return cIDTerminalRuleCall_5; }
 		
 		//_ExperimentKey
-		public RuleCall get_ExperimentKeyParserRuleCall_7() { return c_ExperimentKeyParserRuleCall_7; }
+		public RuleCall get_ExperimentKeyParserRuleCall_6() { return c_ExperimentKeyParserRuleCall_6; }
 	}
 	public class TerminalExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.TerminalExpression");
@@ -4405,7 +4326,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	private final S_ReflexElements pS_Reflex;
 	private final S_DefinitionElements pS_Definition;
 	private final S_ActionElements pS_Action;
-	private final S_VarElements pS_Var;
 	private final S_AssignmentElements pS_Assignment;
 	private final S_EquationsElements pS_Equations;
 	private final S_EquationElements pS_Equation;
@@ -4421,7 +4341,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	private final _1Expr_Facets_BlockOrEnd_KeyElements p_1Expr_Facets_BlockOrEnd_Key;
 	private final _LayerKeyElements p_LayerKey;
 	private final _DoKeyElements p_DoKey;
-	private final _VarOrConstKeyElements p_VarOrConstKey;
 	private final _ReflexKeyElements p_ReflexKey;
 	private final _AssignmentKeyElements p_AssignmentKey;
 	private final ActionArgumentsElements pActionArguments;
@@ -4523,7 +4442,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		this.pS_Reflex = new S_ReflexElements();
 		this.pS_Definition = new S_DefinitionElements();
 		this.pS_Action = new S_ActionElements();
-		this.pS_Var = new S_VarElements();
 		this.pS_Assignment = new S_AssignmentElements();
 		this.pS_Equations = new S_EquationsElements();
 		this.pS_Equation = new S_EquationElements();
@@ -4539,7 +4457,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		this.p_1Expr_Facets_BlockOrEnd_Key = new _1Expr_Facets_BlockOrEnd_KeyElements();
 		this.p_LayerKey = new _LayerKeyElements();
 		this.p_DoKey = new _DoKeyElements();
-		this.p_VarOrConstKey = new _VarOrConstKeyElements();
 		this.p_ReflexKey = new _ReflexKeyElements();
 		this.p_AssignmentKey = new _AssignmentKeyElements();
 		this.pActionArguments = new ActionArgumentsElements();
@@ -4856,7 +4773,7 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	///*
 	// * DECLARATIONS
 	// */ S_Declaration:
-	//	-> S_Definition | S_Species | S_Reflex | S_Action | S_Var | S_Loop;
+	//	-> S_Definition | S_Species | S_Reflex | S_Action | S_Loop;
 	public S_DeclarationElements getS_DeclarationAccess() {
 		return pS_Declaration;
 	}
@@ -4893,16 +4810,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getS_ActionRule() {
 		return getS_ActionAccess().getRule();
-	}
-	
-	//S_Var S_Definition:
-	//	{S_Var} key=_VarOrConstKey name=Valid_ID facets+=Facet* ';';
-	public S_VarElements getS_VarAccess() {
-		return pS_Var;
-	}
-	
-	public ParserRule getS_VarRule() {
-		return getS_VarAccess().getRule();
 	}
 	
 	///*
@@ -5063,16 +4970,6 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule get_DoKeyRule() {
 		return get_DoKeyAccess().getRule();
-	}
-	
-	//_VarOrConstKey:
-	//	"var" | "const" | "let" | "arg";
-	public _VarOrConstKeyElements get_VarOrConstKeyAccess() {
-		return p_VarOrConstKey;
-	}
-	
-	public ParserRule get_VarOrConstKeyRule() {
-		return get_VarOrConstKeyAccess().getRule();
 	}
 	
 	//_ReflexKey:
@@ -5668,8 +5565,7 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Valid_ID:
-	//	_SpeciesKey | _DoKey | _ReflexKey | _VarOrConstKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID |
-	//	_ExperimentKey;
+	//	_SpeciesKey | _DoKey | _ReflexKey | _1Expr_Facets_BlockOrEnd_Key | _EquationsKey | ID | _ExperimentKey;
 	public Valid_IDElements getValid_IDAccess() {
 		return pValid_ID;
 	}

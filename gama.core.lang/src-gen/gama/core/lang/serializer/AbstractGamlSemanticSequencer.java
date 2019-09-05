@@ -46,7 +46,6 @@ import gama.core.lang.gaml.S_Return;
 import gama.core.lang.gaml.S_Solve;
 import gama.core.lang.gaml.S_Species;
 import gama.core.lang.gaml.S_Try;
-import gama.core.lang.gaml.S_Var;
 import gama.core.lang.gaml.SkillFakeDefinition;
 import gama.core.lang.gaml.SkillRef;
 import gama.core.lang.gaml.StandaloneBlock;
@@ -310,9 +309,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case GamlPackage.STRY:
 				sequence_S_Try(context, (S_Try) semanticObject); 
-				return; 
-			case GamlPackage.SVAR:
-				sequence_S_Var(context, (S_Var) semanticObject); 
 				return; 
 			case GamlPackage.SKILL_FAKE_DEFINITION:
 				sequence_SkillFakeDefinition(context, (SkillFakeDefinition) semanticObject); 
@@ -1404,22 +1400,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     (key='try' block=Block catch=Block?)
 	 */
 	protected void sequence_S_Try(ISerializationContext context, S_Try semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Statement returns S_Var
-	 *     S_Declaration returns S_Var
-	 *     S_Var returns S_Var
-	 *     GamlDefinition returns S_Var
-	 *     VarDefinition returns S_Var
-	 *
-	 * Constraint:
-	 *     (key=_VarOrConstKey name=Valid_ID facets+=Facet*)
-	 */
-	protected void sequence_S_Var(ISerializationContext context, S_Var semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
