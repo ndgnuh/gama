@@ -37,7 +37,7 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IDescription;
 import gaml.expressions.IExpression;
 import gaml.expressions.MapExpression;

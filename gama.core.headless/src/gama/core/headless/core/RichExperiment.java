@@ -13,10 +13,10 @@ package gama.core.headless.core;
 import gama.core.headless.common.DataType;
 import gama.core.headless.job.ExperimentJob.ListenedVariable;
 import gama.core.headless.job.ExperimentJob.OutputType;
+import gama.GAMA;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.outputs.IDisplayOutput;
 import gama.common.interfaces.outputs.IOutput;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 
 public class RichExperiment extends Experiment implements IRichExperiment {

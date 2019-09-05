@@ -22,11 +22,11 @@ import java.util.logging.Logger;
 
 import org.locationtech.jts.geom.Envelope;
 
+import gama.GAMA;
 import gama.extensions.graph.util.GraphUtilsPrefuse;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.graph.GamaGraph;

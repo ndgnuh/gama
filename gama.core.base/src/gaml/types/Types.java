@@ -27,11 +27,11 @@ import gama.util.tree.GamaTree.Order;
 import gaml.compilation.AbstractGamlAdditions;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.descriptions.ModelDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.SpeciesDescription;
 import gaml.expressions.IExpression;
 import gaml.expressions.ListExpression;
 import gaml.expressions.MapExpression;
+import gaml.prototypes.OperatorProto;
 
 /**
  * Written by drogoul Modified on 9 juin 2010

@@ -13,7 +13,7 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import gama.runtime.GAMA;
+import gama.GAMA;
 
 public class ShowHideConsoleViewHandler extends AbstractHandler {
 

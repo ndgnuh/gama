@@ -14,6 +14,7 @@ import static gama.common.interfaces.IKeyword.LAYOUT;
 import static gama.common.preferences.GamaPreferences.Displays.CORE_DISPLAY_LAYOUT;
 import static gama.common.preferences.GamaPreferences.Displays.LAYOUTS;
 
+import gama.GAMA;
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
@@ -26,7 +27,6 @@ import gama.processor.annotations.GamlAnnotations.usage;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.outputs.IOutput;
 import gama.common.interfaces.outputs.IOutputManager;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.compilation.interfaces.ISymbol;

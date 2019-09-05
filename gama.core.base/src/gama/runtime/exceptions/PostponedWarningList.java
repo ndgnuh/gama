@@ -13,8 +13,8 @@ package gama.runtime.exceptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import gama.GAMA;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 
 /**

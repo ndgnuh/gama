@@ -30,10 +30,10 @@ import gama.processor.annotations.GamlAnnotations.file;
 
 import org.locationtech.jts.geom.Geometry;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.metamodel.shape.GamaGisGeometry;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

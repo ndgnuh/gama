@@ -16,9 +16,9 @@ import gama.common.interfaces.IGamlDescription;
 import gama.common.interfaces.ITyped;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.SpeciesDescription;
 import gaml.expressions.IExpression;
+import gaml.prototypes.OperatorProto;
 
 /**
  * Written by drogoul Modified on 9 juin 2010

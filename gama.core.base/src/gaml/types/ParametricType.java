@@ -25,9 +25,9 @@ import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.SpeciesDescription;
 import gaml.expressions.IExpression;
+import gaml.prototypes.OperatorProto;
 
 /**
  * Class ParametricType. A class that allows to build composed types with a content type and a key type

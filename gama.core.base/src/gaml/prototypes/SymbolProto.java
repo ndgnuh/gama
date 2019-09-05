@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.descriptions;
+package gaml.prototypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,23 +18,25 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
+import com.google.common.collect.Iterables;
 
 import gama.common.interfaces.IKeyword;
 import gama.common.util.TextBuilder;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.symbol;
+import gama.processor.annotations.ISymbolKind;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.compilation.factories.SymbolFactory;
 import gaml.compilation.interfaces.ISymbol;
 import gaml.compilation.interfaces.ISymbolConstructor;
 import gaml.compilation.interfaces.IValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.SymbolDescription;
+import gaml.descriptions.SymbolSerializer;
 import gaml.statements.Facets;
 import gaml.types.IType;
-
-import com.google.common.collect.Iterables;
 
 /**
  * Written by drogoul Modified on 8 févr. 2010
@@ -113,13 +115,15 @@ public class SymbolProto extends AbstractProto {
 
 	public boolean isLabel(final String s) {
 		final FacetProto f = getPossibleFacets().get(s);
-		if (f == null) { return false; }
+		if (f == null)
+			return false;
 		return f.isLabel();
 	}
 
 	public boolean isId(final String s) {
 		final FacetProto f = getPossibleFacets().get(s);
-		if (f == null) { return false; }
+		if (f == null)
+			return false;
 		return f.isId();
 	}
 
@@ -170,7 +174,8 @@ public class SymbolProto extends AbstractProto {
 
 	@Override
 	public doc getDocAnnotation() {
-		if (support == null) { return null; }
+		if (support == null)
+			return null;
 		doc d = super.getDocAnnotation();
 		if (d == null) {
 			if (support.isAnnotationPresent(action.class)) {
@@ -225,7 +230,7 @@ public class SymbolProto extends AbstractProto {
 		return IKeyword.ASK.equals(name) || IKeyword.LOOP.equals(name) || IKeyword.SWITCH.equals(name);
 	}
 
-	IValidator getValidator() {
+	public IValidator getValidator() {
 		return validator;
 	}
 
@@ -275,7 +280,8 @@ public class SymbolProto extends AbstractProto {
 	 */
 	public Iterable<String> getMissingMandatoryFacets(final Facets facets) {
 		if (facets == null || facets.isEmpty()) {
-			if (mandatoryFacets == null || mandatoryFacets.isEmpty()) { return null; }
+			if (mandatoryFacets == null || mandatoryFacets.isEmpty())
+				return null;
 			return mandatoryFacets;
 		}
 		return Iterables.filter(mandatoryFacets, each -> !facets.containsKey(each));

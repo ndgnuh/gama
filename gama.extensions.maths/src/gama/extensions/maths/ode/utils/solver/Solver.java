@@ -18,8 +18,8 @@ import org.apache.commons.math3.ode.sampling.StepInterpolator;
 
 import gama.dev.utils.DEBUG;
 import gama.extensions.maths.ode.statements.SystemOfEquationsStatement;
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;

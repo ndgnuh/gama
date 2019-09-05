@@ -10,7 +10,7 @@
  **********************************************************************************************/
 package gama.core.application.workspace;
 
-import static gama.runtime.GAMA.getGui;
+import static gama.GAMA.getGui;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -32,8 +32,8 @@ import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.core.runtime.preferences.PreferenceFilterEntry;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.osgi.service.datalocation.Location;
+import gama.GAMA;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 
 public class WorkspaceManager {
 

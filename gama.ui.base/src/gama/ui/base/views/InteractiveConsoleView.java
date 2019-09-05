@@ -34,6 +34,15 @@ import org.eclipse.ui.console.IOConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 import org.eclipse.ui.internal.console.IOConsoleViewer;
 
+import gama.GAMA;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.experiment.ITopLevelAgent;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.util.StringUtils;
+import gama.runtime.scope.ExecutionScope;
+import gama.runtime.scope.IExecutionContext;
+import gama.runtime.scope.IScope;
+import gama.ui.base.access.Documenter;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.IGamaIcons;
@@ -41,16 +50,8 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
-import gama.common.interfaces.IAgent;
-import gama.common.interfaces.experiment.ITopLevelAgent;
-import gama.common.interfaces.gui.IGamaView;
-import gama.common.util.StringUtils;
-import gama.runtime.GAMA;
-import gama.runtime.scope.ExecutionScope;
-import gama.runtime.scope.IExecutionContext;
-import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IVarDescriptionProvider;
 import gaml.expressions.IExpression;
 import gaml.expressions.IVarExpression;
@@ -176,7 +177,6 @@ public class InteractiveConsoleView extends GamaViewPart
 			});
 
 		}).start();
-		;
 
 	}
 
@@ -256,7 +256,8 @@ public class InteractiveConsoleView extends GamaViewPart
 
 	@Override
 	public Control getSizableFontControl() {
-		if (viewer == null) { return null; }
+		if (viewer == null)
+			return null;
 		return viewer.getTextWidget();
 	}
 
@@ -333,7 +334,7 @@ public class InteractiveConsoleView extends GamaViewPart
 			String result = null;
 			boolean error = false;
 			if (entered.startsWith("?")) {
-				result = GAML.getDocumentationOn(entered.substring(1));
+				result = Documenter.getDocumentationOn(entered.substring(1));
 			} else {
 				try {
 					final IExpression expr = GAML.compileExpression(s, agent, this, false);

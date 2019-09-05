@@ -11,8 +11,8 @@
 package gaml.expressions;
 
 import gama.common.preferences.GamaPreferences;
-import gaml.compilation.GAML;
-import gaml.descriptions.OperatorProto;
+import gaml.GAML;
+import gaml.prototypes.OperatorProto;
 
 public class NAryOperator extends AbstractNAryOperator {
 

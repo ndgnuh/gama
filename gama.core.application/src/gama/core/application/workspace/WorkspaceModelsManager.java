@@ -33,10 +33,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.osgi.framework.Bundle;
 import com.google.common.collect.Multimap;
+import gama.GAMA;
 import gama.common.util.FileUtils;
 import gama.core.application.bundles.GamaBundleLoader;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 
 /**
  * Class InitialModelOpener.

@@ -27,7 +27,7 @@ import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.annotations.serializer;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.IDescriptionValidator;

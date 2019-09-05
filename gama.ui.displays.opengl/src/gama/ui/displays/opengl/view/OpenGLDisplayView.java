@@ -9,7 +9,7 @@
  **********************************************************************************************/
 package gama.ui.displays.opengl.view;
 
-import static gama.runtime.GAMA.getGui;
+import static gama.GAMA.getGui;
 
 import java.util.ArrayList;
 import java.util.List;

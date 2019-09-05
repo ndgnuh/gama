@@ -15,7 +15,7 @@ import java.util.HashMap;
 import gama.common.interfaces.IKeyword;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 import gaml.operators.Cast;
 import gaml.operators.Random;

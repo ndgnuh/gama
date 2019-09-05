@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IExecutable;
@@ -26,7 +27,6 @@ import gama.common.interfaces.IStatement.WithArgs;
 import gama.kernel.model.GamlModelSpecies;
 import gama.metamodel.population.IPopulation;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.graph.AbstractGraphNodeAgent;

@@ -13,7 +13,7 @@ package gaml.descriptions;
 import org.eclipse.emf.ecore.EObject;
 
 import gama.common.interfaces.IGamlIssue;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 
 public class OperatorExpressionDescription extends BasicExpressionDescription {

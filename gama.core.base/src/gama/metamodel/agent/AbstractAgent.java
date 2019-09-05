@@ -19,6 +19,7 @@ import org.locationtech.jts.geom.ShapeType;
 
 import com.google.common.primitives.Ints;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.BiConsumerWithPruning;
 import gama.common.interfaces.IAgent;
@@ -33,7 +34,6 @@ import gama.metamodel.topology.ITopology;
 import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

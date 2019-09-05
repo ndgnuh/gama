@@ -14,6 +14,7 @@ import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Multimap;
 
+import gama.GAMA;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.preferences.GamaPreferences;
@@ -22,8 +23,7 @@ import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
 import gama.kernel.experiment.TestAgent;
-import gama.runtime.GAMA;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.descriptions.ModelDescription;
 import gaml.statements.test.TestState;

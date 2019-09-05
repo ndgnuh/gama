@@ -42,7 +42,7 @@ import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.IDescriptionValidator;
 import gaml.descriptions.IDescription;

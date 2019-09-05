@@ -22,8 +22,8 @@ import gama.ui.base.interfaces.IGamlLabelProvider;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gaml.compilation.interfaces.ISyntacticElement;
+import gama.GAMA;
 import gama.common.interfaces.IKeyword;
-import gama.runtime.GAMA;
 
 public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 		implements Comparable<WrappedSyntacticContent> {

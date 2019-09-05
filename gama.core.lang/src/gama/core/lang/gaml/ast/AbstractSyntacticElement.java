@@ -18,8 +18,8 @@ import gama.common.interfaces.IKeyword;
 import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.compilation.interfaces.ISyntacticElement.SyntacticVisitor;
 import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.IDescription.IFacetVisitor;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

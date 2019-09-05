@@ -26,12 +26,12 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.common.util.concurrent.MoreExecutors;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IExecutable;
 import gama.common.preferences.GamaPreferences;
 import gama.common.preferences.Pref;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.benchmark.StopWatch;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;

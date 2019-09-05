@@ -43,6 +43,7 @@ import org.locationtech.jts.operation.union.CascadedPolygonUnion;
 import org.locationtech.jts.util.AssertionFailedException;
 import org.locationtech.jts.util.GeometricShapeFactory;
 
+import gama.GAMA;
 import gama.common.geometry.GamaGeometryFactory;
 import gama.common.geometry.GeometryUtils;
 import gama.common.interfaces.IContainer;
@@ -57,7 +58,6 @@ import gama.processor.annotations.IConcept;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.type;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;

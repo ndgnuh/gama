@@ -22,6 +22,7 @@ import java.util.Set;
 
 import com.google.common.collect.Iterables;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
@@ -49,7 +50,6 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.runtime.ExperimentController;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionScope;
 import gama.runtime.scope.IScope;

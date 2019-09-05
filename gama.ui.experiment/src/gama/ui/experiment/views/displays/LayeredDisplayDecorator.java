@@ -43,12 +43,12 @@ import gama.ui.base.views.InteractiveConsoleView;
 import gama.ui.base.views.toolbar.GamaCommand;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
+import gama.GAMA;
 import gama.common.interfaces.gui.IGui;
 import gama.common.interfaces.outputs.IDisplayDataListener;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.preferences.GamaPreferences;
 import gama.common.util.PlatformUtils;
-import gama.runtime.GAMA;
 
 public class LayeredDisplayDecorator implements IDisplayDataListener {
 

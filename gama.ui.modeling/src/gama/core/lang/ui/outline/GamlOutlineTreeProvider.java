@@ -20,7 +20,7 @@ import gama.common.interfaces.IKeyword;
 import gama.core.lang.gaml.EGaml;
 import gama.processor.annotations.ISymbolKind;
 import gaml.compilation.factories.DescriptionFactory;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 import gama.core.lang.gaml.Block;
 import gama.core.lang.gaml.ExperimentFileStructure;
 import gama.core.lang.gaml.HeadlessExperiment;

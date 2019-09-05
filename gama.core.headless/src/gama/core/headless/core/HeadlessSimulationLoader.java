@@ -18,13 +18,13 @@ import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.Injector;
 
+import gama.GAMA;
 import gama.common.interfaces.IModel;
 import gama.common.preferences.GamaPreferences;
 import gama.core.lang.GamlStandaloneSetup;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import one.util.streamex.StreamEx;
 

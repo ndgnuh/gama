@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
+import gama.GAMA;
 import gama.common.util.TextBuilder;
-import gama.runtime.GAMA;
 import gama.runtime.benchmark.StopWatch;
 import gama.runtime.concurrent.GamaExecutorService;
 import gama.runtime.scope.IScope;

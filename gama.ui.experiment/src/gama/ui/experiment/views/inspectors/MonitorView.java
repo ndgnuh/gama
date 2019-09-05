@@ -39,7 +39,7 @@ import gama.common.interfaces.outputs.IDisplayOutput;
 import gama.common.util.TextBuilder;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 import gaml.expressions.IExpressionFactory;
 import gaml.types.IType;

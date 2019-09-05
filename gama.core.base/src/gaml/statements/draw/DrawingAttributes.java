@@ -24,7 +24,7 @@ import gama.metamodel.shape.GamaPoint;
 import gama.util.GamaColor;
 import gama.util.GamaMaterial;
 import gama.util.file.IGamaFile;
-import gaml.operators.IUnits;
+import gaml.constants.IUnits;
 
 public class DrawingAttributes {
 

@@ -17,11 +17,11 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.Selector;
 import gama.ui.modeling.editor.GamlEditor;
 import gama.ui.modeling.editor.GamlEditorState;
+import gaml.GAML;
+import gama.GAMA;
 import gama.common.interfaces.IModel;
 import gama.common.preferences.GamaPreferences;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
-import gaml.compilation.GAML;
 
 /**
  * The class CreateExperimentSelectionListener.

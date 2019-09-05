@@ -20,8 +20,8 @@ import gama.processor.annotations.GamlAnnotations.factory;
 import gaml.compilation.interfaces.IAgentConstructor;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.TypeDescription;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

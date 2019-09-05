@@ -17,6 +17,7 @@ import java.util.Collection;
 
 import org.locationtech.jts.geom.Envelope;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IDisposable;
@@ -24,7 +25,6 @@ import gama.common.interfaces.IScoped;
 import gama.common.interfaces.outputs.IDisplayOutput.Layered;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gaml.statements.draw.DrawingAttributes;
 

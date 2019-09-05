@@ -10,15 +10,15 @@
  **********************************************************************************************/
 package gama.core.application;
 
-import static gama.runtime.GAMA.getGui;
+import static gama.GAMA.getGui;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.osgi.service.datalocation.Location;
+import gama.GAMA;
 import gama.common.util.MemoryUtils;
 import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.application.workspace.WorkspaceManager;
-import gama.runtime.GAMA;
 import gama.runtime.concurrent.GamaExecutorService;
 import gaml.operators.Dates;
 

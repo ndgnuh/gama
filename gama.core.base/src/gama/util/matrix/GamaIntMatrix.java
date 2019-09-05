@@ -22,12 +22,12 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 import com.google.common.primitives.Ints;
 
+import gama.GAMA;
+import gama.GAMA.InScope;
 import gama.common.interfaces.IContainer;
 import gama.common.util.RandomUtils;
 import gama.common.util.TextBuilder;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
-import gama.runtime.GAMA.InScope;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

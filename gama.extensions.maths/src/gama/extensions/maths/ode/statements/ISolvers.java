@@ -1,6 +1,6 @@
 package gama.extensions.maths.ode.statements;
 
-import gaml.operators.IUnits;
+import gaml.constants.IUnits;
 
 public interface ISolvers extends IUnits {
 

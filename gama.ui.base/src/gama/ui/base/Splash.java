@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 
+import gama.GAMA;
 import gama.common.interfaces.IStartupProgress;
-import gama.runtime.GAMA;
 import gama.ui.base.utils.WorkbenchHelper;
 
 public class Splash implements IStartupProgress {

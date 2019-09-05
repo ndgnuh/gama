@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gama.extensions.maths.ode.statements.SingleEquationStatement;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.StatementDescription;
 import gaml.expressions.IExpression;

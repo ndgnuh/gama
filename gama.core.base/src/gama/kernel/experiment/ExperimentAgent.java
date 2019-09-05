@@ -17,6 +17,7 @@ import java.util.Map;
 
 import com.google.common.collect.Iterables;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IExecutable;
 import gama.common.interfaces.IKeyword;
@@ -50,7 +51,6 @@ import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
 import gama.runtime.ExperimentScheduler;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionScope;
 import gama.runtime.scope.IScope;

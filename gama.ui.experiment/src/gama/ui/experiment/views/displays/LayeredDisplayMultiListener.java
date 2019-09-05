@@ -14,10 +14,10 @@ import java.util.function.Consumer;
 import org.eclipse.swt.graphics.Point;
 
 import gama.ui.base.utils.WorkbenchHelper;
+import gama.GAMA;
 import gama.common.interfaces.gui.IGui;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.util.PlatformUtils;
-import gama.runtime.GAMA;
 
 public class LayeredDisplayMultiListener {
 

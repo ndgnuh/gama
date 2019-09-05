@@ -26,12 +26,12 @@ import gama.processor.annotations.GamlAnnotations.usage;
 import gama.common.interfaces.INamed;
 import gaml.compilation.AbstractGamlAdditions;
 import gaml.compilation.kernel.GamaSkillRegistry;
-import gaml.descriptions.AbstractProto;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.StatementDescription;
 import gaml.descriptions.TypeDescription;
 import gaml.operators.Strings;
+import gaml.prototypes.AbstractProto;
+import gaml.prototypes.OperatorProto;
 import gaml.types.Types;
 
 /**

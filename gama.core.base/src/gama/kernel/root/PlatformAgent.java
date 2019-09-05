@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
+import gama.GAMA;
 import gama.common.interfaces.IExecutable;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.experiment.IExperimentAgent;
@@ -39,7 +40,6 @@ import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionScope;
 import gama.runtime.scope.IScope;

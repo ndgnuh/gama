@@ -23,8 +23,8 @@ import org.eclipse.swt.widgets.Listener;
 import gama.ui.base.access.GamlSearchField;
 import gama.ui.base.utils.PerspectiveHelper;
 import gama.ui.base.utils.WorkbenchHelper;
+import gama.GAMA;
 import gama.common.util.PlatformUtils;
-import gama.runtime.GAMA;
 
 /**
  * The purpose of this class is to install global key bindings that can work in any of the contexts of GAMA (incl.

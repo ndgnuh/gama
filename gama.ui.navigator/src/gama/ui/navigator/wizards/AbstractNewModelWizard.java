@@ -39,7 +39,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import gama.runtime.GAMA;
+import gama.GAMA;
 import gama.ui.navigator.contents.ResourceManager;
 import gaml.operators.Strings;
 

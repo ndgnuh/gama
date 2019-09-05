@@ -14,8 +14,8 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
+import gama.GAMA;
 import gama.ui.experiment.views.inspectors.MonitorView;
-import gama.runtime.GAMA;
 
 public class AddMonitorHandler extends AbstractHandler {
 

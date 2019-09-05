@@ -16,7 +16,7 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 
 import gama.common.util.StringUtils;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 import gaml.expressions.TypeExpression;
 import gaml.types.GamaStringType;

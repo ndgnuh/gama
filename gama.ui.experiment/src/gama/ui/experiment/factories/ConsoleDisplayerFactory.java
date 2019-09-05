@@ -16,12 +16,12 @@ import org.eclipse.ui.services.AbstractServiceFactory;
 import org.eclipse.ui.services.IServiceLocator;
 
 import gama.ui.base.utils.WorkbenchHelper;
+import gama.GAMA;
 import gama.common.interfaces.experiment.ITopLevelAgent;
 import gama.common.interfaces.gui.IConsoleDisplayer;
 import gama.common.interfaces.gui.IGamaView;
 import gama.common.interfaces.gui.IGui;
 import gama.common.interfaces.gui.IGamaView.Console;
-import gama.runtime.GAMA;
 import gama.util.GamaColor;
 import gaml.operators.Strings;
 

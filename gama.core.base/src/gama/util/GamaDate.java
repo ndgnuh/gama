@@ -39,19 +39,19 @@ import java.time.temporal.WeekFields;
 
 import org.apache.commons.lang.StringUtils;
 
+import gama.GAMA;
 import gama.common.interfaces.IValue;
 import gama.kernel.simulation.SimulationAgent;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
+import gaml.constants.TimeUnitConstantExpression;
 import gaml.expressions.IExpression;
-import gaml.expressions.TimeUnitConstantExpression;
 import gaml.operators.Cast;
 import gaml.operators.Dates;
 import gaml.types.GamaDateType;

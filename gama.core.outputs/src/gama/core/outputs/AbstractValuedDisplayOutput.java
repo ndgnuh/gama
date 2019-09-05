@@ -13,7 +13,7 @@ package gama.core.outputs;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.outputs.IOutput;
 import gama.runtime.exceptions.GamaRuntimeException;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IDescription;
 import gaml.expressions.IExpression;
 

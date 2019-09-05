@@ -16,11 +16,11 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Control;
 
+import gama.GAMA;
 import gama.ui.base.menus.GamaMenu;
 import gama.ui.base.views.toolbar.Selector;
 import gama.ui.modeling.editor.GamlEditor;
 import gama.ui.modeling.editor.GamlEditorState;
-import gama.runtime.GAMA;
 
 /**
  * The class CreateExperimentSelectionListener.

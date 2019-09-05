@@ -20,7 +20,7 @@ import gaml.compilation.interfaces.IAgentConstructor;
 import gaml.descriptions.ExperimentDescription;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

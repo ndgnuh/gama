@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
-import gaml.expressions.ConstantExpression;
+import gaml.constants.ConstantExpression;
 import gaml.expressions.IExpression;
 import gaml.types.GamaType;
 import gaml.types.IType;

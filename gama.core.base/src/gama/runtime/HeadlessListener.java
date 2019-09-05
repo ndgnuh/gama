@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentPlan;

@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.locationtech.jts.geom.Coordinate;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IKeyword;
@@ -48,7 +49,6 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.graph.IGraph;

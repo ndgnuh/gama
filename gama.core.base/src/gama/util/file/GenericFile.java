@@ -14,9 +14,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.util.OldFileUtils;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

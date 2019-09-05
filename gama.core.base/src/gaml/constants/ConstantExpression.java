@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.expressions;
+package gaml.constants;
 
 import java.util.Collection;
 
@@ -16,6 +16,8 @@ import gama.common.util.StringUtils;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
+import gaml.expressions.AbstractExpression;
+import gaml.expressions.IExpression;
 import gaml.types.GamaType;
 import gaml.types.IType;
 

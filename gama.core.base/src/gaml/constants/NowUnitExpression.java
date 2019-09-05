@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.expressions;
+package gaml.constants;
 
 import java.time.LocalDateTime;
 

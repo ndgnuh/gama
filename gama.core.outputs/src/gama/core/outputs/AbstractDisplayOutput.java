@@ -10,10 +10,10 @@
  ********************************************************************************************************/
 package gama.core.outputs;
 
+import gama.GAMA;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.gui.IGamaView;
 import gama.common.interfaces.outputs.IDisplayOutput;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;

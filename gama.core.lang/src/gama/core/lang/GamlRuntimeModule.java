@@ -18,6 +18,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Binder;
 
+import gama.GAMA;
 import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.ast.SyntacticFactory;
 import gama.core.lang.gaml.expression.GamlExpressionCompiler;
@@ -33,8 +34,7 @@ import gama.core.lang.gaml.resource.GamlResourceDescriptionStrategy;
 import gama.core.lang.validation.ErrorToDiagnoticTranslator;
 import gama.core.lang.validation.GamlModelBuilder;
 import gama.core.lang.validation.GamlResourceValidator;
-import gama.runtime.GAMA;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.expressions.GamlExpressionFactory;
 import gaml.expressions.IExpressionCompiler;

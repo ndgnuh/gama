@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.factory;
-import gaml.descriptions.FacetProto;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.VariableDescription;
+import gaml.prototypes.FacetProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

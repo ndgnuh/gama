@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.descriptions;
+package gaml.prototypes;
 
 import java.util.Set;
 
@@ -19,6 +19,7 @@ import gama.common.util.TextBuilder;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
+import gaml.descriptions.SymbolSerializer;
 import gaml.types.IType;
 import gaml.types.Types;
 
@@ -34,7 +35,7 @@ public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 	public final boolean internal;
 	private final boolean isLabel;
 	private final boolean isId;
-	final boolean isNewTemp;
+	public final boolean isNewTemp;
 	public final boolean isType;
 	public final Set<String> values;
 	public String doc = "No documentation yet";
@@ -69,7 +70,7 @@ public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 		// }
 	}
 
-	boolean isLabel() {
+	public boolean isLabel() {
 		return isLabel;
 	}
 
@@ -194,8 +195,10 @@ public class FacetProto implements IGamlDescription, Comparable<FacetProto> {
 	 */
 	@Override
 	public String serialize(final boolean includingBuiltIn) {
-		if (deprecated != null) { return ""; }
-		if (SymbolSerializer.uselessFacets.contains(name)) { return ""; }
+		if (deprecated != null)
+			return "";
+		if (SymbolSerializer.uselessFacets.contains(name))
+			return "";
 		return name + (optional ? ": optional" : ": required") + " ("
 				+ (types.length < 2 ? typesToString().substring(1) : typesToString()) + ")";
 	}

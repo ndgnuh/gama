@@ -29,7 +29,7 @@ import gama.common.util.StringUtils;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
-import gaml.compilation.GAML;
+import gaml.GAML;
 
 /**
  * The ListParameterDialog supply a window to help user to modify the list in the visual way.

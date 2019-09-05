@@ -14,6 +14,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import gama.GAMA;
 import gama.common.interfaces.IAddressableContainer;
 import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IKeyword;
@@ -22,7 +23,6 @@ import gama.common.util.FileUtils;
 import gama.core.ext.webb.Webb;
 import gama.core.ext.webb.WebbException;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.file.IGamaFile;

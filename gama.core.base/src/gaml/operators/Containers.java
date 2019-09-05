@@ -11,7 +11,7 @@
 package gaml.operators;
 
 import static com.google.common.collect.Iterables.toArray;
-import static gaml.compilation.GAML.notNull;
+import static gaml.GAML.notNull;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IGamlIssue;
@@ -52,7 +53,6 @@ import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
@@ -65,7 +65,7 @@ import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gama.util.map.GamaMapFactory.GamaMapSupplier;
 import gama.util.matrix.IMatrix;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.IOperatorValidator;
 import gaml.descriptions.IDescription;

@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.dev.utils.DEBUG;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.interfaces.ISyntacticElement;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })

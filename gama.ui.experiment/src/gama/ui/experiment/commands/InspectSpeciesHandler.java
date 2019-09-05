@@ -13,8 +13,8 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
+import gama.GAMA;
 import gama.core.outputs.ValuedDisplayOutputFactory;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gaml.species.ISpecies;
 

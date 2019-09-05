@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
 
+import gama.GAMA;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.dev.utils.DEBUG;
 import gama.runtime.concurrent.GamaExecutorService;

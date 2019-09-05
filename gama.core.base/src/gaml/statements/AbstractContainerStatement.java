@@ -17,7 +17,7 @@ import gama.metamodel.shape.IShape;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.graph.IGraph;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.IDescriptionValidator;
 import gaml.descriptions.IDescription;

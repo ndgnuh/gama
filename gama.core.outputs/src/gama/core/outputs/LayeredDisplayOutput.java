@@ -337,7 +337,7 @@ public class LayeredDisplayOutput extends AbstractDisplayOutput implements IDisp
 			if (type != null) {
 				// Addresses and fixes Issue 833.
 				final String s = type.getExpression().literalValue();
-				if (!IGui.DISPLAYS.containsKey(s) && !gama.runtime.GAMA.isInHeadLessMode()) {
+				if (!IGui.DISPLAYS.containsKey(s) && !gama.GAMA.isInHeadLessMode()) {
 					// In headless mode, all displays should be accepted
 					d.error(s + " is not a valid display type. Valid types are:" + IGui.DISPLAYS.keySet(),
 							IGamlIssue.UNKNOWN_KEYWORD, TYPE);

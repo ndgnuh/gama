@@ -29,7 +29,8 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.ui.ide.application,
  gama.core.lang,
  gama.extensions.files;visibility:=reexport,
- gama.core.outputs
+ gama.core.outputs,
+ org.apache.commons.lang
 Export-Package: gama.ui.base,
  gama.ui.base.access,
  gama.ui.base.bindings,

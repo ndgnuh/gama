@@ -26,8 +26,8 @@ import gama.ui.base.controls.SimpleSlider;
 import gama.ui.base.interfaces.ISpeedDisplayer;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
+import gama.GAMA;
 import gama.kernel.experiment.ExperimentAgent;
-import gama.runtime.GAMA;
 import gaml.operators.Maths;
 
 /**

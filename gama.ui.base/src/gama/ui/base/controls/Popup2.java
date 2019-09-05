@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'Popup.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and simulation
- * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'Popup.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and simulation platform.
+ * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -28,10 +28,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.swt.widgets.Widget;
 
+import gama.ui.base.access.Documenter;
 import gama.ui.base.controls.IPopupProvider.PopupText;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import gaml.compilation.GAML;
 
 /**
  * The class Popup2. An alternative to Popup, which uses JFace dialogs
@@ -127,7 +127,7 @@ public class Popup2 extends PopupDialog {
 			final Label label = (Label) it.next();
 			label.setBackground(color.color());
 			label.setForeground(GamaColors.getTextColorForBackground(color.color()).color());
-			label.setText(GAML.toText(text));
+			label.setText(Documenter.toText(text));
 		});
 		return contents;
 	}

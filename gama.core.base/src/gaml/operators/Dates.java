@@ -42,6 +42,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import gama.GAMA;
 import gama.common.interfaces.IKeyword;
 import gama.common.preferences.GamaPreferences;
 import gama.common.preferences.Pref;
@@ -55,14 +56,13 @@ import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaDate;
 import gama.util.list.GamaDateInterval;
 import gama.util.list.IList;
+import gaml.constants.TimeUnitConstantExpression;
 import gaml.expressions.IExpression;
-import gaml.expressions.TimeUnitConstantExpression;
 import gaml.types.GamaDateType;
 import gaml.types.IType;
 

@@ -16,7 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 
 import gaml.descriptions.IDescription;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

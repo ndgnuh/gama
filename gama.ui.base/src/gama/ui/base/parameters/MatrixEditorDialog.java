@@ -30,8 +30,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import gama.ui.base.utils.WorkbenchHelper;
+import gama.GAMA;
 import gama.common.interfaces.gui.IGui;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.matrix.GamaFloatMatrix;

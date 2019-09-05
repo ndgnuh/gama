@@ -18,7 +18,7 @@ import gama.common.interfaces.experiment.ITopLevelAgent;
 import gama.common.preferences.GamaPreferences;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;

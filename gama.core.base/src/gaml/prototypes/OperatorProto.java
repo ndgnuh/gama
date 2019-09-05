@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.descriptions;
+package gaml.prototypes;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
@@ -36,6 +36,9 @@ import gaml.compilation.AbstractGamlAdditions;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.compilation.interfaces.IValidator;
+import gaml.descriptions.IDescription;
+import gaml.descriptions.SpeciesDescription;
+import gaml.descriptions.VariableDescription;
 import gaml.expressions.BinaryOperator;
 import gaml.expressions.IExpression;
 import gaml.expressions.IExpressionCompiler;
@@ -256,7 +259,7 @@ public class OperatorProto extends AbstractProto {
 	/**
 	 * Method getKind()
 	 *
-	 * @see gaml.descriptions.AbstractProto#getKind()
+	 * @see gaml.prototypes.AbstractProto#getKind()
 	 */
 	@Override
 	public int getKind() {

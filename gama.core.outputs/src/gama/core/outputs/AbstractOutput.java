@@ -14,10 +14,10 @@ import java.util.Collections;
 import java.util.List;
 
 import gama.processor.annotations.GamlAnnotations.inside;
+import gama.GAMA;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.outputs.IOutput;
 import gama.kernel.experiment.ExperimentAgent;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gaml.compilation.Symbol;
 import gaml.compilation.interfaces.ISymbol;

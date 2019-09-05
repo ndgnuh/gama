@@ -34,12 +34,12 @@ import java.util.prefs.Preferences;
 
 import org.geotools.referencing.CRS;
 
+import gama.GAMA;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.IPreferenceChangeListener.IPreferenceBeforeChangeListener;
 import gama.common.preferences.Pref.ValueProvider;
 import gama.common.util.TextBuilder;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gama.util.GamaDate;

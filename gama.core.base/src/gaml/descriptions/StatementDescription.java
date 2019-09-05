@@ -20,7 +20,7 @@ import static java.util.Collections.EMPTY_LIST;
 
 import org.eclipse.emf.ecore.EObject;
 
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 import gaml.expressions.IOperator;
 import gaml.expressions.IVarExpression;

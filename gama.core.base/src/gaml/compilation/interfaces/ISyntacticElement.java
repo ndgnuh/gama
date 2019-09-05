@@ -19,8 +19,8 @@ import gama.common.interfaces.IDisposable;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.INamed;
 import gaml.descriptions.IDescription.IFacetVisitor;
+import gaml.prototypes.SymbolProto;
 import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.statements.Facets;
 
 /**

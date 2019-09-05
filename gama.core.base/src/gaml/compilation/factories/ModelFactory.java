@@ -21,8 +21,8 @@ import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.ModelDescription;
 import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.ValidationContext;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

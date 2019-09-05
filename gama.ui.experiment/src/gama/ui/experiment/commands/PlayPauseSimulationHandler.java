@@ -17,8 +17,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
 
+import gama.GAMA;
 import gama.ui.base.bindings.GamaKeyBindings;
-import gama.runtime.GAMA;
 
 public class PlayPauseSimulationHandler extends AbstractHandler implements IElementUpdater {
 

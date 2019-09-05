@@ -40,6 +40,7 @@ import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
@@ -57,7 +58,6 @@ import gama.metamodel.topology.graph.GamaSpatialGraph;
 import gama.metamodel.topology.graph.GraphTopology;
 import gama.metamodel.topology.grid.GamaSpatialMatrix;
 import gama.metamodel.topology.grid.GridTopology;
-import gama.runtime.GAMA;
 import gama.runtime.benchmark.StopWatch;
 import gama.runtime.concurrent.GamaExecutorService;
 import gama.runtime.exceptions.GamaRuntimeException;

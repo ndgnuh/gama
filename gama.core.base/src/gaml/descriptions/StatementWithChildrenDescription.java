@@ -127,7 +127,7 @@ public class StatementWithChildrenDescription extends StatementDescription {
 			declaration.warning("This declaration of " + name + " shadows the declaration of a global attribute",
 					IGamlIssue.SHADOWS_NAME, facet);
 		}
-		final IExpression result = gaml.compilation.GAML.getExpressionFactory().createVar(name, type, false,
+		final IExpression result = gaml.GAML.getExpressionFactory().createVar(name, type, false,
 				IVarExpression.TEMP, this);
 		temps.put(name, (IVarExpression) result);
 		return result;

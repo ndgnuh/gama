@@ -115,7 +115,7 @@ import gaml.descriptions.ConstantExpressionDescription;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.LabelExpressionDescription;
 import gaml.descriptions.OperatorExpressionDescription;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

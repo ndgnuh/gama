@@ -53,10 +53,10 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.Selector;
+import gama.GAMA;
 import gama.common.preferences.GamaPreferences;
 import gama.common.preferences.Pref;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
 import gama.util.GamaColor;
 import gaml.types.IType;
 

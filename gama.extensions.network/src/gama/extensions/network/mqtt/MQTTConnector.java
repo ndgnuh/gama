@@ -19,11 +19,11 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.dev.utils.DEBUG;
 import gama.extensions.network.common.Connector;
 import gama.extensions.network.common.GamaNetworkException;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 
 public final class MQTTConnector extends Connector {

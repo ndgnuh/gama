@@ -16,7 +16,7 @@ import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 
 import gama.ui.base.views.toolbar.Selector;
 import gama.ui.modeling.editor.GamlEditor;
-import gaml.compilation.GAML;
+import gaml.GAML;
 
 /**
  * The class CreateExperimentSelectionListener.

@@ -37,12 +37,12 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.GamaViewPart;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
+import gama.GAMA;
 import gama.common.interfaces.experiment.ITopLevelAgent;
 import gama.common.interfaces.gui.IGamaView;
 import gama.common.interfaces.outputs.IDisplayOutput;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.interfaces.outputs.ILayerManager;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 
 public abstract class LayeredDisplayView extends GamaViewPart

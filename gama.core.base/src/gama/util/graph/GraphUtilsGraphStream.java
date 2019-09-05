@@ -10,7 +10,7 @@
  ********************************************************************************************************/
 package gama.util.graph;
 
-import static gama.runtime.GAMA.reportError;
+import static gama.GAMA.reportError;
 import static gama.runtime.exceptions.GamaRuntimeException.warning;
 
 import java.util.HashMap;

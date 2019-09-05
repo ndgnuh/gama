@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.TableItem;
 import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.resources.IGamaColors;
 import gama.common.interfaces.IGamlDescription;
-import gaml.compilation.GamlIdiomsProvider;
 
 public class GamlAccessEntry {
 	boolean firstInCategory;

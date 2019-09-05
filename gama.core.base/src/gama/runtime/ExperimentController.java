@@ -12,6 +12,7 @@ package gama.runtime;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
+import gama.GAMA;
 import gama.common.interfaces.experiment.IExperimentController;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.interfaces.gui.IGui;

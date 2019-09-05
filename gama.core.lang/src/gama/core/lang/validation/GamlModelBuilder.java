@@ -21,7 +21,7 @@ import com.google.common.collect.Iterables;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IModel;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.compilation.interfaces.IGamlModelBuilder;
 import gaml.descriptions.ModelDescription;

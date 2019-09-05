@@ -15,7 +15,7 @@ import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.OperatorProto;
+import gaml.prototypes.OperatorProto;
 
 public class TypeFieldExpression extends UnaryOperator {
 

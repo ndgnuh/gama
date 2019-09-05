@@ -18,8 +18,8 @@ import java.net.URLDecoder;
 
 import com.google.common.collect.Iterables;
 
+import gama.GAMA;
 import gama.common.interfaces.experiment.IExperimentAgent;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
 import gama.runtime.scope.IScope;

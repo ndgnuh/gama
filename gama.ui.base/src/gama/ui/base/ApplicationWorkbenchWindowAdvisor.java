@@ -29,8 +29,8 @@ import gama.ui.base.bindings.GamaKeyBindings;
 import gama.ui.base.commands.TestsRunner;
 import gama.ui.base.utils.CleanupHelper;
 import gama.ui.base.utils.PerspectiveHelper;
+import gama.GAMA;
 import gama.common.preferences.GamaPreferences;
-import gama.runtime.GAMA;
 
 public class ApplicationWorkbenchWindowAdvisor extends IDEWorkbenchWindowAdvisor {
 

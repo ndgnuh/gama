@@ -26,6 +26,7 @@ import org.locationtech.jts.geom.Envelope;
 
 import gama.core.outputs.display.AWTDisplayGraphics;
 import gama.core.outputs.display.LayerManager;
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.outputs.IDisplayData;
 import gama.common.interfaces.outputs.IDisplayDataListener;
@@ -39,7 +40,6 @@ import gama.common.preferences.GamaPreferences;
 import gama.common.util.ImageUtils;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

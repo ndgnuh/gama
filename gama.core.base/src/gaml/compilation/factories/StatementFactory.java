@@ -21,7 +21,7 @@ import gaml.descriptions.PrimitiveDescription;
 import gaml.descriptions.StatementDescription;
 import gaml.descriptions.StatementRemoteWithChildrenDescription;
 import gaml.descriptions.StatementWithChildrenDescription;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 
 /**

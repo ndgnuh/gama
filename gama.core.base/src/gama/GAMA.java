@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gama.runtime;
+package gama;
 
 import static gama.dev.utils.DEBUG.PAD;
 import static gama.dev.utils.DEBUG.TIMER_WITH_EXCEPTIONS;
@@ -36,12 +36,13 @@ import gama.kernel.experiment.ExperimentPlan;
 import gama.kernel.experiment.ParametersSet;
 import gama.kernel.root.PlatformAgent;
 import gama.kernel.simulation.SimulationAgent;
+import gama.runtime.HeadlessListener;
 import gama.runtime.benchmark.Benchmark;
 import gama.runtime.benchmark.StopWatch;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.interfaces.ISymbol;
 import gaml.compilation.kernel.GamaMetaModel;
 

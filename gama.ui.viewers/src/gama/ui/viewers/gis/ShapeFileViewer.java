@@ -46,6 +46,7 @@ import org.geotools.styling.StyleBuilder;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.PropertyDescriptor;
 
+import gama.GAMA;
 import gama.dev.utils.DEBUG;
 import gama.extensions.files.GamaShapeFile;
 import gama.extensions.files.GamaShapeFile.ShapeInfo;
@@ -61,7 +62,6 @@ import gama.ui.viewers.gis.geotools.styling.Mode;
 import gama.ui.viewers.gis.geotools.styling.SLDs;
 import gama.ui.viewers.gis.geotools.styling.Utils;
 import gama.metamodel.topology.projection.ProjectionFactory;
-import gama.runtime.GAMA;
 
 public class ShapeFileViewer extends GISFileViewer implements IToolbarDecoratedView.Colorizable {
 

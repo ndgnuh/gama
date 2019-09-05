@@ -21,9 +21,9 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import gama.GAMA;
 import gama.common.preferences.GamaPreferences;
 import gama.common.preferences.Pref;
-import gama.runtime.GAMA;
 
 /**
  * All-purpose static-method container class.

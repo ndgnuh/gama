@@ -20,7 +20,7 @@ import gama.core.headless.batch.AbstractModelLibraryRunner;
 import gama.core.headless.core.Experiment;
 import gama.core.headless.core.HeadlessSimulationLoader;
 import gama.core.headless.runtime.SystemLogger;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.descriptions.ModelDescription;
 

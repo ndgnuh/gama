@@ -35,6 +35,7 @@ import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.w3c.dom.Document;
 
+import gama.GAMA;
 import gama.core.headless.batch.documentation.ModelLibraryGenerator;
 import gama.core.headless.batch.test.ModelLibraryTester;
 import gama.core.headless.batch.validation.ModelLibraryRunner;
@@ -52,8 +53,6 @@ import gama.core.headless.xml.XMLWriter;
 import gama.dev.utils.DEBUG;
 
 import org.locationtech.jts.util.Debug;
-
-import gama.runtime.GAMA;
 
 public class Application implements IApplication {
 

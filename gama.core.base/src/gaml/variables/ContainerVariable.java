@@ -19,7 +19,7 @@ import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.annotations.validator;
 import gaml.descriptions.IDescription;
 import gaml.expressions.IExpression;

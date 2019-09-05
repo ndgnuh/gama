@@ -26,11 +26,13 @@ import gama.common.interfaces.IStatement;
 import gama.common.preferences.GamaPreferences;
 import gama.dev.utils.DEBUG;
 import gama.runtime.exceptions.GamaRuntimeException;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.compilation.interfaces.ISymbol;
 import gaml.expressions.IExpression;
+import gaml.prototypes.FacetProto;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 import gaml.types.GamaType;
 import gaml.types.IType;
@@ -240,7 +242,7 @@ public abstract class SymbolDescription implements IDescription {
 		// the source
 		// (i.e. we are probably in a runtime scenario)
 		if (e == null || e.eResource() == null || e.eResource().getURI().path().contains(SYNTHETIC_RESOURCES_PREFIX)) {
-			if (!warning && !info) { throw GamaRuntimeException.error(s, gama.runtime.GAMA.getRuntimeScope()); }
+			if (!warning && !info) { throw GamaRuntimeException.error(s, gama.GAMA.getRuntimeScope()); }
 			return;
 
 		}

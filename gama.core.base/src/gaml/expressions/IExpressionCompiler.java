@@ -23,7 +23,7 @@ import gama.util.map.IMap;
 import gaml.descriptions.ActionDescription;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.OperatorProto;
+import gaml.prototypes.OperatorProto;
 import gaml.statements.Arguments;
 import gaml.types.Signature;
 

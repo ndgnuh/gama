@@ -10,6 +10,7 @@
  ********************************************************************************************************/
 package gaml.statements;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IKeyword;
 import gama.processor.annotations.IConcept;

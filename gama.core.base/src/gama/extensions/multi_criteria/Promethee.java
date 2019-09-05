@@ -15,7 +15,7 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Map;
 
-import gama.runtime.GAMA;
+import gama.GAMA;
 
 public class Promethee {
 

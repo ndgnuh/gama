@@ -15,9 +15,9 @@ import java.awt.event.MouseMotionListener;
 import org.eclipse.swt.SWT;
 
 import gama.dev.utils.DEBUG;
+import gama.GAMA;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.util.PlatformUtils;
-import gama.runtime.GAMA;
 
 public class WorkaroundForIssue2476 {
 

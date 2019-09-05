@@ -40,13 +40,13 @@ import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import gama.GAMA;
 import gama.common.preferences.GamaPreferences;
 import gama.common.preferences.Pref;
 import gama.common.util.Collector;
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.extensions.files.gaml.GamlFileExtension;
-import gama.runtime.GAMA;
 import gama.ui.base.interfaces.IRefreshHandler;
 import gama.ui.base.menus.GamaMenu;
 import gama.ui.base.resources.GamaIcons;

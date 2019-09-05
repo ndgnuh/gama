@@ -21,9 +21,9 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
+import gaml.prototypes.OperatorProto;
 import gaml.types.GamaType;
 import gaml.types.Types;
 

@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import gama.GAMA;
+import gama.GAMA.InScope;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.batch.IExploration;
 import gama.common.interfaces.experiment.IExperimentPlan;
@@ -23,8 +25,6 @@ import gama.kernel.experiment.ParameterAdapter;
 import gama.kernel.experiment.ParametersSet;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.inside;
-import gama.runtime.GAMA;
-import gama.runtime.GAMA.InScope;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.AbstractGamlAdditions;

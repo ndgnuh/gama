@@ -52,13 +52,13 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
+import gama.GAMA;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentAgent;
 import gama.common.preferences.GamaPreferences;
 import gama.core.ext.webb.Webb;
 import gama.core.ext.webb.WebbException;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.file.CacheLocationProvider;

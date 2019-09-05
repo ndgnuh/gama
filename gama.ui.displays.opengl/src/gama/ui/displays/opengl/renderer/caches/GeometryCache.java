@@ -44,12 +44,12 @@ import com.jogamp.opengl.util.texture.Texture;
 import gama.extensions.files.GamaObjFile;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.ICoordinates;
 import gama.common.preferences.GamaPreferences;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gama.util.file.IGamaFile;
 

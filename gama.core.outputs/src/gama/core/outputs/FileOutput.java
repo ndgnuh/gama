@@ -33,7 +33,7 @@ import gama.common.interfaces.outputs.IOutput;
 import gama.kernel.experiment.ParametersSet;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.descriptions.IDescription;
 import gaml.expressions.IExpression;

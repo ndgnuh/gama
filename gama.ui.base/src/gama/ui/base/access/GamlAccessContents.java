@@ -41,7 +41,6 @@ import gama.ui.base.controls.Popup2;
 import gama.ui.base.resources.GamaFonts;
 import gama.ui.base.resources.IGamaColors;
 import gama.common.interfaces.IGamlDescription;
-import gaml.compilation.GamlIdiomsProvider;
 
 public abstract class GamlAccessContents implements IPopupProvider {
 

@@ -33,6 +33,7 @@ import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.base.views.toolbar.IToolbarDecoratedView;
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.interfaces.gui.IGamaView;
@@ -41,7 +42,6 @@ import gama.common.interfaces.outputs.IOutputManager;
 import gama.kernel.experiment.ExperimentAgent;
 import gama.kernel.simulation.SimulationAgent;
 import gama.metamodel.population.IPopulation;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 
 /**

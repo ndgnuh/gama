@@ -32,6 +32,7 @@ import gaml.descriptions.SymbolSerializer.SpeciesSerializer;
 import gaml.descriptions.SymbolSerializer.StatementSerializer;
 import gaml.descriptions.SymbolSerializer.VarSerializer;
 import gaml.expressions.IExpression;
+import gaml.prototypes.SymbolProto;
 import gaml.statements.Facets;
 import gaml.types.IType;
 

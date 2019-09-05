@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 import gama.core.lang.services.GamlGrammarAccess;
 import gama.core.lang.ui.labeling.GamlLabelProvider;
 import gaml.compilation.factories.DescriptionFactory;
-import gaml.descriptions.SymbolProto;
+import gaml.prototypes.SymbolProto;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant

@@ -1,8 +1,8 @@
 package gama.ui.navigator.contents;
 
+import gama.GAMA;
 import gama.ui.base.interfaces.IGamlLabelProvider;
 import gaml.compilation.interfaces.ISyntacticElement;
-import gama.runtime.GAMA;
 
 public class WrappedExperimentContent extends WrappedSyntacticContent {
 

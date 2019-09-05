@@ -8,10 +8,11 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.expressions;
+package gaml.constants;
 
 import gama.common.interfaces.ISkill;
 import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.expressions.IExpression;
 import gaml.types.IType;
 
 public class SkillConstantExpression extends ConstantExpression<ISkill> {

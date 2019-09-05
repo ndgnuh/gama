@@ -15,10 +15,10 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import gama.GAMA;
 import gama.common.interfaces.IBenchmarkable;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.util.FileUtils;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.file.CsvWriter;

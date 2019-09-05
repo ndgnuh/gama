@@ -1,5 +1,6 @@
 package gama.extensions.bdi;
 
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IKeyword;
 import gama.processor.annotations.GamlAnnotations.doc;
@@ -10,7 +11,6 @@ import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.IConcept;
 import gama.processor.annotations.ISymbolKind;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;

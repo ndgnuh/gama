@@ -26,8 +26,8 @@ import gama.ui.base.resources.GamaIcons;
 import gama.ui.modeling.templates.GamlTemplateFactory;
 import gama.common.preferences.GamaPreferences;
 import gama.util.map.IMap;
-import gaml.descriptions.OperatorProto;
 import gaml.expressions.IExpressionCompiler;
+import gaml.prototypes.OperatorProto;
 import gaml.types.Signature;
 
 /**

@@ -21,9 +21,9 @@ import gama.ui.base.interfaces.IAgentMenuFactory;
 import gama.ui.base.menus.MenuAction;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import gaml.types.IType;
 

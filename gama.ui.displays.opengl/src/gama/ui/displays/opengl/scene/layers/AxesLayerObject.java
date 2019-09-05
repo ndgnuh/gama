@@ -14,9 +14,9 @@ import static gama.common.geometry.Rotation3D.MINUS_I;
 import static gama.common.geometry.Rotation3D.PLUS_J;
 import static gama.common.geometry.Scaling3D.of;
 import static gama.util.GamaColor.getNamed;
-import static gaml.operators.IUnits.bottom_center;
-import static gaml.operators.IUnits.left_center;
-import static gaml.operators.IUnits.top_center;
+import static gaml.constants.IUnits.bottom_center;
+import static gaml.constants.IUnits.left_center;
+import static gaml.constants.IUnits.top_center;
 import static gaml.types.GamaGeometryType.buildCone3D;
 import static gaml.types.GamaGeometryType.buildLineCylinder;
 

@@ -11,7 +11,7 @@ import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
-import gama.runtime.GAMA;
+import gama.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.statements.test.AbstractSummary;

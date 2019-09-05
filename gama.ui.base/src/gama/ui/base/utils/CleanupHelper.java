@@ -43,8 +43,8 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 import org.eclipse.ui.wizards.IWizardCategory;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 
+import gama.GAMA;
 import gama.ui.base.resources.GamaIcons;
-import gama.runtime.GAMA;
 
 public class CleanupHelper {
 

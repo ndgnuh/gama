@@ -7,7 +7,7 @@ import org.eclipse.ui.actions.SelectionListenerAction;
 import org.eclipse.ui.navigator.CommonActionProvider;
 import org.eclipse.ui.navigator.ICommonActionExtensionSite;
 
-import gama.runtime.GAMA;
+import gama.GAMA;
 import gama.ui.navigator.contents.WrappedExperimentContent;
 import gama.ui.navigator.contents.WrappedSyntacticContent;
 

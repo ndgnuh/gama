@@ -15,9 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import gama.GAMA;
 import gama.core.ext.graphstream.FileSource;
 import gama.core.ext.graphstream.SinkAdapter;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 

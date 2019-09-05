@@ -30,10 +30,10 @@ import com.google.inject.name.Named;
 import gama.processor.annotations.GamlAnnotations.usage;
 import gama.ui.modeling.templates.GamlTemplateStore.GamlTemplateStoreProvider;
 import gaml.compilation.factories.DescriptionFactory;
-import gaml.descriptions.OperatorProto;
-import gaml.descriptions.SymbolProto;
 import gaml.expressions.IExpressionCompiler;
 import gaml.operators.Strings;
+import gaml.prototypes.OperatorProto;
+import gaml.prototypes.SymbolProto;
 import gaml.types.Signature;
 
 /**

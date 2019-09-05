@@ -39,7 +39,7 @@ import gama.common.interfaces.IGamlIssue;
 import gama.runtime.scope.IExecutionContext;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.GamlCompilationError;
 import gaml.compilation.factories.ModelFactory;
 import gaml.compilation.interfaces.ISyntacticElement;

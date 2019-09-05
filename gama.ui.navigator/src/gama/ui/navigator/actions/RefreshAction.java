@@ -49,11 +49,11 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.dialogs.IDEResourceInfoUtils;
 
+import gama.GAMA;
 import gama.extensions.files.metadata.FileMetaDataProvider;
 import gama.ui.base.interfaces.IRefreshHandler;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.navigator.GamaNavigator;
-import gama.runtime.GAMA;
 
 /**
  * Standard action for refreshing the workspace from the local file system for the selected resources and all of their

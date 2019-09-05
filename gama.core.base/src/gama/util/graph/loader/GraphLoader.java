@@ -13,8 +13,8 @@ package gama.util.graph.loader;
 import java.io.File;
 import java.util.Map;
 
+import gama.GAMA;
 import gama.common.util.FileUtils;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.graph.GamaGraph;

@@ -9,7 +9,7 @@
  *
  ********************************************************************************************************/
 
-package gaml.compilation;
+package gama.ui.base.access;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,16 +26,16 @@ import gama.common.interfaces.IGamlDescription;
 import gama.common.interfaces.IKeyword;
 import gaml.compilation.factories.DescriptionFactory;
 import gaml.compilation.kernel.GamaSkillRegistry;
+import gaml.constants.IUnits;
+import gaml.constants.UnitConstantExpression;
 import gaml.descriptions.ActionDescription;
-import gaml.descriptions.FacetProto;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.SkillDescription;
 import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.VariableDescription;
 import gaml.expressions.IExpressionCompiler;
-import gaml.expressions.UnitConstantExpression;
-import gaml.operators.IUnits;
+import gaml.prototypes.FacetProto;
+import gaml.prototypes.OperatorProto;
+import gaml.prototypes.SymbolProto;
 import gaml.types.IType;
 import gaml.types.Types;
 

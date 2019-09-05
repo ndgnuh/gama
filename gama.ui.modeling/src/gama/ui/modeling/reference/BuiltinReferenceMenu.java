@@ -28,11 +28,11 @@ import gaml.compilation.AbstractGamlAdditions;
 import gaml.compilation.kernel.GamaSkillRegistry;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.ModelDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.descriptions.StatementDescription;
-import gaml.descriptions.SymbolProto;
 import gaml.descriptions.TypeDescription;
 import gaml.descriptions.VariableDescription;
+import gaml.prototypes.OperatorProto;
+import gaml.prototypes.SymbolProto;
 import gaml.types.Types;
 
 /**

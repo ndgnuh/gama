@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.descriptions;
+package gaml.prototypes;
 
 import java.lang.reflect.AnnotatedElement;
 import java.util.Arrays;

@@ -16,11 +16,11 @@ import gama.common.preferences.GamaPreferences;
 import gama.common.util.TextBuilder;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.OperatorProto;
 import gaml.operators.Cast;
+import gaml.prototypes.OperatorProto;
 
 /**
  * The Class BinaryOperator.

@@ -30,7 +30,7 @@ import gama.common.util.StringUtils;
 import gama.kernel.simulation.SimulationAgent;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.expressions.IExpression;
 import gaml.types.GamaStringType;
 import gaml.types.IType;

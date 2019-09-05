@@ -36,6 +36,7 @@ import org.opengis.feature.type.AttributeDescriptor;
 import org.opengis.feature.type.GeometryType;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.GeometryUtils;
 import gama.common.util.GISUtils;
@@ -50,7 +51,6 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.file;
 import gama.processor.annotations.IConcept;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;

@@ -38,8 +38,8 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.sun.media.jai.codec.FileSeekableStream;
 
+import gama.GAMA;
 import gama.dev.utils.DEBUG;
-import gama.runtime.GAMA;
 import gama.runtime.scope.IScope;
 import it.geosolutions.jaiext.ConcurrentOperationRegistry;
 

@@ -11,7 +11,7 @@
 package gaml.expressions;
 
 import gama.common.interfaces.IBenchmarkable;
-import gaml.descriptions.OperatorProto;
+import gaml.prototypes.OperatorProto;
 
 /**
  * Written by drogoul Modified on 22 ao�t 2010

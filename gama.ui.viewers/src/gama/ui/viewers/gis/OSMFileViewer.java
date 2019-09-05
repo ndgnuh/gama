@@ -46,6 +46,7 @@ import org.geotools.styling.Style;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
+import gama.GAMA;
 import gama.extensions.files.GamaOsmFile;
 import gama.ui.base.controls.FlatButton;
 import gama.ui.base.menus.GamaMenu;
@@ -55,7 +56,6 @@ import gama.ui.base.resources.GamaColors.GamaUIColor;
 import gama.ui.base.views.toolbar.GamaToolbarFactory;
 import gama.ui.viewers.gis.geotools.styling.Utils;
 import gama.metamodel.shape.IShape;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 
 public class OSMFileViewer extends GISFileViewer {

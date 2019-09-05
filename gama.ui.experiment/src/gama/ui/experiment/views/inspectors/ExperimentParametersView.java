@@ -28,14 +28,14 @@ import gama.ui.base.views.toolbar.GamaToolbar2;
 import gama.ui.experiment.commands.ArrangeDisplayViews;
 import gama.ui.experiment.experiment.parameters.EditorsList;
 import gama.ui.experiment.experiment.parameters.ExperimentsParametersList;
+import gaml.constants.IUnits;
+import gama.GAMA;
 import gama.common.interfaces.experiment.IExperimentDisplayable;
 import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.interfaces.gui.IGamaView;
 import gama.common.interfaces.gui.IGui;
 import gama.kernel.experiment.ParametersSet;
 import gama.kernel.simulation.SimulationAgent;
-import gama.runtime.GAMA;
-import gaml.operators.IUnits;
 
 public class ExperimentParametersView extends AttributesEditorsView<String> implements IGamaView.Parameters {
 

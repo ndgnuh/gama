@@ -11,6 +11,7 @@
 package gama.core.outputs.layers;
 
 import gama.dev.utils.DEBUG;
+import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IExecutable;
 import gama.common.interfaces.IKeyword;
@@ -19,7 +20,6 @@ import gama.common.interfaces.outputs.IEventLayerListener;
 import gama.common.interfaces.outputs.IGraphics;
 import gama.common.interfaces.outputs.ILayerStatement;
 import gama.metamodel.shape.GamaPoint;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.expressions.IExpression;

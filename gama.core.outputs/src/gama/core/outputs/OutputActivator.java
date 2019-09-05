@@ -6,7 +6,7 @@ import static gama.kernel.experiment.ExperimentOutputsFactory.setSimulationOutpu
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-import gama.runtime.GAMA;
+import gama.GAMA;
 
 public class OutputActivator implements BundleActivator {
 

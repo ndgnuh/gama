@@ -1,14 +1,14 @@
 /*******************************************************************************************************
  *
- * gaml.operators.IUnits.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.IUnits.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.operators;
+package gaml.constants;
 
 import java.awt.Font;
 import java.lang.reflect.Field;
@@ -17,15 +17,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gama.metamodel.shape.GamaPoint;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IConstantCategory;
 import gama.processor.annotations.GamlAnnotations.constant;
 import gama.processor.annotations.GamlAnnotations.doc;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IConstantCategory;
 import gama.util.GamaColor;
 import gama.util.GamaDate;
 import gama.util.GamaMaterial;
-import gaml.compilation.GAML;
-import gaml.expressions.UnitConstantExpression;
+import gaml.GAML;
+import gaml.operators.Cast;
+import gaml.operators.Dates;
 import gaml.types.GamaDateType;
 import gaml.types.IType;
 import gaml.types.Types;
@@ -759,7 +760,8 @@ public interface IUnits {
 	@SuppressWarnings ("rawtypes")
 	static Object add(final String name, final Object value, final String doc, final String deprec,
 			final boolean isTime, final String[] names) {
-		if (UNITS_EXPR.containsKey(name)) { return null; }
+		if (UNITS_EXPR.containsKey(name))
+			return null;
 		final IType t = Types.get(value.getClass());
 		final UnitConstantExpression exp =
 				GAML.getExpressionFactory().createUnit(value, t, name, doc, deprec, isTime, names);

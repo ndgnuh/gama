@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 
 import org.locationtech.jts.geom.Geometry;
 
+import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IExecutable;
@@ -50,7 +51,6 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
-import gama.runtime.GAMA;
 import gama.runtime.concurrent.GamaExecutorService;
 import gama.runtime.concurrent.GamaExecutorService.Caller;
 import gama.runtime.exceptions.GamaRuntimeException;

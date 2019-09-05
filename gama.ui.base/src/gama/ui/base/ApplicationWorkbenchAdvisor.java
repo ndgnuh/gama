@@ -44,11 +44,11 @@ import gama.core.application.workspace.WorkspaceModelsManager;
 import gama.dev.utils.DEBUG;
 import gama.ui.base.utils.PerspectiveHelper;
 import gama.ui.base.utils.SwtGui;
+import gama.GAMA;
 import gama.common.interfaces.gui.IGui;
 import gama.common.interfaces.outputs.IEventLayerDelegate;
 import gama.common.interfaces.outputs.IEventLayerStatement;
 import gama.common.util.FileUtils;
-import gama.runtime.GAMA;
 import gama.runtime.concurrent.GamaExecutorService;
 
 public class ApplicationWorkbenchAdvisor extends IDEWorkbenchAdvisor {

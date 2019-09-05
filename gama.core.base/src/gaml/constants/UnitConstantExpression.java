@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.expressions;
+package gaml.constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.LabelExpressionDescription;
+import gaml.expressions.IExpression;
 import gaml.types.IType;
 import gaml.types.Types;
 

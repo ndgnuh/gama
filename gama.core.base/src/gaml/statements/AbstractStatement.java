@@ -10,8 +10,8 @@
  ********************************************************************************************************/
 package gaml.statements;
 
+import gama.GAMA;
 import gama.common.interfaces.IStatement;
-import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.Symbol;

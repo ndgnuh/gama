@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import gaml.compilation.GAML;
+import gaml.GAML;
 import gaml.descriptions.IDescription;
 import gaml.expressions.IExpression;
 
