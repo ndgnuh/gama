@@ -127,7 +127,6 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getS_ActionAccess().getGroup(), "rule__S_Action__Group__0");
 			builder.put(grammarAccess.getS_ActionAccess().getGroup_3(), "rule__S_Action__Group_3__0");
 			builder.put(grammarAccess.getS_AssignmentAccess().getGroup(), "rule__S_Assignment__Group__0");
-			builder.put(grammarAccess.getS_AssignmentAccess().getGroup_0(), "rule__S_Assignment__Group_0__0");
 			builder.put(grammarAccess.getS_EquationsAccess().getGroup(), "rule__S_Equations__Group__0");
 			builder.put(grammarAccess.getS_EquationsAccess().getGroup_3_0(), "rule__S_Equations__Group_3_0__0");
 			builder.put(grammarAccess.getS_EquationsAccess().getGroup_3_0_1(), "rule__S_Equations__Group_3_0_1__0");
@@ -152,7 +151,6 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTypeFacetAccess().getGroup(), "rule__TypeFacet__Group__0");
 			builder.put(grammarAccess.getTypeFacetAccess().getGroup_1_0(), "rule__TypeFacet__Group_1_0__0");
 			builder.put(grammarAccess.getActionFacetAccess().getGroup(), "rule__ActionFacet__Group__0");
-			builder.put(grammarAccess.getVarFacetAccess().getGroup(), "rule__VarFacet__Group__0");
 			builder.put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
 			builder.put(grammarAccess.getBlockAccess().getGroup_2(), "rule__Block__Group_2__0");
 			builder.put(grammarAccess.getArgumentPairAccess().getGroup(), "rule__ArgumentPair__Group__0");
@@ -295,10 +293,10 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getS_ActionAccess().getArgsAssignment_3_1(), "rule__S_Action__ArgsAssignment_3_1");
 			builder.put(grammarAccess.getS_ActionAccess().getFacetsAssignment_4(), "rule__S_Action__FacetsAssignment_4");
 			builder.put(grammarAccess.getS_ActionAccess().getBlockAssignment_5_0(), "rule__S_Action__BlockAssignment_5_0");
-			builder.put(grammarAccess.getS_AssignmentAccess().getExprAssignment_0_0(), "rule__S_Assignment__ExprAssignment_0_0");
-			builder.put(grammarAccess.getS_AssignmentAccess().getKeyAssignment_0_1(), "rule__S_Assignment__KeyAssignment_0_1");
-			builder.put(grammarAccess.getS_AssignmentAccess().getValueAssignment_0_2(), "rule__S_Assignment__ValueAssignment_0_2");
-			builder.put(grammarAccess.getS_AssignmentAccess().getFacetsAssignment_0_3(), "rule__S_Assignment__FacetsAssignment_0_3");
+			builder.put(grammarAccess.getS_AssignmentAccess().getExprAssignment_0(), "rule__S_Assignment__ExprAssignment_0");
+			builder.put(grammarAccess.getS_AssignmentAccess().getKeyAssignment_1(), "rule__S_Assignment__KeyAssignment_1");
+			builder.put(grammarAccess.getS_AssignmentAccess().getValueAssignment_2(), "rule__S_Assignment__ValueAssignment_2");
+			builder.put(grammarAccess.getS_AssignmentAccess().getFacetsAssignment_3(), "rule__S_Assignment__FacetsAssignment_3");
 			builder.put(grammarAccess.getS_EquationsAccess().getKeyAssignment_0(), "rule__S_Equations__KeyAssignment_0");
 			builder.put(grammarAccess.getS_EquationsAccess().getNameAssignment_1(), "rule__S_Equations__NameAssignment_1");
 			builder.put(grammarAccess.getS_EquationsAccess().getFacetsAssignment_2(), "rule__S_Equations__FacetsAssignment_2");
@@ -339,8 +337,6 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getActionFacetAccess().getKeyAssignment_0(), "rule__ActionFacet__KeyAssignment_0");
 			builder.put(grammarAccess.getActionFacetAccess().getExprAssignment_1_0(), "rule__ActionFacet__ExprAssignment_1_0");
 			builder.put(grammarAccess.getActionFacetAccess().getBlockAssignment_1_1(), "rule__ActionFacet__BlockAssignment_1_1");
-			builder.put(grammarAccess.getVarFacetAccess().getKeyAssignment_0(), "rule__VarFacet__KeyAssignment_0");
-			builder.put(grammarAccess.getVarFacetAccess().getExprAssignment_1(), "rule__VarFacet__ExprAssignment_1");
 			builder.put(grammarAccess.getBlockAccess().getStatementsAssignment_2_0(), "rule__Block__StatementsAssignment_2_0");
 			builder.put(grammarAccess.getArgumentPairAccess().getOpAssignment_0_0_0_0(), "rule__ArgumentPair__OpAssignment_0_0_0_0");
 			builder.put(grammarAccess.getArgumentPairAccess().getOpAssignment_0_0_1_0(), "rule__ArgumentPair__OpAssignment_0_0_1_0");
