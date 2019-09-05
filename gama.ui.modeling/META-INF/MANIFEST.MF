@@ -11,22 +11,16 @@ Require-Bundle: gama.core.lang;visibility:=reexport,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.ui.codetemplates.ui,
  gama.core.base;bundle-version="1.0.0",
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.ui.ide,
  org.eclipse.compare,
- org.eclipse.ui.editors,
- org.eclipse.ui,
  org.eclipse.core.expressions,
- org.eclipse.jface,
  gama.ui.base,
  gama.ui.navigator,
- org.eclipse.core.resources,
- gama.core.application,
- org.eclipse.emf.common,
- org.eclipse.emf.ecore,
  gama.core.ext,
- org.eclipse.ui.workbench,
- org.apache.commons.lang;bundle-version="2.6.0"
+ org.apache.commons.lang;bundle-version="2.6.0",
+ org.eclipse.ui,
+ org.eclipse.ui.editors,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-Activator: gama.ui.modeling.internal.ModelingActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: gama.ui.modeling
