@@ -3441,70 +3441,38 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class ExpressionListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.ExpressionList");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Assignment cExprsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
-		private final RuleCall cExprsExpressionParserRuleCall_0_0_0 = (RuleCall)cExprsAssignment_0_0.eContents().get(0);
-		private final Group cGroup_0_1 = (Group)cGroup_0.eContents().get(1);
-		private final Keyword cCommaKeyword_0_1_0 = (Keyword)cGroup_0_1.eContents().get(0);
-		private final Assignment cExprsAssignment_0_1_1 = (Assignment)cGroup_0_1.eContents().get(1);
-		private final RuleCall cExprsExpressionParserRuleCall_0_1_1_0 = (RuleCall)cExprsAssignment_0_1_1.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Assignment cExprsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cExprsParameterParserRuleCall_1_0_0 = (RuleCall)cExprsAssignment_1_0.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cCommaKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cExprsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cExprsParameterParserRuleCall_1_1_1_0 = (RuleCall)cExprsAssignment_1_1_1.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cExprsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cExprsExpressionParserRuleCall_0_0 = (RuleCall)cExprsAssignment_0.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cExprsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cExprsExpressionParserRuleCall_1_1_0 = (RuleCall)cExprsAssignment_1_1.eContents().get(0);
 		
 		//ExpressionList:
-		//	exprs+=Expression (',' exprs+=Expression)* | exprs+=Parameter (',' exprs+=Parameter)*;
+		//	exprs+=Expression (',' exprs+=Expression)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//exprs+=Expression (',' exprs+=Expression)* | exprs+=Parameter (',' exprs+=Parameter)*
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
 		//exprs+=Expression (',' exprs+=Expression)*
-		public Group getGroup_0() { return cGroup_0; }
+		public Group getGroup() { return cGroup; }
 		
 		//exprs+=Expression
-		public Assignment getExprsAssignment_0_0() { return cExprsAssignment_0_0; }
+		public Assignment getExprsAssignment_0() { return cExprsAssignment_0; }
 		
 		//Expression
-		public RuleCall getExprsExpressionParserRuleCall_0_0_0() { return cExprsExpressionParserRuleCall_0_0_0; }
+		public RuleCall getExprsExpressionParserRuleCall_0_0() { return cExprsExpressionParserRuleCall_0_0; }
 		
 		//(',' exprs+=Expression)*
-		public Group getGroup_0_1() { return cGroup_0_1; }
-		
-		//','
-		public Keyword getCommaKeyword_0_1_0() { return cCommaKeyword_0_1_0; }
-		
-		//exprs+=Expression
-		public Assignment getExprsAssignment_0_1_1() { return cExprsAssignment_0_1_1; }
-		
-		//Expression
-		public RuleCall getExprsExpressionParserRuleCall_0_1_1_0() { return cExprsExpressionParserRuleCall_0_1_1_0; }
-		
-		//exprs+=Parameter (',' exprs+=Parameter)*
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//exprs+=Parameter
-		public Assignment getExprsAssignment_1_0() { return cExprsAssignment_1_0; }
-		
-		//Parameter
-		public RuleCall getExprsParameterParserRuleCall_1_0_0() { return cExprsParameterParserRuleCall_1_0_0; }
-		
-		//(',' exprs+=Parameter)*
-		public Group getGroup_1_1() { return cGroup_1_1; }
-		
 		//','
-		public Keyword getCommaKeyword_1_1_0() { return cCommaKeyword_1_1_0; }
+		public Keyword getCommaKeyword_1_0() { return cCommaKeyword_1_0; }
 		
-		//exprs+=Parameter
-		public Assignment getExprsAssignment_1_1_1() { return cExprsAssignment_1_1_1; }
+		//exprs+=Expression
+		public Assignment getExprsAssignment_1_1() { return cExprsAssignment_1_1; }
 		
-		//Parameter
-		public RuleCall getExprsParameterParserRuleCall_1_1_1_0() { return cExprsParameterParserRuleCall_1_1_1_0; }
+		//Expression
+		public RuleCall getExprsExpressionParserRuleCall_1_1_0() { return cExprsExpressionParserRuleCall_1_1_0; }
 	}
 	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "gama.core.lang.Gaml.Parameter");
@@ -5279,7 +5247,7 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//ExpressionList:
-	//	exprs+=Expression (',' exprs+=Expression)* | exprs+=Parameter (',' exprs+=Parameter)*;
+	//	exprs+=Expression (',' exprs+=Expression)*;
 	public ExpressionListElements getExpressionListAccess() {
 		return pExpressionList;
 	}

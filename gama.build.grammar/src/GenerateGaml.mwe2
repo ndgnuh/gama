@@ -1,4 +1,4 @@
-module gama.core.gaml.GenerateGaml
+module GenerateGaml
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
@@ -53,6 +53,7 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
+			grammarUri = "Gaml.xtext"
 			name = "gama.core.lang.Gaml"
 			fileExtensions = "gaml,experiment"
 			validator = {
