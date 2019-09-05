@@ -57,7 +57,7 @@ import gama.ui.modeling.reference.BuiltinReferenceMenu;
 import gama.ui.modeling.reference.ColorReferenceMenu;
 import gama.ui.modeling.reference.OperatorsReferenceMenu;
 import gama.ui.modeling.reference.TemplateReferenceMenu;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 
 public class EditorMenu extends ContributionItem implements IWorkbenchContribution {
 

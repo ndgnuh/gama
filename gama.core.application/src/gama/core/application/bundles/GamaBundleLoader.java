@@ -35,8 +35,6 @@ import gama.common.interfaces.outputs.IEventLayerStatement;
 import gama.dev.utils.DEBUG;
 import gama.runtime.GAMA;
 import gaml.compilation.AbstractGamlAdditions;
-import gaml.compilation.interfaces.IGamlAdditions;
-import gaml.compilation.kernel.GamaClassLoader;
 import gaml.compilation.kernel.GamaMetaModel;
 import gaml.statements.CreateStatement;
 import gaml.types.Types;
@@ -238,16 +236,16 @@ public class GamaBundleLoader {
 			String shortcut = bundle.getSymbolicName();
 			shortcut = shortcut.substring(shortcut.lastIndexOf('.') + 1);
 			GamaClassLoader.getInstance().addBundle(bundle);
-			Class<IGamlAdditions> gamlAdditions = null;
+			Class<AbstractGamlAdditions> gamlAdditions = null;
 			try {
-				gamlAdditions = (Class<IGamlAdditions>) bundle
+				gamlAdditions = (Class<AbstractGamlAdditions>) bundle
 					.loadClass(ADDITIONS_PACKAGE_BASE + "." + shortcut + "." + ADDITIONS_CLASS_NAME);
 			} catch (final ClassNotFoundException e1) {
 				ERR(">> Impossible to load additions from " + bundle.getSymbolicName() + " because of " + e1);
 				throw e1;
 			}
 
-			IGamlAdditions add = null;
+			AbstractGamlAdditions add = null;
 			try {
 				add = gamlAdditions.getDeclaredConstructor().newInstance();
 			} catch (final InstantiationException e) {

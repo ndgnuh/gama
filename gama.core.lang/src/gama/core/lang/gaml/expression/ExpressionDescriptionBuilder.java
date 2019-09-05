@@ -18,7 +18,7 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.common.interfaces.IKeyword;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.ConstantExpressionDescription;
 import gaml.descriptions.IExpressionDescription;
 import gaml.operators.IUnits;

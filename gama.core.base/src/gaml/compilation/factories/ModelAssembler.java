@@ -37,18 +37,16 @@ import gama.common.interfaces.IKeyword;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.compilation.GamlCompilationError;
-import gaml.compilation.ast.ISyntacticElement;
-import gaml.compilation.ast.SyntacticFactory;
-import gaml.compilation.ast.SyntacticModelElement;
-import gaml.compilation.ast.ISyntacticElement.SyntacticVisitor;
+import gaml.compilation.interfaces.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement.SyntacticVisitor;
 import gaml.descriptions.ExperimentDescription;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IDescription.DescriptionVisitor;
 import gaml.descriptions.ModelDescription;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.SymbolDescription;
 import gaml.descriptions.TypeDescription;
 import gaml.descriptions.ValidationContext;
-import gaml.descriptions.IDescription.DescriptionVisitor;
 import gaml.statements.Facets;
 import gaml.types.Types;
 
@@ -68,7 +66,7 @@ public class ModelAssembler {
 		final ImmutableList<ISyntacticElement> models = ImmutableList.copyOf(allModels);
 		final IMap<String, ISyntacticElement> speciesNodes = GamaMapFactory.create();
 		final IMap<String, IMap<String, ISyntacticElement>>[] experimentNodes = new IMap[1];
-		final ISyntacticElement globalNodes = SyntacticFactory.create(GLOBAL, (EObject) null, true);
+		final ISyntacticElement globalNodes = DescriptionFactory.SYNTACTIC_FACTORY.create(GLOBAL, (EObject) null, true);
 		final ISyntacticElement source = models.get(0);
 		Facets globalFacets = null;
 		if (source.hasFacet(IKeyword.PRAGMA)) {
@@ -91,7 +89,7 @@ public class ModelAssembler {
 		final Map<String, SpeciesDescription> tempSpeciesCache = GamaMapFactory.createUnordered();
 
 		for (final ISyntacticElement cm : models.reverse()) {
-			final SyntacticModelElement currentModel = (SyntacticModelElement) cm;
+			final ISyntacticElement currentModel = cm;
 			if (currentModel != null) {
 				if (currentModel.hasFacets()) {
 					if (globalFacets == null) {
@@ -125,8 +123,8 @@ public class ModelAssembler {
 		// be able to look for resources. These working paths come from the
 		// imported models
 
-		Set<String> absoluteAlternatePathAsStrings = models.isEmpty() ? null : ImmutableSet
-				.copyOf(Iterables.transform(models.reverse(), each -> ((SyntacticModelElement) each).getPath()));
+		Set<String> absoluteAlternatePathAsStrings = models.isEmpty() ? null
+				: ImmutableSet.copyOf(Iterables.transform(models.reverse(), each -> each.getPath()));
 
 		if (mm != null) {
 			for (final ModelDescription m1 : mm.values()) {
@@ -220,7 +218,8 @@ public class ModelAssembler {
 		for (final SpeciesDescription sd : getSpeciesInHierarchicalOrder(model)) {
 			sd.inheritFromParent();
 			if (sd.isExperiment()) {
-				if (!sd.finalizeDescription()) { return null; }
+				if (!sd.finalizeDescription())
+					return null;
 			}
 		}
 
@@ -229,7 +228,8 @@ public class ModelAssembler {
 			createSchedulerSpecies(model);
 		}
 
-		if (!model.finalizeDescription()) { return null; }
+		if (!model.finalizeDescription())
+			return null;
 
 		if (document) {
 			collector.document(model);
@@ -241,9 +241,11 @@ public class ModelAssembler {
 	private Iterable<SpeciesDescription> getSpeciesInHierarchicalOrder(final ModelDescription model) {
 		final DirectedGraph<SpeciesDescription, Object> hierarchy = new SimpleDirectedGraph<>(Object.class);
 		final DescriptionVisitor visitor = desc -> {
-			if (desc instanceof ModelDescription) { return true; }
+			if (desc instanceof ModelDescription)
+				return true;
 			final SpeciesDescription sd = ((SpeciesDescription) desc).getParent();
-			if (sd == null || sd == desc) { return false; }
+			if (sd == null || sd == desc)
+				return false;
 			hierarchy.addVertex((SpeciesDescription) desc);
 			if (!sd.isBuiltIn()) {
 				hierarchy.addVertex(sd);
@@ -354,7 +356,8 @@ public class ModelAssembler {
 	 *            the structure of micro-species
 	 */
 	void complementSpecies(final SpeciesDescription species, final ISyntacticElement node) {
-		if (species == null) { return; }
+		if (species == null)
+			return;
 		species.copyJavaAdditions();
 		node.visitChildren(element -> {
 			final IDescription childDesc = DescriptionFactory.create(element, species, null);
@@ -375,7 +378,8 @@ public class ModelAssembler {
 	void parentExperiment(final ModelDescription model, final ISyntacticElement micro) {
 		// Gather the previously created species
 		final SpeciesDescription mDesc = model.getExperiment(micro.getName());
-		if (mDesc == null) { return; }
+		if (mDesc == null)
+			return;
 		final String p = mDesc.getLitteral(IKeyword.PARENT);
 		// If no parent is defined, we assume it is "experiment"
 		// No cache needed for experiments ??
@@ -390,7 +394,8 @@ public class ModelAssembler {
 			final Map<String, SpeciesDescription> cache) {
 		// Gather the previously created species
 		final SpeciesDescription mDesc = cache.get(micro.getName());
-		if (mDesc == null || mDesc.isExperiment()) { return; }
+		if (mDesc == null || mDesc.isExperiment())
+			return;
 		String p = mDesc.getLitteral(IKeyword.PARENT);
 		// If no parent is defined, we assume it is "agent"
 		if (p == null) {

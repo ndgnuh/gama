@@ -21,7 +21,7 @@ import gama.common.interfaces.IKeyword;
 import gama.util.file.IGamaFileMetaData;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.IExpressionDescription;
 
 public class WrappedGamaFile extends WrappedFile {

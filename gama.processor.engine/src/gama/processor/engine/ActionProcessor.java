@@ -39,7 +39,7 @@ public class ActionProcessor extends ElementProcessor<action> {
 
 	private final StringBuilder buildArgs(final ProcessorContext context, final Element e, final arg[] args,
 			final StringBuilder sb) {
-		sb.append("new Children(");
+		sb.append("D(");
 		// TODO Argument types not taken into account when declaring them
 		for (int i = 0; i < args.length; i++) {
 			final arg arg = args[i];
@@ -64,11 +64,10 @@ public class ActionProcessor extends ElementProcessor<action> {
 
 	private String getReturnType(final ProcessorContext context, final ExecutableElement ex) {
 		final TypeMirror tm = ex.getReturnType();
-		if (tm.getKind().equals(TypeKind.VOID)) {
+		if (tm.getKind().equals(TypeKind.VOID))
 			return "void";
-		} else {
+		else
 			return rawNameOf(context, tm);
-		}
 	}
 
 	@Override

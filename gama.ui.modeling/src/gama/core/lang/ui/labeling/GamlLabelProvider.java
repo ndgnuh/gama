@@ -26,7 +26,7 @@ import com.google.inject.Singleton;
 import gama.common.interfaces.IKeyword;
 import gama.core.lang.gaml.EGaml;
 import gama.ui.base.interfaces.IGamlLabelProvider;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gama.core.lang.gaml.Expression;
 import gama.core.lang.gaml.Facet;
 import gama.core.lang.gaml.HeadlessExperiment;

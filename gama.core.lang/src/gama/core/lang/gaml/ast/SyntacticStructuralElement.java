@@ -1,6 +1,6 @@
 /*******************************************************************************************************
  *
- * gaml.compilation.ast.SyntacticExperimentElement.java, in plugin gama.core,
+ * gaml.compilation.ast.SyntacticStructuralElement.java, in plugin gama.core,
  * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
  * 
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
@@ -8,45 +8,43 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  * 
  ********************************************************************************************************/
-package gaml.compilation.ast;
+package gama.core.lang.gaml.ast;
 
 import org.eclipse.emf.ecore.EObject;
 
 import gaml.statements.Facets;
 
 /**
- * Class GlobalSyntacticElement.
- * 
- * @author drogoul
- * @since 9 sept. 2013
- * 
+ * The Class SyntacticStructuralElement.
  */
-public class SyntacticExperimentElement extends SyntacticStructuralElement {
+public class SyntacticStructuralElement extends SyntacticComposedElement {
 
 	/**
-	 * Instantiates a new syntactic experiment element.
+	 * The name.
+	 */
+	String name;
+
+	/**
+	 * Instantiates a new syntactic structural element.
 	 *
 	 * @param keyword the keyword
 	 * @param facets the facets
 	 * @param statement the statement
 	 */
-	SyntacticExperimentElement(final String keyword, final Facets facets, final EObject statement) {
+	public SyntacticStructuralElement(final String keyword, final Facets facets, final EObject statement) {
 		super(keyword, facets, statement);
+		name = super.getName();
 	}
 
 	/* (non-Javadoc)
-	 * @see gaml.compilation.ast.AbstractSyntacticElement#isSpecies()
+	 * @see gaml.compilation.ast.AbstractSyntacticElement#getName()
 	 */
 	@Override
-	public boolean isSpecies() {
-		return false;
+	public String getName() {
+		if (name == null) {
+			name = super.getName();
+		}
+		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see gaml.compilation.ast.AbstractSyntacticElement#isExperiment()
-	 */
-	@Override
-	public boolean isExperiment() {
-		return true;
-	}
 }

@@ -6,7 +6,7 @@
    <aboutInfo>
       <image path="branding_icons/icon128.png"/>
       <text>
-         GAMA Platform - V1.9.0 http://gama-platform.org
+         GAMA Platform - V2.0 http://gama-platform.org
 
 (c) 2007-2008 IRD-UR GEODES (France) &amp; IFI-MSI (Vietnam)
 (c) 2009-2011 UMI 209 UMMISCO IRD/UPMC - MSI (Vietnam)
@@ -65,6 +65,7 @@ openFile
             winExtraLargeHigh="./icons/launcher_icons/icon256_32b.bmp"/>
       </win>
    </launcher>
+
 
    <vm>
       <linux include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11</linux>
@@ -276,9 +277,9 @@ openFile
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="5" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <property name="version" value="1.9" />
       <property name="org.eclipse.update.reconcile" value="false" />
       <property name="eclipse.buildId" value="${build.id}" />
+      <property name="version" value="1.9" />
    </configurations>
 
    <repositories>

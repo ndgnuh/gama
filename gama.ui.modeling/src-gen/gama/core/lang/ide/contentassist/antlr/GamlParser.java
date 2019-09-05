@@ -87,6 +87,7 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAccessAccess().getRightAlternatives_1_1_1_1_0(), "rule__Access__RightAlternatives_1_1_1_1_0");
 			builder.put(grammarAccess.getPrimaryAccess().getAlternatives(), "rule__Primary__Alternatives");
 			builder.put(grammarAccess.getAbstractRefAccess().getAlternatives(), "rule__AbstractRef__Alternatives");
+			builder.put(grammarAccess.getExpressionListAccess().getAlternatives(), "rule__ExpressionList__Alternatives");
 			builder.put(grammarAccess.getParameterAccess().getAlternatives_1(), "rule__Parameter__Alternatives_1");
 			builder.put(grammarAccess.getParameterAccess().getBuiltInFacetKeyAlternatives_1_0_0(), "rule__Parameter__BuiltInFacetKeyAlternatives_1_0_0");
 			builder.put(grammarAccess.getTypeRefAccess().getAlternatives(), "rule__TypeRef__Alternatives");
@@ -199,8 +200,10 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getPrimaryAccess().getGroup_4(), "rule__Primary__Group_4__0");
 			builder.put(grammarAccess.getPrimaryAccess().getGroup_4_5(), "rule__Primary__Group_4_5__0");
 			builder.put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
-			builder.put(grammarAccess.getExpressionListAccess().getGroup(), "rule__ExpressionList__Group__0");
+			builder.put(grammarAccess.getExpressionListAccess().getGroup_0(), "rule__ExpressionList__Group_0__0");
+			builder.put(grammarAccess.getExpressionListAccess().getGroup_0_1(), "rule__ExpressionList__Group_0_1__0");
 			builder.put(grammarAccess.getExpressionListAccess().getGroup_1(), "rule__ExpressionList__Group_1__0");
+			builder.put(grammarAccess.getExpressionListAccess().getGroup_1_1(), "rule__ExpressionList__Group_1_1__0");
 			builder.put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
 			builder.put(grammarAccess.getParameterAccess().getGroup_1_1(), "rule__Parameter__Group_1_1__0");
 			builder.put(grammarAccess.getUnitRefAccess().getGroup(), "rule__UnitRef__Group__0");
@@ -378,8 +381,10 @@ public class GamlParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFunctionAccess().getLeftAssignment_1(), "rule__Function__LeftAssignment_1");
 			builder.put(grammarAccess.getFunctionAccess().getTypeAssignment_2(), "rule__Function__TypeAssignment_2");
 			builder.put(grammarAccess.getFunctionAccess().getRightAssignment_4(), "rule__Function__RightAssignment_4");
-			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_0(), "rule__ExpressionList__ExprsAssignment_0");
-			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_1_1(), "rule__ExpressionList__ExprsAssignment_1_1");
+			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_0_0(), "rule__ExpressionList__ExprsAssignment_0_0");
+			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_0_1_1(), "rule__ExpressionList__ExprsAssignment_0_1_1");
+			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_1_0(), "rule__ExpressionList__ExprsAssignment_1_0");
+			builder.put(grammarAccess.getExpressionListAccess().getExprsAssignment_1_1_1(), "rule__ExpressionList__ExprsAssignment_1_1_1");
 			builder.put(grammarAccess.getParameterAccess().getBuiltInFacetKeyAssignment_1_0(), "rule__Parameter__BuiltInFacetKeyAssignment_1_0");
 			builder.put(grammarAccess.getParameterAccess().getLeftAssignment_1_1_0(), "rule__Parameter__LeftAssignment_1_1_0");
 			builder.put(grammarAccess.getParameterAccess().getRightAssignment_2(), "rule__Parameter__RightAssignment_2");

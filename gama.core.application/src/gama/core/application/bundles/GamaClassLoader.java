@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  * 
  ********************************************************************************************************/
-package gaml.compilation.kernel;
+package gama.core.application.bundles;
 
 import java.io.IOException;
 import java.net.URL;

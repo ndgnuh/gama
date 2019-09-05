@@ -869,7 +869,7 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     ExpressionList returns ExpressionList
 	 *
 	 * Constraint:
-	 *     (exprs+=Expression exprs+=Expression*)
+	 *     ((exprs+=Expression exprs+=Expression*) | (exprs+=Parameter exprs+=Parameter*))
 	 */
 	protected void sequence_ExpressionList(ISerializationContext context, ExpressionList semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

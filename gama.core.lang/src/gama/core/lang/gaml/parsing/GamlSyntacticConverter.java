@@ -102,15 +102,15 @@ import gama.core.lang.gaml.StandaloneBlock;
 import gama.core.lang.gaml.Statement;
 import gama.core.lang.gaml.TypeRef;
 import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.ast.SyntacticFactory;
+import gama.core.lang.gaml.ast.SyntacticModelElement;
+import gama.core.lang.gaml.ast.SyntacticModelElement.SyntacticExperimentModelElement;
 import gama.core.lang.gaml.expression.ExpressionDescriptionBuilder;
 import gama.core.lang.gaml.impl.ModelImpl;
 import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.processor.annotations.ISymbolKind;
-import gaml.compilation.ast.ISyntacticElement;
-import gaml.compilation.ast.SyntacticFactory;
-import gaml.compilation.ast.SyntacticModelElement;
-import gaml.compilation.ast.SyntacticModelElement.SyntacticExperimentModelElement;
 import gaml.compilation.factories.DescriptionFactory;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.ConstantExpressionDescription;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.LabelExpressionDescription;
@@ -130,6 +130,7 @@ import gaml.statements.Facets;
 public class GamlSyntacticConverter {
 
 	final static ExpressionDescriptionBuilder builder = new ExpressionDescriptionBuilder();
+	final static SyntacticFactory factory = new SyntacticFactory();
 
 	public static String getAbsoluteContainerFolderPathOf(final Resource r) {
 		URI uri = r.getURI();
@@ -155,14 +156,14 @@ public class GamlSyntacticConverter {
 
 	public ISyntacticElement buildSyntacticContents(final EObject root, final Set<Diagnostic> errors) {
 		if (root instanceof StandaloneBlock) {
-			final SyntacticModelElement elt = SyntacticFactory.createSyntheticModel(root);
+			final SyntacticModelElement elt = factory.createSyntheticModel(root);
 			convertBlock(elt, ((StandaloneBlock) root).getBlock(), errors);
 			return elt;
 		}
 		if (root instanceof ExperimentFileStructure) {
 			final HeadlessExperiment he = ((ExperimentFileStructure) root).getExp();
 			final String path = getAbsoluteContainerFolderPathOf(root.eResource());
-			final SyntacticExperimentModelElement exp = SyntacticFactory.createExperimentModel(root, he, path);
+			final SyntacticExperimentModelElement exp = factory.createExperimentModel(root, he, path);
 			convertFacets(he, exp.getExperiment(), errors);
 			exp.setFacet(NAME, LabelExpressionDescription.create(exp.getExperiment().getName()));
 			convStatements(exp.getExperiment(), EGaml.getInstance().getStatementsOf(he.getBlock()), errors);
@@ -175,8 +176,8 @@ public class GamlSyntacticConverter {
 		// final Object[] imps = collectImports(m);<>
 
 		final String path = getAbsoluteContainerFolderPathOf(root.eResource());
-		final SyntacticModelElement model = (SyntacticModelElement) SyntacticFactory.create(MODEL, m,
-				EGaml.getInstance().hasChildren(m), path/* , imps */);
+		final SyntacticModelElement model =
+				(SyntacticModelElement) factory.create(MODEL, m, EGaml.getInstance().hasChildren(m), path/* , imps */);
 		if (prgm != null) {
 			model.setFacet(IKeyword.PRAGMA, ConstantExpressionDescription.create(prgm));
 		}
@@ -256,8 +257,8 @@ public class GamlSyntacticConverter {
 		final boolean isVar = stm instanceof S_Definition && !DescriptionFactory.isStatementProto(keyword)
 				&& !doesNotDefineAttributes(upper.getKeyword()) && !EGaml.getInstance().hasChildren(stm);
 
-		final ISyntacticElement elt = isVar ? SyntacticFactory.createVar(keyword, ((S_Definition) stm).getName(), stm)
-				: SyntacticFactory.create(keyword, stm, EGaml.getInstance().hasChildren(stm));
+		final ISyntacticElement elt = isVar ? factory.createVar(keyword, ((S_Definition) stm).getName(), stm)
+				: factory.create(keyword, stm, EGaml.getInstance().hasChildren(stm));
 
 		if (stm instanceof S_Assignment) {
 			keyword = convertAssignment((S_Assignment) stm, keyword, elt, stm.getExpr(), errors);
@@ -394,7 +395,7 @@ public class GamlSyntacticConverter {
 		final EObject elseBlock = stm.getElse();
 		if (elseBlock != null) {
 			final ISyntacticElement elseElt =
-					SyntacticFactory.create(ELSE, elseBlock, EGaml.getInstance().hasChildren(elseBlock));
+					factory.create(ELSE, elseBlock, EGaml.getInstance().hasChildren(elseBlock));
 			if (elseBlock instanceof Statement) {
 				elseElt.addChild(convStatement(elt, (Statement) elseBlock, errors));
 			} else {
@@ -408,7 +409,7 @@ public class GamlSyntacticConverter {
 		final EObject catchBlock = stm.getCatch();
 		if (catchBlock != null) {
 			final ISyntacticElement catchElt =
-					SyntacticFactory.create(IKeyword.CATCH, catchBlock, EGaml.getInstance().hasChildren(catchBlock));
+					factory.create(IKeyword.CATCH, catchBlock, EGaml.getInstance().hasChildren(catchBlock));
 			convStatements(catchElt, EGaml.getInstance().getStatementsOf(catchBlock), errors);
 			elt.addChild(catchElt);
 		}
@@ -417,7 +418,7 @@ public class GamlSyntacticConverter {
 	private void convertArgs(final ActionArguments args, final ISyntacticElement elt, final Set<Diagnostic> errors) {
 		if (args != null) {
 			for (final ArgumentDefinition def : EGaml.getInstance().getArgsOf(args)) {
-				final ISyntacticElement arg = SyntacticFactory.create(ARG, def, false);
+				final ISyntacticElement arg = factory.create(ARG, def, false);
 				addFacet(arg, NAME, convertToLabel(null, def.getName()), errors);
 				final EObject type = def.getType();
 				addFacet(arg, TYPE, convExpr(type, errors), errors);
@@ -603,7 +604,7 @@ public class GamlSyntacticConverter {
 			if (expr == null && facet.getBlock() != null) {
 				final Block b = facet.getBlock();
 				final ISyntacticElement elt =
-						SyntacticFactory.create(ACTION, new Facets(NAME, SYNTHETIC + SYNTHETIC_ACTION++), true);
+						factory.create(ACTION, new Facets(NAME, SYNTHETIC + SYNTHETIC_ACTION++), true);
 				convertBlock(elt, b, errors);
 				return convExpr(elt, errors);
 			}

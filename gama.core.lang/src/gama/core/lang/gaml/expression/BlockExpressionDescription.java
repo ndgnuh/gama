@@ -9,8 +9,8 @@
  **********************************************************************************************/
 package gama.core.lang.gaml.expression;
 
-import gaml.compilation.ast.ISyntacticElement;
 import gaml.compilation.factories.DescriptionFactory;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.SpeciesDescription;

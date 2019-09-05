@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.factory;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.ModelDescription;
 import gaml.descriptions.SpeciesDescription;

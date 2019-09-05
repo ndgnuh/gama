@@ -21,9 +21,9 @@ import org.eclipse.swt.graphics.Image;
 import gama.ui.base.interfaces.IGamlLabelProvider;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.resources.GamaColors.GamaUIColor;
+import gaml.compilation.interfaces.ISyntacticElement;
 import gama.common.interfaces.IKeyword;
 import gama.runtime.GAMA;
-import gaml.compilation.ast.ISyntacticElement;
 
 public class WrappedSyntacticContent extends VirtualContent<VirtualContent<?>>
 		implements Comparable<WrappedSyntacticContent> {

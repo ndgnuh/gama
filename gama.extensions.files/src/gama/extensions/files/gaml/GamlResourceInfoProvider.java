@@ -33,7 +33,7 @@ import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.dev.utils.DEBUG;
 import gaml.compilation.GAML;
-import gaml.compilation.ast.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamlResourceInfoProvider {

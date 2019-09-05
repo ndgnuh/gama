@@ -35,8 +35,8 @@ import gama.core.lang.gaml.impl.S_IfImpl;
 import gama.core.lang.gaml.impl.StatementImpl;
 import gama.core.lang.gaml.util.GamlSwitch;
 import gama.util.map.GamaMapFactory;
-import gaml.compilation.ast.SyntacticFactory;
 import gaml.compilation.interfaces.IGamlEcoreUtils;
+import gaml.compilation.interfaces.ISyntacticFactory;
 
 /**
  * The class EGaml.getInstance(). A stateless class, bunch of utilities to work with the various GAML statements and
@@ -337,7 +337,7 @@ public class EGaml implements IGamlEcoreUtils {
 					s = s.split("<")[0];
 					// Special case for the 'species<xxx>' case
 					if (s.equals("species")) {
-						s = SyntacticFactory.SPECIES_VAR;
+						s = ISyntacticFactory.SPECIES_VAR;
 					}
 				}
 				return s;

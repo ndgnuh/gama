@@ -8,7 +8,7 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.compilation.ast;
+package gama.core.lang.gaml.ast;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -16,6 +16,8 @@ import java.util.function.Predicate;
 import org.eclipse.emf.ecore.EObject;
 
 import gama.common.util.TextBuilder;
+import gaml.compilation.interfaces.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement.SyntacticVisitor;
 import gaml.operators.Strings;
 import gaml.statements.Facets;
 

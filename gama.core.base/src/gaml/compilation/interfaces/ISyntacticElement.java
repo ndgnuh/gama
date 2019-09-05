@@ -1,14 +1,14 @@
 /*******************************************************************************************************
  *
- * gaml.compilation.ast.ISyntacticElement.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.compilation.ast.ISyntacticElement.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.compilation.ast;
+package gaml.compilation.interfaces;
 
 import java.util.Map;
 import java.util.function.Predicate;
@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import gama.common.interfaces.IDisposable;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.INamed;
+import gaml.descriptions.IDescription.IFacetVisitor;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.SymbolProto;
-import gaml.descriptions.IDescription.IFacetVisitor;
 import gaml.statements.Facets;
 
 /**
@@ -237,6 +237,13 @@ public interface ISyntacticElement extends INamed, IDisposable {
 	 * @return true if this element has children
 	 */
 	boolean hasChildren();
+
+	/**
+	 * Returns the path of the model or null
+	 */
+	default String getPath() {
+		return null;
+	}
 
 	/**
 	 * Allows a visitor to visit all the children of this element.

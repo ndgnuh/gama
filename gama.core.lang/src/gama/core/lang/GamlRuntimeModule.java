@@ -19,6 +19,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import com.google.inject.Binder;
 
 import gama.core.lang.gaml.EGaml;
+import gama.core.lang.gaml.ast.SyntacticFactory;
 import gama.core.lang.gaml.expression.GamlExpressionCompiler;
 import gama.core.lang.gaml.linking.GamlLinkingErrorMessageProvider;
 import gama.core.lang.gaml.linking.GamlLinkingService;
@@ -34,6 +35,7 @@ import gama.core.lang.validation.GamlModelBuilder;
 import gama.core.lang.validation.GamlResourceValidator;
 import gama.runtime.GAMA;
 import gaml.compilation.GAML;
+import gaml.compilation.factories.DescriptionFactory;
 import gaml.expressions.GamlExpressionFactory;
 import gaml.expressions.IExpressionCompiler;
 
@@ -56,6 +58,7 @@ public class GamlRuntimeModule extends AbstractGamlRuntimeModule {
 				GamlExpressionFactory.registerParserProvider(() -> new GamlExpressionCompiler());
 				GAML.registerGamlEcoreUtils(EGaml.getInstance());
 				GAML.registerGamlModelBuilder(new GamlModelBuilder());
+				DescriptionFactory.registerSyntacticFactory(new SyntacticFactory());
 				initialized = true;
 			});
 

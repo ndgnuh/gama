@@ -30,25 +30,26 @@ import org.geotools.data.store.ContentFeatureSource;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.referencing.CRS;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Polygon;
 import org.opengis.feature.Feature;
 import org.opengis.feature.type.AttributeDescriptor;
 import org.opengis.feature.type.GeometryType;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import gama.dev.utils.DEBUG;
-import gama.extensions.files.metadata.FileMetaDataProvider;
-import gama.extensions.files.metadata.GamaFileMetaData;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.GamlAnnotations.doc;
-import gama.processor.annotations.GamlAnnotations.example;
-import gama.processor.annotations.GamlAnnotations.file;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.GeometryUtils;
 import gama.common.util.GISUtils;
 import gama.common.util.TextBuilder;
+import gama.dev.utils.DEBUG;
+import gama.extensions.files.metadata.FileMetaDataProvider;
+import gama.extensions.files.metadata.GamaFileMetaData;
 import gama.metamodel.shape.GamaGisGeometry;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.projection.ProjectionFactory;
+import gama.processor.annotations.GamlAnnotations.doc;
+import gama.processor.annotations.GamlAnnotations.example;
+import gama.processor.annotations.GamlAnnotations.file;
+import gama.processor.annotations.IConcept;
 import gama.runtime.GAMA;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -387,7 +388,25 @@ public class GamaShapeFile extends GamaGisFile {
 					Geometry g = (Geometry) feature.getDefaultGeometryProperty().getValue();
 					if (g != null && !g.isEmpty() /* Fix for Issue 725 && 677 */ ) {
 						if (!with3D && !g.isValid()) {
-							g = g.buffer(0.0);
+							Geometry g2 = g.buffer(0.0);
+							if (g2.isEmpty()) {
+								if (g instanceof Polygon) {
+									Polygon p = (Polygon) g;
+									Geometry g3 = GeometryUtils.GEOMETRY_FACTORY
+											.createPolygon(p.getExteriorRing().getCoordinates());
+									for (int i = 0; i < p.getNumInteriorRing(); i++) {
+										Geometry g4 = GeometryUtils.GEOMETRY_FACTORY
+												.createPolygon(p.getInteriorRingN(i).getCoordinates());
+										g3 = g3.difference(g4);
+									}
+									g = g3;
+								} else {
+									g = GeometryUtils.GEOMETRY_FACTORY.createGeometry(g);
+								}
+
+							} else {
+								g = g2;
+							}
 						}
 						g = gis.transform(g);
 
@@ -396,7 +415,10 @@ public class GamaShapeFile extends GamaGisFile {
 							g.geometryChanged();
 						}
 						g = multiPolygonManagement(g);
-						list.add(new GamaGisGeometry(g, feature));
+						GamaGisGeometry gt = new GamaGisGeometry(g, feature);
+						if (gt.getInnerGeometry() != null) {
+							list.add(gt);
+						}
 
 					} else if (g == null) {
 						// See Issue 725

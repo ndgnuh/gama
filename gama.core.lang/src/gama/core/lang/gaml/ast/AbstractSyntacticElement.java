@@ -8,13 +8,15 @@
  * Visit https://github.com/gama-platform/gama for license information and contacts.
  *
  ********************************************************************************************************/
-package gaml.compilation.ast;
+package gama.core.lang.gaml.ast;
 
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
 import gama.common.interfaces.IKeyword;
+import gaml.compilation.interfaces.ISyntacticElement;
+import gaml.compilation.interfaces.ISyntacticElement.SyntacticVisitor;
 import gaml.descriptions.IExpressionDescription;
 import gaml.descriptions.SymbolProto;
 import gaml.descriptions.IDescription.IFacetVisitor;

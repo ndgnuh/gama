@@ -56,9 +56,8 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IExecutionContext;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.GAML;
-import gaml.compilation.ast.SyntacticFactory;
-import gaml.compilation.ast.SyntacticModelElement;
 import gaml.compilation.factories.DescriptionFactory;
+import gaml.compilation.interfaces.ISyntacticFactory;
 import gaml.compilation.kernel.GamaSkillRegistry;
 import gaml.descriptions.ActionDescription;
 import gaml.descriptions.ExperimentDescription;
@@ -120,6 +119,7 @@ import gama.core.lang.gaml.Unit;
 import gama.core.lang.gaml.UnitName;
 import gama.core.lang.gaml.VarDefinition;
 import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.ast.SyntacticModelElement;
 import gama.core.lang.gaml.util.GamlSwitch;
 
 /**
@@ -299,7 +299,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 
 		if (primary == null) {
 			primary = object.getRef().getName();
-		} else if (primary.equals(SyntacticFactory.SPECIES_VAR)) {
+		} else if (primary.equals(ISyntacticFactory.SPECIES_VAR)) {
 			primary = SPECIES;
 		}
 

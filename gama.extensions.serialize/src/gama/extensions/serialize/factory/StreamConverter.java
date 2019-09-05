@@ -13,9 +13,9 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import gama.core.application.bundles.GamaClassLoader;
 import gama.extensions.serialize.gamaType.converters.ConverterScope;
 import gama.runtime.scope.IScope;
-import gaml.compilation.kernel.GamaClassLoader;
 
 public abstract class StreamConverter {
 

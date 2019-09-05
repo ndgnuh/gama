@@ -303,7 +303,7 @@ Function returns Expression:
 	{Function} (left=ActionRef) (type=TypeInfo)? '(' right=ExpressionList? ')';
 
 ExpressionList:
-	(exprs+=Expression (',' exprs+=Expression)*);
+		(exprs+=Expression (',' exprs+=Expression)*) | (exprs+=Parameter (',' exprs+=Parameter)*);
 
 Parameter returns Expression:
 	{Parameter} ((builtInFacetKey=(DefinitionFacetKey | TypeFacetKey | SpecialFacetKey | ActionFacetKey )) |

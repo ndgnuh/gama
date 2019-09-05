@@ -33,6 +33,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
+import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.ISkill;
 import gama.common.interfaces.experiment.IExperimentAgentCreator;
 import gama.common.interfaces.experiment.IExperimentAgentCreator.ExperimentAgentDescription;
@@ -41,6 +42,7 @@ import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.vars;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.ITypeProvider;
+import gama.runtime.scope.IScope;
 import gama.util.file.IGamaFile;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
@@ -51,7 +53,6 @@ import gaml.compilation.factories.SymbolFactory;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.compilation.interfaces.IAgentConstructor;
 import gaml.compilation.interfaces.IGamaHelper;
-import gaml.compilation.interfaces.IGamlAdditions;
 import gaml.compilation.interfaces.ISymbolConstructor;
 import gaml.compilation.interfaces.IValidator;
 import gaml.compilation.kernel.GamaMetaModel;
@@ -84,7 +85,44 @@ import gaml.types.Types;
  *
  */
 @SuppressWarnings ({ "unchecked", "rawtypes" })
-public abstract class AbstractGamlAdditions implements IGamlAdditions {
+public abstract class AbstractGamlAdditions {
+
+	// public static class Children {
+	//
+	// private final Iterable<IDescription> children;
+	//
+	// public Children(final IDescription... descs) {
+	// if (descs == null || descs.length == 0) {
+	// children = Collections.emptyList();
+	// } else {
+	// children = Arrays.asList(descs);
+	// }
+	// }
+	//
+	// public Iterable<IDescription> getChildren() {
+	// return children;
+	// }
+	// }
+
+	protected int[] AI = new int[0];
+	protected String[] AS = new String[0];
+	protected boolean F = false;
+	protected boolean T = true;
+	protected String PRIM = IKeyword.PRIMITIVE;
+	protected Class<?> O = Object.class;
+	protected Class<?> B = Boolean.class;
+	protected Class<?> I = Integer.class;
+	protected Class<?> D = Double.class;
+	protected Class<?> S = String.class;
+	protected Class<?> GF = IGamaFile.class;
+	protected Class<?> SC = IScope.class;
+	protected Class<?> i = int.class;
+	protected Class<?> d = double.class;
+	protected Class<?> b = boolean.class;
+
+	public static IDescription[] D(final IDescription... input) {
+		return input;
+	}
 
 	public static final Set<String> CONSTANTS = new HashSet();
 	final static Multimap<Class, IDescription> ADDITIONS = HashMultimap.create();
@@ -95,6 +133,8 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 	// public final static Map<String, IGamaPopulationsLinker> POPULATIONS_LINKERS =
 	// new THashMap<>();
 	public final static Map<String, String> TEMPORARY_BUILT_IN_VARS_DOCUMENTATION = new HashMap<>();
+
+	public abstract void initialize() throws SecurityException, NoSuchMethodException;
 
 	protected static String[] S(final String... strings) {
 		return strings;
@@ -395,8 +435,8 @@ public abstract class AbstractGamlAdditions implements IGamlAdditions {
 		FIELDS.put(clazz, getter);
 	}
 
-	protected IDescription desc(final String keyword, final Children children, final String... facets) {
-		return DescriptionFactory.create(keyword, null, children.getChildren(), facets);
+	protected IDescription desc(final String keyword, final IDescription[] children, final String... facets) {
+		return DescriptionFactory.create(keyword, null, Arrays.asList(children), facets);
 	}
 
 	protected IDescription desc(final String keyword, final String... facets) {
