@@ -9,7 +9,12 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.core.resources,
  org.eclipse.xtext.generator;resolution:=optional,
  gama.core.base;bundle-version="2.0.0",
- gama.core.ext;bundle-version="2.0.0"
+ gama.core.ext;bundle-version="2.0.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Export-Package: gama.core.lang,
  gama.core.lang.gaml,
  gama.core.lang.gaml.documentation,
@@ -31,3 +36,5 @@ Export-Package: gama.core.lang,
  gama.core.lang.validation
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: gama.core.lang
+Import-Package: org.apache.log4j
+Bundle-Activator: gama.core.lang.GamlActivator

@@ -15,8 +15,6 @@ import static gama.common.interfaces.IKeyword.AS;
 import static gama.common.interfaces.IKeyword.EACH;
 import static gama.common.interfaces.IKeyword.IS;
 import static gama.common.interfaces.IKeyword.IS_SKILL;
-import static gama.common.interfaces.IKeyword.MY;
-import static gama.common.interfaces.IKeyword.MYSELF;
 import static gama.common.interfaces.IKeyword.NULL;
 import static gama.common.interfaces.IKeyword.OF;
 import static gama.common.interfaces.IKeyword.POINT;
@@ -44,14 +42,45 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import com.google.common.collect.Iterables;
 
-import gama.core.lang.gaml.EGaml;
-import gama.core.lang.gaml.resource.GamlResource;
-import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.GAMA;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.common.util.Collector;
 import gama.common.util.StringUtils;
+import gama.core.lang.gaml.Access;
+import gama.core.lang.gaml.ActionRef;
+import gama.core.lang.gaml.ArgumentPair;
+import gama.core.lang.gaml.Array;
+import gama.core.lang.gaml.BinaryOperator;
+import gama.core.lang.gaml.BooleanLiteral;
+import gama.core.lang.gaml.DoubleLiteral;
+import gama.core.lang.gaml.EGaml;
+import gama.core.lang.gaml.EquationRef;
+import gama.core.lang.gaml.Expression;
+import gama.core.lang.gaml.ExpressionList;
+import gama.core.lang.gaml.Function;
+import gama.core.lang.gaml.If;
+import gama.core.lang.gaml.IntLiteral;
+import gama.core.lang.gaml.Parameter;
+import gama.core.lang.gaml.Point;
+import gama.core.lang.gaml.ReservedLiteral;
+import gama.core.lang.gaml.SkillFakeDefinition;
+import gama.core.lang.gaml.SkillRef;
+import gama.core.lang.gaml.StringEvaluator;
+import gama.core.lang.gaml.StringLiteral;
+import gama.core.lang.gaml.TerminalExpression;
+import gama.core.lang.gaml.TypeDefinition;
+import gama.core.lang.gaml.TypeInfo;
+import gama.core.lang.gaml.TypeRef;
+import gama.core.lang.gaml.Unary;
+import gama.core.lang.gaml.Unit;
+import gama.core.lang.gaml.UnitName;
+import gama.core.lang.gaml.VarDefinition;
+import gama.core.lang.gaml.VariableRef;
+import gama.core.lang.gaml.ast.SyntacticModelElement;
+import gama.core.lang.gaml.resource.GamlResource;
+import gama.core.lang.gaml.resource.GamlResourceServices;
+import gama.core.lang.gaml.util.GamlSwitch;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IExecutionContext;
 import gama.util.map.GamaMapFactory;
@@ -90,37 +119,6 @@ import gaml.types.IType;
 import gaml.types.ITypesManager;
 import gaml.types.ParametricType;
 import gaml.types.Types;
-import gama.core.lang.gaml.Access;
-import gama.core.lang.gaml.ActionRef;
-import gama.core.lang.gaml.ArgumentPair;
-import gama.core.lang.gaml.Array;
-import gama.core.lang.gaml.BinaryOperator;
-import gama.core.lang.gaml.BooleanLiteral;
-import gama.core.lang.gaml.DoubleLiteral;
-import gama.core.lang.gaml.EquationRef;
-import gama.core.lang.gaml.Expression;
-import gama.core.lang.gaml.ExpressionList;
-import gama.core.lang.gaml.Function;
-import gama.core.lang.gaml.If;
-import gama.core.lang.gaml.IntLiteral;
-import gama.core.lang.gaml.Parameter;
-import gama.core.lang.gaml.Point;
-import gama.core.lang.gaml.ReservedLiteral;
-import gama.core.lang.gaml.SkillFakeDefinition;
-import gama.core.lang.gaml.SkillRef;
-import gama.core.lang.gaml.StringEvaluator;
-import gama.core.lang.gaml.StringLiteral;
-import gama.core.lang.gaml.TerminalExpression;
-import gama.core.lang.gaml.TypeDefinition;
-import gama.core.lang.gaml.TypeInfo;
-import gama.core.lang.gaml.TypeRef;
-import gama.core.lang.gaml.Unary;
-import gama.core.lang.gaml.Unit;
-import gama.core.lang.gaml.UnitName;
-import gama.core.lang.gaml.VarDefinition;
-import gama.core.lang.gaml.VariableRef;
-import gama.core.lang.gaml.ast.SyntacticModelElement;
-import gama.core.lang.gaml.util.GamlSwitch;
 
 /**
  * The Class GamlExpressionCompiler. Transforms Strings or XText Expressions into GAML IExpressions. Normally invoked by
@@ -142,10 +140,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	 * expressions (that contain constants) can be parsed.
 	 */
 	private IDescription currentContext;
-
-	static {
-		IExpressionCompiler.OPERATORS.put(MY, GamaMapFactory.createUnordered());
-	}
 
 	@Override
 	public IExpression compile(final IExpressionDescription s, final IDescription parsingContext) {
@@ -216,19 +210,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final IExpression expr = compile(e);
 		if (expr == null)
 			return null;
-		if (op.equals(MY)) {
-			final IVarDescriptionProvider desc = getContext().getDescriptionDeclaringVar(MYSELF);
-			if (desc instanceof IDescription) {
-				// We are in a remote context, so 'my' refers to the calling
-				// agent
-				final IExpression myself = desc.getVarExpr(MYSELF, false);
-				final IDescription species = myself.getGamlType().getSpecies();
-				final IExpression var = species.getVarExpr(EGaml.getInstance().getKeyOf(e), true);
-				return getFactory().createOperator(_DOT, (IDescription) desc, e, myself, var);
-			}
-			// Otherwise, we ignore 'my' since it refers to 'self'
-			return expr;
-		}
 		// The unary "unit" operator should let the value of its child pass
 		// through
 		if (op.equals("°") || op.equals("#"))

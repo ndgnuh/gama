@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.compilation.IDescriptionValidator.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.compilation.IDescriptionValidator.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -37,8 +37,8 @@ import gaml.types.Types;
 @SuppressWarnings ({ "rawtypes" })
 public interface IDescriptionValidator<T extends IDescription> extends IValidator {
 
-	ImmutableSet<String> RESERVED = ImmutableSet
-			.copyOf(new String[] { IKeyword.THE, IKeyword.FALSE, IKeyword.TRUE, IKeyword.NULL, IKeyword.MYSELF });
+	ImmutableSet<String> RESERVED =
+			ImmutableSet.copyOf(new String[] { IKeyword.FALSE, IKeyword.TRUE, IKeyword.NULL, IKeyword.MYSELF });
 
 	/**
 	 * Called at the end of the validation process. The enclosing description, the children and the facets of the
@@ -67,10 +67,12 @@ public interface IDescriptionValidator<T extends IDescription> extends IValidato
 
 		public static void typesAreCompatibleForAssignment(final String facetName, final IDescription context,
 				final String receiverDescription, final IType<?> receiverType, final IExpressionDescription assigned) {
-			if (assigned == null) { return; }
+			if (assigned == null)
+				return;
 			// IExpression expr1 = receiver.getExpression();
 			final IExpression expr2 = assigned.getExpression();
-			if (expr2 == null) { return; }
+			if (expr2 == null)
+				return;
 			// IType receiverType = expr1.getType();
 			final IType assignedType = expr2.getGamlType();
 
@@ -96,7 +98,8 @@ public interface IDescriptionValidator<T extends IDescription> extends IValidato
 				final IType receiverContentType = receiverType.getContentType();
 				IType<?> contentType = assignedType.getContentType();
 				// Special cases for the empty lists and maps
-				if (Types.isEmptyContainerCase(receiverType, expr2)) { return; }
+				if (Types.isEmptyContainerCase(receiverType, expr2))
+					return;
 				// AD: 28/4/14 special case for variables of type species<xxx>
 				if (expr2 != IExpressionFactory.NIL_EXPR && receiverType.getGamlType().id() == IType.SPECIES) {
 					if (!contentType.isTranslatableInto(receiverContentType)) {

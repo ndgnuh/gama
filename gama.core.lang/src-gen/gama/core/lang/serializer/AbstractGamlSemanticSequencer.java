@@ -1777,7 +1777,7 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     Unary returns Unary
 	 *
 	 * Constraint:
-	 *     ((op='#' right=UnitRef) | ((op='-' | op='!' | op='my' | op='the' | op='not') right=Unary))
+	 *     ((op='#' right=UnitRef) | ((op='-' | op='!' | op='not') right=Unary))
 	 */
 	protected void sequence_Unary(ISerializationContext context, Unary semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

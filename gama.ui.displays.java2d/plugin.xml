@@ -4,7 +4,7 @@
    <extension
          point="gama.display">
       <implementation
-            class="gama.core.display.java2d.Java2DDisplaySurface"
+            class="gama.ui.displays.java2d.Java2DDisplaySurface"
             keyword="java2D">
       </implementation>
    </extension>

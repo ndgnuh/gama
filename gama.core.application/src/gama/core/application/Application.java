@@ -25,10 +25,17 @@ import gaml.operators.Dates;
 /** This class controls all aspects of the application's execution */
 public class Application implements IApplication {
 
+	public Application() {
+		GamaBundleLoader.loadGAML();
+	}
+
 	final Object[] result = { 0 };
 
 	@Override
 	public Object start(final IApplicationContext context) throws Exception {
+
+		GamaBundleLoader.loadGAML();
+
 		/*
 		 * Early build of various GAML/GAMA contributions
 		 */

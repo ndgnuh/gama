@@ -448,8 +448,6 @@ public abstract class AbstractGamlProposalProvider extends AbstractJavaBasedCont
 			// subclasses may override
 			// subclasses may override
 			// subclasses may override
-			// subclasses may override
-			// subclasses may override
 		}
 	}
 	public void completeUnary_Right(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

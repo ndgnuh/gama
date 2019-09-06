@@ -25,7 +25,7 @@
     <extension
           point="gama.display">
        <implementation
-             class="gama.core.display.opengl.view.SWTOpenGLDisplaySurface"
+             class="gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface"
              keyword="opengl">
        </implementation>
     </extension>

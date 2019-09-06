@@ -3105,29 +3105,27 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cOpAlternatives_1_1_1_0_0 = (Alternatives)cOpAssignment_1_1_1_0.eContents().get(0);
 		private final Keyword cOpHyphenMinusKeyword_1_1_1_0_0_0 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(0);
 		private final Keyword cOpExclamationMarkKeyword_1_1_1_0_0_1 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(1);
-		private final Keyword cOpMyKeyword_1_1_1_0_0_2 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(2);
-		private final Keyword cOpTheKeyword_1_1_1_0_0_3 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(3);
-		private final Keyword cOpNotKeyword_1_1_1_0_0_4 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(4);
+		private final Keyword cOpNotKeyword_1_1_1_0_0_2 = (Keyword)cOpAlternatives_1_1_1_0_0.eContents().get(2);
 		private final Assignment cRightAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
 		private final RuleCall cRightUnaryParserRuleCall_1_1_1_1_0 = (RuleCall)cRightAssignment_1_1_1_1.eContents().get(0);
 		
 		//Unary Expression:
-		//	Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'my' | 'the' | 'not') right=Unary);
+		//	Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'not') right=Unary);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'my' | 'the' | 'not') right=Unary)
+		//Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'not') right=Unary)
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Access
 		public RuleCall getAccessParserRuleCall_0() { return cAccessParserRuleCall_0; }
 		
-		//{Unary} (op='#' right=UnitRef | op=('-' | '!' | 'my' | 'the' | 'not') right=Unary)
+		//{Unary} (op='#' right=UnitRef | op=('-' | '!' | 'not') right=Unary)
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//{Unary}
 		public Action getUnaryAction_1_0() { return cUnaryAction_1_0; }
 		
-		//(op='#' right=UnitRef | op=('-' | '!' | 'my' | 'the' | 'not') right=Unary)
+		//(op='#' right=UnitRef | op=('-' | '!' | 'not') right=Unary)
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 		
 		//op='#' right=UnitRef
@@ -3145,13 +3143,13 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		//UnitRef
 		public RuleCall getRightUnitRefParserRuleCall_1_1_0_1_0() { return cRightUnitRefParserRuleCall_1_1_0_1_0; }
 		
-		//op=('-' | '!' | 'my' | 'the' | 'not') right=Unary
+		//op=('-' | '!' | 'not') right=Unary
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 		
-		//op=('-' | '!' | 'my' | 'the' | 'not')
+		//op=('-' | '!' | 'not')
 		public Assignment getOpAssignment_1_1_1_0() { return cOpAssignment_1_1_1_0; }
 		
-		//('-' | '!' | 'my' | 'the' | 'not')
+		//('-' | '!' | 'not')
 		public Alternatives getOpAlternatives_1_1_1_0_0() { return cOpAlternatives_1_1_1_0_0; }
 		
 		//'-'
@@ -3160,14 +3158,8 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 		//'!'
 		public Keyword getOpExclamationMarkKeyword_1_1_1_0_0_1() { return cOpExclamationMarkKeyword_1_1_1_0_0_1; }
 		
-		//'my'
-		public Keyword getOpMyKeyword_1_1_1_0_0_2() { return cOpMyKeyword_1_1_1_0_0_2; }
-		
-		//'the'
-		public Keyword getOpTheKeyword_1_1_1_0_0_3() { return cOpTheKeyword_1_1_1_0_0_3; }
-		
 		//'not'
-		public Keyword getOpNotKeyword_1_1_1_0_0_4() { return cOpNotKeyword_1_1_1_0_0_4; }
+		public Keyword getOpNotKeyword_1_1_1_0_0_2() { return cOpNotKeyword_1_1_1_0_0_2; }
 		
 		//right=Unary
 		public Assignment getRightAssignment_1_1_1_1() { return cRightAssignment_1_1_1_1; }
@@ -5226,7 +5218,7 @@ public class GamlGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Unary Expression:
-	//	Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'my' | 'the' | 'not') right=Unary);
+	//	Access | {Unary} (op='#' right=UnitRef | op=('-' | '!' | 'not') right=Unary);
 	public UnaryElements getUnaryAccess() {
 		return pUnary;
 	}

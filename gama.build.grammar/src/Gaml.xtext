@@ -105,7 +105,7 @@ S_Equation returns S_Assignment:
 S_Solve:
 	key=_SolveKey expr=EquationRef (facets+=Facet)* (block=Block | ';');
 
-	/**
+/**
  * DISPLAYS
  */
 S_Display:
@@ -283,8 +283,7 @@ Unit returns Expression:
 
 Unary returns Expression:
 	Access |
-	{Unary} ((op=('#') right=UnitRef) | (op=('-' | '!' | 'my' | 'the' | 'not')
-	right=Unary));
+	{Unary} ((op=('#') right=UnitRef) | (op=('-' | '!' | 'not') right=Unary));
 
 Access returns Expression:
 	Primary ({Access.left=current} ((op='[' right=ExpressionList? ']') | (op="." right=(AbstractRef | StringLiteral))))*;

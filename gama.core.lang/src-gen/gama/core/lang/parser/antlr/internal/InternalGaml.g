@@ -5623,37 +5623,15 @@ ruleUnary returns [EObject current=null]
 									setWithLastConsumed($current, "op", lv_op_4_2, null);
 								}
 								    |
-								lv_op_4_3='my'
+								lv_op_4_3='not'
 								{
-									newLeafNode(lv_op_4_3, grammarAccess.getUnaryAccess().getOpMyKeyword_1_1_1_0_0_2());
+									newLeafNode(lv_op_4_3, grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_2());
 								}
 								{
 									if ($current==null) {
 										$current = createModelElement(grammarAccess.getUnaryRule());
 									}
 									setWithLastConsumed($current, "op", lv_op_4_3, null);
-								}
-								    |
-								lv_op_4_4='the'
-								{
-									newLeafNode(lv_op_4_4, grammarAccess.getUnaryAccess().getOpTheKeyword_1_1_1_0_0_3());
-								}
-								{
-									if ($current==null) {
-										$current = createModelElement(grammarAccess.getUnaryRule());
-									}
-									setWithLastConsumed($current, "op", lv_op_4_4, null);
-								}
-								    |
-								lv_op_4_5='not'
-								{
-									newLeafNode(lv_op_4_5, grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_4());
-								}
-								{
-									if ($current==null) {
-										$current = createModelElement(grammarAccess.getUnaryRule());
-									}
-									setWithLastConsumed($current, "op", lv_op_4_5, null);
 								}
 							)
 						)

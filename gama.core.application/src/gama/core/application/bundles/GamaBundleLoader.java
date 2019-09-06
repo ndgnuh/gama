@@ -287,6 +287,16 @@ public class GamaBundleLoader {
 		}
 	}
 
+	public static void loadGAML() {
+		final Bundle bundle = Platform.getBundle("gama.core.lang");
+		GamaClassLoader.getInstance().addBundle(bundle);
+		try {
+			bundle.start();
+		} catch (final BundleException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static void loadAllDisplays() {
 		if ( DISPLAY_INITIALIZED )

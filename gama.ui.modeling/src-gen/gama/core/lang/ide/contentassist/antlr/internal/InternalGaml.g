@@ -3997,21 +3997,9 @@ rule__Unary__OpAlternatives_1_1_1_0_0
 	)
 	|
 	(
-		{ before(grammarAccess.getUnaryAccess().getOpMyKeyword_1_1_1_0_0_2()); }
-		'my'
-		{ after(grammarAccess.getUnaryAccess().getOpMyKeyword_1_1_1_0_0_2()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getUnaryAccess().getOpTheKeyword_1_1_1_0_0_3()); }
-		'the'
-		{ after(grammarAccess.getUnaryAccess().getOpTheKeyword_1_1_1_0_0_3()); }
-	)
-	|
-	(
-		{ before(grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_4()); }
+		{ before(grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_2()); }
 		'not'
-		{ after(grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_4()); }
+		{ after(grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_1_0_0_2()); }
 	)
 ;
 finally {
