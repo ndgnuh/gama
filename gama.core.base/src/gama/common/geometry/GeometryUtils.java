@@ -44,6 +44,7 @@ import org.locationtech.jts.geom.impl.CoordinateArraySequence;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.locationtech.jts.io.WKTWriter;
+import org.locationtech.jts.operation.buffer.BufferParameters;
 import org.locationtech.jts.precision.GeometryPrecisionReducer;
 import org.locationtech.jts.simplify.DouglasPeuckerSimplifier;
 import org.locationtech.jts.triangulate.ConformingDelaunayTriangulationBuilder;
@@ -178,6 +179,28 @@ public class GeometryUtils {
 	public static GamaPoint pointInGeom(final IScope scope, final IShape shape) {
 		if (shape == null) { return null; }
 		return pointInGeom(scope, shape.getInnerGeometry());
+	}
+	
+	
+	public static Geometry cleanGeometry(final Geometry g) {
+		//follow the proposition of https://locationtech.github.io/jts/jts-faq.html#G1
+		if (g == null || g.isEmpty()) return g; 
+		Geometry g2 = g.buffer(0.0, BufferParameters.DEFAULT_QUADRANT_SEGMENTS,
+				BufferParameters.CAP_FLAT);
+		if (g2.isEmpty()) {
+			if (g instanceof Polygon) {
+				Polygon p = (Polygon) g;
+				Geometry g3 = GeometryUtils.GEOMETRY_FACTORY.createPolygon(p.getExteriorRing().getCoordinates());
+				for (int i = 0; i < p.getNumInteriorRing(); i++) {
+					Geometry g4 = GeometryUtils.GEOMETRY_FACTORY.createPolygon(p.getInteriorRingN(i).getCoordinates());
+					g3 = g3.difference(g4);
+				}
+				return g3;
+			}else {
+				return GeometryUtils.GEOMETRY_FACTORY.createGeometry(g);
+			}
+		}
+		return g2;
 	}
 
 	private static Coordinate[] minimiseLength(final Coordinate[] coords) {

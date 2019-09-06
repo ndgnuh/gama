@@ -17,10 +17,7 @@ Require-Bundle: gama.core.lang;visibility:=reexport,
  gama.ui.base,
  gama.ui.navigator,
  gama.core.ext,
- org.apache.commons.lang;bundle-version="2.6.0",
- org.eclipse.ui,
- org.eclipse.ui.editors,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+ org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-Activator: gama.ui.modeling.internal.ModelingActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: gama.ui.modeling

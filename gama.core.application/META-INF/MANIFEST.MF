@@ -8,8 +8,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.equinox.p2.operations,
  org.eclipse.equinox.p2.metadata.repository,
  gama.core.base,
- com.google.guava,
- org.eclipse.core.expressions
+ com.google.guava
 Bundle-Vendor: UMMISCO
 Bundle-Version: 2.0.0.qualifier
 Bundle-ManifestVersion: 2

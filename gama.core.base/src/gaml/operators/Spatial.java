@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Spatial.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Spatial.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -77,10 +77,6 @@ import gama.metamodel.topology.filter.In;
 import gama.metamodel.topology.grid.GamaSpatialMatrix;
 import gama.metamodel.topology.grid.GridTopology;
 import gama.metamodel.topology.projection.IProjection;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
-import gama.processor.annotations.Reason;
 import gama.processor.annotations.GamlAnnotations.depends_on;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
@@ -88,6 +84,10 @@ import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
+import gama.processor.annotations.Reason;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;
@@ -3267,15 +3267,13 @@ public abstract class Spatial {
 			if (g == null || g.getInnerGeometry() == null)
 				return g;
 			if (g.getInnerGeometry() instanceof Polygon)
-				return new GamaShape(g, g.getInnerGeometry().buffer(0.0, BufferParameters.DEFAULT_QUADRANT_SEGMENTS,
-						BufferParameters.CAP_FLAT));
+				return new GamaShape(g, GeometryUtils.cleanGeometry(g.getInnerGeometry()));
 			if (g.getInnerGeometry() instanceof MultiPolygon) {
 				final MultiPolygon mp = (MultiPolygon) g.getInnerGeometry();
 				final int nb = mp.getNumGeometries();
 				final Polygon[] polys = new Polygon[nb];
 				for (int i = 0; i < nb; i++) {
-					polys[i] = (Polygon) mp.getGeometryN(i).buffer(0.0, BufferParameters.DEFAULT_QUADRANT_SEGMENTS,
-							BufferParameters.CAP_FLAT);
+					polys[i] = (Polygon) GeometryUtils.cleanGeometry(mp.getGeometryN(i));
 				}
 				return new GamaShape(g, GeometryUtils.GEOMETRY_FACTORY.createMultiPolygon(polys));
 			}
