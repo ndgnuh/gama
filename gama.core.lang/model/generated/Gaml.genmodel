@@ -63,6 +63,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//S_Definition/tkey"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//S_Definition/args"/>
     </genClasses>
+    <genClasses ecoreClass="Gaml.ecore#//S_StringDefinition"/>
     <genClasses ecoreClass="Gaml.ecore#//S_Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//S_Assignment/value"/>
     </genClasses>
@@ -73,7 +74,7 @@
     <genClasses ecoreClass="Gaml.ecore#//S_Display">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//S_Display/name"/>
     </genClasses>
-    <genClasses ecoreClass="Gaml.ecore#//speciesOrGridDisplayStatement"/>
+    <genClasses ecoreClass="Gaml.ecore#//D_Species"/>
     <genClasses ecoreClass="Gaml.ecore#//ActionArguments">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//ActionArguments/args"/>
     </genClasses>

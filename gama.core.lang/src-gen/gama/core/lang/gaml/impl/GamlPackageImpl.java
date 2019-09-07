@@ -14,6 +14,7 @@ import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.BinaryOperator;
 import gama.core.lang.gaml.Block;
 import gama.core.lang.gaml.BooleanLiteral;
+import gama.core.lang.gaml.D_Species;
 import gama.core.lang.gaml.DoubleLiteral;
 import gama.core.lang.gaml.Entry;
 import gama.core.lang.gaml.EquationDefinition;
@@ -52,6 +53,7 @@ import gama.core.lang.gaml.S_Reflex;
 import gama.core.lang.gaml.S_Return;
 import gama.core.lang.gaml.S_Solve;
 import gama.core.lang.gaml.S_Species;
+import gama.core.lang.gaml.S_StringDefinition;
 import gama.core.lang.gaml.S_Try;
 import gama.core.lang.gaml.SkillFakeDefinition;
 import gama.core.lang.gaml.SkillRef;
@@ -71,7 +73,6 @@ import gama.core.lang.gaml.UnitName;
 import gama.core.lang.gaml.VarDefinition;
 import gama.core.lang.gaml.VarFakeDefinition;
 import gama.core.lang.gaml.VariableRef;
-import gama.core.lang.gaml.speciesOrGridDisplayStatement;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -247,6 +248,13 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass s_StringDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass s_AssignmentEClass = null;
 
   /**
@@ -275,7 +283,7 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass speciesOrGridDisplayStatementEClass = null;
+  private EClass d_SpeciesEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1121,6 +1129,17 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * @generated
    */
   @Override
+  public EClass getS_StringDefinition()
+  {
+    return s_StringDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getS_Assignment()
   {
     return s_AssignmentEClass;
@@ -1198,9 +1217,9 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * @generated
    */
   @Override
-  public EClass getspeciesOrGridDisplayStatement()
+  public EClass getD_Species()
   {
-    return speciesOrGridDisplayStatementEClass;
+    return d_SpeciesEClass;
   }
 
   /**
@@ -2247,6 +2266,8 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     createEReference(s_DefinitionEClass, SDEFINITION__TKEY);
     createEReference(s_DefinitionEClass, SDEFINITION__ARGS);
 
+    s_StringDefinitionEClass = createEClass(SSTRING_DEFINITION);
+
     s_AssignmentEClass = createEClass(SASSIGNMENT);
     createEReference(s_AssignmentEClass, SASSIGNMENT__VALUE);
 
@@ -2258,7 +2279,7 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     s_DisplayEClass = createEClass(SDISPLAY);
     createEAttribute(s_DisplayEClass, SDISPLAY__NAME);
 
-    speciesOrGridDisplayStatementEClass = createEClass(SPECIES_OR_GRID_DISPLAY_STATEMENT);
+    d_SpeciesEClass = createEClass(DSPECIES);
 
     actionArgumentsEClass = createEClass(ACTION_ARGUMENTS);
     createEReference(actionArgumentsEClass, ACTION_ARGUMENTS__ARGS);
@@ -2439,12 +2460,13 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     s_ReflexEClass.getESuperTypes().add(this.getS_Declaration());
     s_DefinitionEClass.getESuperTypes().add(this.getS_Declaration());
     s_DefinitionEClass.getESuperTypes().add(this.getActionDefinition());
+    s_StringDefinitionEClass.getESuperTypes().add(this.getS_Declaration());
     s_AssignmentEClass.getESuperTypes().add(this.getStatement());
     s_EquationsEClass.getESuperTypes().add(this.getStatement());
     s_EquationsEClass.getESuperTypes().add(this.getEquationDefinition());
     s_SolveEClass.getESuperTypes().add(this.getStatement());
     s_DisplayEClass.getESuperTypes().add(this.getStatement());
-    speciesOrGridDisplayStatementEClass.getESuperTypes().add(this.getStatement());
+    d_SpeciesEClass.getESuperTypes().add(this.getStatement());
     argumentDefinitionEClass.getESuperTypes().add(this.getVarDefinition());
     facetEClass.getESuperTypes().add(this.getVarDefinition());
     argumentPairEClass.getESuperTypes().add(this.getExpression());
@@ -2551,6 +2573,8 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     initEReference(getS_Definition_Tkey(), this.getExpression(), null, "tkey", null, 0, 1, S_Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getS_Definition_Args(), this.getActionArguments(), null, "args", null, 0, 1, S_Definition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(s_StringDefinitionEClass, S_StringDefinition.class, "S_StringDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(s_AssignmentEClass, S_Assignment.class, "S_Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getS_Assignment_Value(), this.getExpression(), null, "value", null, 0, 1, S_Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2562,7 +2586,7 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     initEClass(s_DisplayEClass, S_Display.class, "S_Display", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getS_Display_Name(), ecorePackage.getEString(), "name", null, 0, 1, S_Display.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(speciesOrGridDisplayStatementEClass, speciesOrGridDisplayStatement.class, "speciesOrGridDisplayStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(d_SpeciesEClass, D_Species.class, "D_Species", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(actionArgumentsEClass, ActionArguments.class, "ActionArguments", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActionArguments_Args(), this.getArgumentDefinition(), null, "args", null, 0, -1, ActionArguments.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

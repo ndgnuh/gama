@@ -68,9 +68,9 @@ public class GamlFormatter extends AbstractDeclarativeFormatter {
 			}
 		}
 		handled.add(g.getBlockAccess().getLeftCurlyBracketKeyword_1());
-		handled.add(g.getDisplayBlockAccess().getLeftCurlyBracketKeyword_1());
+		handled.add(g.getD_BlockAccess().getLeftCurlyBracketKeyword_1());
 		handled.add(g.getBlockAccess().getRightCurlyBracketKeyword_2_1());
-		handled.add(g.getDisplayBlockAccess().getRightCurlyBracketKeyword_3());
+		handled.add(g.getD_BlockAccess().getRightCurlyBracketKeyword_3());
 		handled.add(g.getS_EquationsAccess().getLeftCurlyBracketKeyword_3_0_0());
 		handled.add(g.getS_EquationsAccess().getRightCurlyBracketKeyword_3_0_2());
 		// No space after these elements
@@ -116,8 +116,8 @@ public class GamlFormatter extends AbstractDeclarativeFormatter {
 		// Regular blocks
 		final BlockElements elem = g.getBlockAccess();
 		handleBlock(c, elem.getLeftCurlyBracketKeyword_1(), elem.getRightCurlyBracketKeyword_2_1(), 2);
-		handleBlock(c, g.getDisplayBlockAccess().getLeftCurlyBracketKeyword_1(),
-				g.getDisplayBlockAccess().getRightCurlyBracketKeyword_3(), 2);
+		handleBlock(c, g.getD_BlockAccess().getLeftCurlyBracketKeyword_1(),
+				g.getD_BlockAccess().getRightCurlyBracketKeyword_3(), 2);
 		handleBlock(c, g.getS_EquationsAccess().getLeftCurlyBracketKeyword_3_0_0(),
 				g.getS_EquationsAccess().getRightCurlyBracketKeyword_3_0_2(), 2);
 
@@ -125,9 +125,9 @@ public class GamlFormatter extends AbstractDeclarativeFormatter {
 		c.setNoLinewrap().before(g.getS_IfAccess().getElseKeyword_3_0());
 		// Adding more space to init (supposing it is the first declared)
 		c.setLinewrap(2).before(g.getS_ReflexRule());
-		c.setLinewrap(2).before(g.getS_ActionRule());
+		// c.setLinewrap(2).before(g.getS_ActionRule());
 		c.setLinewrap(2).before(g.getS_EquationsRule());
-		c.setLinewrap(2).before(g.getS_ActionAccess().getKeyAssignment_1());
+		// c.setLinewrap(2).before(g.getS_ActionAccess().getKeyAssignment_1());
 		c.setNoLinewrap().between(elem.getRightCurlyBracketKeyword_2_1(), elem.getRightCurlyBracketKeyword_2_1());
 		c.setLinewrap(2).after(g.getS_SpeciesRule());
 		c.setLinewrap(2).after(g.getS_ExperimentRule());

@@ -87,11 +87,12 @@ public class GamlFactoryImpl extends EFactoryImpl implements GamlFactory
       case GamlPackage.SDECLARATION: return createS_Declaration();
       case GamlPackage.SREFLEX: return createS_Reflex();
       case GamlPackage.SDEFINITION: return createS_Definition();
+      case GamlPackage.SSTRING_DEFINITION: return createS_StringDefinition();
       case GamlPackage.SASSIGNMENT: return createS_Assignment();
       case GamlPackage.SEQUATIONS: return createS_Equations();
       case GamlPackage.SSOLVE: return createS_Solve();
       case GamlPackage.SDISPLAY: return createS_Display();
-      case GamlPackage.SPECIES_OR_GRID_DISPLAY_STATEMENT: return createspeciesOrGridDisplayStatement();
+      case GamlPackage.DSPECIES: return createD_Species();
       case GamlPackage.ACTION_ARGUMENTS: return createActionArguments();
       case GamlPackage.ARGUMENT_DEFINITION: return createArgumentDefinition();
       case GamlPackage.FACET: return createFacet();
@@ -407,6 +408,18 @@ public class GamlFactoryImpl extends EFactoryImpl implements GamlFactory
    * @generated
    */
   @Override
+  public S_StringDefinition createS_StringDefinition()
+  {
+    S_StringDefinitionImpl s_StringDefinition = new S_StringDefinitionImpl();
+    return s_StringDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public S_Assignment createS_Assignment()
   {
     S_AssignmentImpl s_Assignment = new S_AssignmentImpl();
@@ -455,10 +468,10 @@ public class GamlFactoryImpl extends EFactoryImpl implements GamlFactory
    * @generated
    */
   @Override
-  public speciesOrGridDisplayStatement createspeciesOrGridDisplayStatement()
+  public D_Species createD_Species()
   {
-    speciesOrGridDisplayStatementImpl speciesOrGridDisplayStatement = new speciesOrGridDisplayStatementImpl();
-    return speciesOrGridDisplayStatement;
+    D_SpeciesImpl d_Species = new D_SpeciesImpl();
+    return d_Species;
   }
 
   /**

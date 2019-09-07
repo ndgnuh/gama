@@ -285,7 +285,7 @@ species boids skills: [moving] {
 		point acc <- {0,0};
 		list<obstacle> nearby_obstacles <- (obstacle overlapping (circle (range)) );
 		loop obs over: nearby_obstacles {
-			acc <- acc - ((location of obs) - my (location));
+			acc <- acc - ((location of obs) -  (location));
 		}
 		velocity <- velocity + acc; 
 	}

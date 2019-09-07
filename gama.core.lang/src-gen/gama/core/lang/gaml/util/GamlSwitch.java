@@ -266,6 +266,17 @@ public class GamlSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case GamlPackage.SSTRING_DEFINITION:
+      {
+        S_StringDefinition s_StringDefinition = (S_StringDefinition)theEObject;
+        T result = caseS_StringDefinition(s_StringDefinition);
+        if (result == null) result = caseS_Declaration(s_StringDefinition);
+        if (result == null) result = caseStatement(s_StringDefinition);
+        if (result == null) result = caseVarDefinition(s_StringDefinition);
+        if (result == null) result = caseGamlDefinition(s_StringDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case GamlPackage.SASSIGNMENT:
       {
         S_Assignment s_Assignment = (S_Assignment)theEObject;
@@ -300,11 +311,11 @@ public class GamlSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case GamlPackage.SPECIES_OR_GRID_DISPLAY_STATEMENT:
+      case GamlPackage.DSPECIES:
       {
-        speciesOrGridDisplayStatement speciesOrGridDisplayStatement = (speciesOrGridDisplayStatement)theEObject;
-        T result = casespeciesOrGridDisplayStatement(speciesOrGridDisplayStatement);
-        if (result == null) result = caseStatement(speciesOrGridDisplayStatement);
+        D_Species d_Species = (D_Species)theEObject;
+        T result = caseD_Species(d_Species);
+        if (result == null) result = caseStatement(d_Species);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -999,6 +1010,22 @@ public class GamlSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>SString Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>SString Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseS_StringDefinition(S_StringDefinition object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>SAssignment</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1063,17 +1090,17 @@ public class GamlSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>species Or Grid Display Statement</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>DSpecies</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>species Or Grid Display Statement</em>'.
+   * @return the result of interpreting the object as an instance of '<em>DSpecies</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casespeciesOrGridDisplayStatement(speciesOrGridDisplayStatement object)
+  public T caseD_Species(D_Species object)
   {
     return null;
   }

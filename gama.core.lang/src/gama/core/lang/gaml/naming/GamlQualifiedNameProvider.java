@@ -24,6 +24,7 @@ import gama.core.lang.gaml.ArgumentPair;
 import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.Block;
 import gama.core.lang.gaml.BooleanLiteral;
+import gama.core.lang.gaml.D_Species;
 import gama.core.lang.gaml.DoubleLiteral;
 import gama.core.lang.gaml.Entry;
 import gama.core.lang.gaml.EquationDefinition;
@@ -75,7 +76,6 @@ import gama.core.lang.gaml.UnitName;
 import gama.core.lang.gaml.VarDefinition;
 import gama.core.lang.gaml.VarFakeDefinition;
 import gama.core.lang.gaml.VariableRef;
-import gama.core.lang.gaml.speciesOrGridDisplayStatement;
 import gama.core.lang.gaml.util.GamlSwitch;
 import gaml.descriptions.ModelDescription;
 
@@ -96,7 +96,7 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 		}
 
 		@Override
-		public String casespeciesOrGridDisplayStatement(final speciesOrGridDisplayStatement s) {
+		public String caseD_Species(final D_Species s) {
 			return NULL;
 		}
 

@@ -222,6 +222,15 @@ public interface GamlFactory extends EFactory
   S_Definition createS_Definition();
 
   /**
+   * Returns a new object of class '<em>SString Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>SString Definition</em>'.
+   * @generated
+   */
+  S_StringDefinition createS_StringDefinition();
+
+  /**
    * Returns a new object of class '<em>SAssignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -258,13 +267,13 @@ public interface GamlFactory extends EFactory
   S_Display createS_Display();
 
   /**
-   * Returns a new object of class '<em>species Or Grid Display Statement</em>'.
+   * Returns a new object of class '<em>DSpecies</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>species Or Grid Display Statement</em>'.
+   * @return a new object of class '<em>DSpecies</em>'.
    * @generated
    */
-  speciesOrGridDisplayStatement createspeciesOrGridDisplayStatement();
+  D_Species createD_Species();
 
   /**
    * Returns a new object of class '<em>Action Arguments</em>'.

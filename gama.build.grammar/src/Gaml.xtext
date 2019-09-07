@@ -34,6 +34,13 @@ HeadlessExperiment:
 	/**
  * Global statements
  */
+
+// For a future release, drop the linking part ? Statements become simply: 
+//T_Statement:
+//	key=ID (expr=Expression)? (facets+=Facet)* (block=Block | ';') 
+//;
+
+ 
 S_Section returns Statement:
 	S_Global | S_Species | S_Experiment;
 
@@ -61,7 +68,7 @@ S_Do:
 	key=_DoKey expr=AbstractRef (facets+=Facet)* (block=Block | ';');
 
 S_Loop:
-	key="loop" (name=ID)? (facets+=Facet)* block=Block;
+	key="loop" (name=Valid_ID)? (facets+=Facet)* block=Block;
 
 S_If:
 	key='if' expr=Expression block=Block (-> 'else' else=(S_If | Block))?;
@@ -79,13 +86,16 @@ S_Return:
  * DECLARATIONS
  */
 S_Declaration:
-	-> S_Definition | S_Species | S_Reflex | S_Action | S_Loop;
+	-> S_Definition | S_Species | S_Reflex | S_Action | S_Loop | S_StringDefinition;
 
 S_Reflex:
-	key=_ReflexKey (name=Valid_ID)? ("when" ":" expr=Expression)? block=Block;
+	key=_ReflexKey (name=Valid_ID)? (facets+=Facet)* (block=Block | ';');
 
 S_Definition:
-	tkey=(TypeRef) name=(Valid_ID | STRING) ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
+	tkey=(TypeRef) name=Valid_ID ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
+
+S_StringDefinition:
+	key=ID name=STRING (facets+=Facet)* (block=Block | ';');
 
 S_Action returns S_Definition:
 	{S_Action} key="action" name=Valid_ID ('(' (args=ActionArguments) ')')? (facets+=Facet)* (block=Block | ';');
@@ -106,19 +116,19 @@ S_Solve:
 	key=_SolveKey expr=EquationRef (facets+=Facet)* (block=Block | ';');
 
 /**
- * DISPLAYS
+ * DISPLAYS: to keep in order to distinguish species/grid from declarations
  */
 S_Display:
-	key="display" name=(Valid_ID | STRING) (facets+=Facet)* block=displayBlock;
+	key="display" name=(Valid_ID | STRING) (facets+=Facet)* block=D_Block;
 
-displayBlock returns Block:
-	{Block} '{' (statements+=displayStatement)* '}';
+D_Block returns Block:
+	{Block} '{' (statements+=D_Statement)* '}';
 
-displayStatement returns Statement:
-	speciesOrGridDisplayStatement | S_1Expr_Facets_BlockOrEnd;
+D_Statement returns Statement:
+	D_Species | S_1Expr_Facets_BlockOrEnd;
 
-speciesOrGridDisplayStatement:
-	key=_SpeciesKey expr=Expression (facets+=Facet)* (block=displayBlock | ";");
+D_Species:
+	key=_SpeciesKey expr=Expression (facets+=Facet)* (block=D_Block | ";");
 
 	/**
  * Statement keys
@@ -142,8 +152,7 @@ _1Expr_Facets_BlockOrEnd_Key:
 	"status" | "highlight" | "focus_on" | "layout";
 
 _LayerKey:
-	"light" | "camera" | "text" | "image" | "data" | "chart" | "agents" | "graphics" | "display_population" |
-	"display_grid" | "quadtree" | "event" | "overlay" | "datalist";
+	"light" | "camera" | "image" | "data" | "chart" | "agents" | "graphics"  | "event" | "overlay" | "datalist";
 
 _DoKey:
 	"do" | "invoke";
@@ -157,8 +166,6 @@ _AssignmentKey:
 	/**
  * Parameters and arguments
  */
-//Parameters:
-//	{Parameters} (params=ParameterList)?;
 ActionArguments:
 	args+=ArgumentDefinition (',' args+=ArgumentDefinition)*;
 
@@ -169,7 +176,7 @@ ArgumentDefinition:
  * Facets
  */
 Facet:
-	ActionFacet | DefinitionFacet | ClassicFacet | TypeFacet | FunctionFacet;
+	ActionFacet | DefinitionFacet | ClassicFacet| TypeFacet /*  | FunctionFacet */;
 
 ClassicFacetKey:
 	(ID ':');
@@ -178,24 +185,24 @@ DefinitionFacetKey:
 	"name:" | "returns:";
 
 TypeFacetKey:
-	("as:" | "of:" | "parent:" | "species:" | "type:");
+	"as:" | "of:" | "parent:" | "species:" | "type:";
 
 SpecialFacetKey:
-	'data:' | 'when' ':' | "value:" | "topology:" | "item:" | "init:" | "message:" | "control:" | "layout:" |
-	"environment:" | 'text:' | 'image:' | 'using:' | "parameter:" | "aspect:" | "light:";
+	'data:' | "init:" | "layout:" | 'image:' | "parameter:" | "aspect:" | "light:";
 
 ActionFacetKey:
 	"action:" | "on_change:";
 
 
 ClassicFacet returns Facet:
-	(key=ClassicFacetKey | key='<-' | key=SpecialFacetKey) expr=Expression;
+	(key=ClassicFacetKey | key='<-' | key='->'| key=SpecialFacetKey) expr=Expression;
 
 DefinitionFacet returns Facet:
 	((-> key=DefinitionFacetKey) name=(Valid_ID | STRING));
 
-FunctionFacet returns Facet:
-	key='->' (=> (expr=Expression) | ('{' expr=Expression '}'));
+// Former: 
+//FunctionFacet returns Facet:
+//	key='->' (=> (expr=Expression) | ('{' expr=Expression '}'));
 
 TypeFacet returns Facet:
 	key=TypeFacetKey (-> (expr=TypeRef) | expr=Expression);

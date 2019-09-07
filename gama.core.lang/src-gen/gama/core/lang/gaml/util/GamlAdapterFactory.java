@@ -186,6 +186,11 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
         return createS_DefinitionAdapter();
       }
       @Override
+      public Adapter caseS_StringDefinition(S_StringDefinition object)
+      {
+        return createS_StringDefinitionAdapter();
+      }
+      @Override
       public Adapter caseS_Assignment(S_Assignment object)
       {
         return createS_AssignmentAdapter();
@@ -206,9 +211,9 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
         return createS_DisplayAdapter();
       }
       @Override
-      public Adapter casespeciesOrGridDisplayStatement(speciesOrGridDisplayStatement object)
+      public Adapter caseD_Species(D_Species object)
       {
-        return createspeciesOrGridDisplayStatementAdapter();
+        return createD_SpeciesAdapter();
       }
       @Override
       public Adapter caseActionArguments(ActionArguments object)
@@ -763,6 +768,21 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.S_StringDefinition <em>SString Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see gama.core.lang.gaml.S_StringDefinition
+   * @generated
+   */
+  public Adapter createS_StringDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.S_Assignment <em>SAssignment</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -823,16 +843,16 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.speciesOrGridDisplayStatement <em>species Or Grid Display Statement</em>}'.
+   * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.D_Species <em>DSpecies</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see gama.core.lang.gaml.speciesOrGridDisplayStatement
+   * @see gama.core.lang.gaml.D_Species
    * @generated
    */
-  public Adapter createspeciesOrGridDisplayStatementAdapter()
+  public Adapter createD_SpeciesAdapter()
   {
     return null;
   }

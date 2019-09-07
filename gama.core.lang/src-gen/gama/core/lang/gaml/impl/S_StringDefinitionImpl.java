@@ -4,25 +4,25 @@
 package gama.core.lang.gaml.impl;
 
 import gama.core.lang.gaml.GamlPackage;
-import gama.core.lang.gaml.speciesOrGridDisplayStatement;
+import gama.core.lang.gaml.S_StringDefinition;
 
 import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>species Or Grid Display Statement</b></em>'.
+ * An implementation of the model object '<em><b>SString Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class speciesOrGridDisplayStatementImpl extends StatementImpl implements speciesOrGridDisplayStatement
+public class S_StringDefinitionImpl extends S_DeclarationImpl implements S_StringDefinition
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected speciesOrGridDisplayStatementImpl()
+  protected S_StringDefinitionImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class speciesOrGridDisplayStatementImpl extends StatementImpl implements 
   @Override
   protected EClass eStaticClass()
   {
-    return GamlPackage.Literals.SPECIES_OR_GRID_DISPLAY_STATEMENT;
+    return GamlPackage.Literals.SSTRING_DEFINITION;
   }
 
-} //speciesOrGridDisplayStatementImpl
+} //S_StringDefinitionImpl
