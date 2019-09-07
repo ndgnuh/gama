@@ -198,7 +198,7 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case GamlPackage.FACET:
 				if (rule == grammarAccess.getFacetRule()) {
-					sequence_ActionFacet_ClassicFacet_DefinitionFacet_TypeFacet(context, (Facet) semanticObject); 
+					sequence_ActionFacet_ClassicFacet_DefinitionFacet(context, (Facet) semanticObject); 
 					return; 
 				}
 				else if (rule == grammarAccess.getActionFacetRule()) {
@@ -213,10 +213,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 						|| rule == grammarAccess.getGamlDefinitionRule()
 						|| rule == grammarAccess.getVarDefinitionRule()) {
 					sequence_DefinitionFacet(context, (Facet) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getTypeFacetRule()) {
-					sequence_TypeFacet(context, (Facet) semanticObject); 
 					return; 
 				}
 				else break;
@@ -417,11 +413,10 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     (
 	 *         ((key=ClassicFacetKey | key='<-' | key='->' | key=SpecialFacetKey) expr=Expression) | 
 	 *         (key=DefinitionFacetKey (name=Valid_ID | name=STRING)) | 
-	 *         (key=TypeFacetKey (expr=TypeRef | expr=Expression)) | 
 	 *         (key=ActionFacetKey (expr=ActionRef | block=Block))
 	 *     )
 	 */
-	protected void sequence_ActionFacet_ClassicFacet_DefinitionFacet_TypeFacet(ISerializationContext context, Facet semanticObject) {
+	protected void sequence_ActionFacet_ClassicFacet_DefinitionFacet(ISerializationContext context, Facet semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -678,7 +673,7 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     ArgumentPair returns ArgumentPair
 	 *
 	 * Constraint:
-	 *     ((op=Valid_ID | op=DefinitionFacetKey | op=TypeFacetKey | op=SpecialFacetKey | op=ActionFacetKey)? right=Pair)
+	 *     ((op=Valid_ID | op=DefinitionFacetKey | op=SpecialFacetKey | op=ActionFacetKey)? right=Pair)
 	 */
 	protected void sequence_ArgumentPair(ISerializationContext context, ArgumentPair semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1030,10 +1025,7 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     Parameter returns Parameter
 	 *
 	 * Constraint:
-	 *     (
-	 *         (builtInFacetKey=DefinitionFacetKey | builtInFacetKey=TypeFacetKey | builtInFacetKey=SpecialFacetKey | builtInFacetKey=ActionFacetKey | left=VariableRef) 
-	 *         right=Expression
-	 *     )
+	 *     ((builtInFacetKey=DefinitionFacetKey | builtInFacetKey=SpecialFacetKey | builtInFacetKey=ActionFacetKey | left=VariableRef) right=Expression)
 	 */
 	protected void sequence_Parameter(ISerializationContext context, gama.core.lang.gaml.Parameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1387,7 +1379,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     S_Declaration returns S_StringDefinition
 	 *     S_StringDefinition returns S_StringDefinition
 	 *     GamlDefinition returns S_StringDefinition
-	 *     VarDefinition returns S_StringDefinition
 	 *
 	 * Constraint:
 	 *     (key=ID name=STRING facets+=Facet* block=Block?)
@@ -1716,18 +1707,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTerminalExpressionAccess().getOpKEYWORDTerminalRuleCall_4_1_0(), semanticObject.getOp());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     TypeFacet returns Facet
-	 *
-	 * Constraint:
-	 *     (key=TypeFacetKey (expr=TypeRef | expr=Expression))
-	 */
-	protected void sequence_TypeFacet(ISerializationContext context, Facet semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

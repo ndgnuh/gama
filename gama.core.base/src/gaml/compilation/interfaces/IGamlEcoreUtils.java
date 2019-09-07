@@ -150,8 +150,6 @@ public interface IGamlEcoreUtils {
 
 	boolean isExperiment(EObject e);
 
-	EObject getExprOf(EObject element);
-
 	ResourceSet getResourceSet();
 
 	boolean isHeadlessExperiment(EObject e);
@@ -159,5 +157,7 @@ public interface IGamlEcoreUtils {
 	TreeIterator<EObject> getAllContents(Resource r, boolean b);
 
 	boolean isStringLiteral(EObject e);
+
+	EObject getDefaultExprOf(EObject s);
 
 }

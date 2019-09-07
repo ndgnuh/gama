@@ -46,7 +46,6 @@ import gama.core.lang.gaml.Pragma;
 import gama.core.lang.gaml.ReservedLiteral;
 import gama.core.lang.gaml.S_Action;
 import gama.core.lang.gaml.S_Assignment;
-import gama.core.lang.gaml.S_Declaration;
 import gama.core.lang.gaml.S_Definition;
 import gama.core.lang.gaml.S_Display;
 import gama.core.lang.gaml.S_Do;
@@ -59,6 +58,7 @@ import gama.core.lang.gaml.S_Other;
 import gama.core.lang.gaml.S_Reflex;
 import gama.core.lang.gaml.S_Solve;
 import gama.core.lang.gaml.S_Species;
+import gama.core.lang.gaml.S_StringDefinition;
 import gama.core.lang.gaml.SkillFakeDefinition;
 import gama.core.lang.gaml.SkillRef;
 import gama.core.lang.gaml.Statement;
@@ -101,7 +101,7 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 		}
 
 		@Override
-		public String caseS_Declaration(final S_Declaration s) {
+		public String caseS_StringDefinition(final S_StringDefinition s) {
 			return s.getName();
 		}
 
@@ -320,25 +320,10 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 			return object.getName();
 		}
 
-		// @Override
-		// public String caseS_Var(final S_Var object) {
-		// return object.getName();
-		// }
-
 		@Override
 		public String caseIf(final If object) {
 			return NULL;
 		}
-		//
-		// @Override
-		// public String caseCast(final Cast object) {
-		// return NULL;
-		// }
-
-		// @Override
-		// public String caseBinary(final Binary object) {
-		// return NULL;
-		// }
 
 		@Override
 		public String caseUnit(final Unit object) {
@@ -404,11 +389,6 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 		public String caseDoubleLiteral(final DoubleLiteral object) {
 			return NULL;
 		}
-		//
-		// @Override
-		// public String caseColorLiteral(final ColorLiteral object) {
-		// return NULL;
-		// }
 
 		@Override
 		public String caseStringLiteral(final StringLiteral object) {

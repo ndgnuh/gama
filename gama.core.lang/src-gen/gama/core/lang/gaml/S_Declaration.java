@@ -14,6 +14,6 @@ package gama.core.lang.gaml;
  * @model
  * @generated
  */
-public interface S_Declaration extends Statement, VarDefinition
+public interface S_Declaration extends Statement
 {
 } // S_Declaration

@@ -14,6 +14,6 @@ package gama.core.lang.gaml;
  * @model
  * @generated
  */
-public interface S_Loop extends S_Declaration
+public interface S_Loop extends S_Declaration, VarDefinition
 {
 } // S_Loop

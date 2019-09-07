@@ -21,7 +21,7 @@ package gama.core.lang.gaml;
  * @model
  * @generated
  */
-public interface S_Definition extends S_Declaration, ActionDefinition
+public interface S_Definition extends S_Declaration, VarDefinition, ActionDefinition
 {
   /**
    * Returns the value of the '<em><b>Tkey</b></em>' containment reference.

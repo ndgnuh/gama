@@ -777,22 +777,13 @@ public interface GamlPackage extends EPackage
   int SDECLARATION__BLOCK = STATEMENT__BLOCK;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SDECLARATION__NAME = STATEMENT_FEATURE_COUNT + 0;
-
-  /**
    * The number of structural features of the '<em>SDeclaration</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SDECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+  int SDECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_LoopImpl <em>SLoop</em>}' class.
@@ -847,7 +838,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SLOOP__NAME = SDECLARATION__NAME;
+  int SLOOP__NAME = SDECLARATION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>SLoop</em>' class.
@@ -856,7 +847,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SLOOP_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 0;
+  int SLOOP_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_IfImpl <em>SIf</em>}' class.
@@ -1149,7 +1140,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SREFLEX__NAME = SDECLARATION__NAME;
+  int SREFLEX__NAME = SDECLARATION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>SReflex</em>' class.
@@ -1158,7 +1149,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SREFLEX_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 0;
+  int SREFLEX_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_DefinitionImpl <em>SDefinition</em>}' class.
@@ -1213,7 +1204,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SDEFINITION__NAME = SDECLARATION__NAME;
+  int SDEFINITION__NAME = SDECLARATION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Tkey</b></em>' containment reference.
@@ -1222,7 +1213,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SDEFINITION__TKEY = SDECLARATION_FEATURE_COUNT + 0;
+  int SDEFINITION__TKEY = SDECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Args</b></em>' containment reference.
@@ -1231,7 +1222,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SDEFINITION__ARGS = SDECLARATION_FEATURE_COUNT + 1;
+  int SDEFINITION__ARGS = SDECLARATION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>SDefinition</em>' class.
@@ -1240,7 +1231,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SDEFINITION_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 2;
+  int SDEFINITION_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_StringDefinitionImpl <em>SString Definition</em>}' class.
@@ -1295,7 +1286,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SSTRING_DEFINITION__NAME = SDECLARATION__NAME;
+  int SSTRING_DEFINITION__NAME = SDECLARATION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>SString Definition</em>' class.
@@ -1304,7 +1295,7 @@ public interface GamlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SSTRING_DEFINITION_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 0;
+  int SSTRING_DEFINITION_FEATURE_COUNT = SDECLARATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.S_AssignmentImpl <em>SAssignment</em>}' class.

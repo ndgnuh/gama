@@ -74,7 +74,7 @@ species people skills:[moving]{
 species road {
 	aspect default {
 		draw shape color: #black;
-	}
+	} 
 }
 
 species building {

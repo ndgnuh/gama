@@ -4,9 +4,12 @@
 package gama.core.lang.gaml.impl;
 
 import gama.core.lang.gaml.ActionArguments;
+import gama.core.lang.gaml.ActionDefinition;
 import gama.core.lang.gaml.Expression;
+import gama.core.lang.gaml.GamlDefinition;
 import gama.core.lang.gaml.GamlPackage;
 import gama.core.lang.gaml.S_Definition;
+import gama.core.lang.gaml.VarDefinition;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link gama.core.lang.gaml.impl.S_DefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link gama.core.lang.gaml.impl.S_DefinitionImpl#getTkey <em>Tkey</em>}</li>
  *   <li>{@link gama.core.lang.gaml.impl.S_DefinitionImpl#getArgs <em>Args</em>}</li>
  * </ul>
@@ -32,6 +36,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getTkey() <em>Tkey</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -71,6 +95,31 @@ public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
   protected EClass eStaticClass()
   {
     return GamlPackage.Literals.SDEFINITION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, GamlPackage.SDEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -201,6 +250,8 @@ public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
   {
     switch (featureID)
     {
+      case GamlPackage.SDEFINITION__NAME:
+        return getName();
       case GamlPackage.SDEFINITION__TKEY:
         return getTkey();
       case GamlPackage.SDEFINITION__ARGS:
@@ -219,6 +270,9 @@ public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
   {
     switch (featureID)
     {
+      case GamlPackage.SDEFINITION__NAME:
+        setName((String)newValue);
+        return;
       case GamlPackage.SDEFINITION__TKEY:
         setTkey((Expression)newValue);
         return;
@@ -239,6 +293,9 @@ public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
   {
     switch (featureID)
     {
+      case GamlPackage.SDEFINITION__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case GamlPackage.SDEFINITION__TKEY:
         setTkey((Expression)null);
         return;
@@ -259,12 +316,97 @@ public class S_DefinitionImpl extends S_DeclarationImpl implements S_Definition
   {
     switch (featureID)
     {
+      case GamlPackage.SDEFINITION__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case GamlPackage.SDEFINITION__TKEY:
         return tkey != null;
       case GamlPackage.SDEFINITION__ARGS:
         return args != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == GamlDefinition.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case GamlPackage.SDEFINITION__NAME: return GamlPackage.GAML_DEFINITION__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == VarDefinition.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == ActionDefinition.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == GamlDefinition.class)
+    {
+      switch (baseFeatureID)
+      {
+        case GamlPackage.GAML_DEFINITION__NAME: return GamlPackage.SDEFINITION__NAME;
+        default: return -1;
+      }
+    }
+    if (baseClass == VarDefinition.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == ActionDefinition.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //S_DefinitionImpl

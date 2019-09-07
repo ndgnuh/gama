@@ -176,19 +176,17 @@ ArgumentDefinition:
  * Facets
  */
 Facet:
-	ActionFacet | DefinitionFacet | ClassicFacet| TypeFacet /*  | FunctionFacet */;
+	ActionFacet | DefinitionFacet | ClassicFacet  ;
 
 ClassicFacetKey:
 	(ID ':');
 
 DefinitionFacetKey:
-	"name:" | "returns:";
+	"returns:";
 
-TypeFacetKey:
-	"as:" | "of:" | "parent:" | "species:" | "type:";
 
 SpecialFacetKey:
-	'data:' | "init:" | "layout:" | 'image:' | "parameter:" | "aspect:" | "light:";
+	'data:' | "init:" | "layout:" | 'image:' | "parameter:" | "aspect:" | "light:" | "as:" | "species:";
 
 ActionFacetKey:
 	"action:" | "on_change:";
@@ -199,13 +197,6 @@ ClassicFacet returns Facet:
 
 DefinitionFacet returns Facet:
 	((-> key=DefinitionFacetKey) name=(Valid_ID | STRING));
-
-// Former: 
-//FunctionFacet returns Facet:
-//	key='->' (=> (expr=Expression) | ('{' expr=Expression '}'));
-
-TypeFacet returns Facet:
-	key=TypeFacetKey (-> (expr=TypeRef) | expr=Expression);
 
 ActionFacet returns Facet:
 	key=ActionFacetKey (expr=ActionRef | block=Block);
@@ -227,7 +218,7 @@ BinaryOperator returns Expression:
 	Or | And | Cast | Comparison | Addition | Multiplication | Exponentiation | Binary | Pair | Unit;
 
 ArgumentPair:
-	=> (op=(Valid_ID) '::' | op=(DefinitionFacetKey | TypeFacetKey | SpecialFacetKey | ActionFacetKey ) ':')?
+	=> (op=(Valid_ID) '::' | op=(DefinitionFacetKey | SpecialFacetKey | ActionFacetKey ) ':')?
 	right=Pair;
 
 Pair returns Expression:
@@ -312,7 +303,7 @@ ExpressionList:
 		(exprs+=Expression (',' exprs+=Expression)*) | (exprs+=Parameter (',' exprs+=Parameter)*);
 
 Parameter returns Expression:
-	{Parameter} ((builtInFacetKey=(DefinitionFacetKey | TypeFacetKey | SpecialFacetKey | ActionFacetKey )) |
+	{Parameter} ((builtInFacetKey=(DefinitionFacetKey /*| TypeFacetKey*/ | SpecialFacetKey | ActionFacetKey )) |
 	(left=VariableRef ':')) right=Expression;
 
 UnitRef returns Expression:
@@ -337,7 +328,7 @@ EquationRef returns Expression:
 	{EquationRef} ref=[EquationDefinition|Valid_ID];
 
 GamlDefinition:
-	TypeDefinition | VarDefinition | UnitFakeDefinition | SkillFakeDefinition | ActionDefinition | EquationDefinition;
+	TypeDefinition | VarDefinition | UnitFakeDefinition | SkillFakeDefinition | ActionDefinition | EquationDefinition | S_StringDefinition;
 
 EquationDefinition:
 	S_Equations | EquationFakeDefinition;
@@ -346,7 +337,7 @@ TypeDefinition:
 	S_Species | TypeFakeDefinition;
 
 VarDefinition:
-	=> S_Declaration | (Model | ArgumentDefinition | DefinitionFacet | VarFakeDefinition | Import | S_Experiment);
+	=> (S_Definition | S_Species | S_Reflex | S_Action | S_Loop) | (Model | ArgumentDefinition | DefinitionFacet | VarFakeDefinition | Import | S_Experiment);
 
 ActionDefinition:
 	S_Action | ActionFakeDefinition | S_Definition | TypeDefinition;

@@ -165,8 +165,8 @@ public class GamlSwitch<T> extends Switch<T>
         T result = caseS_Species(s_Species);
         if (result == null) result = caseS_Declaration(s_Species);
         if (result == null) result = caseTypeDefinition(s_Species);
-        if (result == null) result = caseStatement(s_Species);
         if (result == null) result = caseVarDefinition(s_Species);
+        if (result == null) result = caseStatement(s_Species);
         if (result == null) result = caseActionDefinition(s_Species);
         if (result == null) result = caseGamlDefinition(s_Species);
         if (result == null) result = defaultCase(theEObject);
@@ -195,8 +195,8 @@ public class GamlSwitch<T> extends Switch<T>
         S_Loop s_Loop = (S_Loop)theEObject;
         T result = caseS_Loop(s_Loop);
         if (result == null) result = caseS_Declaration(s_Loop);
-        if (result == null) result = caseStatement(s_Loop);
         if (result == null) result = caseVarDefinition(s_Loop);
+        if (result == null) result = caseStatement(s_Loop);
         if (result == null) result = caseGamlDefinition(s_Loop);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -238,8 +238,6 @@ public class GamlSwitch<T> extends Switch<T>
         S_Declaration s_Declaration = (S_Declaration)theEObject;
         T result = caseS_Declaration(s_Declaration);
         if (result == null) result = caseStatement(s_Declaration);
-        if (result == null) result = caseVarDefinition(s_Declaration);
-        if (result == null) result = caseGamlDefinition(s_Declaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -248,8 +246,8 @@ public class GamlSwitch<T> extends Switch<T>
         S_Reflex s_Reflex = (S_Reflex)theEObject;
         T result = caseS_Reflex(s_Reflex);
         if (result == null) result = caseS_Declaration(s_Reflex);
-        if (result == null) result = caseStatement(s_Reflex);
         if (result == null) result = caseVarDefinition(s_Reflex);
+        if (result == null) result = caseStatement(s_Reflex);
         if (result == null) result = caseGamlDefinition(s_Reflex);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -259,9 +257,9 @@ public class GamlSwitch<T> extends Switch<T>
         S_Definition s_Definition = (S_Definition)theEObject;
         T result = caseS_Definition(s_Definition);
         if (result == null) result = caseS_Declaration(s_Definition);
+        if (result == null) result = caseVarDefinition(s_Definition);
         if (result == null) result = caseActionDefinition(s_Definition);
         if (result == null) result = caseStatement(s_Definition);
-        if (result == null) result = caseVarDefinition(s_Definition);
         if (result == null) result = caseGamlDefinition(s_Definition);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -271,9 +269,8 @@ public class GamlSwitch<T> extends Switch<T>
         S_StringDefinition s_StringDefinition = (S_StringDefinition)theEObject;
         T result = caseS_StringDefinition(s_StringDefinition);
         if (result == null) result = caseS_Declaration(s_StringDefinition);
-        if (result == null) result = caseStatement(s_StringDefinition);
-        if (result == null) result = caseVarDefinition(s_StringDefinition);
         if (result == null) result = caseGamlDefinition(s_StringDefinition);
+        if (result == null) result = caseStatement(s_StringDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -498,9 +495,9 @@ public class GamlSwitch<T> extends Switch<T>
         T result = caseS_Action(s_Action);
         if (result == null) result = caseS_Definition(s_Action);
         if (result == null) result = caseS_Declaration(s_Action);
+        if (result == null) result = caseVarDefinition(s_Action);
         if (result == null) result = caseActionDefinition(s_Action);
         if (result == null) result = caseStatement(s_Action);
-        if (result == null) result = caseVarDefinition(s_Action);
         if (result == null) result = caseGamlDefinition(s_Action);
         if (result == null) result = defaultCase(theEObject);
         return result;

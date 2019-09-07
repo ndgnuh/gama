@@ -14,6 +14,6 @@ package gama.core.lang.gaml;
  * @model
  * @generated
  */
-public interface S_Species extends Statement, S_Declaration, TypeDefinition
+public interface S_Species extends Statement, S_Declaration, TypeDefinition, VarDefinition
 {
 } // S_Species

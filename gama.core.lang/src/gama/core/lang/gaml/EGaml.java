@@ -168,7 +168,7 @@ public class EGaml implements IGamlEcoreUtils {
 	}
 
 	@Override
-	public Expression getExprOf(final EObject s) {
+	public Expression getDefaultExprOf(final EObject s) {
 		if (s instanceof Expression)
 			return (Expression) s;
 		if (s instanceof Statement)

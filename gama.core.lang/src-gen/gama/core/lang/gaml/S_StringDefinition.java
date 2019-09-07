@@ -14,6 +14,6 @@ package gama.core.lang.gaml;
  * @model
  * @generated
  */
-public interface S_StringDefinition extends S_Declaration
+public interface S_StringDefinition extends S_Declaration, GamlDefinition
 {
 } // S_StringDefinition

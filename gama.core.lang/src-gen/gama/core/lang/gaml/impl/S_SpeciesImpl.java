@@ -172,25 +172,18 @@ public class S_SpeciesImpl extends StatementImpl implements S_Species
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
+    if (baseClass == S_Declaration.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == GamlDefinition.class)
     {
       switch (derivedFeatureID)
       {
         case GamlPackage.SSPECIES__NAME: return GamlPackage.GAML_DEFINITION__NAME;
-        default: return -1;
-      }
-    }
-    if (baseClass == VarDefinition.class)
-    {
-      switch (derivedFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == S_Declaration.class)
-    {
-      switch (derivedFeatureID)
-      {
         default: return -1;
       }
     }
@@ -202,6 +195,13 @@ public class S_SpeciesImpl extends StatementImpl implements S_Species
       }
     }
     if (baseClass == TypeDefinition.class)
+    {
+      switch (derivedFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == VarDefinition.class)
     {
       switch (derivedFeatureID)
       {
@@ -219,25 +219,18 @@ public class S_SpeciesImpl extends StatementImpl implements S_Species
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
+    if (baseClass == S_Declaration.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
     if (baseClass == GamlDefinition.class)
     {
       switch (baseFeatureID)
       {
         case GamlPackage.GAML_DEFINITION__NAME: return GamlPackage.SSPECIES__NAME;
-        default: return -1;
-      }
-    }
-    if (baseClass == VarDefinition.class)
-    {
-      switch (baseFeatureID)
-      {
-        default: return -1;
-      }
-    }
-    if (baseClass == S_Declaration.class)
-    {
-      switch (baseFeatureID)
-      {
         default: return -1;
       }
     }
@@ -249,6 +242,13 @@ public class S_SpeciesImpl extends StatementImpl implements S_Species
       }
     }
     if (baseClass == TypeDefinition.class)
+    {
+      switch (baseFeatureID)
+      {
+        default: return -1;
+      }
+    }
+    if (baseClass == VarDefinition.class)
     {
       switch (baseFeatureID)
       {
