@@ -49,7 +49,6 @@ import gama.common.util.Collector;
 import gama.common.util.StringUtils;
 import gama.core.lang.gaml.Access;
 import gama.core.lang.gaml.ActionRef;
-import gama.core.lang.gaml.ArgumentPair;
 import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.BinaryOperator;
 import gama.core.lang.gaml.BooleanLiteral;
@@ -683,11 +682,7 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		for (final Expression exp : parameters) {
 			String arg = null;
 			IExpressionDescription ed = null;
-
-			if (exp instanceof ArgumentPair) {
-				arg = EGaml.getInstance().getKeyOf(exp);
-				ed = builder.create(((ArgumentPair) exp).getRight()/* , errors */);
-			} else if (exp instanceof Parameter) {
+			if (exp instanceof Parameter) {
 				arg = EGaml.getInstance().getKeyOf(exp);
 				ed = builder.create(((Parameter) exp).getRight()/* , errors */);
 			} else if (exp instanceof BinaryOperator && "::".equals(EGaml.getInstance().getKeyOf(exp))) {
@@ -834,13 +829,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	}
 
 	@Override
-	public IExpression caseArgumentPair(final ArgumentPair object) {
-		final IExpression result =
-				binary("::", caseVar(EGaml.getInstance().getKeyOf(object), object), object.getRight());
-		return result;
-	}
-
-	@Override
 	public IExpression caseUnit(final Unit object) {
 		// We simply return a multiplication, since the right member (the
 		// "unit") will be
@@ -943,8 +931,8 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 	public IExpression caseArray(final Array object) {
 		final List<? extends Expression> list = EGaml.getInstance().getExprsOf(object.getExprs());
 		// Awkward expression, but necessary to fix Issue #2612
-		final boolean allPairs = !list.isEmpty() && Iterables.all(list,
-				each -> each instanceof ArgumentPair || "::".equals(EGaml.getInstance().getKeyOf(each)));
+		final boolean allPairs =
+				!list.isEmpty() && Iterables.all(list, each -> "::".equals(EGaml.getInstance().getKeyOf(each)));
 		final Iterable<IExpression> result = Iterables.transform(list, input -> compile(input));
 		return allPairs ? getFactory().createMap(result) : getFactory().createList(result);
 	}
@@ -960,13 +948,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		exprs[2] = compile(z);
 		return getFactory().createOperator(POINT, getContext(), object, exprs);
 	}
-	//
-	// @Override
-	// public IExpression caseParameters(final Parameters object) {
-	// final Iterable it = Iterables.transform(EGaml.getInstance().getExprsOf(object.getParams()), input -> binary("::",
-	// getFactory().createConst(EGaml.getInstance().getKeyOf(input.getLeft()), Types.STRING), input.getRight()));
-	// return getFactory().createMap(it);
-	// }
 
 	@Override
 	public IExpression caseExpressionList(final ExpressionList object) {

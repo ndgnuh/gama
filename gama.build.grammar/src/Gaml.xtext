@@ -212,14 +212,10 @@ Block:
  * Expressions
  */
 Expression:
-	ArgumentPair | Pair;
+	Pair;
 
 BinaryOperator returns Expression:
 	Or | And | Cast | Comparison | Addition | Multiplication | Exponentiation | Binary | Pair | Unit;
-
-ArgumentPair:
-	=> (op=(Valid_ID) '::' | op=(DefinitionFacetKey | SpecialFacetKey | ActionFacetKey ) ':')?
-	right=Pair;
 
 Pair returns Expression:
 	If
@@ -303,7 +299,7 @@ ExpressionList:
 		(exprs+=Expression (',' exprs+=Expression)*) | (exprs+=Parameter (',' exprs+=Parameter)*);
 
 Parameter returns Expression:
-	{Parameter} ((builtInFacetKey=(DefinitionFacetKey /*| TypeFacetKey*/ | SpecialFacetKey | ActionFacetKey )) |
+	{Parameter} ((builtInFacetKey=(DefinitionFacetKey | SpecialFacetKey | ActionFacetKey )) |
 	(left=VariableRef ':')) right=Expression;
 
 UnitRef returns Expression:

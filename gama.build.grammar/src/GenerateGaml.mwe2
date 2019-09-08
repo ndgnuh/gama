@@ -56,9 +56,21 @@ Workflow {
 			grammarUri = "src/Gaml.xtext"
 			name = "gama.core.lang.Gaml"
 			fileExtensions = "gaml,experiment"
+			parserGenerator = {
+				lookaheadThreshold = '5'
+				removeBacktrackingGuards = true
+				options = {
+					backtrack = true
+					memoize = true
+					optimizeCodeQuality = true
+					stripAllComments = true
+					skipUnusedRules = true
+				}
+			}
 			validator = {
 				generatePropertyPage = true
 				generateXtendStub = false
+				
 			}
 			generator = {
 				generateXtendMain = false
@@ -71,6 +83,7 @@ Workflow {
 				generateXtendStub = false
 			}
 			junitSupport = {
+				generateStub = false
 				generateXtendStub = false
 			}
 			labelProvider = {

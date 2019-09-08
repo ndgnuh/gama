@@ -312,15 +312,6 @@ public interface GamlFactory extends EFactory
   Expression createExpression();
 
   /**
-   * Returns a new object of class '<em>Argument Pair</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Argument Pair</em>'.
-   * @generated
-   */
-  ArgumentPair createArgumentPair();
-
-  /**
    * Returns a new object of class '<em>Expression List</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

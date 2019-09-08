@@ -232,7 +232,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getGamlDefinition()
    * @generated
    */
-  int GAML_DEFINITION = 36;
+  int GAML_DEFINITION = 35;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -260,7 +260,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVarDefinition()
    * @generated
    */
-  int VAR_DEFINITION = 39;
+  int VAR_DEFINITION = 38;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1757,43 +1757,6 @@ public interface GamlPackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link gama.core.lang.gaml.impl.ArgumentPairImpl <em>Argument Pair</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see gama.core.lang.gaml.impl.ArgumentPairImpl
-   * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArgumentPair()
-   * @generated
-   */
-  int ARGUMENT_PAIR = 32;
-
-  /**
-   * The feature id for the '<em><b>Op</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARGUMENT_PAIR__OP = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARGUMENT_PAIR__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Argument Pair</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ARGUMENT_PAIR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
    * The meta object id for the '{@link gama.core.lang.gaml.impl.ExpressionListImpl <em>Expression List</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1801,7 +1764,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getExpressionList()
    * @generated
    */
-  int EXPRESSION_LIST = 33;
+  int EXPRESSION_LIST = 32;
 
   /**
    * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
@@ -1829,7 +1792,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVariableRef()
    * @generated
    */
-  int VARIABLE_REF = 34;
+  int VARIABLE_REF = 33;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -1857,7 +1820,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeInfo()
    * @generated
    */
-  int TYPE_INFO = 35;
+  int TYPE_INFO = 34;
 
   /**
    * The feature id for the '<em><b>First</b></em>' containment reference.
@@ -1894,7 +1857,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationDefinition()
    * @generated
    */
-  int EQUATION_DEFINITION = 37;
+  int EQUATION_DEFINITION = 36;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1922,7 +1885,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeDefinition()
    * @generated
    */
-  int TYPE_DEFINITION = 38;
+  int TYPE_DEFINITION = 37;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1950,7 +1913,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionDefinition()
    * @generated
    */
-  int ACTION_DEFINITION = 40;
+  int ACTION_DEFINITION = 39;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1978,7 +1941,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnitFakeDefinition()
    * @generated
    */
-  int UNIT_FAKE_DEFINITION = 41;
+  int UNIT_FAKE_DEFINITION = 40;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2006,7 +1969,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeFakeDefinition()
    * @generated
    */
-  int TYPE_FAKE_DEFINITION = 42;
+  int TYPE_FAKE_DEFINITION = 41;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2034,7 +1997,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionFakeDefinition()
    * @generated
    */
-  int ACTION_FAKE_DEFINITION = 43;
+  int ACTION_FAKE_DEFINITION = 42;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2062,7 +2025,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getSkillFakeDefinition()
    * @generated
    */
-  int SKILL_FAKE_DEFINITION = 44;
+  int SKILL_FAKE_DEFINITION = 43;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2090,7 +2053,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getVarFakeDefinition()
    * @generated
    */
-  int VAR_FAKE_DEFINITION = 45;
+  int VAR_FAKE_DEFINITION = 44;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2118,7 +2081,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationFakeDefinition()
    * @generated
    */
-  int EQUATION_FAKE_DEFINITION = 46;
+  int EQUATION_FAKE_DEFINITION = 45;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2146,7 +2109,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTerminalExpression()
    * @generated
    */
-  int TERMINAL_EXPRESSION = 47;
+  int TERMINAL_EXPRESSION = 46;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2174,7 +2137,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getStringLiteral()
    * @generated
    */
-  int STRING_LITERAL = 48;
+  int STRING_LITERAL = 47;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2202,7 +2165,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getS_Action()
    * @generated
    */
-  int SACTION = 49;
+  int SACTION = 48;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -2284,7 +2247,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBinaryOperator()
    * @generated
    */
-  int BINARY_OPERATOR = 50;
+  int BINARY_OPERATOR = 49;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2330,7 +2293,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIf()
    * @generated
    */
-  int IF = 51;
+  int IF = 50;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2385,7 +2348,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnit()
    * @generated
    */
-  int UNIT = 52;
+  int UNIT = 51;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2431,7 +2394,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnary()
    * @generated
    */
-  int UNARY = 53;
+  int UNARY = 52;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2468,7 +2431,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getAccess()
    * @generated
    */
-  int ACCESS = 54;
+  int ACCESS = 53;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2514,7 +2477,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArray()
    * @generated
    */
-  int ARRAY = 55;
+  int ARRAY = 54;
 
   /**
    * The feature id for the '<em><b>Exprs</b></em>' containment reference.
@@ -2542,7 +2505,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getPoint()
    * @generated
    */
-  int POINT = 56;
+  int POINT = 55;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2597,7 +2560,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 57;
+  int FUNCTION = 56;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -2643,7 +2606,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 58;
+  int PARAMETER = 57;
 
   /**
    * The feature id for the '<em><b>Built In Facet Key</b></em>' attribute.
@@ -2689,7 +2652,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getUnitName()
    * @generated
    */
-  int UNIT_NAME = 59;
+  int UNIT_NAME = 58;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2717,7 +2680,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getTypeRef()
    * @generated
    */
-  int TYPE_REF = 60;
+  int TYPE_REF = 59;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2754,7 +2717,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getSkillRef()
    * @generated
    */
-  int SKILL_REF = 61;
+  int SKILL_REF = 60;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2782,7 +2745,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getActionRef()
    * @generated
    */
-  int ACTION_REF = 62;
+  int ACTION_REF = 61;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2810,7 +2773,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getEquationRef()
    * @generated
    */
-  int EQUATION_REF = 63;
+  int EQUATION_REF = 62;
 
   /**
    * The feature id for the '<em><b>Ref</b></em>' reference.
@@ -2838,7 +2801,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getIntLiteral()
    * @generated
    */
-  int INT_LITERAL = 64;
+  int INT_LITERAL = 63;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2866,7 +2829,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getDoubleLiteral()
    * @generated
    */
-  int DOUBLE_LITERAL = 65;
+  int DOUBLE_LITERAL = 64;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2894,7 +2857,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 66;
+  int BOOLEAN_LITERAL = 65;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -2922,7 +2885,7 @@ public interface GamlPackage extends EPackage
    * @see gama.core.lang.gaml.impl.GamlPackageImpl#getReservedLiteral()
    * @generated
    */
-  int RESERVED_LITERAL = 67;
+  int RESERVED_LITERAL = 66;
 
   /**
    * The feature id for the '<em><b>Op</b></em>' attribute.
@@ -3614,38 +3577,6 @@ public interface GamlPackage extends EPackage
    * @generated
    */
   EClass getExpression();
-
-  /**
-   * Returns the meta object for class '{@link gama.core.lang.gaml.ArgumentPair <em>Argument Pair</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Argument Pair</em>'.
-   * @see gama.core.lang.gaml.ArgumentPair
-   * @generated
-   */
-  EClass getArgumentPair();
-
-  /**
-   * Returns the meta object for the attribute '{@link gama.core.lang.gaml.ArgumentPair#getOp <em>Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Op</em>'.
-   * @see gama.core.lang.gaml.ArgumentPair#getOp()
-   * @see #getArgumentPair()
-   * @generated
-   */
-  EAttribute getArgumentPair_Op();
-
-  /**
-   * Returns the meta object for the containment reference '{@link gama.core.lang.gaml.ArgumentPair#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see gama.core.lang.gaml.ArgumentPair#getRight()
-   * @see #getArgumentPair()
-   * @generated
-   */
-  EReference getArgumentPair_Right();
 
   /**
    * Returns the meta object for class '{@link gama.core.lang.gaml.ExpressionList <em>Expression List</em>}'.
@@ -5013,32 +4944,6 @@ public interface GamlPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
-
-    /**
-     * The meta object literal for the '{@link gama.core.lang.gaml.impl.ArgumentPairImpl <em>Argument Pair</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see gama.core.lang.gaml.impl.ArgumentPairImpl
-     * @see gama.core.lang.gaml.impl.GamlPackageImpl#getArgumentPair()
-     * @generated
-     */
-    EClass ARGUMENT_PAIR = eINSTANCE.getArgumentPair();
-
-    /**
-     * The meta object literal for the '<em><b>Op</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ARGUMENT_PAIR__OP = eINSTANCE.getArgumentPair_Op();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ARGUMENT_PAIR__RIGHT = eINSTANCE.getArgumentPair_Right();
 
     /**
      * The meta object literal for the '{@link gama.core.lang.gaml.impl.ExpressionListImpl <em>Expression List</em>}' class.

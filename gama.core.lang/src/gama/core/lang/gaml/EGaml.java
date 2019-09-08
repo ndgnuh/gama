@@ -305,9 +305,6 @@ public class EGaml implements IGamlEcoreUtils {
 				return ((Unary) object).getOp();
 			case GamlPackage.BINARY_OPERATOR:
 				return ((BinaryOperator) object).getOp();
-			case GamlPackage.ARGUMENT_PAIR:
-				s = ((ArgumentPair) object).getOp();
-				return s.endsWith(":") ? s.substring(0, s.length() - 1) : s;
 			case GamlPackage.PARAMETER:
 				final Parameter p = (Parameter) object;
 				s = getKeyOf(p.getLeft());

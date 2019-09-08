@@ -20,7 +20,6 @@ import gama.core.lang.gaml.ActionDefinition;
 import gama.core.lang.gaml.ActionFakeDefinition;
 import gama.core.lang.gaml.ActionRef;
 import gama.core.lang.gaml.ArgumentDefinition;
-import gama.core.lang.gaml.ArgumentPair;
 import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.Block;
 import gama.core.lang.gaml.BooleanLiteral;
@@ -227,11 +226,6 @@ public class GamlQualifiedNameProvider extends IQualifiedNameProvider.AbstractIm
 
 		@Override
 		public String caseExpression(final Expression object) {
-			return NULL;
-		}
-
-		@Override
-		public String caseArgumentPair(final ArgumentPair object) {
 			return NULL;
 		}
 

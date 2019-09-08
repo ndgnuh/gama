@@ -236,11 +236,6 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
         return createExpressionAdapter();
       }
       @Override
-      public Adapter caseArgumentPair(ArgumentPair object)
-      {
-        return createArgumentPairAdapter();
-      }
-      @Override
       public Adapter caseExpressionList(ExpressionList object)
       {
         return createExpressionListAdapter();
@@ -913,21 +908,6 @@ public class GamlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link gama.core.lang.gaml.ArgumentPair <em>Argument Pair</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see gama.core.lang.gaml.ArgumentPair
-   * @generated
-   */
-  public Adapter createArgumentPairAdapter()
   {
     return null;
   }

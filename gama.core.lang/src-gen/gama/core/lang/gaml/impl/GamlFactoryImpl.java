@@ -97,7 +97,6 @@ public class GamlFactoryImpl extends EFactoryImpl implements GamlFactory
       case GamlPackage.ARGUMENT_DEFINITION: return createArgumentDefinition();
       case GamlPackage.FACET: return createFacet();
       case GamlPackage.EXPRESSION: return createExpression();
-      case GamlPackage.ARGUMENT_PAIR: return createArgumentPair();
       case GamlPackage.EXPRESSION_LIST: return createExpressionList();
       case GamlPackage.VARIABLE_REF: return createVariableRef();
       case GamlPackage.TYPE_INFO: return createTypeInfo();
@@ -520,18 +519,6 @@ public class GamlFactoryImpl extends EFactoryImpl implements GamlFactory
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ArgumentPair createArgumentPair()
-  {
-    ArgumentPairImpl argumentPair = new ArgumentPairImpl();
-    return argumentPair;
   }
 
   /**

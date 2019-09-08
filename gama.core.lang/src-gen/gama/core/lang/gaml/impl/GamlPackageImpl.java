@@ -9,7 +9,6 @@ import gama.core.lang.gaml.ActionDefinition;
 import gama.core.lang.gaml.ActionFakeDefinition;
 import gama.core.lang.gaml.ActionRef;
 import gama.core.lang.gaml.ArgumentDefinition;
-import gama.core.lang.gaml.ArgumentPair;
 import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.BinaryOperator;
 import gama.core.lang.gaml.Block;
@@ -312,13 +311,6 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * @generated
    */
   private EClass expressionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass argumentPairEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1338,39 +1330,6 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
    * @generated
    */
   @Override
-  public EClass getArgumentPair()
-  {
-    return argumentPairEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getArgumentPair_Op()
-  {
-    return (EAttribute)argumentPairEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getArgumentPair_Right()
-  {
-    return (EReference)argumentPairEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getExpressionList()
   {
     return expressionListEClass;
@@ -2295,10 +2254,6 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
 
     expressionEClass = createEClass(EXPRESSION);
 
-    argumentPairEClass = createEClass(ARGUMENT_PAIR);
-    createEAttribute(argumentPairEClass, ARGUMENT_PAIR__OP);
-    createEReference(argumentPairEClass, ARGUMENT_PAIR__RIGHT);
-
     expressionListEClass = createEClass(EXPRESSION_LIST);
     createEReference(expressionListEClass, EXPRESSION_LIST__EXPRS);
 
@@ -2473,7 +2428,6 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     d_SpeciesEClass.getESuperTypes().add(this.getStatement());
     argumentDefinitionEClass.getESuperTypes().add(this.getVarDefinition());
     facetEClass.getESuperTypes().add(this.getVarDefinition());
-    argumentPairEClass.getESuperTypes().add(this.getExpression());
     expressionListEClass.getESuperTypes().add(this.getExpression());
     variableRefEClass.getESuperTypes().add(this.getExpression());
     equationDefinitionEClass.getESuperTypes().add(this.getGamlDefinition());
@@ -2605,10 +2559,6 @@ public class GamlPackageImpl extends EPackageImpl implements GamlPackage
     initEReference(getFacet_Block(), this.getBlock(), null, "block", null, 0, 1, Facet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(argumentPairEClass, ArgumentPair.class, "ArgumentPair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getArgumentPair_Op(), ecorePackage.getEString(), "op", null, 0, 1, ArgumentPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getArgumentPair_Right(), this.getExpression(), null, "right", null, 0, 1, ArgumentPair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionListEClass, ExpressionList.class, "ExpressionList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpressionList_Exprs(), this.getExpression(), null, "exprs", null, 0, -1, ExpressionList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

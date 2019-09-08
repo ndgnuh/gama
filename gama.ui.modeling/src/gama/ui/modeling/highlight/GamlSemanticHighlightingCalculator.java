@@ -43,9 +43,8 @@ import org.eclipse.xtext.util.CancelIndicator;
 import com.google.inject.Inject;
 
 import gama.common.util.StringUtils;
-import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.ArgumentDefinition;
-import gama.core.lang.gaml.ArgumentPair;
+import gama.core.lang.gaml.EGaml;
 import gama.core.lang.gaml.Facet;
 import gama.core.lang.gaml.GamlPackage;
 import gama.core.lang.gaml.Parameter;
@@ -133,9 +132,6 @@ public class GamlSemanticHighlightingCalculator implements ISemanticHighlighting
 			case GamlPackage.BINARY_OPERATOR:
 			case GamlPackage.FUNCTION:
 				setStyle(object, OPERATOR_ID, EGaml.getInstance().getKeyOf(object), true);
-				break;
-			case GamlPackage.ARGUMENT_PAIR:
-				setStyle(object, VARIABLE_ID, ((ArgumentPair) object).getOp(), false);
 				break;
 			case GamlPackage.VARIABLE_REF:
 				setStyle(VARIABLE_ID, NodeModelUtils.getNode(object));

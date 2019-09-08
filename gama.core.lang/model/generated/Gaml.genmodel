@@ -88,10 +88,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//Facet/block"/>
     </genClasses>
     <genClasses ecoreClass="Gaml.ecore#//Expression"/>
-    <genClasses ecoreClass="Gaml.ecore#//ArgumentPair">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Gaml.ecore#//ArgumentPair/op"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//ArgumentPair/right"/>
-    </genClasses>
     <genClasses ecoreClass="Gaml.ecore#//ExpressionList">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Gaml.ecore#//ExpressionList/exprs"/>
     </genClasses>

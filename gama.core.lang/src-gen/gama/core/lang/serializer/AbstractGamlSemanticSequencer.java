@@ -9,7 +9,6 @@ import gama.core.lang.gaml.ActionArguments;
 import gama.core.lang.gaml.ActionFakeDefinition;
 import gama.core.lang.gaml.ActionRef;
 import gama.core.lang.gaml.ArgumentDefinition;
-import gama.core.lang.gaml.ArgumentPair;
 import gama.core.lang.gaml.Array;
 import gama.core.lang.gaml.BinaryOperator;
 import gama.core.lang.gaml.Block;
@@ -103,9 +102,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 				return; 
 			case GamlPackage.ARGUMENT_DEFINITION:
 				sequence_ArgumentDefinition(context, (ArgumentDefinition) semanticObject); 
-				return; 
-			case GamlPackage.ARGUMENT_PAIR:
-				sequence_ArgumentPair(context, (ArgumentPair) semanticObject); 
 				return; 
 			case GamlPackage.ARRAY:
 				sequence_Primary(context, (Array) semanticObject); 
@@ -663,19 +659,6 @@ public abstract class AbstractGamlSemanticSequencer extends AbstractDelegatingSe
 	 *     (type=TypeRef name=Valid_ID default=Expression?)
 	 */
 	protected void sequence_ArgumentDefinition(ISerializationContext context, ArgumentDefinition semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Expression returns ArgumentPair
-	 *     ArgumentPair returns ArgumentPair
-	 *
-	 * Constraint:
-	 *     ((op=Valid_ID | op=DefinitionFacetKey | op=SpecialFacetKey | op=ActionFacetKey)? right=Pair)
-	 */
-	protected void sequence_ArgumentPair(ISerializationContext context, ArgumentPair semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
