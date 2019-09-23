@@ -4,9 +4,9 @@ Bundle-Name: Experiment UI
 Bundle-SymbolicName: gama.ui.experiment;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: gama.core.application;bundle-version="1.7.0",
- gama.ui.base;bundle-version="1.7.0",
- gama.core.base;bundle-version="1.7.0",
+Require-Bundle: gama.core.application,
+ gama.ui.base,
+ gama.core.base,
  org.eclipse.swt,
  org.eclipse.ui.workbench,
  org.eclipse.jface,

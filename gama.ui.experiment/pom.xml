@@ -10,5 +10,4 @@
 	</parent>
 	<artifactId>gama.ui.experiment</artifactId>
 	<packaging>eclipse-plugin</packaging>
-	<version>1.7.0-SNAPSHOT</version>
 </project>

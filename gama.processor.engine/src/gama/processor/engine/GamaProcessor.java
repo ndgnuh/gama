@@ -98,7 +98,7 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		}
 		// We pass the current document of the documentation processor to avoir re-reading it
 		final DocProcessor dp = (DocProcessor) processors.get(doc.class);
-		ExamplesToTests.createTests(context, dp.document);
+//		ExamplesToTests.createTests(context, dp.document);
 	}
 
 	public void generateJavaSource(final FileObject file) {

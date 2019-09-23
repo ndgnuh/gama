@@ -129,13 +129,13 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<id>eclipse-1903</id>
-			<url>http://download.eclipse.org/releases/2019-03</url>
+			<id>eclipse-1909</id>
+			<url>http://download.eclipse.org/releases/2019-09</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
 			<id>xtext</id>
-			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.17.0/</url>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.19.0/</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
@@ -219,6 +219,7 @@
 		<module>../gama.core.headless</module>
 		<module>../gama.feature.core</module>
 		
+		<module>../gama.extensions.files</module>
 		<!-- UI -->
 		
 		<module>../gama.build.documentation</module>
@@ -233,7 +234,6 @@
 		
 		<!-- EXTENSIONS -->
 		
-		<module>../gama.extensions.files</module>
 		<module>../gama.extensions.fipa</module>
 		<module>../gama.extensions.traffic</module>
 		<module>../gama.extensions.physics</module>
@@ -604,7 +604,7 @@
 
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.1.0</version>
 				<configuration>
 					<filesets>
 						<fileset>
