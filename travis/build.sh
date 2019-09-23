@@ -1,9 +1,9 @@
-cd ummisco.gama.annotations
+cd gama.processor.annotations
 mvn clean install $1
 cd - 
-cd msi.gama.processor 
+cd gama.processor.engine 
 mvn clean install $1
 cd - 
-cd msi.gama.parent 
+cd gama.build.parent
 mvn clean install $1
 cd -

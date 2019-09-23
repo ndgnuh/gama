@@ -210,7 +210,7 @@ public class RenameResourceAction extends WorkspaceAction {
 		final IResource currentResource = getCurrentResource();
 		if (currentResource == null || !currentResource.exists())
 			return;
-		if (LTKLauncher.openRenameWizard(null, getStructuredSelection()))
+		if (LTKLauncher.openRenameWizard(null))
 			return;
 		// Do a quick read only and null check
 		if (!checkReadOnlyAndNull(currentResource))

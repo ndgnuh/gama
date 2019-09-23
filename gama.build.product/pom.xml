@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ummisco.gama.product</artifactId>
+	<artifactId>gama.build.product</artifactId>
 	<parent>
-		<groupId>msi.gama</groupId>
-		<artifactId>msi.gama.parent</artifactId>
-		<version>1.7.0-SNAPSHOT</version>
-		<relativePath>../msi.gama.parent</relativePath>
+		<groupId>gama</groupId>
+		<artifactId>gama.build.parent</artifactId>
+		<version>2.0.0-SNAPSHOT</version>
+		<relativePath>../gama.build.parent/</relativePath>
 	</parent>
 
 
@@ -46,53 +47,56 @@
 							<goal>run</goal>
 						</goals>
 						<configuration>
-							<tasks>		
-			                    <delete>
-			                    	<fileset dir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Eclipse/plugins/" includes="com.ibm.icu_*" />
-			                    </delete> 
-			                    <delete>
-			                    	<fileset dir="./target/products/ummisco.gama.application.product/linux/gtk/x86_64/plugins/" includes="com.ibm.icu_*" />
-			                    </delete> 
-			                    <delete>
-			                    	<fileset dir="./target/products/ummisco.gama.application.product/win32/win32/x86_64/plugins/" includes="com.ibm.icu_*" />
-			                    </delete> 
-								<copy file="../ummisco.gama.product/extraresources/Model.icns"
+							<tasks>
+								<delete>
+									<fileset
+										dir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Eclipse/plugins/"
+										includes="com.ibm.icu_*" />
+								</delete>
+								<delete>
+									<fileset
+										dir="./target/products/ummisco.gama.application.product/linux/gtk/x86_64/plugins/"
+										includes="com.ibm.icu_*" />
+								</delete>
+								<delete>
+									<fileset
+										dir="./target/products/ummisco.gama.application.product/win32/win32/x86_64/plugins/"
+										includes="com.ibm.icu_*" />
+								</delete>
+								<copy
+									file="../ummisco.gama.product/extraresources/Model.icns"
 									todir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Resources/" />
-								<copy file="../ummisco.gama.product/extraresources/Experiment.icns"
+								<copy
+									file="../ummisco.gama.product/extraresources/Experiment.icns"
 									todir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Resources/" />
-								<copy file="../ummisco.gama.product/extraresources/Info.plist"
-									todir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/" overwrite="true"/>	
+								<copy
+									file="../ummisco.gama.product/extraresources/Info.plist"
+									todir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/"
+									overwrite="true" />
 								<copy
 									todir="./target/products/ummisco.gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/headless">
-									<fileset dir="../ummisco.gama.product/extraresources/headless/osx" />
+									<fileset
+										dir="../ummisco.gama.product/extraresources/headless/osx" />
 								</copy>
 								<copy
 									todir="./target/products/ummisco.gama.application.product/win32/win32/x86_64/headless">
 									<fileset
 										dir="../ummisco.gama.product/extraresources/headless/windows" />
 								</copy>
-								
-								<!--  obsolete on 1812 
-								<copy
-									todir="./target/products/ummisco.gama.application.product/win32/win32/x86/headless">
-									<fileset
-										dir="../ummisco.gama.product/extraresources/headless/windows" />
-								</copy>
-								-->
+
+								<!-- obsolete on 1812 <copy todir="./target/products/ummisco.gama.application.product/win32/win32/x86/headless"> 
+									<fileset dir="../ummisco.gama.product/extraresources/headless/windows" /> 
+									</copy> -->
 								<copy
 									todir="./target/products/ummisco.gama.application.product/linux/gtk/x86_64/headless">
-									<fileset dir="../ummisco.gama.product/extraresources/headless/unix" />
+									<fileset
+										dir="../ummisco.gama.product/extraresources/headless/unix" />
 								</copy>
-								
-								<!--  obsolete on 1812 
-								<copy
-									todir="./target/products/ummisco.gama.application.product/linux/gtk/x86/headless">
-									<fileset dir="../ummisco.gama.product/extraresources/headless/unix" />
-								</copy>
-											
-							<target></target>		
-								-->
-			                </tasks>
+
+								<!-- obsolete on 1812 <copy todir="./target/products/ummisco.gama.application.product/linux/gtk/x86/headless"> 
+									<fileset dir="../ummisco.gama.product/extraresources/headless/unix" /> </copy> 
+									<target></target> -->
+							</tasks>
 						</configuration>
 
 					</execution>

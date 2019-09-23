@@ -32,6 +32,7 @@
        <goal>copy-dependencies</goal>
       </goals>
        <configuration>
+					<release>11</release>
               <outputDirectory>${basedir}/target/lib</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
