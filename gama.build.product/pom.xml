@@ -63,37 +63,37 @@
 										includes="com.ibm.icu_*" />
 								</delete>
 								<copy
-									file="../ummisco.gama.product/extraresources/Model.icns"
+									file="../gama.build.product/extraresources/Model.icns"
 									todir="./target/products/gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Resources/" />
 								<copy
-									file="../ummisco.gama.product/extraresources/Experiment.icns"
+									file="../gama.build.product/extraresources/Experiment.icns"
 									todir="./target/products/gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/Resources/" />
 								<copy
-									file="../ummisco.gama.product/extraresources/Info.plist"
+									file="../gama.build.product/extraresources/Info.plist"
 									todir="./target/products/gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/"
 									overwrite="true" />
 								<copy
 									todir="./target/products/gama.application.product/macosx/cocoa/x86_64/Gama.app/Contents/headless">
 									<fileset
-										dir="../ummisco.gama.product/extraresources/headless/osx" />
+										dir="../gama.build.product/extraresources/headless/osx" />
 								</copy>
 								<copy
 									todir="./target/products/gama.application.product/win32/win32/x86_64/headless">
 									<fileset
-										dir="../ummisco.gama.product/extraresources/headless/windows" />
+										dir="../gama.build.product/extraresources/headless/windows" />
 								</copy>
 
 								<!-- obsolete on 1812 <copy todir="./target/products/gama.application.product/win32/win32/x86/headless"> 
-									<fileset dir="../ummisco.gama.product/extraresources/headless/windows" /> 
+									<fileset dir="../gama.build.product/extraresources/headless/windows" /> 
 									</copy> -->
 								<copy
 									todir="./target/products/gama.application.product/linux/gtk/x86_64/headless">
 									<fileset
-										dir="../ummisco.gama.product/extraresources/headless/unix" />
+										dir="../gama.build.product/extraresources/headless/unix" />
 								</copy>
 
 								<!-- obsolete on 1812 <copy todir="./target/products/gama.application.product/linux/gtk/x86/headless"> 
-									<fileset dir="../ummisco.gama.product/extraresources/headless/unix" /> </copy> 
+									<fileset dir="../gama.build.product/extraresources/headless/unix" /> </copy> 
 									<target></target> -->
 							</tasks>
 						</configuration>

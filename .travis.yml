@@ -40,4 +40,4 @@ after_success:
   - bash ./travis/publish.sh
 branches:
   only:
-    - master
+    - GAMA_2.0
