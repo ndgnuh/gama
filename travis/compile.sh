@@ -29,29 +29,29 @@ function mvn_compile() {
 
 compile (){
 	echo "Compile GAMA project"			
-	mvn_install ummisco.gama.annotations
-	mvn_install msi.gama.processor
+	mvn_install gama.processor.annotations
+	mvn_install gama.processor.engine 
 	
 	change=$(git log --pretty=format: --name-only --since="1 hour ago")
 	
-	if [[ ${change} == *"msi.gama.ext"* ]] || [[ $MSG == *"ci ext"* ]]; then
-		mvn_install msi.gama.ext
-		mvn_install ummisco.gama.feature.dependencies
+	if [[ ${change} == *"gama.core.ext"* ]] || [[ $MSG == *"ci ext"* ]]; then
+		mvn_install gama.core.ext
+		mvn_install gama.feature.dependencies
 	fi
 	
 	
-	mvn_install msi.gama.parent
+	mvn_install gama.build.parent
 }
 
 install (){
 	echo "Install GAMA project"			
-	mvn_install ummisco.gama.annotations
-	mvn_install msi.gama.processor
+	mvn_install gama.processor.annotations
+	mvn_install gama.processor.engine 
 	
 	
 	
 	
-	mvn_install msi.gama.parent
+	mvn_install gama.build.parent
 }
 
 install1 (){
