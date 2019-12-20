@@ -1,4 +1,4 @@
-# GAMA
+# GAMA 2.0
 [![Build Status](https://travis-ci.org/gama-platform/gama.svg?branch=master)](https://travis-ci.org/gama-platform/gama)
 [![Language](http://img.shields.io/badge/language-java-brightgreen.svg)](https://www.java.com/)
 [![GitHub issues](https://img.shields.io/github/issues/gama-platform/gama.svg)](https://github.com/gama-platform/gama/issues)
@@ -6,7 +6,9 @@
 [![Documentation](https://img.shields.io/badge/documentation-web-brightgreen.svg)](https://gama-platform.github.io)
 [![Documentation](https://img.shields.io/badge/documentation-pdf-brightgreen.svg)](https://github.com/gama-platform/gama/wiki/resources/pdf/docGAMAv17.pdf)
 
-**Core repository for the GAMA Platform project**
+**Core repository for the GAMA Platform project, 2.0 Branch**
+
+The official Eclipse version is [Eclipse 2019-12(https://www.eclipse.org/downloads/packages/release/2019-12/r) 
 
 Please post issues about GAMA here:  
  
