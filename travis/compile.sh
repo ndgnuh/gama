@@ -73,6 +73,13 @@ if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]] || [[ $MSG == *"ci cron"* ]]; then
 	
 	mvn_install_with_sonar gama.processor.annotations
 	mvn_install_with_sonar gama.processor.engine 
+	mvn_install_with_sonar gama.core.ext
+	mvn_install_with_sonar gama.core.base
+
+	mvn_install_with_sonar gama.core.ext
+	mvn_install_with_sonar gama.core.outputs
+	
+	mvn_install_with_sonar gama.core.exts	
 	
 	
 	
