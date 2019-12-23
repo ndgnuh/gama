@@ -8,7 +8,7 @@ before_install:
 notifications:
   email:
     recipients:
-      - my.gama.bot@gmail.com
+      - hqnghi88@gmail.com
     on_success: change
     on_failure: always
 cache:
