@@ -1,5 +1,5 @@
 #! /bin/bash
-cd /home/travis/build/gama-platform/gama/ummisco.gama.product/target/products/ummisco.gama.application.product/linux/gtk/x86_64/headless
+cd /home/travis/build/gama-platform/gama/gama.build.product/target/products/gama.application.product/linux/gtk/x86_64/headless
 memory=3048m 
 
 
@@ -16,7 +16,7 @@ echo "GAMA is starting..."
 #exec
 
 #GAMA=Gamaq
-java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -validate 
+java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application gama.core.headless.id4 -data $passWork -validate 
 res=$?		
 if [[ $res -gt 0 ]]; then	
 	rm -rf $passWork
@@ -24,7 +24,7 @@ if [[ $res -gt 0 ]]; then
 fi
 
 echo "GAMA is starting..."
-java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application msi.gama.headless.id4 -data $passWork -test -failed   
+java -cp $GAMA -Xms512m -Xmx$memory  -Djava.awt.headless=true org.eclipse.core.launcher.Main  -application gama.core.headless.id4 -data $passWork -test -failed   
 res=$?			
 if [[ $res -gt 0 ]]; then
 	rm -rf $passWork
