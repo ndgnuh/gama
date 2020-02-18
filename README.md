@@ -8,7 +8,8 @@
 
 **Core repository for the GAMA Platform project, 2.0 Branch**
 
-The official Eclipse version is [Eclipse 2019-12](https://www.eclipse.org/downloads/packages/release/2019-12/r) 
+The official Eclipse version is [Eclipse 2019-12](https://www.eclipse.org/downloads/packages/release/2019-12/r). 
+The requiered Java version is [Oracle JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).
 
 Please post issues about GAMA here:  
  
