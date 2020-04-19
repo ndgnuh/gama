@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.TypeDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.descriptions.TypeDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -25,9 +25,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.jgrapht.DirectedGraph;
+import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
-import org.jgrapht.alg.CycleDetector;
+import org.jgrapht.alg.cycle.CycleDetector;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.traverse.TopologicalOrderIterator;
 
@@ -308,7 +308,7 @@ public abstract class TypeDescription extends SymbolDescription {
 
 	public Collection<String> getOrderedAttributeNames(final Set<String> facetsToConsider) {
 		// AD Revised in Aug 2019 for Issue #2869: keep constraints between superspecies and subspecies
-		final DirectedGraph<String, Object> dependencies = new DefaultDirectedGraph<>(Object.class);
+		final Graph<String, Object> dependencies = new DefaultDirectedGraph<>(Object.class);
 		final Map<String, VariableDescription> all = new HashMap<>();
 		this.visitAllAttributes((d) -> {
 			all.put(d.getName(), (VariableDescription) d);
@@ -342,7 +342,7 @@ public abstract class TypeDescription extends SymbolDescription {
 		if (attributes == null || attributes.size() <= 1)
 			return true;
 		final VariableDescription shape = attributes.get(SHAPE);
-		final DirectedGraph<VariableDescription, Object> dependencies = new DefaultDirectedGraph<>(Object.class);
+		final Graph<VariableDescription, Object> dependencies = new DefaultDirectedGraph<>(Object.class);
 		if (shape != null) {
 			dependencies.addVertex(shape);
 		}
@@ -379,7 +379,7 @@ public abstract class TypeDescription extends SymbolDescription {
 			}
 			return false;
 		}
-		final DirectedGraph<VariableDescription, Object> fDependencies = new DefaultDirectedGraph<>(Object.class);
+		final Graph<VariableDescription, Object> fDependencies = new DefaultDirectedGraph<>(Object.class);
 		attributes.forEachPair((aName, var) -> {
 			if (!var.hasFacet(FUNCTION))
 				return true;

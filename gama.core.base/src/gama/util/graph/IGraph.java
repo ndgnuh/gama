@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.util.graph.IGraph.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.util.graph.IGraph.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,19 +14,17 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.UndirectedGraph;
-import org.jgrapht.WeightedGraph;
+import org.jgrapht.Graph;
 
 import gama.common.interfaces.IAddressableContainer;
 import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IModifiableContainer;
 import gama.metamodel.topology.graph.FloydWarshallShortestPathsGAMA;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.getter;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;
 import gama.util.list.IList;
@@ -68,8 +66,7 @@ import gaml.types.IType;
 @SuppressWarnings ({ "rawtypes" })
 public interface IGraph<Node, Edge>
 		extends IModifiableContainer<Node, Edge, GamaPair<Node, Node>, Graphs.GraphObjectToAdd>,
-		IAddressableContainer<Node, Edge, GamaPair<Node, Node>, List<Edge>>, WeightedGraph<Node, Edge>,
-		DirectedGraph<Node, Edge>, UndirectedGraph<Node, Edge>, IGraphEventProvider {
+		IAddressableContainer<Node, Edge, GamaPair<Node, Node>, List<Edge>>, Graph<Node, Edge>, IGraphEventProvider {
 
 	double getVertexWeight(final Object v);
 
@@ -161,7 +158,8 @@ public interface IGraph<Node, Edge>
 
 	@Override
 	default boolean contains(final IScope scope, final Object o) {
-		if (o instanceof GamaPair) { return Graphs.containsEdge(scope, this, (GamaPair) o); }
+		if (o instanceof GamaPair)
+			return Graphs.containsEdge(scope, this, (GamaPair) o);
 		return Graphs.containsEdge(scope, this, o);
 	}
 

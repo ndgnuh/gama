@@ -1,16 +1,16 @@
 /*******************************************************************************************************
  *
- * gama.util.graph._Edge.java, in plugin gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * gama.util.graph._Edge.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package gama.util.graph;
 
-import org.jgrapht.WeightedGraph;
+import org.jgrapht.Graph;
 
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -18,7 +18,7 @@ import gama.runtime.scope.IScope;
 public class _Edge<V, E> extends GraphObject<GamaGraph<V, E>, V, E> {
 
 	/**
-	 * 
+	 *
 	 */
 	// protected final GamaGraph<V, ?> graph;
 	// private double weight = WeightedGraph.DEFAULT_EDGE_WEIGHT;
@@ -26,7 +26,7 @@ public class _Edge<V, E> extends GraphObject<GamaGraph<V, E>, V, E> {
 
 	public _Edge(final GamaGraph<V, E> gamaGraph, final Object edge, final Object source, final Object target)
 			throws GamaRuntimeException {
-		this(gamaGraph, edge, source, target, WeightedGraph.DEFAULT_EDGE_WEIGHT);
+		this(gamaGraph, edge, source, target, Graph.DEFAULT_EDGE_WEIGHT);
 	}
 
 	public _Edge(final GamaGraph<V, E> gamaGraph, final Object edge, final Object source, final Object target,

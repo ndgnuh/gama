@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlResourceIndexer.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlResourceIndexer.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
-import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
@@ -34,22 +33,22 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.inject.Singleton;
 
-import gama.core.lang.gaml.resource.GamlResource;
-import gama.core.lang.gaml.resource.GamlResourceServices;
 import gama.common.interfaces.BiConsumerWithPruning;
-import gama.util.map.GamaMapFactory;
-import gama.util.map.IMap;
 import gama.core.lang.gaml.ExperimentFileStructure;
 import gama.core.lang.gaml.GamlPackage;
 import gama.core.lang.gaml.Import;
 import gama.core.lang.gaml.Model;
 import gama.core.lang.gaml.impl.ModelImpl;
+import gama.core.lang.gaml.resource.GamlResource;
+import gama.core.lang.gaml.resource.GamlResourceServices;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
 
 @Singleton
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamlResourceIndexer {
 
-	DirectedGraph<URI, Edge> index = new SimpleDirectedGraph(Edge.class);
+	SimpleDirectedGraph<URI, Edge> index = new SimpleDirectedGraph(Edge.class);
 	protected final static IMap EMPTY_MAP = GamaMapFactory.create();
 	public static final Object IMPORTED_URIS = "ImportedURIs";
 

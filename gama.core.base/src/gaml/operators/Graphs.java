@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Graphs.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Graphs.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,16 +14,14 @@ import static one.util.streamex.StreamEx.of;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.alg.BronKerboschCliqueFinder;
-import org.jgrapht.alg.ConnectivityInspector;
+import org.jgrapht.alg.clique.BronKerboschCliqueFinder;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.alg.flow.EdmondsKarpMFImpl;
 import org.jgrapht.alg.interfaces.MaximumFlowAlgorithm.MaximumFlow;
 import org.locationtech.jts.geom.Coordinate;
@@ -38,15 +36,15 @@ import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.graph.GamaSpatialGraph;
 import gama.metamodel.topology.graph.GamaSpatialGraph.VertexRelationship;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;
@@ -706,7 +704,7 @@ public class Graphs {
 
 		ConnectivityInspector ci;
 		// there is an error with connectivity inspector of JGrapht....
-		ci = new ConnectivityInspector((DirectedGraph) graph);
+		ci = new ConnectivityInspector(graph);
 		final IList<IList> results = GamaListFactory.create(Types.LIST);
 		for (final Object obj : ci.connectedSets()) {
 			results.add(GamaListFactory.create(scope, graph.getGamlType().getKeyType(), (Set) obj));
@@ -737,7 +735,7 @@ public class Graphs {
 
 		ConnectivityInspector ci;
 		// there is an error with connectivity inspector of JGrapht....
-		ci = new ConnectivityInspector((DirectedGraph) graph);
+		ci = new ConnectivityInspector(graph);
 		final IList<IList> results = GamaListFactory.create(Types.LIST);
 		for (final Object obj : ci.connectedSets()) {
 			if (edge) {
@@ -817,8 +815,7 @@ public class Graphs {
 			throw GamaRuntimeException.error("The graph is nil", scope);
 		final BronKerboschCliqueFinder cls = new BronKerboschCliqueFinder(graph);
 		final IList<IList> results = GamaListFactory.create(Types.LIST);
-		final Collection cliques = cls.getAllMaximalCliques();
-		for (final Object obj : cliques) {
+		for (final Object obj : cls) {
 			results.add(GamaListFactory.create(scope, graph.getGamlType().getKeyType(), (Set) obj));
 		}
 		return results;
@@ -847,8 +844,7 @@ public class Graphs {
 		final BronKerboschCliqueFinder cls = new BronKerboschCliqueFinder(graph);
 
 		final IList<IList> results = GamaListFactory.create(Types.LIST);
-		final Collection cliques = cls.getBiggestMaximalCliques();
-		for (final Object obj : cliques) {
+		for (final Object obj : cls) {
 			results.add(GamaListFactory.create(scope, graph.getGamlType().getKeyType(), (Set) obj));
 		}
 		return results;

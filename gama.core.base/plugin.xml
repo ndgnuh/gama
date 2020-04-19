@@ -21,14 +21,14 @@
    <extension
          point="gama.experiment">
       <implementation
-            class="msi.gama.kernel.experiment.ExperimentAgent"
+            class="gama.kernel.experiment.ExperimentAgent"
             keyword="gui">
       </implementation>
    </extension>
    <extension
          point="gama.experiment">
       <implementation
-            class="msi.gama.kernel.experiment.BatchAgent"
+            class="gama.kernel.experiment.BatchAgent"
             keyword="batch">
       </implementation>
    </extension>
