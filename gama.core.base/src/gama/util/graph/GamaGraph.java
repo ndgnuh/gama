@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.GraphType;
 import org.jgrapht.Graphs;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.alg.cycle.CycleDetector;
@@ -30,8 +31,10 @@ import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.alg.shortestpath.KShortestSimplePaths;
 import org.jgrapht.alg.spanning.KruskalMinimumSpanningTree;
+import org.jgrapht.alg.tour.NearestInsertionHeuristicTSP;
 import org.jgrapht.alg.util.Pair;
 import org.jgrapht.graph.AsUndirectedGraph;
+import org.jgrapht.graph.DefaultGraphType;
 
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
@@ -82,6 +85,7 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 	protected Map<Pair<V, V>, IList<IList<E>>> shortestPathComputed = null;
 	protected VertexRelationship vertexRelation;
 	protected GamaIntMatrix shortestPathMatrix = null;
+	private final GraphType graphType;
 
 	protected static double DEFAULT_NODE_WEIGHT = 0.0;
 
@@ -115,6 +119,8 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 		this.graphScope = scope;
 		shortestPathComputed = new ConcurrentHashMap<>();
 		type = Types.GRAPH.of(nodeType, vertexType);
+		GraphType base = DefaultGraphType.multigraph().asModifiable().asWeighted();
+		graphType = directed ? base.asDirected() : base.asUndirected();
 	}
 
 	public GamaGraph(final IScope scope, final IContainer edgesOrVertices, final boolean byEdge, final boolean directed,
@@ -130,6 +136,8 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 		// : Types.NO_TYPE;
 		//
 		type = Types.GRAPH.of(nodeType, edgeType);
+		GraphType base = DefaultGraphType.multigraph().asModifiable().asWeighted();
+		graphType = directed ? base.asDirected() : base.asUndirected();
 		init(scope, edgesOrVertices, byEdge, directed, rel, edgesSpecies);
 	}
 
@@ -139,6 +147,8 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 		shortestPathComputed = new ConcurrentHashMap<>();
 		this.graphScope = scope;
 		type = Types.GRAPH.of(nodeType, vertexType);
+		GraphType base = DefaultGraphType.multigraph().asModifiable().asWeighted();
+		graphType = directed ? base.asDirected() : base.asUndirected();
 	}
 
 	public IScope getScope() {
@@ -1057,13 +1067,21 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 
 	@Override
 	public IPath getCircuit(final IScope scope) {
-		final List vertices = HamiltonianCycle.getApproximateOptimalForCompleteGraph(this);
+		NearestInsertionHeuristicTSP<V, E> algo = new NearestInsertionHeuristicTSP();
+		GraphPath p = algo.getTour(this);
+		final List vertices = p.getVertexList();
 		final int size = vertices.size();
 		final IList edges = GamaListFactory.create(getGamlType().getContentType());
+
 		for (int i = 0; i < size - 1; i++) {
 			edges.add(this.getEdge(vertices.get(i), vertices.get(i + 1)));
 		}
 		return pathFromEdges(scope, null, null, edges);
+	}
+
+	@Override
+	public GraphType getType() {
+		return graphType;
 	}
 
 	@Override

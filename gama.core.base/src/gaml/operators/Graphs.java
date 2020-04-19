@@ -1713,7 +1713,7 @@ public class Graphs {
 		final EdmondsKarpMFImpl ek = new EdmondsKarpMFImpl(graph);
 		final MaximumFlow<IShape> mf = ek.getMaximumFlow(source, sink);
 		final IMap<Object, Double> result = GamaMapFactory.create();
-		result.putAll(mf.getFlow());
+		result.putAll(mf.getFlowMap());
 		return result;
 	}
 
