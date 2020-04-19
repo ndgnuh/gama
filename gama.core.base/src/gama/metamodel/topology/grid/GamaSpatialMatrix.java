@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.grid.GamaSpatialMatrix.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.grid.GamaSpatialMatrix.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -60,6 +60,7 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gama.util.file.IGamaFile;
+import gama.util.file.IGamaFile.Grid;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
 import gama.util.map.GamaMapFactory;
@@ -243,8 +244,8 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 				gridValue[i] = val;
 			}
 			final IList vals = GamaListFactory.create(Types.FLOAT);
-			for (int j = 0; j < gfiles.size(); j++) {
-				final Double v = gfiles.get(j).valueOf(scope, g.getLocation());
+			for (Grid gfile2 : gfiles) {
+				final Double v = gfile2.valueOf(scope, g.getLocation());
 				vals.add(v);
 			}
 			bands.add(vals);
@@ -508,38 +509,41 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 
 	private final int getPlaceIndexAt(final GamaPoint p) {
 		if (isHexagon) {
-			final int xx = (int) (p.getX() / (cellWidth * 0.75));
-			final int yy = xx % 2 == 0 ? (int) (p.getY() / cellHeight) : (int) ((p.getY() - cellHeight) / cellHeight);
+			int xx = 0;
+			int yy = 0;
+			if (isHorizontalOrientation) {
+				xx = (int) (p.getX() / (cellWidth * 0.75));
+				yy = xx % 2 == 0 ? (int) (p.getY() / cellHeight) : (int) ((p.getY() - cellHeight) / cellHeight);
+			} else {
+				yy = (int) (p.getY() / (cellHeight * 0.75));
+				xx = yy % 2 == 0 ? (int) (p.getX() / cellWidth) : (int) ((p.getX() - cellWidth) / cellWidth);
 
+			}
+			xx = Math.min(xx, this.numCols - 1);
+			yy = Math.min(yy, this.numRows - 1);
 			int i = getPlaceIndexAt(xx, yy);
 			if (matrix[i] == null)
 				return -1;
-			if (matrix[i].getLocation() == p)
+			if (matrix[i].getLocation() == p || matrix[i].intersects(p))
 				return i;
 			final Set<Integer> toObserve =
 					((GridHexagonalNeighborhood) getNeighborhood()).getNeighborsAtRadius1(i, numCols, numRows, isTorus);
 			toObserve.add(i);
-			double dMin = Double.MAX_VALUE;
 			int x = 0, y = 0;
 			final Iterator<Integer> it = toObserve.iterator();
 			while (it.hasNext()) {
 				final int id = it.next();
 
 				final IShape sh = matrix[id];
-				if (sh == null) {
-					continue;
-				}
-				final double dist = sh.getLocation().euclidianDistanceTo(p);
-				if (dist < dMin) {
-					dMin = dist;
+				if (sh.intersects(p)) {
 					final GamaPoint pt = (GamaPoint) hexAgentToLoc.get(sh.getGeometry());
 					x = (int) pt.x;
 					y = (int) pt.y;
+					return getPlaceIndexAt(x, y);
 				}
 
 			}
-			i = getPlaceIndexAt(x, y);
-			return i;
+			return -1;
 
 		}
 		final double px = p.getX();
@@ -1435,10 +1439,29 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 	private Set<IAgent> inEnvelope(final Envelope env) {
 		// TODO Is it really efficient?
 		final Set<IAgent> shapes = new LinkedHashSet();
-		final int minX = max(0, (int) (env.getMinX() / cellWidth));
-		final int minY = max(0, (int) (env.getMinY() / cellHeight));
-		final int maxX = min(numCols - 1, (int) (env.getMaxX() / cellWidth));
-		final int maxY = min(numRows - 1, (int) (env.getMaxY() / cellHeight));
+		int minX = 0;
+		int minY = 0;
+		int maxX = numCols - 1;
+		int maxY = numRows - 1;
+
+		if (this.isHexagon) {
+			if (this.isHorizontalOrientation) {
+				minX = max(0, (int) (env.getMinX() / (cellWidth / 0.75)));
+				minY = max(0, (int) (env.getMinY() / cellHeight));
+				maxX = min(numCols - 1, (int) (env.getMaxX() / (cellWidth * 0.75)));
+				maxY = min(numRows - 1, (int) (env.getMaxY() / cellHeight));
+			} else {
+				minX = max(0, (int) (env.getMinX() / cellWidth));
+				minY = max(0, (int) (env.getMinY() / (cellHeight / 0.75)));
+				maxX = min(numCols - 1, (int) (env.getMaxX() / cellWidth));
+				maxY = min(numRows - 1, (int) (env.getMaxY() / (cellHeight * 0.75)));
+			}
+		} else {
+			minX = max(0, (int) (env.getMinX() / cellWidth));
+			minY = max(0, (int) (env.getMinY() / cellHeight));
+			maxX = min(numCols - 1, (int) (env.getMaxX() / cellWidth));
+			maxY = min(numRows - 1, (int) (env.getMaxY() / cellHeight));
+		}
 		for (int i = minX; i <= maxX; i++) {
 			for (int j = minY; j <= maxY; j++) {
 				final int index = getPlaceIndexAt(i, j);
