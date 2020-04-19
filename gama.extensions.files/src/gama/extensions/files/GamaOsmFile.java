@@ -47,6 +47,9 @@ import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
+import gama.GAMA;
+import gama.common.geometry.Envelope3D;
+import gama.common.util.TextBuilder;
 import gama.core.ext.osmosis.Bound;
 import gama.core.ext.osmosis.Entity;
 import gama.core.ext.osmosis.EntityContainer;
@@ -62,16 +65,13 @@ import gama.core.ext.osmosis.Way;
 import gama.core.ext.osmosis.WayNode;
 import gama.dev.utils.DEBUG;
 import gama.extensions.files.metadata.GamaFileMetaData;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.GamlAnnotations.doc;
-import gama.processor.annotations.GamlAnnotations.example;
-import gama.processor.annotations.GamlAnnotations.file;
-import gama.GAMA;
-import gama.common.geometry.Envelope3D;
-import gama.common.util.TextBuilder;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.GamaShape;
 import gama.metamodel.shape.IShape;
+import gama.processor.annotations.GamlAnnotations.doc;
+import gama.processor.annotations.GamlAnnotations.example;
+import gama.processor.annotations.GamlAnnotations.file;
+import gama.processor.annotations.IConcept;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
@@ -93,6 +93,8 @@ import gaml.types.Types;
 		doc = @doc ("Represents files that contain OSM GIS information. The internal representation is a list of geometries. See https://en.wikipedia.org/wiki/OpenStreetMap for more information"))
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GamaOsmFile extends GamaGisFile {
+
+	final ReferencedEnvelope env = new ReferencedEnvelope();
 
 	public static class OSMInfo extends GamaFileMetaData {
 
@@ -301,9 +303,9 @@ public class GamaOsmFile extends GamaGisFile {
 				final boolean toFilter = filteringOptions != null && !filteringOptions.isEmpty();
 				if (entity instanceof Bound) {
 					final Bound bound = (Bound) entity;
-					final Envelope3D env =
+					final Envelope3D e =
 							Envelope3D.of(bound.getLeft(), bound.getRight(), bound.getBottom(), bound.getTop(), 0, 0);
-					computeProjection(scope, env);
+					computeProjection(scope, e);
 				} else if (returnIt) {
 					if (entity instanceof Node) {
 						final Node node = (Node) entity;
@@ -312,6 +314,10 @@ public class GamaOsmFile extends GamaGisFile {
 								? new GamaPoint(node.getLongitude(), node.getLatitude()).getInnerGeometry()
 								: gis.transform(
 										new GamaPoint(node.getLongitude(), node.getLatitude()).getInnerGeometry());
+
+						// final Geometry g = new GamaPoint(node.getLongitude(), node.getLatitude()).getInnerGeometry();
+						env.expandToInclude(g.getCoordinate());
+
 						nodesPt.put(node.getId(), new GamaShape(g));
 					} else if (entity instanceof Way) {
 						if (toFilter) {
@@ -349,7 +355,7 @@ public class GamaOsmFile extends GamaGisFile {
 		};
 		readFile(scope, sinkImplementation, getFile(scope));
 		if (returnIt) {
-			setBuffer(buildGeometries(nodes, ways, relations, intersectionNodes, nodesPt));
+			setBuffer(buildGeometries(scope, nodes, ways, relations, intersectionNodes, nodesPt));
 		}
 	}
 
@@ -384,10 +390,18 @@ public class GamaOsmFile extends GamaGisFile {
 		getFeatureIterator(scope, true);
 	}
 
-	public IList<IShape> buildGeometries(final List<Node> nodes, final List<Way> ways, final List<Relation> relations,
-			final Set<Long> intersectionNodes, final Map<Long, GamaShape> nodesPt) {
+	public IList<IShape> buildGeometries(final IScope scope, final List<Node> nodes, final List<Way> ways,
+			final List<Relation> relations, final Set<Long> intersectionNodes, final Map<Long, GamaShape> nodesPt) {
 		final IList<IShape> geometries = GamaListFactory.create(Types.GEOMETRY);
-
+		if (gis == null) {
+			computeProjection(scope, Envelope3D.of(env));
+			if (gis != null) {
+				for (Long id : nodesPt.keySet()) {
+					GamaShape sp = new GamaShape(gis.transform(nodesPt.get(id).getInnerGeometry()));
+					nodesPt.put(id, sp);
+				}
+			}
+		}
 		final Map<Long, Entity> geomMap = new HashMap<>();
 		for (final Node node : nodes) {
 			geomMap.put(node.getId(), node);
@@ -702,6 +716,8 @@ public class GamaOsmFile extends GamaGisFile {
 		if (gis == null) {
 			getFeatureIterator(scope, false);
 		}
+		if (gis == null)
+			return Envelope3D.of(env);
 		return gis.getProjectedEnvelope();
 
 	}

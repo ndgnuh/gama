@@ -160,4 +160,6 @@ public interface IGamlEcoreUtils {
 
 	EObject getDefaultExprOf(EObject s);
 
+	boolean hasFacet(EObject s, String facet);
+
 }

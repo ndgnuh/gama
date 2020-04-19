@@ -32,7 +32,6 @@ import gama.core.lang.gaml.impl.ModelImpl;
 import gama.core.lang.gaml.impl.S_ActionImpl;
 import gama.core.lang.gaml.impl.S_EquationsImpl;
 import gama.core.lang.gaml.impl.S_IfImpl;
-import gama.core.lang.gaml.impl.StatementImpl;
 import gama.core.lang.gaml.util.GamlSwitch;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.interfaces.IGamlEcoreUtils;
@@ -63,6 +62,28 @@ public class EGaml implements IGamlEcoreUtils {
 		if (o instanceof HeadlessExperiment)
 			return ((HeadlessExperiment) o).getName();
 		return null;
+	}
+
+	/**
+	 * Tells if a facet is present in a statement
+	 *
+	 * @param s
+	 *            the s
+	 * @return the facets map of
+	 */
+	@Override
+	public boolean hasFacet(final EObject s, final String facet) {
+		final List<? extends EObject> list = getFacetsOf(s);
+		if (list.isEmpty())
+			return false;
+		for (final EObject f : list) {
+			if (f instanceof Facet) {
+				final String name = getKeyOf(f);
+				if (facet.equals(name))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -198,7 +219,7 @@ public class EGaml implements IGamlEcoreUtils {
 
 		@Override
 		public Boolean caseStatement(final Statement object) {
-			return ((StatementImpl) object).eIsSet(GamlPackage.STATEMENT__BLOCK)
+			return ((StatementImpl) object).eIsSet(GamlPackage.STATEMENT__BLOCK) || hasFacet(object, IKeyword.VIRTUAL)
 			// && ((StatementImpl) object).getBlock().getFunction() == null
 			;
 		}
@@ -468,9 +489,9 @@ public class EGaml implements IGamlEcoreUtils {
 		} else if (expr instanceof Function) {
 			function(serializer, (Function) expr);
 		}
-		// else if ( expr instanceof FunctionRef ) {
-		// function((FunctionRef) expr);
-		// }
+			// else if ( expr instanceof FunctionRef ) {
+			// function((FunctionRef) expr);
+			// }
 		else {
 			// serializer.append("(");
 			// serialize(serializer, expr.getLeft());

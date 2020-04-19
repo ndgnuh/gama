@@ -216,6 +216,10 @@ public class GamlSyntacticConverter {
 		}
 	}
 
+	private boolean doesNotContainVirtual(final Statement stm) {
+		return !EGaml.getInstance().hasFacet(stm, IKeyword.VIRTUAL);
+	}
+
 	private boolean doesNotDefineAttributes(final String keyword) {
 		final SymbolProto p = DescriptionFactory.getProto(keyword, null);
 		if (p == null)
@@ -280,8 +284,7 @@ public class GamlSyntacticConverter {
 				// Translation of "type1 ID1 (type2 ID2, type3 ID3) {...}" to
 				// "action ID1 type: type1 { arg ID2 type: type2; arg ID3 type:
 				// type3; ...}"
-				final Block b = def.getBlock();
-				if (b != null /* && b.getFunction() == null */) {
+				if (EGaml.getInstance().hasChildren(def)) {
 					elt.setKeyword(ACTION);
 					keyword = ACTION;
 				}
