@@ -36,6 +36,9 @@ global {
     
     reflex end_simulation when: sum(gold_mine collect each.quantity) = 0 and empty(miner where each.has_belief(has_gold)){
         do pause;
+        ask miner {
+			write name + " : " +gold_sold;
+		}
     }
 }
 
@@ -122,6 +125,7 @@ species miner skills: [moving] control:simple_bdi {
 
     aspect default {
       draw circle(200) color: my_color border: #black depth: gold_sold;
+      draw circle(view_dist) color: my_color border: #black depth: gold_sold empty: true;
     }
 }
 
@@ -133,6 +137,12 @@ experiment GoldBdi type: gui {
             species gold_mine ;
             species miner;
         }
+        
+        display chart {
+			chart "Money" type: series {
+				datalist legend: miner accumulate each.name value: miner accumulate each.gold_sold color: miner accumulate each.my_color;
+			}
+		}
+        
     }
 }
-

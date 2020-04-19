@@ -40,8 +40,37 @@ global {
 		create miner number: nb_miners;
 	}
 	
+	reflex display_social_links{
+		loop tempMiner over: miner{
+				loop tempDestination over: tempMiner.social_link_base{
+					if (tempDestination !=nil){
+						bool exists<-false;
+						loop tempLink over: socialLinkRepresentation{
+							if((tempLink.origin=tempMiner) and (tempLink.destination=tempDestination.agent)){
+								exists<-true;
+							}
+						}
+						if(not exists){
+							create socialLinkRepresentation number: 1{
+								origin <- tempMiner;
+								destination <- tempDestination.agent;
+								if(get_liking(tempDestination)>0){
+									my_color <- #green;
+								} else {
+									my_color <- #red;
+								}
+							}
+						}
+					}
+				}
+			}
+	}
+	
 	reflex end_simulation when: sum(gold_mine collect each.quantity) = 0 and empty(miner where each.has_belief(has_gold)){
 		do pause;
+		ask miner {
+			write name + " : " +gold_sold;
+		}
 	}
 }
 
@@ -83,6 +112,7 @@ species miner skills: [moving] control:simple_bdi {
 		focus id: mine_at_location var: location;
 		ask myself {
 			if (has_emotion(joy)) {
+				write self.name + " is joyous";
 				do add_desire(predicate:share_information, strength: 5.0);
 			}
 			do remove_intention(find_gold, false);
@@ -92,7 +122,7 @@ species miner skills: [moving] control:simple_bdi {
 	rule belief: mine_location new_desire: has_gold strength: 2.0;
 	rule belief: has_gold new_desire: sell_gold strength: 3.0;
 	
-	plan lets_wander intention:find_gold {
+	plan lets_wander intention:find_gold finished_when: has_desire(has_gold){
 		do wander;
 	}
 	
@@ -139,12 +169,12 @@ species miner skills: [moving] control:simple_bdi {
 		list<miner> my_friends <- list<miner>((social_link_base where (each.liking > 0)) collect each.agent);
 		loop known_gold_mine over: get_beliefs_with_name(mine_at_location) {
 			ask my_friends {
-				do add_belief(known_gold_mine);
+				do add_directly_belief(known_gold_mine);
 			}
 		}
 		loop known_empty_gold_mine over: get_beliefs_with_name(empty_mine_location) {
 			ask my_friends {
-				do add_belief(known_empty_gold_mine);
+				do add_directly_belief(known_empty_gold_mine);
 			}
 		}
 		
@@ -153,6 +183,17 @@ species miner skills: [moving] control:simple_bdi {
 
 	aspect default {
 	    draw circle(200) color: my_color border: #black depth: gold_sold;
+	    draw circle(view_dist) color: my_color border: #black depth: gold_sold empty: true;
+	}
+}
+
+species socialLinkRepresentation{
+	miner origin;
+	agent destination;
+	rgb my_color;
+	
+	aspect base{
+		draw line([origin,destination],50.0) color: my_color;
 	}
 }
 
@@ -165,6 +206,12 @@ experiment GoldBdi type: gui {
 			species gold_mine ;
 			species miner;
 		}
+		
+		display chart {
+			chart "Money" type: series {
+				datalist legend: miner accumulate each.name value: miner accumulate each.gold_sold color: miner accumulate each.my_color;
+			}
+		}
+		
 	}
 }
-

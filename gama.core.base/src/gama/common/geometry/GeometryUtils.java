@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.geometry.GeometryUtils.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gama.common.geometry.GeometryUtils.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 import org.geotools.geometry.jts.JTS;
-
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
@@ -85,7 +84,6 @@ import gaml.types.Types;
 @SuppressWarnings ({ "unchecked", "rawtypes" })
 public class GeometryUtils {
 
-
 	private static List<IEnvelopeComputer> envelopeComputers = new ArrayList<>();
 
 	public static void addEnvelopeComputer(final IEnvelopeComputer ec) {
@@ -97,9 +95,11 @@ public class GeometryUtils {
 
 	public static GamaPoint pointInGeom(final IScope scope, final Geometry geom) {
 		// WARNING Only in 2D for Polygons !
-		if (geom == null || geom.getCoordinate() == null) { return null; }
+		if (geom == null || geom.getCoordinate() == null)
+			return null;
 		final RandomUtils rand = scope.getRandom();
-		if (geom instanceof Point || geom.getCoordinates().length < 2) { return new GamaPoint(geom.getCoordinate()); }
+		if (geom instanceof Point || geom.getCoordinates().length < 2)
+			return new GamaPoint(geom.getCoordinate());
 		if (geom instanceof LineString) {
 			final double perimeter = GeometryUtils.getContourCoordinates(geom).getLength();
 			final double dist = perimeter * rand.between(0.0, 1.0);
@@ -177,16 +177,16 @@ public class GeometryUtils {
 	}
 
 	public static GamaPoint pointInGeom(final IScope scope, final IShape shape) {
-		if (shape == null) { return null; }
+		if (shape == null)
+			return null;
 		return pointInGeom(scope, shape.getInnerGeometry());
 	}
-	
-	
+
 	public static Geometry cleanGeometry(final Geometry g) {
-		//follow the proposition of https://locationtech.github.io/jts/jts-faq.html#G1
-		if (g == null || g.isEmpty()) return g; 
-		Geometry g2 = g.buffer(0.0, BufferParameters.DEFAULT_QUADRANT_SEGMENTS,
-				BufferParameters.CAP_FLAT);
+		// follow the proposition of https://locationtech.github.io/jts/jts-faq.html#G1
+		if (g == null || g.isEmpty())
+			return g;
+		Geometry g2 = g.buffer(0.0, BufferParameters.DEFAULT_QUADRANT_SEGMENTS, BufferParameters.CAP_FLAT);
 		if (g2.isEmpty()) {
 			if (g instanceof Polygon) {
 				Polygon p = (Polygon) g;
@@ -196,9 +196,8 @@ public class GeometryUtils {
 					g3 = g3.difference(g4);
 				}
 				return g3;
-			}else {
+			} else
 				return GeometryUtils.GEOMETRY_FACTORY.createGeometry(g);
-			}
 		}
 		return g2;
 	}
@@ -217,9 +216,12 @@ public class GeometryUtils {
 		coordstest2[2] = coords[2];
 		final double dist3 = GEOMETRY_FACTORY.createLineString(coordstest2).getLength();
 
-		if (dist1 <= dist2 && dist1 <= dist3) { return coords; }
-		if (dist2 <= dist1 && dist2 <= dist3) { return coordstest1; }
-		if (dist3 <= dist1 && dist3 <= dist2) { return coordstest2; }
+		if (dist1 <= dist2 && dist1 <= dist3)
+			return coords;
+		if (dist2 <= dist1 && dist2 <= dist3)
+			return coordstest1;
+		if (dist3 <= dist1 && dist3 <= dist2)
+			return coordstest2;
 		return coords;
 	}
 
@@ -265,9 +267,8 @@ public class GeometryUtils {
 				}
 			}
 
-		} else {
+		} else
 			return null;
-		}
 		return pts;
 	}
 
@@ -518,7 +519,8 @@ public class GeometryUtils {
 
 	private static IList<IShape> filterGeoms(final GeometryCollection geom, final Geometry clip, final double sizeTol,
 			final boolean approxClipping) {
-		if (geom == null) { return null; }
+		if (geom == null)
+			return null;
 		final double elevation = getContourCoordinates(clip).averageZ();
 		final boolean setZ = elevation != 0.0;
 		final IList<IShape> result = GamaListFactory.create(Types.GEOMETRY);
@@ -699,8 +701,10 @@ public class GeometryUtils {
 
 	private static ShapeType geometryType(final List<List<List<GamaPoint>>> listPoints) {
 		final int size = listPoints.size();
-		if (size == 0) { return NULL; }
-		if (size == 1) { return geometryTypeSimp(listPoints.get(0)); }
+		if (size == 0)
+			return NULL;
+		if (size == 1)
+			return geometryTypeSimp(listPoints.get(0));
 		final ShapeType type = geometryTypeSimp(listPoints.get(0));
 		switch (type) {
 			case POINT:
@@ -715,11 +719,14 @@ public class GeometryUtils {
 	}
 
 	private static ShapeType geometryTypeSimp(final List<List<GamaPoint>> listPoints) {
-		if (listPoints.isEmpty() || listPoints.get(0).isEmpty()) { return NULL; }
+		if (listPoints.isEmpty() || listPoints.get(0).isEmpty())
+			return NULL;
 		final List<GamaPoint> list0 = listPoints.get(0);
 		final int size0 = list0.size();
-		if (size0 == 1 || size0 == 2 && list0.get(0).equals(list0.get(listPoints.size() - 1))) { return POINT; }
-		if (!list0.get(0).equals(list0.get(listPoints.size() - 1)) || size0 < 3) { return LINESTRING; }
+		if (size0 == 1 || size0 == 2 && list0.get(0).equals(list0.get(listPoints.size() - 1)))
+			return POINT;
+		if (!list0.get(0).equals(list0.get(listPoints.size() - 1)) || size0 < 3)
+			return LINESTRING;
 		return POLYGON;
 	}
 
@@ -778,16 +785,18 @@ public class GeometryUtils {
 
 	public static IList<GamaPoint> locsAlongGeometry(final Geometry geom, final List<Double> rates) {
 		final IList<GamaPoint> locs = GamaListFactory.create(Types.POINT);
-		if (rates == null || rates.isEmpty()) { return locs; }
+		if (rates == null || rates.isEmpty())
+			return locs;
 		if (geom instanceof Point) {
-			for (int i = 0; i < rates.size(); i++) {
+			for (Double rate : rates) {
 				locs.add(new GamaPoint(geom.getCoordinate()));
 			}
 		} else if (geom instanceof LineString) {
 			for (Double rate : rates) {
 				final Coordinate[] coordsSimp = geom.getCoordinates();
 				final int nbSp = coordsSimp.length;
-				if (nbSp <= 0) { return locs; }
+				if (nbSp <= 0)
+					return locs;
 				if (rate > 1.0) {
 					rate = 1.0;
 				}
@@ -839,9 +848,9 @@ public class GeometryUtils {
 
 	public static Envelope3D computeEnvelopeFrom(final IScope scope, final Object obj) {
 		Envelope3D result = null;
-		if (obj instanceof ISpecies) {
+		if (obj instanceof ISpecies)
 			return computeEnvelopeFrom(scope, ((ISpecies) obj).getPopulation(scope));
-		} else if (obj instanceof Number) {
+		else if (obj instanceof Number) {
 			final double size = ((Number) obj).doubleValue();
 			result = Envelope3D.of(0, size, 0, size, 0, size);
 		} else if (obj instanceof GamaPoint) {
@@ -867,7 +876,8 @@ public class GeometryUtils {
 		} else {
 			for (final IEnvelopeComputer ec : envelopeComputers) {
 				result = ec.computeEnvelopeFrom(scope, obj);
-				if (result != null) { return result; }
+				if (result != null)
+					return result;
 			}
 		}
 		return result;
@@ -926,7 +936,8 @@ public class GeometryUtils {
 	 * @return
 	 */
 	public static ShapeType getTypeOf(final Geometry g) {
-		if (g == null) { return ShapeType.NULL; }
+		if (g == null)
+			return ShapeType.NULL;
 		return ShapeType.JTS_TYPES.get(g.getGeometryType());
 	}
 
@@ -941,28 +952,34 @@ public class GeometryUtils {
 	}
 
 	public static ICoordinates getContourCoordinates(final Polygon g) {
-		if (g.isEmpty()) { return ICoordinates.EMPTY; }
-		if (g.getExteriorRing().getCoordinateSequence() instanceof CoordinateArraySequence) {
+		if (g.isEmpty())
+			return ICoordinates.EMPTY;
+		if (g.getExteriorRing().getCoordinateSequence() instanceof CoordinateArraySequence)
 			return GEOMETRY_FACTORY.getCoordinateSequenceFactory().create(g.getExteriorRing().getCoordinates());
-		}
 		return (ICoordinates) g.getExteriorRing().getCoordinateSequence();
 	}
 
 	public static ICoordinates getContourCoordinates(final LineString g) {
-		if (g.isEmpty()) { return ICoordinates.EMPTY; }
+		if (g.isEmpty())
+			return ICoordinates.EMPTY;
 		return (ICoordinates) g.getCoordinateSequence();
 	}
 
 	public static ICoordinates getContourCoordinates(final Point g) {
-		if (g.isEmpty()) { return ICoordinates.EMPTY; }
+		if (g.isEmpty())
+			return ICoordinates.EMPTY;
 		return (ICoordinates) g.getCoordinateSequence();
 	}
 
 	public static ICoordinates getContourCoordinates(final Geometry g) {
-		if (g instanceof Polygon) { return getContourCoordinates((Polygon) g); }
-		if (g instanceof LineString) { return getContourCoordinates((LineString) g); }
-		if (g instanceof Point) { return getContourCoordinates((Point) g); }
-		if (g instanceof GeometryCollection) { return getContourCoordinates(g.convexHull()); }
+		if (g instanceof Polygon)
+			return getContourCoordinates((Polygon) g);
+		if (g instanceof LineString)
+			return getContourCoordinates((LineString) g);
+		if (g instanceof Point)
+			return getContourCoordinates((Point) g);
+		if (g instanceof GeometryCollection)
+			return getContourCoordinates(g.convexHull());
 		return ICoordinates.EMPTY;
 	}
 
@@ -977,13 +994,15 @@ public class GeometryUtils {
 
 	public static GamaPoint getFirstPointOf(final IShape shape) {
 		final Geometry g = shape.getInnerGeometry();
-		if (g.isEmpty()) { return null; }
+		if (g.isEmpty())
+			return null;
 		return (GamaPoint) g.getCoordinates()[0];
 	}
 
 	public static GamaPoint getLastPointOf(final IShape shape) {
 		final Geometry g = shape.getInnerGeometry();
-		if (g.isEmpty()) { return null; }
+		if (g.isEmpty())
+			return null;
 		final Coordinate[] cc = g.getCoordinates();
 		return (GamaPoint) cc[cc.length - 1];
 	}
@@ -1007,7 +1026,8 @@ public class GeometryUtils {
 
 	public static void applyToInnerGeometries(final Polygon g, final GeometryFilter f) {
 		final int holes = g.getNumInteriorRing();
-		if (holes == 0) { return; }
+		if (holes == 0)
+			return;
 		for (int i = 0; i < holes; i++) {
 			g.getInteriorRingN(i).apply(f);
 		}
@@ -1015,7 +1035,8 @@ public class GeometryUtils {
 
 	public static void applyToInnerGeometries(final GeometryCollection g, final GeometryFilter f) {
 		final int geoms = g.getNumGeometries();
-		if (geoms == 0) { return; }
+		if (geoms == 0)
+			return;
 		for (int i = 0; i < geoms; i++) {
 			final Geometry sub = g.getGeometryN(i);
 			sub.apply(f);
@@ -1039,7 +1060,8 @@ public class GeometryUtils {
 	}
 
 	public static void rotate(final Geometry geometry, final GamaPoint center, final AxisAngle rotation) {
-		if (rotation == null) { return; }
+		if (rotation == null)
+			return;
 		final Rotation3D r = new Rotation3D.CenteredOn(rotation, center);
 		geometry.apply(r);
 		geometry.geometryChanged();
