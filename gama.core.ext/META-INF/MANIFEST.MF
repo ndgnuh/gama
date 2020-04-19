@@ -503,7 +503,6 @@ Bundle-ClassPath: .,
  kml/jars/jaxb-impl.jar,
  kml/jars/jaxb-api.jar,
  kml/jars/jaxb-core.jar,
- jfreechart-1.5.0.jar,
  geotools 21.1/batik-transcoder-1.10.jar,
  geotools 21.1/commons-collections-3.2.2.jar,
  geotools 21.1/commons-dbcp-1.4.jar,
@@ -615,6 +614,7 @@ Bundle-ClassPath: .,
  geotools 21.1/imageio-ext-imagereadmt-1.2.1.jar,
  geotools 21.1/sqlite-jdbc-3.23.1.jar,
  jgrapht 1.4.0/jgrapht-core-1.4.0.jar,
- jgrapht 1.4.0/jheaps-0.13.jar
+ jgrapht 1.4.0/jheaps-0.13.jar,
+ jfreechart 1.5.0/jfreechart-1.5.0.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Automatic-Module-Name: msi.gama.ext

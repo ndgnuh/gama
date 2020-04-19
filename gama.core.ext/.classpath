@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="jfreechart 1.5.0/jfreechart-1.5.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="jgrapht 1.4.0/jheaps-0.13.jar"/>
 	<classpathentry exported="true" kind="lib" path="jgrapht 1.4.0/jgrapht-core-1.4.0.jar" sourcepath="jgrapht 1.4.0/source.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
@@ -22,7 +23,6 @@
 	<classpathentry exported="true" kind="lib" path="kml/jars/jaxb-impl.jar"/>
 	<classpathentry exported="true" kind="lib" path="kml/jars/jaxb-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="kml/jars/jaxb-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="jfreechart-1.5.0.jar" sourcepath="jfreechart-1.5.0.zip"/>
 	<classpathentry exported="true" kind="lib" path="geotools 21.1/batik-transcoder-1.10.jar"/>
 	<classpathentry exported="true" kind="lib" path="geotools 21.1/commons-collections-3.2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="geotools 21.1/commons-dbcp-1.4.jar"/>
