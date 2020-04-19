@@ -2,6 +2,8 @@ package gama.ui.navigator.wizards;
 
 import java.net.InetAddress;
 
+import javax.lang.model.SourceVersion;
+
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -74,7 +76,7 @@ public abstract class AbstractNewModelWizardPage extends WizardPage {
 
 	/**
 	 * Return the computer full name. <br>
-	 * 
+	 *
 	 * @return the name or <b>null</b> if the name cannot be found
 	 */
 	public static String getComputerFullName() {
@@ -147,15 +149,15 @@ public abstract class AbstractNewModelWizardPage extends WizardPage {
 			obj = ((IStructuredSelection) selection).getFirstElement();
 		}
 		IResource r = ResourceManager.getResource(obj);
-		if (r == null) { return null; }
+		if (r == null)
+			return null;
 		if (r instanceof IProject) {
 			r = ((IProject) r).getFolder(getInnerDefaultFolder());
 		}
-		if (r instanceof IContainer) {
+		if (r instanceof IContainer)
 			return (IContainer) r;
-		} else {
+		else
 			return r.getParent();
-		}
 	}
 
 	protected String getInnerDefaultFolder() {
@@ -270,6 +272,10 @@ public abstract class AbstractNewModelWizardPage extends WizardPage {
 		final String titleName = getModelName();
 		if (titleName.length() == 0) {
 			updateStatus("The name of the " + gamlType() + " must be specified");
+			return;
+		}
+		if (!SourceVersion.isName(titleName)) {
+			updateStatus("The name of the " + gamlType() + " is not a proper identifier");
 			return;
 		}
 

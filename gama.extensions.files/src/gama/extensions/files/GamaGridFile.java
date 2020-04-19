@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gama.extensions.files;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringBufferInputStream;
 import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
@@ -32,15 +32,15 @@ import org.locationtech.jts.geom.Envelope;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.GamlAnnotations.doc;
-import gama.processor.annotations.GamlAnnotations.example;
-import gama.processor.annotations.GamlAnnotations.file;
 import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.GamaShape;
 import gama.metamodel.shape.IShape;
+import gama.processor.annotations.GamlAnnotations.doc;
+import gama.processor.annotations.GamlAnnotations.example;
+import gama.processor.annotations.GamlAnnotations.file;
+import gama.processor.annotations.IConcept;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.file.IGamaFile;
@@ -98,35 +98,45 @@ public class GamaGridFile extends GamaGisFile implements IGamaFile.Grid {
 								"The format of " + getName(scope) + " is incorrect. Attempting to read it anyway.",
 								scope),
 						false);
-				final StringBuilder text = new StringBuilder();
-				final String NL = System.getProperty("line.separator");
 
-				try (Scanner scanner = new Scanner(getFile(scope))) {
-					// final int cpt = 0;
-					while (scanner.hasNextLine()) {
-						final String line = scanner.nextLine();
-
-						if (line.contains("dx")) {
-							text.append(line.replace("dx", "cellsize") + NL);
-						} else if (line.contains("dy")) {
-							// continue;
-						} else {
-							text.append(line + NL);
-						}
-					}
-				} catch (final FileNotFoundException e2) {
-					final GamaRuntimeException ex = GamaRuntimeException.error(
-							"The format of " + getName(scope) + " is not correct. Error: " + e2.getMessage(), scope);
-					ex.addContext("for file " + getPath(scope));
-					throw ex;
-				}
-
-				text.append(NL);
-				// fis = new StringBufferInputStream(text.toString());
-				reader = new GamaGridReader(scope, new ByteArrayInputStream(text.toString().getBytes()), fillBuffer);
+				reader = fixFileHeader(scope, fillBuffer);
 			}
 		}
 		return reader;
+	}
+
+	public GamaGridReader fixFileHeader(final IScope scope, final boolean fillBuffer) {
+		final StringBuilder text = new StringBuilder();
+		final String NL = System.getProperty("line.separator");
+
+		try (Scanner scanner = new Scanner(getFile(scope))) {
+			// final int cpt = 0;
+			while (scanner.hasNextLine()) {
+				final String line = scanner.nextLine();
+
+				if (line.contains("dx")) {
+					text.append(line.replace("dx", "cellsize") + NL);
+				} else if (line.contains("dy")) {
+					// continue;
+				} else {
+					text.append(line + NL);
+				}
+
+				// if (cpt < 10) {}
+				// else {
+				// text.append(line + NL);
+				// }
+			}
+		} catch (final FileNotFoundException e2) {
+			final GamaRuntimeException ex = GamaRuntimeException
+					.error("The format of " + getName(scope) + " is not correct. Error: " + e2.getMessage(), scope);
+			ex.addContext("for file " + getPath(scope));
+			throw ex;
+		}
+
+		text.append(NL);
+		// fis = new StringBufferInputStream(text.toString());
+		return new GamaGridReader(scope, new StringBufferInputStream(text.toString()), fillBuffer);
 	}
 
 	class GamaGridReader {
@@ -409,6 +419,7 @@ public class GamaGridFile extends GamaGisFile implements IGamaFile.Grid {
 		return coverage;
 	}
 
+	@Override
 	public Double valueOf(final IScope scope, final GamaPoint loc) {
 		if (getBuffer() == null) {
 			fillBuffer(scope);

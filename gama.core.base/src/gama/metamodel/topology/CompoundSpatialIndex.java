@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.CompoundSpatialIndex.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.CompoundSpatialIndex.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -45,14 +45,16 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	}
 
 	private ISpatialIndex findSpatialIndex(final IPopulation<? extends IAgent> s) {
-		if (disposed) { return null; }
+		if (disposed)
+			return null;
 		final ISpatialIndex index = spatialIndexes.get(s);
 		return index == null ? rootIndex : index;
 	}
 
 	@Override
 	public void insert(final IAgent a) {
-		if (a == null) { return; }
+		if (a == null)
+			return;
 		final ISpatialIndex si = findSpatialIndex(a.getPopulation());
 		if (si != null) {
 			si.insert(a);
@@ -62,7 +64,8 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	@Override
 	public void remove(final Envelope3D previous, final IAgent o) {
 		final IAgent a = o.getAgent();
-		if (a == null) { return; }
+		if (a == null)
+			return;
 		final ISpatialIndex si = findSpatialIndex(a.getPopulation());
 		if (si != null) {
 			si.remove(previous, o);
@@ -72,7 +75,8 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	@Override
 	public void firstAtDistance(final IScope scope, final IShape source, final double dist, final IAgentFilter f,
 			final int number, final Collection<IAgent> alreadyChosen) {
-		if (disposed) { return; }
+		if (disposed)
+			return;
 		final IPopulation<? extends IAgent> pop = f.getPopulation(scope);
 		final ISpatialIndex id = findSpatialIndex(pop);
 		if (id != rootIndex) {
@@ -86,12 +90,13 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 
 	@Override
 	public IAgent firstAtDistance(final IScope scope, final IShape source, final double dist, final IAgentFilter f) {
-		if (disposed) { return null; }
+		if (disposed)
+			return null;
 		final IPopulation<? extends IAgent> pop = f.getPopulation(scope);
 		final ISpatialIndex id = findSpatialIndex(pop);
-		if (id != rootIndex) {
+		if (id != rootIndex)
 			return id.firstAtDistance(scope, source, dist, f);
-		} else {
+		else {
 			IAgent min_agent = null;
 			double min_dist = Double.MAX_VALUE;
 			for (final ISpatialIndex si : getAllSpatialIndexes()) {
@@ -115,7 +120,8 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	@Override
 	public Collection<IAgent> allAtDistance(final IScope scope, final IShape source, final double dist,
 			final IAgentFilter f) {
-		if (disposed) { return Collections.EMPTY_LIST; }
+		if (disposed)
+			return Collections.EMPTY_LIST;
 		final ISpatialIndex id = findSpatialIndex(f.getPopulation(scope));
 		if (id == rootIndex) {
 			try (final ICollector<IAgent> agents = Collector.newSet()) {
@@ -131,13 +137,15 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	@Override
 	public Collection<IAgent> allInEnvelope(final IScope scope, final IShape source, final Envelope3D envelope,
 			final IAgentFilter f, final boolean contained) {
-		if (disposed) { return Collections.EMPTY_LIST; }
+		if (disposed)
+			return Collections.EMPTY_LIST;
 		final ISpatialIndex id = findSpatialIndex(f.getPopulation(scope));
 		if (id == rootIndex) {
-			try (final ICollector<IAgent> agents = Collector.newSet()) {
+			try (final ICollector<IAgent> agents = Collector.newOrderedSet()) {
 				for (final ISpatialIndex si : getAllSpatialIndexes()) {
 					agents.addAll(si.allInEnvelope(scope, source, envelope, f, contained));
 				}
+				agents.shuffleInPlaceWith(scope.getRandom());
 				return agents.items();
 			}
 		}
@@ -146,15 +154,18 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 
 	@Override
 	public void add(final ISpatialIndex index, final IPopulation<? extends IAgent> species) {
-		if (disposed) { return; }
-		if (index == null) { return; }
+		if (disposed)
+			return;
+		if (index == null)
+			return;
 		spatialIndexes.put(species, index);
 		uniqueIndexes.add(index);
 	}
 
 	@Override
 	public void remove(final IPopulation<? extends IAgent> species) {
-		if (disposed) { return; }
+		if (disposed)
+			return;
 		final ISpatialIndex index = spatialIndexes.remove(species);
 		if (index != null) {
 			uniqueIndexes.remove(index);

@@ -56,8 +56,6 @@ public interface ILayerData {
 
 	void setPosition(final double x, final double y, final double z);
 
-	void setRefresh(final Boolean r);
-
 	GamaPoint getPosition();
 
 	GamaPoint getSize();

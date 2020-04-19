@@ -19,18 +19,10 @@ experiment "Multiple displays" type: gui {
 			 	background: #darkblue
 			 	color: #lightgreen 
 			 	axes: #lightgreen
-			 	title_font: 'Serif'
-			 	title_font_size: 32.0
-			 	title_font_style: 'italic'
-			 	tick_font: 'Monospaced'
-			 	tick_font_size: 14
-			 	tick_font_style: 'bold' 
-			 	label_font: 'Arial'
-			 	label_font_size: 18
-			 	label_font_style: 'bold' 
-			 	legend_font: 'SanSerif'
-			 	legend_font_size: 14
-			 	legend_font_style: 'bold' 
+			 	title_font: font('Serif', 32.0, #italic)
+			 	tick_font: font('Monospaced', 14, #bold) 
+			 	label_font: font('Arial', 18, #bold) 
+			 	legend_font: font('SanSerif', 14, #bold) 
 			 	y_range:[-20,40]
 			 	y_tick_unit:10
 			 	x_label:'Nice Xlabel'
@@ -90,7 +82,7 @@ experiment "Multiple displays" type: gui {
 			chart "datalist_bar" type:histogram 
 			series_label_position: onchart
 			{
-				datalist ["A","B","C"] 
+				datalist legend:["A","B","C"] 
 					style: bar
 					value:[cycle,cos(100*cycle),cos(100*(cycle+30))] 
 					color:[#green,#black,#purple];

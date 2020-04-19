@@ -25,8 +25,9 @@
 --launcher.defaultAction
 openFile
       </programArgs>
-      <programArgsLin>--launcher.GTK_version 2
-      </programArgsLin>
+      <programArgsLin>
+          --launcher.GTK_version 3
+       </programArgsLin>
       <vmArgs>-server
 -noverify
 -Xmn128m
@@ -65,7 +66,7 @@ openFile
    </vm>
 
    <license>
-        <url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+        <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
    </license>
 
    <plugins>

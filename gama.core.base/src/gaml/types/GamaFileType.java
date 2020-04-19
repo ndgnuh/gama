@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.types.GamaFileType.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.types.GamaFileType.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -21,16 +21,17 @@ import com.google.common.collect.Multimap;
 
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.IModifiableContainer;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.type;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.scope.IScope;
 import gama.util.file.GamaFolderFile;
 import gama.util.file.IGamaFile;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.expressions.IExpression;
+import gaml.operators.Cast;
 
 /**
  * Written by drogoul Modified on 1st Aug. 2010 Modified on 30 Dec. 2013
@@ -154,8 +155,8 @@ public class GamaFileType extends GamaContainerType<IGamaFile> {
 
 	@Override
 	public IContainerType typeIfCasting(final IExpression exp) {
-		if (exp.isConst()) {
-			final String s = exp.literalValue();
+		if (exp.isConst() && exp.isContextIndependant()) {
+			final String s = Cast.asString(null, exp.getConstValue());
 			final ParametricFileType ft = getTypeFromFileName(s);
 			return ft;
 		}

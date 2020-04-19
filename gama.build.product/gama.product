@@ -25,27 +25,33 @@
 --launcher.defaultAction
 openFile
       </programArgs>
-      <programArgsLin>--launcher.GTK_version 2
-      </programArgsLin>
-      <vmArgs>-server
--Dosgi.locking=none
--noverify
--Xmn128m
--Xss2m
--Xms256m -Xmx2048m
--XX:+UseParallelGC
--XX:+UseAdaptiveSizePolicy
--XX:+OptimizeStringConcat
--Dorg.eclipse.ecf.provider.filetransfer.retrieve.retryAttempts=10
--Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=6000
--Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=6000
--Declipse.log.level=ERROR
--Dosgi.checkConfiguration=false
-      </vmArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
-      </vmArgsMac>
-      <vmArgsWin>-Dfile.encoding=UTF-8
-      </vmArgsWin>
+      <programArgsLin>
+          --launcher.GTK_version 3
+       </programArgsLin>
+      <vmArgs>
+          -server
+          -Dosgi.locking=none
+          -noverify
+          -Xmn128m
+          -Xss2m
+          -Xms256m 
+          -Xmx2048m
+          -XX:+UseParallelGC
+          -XX:+UseAdaptiveSizePolicy
+          -XX:+OptimizeStringConcat
+          -Dorg.eclipse.ecf.provider.filetransfer.retrieve.retryAttempts=10
+          -Dorg.eclipse.ecf.provider.filetransfer.retrieve.closeTimeout=6000
+          -Dorg.eclipse.ecf.provider.filetransfer.retrieve.readTimeout=6000
+          -Declipse.log.level=ERROR
+          -Dosgi.checkConfiguration=false
+       </vmArgs>
+      <vmArgsMac>
+          -XstartOnFirstThread 
+          -Dorg.eclipse.swt.internal.carbon.smallFonts
+       </vmArgsMac>
+      <vmArgsWin>
+      	-Dfile.encoding=UTF-8
+       <vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="branding_icons/icon16.png" i32="branding_icons/icon32.png" i48="branding_icons/icon48.png" i64="branding_icons/icon64.png" i128="branding_icons/icon128.png" i256="branding_icons/icon256.png"/>
@@ -73,7 +79,7 @@ openFile
    </vm>
 
    <license>
-        <url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+        <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
    </license>
 
    <plugins>

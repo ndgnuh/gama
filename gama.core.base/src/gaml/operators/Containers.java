@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Containers.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Containers.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -44,26 +44,26 @@ import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.ITopology;
 import gama.metamodel.topology.grid.IGrid;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gama.util.GamaPair;
 import gama.util.graph.IGraph;
 import gama.util.list.GamaListFactory;
-import gama.util.list.IList;
 import gama.util.list.GamaListFactory.GamaListSupplier;
+import gama.util.list.IList;
 import gama.util.map.GamaMapFactory;
-import gama.util.map.IMap;
 import gama.util.map.GamaMapFactory.GamaMapSupplier;
+import gama.util.map.IMap;
 import gama.util.matrix.IMatrix;
 import gaml.GAML;
 import gaml.compilation.annotations.validator;
@@ -1254,7 +1254,6 @@ public class Containers {
 	@operator (
 			value = "sum",
 			can_be_const = true,
-			type = IType.GRAPH,
 			doc = @doc ("Returns the sum of the weights of the graph nodes"),
 			category = { IOperatorCategory.GRAPH },
 			concept = { IConcept.GRAPH })

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.System.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.System.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -24,15 +24,15 @@ import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.IValue;
 import gama.common.util.TextBuilder;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.map.GamaMapFactory;
@@ -73,7 +73,7 @@ public class System {
 			can_be_const = true,
 			concept = IConcept.TEST)
 	@doc ("Returns whether or not the argument raises an error when evaluated")
-	@test ("is_error(\"one\" = 1) = false")
+	@test ("is_error(1.0 = 1) = false")
 	public static Boolean is_error(final IScope scope, final IExpression expr) {
 		try {
 			expr.value(scope);
@@ -88,7 +88,7 @@ public class System {
 			can_be_const = true,
 			concept = IConcept.TEST)
 	@doc ("Returns whether or not the argument raises a warning when evaluated")
-	@test ("is_warning(\"one\" = 1) = false")
+	@test ("is_warning(1.0 = 1) = false")
 	public static Boolean is_warning(final IScope scope, final IExpression expr) {
 		try {
 			expr.value(scope);
@@ -126,7 +126,8 @@ public class System {
 	@no_test
 	public static String console(final IScope scope, final String s, final String directory,
 			final IMap<String, String> environment) {
-		if (s == null || s.isEmpty()) { return ""; }
+		if (s == null || s.isEmpty())
+			return "";
 		try (TextBuilder sb = TextBuilder.create()) {
 			final List<String> commands = new ArrayList<>();
 			commands.add(Platform.getOS().equals(Platform.OS_WIN32) ? "cmd.exe" : "/bin/bash");
@@ -143,7 +144,8 @@ public class System {
 			b.environment().putAll(environment);
 			try {
 				final Process p = b.start();
-				if (nonBlocking) { return ""; }
+				if (nonBlocking)
+					return "";
 				final BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 				final int returnValue = p.waitFor();
 				String line = "";
@@ -151,9 +153,8 @@ public class System {
 					sb.append(line + Strings.LN);
 				}
 
-				if (returnValue != 0) {
+				if (returnValue != 0)
 					throw GamaRuntimeException.error("Error in console command." + sb.toString(), scope);
-				}
 			} catch (final IOException | InterruptedException e) {
 				throw GamaRuntimeException.error("Error in console command. " + e.getMessage(), scope);
 			}
@@ -185,19 +186,17 @@ public class System {
 	public static Object opGetValue(final IScope scope, final IAgent a, final IExpression s)
 			throws GamaRuntimeException {
 		if (a == null) {
-			if (!scope.interrupted()) {
+			if (!scope.interrupted())
 				throw GamaRuntimeException
 						.warning("Cannot evaluate " + s.serialize(false) + " as the target agent is nil", scope);
-			}
 			return null;
 		}
 		if (a.dead()) {
 			// scope.getGui().debug("System.opGetValue");
-			if (!scope.interrupted()) {
+			if (!scope.interrupted())
 				// scope.getGui().debug("System.opGetValue error");
 				throw GamaRuntimeException
 						.warning("Cannot evaluate " + s.serialize(false) + " as the target agent is dead", scope);
-			}
 			return null;
 		}
 		return scope.evaluate(s, a).getValue();
@@ -214,7 +213,8 @@ public class System {
 			value = "returns a copy of the operand.")
 	@no_test
 	public static <T> T opCopy(final IScope scope, final T o) throws GamaRuntimeException {
-		if (o instanceof IValue) { return (T) ((IValue) o).copy(scope); }
+		if (o instanceof IValue)
+			return (T) ((IValue) o).copy(scope);
 		return o;
 	}
 
@@ -276,7 +276,8 @@ public class System {
 				initialTypes.put(entry.getKey(), GamaType.of(entry.getValue()));
 			}
 		}
-		if (initialValues.isEmpty()) { return GamaMapFactory.create(Types.STRING, Types.NO_TYPE); }
+		if (initialValues.isEmpty())
+			return GamaMapFactory.create(Types.STRING, Types.NO_TYPE);
 		return GamaMapFactory.createWithoutCasting(Types.STRING, Types.NO_TYPE,
 				scope.getGui().openUserInputDialog(scope, title, initialValues, initialTypes));
 	}

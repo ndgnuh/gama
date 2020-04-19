@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.population.GamaPopulation.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.metamodel.population.GamaPopulation.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -114,6 +114,7 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 	protected int currentAgentIndex;
 	private final int hashCode;
 	private final boolean isInitOverriden, isStepOverriden;
+	private final MirrorPopulationManagement mirrorManagement;
 
 	/**
 	 * Listeners, created in a lazy way
@@ -168,7 +169,9 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 		updatableVars = StreamEx.of(ecd.getOrderedAttributeNames(VariableDescription.UPDATE_DEPENDENCIES_FACETS))
 				.map(v -> species.getVar(v)).filter(v -> v.isUpdatable()).toArray(IVariable.class);
 		if (species.isMirror() && host != null) {
-			host.getScope().getSimulation().postEndAction(new MirrorPopulationManagement(species.getFacet(MIRRORS)));
+			mirrorManagement = new MirrorPopulationManagement(species.getFacet(MIRRORS));
+		} else {
+			mirrorManagement = null;
 		}
 		hashCode = Objects.hash(getSpecies(), getHost());
 		final boolean[] result = { false, false };
@@ -196,6 +199,9 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 			final int step = scope.getClock().getCycle();
 			if (frequency == 0 || step % frequency != 0)
 				return true;
+		}
+		if (mirrorManagement != null) {
+			mirrorManagement.executeOn(scope);
 		}
 		getSpecies().getArchitecture().preStep(scope, this);
 		return stepAgents(scope);
@@ -241,6 +247,10 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 
 	@Override
 	public boolean init(final IScope scope) {
+		// See #2933
+		if (mirrorManagement != null) {
+			mirrorManagement.executeOn(scope);
+		}
 		return true;
 		// // Do whatever the population has to do at the first step ?
 	}
@@ -771,8 +781,8 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 	/**
 	 * Method accept()
 	 *
-	 * @see gama.metamodel.topology.filter.IAgentFilter#accept(gama.runtime.scope.IScope,
-	 *      gama.metamodel.shape.IShape, gama.metamodel.shape.IShape)
+	 * @see gama.metamodel.topology.filter.IAgentFilter#accept(gama.runtime.scope.IScope, gama.metamodel.shape.IShape,
+	 *      gama.metamodel.shape.IShape)
 	 */
 	@Override
 	public boolean accept(final IScope scope, final IShape source, final IShape a) {
@@ -793,8 +803,8 @@ public class GamaPopulation<T extends IAgent> extends GamaList<T> implements IPo
 	/**
 	 * Method filter()
 	 *
-	 * @see gama.metamodel.topology.filter.IAgentFilter#filter(gama.runtime.scope.IScope,
-	 *      gama.metamodel.shape.IShape, java.util.Collection)
+	 * @see gama.metamodel.topology.filter.IAgentFilter#filter(gama.runtime.scope.IScope, gama.metamodel.shape.IShape,
+	 *      java.util.Collection)
 	 */
 	@Override
 	public void filter(final IScope scope, final IShape source, final Collection<? extends IShape> results) {

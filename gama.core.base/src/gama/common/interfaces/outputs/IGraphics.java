@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.interfaces.IGraphics.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gama.common.interfaces.IGraphics.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *

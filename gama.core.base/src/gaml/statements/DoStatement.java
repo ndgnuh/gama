@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.statements.DoStatement.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.statements.DoStatement.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -15,8 +15,6 @@ import java.util.Set;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.IStatement;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -24,6 +22,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionResult;
 import gama.runtime.scope.IScope;
@@ -185,7 +185,8 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 		@Override
 		protected String serializeFacetValue(final SymbolDescription s, final String key,
 				final boolean includingBuiltIn) {
-			if (!DO_FACETS.contains(key)) { return null; }
+			if (!DO_FACETS.contains(key))
+				return null;
 			return super.serializeFacetValue(s, key, includingBuiltIn);
 		}
 
@@ -212,7 +213,8 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 				}
 
 			}
-			if (sd == null) { return; }
+			if (sd == null)
+				return;
 			// TODO What about actions defined in a macro species (not the
 			// global one, which is filtered before) ?
 			if (!sd.hasAction(action, false)) {
@@ -269,7 +271,7 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 		final IStatement.WithArgs executer = context.getAction(name);
 		Object result = null;
 		if (executer != null) {
-			final ExecutionResult er = scope.execute(executer, args);
+			final ExecutionResult er = scope.execute(executer, args == null ? null : args.resolveAgainst(scope));
 			result = er.getValue();
 		} else if (function != null) {
 			result = function.value(scope);

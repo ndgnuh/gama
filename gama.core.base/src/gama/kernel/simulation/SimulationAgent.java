@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.kernel.simulation.SimulationAgent.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.kernel.simulation.SimulationAgent.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -43,7 +43,6 @@ import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.continuous.RootTopology;
 import gama.metamodel.topology.projection.ProjectionFactory;
 import gama.metamodel.topology.projection.WorldProjection;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.getter;
@@ -51,6 +50,7 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.concurrent.GamaExecutorService;
 import gama.runtime.concurrent.GamaExecutorService.Caller;
 import gama.runtime.exceptions.GamaRuntimeException;
@@ -311,9 +311,7 @@ public class SimulationAgent extends GamlAgent implements ITopLevelAgent {
 	@Override
 	public Object _init_(final IScope scope) {
 		super._init_(this.getScope());
-		if (outputs != null) {
-			outputs.init(this.getScope());
-		}
+		initOutputs();
 		return this;
 	}
 

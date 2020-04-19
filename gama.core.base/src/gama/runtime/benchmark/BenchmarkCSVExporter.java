@@ -42,8 +42,9 @@ public class BenchmarkCSVExporter {
 			return;
 		}
 		final IMap<IScope, Benchmark.ScopeRecord> scopes = GamaMapFactory.wrap(Types.NO_TYPE, Types.NO_TYPE, records);
-		final String exportFileName = FileUtils.constructAbsoluteFilePath(scope, exportFolder + "/"
-				+ experiment.getModel().getName() + "_benchmark_" + Instant.now().toString() + ".csv", false);
+		final String exportFileName =
+				FileUtils.constructAbsoluteFilePath(scope, exportFolder + "/" + experiment.getModel().getName()
+						+ "_benchmark_" + Instant.now().toString().replace(':', '_') + ".csv", false);
 
 		final List<String> headers = new ArrayList<>();
 		final List<List<String>> contents = new ArrayList<>();

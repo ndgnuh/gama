@@ -35,6 +35,7 @@ public class OverlayLayerData extends LayerData implements ILayerData.Overlay {
 		rounded = create(IKeyword.ROUNDED, Types.BOOL, true);
 	}
 
+	@Override
 	public Color getBackgroundColor(final IScope scope) {
 		return new Color(background.get().getRed(), background.get().getGreen(), background.get().getBlue(),
 				(int) (getTransparency(scope) * 255));
@@ -48,10 +49,12 @@ public class OverlayLayerData extends LayerData implements ILayerData.Overlay {
 		computed = true;
 	}
 
+	@Override
 	public Color getBorderColor() {
 		return border.get();
 	}
 
+	@Override
 	public boolean isRounded() {
 		return rounded.get();
 	}

@@ -247,7 +247,11 @@ public abstract class AbstractAgent implements IAgent {
 
 	@Override
 	public boolean init(final IScope scope) throws GamaRuntimeException {
-		return getSpecies().getArchitecture().init(scope);
+		return getSpecies().getArchitecture().init(scope) ? initSubPopulations(scope) : false;
+	}
+
+	protected boolean initSubPopulations(final IScope scope) {
+		return true;
 	}
 
 	/**

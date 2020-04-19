@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Files.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Files.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -15,18 +15,17 @@ import java.util.Map;
 
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IContainer;
-import gama.common.interfaces.IKeyword;
 import gama.common.util.FileUtils;
 import gama.metamodel.shape.GamaShape;
 import gama.metamodel.shape.IShape;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.file.GamaFolderFile;
@@ -46,15 +45,17 @@ public class Files {
 	public static final String FOLDER = "folder";
 	public static final String WRITE = "write";
 
-	@operator (
-			value = IKeyword.FILE,
-			can_be_const = true,
-			category = IOperatorCategory.FILE,
-			concept = { IConcept.FILE })
-	@doc (
-			value = "Creates a file in read/write mode, setting its contents to the container passed in parameter",
-			comment = "The type of container to pass will depend on the type of file (see the management of files in the documentation). Can be used to copy files since files are considered as containers. For example: save file('image_copy.png', file('image.png')); will copy image.png to image_copy.png")
-	@no_test
+	// @operator (
+	// value = IKeyword.FILE,
+	// can_be_const = true,
+	// category = IOperatorCategory.FILE,
+	// concept = { IConcept.FILE })
+	// @doc (
+	// value = "Creates a file in read/write mode, setting its contents to the container passed in parameter",
+	// comment = "The type of container to pass will depend on the type of file (see the management of files in the
+	// documentation). Can be used to copy files since files are considered as containers. For example: save
+	// file('image_copy.png', file('image.png')); will copy image.png to image_copy.png")
+	// @no_test
 	public static IGamaFile from(final IScope scope, final String s, final IContainer container) {
 		// WARNING Casting to Modifiable is not safe
 		// TODO: Add a method toModifiableVersion() to IContainer
@@ -63,22 +64,24 @@ public class Files {
 		return (IGamaFile) Types.FILE.cast(scope, s, container, key, content, false);
 	}
 
-	@operator (
-			value = IKeyword.FILE,
-			can_be_const = true,
-			category = IOperatorCategory.FILE,
-			concept = { IConcept.FILE })
-	@doc (
-			value = "opens a file in read only mode, creates a GAML file object, and tries to determine and store the file content in the contents attribute.",
-			comment = "The file should have a supported extension, see file type definition for supported file extensions.",
-			usages = @usage ("If the specified string does not refer to an existing file, an exception is risen when the variable is used."),
-			examples = { @example (
-					value = "let fileT type: file value: file(\"../includes/Stupid_Cell.Data\"); "),
-					@example (
-							value = "			// fileT represents the file \"../includes/Stupid_Cell.Data\""),
-					@example (
-							value = "			// fileT.contents here contains a matrix storing all the data of the text file") },
-			see = { "folder", "new_folder" })
+	// @operator (
+	// value = IKeyword.FILE,
+	// can_be_const = true,
+	// category = IOperatorCategory.FILE,
+	// concept = { IConcept.FILE })
+	// @doc (
+	// value = "opens a file in read only mode, creates a GAML file object, and tries to determine and store the file
+	// content in the contents attribute.",
+	// comment = "The file should have a supported extension, see file type definition for supported file extensions.",
+	// usages = @usage ("If the specified string does not refer to an existing file, an exception is risen when the
+	// variable is used."),
+	// examples = { @example (
+	// value = "let fileT type: file value: file(\"../includes/Stupid_Cell.Data\"); "),
+	// @example (
+	// value = " // fileT represents the file \"../includes/Stupid_Cell.Data\""),
+	// @example (
+	// value = " // fileT.contents here contains a matrix storing all the data of the text file") },
+	// see = { "folder", "new_folder" })
 	public static IGamaFile from(final IScope scope, final String s) throws GamaRuntimeException {
 		return from(scope, s, null);
 	}
@@ -111,7 +114,6 @@ public class Files {
 		else {
 			final String path = FileUtils.constructAbsoluteFilePath(scope, s, false);
 			final File f = new File(path);
-
 			return f.exists() && !f.isDirectory();
 		}
 	}

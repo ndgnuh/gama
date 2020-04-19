@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Comparison.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Comparison.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -12,16 +12,23 @@ package gaml.operators;
 
 import static org.locationtech.jts.index.quadtree.IntervalSize.isZeroWidth;
 
+import org.eclipse.emf.ecore.EObject;
 import org.locationtech.jts.index.quadtree.IntervalSize;
 
+import gama.common.interfaces.IGamlIssue;
 import gama.metamodel.shape.GamaPoint;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gaml.compilation.annotations.validator;
+import gaml.compilation.interfaces.IOperatorValidator;
+import gaml.descriptions.IDescription;
+import gaml.expressions.IExpression;
+import gaml.types.IType;
 
 /**
  * Written by drogoul Modified on 10 dec. 2010
@@ -30,6 +37,24 @@ import gama.processor.annotations.GamlAnnotations.usage;
  *
  */
 public class Comparison {
+
+	public static class EqualValidator implements IOperatorValidator {
+
+		@Override
+		public boolean validate(final IDescription context, final EObject emfContext, final IExpression... arguments) {
+			if (arguments.length > 1) {
+				final IType<?> t1 = arguments[0].getGamlType();
+				final IType<?> t2 = arguments[1].getGamlType();
+				if (t1.id() == IType.NONE || t2.id() == IType.NONE)
+					return true;
+				if (t1.isTranslatableInto(t2) || t2.isTranslatableInto(t1))
+					return true;
+				context.warning("This equality will always return false", IGamlIssue.UNMATCHED_OPERANDS, emfContext);
+			}
+			return true;
+		}
+
+	}
 
 	public final static String GT = ">";
 	public final static String LT = "<";
@@ -51,7 +76,8 @@ public class Comparison {
 	@test ("not(1 between(1,4))")
 	@test ("not(2 between(4,1))")
 	public static Boolean between(final Integer a, final Integer inf, final Integer sup) {
-		if (inf > sup) { return false; }
+		if (inf > sup)
+			return false;
 		return a >= sup ? false : a > inf;
 	}
 
@@ -70,7 +96,8 @@ public class Comparison {
 	@test ("not(1.0 between(1.0,4.0))")
 	@test ("not(2.2 between(4.0,1.9))")
 	public static Boolean between(final Double a, final Double inf, final Double sup) {
-		if (inf > sup) { return false; }
+		if (inf > sup)
+			return false;
 		return a >= sup ? false : a > inf;
 	}
 
@@ -92,7 +119,8 @@ public class Comparison {
 	@test (
 			value = "val <- (13 > 7); val = true")
 	public static Boolean greater(final Integer a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a > b;
 	}
 
@@ -107,7 +135,8 @@ public class Comparison {
 					value = "3 > 2.5",
 					equals = "true") })
 	public static Boolean greater(final Integer a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a > b;
 	}
 
@@ -122,7 +151,8 @@ public class Comparison {
 					value = "3.5 > 7",
 					equals = "false") })
 	public static Boolean greater(final Double a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a > b;
 	}
 
@@ -137,7 +167,8 @@ public class Comparison {
 					value = "3.5 > 7.6",
 					equals = "false") })
 	public static Boolean greater(final Double a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a > b;
 	}
 
@@ -155,7 +186,8 @@ public class Comparison {
 					equals = "true") },
 			see = { GT, GTE, LTE, "=", "!=" })
 	public static Boolean less(final Integer a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a < b;
 	}
 
@@ -170,7 +202,8 @@ public class Comparison {
 					value = "3 < 2.5",
 					equals = "false") })
 	public static Boolean less(final Integer a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a < b;
 	}
 
@@ -185,7 +218,8 @@ public class Comparison {
 					value = "3.5 < 7",
 					equals = "true") })
 	public static Boolean less(final Double a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a < b;
 	}
 
@@ -200,7 +234,8 @@ public class Comparison {
 					value = "3.5 < 7.6",
 					equals = "true") })
 	public static Boolean less(final Double a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a < b;
 	}
 
@@ -218,7 +253,8 @@ public class Comparison {
 					equals = "false") },
 			see = { GT, LT, LTE, "=", "!=" })
 	public static Boolean greaterOrEqual(final Integer a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a >= b;
 	}
 
@@ -233,7 +269,8 @@ public class Comparison {
 					value = "3 >= 2.5",
 					equals = "true") })
 	public static Boolean greaterOrEqual(final Integer a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a >= b;
 	}
 
@@ -248,7 +285,8 @@ public class Comparison {
 					value = "3.5 >= 7",
 					equals = "false") })
 	public static Boolean greaterOrEqual(final Double a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a >= b;
 	}
 
@@ -263,7 +301,8 @@ public class Comparison {
 					value = "3.5 >= 3.5",
 					equals = "true") })
 	public static Boolean greaterOrEqual(final Double a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return !(a < b);
 	}
 
@@ -280,7 +319,8 @@ public class Comparison {
 					value = "3 <= 7",
 					equals = "true") })
 	public static Boolean opLessThanOrEqual(final Integer a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a <= b;
 	}
 
@@ -296,7 +336,8 @@ public class Comparison {
 					equals = "false") },
 			see = { GT, LT, GTE, "=", "!=" })
 	public static Boolean lessOrEqual(final Integer a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a <= b;
 	}
 
@@ -311,7 +352,8 @@ public class Comparison {
 					value = "7.0 <= 7",
 					equals = "true") })
 	public static Boolean lessOrEqual(final Double a, final Integer b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return a <= b;
 	}
 
@@ -326,7 +368,8 @@ public class Comparison {
 					value = "3.5 <= 3.5",
 					equals = "true") })
 	public static Boolean lessOrEqual(final Double a, final Double b) {
-		if (a == null || b == null) { return false; }
+		if (a == null || b == null)
+			return false;
 		return !(a > b);
 	}
 
@@ -415,8 +458,10 @@ public class Comparison {
 							equals = "true") },
 			see = { "=", GT, LT, GTE, LTE, "=" })
 	public static Boolean different(final Double a, final Double b) {
-		if (a == null) { return b != null; }
-		if (b == null) { return false; }
+		if (a == null)
+			return b != null;
+		if (b == null)
+			return false;
 		return !IntervalSize.isZeroWidth(a, b);
 		// return a < b || a > b;
 	}
@@ -471,7 +516,8 @@ public class Comparison {
 							value = "'abc' <= 'aeb'",
 							equals = "true") }))
 	public static Boolean lessOrEqual(final String a, final String b) {
-		if (a == null) { return false; }
+		if (a == null)
+			return false;
 		final int i = a.compareTo(b);
 		return i <= 0;
 	}
@@ -492,7 +538,8 @@ public class Comparison {
 									value = "'abc' >= 'abc'",
 									equals = "true") }))
 	public static Boolean greaterOrEqual(final String a, final String b) {
-		if (a == null) { return false; }
+		if (a == null)
+			return false;
 		final int i = a.compareTo(b);
 		return i >= 0;
 	}
@@ -510,7 +557,8 @@ public class Comparison {
 							value = "'abc' < 'aeb'",
 							equals = "true") }))
 	public static Boolean less(final String a, final String b) {
-		if (a == null) { return false; }
+		if (a == null)
+			return false;
 		final int i = a.compareTo(b);
 		return i < 0;
 	}
@@ -528,7 +576,8 @@ public class Comparison {
 							value = "'abc' > 'aeb'",
 							equals = "false") }))
 	public static Boolean greater(final String a, final String b) {
-		if (a == null) { return false; }
+		if (a == null)
+			return false;
 		final int i = a.compareTo(b);
 		return i > 0;
 	}
@@ -538,6 +587,7 @@ public class Comparison {
 			can_be_const = true,
 			category = { IOperatorCategory.COMPARISON },
 			concept = {})
+	@validator (EqualValidator.class)
 	@doc (
 			usages = @usage (
 					value = "if both operands are any kind of objects, returns true if they are identical (i.e., the same object) or equal (comparisons between nil values are permitted)",

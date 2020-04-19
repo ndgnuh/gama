@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.species.GamlSpecies.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.species.GamlSpecies.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -18,8 +18,6 @@ import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.metamodel.population.IPopulation;
 import gama.metamodel.shape.IShape;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -27,6 +25,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
@@ -340,7 +340,7 @@ public class GamlSpecies extends AbstractSpecies {
 	public GamlSpecies(final IDescription desc) {
 		super(desc);
 		concurrency = this.getFacet(IKeyword.PARALLEL);
-		if (((SpeciesDescription) desc).isMirror() && !hasFacet(IKeyword.SCHEDULES)) {
+		if (isMirror() && !hasFacet(IKeyword.SCHEDULES)) {
 			// See Issue #2731 -- mirror species have a default scheduling rule
 			schedule = scope -> {
 				final IList<IAgent> agents = GamaListFactory.create();
@@ -410,8 +410,8 @@ public class GamlSpecies extends AbstractSpecies {
 	/**
 	 * Method accept()
 	 *
-	 * @see gama.metamodel.topology.filter.IAgentFilter#accept(gama.runtime.scope.IScope,
-	 *      gama.metamodel.shape.IShape, gama.metamodel.shape.IShape)
+	 * @see gama.metamodel.topology.filter.IAgentFilter#accept(gama.runtime.scope.IScope, gama.metamodel.shape.IShape,
+	 *      gama.metamodel.shape.IShape)
 	 */
 	@Override
 	public boolean accept(final IScope scope, final IShape source, final IShape a) {
@@ -434,8 +434,8 @@ public class GamlSpecies extends AbstractSpecies {
 	/**
 	 * Method filter()
 	 *
-	 * @see gama.metamodel.topology.filter.IAgentFilter#filter(gama.runtime.scope.IScope,
-	 *      gama.metamodel.shape.IShape, java.util.Collection)
+	 * @see gama.metamodel.topology.filter.IAgentFilter#filter(gama.runtime.scope.IScope, gama.metamodel.shape.IShape,
+	 *      java.util.Collection)
 	 */
 	@Override
 	public void filter(final IScope scope, final IShape source, final Collection<? extends IShape> results) {

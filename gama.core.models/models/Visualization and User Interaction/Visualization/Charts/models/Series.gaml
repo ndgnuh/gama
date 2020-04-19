@@ -22,9 +22,8 @@ experiment "Different series" type: gui
 		layout #split toolbars: false;
 		display "data_cumulative_serie_spline_chart" type: java2D synchronized: true
 		{
-			chart "Nice cumulative series chart" type: series background: # darkblue color: # lightgreen axes: # lightgreen title_font: 'Serif' title_font_size: 32.0 title_font_style:
-			'italic' tick_font: 'Monospaced' tick_font_size: 14 tick_font_style: 'bold' label_font: 'Serif' label_font_size: 18 label_font_style: 'plain' legend_font: 'SanSerif'
-			legend_font_size: 18 legend_font_style: 'bold' x_range: 50 x_tick_unit: 5 x_serie_labels: ("T+" + cycle) x_label: 'Nice Xlabel' y_label: 'Nice Ylabel'
+			chart "Nice cumulative series chart" type: series background: # darkblue color: # lightgreen axes: # lightgreen title_font: font( 'Serif' , 32.0, #italic)
+			 tick_font: font('Monospaced' , 14 #bold) label_font: font('Serif', 18 #plain) legend_font: font('SanSerif', 18 #bold) x_range: 50 x_tick_unit: 5 x_serie_labels: ("T+" + cycle) x_label: 'Nice Xlabel' y_label: 'Nice Ylabel'
 			{
 				data "Spline" value: cos(100 * cycle) * cycle * cycle color: # orange marker_shape: marker_empty style: spline;
 				data "Step" value: cycle * cycle style: step color: # lightgrey;
@@ -60,7 +59,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_cumulative_chart" type: xy
 			{
-				datalist  ["A", "B", "C"] value:
+				datalist legend: ["A", "B", "C"] value:
 				[[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1], [cycle + 2, cycle - 2, cos(cycle * 100)]]
 				x_err_values: [3, 2, 10] y_err_values: [3, cos(cycle * 100), 2 * sin(cycle * 100)] marker_shape: marker_circle // same for all
 				color: [# green, # blue, # red];
@@ -72,7 +71,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_cumulative_chart" type: xy
 			{
-				datalist  ["A", "B"] value: [[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1]] marker_shape:
+				datalist legend: ["A", "B"] value: [[cycle * cos(cycle * 100), cycle * sin(cycle * 100), 2], [cycle / 2 * sin(cycle * 100), cycle * 2 * cos(cycle * 100), 1]] marker_shape:
 				marker_circle // same for all
 				color: [# green, # blue] style: line;
 			}
@@ -83,7 +82,7 @@ experiment "Different series" type: gui
 		{
 			chart "datalist_xy_non_cumulative_chart" type: xy
 			{
-				datalist  ["A", "B", "C"] value: [[10, 10], [12, 10], [20 + cycle, 10]] accumulate_values: false x_err_values: [3, 1, 2] y_err_values:
+				datalist legend: ["A", "B", "C"] value: [[10, 10], [12, 10], [20 + cycle, 10]] accumulate_values: false x_err_values: [3, 1, 2] y_err_values:
 				[[9, 20], [5, 11], [8, 10 + cycle / 2]] // different low/high values for yerr
 				marker_size: [1, cycle, 2] // size keyword instead of size in values
 				marker_shape: marker_circle // same for all

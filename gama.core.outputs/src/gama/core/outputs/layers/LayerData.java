@@ -30,14 +30,12 @@ import gama.common.interfaces.outputs.IGraphics;
 import gama.common.interfaces.outputs.ILayerData;
 import gama.common.interfaces.outputs.ILayerStatement;
 import gama.metamodel.shape.GamaPoint;
-import gama.metamodel.shape.GamaPoint;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.constants.PixelUnitExpression;
 import gaml.expressions.IExpression;
 import gaml.operators.Cast;
 import gaml.statements.draw.AttributeHolder;
-import gaml.types.Types;
 
 /**
  * Written by drogoul Modified on 16 nov. 2010
@@ -55,7 +53,7 @@ public class LayerData extends AttributeHolder implements ILayerData {
 
 	Attribute<GamaPoint> size;
 	Attribute<GamaPoint> position;
-	Attribute<Boolean> refresh;
+	final Attribute<Boolean> refresh;
 	final Attribute<Boolean> fading;
 	final Attribute<Integer> trace;
 	Attribute<Boolean> selectable;
@@ -121,12 +119,6 @@ public class LayerData extends AttributeHolder implements ILayerData {
 	public void setPosition(final double x, final double y, final double z) {
 		position = create(POSITION, new GamaPoint(x, y, z));
 		positionIsInPixels = false;
-	}
-
-	@Override
-	public void setRefresh(final Boolean r) {
-		refresh = create(null, Types.BOOL, r);
-
 	}
 
 	@Override

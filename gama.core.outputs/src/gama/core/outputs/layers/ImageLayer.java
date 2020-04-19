@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.core.outputs.layers.ImageLayer.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.core.outputs.layers.ImageLayer.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -15,6 +15,7 @@ import static gama.runtime.exceptions.GamaRuntimeException.error;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.Scaling3D;
 import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayerData;
 import gama.common.interfaces.outputs.ILayerStatement;
 import gama.metamodel.shape.GamaPoint;
 import gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
@@ -59,6 +60,11 @@ public class ImageLayer extends AbstractLayer {
 				isFile = true;
 			}
 		}
+	}
+
+	@Override
+	protected ILayerData createData() {
+		return new ImageLayerData(definition);
 	}
 
 	private IGamaFile.Image createFileFromFileExpression(final IScope scope) {

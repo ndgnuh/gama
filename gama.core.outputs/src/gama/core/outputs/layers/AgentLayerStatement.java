@@ -13,9 +13,11 @@ package gama.core.outputs.layers;
 import java.util.ArrayList;
 import java.util.List;
 
+import gama.common.interfaces.IExecutable;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IStatement;
 import gama.core.outputs.layers.AgentLayerStatement.AgentLayerValidator;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -23,10 +25,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IExecutable;
-import gama.common.interfaces.IGamlIssue;
-import gama.common.interfaces.IKeyword;
-import gama.common.interfaces.IStatement;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.annotations.validator;
@@ -52,6 +52,7 @@ import gaml.types.IType;
 		name = IKeyword.AGENTS,
 		kind = ISymbolKind.LAYER,
 		with_sequence = true,
+		remote_context = true,
 		concept = { IConcept.SPECIES, IConcept.DISPLAY })
 @inside (
 		symbols = IKeyword.DISPLAY)

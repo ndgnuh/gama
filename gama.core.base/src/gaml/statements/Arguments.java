@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.statements.Arguments.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.statements.Arguments.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -11,6 +11,7 @@
 package gaml.statements;
 
 import gama.common.interfaces.IAgent;
+import gama.runtime.scope.IScope;
 
 /**
  * @author drogoul
@@ -54,6 +55,18 @@ public class Arguments extends Facets {
 	public void dispose() {
 		super.dispose();
 		caller.set(null);
+	}
+
+	/**
+	 * Returns arguments where all the temp variables belonging to the scope passed in parameter are replaced by their
+	 * values
+	 */
+	public Arguments resolveAgainst(final IScope scope) {
+		forEachFacet((n, f) -> {
+			f.setExpression(f.getExpression().resolveAgainst(scope));
+			return true;
+		});
+		return this;
 	}
 
 }

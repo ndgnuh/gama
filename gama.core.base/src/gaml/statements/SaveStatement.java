@@ -81,8 +81,6 @@ import gama.metamodel.population.IPopulation;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.grid.GamaSpatialMatrix.GridPopulation;
 import gama.metamodel.topology.projection.IProjection;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -90,6 +88,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.exceptions.GamaRuntimeException.GamaRuntimeFileException;
 import gama.runtime.scope.IScope;
@@ -244,11 +244,13 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			}
 
 			final IExpression data = desc.getFacetExpr(DATA);
-			if (data == null) { return; }
+			if (data == null)
+				return;
 			final IType<?> t = data.getGamlType().getContentType();
 			final SpeciesDescription species = t.getSpecies();
 
-			if (att == null && (args == null || args.isEmpty())) { return; }
+			if (att == null && (args == null || args.isEmpty()))
+				return;
 			if (species == null) {
 				desc.error("Attributes can only be saved for agents", IGamlIssue.UNKNOWN_FACET,
 						att == null ? WITH : ATTRIBUTES);
@@ -284,7 +286,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 	}
 
 	private boolean shouldOverwrite(final IScope scope) {
-		if (rewriteExpr == null) { return true; }
+		if (rewriteExpr == null)
+			return true;
 		return Cast.asBool(scope, rewriteExpr.value(scope));
 	}
 
@@ -293,7 +296,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 	@SuppressWarnings ("unchecked")
 	@Override
 	public Object privateExecuteIn(final IScope scope) throws GamaRuntimeException {
-		if (item == null) { return null; }
+		if (item == null)
+			return null;
 		// First case: we have a file as item;
 		if (file == null) {
 			if (Types.FILE.isAssignableFrom(item.getGamlType())) {
@@ -303,9 +307,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					file.save(scope, description.getFacets());
 				}
 				return file;
-			} else {
+			} else
 				return null;
-			}
 		}
 		final String typeExp = getLiteral(IKeyword.TYPE);
 		// Second case: a filename is indicated but not the type. In that case,
@@ -330,7 +333,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 
 		try {
 			final String path = constructAbsoluteFilePath(scope, Cast.asString(scope, file.value(scope)), false);
-			if (path == null || path.equals("")) { return null; }
+			if (path == null || path.equals(""))
+				return null;
 			final File fileToSave = new File(path);
 			createParents(fileToSave);
 			boolean exists = fileToSave.exists();
@@ -345,7 +349,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					} else if (agents instanceof IShape) {
 						// see Issue #2857
 						agents = GamaListFactory.wrap(item.getGamlType(), agents);
-					} else if (!(agents instanceof IList)) { return null; }
+					} else if (!(agents instanceof IList))
+						return null;
 					saveShape((IList<? extends IShape>) agents, fileToSave, scope, type.equals("json"));
 					break;
 				case "text":
@@ -363,19 +368,22 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					break;
 				case "asc":
 					final ISpecies species1 = Cast.asSpecies(scope, item.value(scope));
-					if (species1 == null || !species1.isGrid()) { return null; }
+					if (species1 == null || !species1.isGrid())
+						return null;
 					saveAsc(species1, fileToSave, scope);
 					break;
 				case "geotiff":
 				case "image":
 					final ISpecies species2 = Cast.asSpecies(scope, item.value(scope));
-					if (species2 == null || !species2.isGrid()) { return null; }
+					if (species2 == null || !species2.isGrid())
+						return null;
 					saveRasterImage(species2, path, scope, type.equals("geotiff"));
 					break;
 				case "kml":
 				case "kmz":
 					final Object kml = item.value(scope);
-					if (!(kml instanceof GamaKmlExport)) { return null; }
+					if (!(kml instanceof GamaKmlExport))
+						return null;
 					if (type.equals("kml")) {
 						((GamaKmlExport) kml).saveAsKml(scope, path);
 					} else {
@@ -386,11 +394,11 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 				default:
 					if (getAvailableWriters().contains(type)) {
 						final IGraph g = Cast.asGraph(scope, item);
-						if (g == null) { return null; }
+						if (g == null)
+							return null;
 						getGraphWriter(scope, type).writeGraph(scope, g, null, path);
-					} else {
+					} else
 						throw GamaRuntimeFileException.error("Format is not recognized ('" + type + "')", scope);
-					}
 			}
 		} catch (final GamaRuntimeException e) {
 			throw e;
@@ -529,8 +537,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			// This is perfectly possible for the GeoTiff, but as GAMA can only read Byte format GeoTiff files, we limit
 			// the save to this
 			// specific format of data.
-			// final GridCoverage2D coverage = new GridCoverageFactory().create("data", imagePixelData, refEnvelope);
-			final GridCoverage2D coverage = createCoverageByteFromFloat("data", imagePixelData, refEnvelope);
+			final GridCoverage2D coverage = new GridCoverageFactory().create("data", imagePixelData, refEnvelope);
+			// final GridCoverage2D coverage = createCoverageByteFromFloat("data", imagePixelData, refEnvelope);
 
 			try {
 
@@ -716,7 +724,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 				final Object value = item.value(scope);
 				final IList values = itemType.isContainer() ? Cast.asList(scope, value)
 						: GamaListFactory.create(scope, itemType, value);
-				if (values.isEmpty()) { return; }
+				if (values.isEmpty())
+					return;
 				if (sd != null) {
 					final Collection<String> attributeNames = sd.getAttributeNames();
 					attributeNames.removeAll(NON_SAVEABLE_ATTRIBUTE_NAMES);
@@ -847,7 +856,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 		if (g instanceof Polygon) {
 			final Polygon p = (Polygon) g;
 			final boolean clockwise = CGAlgorithms.isCCW(p.getExteriorRing().getCoordinates());
-			if (p.getNumInteriorRing() == 0) { return g; }
+			if (p.getNumInteriorRing() == 0)
+				return g;
 			boolean change = false;
 			final LinearRing[] holes = new LinearRing[p.getNumInteriorRing()];
 			final GeometryFactory geomFact = new GeometryFactory();
@@ -864,7 +874,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					holes[i] = hole;
 				}
 			}
-			if (change) { return geomFact.createPolygon((LinearRing) p.getExteriorRing(), holes); }
+			if (change)
+				return geomFact.createPolygon((LinearRing) p.getExteriorRing(), holes);
 		} else if (g instanceof GeometryCollection) {
 			final GeometryCollection gc = (GeometryCollection) g;
 			boolean change = false;
@@ -879,7 +890,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					geometries[i] = gg;
 				}
 			}
-			if (change) { return geomFact.createGeometryCollection(geometries); }
+			if (change)
+				return geomFact.createGeometryCollection(geometries);
 		}
 		return g;
 	}
@@ -888,8 +900,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			final IProjection gis, final Collection<IExpression> attributeValues) {
 		final List<Object> values = new ArrayList<>();
 		// geometry is by convention (in specs) at position 0
-		if (ag.getInnerGeometry() == null) { return false; }
-		// System.out.println("ag.getInnerGeometry(): "+ ag.getInnerGeometry().getClass());
+		if (ag.getInnerGeometry() == null)
+			return false;
 
 		Geometry g = gis == null ? ag.getInnerGeometry() : gis.inverseTransform(ag.getInnerGeometry());
 
@@ -929,7 +941,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			/* final String featureTypeName, */final String specs, final Map<String, IExpression> attributes,
 			final IProjection gis) throws IOException, SchemaException, GamaRuntimeException {
 		// AD 11/02/15 Added to allow saving to new directories
-		if (agents == null || agents.isEmpty()) { return; }
+		if (agents == null || agents.isEmpty())
+			return;
 
 		// The name of the type and the name of the feature source shoud now be
 		// the same.
@@ -961,7 +974,8 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			/* final String featureTypeName, */final String specs, final Map<String, IExpression> attributes,
 			final IProjection gis) throws IOException, SchemaException, GamaRuntimeException {
 		// AD 11/02/15 Added to allow saving to new directories
-		if (agents == null || agents.isEmpty()) { return; }
+		if (agents == null || agents.isEmpty())
+			return;
 
 		final ShapefileDataStore store = new ShapefileDataStore(f.toURI().toURL());
 		store.setCharset(Charset.forName("UTF8"));
