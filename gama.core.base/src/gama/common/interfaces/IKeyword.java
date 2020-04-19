@@ -277,6 +277,8 @@ public interface IKeyword {
 	String MOUSE_MOVED = "mouse_move";
 	String MOUSE_ENTERED = "mouse_enter";
 	String MOUSE_EXITED = "mouse_exit";
+	String MOUSE_MENU = "mouse_menu";
+
 	String MOVING_SKILL = "moving";
 	String MOVING_3D_SKILL = "moving3D";
 	String MULTIPLY = "*";

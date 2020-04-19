@@ -770,11 +770,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		final IType t = fromTypeRef(object);
 		if (t == null)
 			return null;
-		// / SEE IF IT WORKS
-
-		// 2 erreurs :
-		// - type inconnu n'est pas mentionné (electors ??)
-		// - lors d'une affectation de nil warning sur le type (candidate)
 
 		if (t.isAgentType())
 			return t.getSpecies().getSpeciesExpr();
@@ -1076,18 +1071,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 		}
 
 	}
-	//
-	// @Override
-	// public IExpression caseColorLiteral(final ColorLiteral object) {
-	// try {
-	// final Integer val = Integer.parseInt(EGaml.getInstance().getKeyOf(object).substring(1), 16);
-	// return getFactory().createConst(val, Types.INT);
-	// } catch (final NumberFormatException e) {
-	// getContext().error("Malformed integer: " + EGaml.getInstance().getKeyOf(object), IGamlIssue.UNKNOWN_NUMBER,
-	// object);
-	// return null;
-	// }
-	// }
 
 	@Override
 	public IExpression caseStringLiteral(final StringLiteral object) {
@@ -1144,8 +1127,6 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 				final IType t = sd.getGamlType();
 				return getFactory().createVar(SUPER, t, true, IVarExpression.SUPER, null);
 
-			// case WORLD_AGENT_NAME:
-			// return getWorldExpr();
 		}
 
 		// check if the var has been declared in an iterator context
@@ -1192,13 +1173,13 @@ public class GamlExpressionCompiler extends GamlSwitch<IExpression> implements I
 			// the "elevation" facet of grid layers), is that the variable
 			// belongs to the species denoted by the
 			// current statement
-			if (getContext() instanceof StatementDescription) {
-				final SpeciesDescription denotedSpecies = getContext().getGamlType().getDenotedSpecies();
-				if (denotedSpecies != null) {
-					if (denotedSpecies.hasAttribute(varName))
-						return denotedSpecies.getVarExpr(varName, false);
-				}
-			}
+			// if (getContext() instanceof StatementDescription) {
+			// final SpeciesDescription denotedSpecies = getContext().getGamlType().getDenotedSpecies();
+			// if (denotedSpecies != null) {
+			// if (denotedSpecies.hasAttribute(varName))
+			// return denotedSpecies.getVarExpr(varName, false);
+			// }
+			// }
 
 			// An experimental possibility is that the variable refers to a
 			// an action (used like a variable, see Issue 853) or also any

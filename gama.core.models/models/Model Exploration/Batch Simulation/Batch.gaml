@@ -58,8 +58,8 @@ species people skills:[moving] {
 			cpt <- cpt + 1;
 		}
 	}
-	reflex become_infected when: ! is_infected and ! is_immune{
-		if (flip(infection_rate) and ! empty(people at_distance infection_distance where each.is_infected)) {
+	reflex become_infected when: not is_infected and not is_immune{
+		if (flip(infection_rate) and not empty(people at_distance infection_distance where each.is_infected)) {
 			is_infected <- true;
 			color <-  #red;
 			nb_infected <- nb_infected + 1;
@@ -96,7 +96,7 @@ experiment 'Run 5 simulations' type: batch repeat: 5 keep_seed: true until: ( ti
 		//in this example, we ask all the simulation agents of the run to save (at the end of the simulation) the people population in a shapefile with their is_infected and is_immune attributes 
 		ask simulations
 		{
-			save people type: "shp" to: "result/people_shape" + cpt + ".shp" with: [is_infected::"INFECTED", is_immune::"IMMUNE"];
+			save people type: "shp" to: "result/people_shape" + cpt + ".shp" attributes: ["INFECTED"::is_infected, "IMMUNE"::is_immune];
 			cpt <- cpt + 1;
 		}
 	}

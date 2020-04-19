@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'Java2DDisplaySurface.java, in plugin gama.ui.displays.java2d, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'Java2DDisplaySurface.java, in plugin gama.ui.displays.java2d, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -12,8 +12,8 @@ package gama.ui.displays.java2d;
 /*********************************************************************************************
  *
  *
- * 'AbstractAWTDisplaySurface.java', in plugin 'gama.core.application', is part of the source code of the GAMA
- * modeling and simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'AbstractAWTDisplaySurface.java', in plugin 'gama.core.application', is part of the source code of the GAMA modeling
+ * and simulation platform. (c) 2007-2014 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://code.google.com/p/gama-platform/ for license information and developers contact.
  *
@@ -44,14 +44,6 @@ import javax.swing.JPanel;
 
 import org.locationtech.jts.geom.Envelope;
 
-import gama.core.outputs.display.AWTDisplayGraphics;
-import gama.core.outputs.display.LayerManager;
-import gama.core.outputs.layers.OverlayLayer;
-import gama.dev.utils.DEBUG;
-import gama.processor.annotations.GamlAnnotations.doc;
-import gama.ui.base.utils.GraphicsHelper;
-import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.experiment.views.displays.DisplaySurfaceMenu;
 import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IKeyword;
@@ -67,9 +59,17 @@ import gama.common.interfaces.outputs.ILayerManager;
 import gama.common.preferences.GamaPreferences;
 import gama.common.util.ImageUtils;
 import gama.common.util.PlatformUtils;
+import gama.core.outputs.display.AWTDisplayGraphics;
+import gama.core.outputs.display.LayerManager;
+import gama.core.outputs.layers.OverlayLayer;
+import gama.dev.utils.DEBUG;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
+import gama.processor.annotations.GamlAnnotations.doc;
 import gama.runtime.scope.IScope;
+import gama.ui.base.utils.GraphicsHelper;
+import gama.ui.base.utils.WorkbenchHelper;
+import gama.ui.experiment.views.displays.DisplaySurfaceMenu;
 import gaml.expressions.IExpression;
 import gaml.operators.Cast;
 
@@ -220,6 +220,9 @@ public class Java2DDisplaySurface extends JPanel implements IDisplaySurface {
 					break;
 				case IGui.MouseExit:
 					gl.mouseExit(x, y);
+					break;
+				case IGui.MenuDetect:
+					gl.mouseMenu(x, y);
 					break;
 			}
 		}

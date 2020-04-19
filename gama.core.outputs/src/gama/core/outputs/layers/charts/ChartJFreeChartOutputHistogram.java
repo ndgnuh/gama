@@ -269,26 +269,28 @@ public class ChartJFreeChartOutputHistogram extends ChartJFreeChartOutput {
 		// serieid);
 		// final XYIntervalSeries serie = new
 		// XYIntervalSeries(dataserie.getSerieLegend(scope), false, true);
-		final CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
+		if (!IdPosition.containsKey(serieid)) {
 
-		final DefaultCategoryDataset firstdataset = (DefaultCategoryDataset) plot.getDataset();
+			final CategoryPlot plot = (CategoryPlot) this.chart.getPlot();
 
-		if (nbseries == 0) {
-			plot.setDataset(0, firstdataset);
-			plot.setRenderer(nbseries, (CategoryItemRenderer) getOrCreateRenderer(scope, serieid));
+			final DefaultCategoryDataset firstdataset = (DefaultCategoryDataset) plot.getDataset();
 
-		} else {
+			if (nbseries == 0) {
+				plot.setDataset(0, firstdataset);
+				plot.setRenderer(nbseries, (CategoryItemRenderer) getOrCreateRenderer(scope, serieid));
+			} else {
 
-			// DefaultCategoryDataset newdataset=new DefaultCategoryDataset();
-			// jfreedataset.add(newdataset);
-			// plot.setDataset(jfreedataset.size()-1, newdataset);
-			// plot.setDataset(nbseries, firstdataset);
+				// DefaultCategoryDataset newdataset=new DefaultCategoryDataset();
+				// jfreedataset.add(newdataset);
+				// plot.setDataset(jfreedataset.size()-1, newdataset);
+				// plot.setDataset(nbseries, firstdataset);
+			}
 
+			nbseries++;
+			// plot.setRenderer(nbseries-1,
+			// (CategoryItemRenderer)getOrCreateRenderer(scope,serieid));
+			IdPosition.put(serieid, nbseries - 1);
 		}
-		nbseries++;
-		// plot.setRenderer(nbseries-1,
-		// (CategoryItemRenderer)getOrCreateRenderer(scope,serieid));
-		IdPosition.put(serieid, nbseries - 1);
 
 		// DEBUG.LOG("new serie"+serieid+" at
 		// "+IdPosition.get(serieid)+" fdsize "+plot.getCategories().size()+"
@@ -327,9 +329,9 @@ public class ChartJFreeChartOutputHistogram extends ChartJFreeChartOutput {
 			for (int i = 0; i < CValues.size(); i++) {
 				if (getY_LogScale(scope)) {
 					final double val = YValues.get(i);
-					if (val <= 0) {
+					if (val <= 0)
 						throw GamaRuntimeException.warning("Log scale with <=0 value:" + val, scope);
-					} else {
+					else {
 						serie.addValue(YValues.get(i), serieid, CValues.get(i));
 					}
 

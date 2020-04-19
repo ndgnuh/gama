@@ -3,12 +3,19 @@ package gama.ui.displays.opengl.renderer.helpers;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 
+import gama.common.interfaces.outputs.IDisplayData;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface;
-import gama.common.interfaces.outputs.IDisplayData;
 
 public abstract class AbstractRendererHelper {
+
+	public interface Pass extends AutoCloseable {
+
+		@Override
+		void close();
+
+	}
 
 	private final IOpenGLRenderer renderer;
 

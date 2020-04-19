@@ -13,11 +13,11 @@ import java.util.function.Consumer;
 
 import org.eclipse.swt.graphics.Point;
 
-import gama.ui.base.utils.WorkbenchHelper;
 import gama.GAMA;
 import gama.common.interfaces.gui.IGui;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.util.PlatformUtils;
+import gama.ui.base.utils.WorkbenchHelper;
 
 public class LayeredDisplayMultiListener {
 
@@ -184,10 +184,17 @@ public class LayeredDisplayMultiListener {
 	public void menuDetected(final int x, final int y) {
 		if (inMenu)
 			return;
+		if (inMenu)
+			return;
 		// DEBUG.LOG("Menu detected on " + view.getPartName());
 		inMenu = true;
+		inMenu = surface.canTriggerContextualMenu();
 		setMousePosition(x, y);
 		surface.selectAgentsAroundMouse();
+		surface.dispatchMouseEvent(IGui.MenuDetect);
+		if (inMenu) {
+			surface.selectAgentsAroundMouse();
+		}
 	}
 
 	public void dragDetected() {

@@ -12,6 +12,8 @@ package gama.util.file;
 
 import static gama.util.list.GamaListFactory.createWithoutCasting;
 
+import java.io.File;
+
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IContainer;
 import gama.runtime.exceptions.GamaRuntimeException;
@@ -35,11 +37,12 @@ public class GamaFolderFile extends GamaFile<IList<String>, String> {
 
 	@Override
 	protected void checkValidity(final IScope scope) throws GamaRuntimeException {
-		if (!getFile(scope).isDirectory())
-			throw GamaRuntimeException.error(getFile(scope).getAbsolutePath() + "is not a folder", scope);
-		if (!getFile(scope).exists())
+		final File file = getFile(scope);
+		if (file == null || !file.exists())
 			throw GamaRuntimeException.error("The folder " + getFile(scope).getAbsolutePath()
 					+ " does not exist. Please use 'new_folder' instead", scope);
+		if (!getFile(scope).isDirectory())
+			throw GamaRuntimeException.error(getFile(scope).getAbsolutePath() + "is not a folder", scope);
 	}
 
 	@Override

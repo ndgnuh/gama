@@ -7,10 +7,13 @@ import java.nio.IntBuffer;
 import org.locationtech.jts.geom.ShapeType;
 
 import com.jogamp.common.nio.Buffers;
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.util.gl2.GLUT;
 
+import gama.common.geometry.ICoordinates;
+import gama.common.geometry.Scaling3D;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.metamodel.shape.GamaPoint;
 import gama.ui.base.utils.GraphicsHelper;
 import gama.ui.displays.opengl.OpenGL;
 import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
@@ -18,20 +21,9 @@ import gama.ui.displays.opengl.renderer.shaders.AbstractPostprocessingShader;
 import gama.ui.displays.opengl.renderer.shaders.AbstractShader;
 import gama.ui.displays.opengl.renderer.shaders.FrameBufferObject;
 import gama.ui.displays.opengl.renderer.shaders.KeystoneShaderProgram;
-import gama.common.geometry.ICoordinates;
-import gama.common.geometry.Scaling3D;
-import gama.common.interfaces.outputs.IDisplayData;
-import gama.metamodel.shape.GamaPoint;
 import gama.util.GamaColor.NamedGamaColor;
 
 public class KeystoneHelper extends AbstractRendererHelper {
-
-	public interface Pass extends AutoCloseable {
-
-		@Override
-		void close();
-
-	}
 
 	private final Pass finishingHelper = () -> finishRenderToTexture();
 	private FrameBufferObject fboScene;
@@ -274,11 +266,8 @@ public class KeystoneHelper extends AbstractRendererHelper {
 		}
 
 		// gl.glActiveTexture(GL.GL_TEXTURE0);
-		gl.glBindTexture(GL.GL_TEXTURE_2D, fboScene.getFBOTexture());
-		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER,
-				getData().isAntialias() ? GL.GL_LINEAR : GL.GL_NEAREST);
-		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER,
-				getData().isAntialias() ? GL.GL_LINEAR : GL.GL_NEAREST);
+		// gl.glBindTexture(GL.GL_TEXTURE_2D, fboScene.getFBOTexture());
+		getOpenGL().bindTexture(fboScene.getFBOTexture());
 
 		// Select the VBO, GPU memory data, to use for colors
 		gl.glBindBuffer(GL2.GL_ELEMENT_ARRAY_BUFFER, indexBufferIndex);
@@ -314,33 +303,29 @@ public class KeystoneHelper extends AbstractRendererHelper {
 
 	public int cornerSelected(final GamaPoint mouse) {
 		if (mouse.x < getViewWidth() / 2) {
-			if (mouse.y < getViewHeight() / 2) {
+			if (mouse.y < getViewHeight() / 2)
 				return 1;
-			} else {
+			else
 				return 0;
-			}
 		} else {
-			if (mouse.y < getViewHeight() / 2) {
+			if (mouse.y < getViewHeight() / 2)
 				return 2;
-			} else {
+			else
 				return 3;
-			}
 		}
 	}
 
 	public int cornerHovered(final GamaPoint mouse) {
 		if (mouse.x < getViewWidth() / 2) {
-			if (mouse.y < getViewHeight() / 2) {
+			if (mouse.y < getViewHeight() / 2)
 				return 1;
-			} else {
+			else
 				return 0;
-			}
 		} else {
-			if (mouse.y < getViewHeight() / 2) {
+			if (mouse.y < getViewHeight() / 2)
 				return 2;
-			} else {
+			else
 				return 3;
-			}
 		}
 	}
 

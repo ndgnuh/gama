@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.outputs.IDisplayOutput.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.outputs.IDisplayOutput.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -100,5 +100,9 @@ public interface IDisplayOutput extends IOutput {
 	 * @return
 	 */
 	boolean isVirtual();
+
+	default boolean isAutoSave() {
+		return false;
+	}
 
 }

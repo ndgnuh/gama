@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'SolveStatement.java, in plugin gama.extensions.maths, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'SolveStatement.java, in plugin gama.extensions.maths, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -12,6 +12,9 @@ package gama.extensions.maths.ode.statements;
 import java.util.Arrays;
 import java.util.List;
 
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
 import gama.extensions.maths.ode.statements.SolveStatement.SolveValidator;
 import gama.extensions.maths.ode.utils.solver.AdamsBashforthSolver;
 import gama.extensions.maths.ode.utils.solver.AdamsMoultonSolver;
@@ -26,9 +29,6 @@ import gama.extensions.maths.ode.utils.solver.MidpointSolver;
 import gama.extensions.maths.ode.utils.solver.Rk4Solver;
 import gama.extensions.maths.ode.utils.solver.Solver;
 import gama.extensions.maths.ode.utils.solver.ThreeEighthesSolver;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -38,9 +38,9 @@ import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IAgent;
-import gama.common.interfaces.IGamlIssue;
-import gama.common.interfaces.IKeyword;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
@@ -75,13 +75,16 @@ import gaml.types.Types;
 						name = "integrated_times",
 						type = IType.LIST,
 						optional = true,
+
 						doc = @doc (
+								deprecated = "does not work anymore, use t[] instead, which is automatically updated.",
 								value = "time interval inside integration process")),
 				@facet (
 						name = "integrated_values",
 						type = IType.LIST,
 						optional = true,
 						doc = @doc (
+								deprecated = "does not work anymore, use S[], I[] or any variable of the equations instead; it is automatically updated.",
 								value = "list of variables's value inside integration process")),
 				@facet (
 						name = "t0",

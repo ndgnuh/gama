@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.geometry.GamaGeometryFactory.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.common.geometry.GamaGeometryFactory.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -13,8 +13,8 @@ package gama.common.geometry;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
-
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
 import org.locationtech.jts.geom.CoordinateSequenceFactory;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
@@ -34,15 +34,27 @@ public class GamaGeometryFactory extends GeometryFactory {
 	}
 
 	public static boolean isRing(final Coordinate[] pts) {
-		if (pts.length < 4) { return false; }
-		if (!pts[0].equals(pts[pts.length - 1])) { return false; }
+		if (pts.length < 4)
+			return false;
+		if (!pts[0].equals(pts[pts.length - 1]))
+			return false;
 		return true;
+	}
+
+	public Polygon buildRectangle(final Coordinate[] points) {
+		final CoordinateSequenceFactory fact = GamaGeometryFactory.COORDINATES_FACTORY;
+		final CoordinateSequence cs = fact.create(points);
+		final LinearRing geom = GeometryUtils.GEOMETRY_FACTORY.createLinearRing(cs);
+		final Polygon p = GeometryUtils.GEOMETRY_FACTORY.createPolygon(geom, null);
+		return p;
 	}
 
 	public static boolean isRing(final List<GamaPoint> pts) {
 		final int size = pts.size();
-		if (size < 4) { return false; }
-		if (!pts.get(0).equals(pts.get(size - 1))) { return false; }
+		if (size < 4)
+			return false;
+		if (!pts.get(0).equals(pts.get(size - 1)))
+			return false;
 		return true;
 	}
 
@@ -81,7 +93,8 @@ public class GamaGeometryFactory extends GeometryFactory {
 	}
 
 	private LinearRing turnClockwise(final LinearRing ring) {
-		if (ring == null || ring.isEmpty()) { return ring; }
+		if (ring == null || ring.isEmpty())
+			return ring;
 		return createLinearRing(COORDINATES_FACTORY.create(ring.getCoordinateSequence()));
 	}
 

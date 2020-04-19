@@ -37,9 +37,11 @@ species userSIR {
 	}		
 	
 	reflex solving {	
-		solve eqSIR method: "rk4" step_size: h;
-		write "t list: " + t[];
-		write "s list:" + S[];
+		solve eqSIR method: "rk4" step_size: h ;
+ 		write "t_list: " + t[];
+ 		write "s_list:" + S[];
+ 		write "i_list:" + I[];
+ 		write "r_list:" + R[];		
 	}
 
 }

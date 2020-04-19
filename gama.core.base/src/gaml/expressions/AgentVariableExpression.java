@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.AgentVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.AgentVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -52,9 +52,8 @@ public class AgentVariableExpression extends VariableExpression implements IVarE
 			if (var != null) {
 				doc = var.getBuiltInDoc();
 			}
-		} else {
+		} else
 			return s;
-		}
 		if (doc != null) {
 			s += "<br>" + doc;
 		}
@@ -80,7 +79,7 @@ public class AgentVariableExpression extends VariableExpression implements IVarE
 	@Override
 	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
 		final SpeciesDescription sd = this.getDefinitionDescription().getSpeciesContext();
-		if (species.equals(sd)) {
+		if (species.equals(sd) || species.hasParent(sd)) {
 			result.add(sd.getAttribute(getName()));
 		}
 	}

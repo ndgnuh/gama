@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'INetworkSkill.java, in plugin gama.extensions.network, is part of the source code of the GAMA modeling and simulation
- * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'INetworkSkill.java, in plugin gama.extensions.network, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -42,5 +42,7 @@ public interface INetworkSkill {
 
 	// SKILL TEST
 	String SIMULATE_STEP = "simulate_step";
+	// UDP data packet max size
+	String MAX_DATA_PACKET_SIZE = "size_packet";
 
 }

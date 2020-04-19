@@ -21,12 +21,23 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import gama.GAMA;
+import gama.common.geometry.ICoordinates;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.ItemList;
+import gama.common.interfaces.outputs.IDisplayData;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerStatement;
+import gama.common.preferences.GamaPreferences;
 import gama.core.outputs.layers.AgentLayerStatement;
 import gama.core.outputs.layers.GridLayer;
 import gama.core.outputs.layers.ImageLayer;
 import gama.core.outputs.layers.ImageLayerStatement;
 import gama.core.outputs.layers.SpeciesLayerStatement;
 import gama.core.outputs.layers.charts.ChartLayerStatement;
+import gama.metamodel.shape.GamaPoint;
+import gama.runtime.scope.IScope;
 import gama.ui.base.controls.ParameterExpandBar;
 import gama.ui.base.controls.ParameterExpandItem;
 import gama.ui.base.interfaces.EditorListener;
@@ -39,16 +50,6 @@ import gama.ui.base.parameters.PointEditor;
 import gama.ui.base.parameters.StringEditor;
 import gama.ui.base.resources.IGamaColors;
 import gama.ui.base.utils.WorkbenchHelper;
-import gama.GAMA;
-import gama.common.geometry.ICoordinates;
-import gama.common.interfaces.IKeyword;
-import gama.common.interfaces.ItemList;
-import gama.common.interfaces.outputs.IDisplayData;
-import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.ILayer;
-import gama.common.interfaces.outputs.ILayerStatement;
-import gama.metamodel.shape.GamaPoint;
-import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
@@ -518,6 +519,8 @@ public class LayerSideControls {
 	}
 
 	private void copyCameraAndKeystoneDefinition(final IScope scope, final IDisplayData data) {
+		if (!GamaPreferences.Displays.OPENGL_CLIPBOARD_CAM.getValue())
+			return;
 		final String toCopy = cameraDefinitionToCopy() + " " + Strings.LN
 				+ (data.isKeystoneDefined() ? keystoneDefinitionToCopy(scope, data) : "");
 		WorkbenchHelper.copy(toCopy);

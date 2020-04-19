@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.types.GamaGeometryType.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.types.GamaGeometryType.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -54,10 +54,10 @@ import gama.metamodel.shape.DynamicLineString;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.GamaShape;
 import gama.metamodel.shape.IShape;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.type;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;
@@ -95,25 +95,26 @@ public class GamaGeometryType extends GamaType<IShape> {
 	public static IShape staticCast(final IScope scope, final Object obj, final Object param, final boolean copy)
 			throws GamaRuntimeException {
 
-		if (obj instanceof IShape) {
+		if (obj instanceof IShape)
 			// WARNING TODO Take copy into account
 			return (IShape) obj;
-		}
 		// if ( obj instanceof GamaPoint ) { return createPoint((GamaPoint)
 		// obj); }
 		// if ( obj instanceof IShape ) { return ((IShape) obj).getGeometry(); }
-		if (obj instanceof ISpecies) {
+		if (obj instanceof ISpecies)
 			return geometriesToGeometry(scope, scope.getAgent().getPopulationFor((ISpecies) obj));
-		}
-		if (obj instanceof GamaPair) { return pairToGeometry(scope, (GamaPair) obj); }
-		if (obj instanceof IGamaFile.Geom) { return ((IGamaFile.Geom) obj).getGeometry(scope); }
+		if (obj instanceof GamaPair)
+			return pairToGeometry(scope, (GamaPair) obj);
+		if (obj instanceof IGamaFile.Geom)
+			return ((IGamaFile.Geom) obj).getGeometry(scope);
 		if (obj instanceof IContainer) {
-			if (isPoints(scope, (IContainer) obj)) { return pointsToGeometry(scope, (IContainer<?, GamaPoint>) obj); }
+			if (isPoints(scope, (IContainer) obj))
+				return pointsToGeometry(scope, (IContainer<?, GamaPoint>) obj);
 			return geometriesToGeometry(scope, (IContainer) obj);
 		}
 		if (obj instanceof String) {
 			// Try to decode a WKT representation (the format outputted by the
-			// conversion of geometries to strings) 
+			// conversion of geometries to strings)
 			try {
 				final Geometry g = SHAPE_READER.read((String) obj);
 				return new GamaShape(g);
@@ -132,7 +133,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 	 */
 	private static boolean isPoints(final IScope scope, final IContainer obj) {
 		for (final Object o : obj.iterable(scope)) {
-			if (!(o instanceof GamaPoint)) { return false; }
+			if (!(o instanceof GamaPoint))
+				return false;
 		}
 		return true;
 	}
@@ -279,11 +281,7 @@ public class GamaGeometryType extends GamaType<IShape> {
 		points[2] = new GamaPoint(x + width / 2.0, y - height / 2.0, z);
 		points[1] = new GamaPoint(x - width / 2.0, y - height / 2.0, z);
 		points[0] = new GamaPoint(x - width / 2.0, y + height / 2.0, z);
-		final CoordinateSequenceFactory fact = GamaGeometryFactory.COORDINATES_FACTORY;
-		final CoordinateSequence cs = fact.create(points);
-		final LinearRing geom = GeometryUtils.GEOMETRY_FACTORY.createLinearRing(cs);
-		final Polygon p = GeometryUtils.GEOMETRY_FACTORY.createPolygon(geom, null);
-		return new GamaShape(p);
+		return new GamaShape(GeometryUtils.GEOMETRY_FACTORY.buildRectangle(points));
 	}
 
 	/**
@@ -316,7 +314,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 		// WARNING Circumvents a bug in JTS 1.13, where a line built between two
 		// identical points would return a null
 		// centroid
-		if (coordinates[0].equals(coordinates[1])) { return createPoint((GamaPoint) coordinates[0]); }
+		if (coordinates[0].equals(coordinates[1]))
+			return createPoint((GamaPoint) coordinates[0]);
 		return new GamaShape(GeometryUtils.GEOMETRY_FACTORY.createLineString(coordinates));
 	}
 
@@ -423,7 +422,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 
 	public static IShape buildEllipse(final double xRadius, final double yRadius, final GamaPoint location) {
 		if (xRadius <= 0) {
-			if (yRadius <= 0) { return new GamaShape(location); }
+			if (yRadius <= 0)
+				return new GamaShape(location);
 		}
 		final GeometricShapeFactory factory = new GeometricShapeFactory(GeometryUtils.GEOMETRY_FACTORY);
 		factory.setNumPoints(GamaPreferences.Displays.DISPLAY_SLICE_NUMBER.getValue()); // WARNING AD Arbitrary number.
@@ -443,7 +443,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 	}
 
 	public static IShape buildSquircle(final double xRadius, final double power, final GamaPoint location) {
-		if (xRadius <= 0) { return new GamaShape(location); }
+		if (xRadius <= 0)
+			return new GamaShape(location);
 		final GeometricShapeFactory factory = new GeometricShapeFactory(GeometryUtils.GEOMETRY_FACTORY);
 		factory.setNumPoints(GamaPreferences.Displays.DISPLAY_SLICE_NUMBER.getValue()); // WARNING AD Arbitrary number.
 																						// Maybe add a
@@ -474,7 +475,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 	 */
 	public static IShape buildArc(final double xRadius, final double heading, final double amplitude,
 			final boolean filled, final GamaPoint location) {
-		if (amplitude <= 0 || xRadius <= 0) { return new GamaShape(location); }
+		if (amplitude <= 0 || xRadius <= 0)
+			return new GamaShape(location);
 		final GeometricShapeFactory factory = new GeometricShapeFactory(GeometryUtils.GEOMETRY_FACTORY);
 		factory.setNumPoints(GamaPreferences.Displays.DISPLAY_SLICE_NUMBER.getValue()); // WARNING AD Arbitrary number.
 																						// Maybe add a
@@ -571,7 +573,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 
 	public static GamaShape geometriesToGeometry(final IScope scope, final IContainer<?, ? extends IShape> ags)
 			throws GamaRuntimeException {
-		if (ags == null || ags.isEmpty(scope)) { return null; }
+		if (ags == null || ags.isEmpty(scope))
+			return null;
 		// final Geometry geoms[] = new Geometry[ags.length(scope)];
 		final List<Geometry> geoms = new ArrayList(ags.length(scope));
 		// int cpt = 0;
@@ -591,11 +594,13 @@ public class GamaGeometryType extends GamaType<IShape> {
 			}
 			// cpt++;
 		}
-		if (geoms.size() == 1) { return new GamaShape(geoms.get(0)); }
+		if (geoms.size() == 1)
+			return new GamaShape(geoms.get(0));
 		try {
 			if (is_polygon) {
 				final Geometry geom = CascadedPolygonUnion.union(geoms);
-				if (geom != null && !geom.isEmpty()) { return new GamaShape(geom); }
+				if (geom != null && !geom.isEmpty())
+					return new GamaShape(geom);
 			} else if (is_polyline) {
 				final LineMerger merger = new LineMerger();
 				for (final Geometry g : geoms) {
@@ -606,12 +611,14 @@ public class GamaGeometryType extends GamaType<IShape> {
 				Geometry geom =
 						GeometryUtils.GEOMETRY_FACTORY.createGeometryCollection(collection.toArray(new Geometry[0]));
 				geom = geom.union();
-				if (!geom.isEmpty()) { return new GamaShape(geom); }
+				if (!geom.isEmpty())
+					return new GamaShape(geom);
 
 			} else {
 				Geometry geom = GeometryUtils.GEOMETRY_FACTORY.createGeometryCollection(geoms.toArray(new Geometry[0]));
 				geom = geom.union();
-				if (!geom.isEmpty()) { return new GamaShape(geom); }
+				if (!geom.isEmpty())
+					return new GamaShape(geom);
 			}
 		} catch (final AssertionFailedException | TopologyException | IllegalArgumentException e) {
 			// Geometry gs[] = new Geometry[geoms.length];
@@ -621,7 +628,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 			}
 			try {
 				final Geometry geom = CascadedPolygonUnion.union(gs);
-				if (geom != null && !geom.isEmpty()) { return new GamaShape(geom); }
+				if (geom != null && !geom.isEmpty())
+					return new GamaShape(geom);
 			} catch (final AssertionFailedException | TopologyException | IllegalArgumentException e2) {
 				return null;
 			}
@@ -650,17 +658,22 @@ public class GamaGeometryType extends GamaType<IShape> {
 
 	public static IShape pairToGeometry(final IScope scope, final GamaPair p) throws GamaRuntimeException {
 		final IShape first = staticCast(scope, p.first(), null, false);
-		if (first == null) { return null; }
+		if (first == null)
+			return null;
 		final IShape second = staticCast(scope, p.last(), null, false);
-		if (second == null) { return null; }
+		if (second == null)
+			return null;
 		return buildLink(scope, first, second);
 	}
 
 	public static IShape buildMultiGeometry(final IList<IShape> shapes) {
-		if (shapes.size() == 0) { return null; }
-		if (shapes.size() == 1) { return shapes.get(0); }
+		if (shapes.size() == 0)
+			return null;
+		if (shapes.size() == 1)
+			return shapes.get(0);
 		final Geometry geom = GeometryUtils.buildGeometryCollection(shapes);
-		if (geom == null) { return null; }
+		if (geom == null)
+			return null;
 		return new GamaShape(geom);
 	}
 
@@ -676,7 +689,8 @@ public class GamaGeometryType extends GamaType<IShape> {
 	}
 
 	public static IShape buildCross(final Double xRadius, final Double width, final GamaPoint location) {
-		if (xRadius <= 0) { return new GamaShape(location); }
+		if (xRadius <= 0)
+			return new GamaShape(location);
 		final double val = xRadius / Math.sqrt(2);
 		IShape line1 = GamaGeometryType.buildLine(new GamaPoint(location.x - val, location.y - val),
 				new GamaPoint(location.x + val, location.y + val));

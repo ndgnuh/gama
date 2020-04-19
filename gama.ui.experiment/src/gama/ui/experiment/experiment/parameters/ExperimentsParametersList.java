@@ -13,15 +13,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import gama.ui.base.interfaces.IParameterEditor;
-import gama.ui.base.interfaces.EditorListener.Command;
-import gama.ui.base.parameters.AbstractEditor;
-import gama.ui.base.parameters.EditorFactory;
 import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.experiment.IExperimentPlan;
 import gama.common.interfaces.experiment.IParameter;
 import gama.runtime.scope.IScope;
+import gama.ui.base.interfaces.EditorListener.Command;
+import gama.ui.base.interfaces.IParameterEditor;
+import gama.ui.base.parameters.AbstractEditor;
+import gama.ui.base.parameters.EditorFactory;
 import gama.util.GamaColor;
 import gaml.operators.Cast;
 import gaml.statements.UserCommandStatement;
@@ -43,7 +44,8 @@ public class ExperimentsParametersList extends EditorsList<String> {
 	@Override
 	public boolean isEnabled(final AbstractEditor<?> gpParam) {
 		final IParameter p = gpParam.getParam();
-		if (p == null) { return true; }
+		if (p == null)
+			return true;
 		final Boolean b = activations.get(p.getName());
 		return b == null ? true : b;
 	}
@@ -62,7 +64,8 @@ public class ExperimentsParametersList extends EditorsList<String> {
 		for (final Map<String, IParameterEditor<?>> m : categories.values()) {
 			for (final IParameterEditor<?> ed : m.values()) {
 				final IParameter param = ed.getParam();
-				if (param != null && param.getName().equals(var)) { return ed; }
+				if (param != null && param.getName().equals(var))
+					return ed;
 			}
 		}
 		return null;
@@ -111,7 +114,10 @@ public class ExperimentsParametersList extends EditorsList<String> {
 				gp = EditorFactory.getInstance().create(scope, (UserCommandStatement) var,
 						(Command) e -> GAMA.getExperiment().getAgent().executeAction(scope -> {
 							final Object result = scope.execute((UserCommandStatement) var).getValue();
-							GAMA.getExperiment().refreshAllOutputs();
+							final IExperimentPlan exp = GAMA.getExperiment();
+							if (exp != null) { // in case the experiment is killed in the meantime
+								exp.refreshAllOutputs();
+							}
 							return result;
 						}));
 			}
@@ -138,7 +144,6 @@ public class ExperimentsParametersList extends EditorsList<String> {
 			for (final IParameterEditor gp : entry.getValue().values()) {
 				gp.updateValue(true);
 			}
-			;
 		}
 	}
 

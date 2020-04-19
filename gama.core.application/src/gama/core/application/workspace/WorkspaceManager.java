@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.preferences.PreferenceFilterEntry;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.osgi.service.datalocation.Location;
 import gama.GAMA;
+import gama.common.preferences.GamaPreferences;
 import gama.dev.utils.DEBUG;
 
 public class WorkspaceManager {
@@ -42,9 +43,16 @@ public class WorkspaceManager {
 	 * to our application
 	 */
 
+	static {
+		GamaPreferences.Interface.CORE_ASK_REBUILD.onChange(v -> askBeforeRebuildingWorkspace(v));
+		GamaPreferences.Interface.CORE_ASK_OUTDATED.onChange(v -> askBeforeUsingOutdatedWorkspace(v));
+	}
+
 	private static final String keyWorkspaceRootDir = "wsRootDir";
 	private static final String keyRememberWorkspace = "wsRemember";
 	private static final String keyLastUsedWorkspaces = "wsLastUsedWorkspaces";
+	private static final String keyAskForRebuilding = "wsAskRebuildingWorkspace";
+	private static final String keyAskForOutdated = "wsAskOutdatedWorkspace";
 
 	static String selectedWorkspaceRootLocation;
 	static boolean applyPrefs;
@@ -208,8 +216,11 @@ public class WorkspaceManager {
 		final File dotFile = new File(workspaceLocation + File.separator + getModelIdentifier());
 		if ( !dotFile.exists() ) {
 			if ( fromDialog ) {
-				final boolean create = GAMA.getGui().confirm("Different version of the models library",
-					"The workspace contains a different version of the models library. Do you want to proceed anyway ?");
+				boolean create = true;
+				if ( askBeforeUsingOutdatedWorkspace() ) {
+					create = getGui().confirm("Different version of the models library",
+						"The workspace contains a different version of the models library. Do you want to proceed anyway ?");
+				}
 				if ( create ) {
 					try {
 						dotFile.createNewFile();
@@ -257,8 +268,12 @@ public class WorkspaceManager {
 		DEBUG.OUT("[GAMA] Workspace appears to be " + (files.length == 0 ? "clean" : "corrupted"));
 		if ( files.length == 0 )
 			return true;
-		if ( GAMA.getGui().confirm("Corrupted workspace",
-			"The workspace appears to be corrupted (due to a previous crash) or it is currently used by another instance of the platform. Would you like GAMA to clean it ? Once it is done, the platform will restart to complete the cleaning process.") ) {
+		boolean rebuild = true;
+		if ( askBeforeRebuildingWorkspace() ) {
+			rebuild = getGui().confirm("Corrupted workspace",
+				"The workspace appears to be corrupted (due to a previous crash) or it is currently used by another instance of the platform. Would you like GAMA to clean it ?");
+		}
+		if ( rebuild ) {
 			for ( final File file : files ) {
 				if ( file.exists() ) {
 					file.delete();
@@ -387,16 +402,42 @@ public class WorkspaceManager {
 
 	public static void lastSetWorkspaceDirectory(final String value) {
 		getSystemWidePreferences().put(keyWorkspaceRootDir, value);
+		flush();
+
+	}
+
+	private static void flush() {
 		try {
 			getSystemWidePreferences().flush();
 		} catch (final BackingStoreException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public static String lastUsedWorkspaces() {
 		return getSystemWidePreferences().get(keyLastUsedWorkspaces, "");
+	}
+
+	public static boolean askBeforeRebuildingWorkspace() {
+		// true by default
+		return getSystemWidePreferences().getBoolean(keyAskForRebuilding, true);
+	}
+
+	public static void askBeforeRebuildingWorkspace(final boolean ask) {
+		// true by default
+		getSystemWidePreferences().putBoolean(keyAskForRebuilding, ask);
+		flush();
+	}
+
+	public static boolean askBeforeUsingOutdatedWorkspace() {
+		// true by default
+		return getSystemWidePreferences().getBoolean(keyAskForOutdated, true);
+	}
+
+	public static void askBeforeUsingOutdatedWorkspace(final boolean ask) {
+		// true by default
+		getSystemWidePreferences().putBoolean(keyAskForOutdated, ask);
+		flush();
 	}
 
 }

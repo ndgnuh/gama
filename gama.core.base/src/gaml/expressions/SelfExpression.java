@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.SelfExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.expressions.SelfExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -56,6 +56,9 @@ public class SelfExpression extends VariableExpression {
 	// public void collectMetaInformation(final GamlProperties meta) {}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
-
+	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+		// Added to fix a bug introduced in #2869: expressions containing `self` would not correctly initialize their
+		// dependencies.
+		result.add(species.getAttribute(IKeyword.LOCATION));
+	}
 }

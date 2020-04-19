@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.shape.DynamicLineString.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.metamodel.shape.DynamicLineString.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -179,7 +179,8 @@ public class DynamicLineString extends LineString {
 	 */
 	@Override
 	public boolean equalsExact(final Geometry other, final double tolerance) {
-		if (!(other instanceof DynamicLineString)) { return false; }
+		if (!(other instanceof DynamicLineString))
+			return false;
 		final DynamicLineString dls = (DynamicLineString) other;
 		return Objects.equals(dls.source, source) && Objects.equals(dls.target, target);
 	}
@@ -204,7 +205,8 @@ public class DynamicLineString extends LineString {
 	public void apply(final CoordinateSequenceFilter filter) {
 		final CoordinateSequence points = getCoordinateSequence();
 		filter.filter(points, 0);
-		if (filter.isDone()) { return; }
+		if (filter.isDone())
+			return;
 		filter.filter(points, 1);
 		if (filter.isGeometryChanged()) {
 			geometryChanged();
@@ -276,7 +278,8 @@ public class DynamicLineString extends LineString {
 	protected int compareToSameClass(final Object o) {
 		final DynamicLineString line = (DynamicLineString) o;
 		final int comparison = source.getLocation().compareTo(line.source.getLocation());
-		if (comparison != 0) { return comparison; }
+		if (comparison != 0)
+			return comparison;
 		return target.getLocation().compareTo(line.target.getLocation());
 	}
 
@@ -309,15 +312,19 @@ public class DynamicLineString extends LineString {
 
 	@Override
 	public Point getPointN(final int n) {
-		if (n == 0) { return getFactory().createPoint(getCoordinate()); }
-		if (n == 1) { return getFactory().createPoint(target.getLocation()); }
+		if (n == 0)
+			return getFactory().createPoint(getCoordinate());
+		if (n == 1)
+			return getFactory().createPoint(target.getLocation());
 		return null;
 	}
 
 	@Override
 	public Coordinate getCoordinateN(final int n) {
-		if (n == 0) { return getCoordinate(); }
-		if (n == 1) { return target.getLocation(); }
+		if (n == 0)
+			return getCoordinate();
+		if (n == 1)
+			return target.getLocation();
 		return null;
 
 	}
@@ -331,6 +338,14 @@ public class DynamicLineString extends LineString {
 
 	public IShape getTarget() {
 		return target;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = source == null ? 0 : source.hashCode();
+		result = prime * result + (target == null ? 0 : target.hashCode());
+		return result;
 	}
 
 }

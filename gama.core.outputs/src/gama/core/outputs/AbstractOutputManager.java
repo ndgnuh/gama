@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.core.outputs.AbstractOutputManager.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gama.core.outputs.AbstractOutputManager.java, in plugin msi.gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -187,9 +187,18 @@ public abstract class AbstractOutputManager extends Symbol implements IOutputMan
 	@Override
 	public boolean init(final IScope scope) {
 		name = scope.getRoot().getName();
+		boolean oneOutputAutosaving = false;
 		for (final IOutput output : ImmutableList.copyOf(this)) {
 			if (!open(scope, output))
 				return false;
+			if (output instanceof IDisplayOutput) {
+				if (((IDisplayOutput) output).isAutoSave()) {
+					oneOutputAutosaving = true;
+				}
+			}
+		}
+		if (oneOutputAutosaving) {
+			synchronize();
 		}
 
 		return true;

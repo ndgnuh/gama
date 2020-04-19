@@ -56,6 +56,7 @@ public interface IGui {
 	int MouseExit = 7;
 	int DragDetect = 29;
 	int MouseHover = 32;
+	int MenuDetect = 35;
 
 	Map<String, DisplayDescription> DISPLAYS = GamaMapFactory.createUnordered();
 	String MONITOR_VIEW_ID = "gama.core.application.view.MonitorView";

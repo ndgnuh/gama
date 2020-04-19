@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.StatementWithChildrenDescription.java, in plugin gama.core, is part of the source code of
- * the GAMA modeling and simulation platform (v. 1.8)
+ * gaml.descriptions.StatementWithChildrenDescription.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -9,6 +9,8 @@
  *
  ********************************************************************************************************/
 package gaml.descriptions;
+
+import static gaml.GAML.getExpressionFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +44,8 @@ public class StatementWithChildrenDescription extends StatementDescription {
 	@Override
 	public boolean visitChildren(final DescriptionVisitor<IDescription> visitor) {
 		for (final IDescription d : children) {
-			if (!visitor.process(d)) { return false; }
+			if (!visitor.process(d))
+				return false;
 		}
 		return true;
 	}
@@ -50,8 +53,10 @@ public class StatementWithChildrenDescription extends StatementDescription {
 	@Override
 	public boolean visitOwnChildrenRecursively(final DescriptionVisitor<IDescription> visitor) {
 		for (final IDescription d : children) {
-			if (!visitor.process(d)) { return false; }
-			if (!d.visitOwnChildrenRecursively(visitor)) { return false; }
+			if (!visitor.process(d))
+				return false;
+			if (!d.visitOwnChildrenRecursively(visitor))
+				return false;
 		}
 		return true;
 
@@ -60,7 +65,8 @@ public class StatementWithChildrenDescription extends StatementDescription {
 	@Override
 	public boolean visitOwnChildren(final DescriptionVisitor<IDescription> visitor) {
 		for (final IDescription d : children) {
-			if (!visitor.process(d)) { return false; }
+			if (!visitor.process(d))
+				return false;
 		}
 		return true;
 	}
@@ -90,7 +96,8 @@ public class StatementWithChildrenDescription extends StatementDescription {
 
 	@Override
 	public IExpression getVarExpr(final String name, final boolean asField) {
-		if (temps != null) { return temps.get(name); }
+		if (temps != null)
+			return temps.get(name);
 		return null;
 	}
 
@@ -102,8 +109,10 @@ public class StatementWithChildrenDescription extends StatementDescription {
 		// TODO Should separate validation from execution, here.
 
 		if (!getMeta().hasScope() /* canHaveTemps */) {
-			if (getEnclosingDescription() == null) { return null; }
-			if (!(getEnclosingDescription() instanceof StatementWithChildrenDescription)) { return null; }
+			if (getEnclosingDescription() == null)
+				return null;
+			if (!(getEnclosingDescription() instanceof StatementWithChildrenDescription))
+				return null;
 
 			return ((StatementWithChildrenDescription) getEnclosingDescription()).addTemp(declaration, name, type);
 		}
@@ -127,8 +136,9 @@ public class StatementWithChildrenDescription extends StatementDescription {
 			declaration.warning("This declaration of " + name + " shadows the declaration of a global attribute",
 					IGamlIssue.SHADOWS_NAME, facet);
 		}
-		final IExpression result = gaml.GAML.getExpressionFactory().createVar(name, type, false,
-				IVarExpression.TEMP, this);
+		final IExpression result =
+				name.equals(MYSELF) ? getExpressionFactory().createVar(name, type, false, IVarExpression.MYSELF, this)
+						: getExpressionFactory().createVar(name, type, false, IVarExpression.TEMP, this);
 		temps.put(name, (IVarExpression) result);
 		return result;
 	}
@@ -167,10 +177,9 @@ public class StatementWithChildrenDescription extends StatementDescription {
 
 	@Override
 	public IVarExpression addNewTempIfNecessary(final String facetName, final IType type) {
-		if (getKeyword().equals(LOOP) && facetName.equals(NAME)) {
+		if (getKeyword().equals(LOOP) && facetName.equals(NAME))
 			// Case of loops: the variable is inside the loop (not outside)
 			return (IVarExpression) addTemp(this, getLitteral(facetName), type);
-		}
 		return super.addNewTempIfNecessary(facetName, type);
 	}
 

@@ -10,9 +10,11 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IEventLayerDelegate;
+import gama.common.interfaces.outputs.IEventLayerStatement;
 import gama.core.outputs.layers.EventLayerStatement.EventLayerValidator;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -20,10 +22,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IGamlIssue;
-import gama.common.interfaces.IKeyword;
-import gama.common.interfaces.outputs.IEventLayerDelegate;
-import gama.common.interfaces.outputs.IEventLayerStatement;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.annotations.validator;
@@ -50,7 +50,8 @@ import gaml.types.IType;
 		value = { @facet (
 				name = "unused",
 				type = IType.ID,
-				values = { "mouse_up", "mouse_down", "mouse_move", "mouse_enter", "mouse_exit" },
+				values = { IKeyword.MOUSE_UP, IKeyword.MOUSE_DOWN, IKeyword.MOUSE_MOVED, IKeyword.MOUSE_ENTERED,
+						IKeyword.MOUSE_EXITED, IKeyword.MOUSE_MENU },
 				optional = true,
 				doc = @doc (
 						value = "an unused facet that serves only for the purpose of declaring the string values"),
@@ -59,7 +60,7 @@ import gaml.types.IType;
 						name = IKeyword.NAME,
 						type = IType.ID,
 						optional = false,
-						doc = @doc ("the type of event captured: can be  \"mouse_up\", \"mouse_down\", \"mouse_move\", \"mouse_exit\", \"mouse_enter\" or a character")),
+						doc = @doc ("the type of event captured: can be  \"mouse_up\", \"mouse_down\", \"mouse_move\", \"mouse_exit\", \"mouse_enter\", \"mouse_menu\" or a character")),
 				@facet (
 						name = IKeyword.TYPE,
 						type = IType.STRING,

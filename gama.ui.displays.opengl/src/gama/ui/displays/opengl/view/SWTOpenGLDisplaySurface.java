@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface.java, in plugin gama.ui.displays.opengl, is part of the
- * source code of the GAMA modeling and simulation platform (v. 1.8)
+ * gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface.java, in plugin gama.ui.displays.opengl, is part of the source
+ * code of the GAMA modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -32,16 +32,6 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.GLBuffers;
 
-import gama.core.outputs.display.LayerManager;
-import gama.core.outputs.layers.OverlayLayer;
-import gama.processor.annotations.GamlAnnotations.doc;
-import gama.ui.base.resources.IGamaIcons;
-import gama.ui.base.utils.GraphicsHelper;
-import gama.ui.base.utils.WorkbenchHelper;
-import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import gama.ui.displays.opengl.renderer.JOGLRenderer;
-import gama.ui.experiment.menus.AgentsMenu;
-import gama.ui.experiment.views.displays.DisplaySurfaceMenu;
 import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IAgent;
@@ -55,10 +45,20 @@ import gama.common.interfaces.outputs.IEventLayerListener;
 import gama.common.interfaces.outputs.ILayer;
 import gama.common.interfaces.outputs.ILayerManager;
 import gama.common.preferences.GamaPreferences;
+import gama.core.outputs.display.LayerManager;
+import gama.core.outputs.layers.OverlayLayer;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.filter.Different;
+import gama.processor.annotations.GamlAnnotations.doc;
 import gama.runtime.scope.IScope;
+import gama.ui.base.resources.IGamaIcons;
+import gama.ui.base.utils.GraphicsHelper;
+import gama.ui.base.utils.WorkbenchHelper;
+import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
+import gama.ui.displays.opengl.renderer.JOGLRenderer;
+import gama.ui.experiment.menus.AgentsMenu;
+import gama.ui.experiment.views.displays.DisplaySurfaceMenu;
 import gaml.expressions.IExpression;
 import gaml.operators.Cast;
 import gaml.statements.draw.DrawingAttributes;
@@ -472,7 +472,8 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 	/**
 	 * Method getModelCoordinatesFrom()
 	 *
-	 * @see msi.gama.common.interfaces.outputs.IDisplaySurface#getModelCoordinatesFrom(int, int, java.awt.Point, java.awt.Point)
+	 * @see msi.gama.common.interfaces.outputs.IDisplaySurface#getModelCoordinatesFrom(int, int, java.awt.Point,
+	 *      java.awt.Point)
 	 */
 	@Override
 	public GamaPoint getModelCoordinatesFrom(final int xOnScreen, final int yOnScreen, final Point sizeInPixels,
@@ -784,6 +785,9 @@ public class SWTOpenGLDisplaySurface implements IDisplaySurface.OpenGL {
 					break;
 				case IGui.MouseExit:
 					gl.mouseExit(x, y);
+					break;
+				case IGui.MenuDetect:
+					gl.mouseMenu(x, y);
 					break;
 			}
 		}

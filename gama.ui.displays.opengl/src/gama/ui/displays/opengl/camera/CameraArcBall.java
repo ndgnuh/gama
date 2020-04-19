@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'CameraArcBall.java, in plugin gama.ui.displays.opengl, is part of the source code of the GAMA modeling and simulation
- * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'CameraArcBall.java, in plugin gama.ui.displays.opengl, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -11,13 +11,13 @@ package gama.ui.displays.opengl.camera;
 
 import org.eclipse.swt.SWT;
 
-import gama.ui.base.bindings.GamaKeyBindings;
-import gama.ui.base.utils.GraphicsHelper;
-import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.outputs.IDisplayData;
 import gama.common.preferences.GamaPreferences;
 import gama.metamodel.shape.GamaPoint;
+import gama.ui.base.bindings.GamaKeyBindings;
+import gama.ui.base.utils.GraphicsHelper;
+import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
 import gaml.operators.Maths;
 
 public class CameraArcBall extends AbstractCamera {
@@ -46,6 +46,14 @@ public class CameraArcBall extends AbstractCamera {
 		final double sinP = Math.sin(factorP);
 		setPosition(getDistance() * cosT * sinP + target.x, getDistance() * sinT * sinP + target.y,
 				getDistance() * cosP + target.z);
+		// See #2854 -- see if putting this here does not restrict the moves using the mouse
+		if (flipped) {
+			setUpVector(-(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)),
+					-(-Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)), -Math.sin(phi * Maths.toRad));
+		} else {
+			setUpVector(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad),
+					-Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad), Math.sin(phi * Maths.toRad));
+		}
 	}
 
 	@Override
@@ -347,7 +355,8 @@ public class CameraArcBall extends AbstractCamera {
 
 	@Override
 	public void zoom(final boolean in) {
-		if (keystoneMode) { return; }
+		if (keystoneMode)
+			return;
 		final double step =
 				getDistance() != 0d ? getDistance() / 10d * GamaPreferences.Displays.OPENGL_ZOOM.getValue() : 0.1d;
 		setDistance(getDistance() + (in ? -step : step));
@@ -394,7 +403,8 @@ public class CameraArcBall extends AbstractCamera {
 		}
 
 		super.internalMouseMove(e);
-		if ((e.stateMask & SWT.BUTTON_MASK) == 0) { return; }
+		if ((e.stateMask & SWT.BUTTON_MASK) == 0)
+			return;
 		final GamaPoint newPoint = new GamaPoint(GraphicsHelper.scaleUpIfWin(x), GraphicsHelper.scaleUpIfWin(y));
 		if (cameraInteraction && GamaKeyBindings.ctrl(e)) {
 			final int horizMovement = (int) (newPoint.x - lastMousePressedPosition.x);

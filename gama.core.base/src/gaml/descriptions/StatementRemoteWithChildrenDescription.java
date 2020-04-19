@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.StatementRemoteWithChildrenDescription.java, in plugin gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * gaml.descriptions.StatementRemoteWithChildrenDescription.java, in plugin gama.core, is part of the source code of the
+ * GAMA modeling and simulation platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package gaml.descriptions;
 
@@ -45,28 +45,38 @@ public class StatementRemoteWithChildrenDescription extends StatementWithChildre
 	public boolean validateChildren() {
 		IDescription previousEnclosingDescription = null;
 		try {
-
-			final SpeciesDescription denotedSpecies = getGamlType().getDenotedSpecies();
-			if (denotedSpecies != null) {
-				final SpeciesDescription s = getSpeciesContext();
-				if (s != null) {
-					final IType t = s.getGamlType();
-					addTemp(this, MYSELF, t);
-					previousEnclosingDescription = getEnclosingDescription();
-					setEnclosingDescription(denotedSpecies);
-
-					// FIXME ===> Model Description is lost if we are
-					// dealing
-					// with a built-in species !
-				}
-			}
-
+			previousEnclosingDescription = pushRemoteContext();
 			return super.validateChildren();
 		} finally {
-			if (previousEnclosingDescription != null) {
-				setEnclosingDescription(previousEnclosingDescription);
+			popRemoteContext(previousEnclosingDescription);
+		}
+	}
+
+	public IDescription pushRemoteContext() {
+		final SpeciesDescription denotedSpecies = getGamlType().getDenotedSpecies();
+		IDescription previousEnclosingDescription = null;
+		if (denotedSpecies != null) {
+			final SpeciesDescription s = getSpeciesContext();
+			if (s != null) {
+				final IType t = s.getGamlType();
+				addTemp(this, MYSELF, t);
+				previousEnclosingDescription = getEnclosingDescription();
+				setEnclosingDescription(denotedSpecies);
+
+				// FIXME ===> Model Description is lost if we are
+				// dealing
+				// with a built-in species !
 			}
 		}
+		return previousEnclosingDescription;
+	}
+
+	public void popRemoteContext(final IDescription previousEnclosingDescription) {
+
+		if (previousEnclosingDescription != null) {
+			setEnclosingDescription(previousEnclosingDescription);
+		}
+
 	}
 
 	@Override

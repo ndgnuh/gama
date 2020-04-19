@@ -156,9 +156,7 @@ public final class GamlAnnotations {
 		 * @return The int representation of the content type of the facet (see IType#defaultContentType()). Only
 		 *         applies to the types considered as containers
 		 */
-		int of()
-
-		default 0;
+		int of() default 0;
 
 		/**
 		 * Index.
@@ -166,9 +164,7 @@ public final class GamlAnnotations {
 		 * @return The int representation of the index type of the facet (see IType#defaultKeyType()). Only applies to
 		 *         the types considered as containers
 		 */
-		int index()
-
-		default 0;
+		int index() default 0;
 
 		/**
 		 * Values.
@@ -184,18 +180,14 @@ public final class GamlAnnotations {
 		 * @return whether or not this facet is optional or mandatory.
 		 */
 
-		boolean optional()
-
-		default false;
+		boolean optional() default false;
 
 		/**
 		 * internal.
 		 *
 		 * @return whether this facet is for internal use only.
 		 */
-		boolean internal()
-
-		default false;
+		boolean internal() default false;
 
 		/**
 		 * Doc.
@@ -204,6 +196,16 @@ public final class GamlAnnotations {
 		 * @see doc
 		 */
 		doc[] doc() default {};
+
+		/**
+		 * RemoteContext.
+		 *
+		 * @return Indicates that the context of this facet is actually the one denoted by the statement it is attached
+		 *         to. i.e. `self` will represent an agent of the species denoted by the statement, while `myself` will
+		 *         represent the agent calling the statement
+		 */
+
+		boolean remote_context() default false;
 	}
 
 	//
@@ -820,9 +822,8 @@ public final class GamlAnnotations {
 		String[] value();
 
 		/**
-		 * @return true if this operator should be treated as an iterator (i.e.requires initializing the special
-		 *         variable "each" of WorldSkill within the method)
-		 * @see WorldSkill
+		 * @return true if this operator should be treated as an iterator (i.e. allows the special variable "each" to be
+		 *         used inside)
 		 */
 
 		boolean iterator() default false;

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.common.interfaces.IDisplaySurface.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.common.interfaces.IDisplaySurface.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -360,6 +360,10 @@ public interface IDisplaySurface extends IDisplayDataListener, IScoped, IDisposa
 
 	default Font computeFont(final Font f) {
 		return f;
+	}
+
+	default boolean canTriggerContextualMenu() {
+		return !getManager().hasMouseMenuEventLayer();
 	}
 
 }

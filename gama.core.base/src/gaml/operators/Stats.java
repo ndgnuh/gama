@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.operators.Stats.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.operators.Stats.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.math3.distribution.GammaDistribution;
 import org.apache.commons.math3.ml.clustering.CentroidCluster;
 import org.apache.commons.math3.ml.clustering.Cluster;
 import org.apache.commons.math3.ml.clustering.DBSCANClusterer;
@@ -32,15 +31,15 @@ import gama.common.interfaces.IKeyword;
 import gama.common.preferences.GamaPreferences;
 import gama.common.util.Collector;
 import gama.metamodel.shape.GamaPoint;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.IOperatorCategory;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.no_test;
 import gama.processor.annotations.GamlAnnotations.operator;
 import gama.processor.annotations.GamlAnnotations.test;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.IOperatorCategory;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
@@ -173,7 +172,8 @@ public class Stats {
 			java.lang.System.arraycopy(dataSet, 0, dataCopy, 0, dataCopy.length);
 			Arrays.sort(dataCopy);
 			final int midPoint = dataCopy.length / 2;
-			if (dataCopy.length % 2 != 0) { return dataCopy[midPoint]; }
+			if (dataCopy.length % 2 != 0)
+				return dataCopy[midPoint];
 
 			return dataCopy[midPoint - 1] + (dataCopy[midPoint] - dataCopy[midPoint - 1]) / 2;
 		}
@@ -461,10 +461,9 @@ public class Stats {
 			result.add(list);
 			return result;
 		}
-		if (!Ordering.<Comparable> natural().isStrictlyOrdered(stops)) {
+		if (!Ordering.<Comparable> natural().isStrictlyOrdered(stops))
 			throw GamaRuntimeException.error(
 					"The list " + Cast.toGaml(stops) + " should be ordered and cannot contain duplicates", scope);
-		}
 		final DataSet d = from(scope, stops);
 		d.addValue(Double.MAX_VALUE);
 		final IType numberType = list.getGamlType().getContentType();
@@ -663,10 +662,12 @@ public class Stats {
 			}
 		}
 		if (x.getSize() == 0) {
-			if (y == null) { return 0.0; }
+			if (y == null)
+				return 0.0;
 			return new GamaPoint(0, 0, 0);
 		}
-		if (y == null) { return x.getProduct(); }
+		if (y == null)
+			return x.getProduct();
 		return new GamaPoint(x.getProduct(), y.getProduct(), z.getProduct());
 	}
 
@@ -692,7 +693,8 @@ public class Stats {
 	public static Object opMedian(final IScope scope, final IContainer values) {
 
 		final IType contentType = values.getGamlType().getContentType();
-		if (values.length(scope) == 0) { return contentType.cast(scope, 0d, null, false); }
+		if (values.length(scope) == 0)
+			return contentType.cast(scope, 0d, null, false);
 		switch (contentType.id()) {
 			case IType.INT:
 			case IType.FLOAT:
@@ -712,7 +714,8 @@ public class Stats {
 					y.addValue(p.getY());
 					z.addValue(p.getZ());
 				}
-				if (x.getSize() == 0) { return new GamaPoint(0, 0, 0); }
+				if (x.getSize() == 0)
+					return new GamaPoint(0, 0, 0);
 				return new GamaPoint(x.getMedian(), y.getMedian(), z.getMedian());
 			case IType.COLOR:
 				final DataSet r = new DataSet();
@@ -724,7 +727,8 @@ public class Stats {
 					g.addValue(p.getGreen());
 					b.addValue(p.getBlue());
 				}
-				if (r.getSize() == 0) { return new GamaColor(0, 0, 0, 0); }
+				if (r.getSize() == 0)
+					return new GamaColor(0, 0, 0, 0);
 				return new GamaColor(r.getMedian(), g.getMedian(), b.getMedian(), 0);
 			default:
 				final DataSet d = new DataSet();
@@ -859,7 +863,8 @@ public class Stats {
 
 	public static IMap frequencyOf(final IScope scope, final IContainer original, final IExpression filter)
 			throws GamaRuntimeException {
-		if (original == null) { return GamaMapFactory.create(Types.NO_TYPE, Types.INT); }
+		if (original == null)
+			return GamaMapFactory.create(Types.NO_TYPE, Types.INT);
 		final IMap<Object, Integer> result = GamaMapFactory.create(original.getGamlType().getContentType(), Types.INT);
 		for (final Object each : original.iterable(scope)) {
 			scope.setEach(each);
@@ -897,9 +902,11 @@ public class Stats {
 
 	public static Object getCorrelationR(final IScope scope, final IContainer l1, final IContainer l2)
 			throws GamaRuntimeException, ParseException, ExecutionException {
-		if (l1.length(scope) == 0 || l2.length(scope) == 0) { return Double.valueOf(0d); }
+		if (l1.length(scope) == 0 || l2.length(scope) == 0)
+			return Double.valueOf(0d);
 
-		if (l1.length(scope) != l2.length(scope)) { return Double.valueOf(0d); }
+		if (l1.length(scope) != l2.length(scope))
+			return Double.valueOf(0d);
 
 		final RCaller caller = new RCaller();
 		final RCode code = new RCode();
@@ -964,7 +971,8 @@ public class Stats {
 	@no_test
 	public static Object getMeanR(final IScope scope, final IContainer l)
 			throws GamaRuntimeException, ParseException, ExecutionException {
-		if (l.length(scope) == 0) { return Double.valueOf(0d); }
+		if (l.length(scope) == 0)
+			return Double.valueOf(0d);
 
 		double[] results;
 		final RCaller caller = new RCaller();
@@ -1195,25 +1203,6 @@ public class Stats {
 	}
 
 	@operator (
-			value = "gamma_rnd",
-			can_be_const = false,
-			type = IType.LIST,
-			category = { IOperatorCategory.STATISTICAL },
-			concept = { IConcept.STATISTIC, IConcept.CLUSTERING })
-	@doc (
-			value = "returns a random value from a gamma distribution with specified values of the shape and scale parameters",
-			examples = { @example (
-					value = "gamma_distribution_complemented(2,3,0.9) with_precision(3)",
-					equals = "0.731") })
-
-	public static Double OpGammaDist(final IScope scope, final Double shape, final Double scale)
-			throws GamaRuntimeException {
-		final GammaDistribution dist = new GammaDistribution(scope.getRandom().getGenerator(), shape, scale,
-				GammaDistribution.DEFAULT_INVERSE_ABSOLUTE_ACCURACY);
-		return dist.sample();
-	}
-
-	@operator (
 			value = "skewness",
 			can_be_const = false,
 			// type = IType.LIST,
@@ -1253,7 +1242,7 @@ public class Stats {
 		for (int i = 0; i < values.length; i++) {
 			values[i] = Cast.asFloat(scope, data.get(i));
 		}
-//		java.lang.System.out.println("KURT: " + k.evaluate(values, 0, values.length));
+		// java.lang.System.out.println("KURT: " + k.evaluate(values, 0, values.length));
 		return k.evaluate(values);
 	}
 

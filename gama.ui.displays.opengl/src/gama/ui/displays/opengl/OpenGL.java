@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.ui.displays.opengl.OpenGL.java, in plugin gama.ui.displays.opengl, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.ui.displays.opengl.OpenGL.java, in plugin gama.ui.displays.opengl, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -25,11 +25,13 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.BufferOverflowException;
+import java.nio.FloatBuffer;
 
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Polygon;
 import org.locationtech.jts.geom.ShapeType;
 
+import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GL2ES1;
@@ -40,23 +42,6 @@ import com.jogamp.opengl.util.awt.TextRenderer;
 import com.jogamp.opengl.util.gl2.GLUT;
 import com.jogamp.opengl.util.texture.Texture;
 
-import gama.dev.utils.DEBUG;
-import gama.ui.base.utils.GraphicsHelper;
-import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import gama.ui.displays.opengl.renderer.caches.FontCache;
-import gama.ui.displays.opengl.renderer.caches.GeometryCache;
-import gama.ui.displays.opengl.renderer.caches.ITextureCache;
-import gama.ui.displays.opengl.renderer.caches.TextureCache2;
-import gama.ui.displays.opengl.renderer.caches.GeometryCache.BuiltInGeometry;
-import gama.ui.displays.opengl.renderer.helpers.AbstractRendererHelper;
-import gama.ui.displays.opengl.renderer.helpers.PickingHelper;
-import gama.ui.displays.opengl.scene.AbstractObject;
-import gama.ui.displays.opengl.scene.FieldDrawer;
-import gama.ui.displays.opengl.scene.GeometryDrawer;
-import gama.ui.displays.opengl.scene.ObjectDrawer;
-import gama.ui.displays.opengl.scene.ResourceDrawer;
-import gama.ui.displays.opengl.scene.StringDrawer;
-import jogamp.opengl.glu.tessellator.GLUtessellatorImpl;
 import gama.GAMA;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.ICoordinates;
@@ -65,10 +50,27 @@ import gama.common.geometry.Rotation3D;
 import gama.common.geometry.Scaling3D;
 import gama.common.geometry.UnboundedCoordinateSequence;
 import gama.common.preferences.GamaPreferences;
+import gama.dev.utils.DEBUG;
 import gama.metamodel.shape.GamaPoint;
+import gama.ui.base.utils.GraphicsHelper;
+import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
+import gama.ui.displays.opengl.renderer.caches.FontCache;
+import gama.ui.displays.opengl.renderer.caches.GeometryCache;
+import gama.ui.displays.opengl.renderer.caches.GeometryCache.BuiltInGeometry;
+import gama.ui.displays.opengl.renderer.caches.ITextureCache;
+import gama.ui.displays.opengl.renderer.caches.TextureCache2;
+import gama.ui.displays.opengl.renderer.helpers.AbstractRendererHelper;
+import gama.ui.displays.opengl.renderer.helpers.PickingHelper;
+import gama.ui.displays.opengl.scene.AbstractObject;
+import gama.ui.displays.opengl.scene.FieldDrawer;
+import gama.ui.displays.opengl.scene.GeometryDrawer;
+import gama.ui.displays.opengl.scene.ObjectDrawer;
+import gama.ui.displays.opengl.scene.ResourceDrawer;
+import gama.ui.displays.opengl.scene.StringDrawer;
 import gama.util.file.IGamaFile;
 import gaml.operators.Maths;
 import gaml.statements.draw.DrawingAttributes;
+import jogamp.opengl.glu.tessellator.GLUtessellatorImpl;
 
 /**
  * A class that represents an intermediate state between the rendering and the opengl state. It captures all the
@@ -88,6 +90,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	private static boolean SHOULD_DRAW_ROTATION_SPHERE = GamaPreferences.Displays.DRAW_ROTATE_HELPER.getValue();
 
 	public static final int NO_TEXTURE = Integer.MAX_VALUE;
+	public static final float NO_ANISOTROPY = -1f;
 
 	// Special drawers
 	private final GeometryDrawer geometryDrawer;
@@ -114,12 +117,11 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	private boolean textured;
 	private int primaryTexture = NO_TEXTURE;
 	private int alternateTexture = NO_TEXTURE;
+	private float anisotropicLevel = NO_ANISOTROPY;
 
 	// Colors
 	private Color currentColor;
 	private double currentObjectAlpha = 1d;
-	private boolean isAntiAlias;
-	private boolean antiAliasChanged;
 	private boolean lighted;
 
 	// Text
@@ -140,7 +142,6 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	private boolean isROISticky;
 
 	// Working objects
-	// final GamaPoint workingPoint = new GamaPoint();
 	final GamaPoint currentNormal = new GamaPoint();
 	// final GamaPoint currentScale = new GamaPoint(1, 1, 1);
 	final GamaPoint textureCoords = new GamaPoint();
@@ -148,6 +149,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	private double currentZIncrement, currentZTranslation, savedZTranslation;
 	private volatile boolean ZTranslationSuspended;
 	private final boolean useJTSTriangulation = !GamaPreferences.Displays.OPENGL_TRIANGULATOR.getValue();
+	private final Pass endScene = () -> endScene();
 
 	public OpenGL(final IOpenGLRenderer renderer) {
 		super(renderer);
@@ -202,6 +204,12 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	public void setGL2(final GL2 gl2) {
 		this.gl = gl2;
 		textureCache.initialize();
+		if (anisotropicLevel == NO_ANISOTROPY && gl2.isExtensionAvailable("GL_EXT_texture_filter_anisotropic")) {
+			final FloatBuffer aniso = Buffers.newDirectFloatBuffer(1);
+			gl.glGetFloatv(GL.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, aniso);
+			anisotropicLevel = aniso.get();
+			DEBUG.OUT("Anisotropic level: " + anisotropicLevel);
+		}
 	}
 
 	public GLUT getGlut() {
@@ -701,17 +709,6 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 		return currentObjectAlpha;
 	}
 
-	// ANTIALIAS
-
-	public void setAntiAlias(final boolean aa) {
-		antiAliasChanged = aa != isAntiAlias;
-		isAntiAlias = aa;
-	}
-
-	public boolean isAntiAlias() {
-		return isAntiAlias;
-	}
-
 	// TEXTURES
 
 	/**
@@ -731,11 +728,11 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 	public void bindTexture(final int texture) {
 		gl.glBindTexture(GL.GL_TEXTURE_2D, texture);
 		// Apply antialas to the texture based on the current preferences
-		if (antiAliasChanged) {
-			gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER,
-					isAntiAlias ? GL.GL_LINEAR_MIPMAP_LINEAR : GL.GL_NEAREST);
-			gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, isAntiAlias ? GL.GL_LINEAR : GL.GL_NEAREST);
-			antiAliasChanged = false;
+		final boolean isAntiAlias = getData().isAntialias();
+		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, isAntiAlias ? GL.GL_LINEAR : GL.GL_NEAREST);
+		gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, isAntiAlias ? GL.GL_LINEAR : GL.GL_NEAREST);
+		if (isAntiAlias && anisotropicLevel > NO_ANISOTROPY) {
+			gl.glTexParameterf(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAX_ANISOTROPY_EXT, anisotropicLevel);
 		}
 	}
 
@@ -1026,8 +1023,7 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 
 	}
 
-	public void beginScene() {
-		setAntiAlias(isAntiAlias);
+	public Pass beginScene() {
 		setWireframe(getData().isWireframe());
 		processUnloadedCacheObjects();
 		final Color backgroundColor = getData().getBackgroundColor();
@@ -1040,6 +1036,8 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 		updatePerspective();
 		resetMatrix(GL2.GL_MODELVIEW);
 		rotateModel();
+		return endScene;
+
 	}
 
 	public void processUnloadedCacheObjects() {
@@ -1097,8 +1095,12 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 		// Turn on clockwise direction of vertices as an indication of "front" (important)
 		gl.glFrontFace(GL.GL_CW);
 
-		// Perspective correction
+		// Hints
 		gl.glHint(GL2ES1.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
+		gl.glHint(GL.GL_LINE_SMOOTH_HINT, GL.GL_NICEST);
+		gl.glHint(GL2.GL_POINT_SMOOTH_HINT, GL.GL_NICEST);
+		gl.glHint(GL2.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST);
+		gl.glHint(GL2.GL_MULTISAMPLE_FILTER_HINT_NV, GL2.GL_NICEST);
 
 		// Enable texture 2D
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -1110,12 +1112,14 @@ public class OpenGL extends AbstractRendererHelper implements Tesselator {
 		gl.glAlphaFunc(GL2.GL_GREATER, 0.01f);
 		// Disabling line smoothing to only rely on FSAA
 		// gl.glDisable(GL.GL_LINE_SMOOTH);
+		gl.glEnable(GL.GL_LINE_SMOOTH);
+		gl.glEnable(GL2.GL_POINT_SMOOTH);
+		gl.glEnable(GL2.GL_POLYGON_SMOOTH);
 		// Enabling forced normalization of normal vectors (important)
 		gl.glEnable(GL2.GL_NORMALIZE);
 		// Enabling multi-sampling (necessary ?)
 		// if (USE_MULTI_SAMPLE) {
 		gl.glEnable(GL2.GL_MULTISAMPLE);
-		gl.glHint(GL2.GL_MULTISAMPLE_FILTER_HINT_NV, GL2.GL_NICEST);
 		// }
 		initializeShapeCache();
 	}

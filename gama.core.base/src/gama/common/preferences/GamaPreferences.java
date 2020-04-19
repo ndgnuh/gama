@@ -87,6 +87,11 @@ public class GamaPreferences {
 				create("pref_show_welcome_page", "Display welcome page", true, IType.BOOL, false).in(NAME, STARTUP);
 		public static final Pref<Boolean> CORE_SHOW_MAXIMIZED =
 				create("pref_show_maximized", "Maximize GAMA window", true, IType.BOOL, false).in(NAME, STARTUP);
+		public static final Pref<Boolean> CORE_ASK_REBUILD =
+				create("pref_ask_rebuild", "Ask before rebuilding a corrupted workspace", true, IType.BOOL, false)
+						.in(NAME, STARTUP);
+		public static final Pref<Boolean> CORE_ASK_OUTDATED = create("pref_ask_outdated",
+				"Ask before using a workspace created by another version", true, IType.BOOL, false).in(NAME, STARTUP);
 		/**
 		 * Menus
 		 */
@@ -424,6 +429,9 @@ public class GamaPreferences {
 						.in(NAME, RENDERING);
 		public static final Pref<Boolean> OPENGL_NUM_KEYS_CAM = create("pref_display_numkeyscam",
 				"Use Numeric Keypad (2,4,6,8) for camera interaction", true, IType.BOOL, true).in(NAME, RENDERING);
+		public static final Pref<Boolean> OPENGL_CLIPBOARD_CAM = create("pref_display_clipboard_cam",
+				"Copy the camera definition to the clipboard when it is changed on the display", false, IType.BOOL,
+				true).in(NAME, RENDERING);
 	}
 
 	public static class External {

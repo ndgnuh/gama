@@ -12,10 +12,10 @@ package gama.core.outputs.layers;
 
 import static gaml.expressions.IExpressionFactory.TRUE_EXPR;
 
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
 import gama.core.outputs.layers.GridLayerStatement.GridLayerSerializer;
 import gama.core.outputs.layers.GridLayerStatement.GridLayerValidator;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -23,8 +23,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IGamlIssue;
-import gama.common.interfaces.IKeyword;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.GAML;
@@ -49,7 +49,8 @@ import gaml.types.Types;
 @symbol (
 		name = IKeyword.GRID_POPULATION,
 		kind = ISymbolKind.LAYER,
-		with_sequence = false,
+		with_sequence = true, // Necessary to declare the elevation facet as remote itself
+		remote_context = true,
 		concept = { IConcept.GRID, IConcept.DISPLAY, IConcept.INSPECTOR })
 @inside (
 		symbols = IKeyword.DISPLAY)
@@ -88,6 +89,7 @@ import gaml.types.Types;
 						name = IKeyword.ELEVATION,
 						type = { IType.MATRIX, IType.FLOAT, IType.INT, IType.BOOL },
 						optional = true,
+						remote_context = true,
 						doc = @doc ("Allows to specify the elevation of each cell, if any. Can be a matrix of float (provided it has the same size than the grid), an int or float variable of the grid species, or simply true (in which case, the variable called 'grid_value' is used to compute the elevation of each cell)")),
 				@facet (
 						name = IKeyword.TEXTURE,

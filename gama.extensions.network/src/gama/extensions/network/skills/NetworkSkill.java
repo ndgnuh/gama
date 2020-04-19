@@ -29,7 +29,6 @@ import gama.extensions.network.common.IConnector;
 import gama.extensions.network.mqtt.MQTTConnector;
 import gama.extensions.network.tcp.TCPConnection;
 import gama.extensions.network.udp.UDPConnector;
-import gama.processor.annotations.IConcept;
 import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
@@ -37,6 +36,7 @@ import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.skill;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.IConcept;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
@@ -138,14 +138,20 @@ public class NetworkSkill extends MessagingSkill {
 							name = INetworkSkill.SERVER_URL,
 							type = IType.STRING,
 							optional = true,
-							doc = @doc ("server URL (localhost or a server URL)")) },
+							doc = @doc ("server URL (localhost or a server URL)")),
+					@arg (
+							name = INetworkSkill.MAX_DATA_PACKET_SIZE,
+							type = IType.INT,
+							optional = true,
+							doc = @doc ("For UDP connection, it sets the maximum size of received packets (deafault = 1024bits).")) },
 			doc = @doc (
 					value = "Action used by a networking agent to connect to a server or as a server.",
 					examples = { @example (" do connect  with_name:\"any_name\";"),
 							@example (" do connect to:\\\"localhost\\\" port:9876 with_name:\"any_name\";"),
 							@example (" do connect to:\\\"localhost\\\" protocol:\\\"MQTT\\\" port:9876 with_name:\"any_name\";"),
 							@example (" do connect to:\"localhost\" protocol:\"udp_server\" port:9876 with_name:\"Server\"; "),
-							@example (" do connect to:\"localhost\" protocol:\"udp_client\" port:9876 with_name:\"Client\";"), }))
+							@example (" do connect to:\"localhost\" protocol:\"udp_client\" port:9876 with_name:\"Client\";"),
+							@example ("	do connect to:\"localhost\" protocol:\"udp_server\" port:9877 size_packet: 4096;") }))
 	public void connectToServer(final IScope scope) throws GamaRuntimeException {
 		if (!scope.getExperiment().hasAttribute(REGISTRED_SERVER)) {
 			this.startSkill(scope);
@@ -158,6 +164,7 @@ public class NetworkSkill extends MessagingSkill {
 		final String protocol = (String) scope.getArg(INetworkSkill.PROTOCOL, IType.STRING);
 		final Boolean force_local = (Boolean) scope.getArg(INetworkSkill.FORCE_NETWORK_USE, IType.BOOL);
 		final Integer port = (Integer) scope.getArg(INetworkSkill.PORT, IType.INT);
+		final String packet_size = (String) scope.getArg(INetworkSkill.MAX_DATA_PACKET_SIZE, IType.STRING);
 
 		// Fix to Issue #2618
 		final String serverKey = createServerKey(serverURL, port);
@@ -171,13 +178,15 @@ public class NetworkSkill extends MessagingSkill {
 				connector = new UDPConnector(scope, true);
 				connector.configure(IConnector.SERVER_URL, serverURL);
 				connector.configure(IConnector.SERVER_PORT, "" + port);
+				connector.configure(IConnector.PACKET_SIZE, packet_size);
 			} else if (protocol != null && protocol.equals(INetworkSkill.UDP_CLIENT)) {
 				DEBUG.OUT("create UDP client");
 				connector = new UDPConnector(scope, false);
 				connector.configure(IConnector.SERVER_URL, serverURL);
 				connector.configure(IConnector.SERVER_PORT, "" + port);
+				connector.configure(IConnector.PACKET_SIZE, packet_size);
 			} else if (protocol != null && protocol.equals(INetworkSkill.TCP_SERVER)) {
-				DEBUG.OUT("create TCP serveur");
+				DEBUG.OUT("create TCP server");
 				connector = new TCPConnection(scope, true);
 				connector.configure(IConnector.SERVER_URL, serverURL);
 				connector.configure(IConnector.SERVER_PORT, "" + port);
@@ -188,7 +197,7 @@ public class NetworkSkill extends MessagingSkill {
 				connector.configure(IConnector.SERVER_PORT, "" + port);
 			} else // if(protocol.equals( INetworkSkill.MQTT))
 			{
-				DEBUG.OUT("create MQTT serveur " + login + " " + password);
+				DEBUG.OUT("create MQTT server " + login + " " + password);
 				connector = new MQTTConnector(scope);
 				if (serverURL != null) {
 					connector.configure(IConnector.SERVER_URL, serverURL);
@@ -234,7 +243,6 @@ public class NetworkSkill extends MessagingSkill {
 			DEBUG.OUT(grp);
 			// connector.joinAGroup(agt, grp);
 		}
-		;
 	}
 
 	private static String createServerKey(final String serverURL, final Integer port) {
@@ -271,7 +279,6 @@ public class NetworkSkill extends MessagingSkill {
 		return !box.isEmpty();
 	}
 
-	@SuppressWarnings ("unchecked")
 	@action (
 			name = INetworkSkill.REGISTER_TO_GROUP,
 			args = {
@@ -329,7 +336,8 @@ public class NetworkSkill extends MessagingSkill {
 	public void leaveTheGroup(final IScope scope) {
 		final IAgent agent = scope.getAgent();
 		final String groupName = (String) scope.getArg(INetworkSkill.WITHNAME, IType.STRING);
-		if (groupName == null) { return; }
+		if (groupName == null)
+			return;
 		final IList<String> groups = getGroups(scope, agent);
 
 		groups.remove(groupName);

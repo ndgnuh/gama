@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'WorkaroundForIssue2476.java, in plugin gama.ui.displays.java2d, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'WorkaroundForIssue2476.java, in plugin gama.ui.displays.java2d, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -14,10 +14,10 @@ import java.awt.event.MouseMotionListener;
 
 import org.eclipse.swt.SWT;
 
-import gama.dev.utils.DEBUG;
 import gama.GAMA;
 import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.util.PlatformUtils;
+import gama.dev.utils.DEBUG;
 
 public class WorkaroundForIssue2476 {
 
@@ -84,9 +84,12 @@ public class WorkaroundForIssue2476 {
 					surface.zoomFit();
 				}
 				if (e.getButton() == 3 && !inMenu) {
-					inMenu = true;
+					inMenu = surface.canTriggerContextualMenu();
 					setMousePosition(surface, e.getX(), e.getY());
-					surface.selectAgentsAroundMouse();
+					if (inMenu) {
+						surface.selectAgentsAroundMouse();
+					}
+					surface.dispatchMouseEvent(SWT.MenuDetect);
 					return;
 				}
 

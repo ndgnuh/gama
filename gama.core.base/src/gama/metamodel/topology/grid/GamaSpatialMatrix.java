@@ -37,6 +37,7 @@ import org.locationtech.jts.operation.distance.DistanceOp;
 import com.google.common.collect.Ordering;
 
 import gama.common.geometry.Envelope3D;
+import gama.common.geometry.GeometryUtils;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IContainer;
@@ -407,25 +408,31 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 
 	private void createCells(final IScope scope, final boolean partialCells) throws GamaRuntimeException {
 		final boolean isRectangle = environmentFrame.getInnerGeometry().isRectangle();
-		final GamaPoint p = new GamaPoint(0, 0);
 		final GamaPoint origin =
 				new GamaPoint(environmentFrame.getEnvelope().getMinX(), environmentFrame.getEnvelope().getMinY());
 
 		final IShape translatedReferenceFrame = Spatial.Transformations.translated_by(scope, environmentFrame, origin);
-
-		final double cmx = cellWidth / 2;
-		final double cmy = cellHeight / 2;
+		final GamaPoint[][] xs = new GamaPoint[numCols + 1][numRows + 1];
+		for (int i = 0; i < numCols + 1; i++) {
+			for (int j = 0; j < numRows + 1; j++) {
+				final GamaPoint p = new GamaPoint(i * cellWidth, j * cellHeight);
+				xs[i][j] = p;
+			}
+		}
 		for (int i = 0, n = numRows * numCols; i < n; i++) {
 			final int yy = i / numCols;
 			final int xx = i - yy * numCols;
-			p.x = xx * cellWidth + cmx;
-			p.y = yy * cellHeight + cmy;
 			// WARNING HACK
 			IShape rect = null;
 			if (useIndividualShapes) {
-				rect = GamaGeometryType.buildRectangle(cellWidth, cellHeight, p);
+				// Change in the function used in building cells in order to minimize computations and mutualize points.
+				// See #2896
+				rect = new GamaShape(GeometryUtils.GEOMETRY_FACTORY.buildRectangle(new GamaPoint[] { xs[xx][yy],
+						xs[xx + 1][yy], xs[xx + 1][yy + 1], xs[xx][yy + 1], xs[xx][yy] }));
 			} else {
-				rect = new CellProxyGeometry(p.copy(scope));
+				final double cmx = cellWidth / 2;
+				final double cmy = cellHeight / 2;
+				rect = new CellProxyGeometry(new GamaPoint(xx * cellWidth + cmx, yy * cellHeight + cmy));
 			}
 			boolean ok = isRectangle || translatedReferenceFrame.covers(rect);
 			if (partialCells && !ok && rect.intersects(translatedReferenceFrame)) {

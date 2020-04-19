@@ -11,7 +11,6 @@
 package gaml.statements;
 
 import gama.common.interfaces.IAgent;
-import gama.runtime.scope.IScope;
 
 /**
  * @author drogoul
@@ -38,8 +37,11 @@ public class Arguments extends Facets {
 
 	@Override
 	public Arguments cleanCopy() {
-		final Arguments result = new Arguments(this);
-		result.transformValues(cleanCopy);
+		final Arguments result = new Arguments();
+		result.setCaller(caller.get());
+		for (final Facet f : facets) {
+			result.facets.add(f.cleanCopy());
+		}
 		return result;
 	}
 
@@ -55,18 +57,6 @@ public class Arguments extends Facets {
 	public void dispose() {
 		super.dispose();
 		caller.set(null);
-	}
-
-	/**
-	 * Returns arguments where all the temp variables belonging to the scope passed in parameter are replaced by their
-	 * values
-	 */
-	public Arguments resolveAgainst(final IScope scope) {
-		forEachFacet((n, f) -> {
-			f.setExpression(f.getExpression().resolveAgainst(scope));
-			return true;
-		});
-		return this;
 	}
 
 }

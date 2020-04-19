@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.core.outputs.layers.EventLayer.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.core.outputs.layers.EventLayer.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,7 +10,6 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
-import gama.dev.utils.DEBUG;
 import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IExecutable;
@@ -19,6 +18,7 @@ import gama.common.interfaces.outputs.IDisplaySurface;
 import gama.common.interfaces.outputs.IEventLayerListener;
 import gama.common.interfaces.outputs.IGraphics;
 import gama.common.interfaces.outputs.ILayerStatement;
+import gama.dev.utils.DEBUG;
 import gama.metamodel.shape.GamaPoint;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -79,7 +79,8 @@ public class EventLayer extends AbstractLayer {
 	// We explicitly translate by the origin of the surface
 	@Override
 	public GamaPoint getModelCoordinatesFrom(final int xOnScreen, final int yOnScreen, final IDisplaySurface g) {
-		if (xOnScreen == -1 && yOnScreen == -1) { return new GamaPoint(0, 0); }
+		if (xOnScreen == -1 && yOnScreen == -1)
+			return new GamaPoint(0, 0);
 		return g.getModelCoordinates();
 	}
 
@@ -98,6 +99,7 @@ public class EventLayer extends AbstractLayer {
 		private final static int MOUSE_ENTERED = 5;
 		private final static int MOUSE_EXITED = 6;
 		private final static int KEY_PRESSED = 3;
+		private final static int MOUSE_MENU = 7;
 
 		private final int listenedEvent;
 		private final IDisplaySurface surface;
@@ -115,12 +117,21 @@ public class EventLayer extends AbstractLayer {
 		}
 
 		private int getListeningEvent(final String eventTypeName) {
-			if (eventTypeName.equals(IKeyword.MOUSE_DOWN)) { return MOUSE_PRESS; }
-			if (eventTypeName.equals(IKeyword.MOUSE_UP)) { return MOUSE_RELEASED; }
-			if (eventTypeName.equals(IKeyword.MOUSE_CLICKED)) { return MOUSE_CLICKED; }
-			if (eventTypeName.equals(IKeyword.MOUSE_MOVED)) { return MOUSE_MOVED; }
-			if (eventTypeName.equals(IKeyword.MOUSE_ENTERED)) { return MOUSE_ENTERED; }
-			if (eventTypeName.equals(IKeyword.MOUSE_EXITED)) { return MOUSE_EXITED; }
+			if (eventTypeName.equals(IKeyword.MOUSE_DOWN))
+				return MOUSE_PRESS;
+			if (eventTypeName.equals(IKeyword.MOUSE_UP))
+				return MOUSE_RELEASED;
+			if (eventTypeName.equals(IKeyword.MOUSE_CLICKED))
+				return MOUSE_CLICKED;
+			if (eventTypeName.equals(IKeyword.MOUSE_MOVED))
+				return MOUSE_MOVED;
+			if (eventTypeName.equals(IKeyword.MOUSE_ENTERED))
+				return MOUSE_ENTERED;
+			if (eventTypeName.equals(IKeyword.MOUSE_EXITED))
+				return MOUSE_EXITED;
+			if (eventTypeName.equals(IKeyword.MOUSE_MENU))
+				return MOUSE_MENU;
+
 			return KEY_PRESSED;
 		}
 
@@ -166,16 +177,26 @@ public class EventLayer extends AbstractLayer {
 			}
 		}
 
+		@Override
+		public void mouseMenu(final int x, final int y) {
+			if (MOUSE_MENU == listenedEvent) {
+				executeEvent(x, y);
+			}
+		}
+
 		private void executeEvent(final int x, final int y) {
 			final IAgent agent = ((EventLayerStatement) definition).executesInSimulation()
 					? executionScope.getSimulation() : executionScope.getExperiment();
 			final IExecutable executer = agent == null ? null : agent.getSpecies().getAction(actionName);
-			if (executer == null) { return; }
+			if (executer == null)
+				return;
 			final GamaPoint pp = getModelCoordinatesFrom(x, y, surface);
-			if (pp == null) { return; }
+			if (pp == null)
+				return;
 			if (pp.getX() < 0 || pp.getY() < 0 || pp.getX() >= surface.getEnvWidth()
 					|| pp.getY() >= surface.getEnvHeight()) {
-				if (MOUSE_EXITED != listenedEvent && MOUSE_ENTERED != listenedEvent) { return; }
+				if (MOUSE_EXITED != listenedEvent && MOUSE_ENTERED != listenedEvent)
+					return;
 			}
 			DEBUG.OUT("Coordinates in env " + pp);
 			GAMA.runAndUpdateAll(() -> executionScope.execute(executer, agent, null));
@@ -206,6 +227,10 @@ public class EventLayer extends AbstractLayer {
 	@Override
 	public Boolean isControllable() {
 		return false;
+	}
+
+	public String getEvent() {
+		return listener.event;
 	}
 
 }

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.ui.displays.opengl.renderer.JOGLRenderer.java, in plugin gama.ui.displays.opengl, is part of the source
- * code of the GAMA modeling and simulation platform (v. 1.8)
+ * gama.ui.displays.opengl.renderer.JOGLRenderer.java, in plugin gama.ui.displays.opengl, is part of the source code of
+ * the GAMA modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -22,22 +22,22 @@ import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.swt.GLCanvas;
 
+import gama.common.interfaces.outputs.IChartImageProvider;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.ILayer;
 import gama.core.outputs.display.AbstractDisplayGraphics;
+import gama.metamodel.shape.GamaPoint;
 import gama.ui.base.utils.GraphicsHelper;
 import gama.ui.base.utils.WorkbenchHelper;
 import gama.ui.displays.opengl.OpenGL;
+import gama.ui.displays.opengl.renderer.helpers.AbstractRendererHelper.Pass;
 import gama.ui.displays.opengl.renderer.helpers.CameraHelper;
 import gama.ui.displays.opengl.renderer.helpers.KeystoneHelper;
 import gama.ui.displays.opengl.renderer.helpers.LightHelper;
 import gama.ui.displays.opengl.renderer.helpers.PickingHelper;
 import gama.ui.displays.opengl.renderer.helpers.SceneHelper;
-import gama.ui.displays.opengl.renderer.helpers.KeystoneHelper.Pass;
 import gama.ui.displays.opengl.scene.ModelScene;
 import gama.ui.displays.opengl.view.SWTOpenGLDisplaySurface;
-import gama.common.interfaces.outputs.IChartImageProvider;
-import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.ILayer;
-import gama.metamodel.shape.GamaPoint;
 import gama.util.GamaColor;
 import gama.util.file.IGamaFile;
 import gaml.statements.draw.DrawingAttributes;
@@ -177,12 +177,10 @@ public class JOGLRenderer extends AbstractDisplayGraphics implements IOpenGLRend
 		if (!sceneHelper.isReady())
 			return;
 
-		try (Pass c = keystoneHelper.render()) {
-			openGL.beginScene();
+		try (Pass c = keystoneHelper.render(); Pass d = openGL.beginScene();) {
 			cameraHelper.update();
 			lightHelper.draw();
 			sceneHelper.draw();
-			openGL.endScene();
 		}
 
 		if (!visible) {

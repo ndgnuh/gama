@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'AbstractCamera.java, in plugin gama.ui.displays.opengl, is part of the source code of the GAMA modeling and simulation
- * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'AbstractCamera.java, in plugin gama.ui.displays.opengl, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -15,16 +15,14 @@ import org.eclipse.swt.events.MouseEvent;
 import com.jogamp.opengl.GLRunnable;
 import com.jogamp.opengl.glu.GLU;
 
-import gama.dev.utils.DEBUG;
-import gama.ui.base.bindings.GamaKeyBindings;
-import gama.ui.base.utils.GraphicsHelper;
-import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import gama.ui.displays.opengl.renderer.helpers.CameraHelper;
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.outputs.IDisplayData;
 import gama.common.preferences.GamaPreferences;
 import gama.metamodel.shape.GamaPoint;
-import gaml.operators.Maths;
+import gama.ui.base.bindings.GamaKeyBindings;
+import gama.ui.base.utils.GraphicsHelper;
+import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
+import gama.ui.displays.opengl.renderer.helpers.CameraHelper;
 
 public abstract class AbstractCamera implements ICamera {
 
@@ -98,7 +96,7 @@ public abstract class AbstractCamera implements ICamera {
 
 	@Override
 	public void updateOrientation() {
-		DEBUG.OUT("Upvector updatd as " + upVector);
+		// DEBUG.OUT("Upvector updatd as " + upVector);
 		upVector.setLocation(renderer.getData().getCameraUpVector());
 	}
 
@@ -108,13 +106,13 @@ public abstract class AbstractCamera implements ICamera {
 		cameraInteraction = !data.cameraInteractionDisabled();
 		updateSphericalCoordinatesFromLocations();
 		if (initialized) {
-			if (flipped) {
-				setUpVector(-(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)),
-						-(-Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)), -Math.sin(phi * Maths.toRad));
-			} else {
-				setUpVector(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad),
-						-Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad), Math.sin(phi * Maths.toRad));
-			}
+			// if (flipped) {
+			// setUpVector(-(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)),
+			// -(-Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad)), -Math.sin(phi * Maths.toRad));
+			// } else {
+			// setUpVector(-Math.cos(theta * Maths.toRad) * Math.cos(phi * Maths.toRad),
+			// -Math.sin(theta * Maths.toRad) * Math.cos(phi * Maths.toRad), Math.sin(phi * Maths.toRad));
+			// }
 			drawRotationHelper();
 		}
 
@@ -138,7 +136,7 @@ public abstract class AbstractCamera implements ICamera {
 	@Override
 	public void setUpVector(final double xPos, final double yPos, final double zPos) {
 		upVector.setLocation(xPos, yPos, zPos);
-		DEBUG.OUT("Upvector modified as " + upVector);
+		// DEBUG.OUT("Upvector modified as " + upVector);
 		getRenderer().getData().setCameraUpVector(new GamaPoint(upVector));
 	}
 
@@ -339,7 +337,9 @@ public abstract class AbstractCamera implements ICamera {
 			if (renderer.getOpenGLHelper().mouseInROI(lastMousePressedPosition)) {
 				renderer.getSurface().selectionIn(renderer.getOpenGLHelper().getROIEnvelope());
 			} else {
-				renderer.getPickingHelper().setPicking(true);
+				if (renderer.getSurface().canTriggerContextualMenu()) {
+					renderer.getPickingHelper().setPicking(true);
+				}
 			}
 		} else if (e.button == 2 && cameraInteraction) { // mouse wheel
 			resetPivot();
@@ -650,7 +650,8 @@ public abstract class AbstractCamera implements ICamera {
 	}
 
 	public double getInitialZFactor() {
-		if (renderer.getData().isDrawEnv()) { return 1.46 / zCorrector; }
+		if (renderer.getData().isDrawEnv())
+			return 1.46 / zCorrector;
 		return 1.2 / zCorrector;
 	}
 

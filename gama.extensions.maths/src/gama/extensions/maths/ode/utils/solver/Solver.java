@@ -16,10 +16,10 @@ import org.apache.commons.math3.ode.FirstOrderIntegrator;
 import org.apache.commons.math3.ode.sampling.StepHandler;
 import org.apache.commons.math3.ode.sampling.StepInterpolator;
 
-import gama.dev.utils.DEBUG;
-import gama.extensions.maths.ode.statements.SystemOfEquationsStatement;
 import gama.GAMA;
 import gama.common.interfaces.IAgent;
+import gama.dev.utils.DEBUG;
+import gama.extensions.maths.ode.statements.SystemOfEquationsStatement;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaPair;
@@ -117,7 +117,7 @@ public abstract class Solver {
 				}
 			}
 
-			seq.assignValue(scope, finalTime * step, y);
+			seq.assignValue(scope, finalTime, y);
 			storeValues(finalTime, y, integrationValues);
 		});
 

@@ -65,7 +65,8 @@ public class UDPConnector extends Connector {
 		if (agent.getScope().getSimulation().getAttribute(_UDP_SERVER + port) == null) {
 			try {
 				final DatagramSocket sersock = new DatagramSocket(port);
-				final MultiThreadedUDPSocketServer ssThread = new MultiThreadedUDPSocketServer(agent, sersock);
+				final MultiThreadedUDPSocketServer ssThread =
+						new MultiThreadedUDPSocketServer(agent, sersock, this.getConfigurationParameter(PACKET_SIZE));
 				ssThread.start();
 				agent.getScope().getSimulation().setAttribute(_UDP_SERVER + port, ssThread);
 
@@ -121,7 +122,8 @@ public class UDPConnector extends Connector {
 		final String sport = this.getConfigurationParameter(SERVER_PORT);
 		final Integer port = Cast.asInt(agent.getScope(), sport);
 		final Thread sersock = (Thread) agent.getScope().getSimulation().getAttribute(_UDP_SERVER + port);
-		if (sersock != null && sersock.isAlive()) { return true; }
+		if (sersock != null && sersock.isAlive())
+			return true;
 
 		return false;
 	}

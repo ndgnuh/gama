@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.kernel.experiment.ExperimentPlan.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.kernel.experiment.ExperimentPlan.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -42,13 +42,13 @@ import gama.kernel.simulation.SimulationAgent;
 import gama.metamodel.population.GamaPopulation;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.topology.continuous.AmorphousTopology;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.ExperimentController;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionScope;
@@ -84,7 +84,7 @@ import gaml.variables.IVariable;
 		kind = ISymbolKind.EXPERIMENT,
 		with_sequence = true,
 		concept = { IConcept.EXPERIMENT })
-@doc ("Declaration of a particular type of agent that can manage simulations")
+@doc ("Declaration of a particular type of agent that can manage simulations. If the experiment directly imports a model using the 'model:' facet, this facet *must* be the first one after the name of the experiment")
 @facets (
 		value = { @facet (
 				name = IKeyword.NAME,

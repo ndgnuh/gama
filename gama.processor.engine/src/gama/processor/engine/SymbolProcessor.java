@@ -48,7 +48,7 @@ public class SymbolProcessor extends ElementProcessor<symbol> {
 					toArrayOfStrings(values, constants).append(',');
 				}
 				toArrayOfStrings(values, sb).append(',').append(toBoolean(child.optional())).append(',')
-						.append(toBoolean(child.internal()));
+						.append(toBoolean(child.internal())).append(',').append(toBoolean(child.remote_context()));
 				verifyDoc(context, e, "facet " + child.name(), child);
 				sb.append(')');
 			}

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.TempVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.TempVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -12,6 +12,7 @@ package gaml.expressions;
 
 import java.util.Collection;
 
+import gama.common.interfaces.IKeyword;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.GAML;
@@ -71,4 +72,32 @@ public class TempVariableExpression extends VariableExpression {
 
 	@Override
 	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
+
+	public static class MyselfExpression extends TempVariableExpression {
+
+		protected MyselfExpression(final IType<?> type, final IDescription definitionDescription) {
+			super(IKeyword.MYSELF, type, definitionDescription);
+		}
+
+		@Override
+		public IExpression resolveAgainst(final IScope scope) {
+			return this;
+		}
+
+		@Override
+		public void setVal(final IScope scope, final Object v, final boolean create) throws GamaRuntimeException {}
+
+		@Override
+		public String getTitle() {
+			return "pseudo variable " + getName() + " of type " + getGamlType().getTitle();
+		}
+
+		@Override
+		public String getDocumentation() {
+			final IDescription desc = getDefinitionDescription();
+			return "pseudo variable " + getName() + " of type " + getGamlType().getTitle()
+					+ (desc == null ? "<br>Built In" : "<br>Defined in " + desc.getTitle());
+		}
+
+	}
 }

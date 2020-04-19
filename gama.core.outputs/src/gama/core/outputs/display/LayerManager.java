@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.core.outputs.display.LayerManager.java, in plugin msi.gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.core.outputs.display.LayerManager.java, in plugin msi.gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -15,7 +15,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import gama.GAMA;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IGraphics;
+import gama.common.interfaces.outputs.ILayer;
+import gama.common.interfaces.outputs.ILayerManager;
+import gama.common.interfaces.outputs.ILayerStatement;
 import gama.core.outputs.layers.AgentLayer;
 import gama.core.outputs.layers.EventLayer;
 import gama.core.outputs.layers.GisLayer;
@@ -26,13 +35,6 @@ import gama.core.outputs.layers.ImageLayer;
 import gama.core.outputs.layers.OverlayLayer;
 import gama.core.outputs.layers.SpeciesLayer;
 import gama.core.outputs.layers.charts.ChartLayer;
-import gama.GAMA;
-import gama.common.interfaces.outputs.IDisplayOutput;
-import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.IGraphics;
-import gama.common.interfaces.outputs.ILayer;
-import gama.common.interfaces.outputs.ILayerManager;
-import gama.common.interfaces.outputs.ILayerStatement;
 import gama.metamodel.shape.IShape;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -73,7 +75,9 @@ public class LayerManager implements ILayerManager {
 		}
 	}
 
-	private final List<ILayer> enabledLayers = new ArrayList<>();
+	// private final List<ILayer> enabledLayers = new ArrayList<>();
+	// Feb 2020: added to avoid concurrentModifications
+	private final List<ILayer> enabledLayers = new CopyOnWriteArrayList<>();
 	private final List<ILayer> disabledLayers = new ArrayList<>();
 	private OverlayLayer overlay = null;
 	final IDisplaySurface surface;
@@ -193,6 +197,17 @@ public class LayerManager implements ILayerManager {
 		} finally {
 			g.endDrawingLayers();
 		}
+	}
+
+	@Override
+	public boolean hasMouseMenuEventLayer() {
+		for (final ILayer i : enabledLayers) {
+			if (i instanceof EventLayer) {
+				if (((EventLayer) i).getEvent().equals(IKeyword.MOUSE_MENU))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
