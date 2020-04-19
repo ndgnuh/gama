@@ -47,7 +47,7 @@ public class WebHelper {
 		if (HOME_URL == null) {
 			try {
 				HOME_URL = FileLocator
-						.toFileURL(Platform.getBundle("gama.ui.base.shared").getEntry("/welcome/welcome.html"));
+						.toFileURL(Platform.getBundle("gama.ui.base").getEntry("/welcome/welcome.html"));
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}

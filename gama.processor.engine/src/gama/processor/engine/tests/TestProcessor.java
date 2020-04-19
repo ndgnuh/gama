@@ -36,16 +36,30 @@ public class TestProcessor extends ElementProcessor<tests> {
 		// Special case for lone test annotations
 		final Map<String, List<Element>> elements = context.groupElements(test.class);
 		for (final Map.Entry<String, List<Element>> entry : elements.entrySet()) {
-			final StringBuilder sb = opIndex.getOrDefault(entry.getKey(), new StringBuilder());
-			for (final Element e : entry.getValue()) {
-				try {
-					createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
-				} catch (final Exception exception) {
-					context.emitError("Exception in processor: " + exception.getMessage(), e);
-				}
 
+			if (opIndex1.keySet().size() < 20) {
+				final StringBuilder sb = opIndex1.getOrDefault(entry.getKey(), new StringBuilder());
+				for (final Element e : entry.getValue()) {
+					try {
+						createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
+					} catch (final Exception exception) {
+						context.emitError("Exception in processor: " + exception.getMessage(), e);
+					}
+
+				}
+				opIndex1.put(entry.getKey(), sb);
+			} else {
+				final StringBuilder sb = opIndex2.getOrDefault(entry.getKey(), new StringBuilder());
+				for (final Element e : entry.getValue()) {
+					try {
+						createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
+					} catch (final Exception exception) {
+						context.emitError("Exception in processor: " + exception.getMessage(), e);
+					}
+
+				}
+				opIndex2.put(entry.getKey(), sb);
 			}
-			opIndex.put(entry.getKey(), sb);
 		}
 	}
 
@@ -88,9 +102,17 @@ public class TestProcessor extends ElementProcessor<tests> {
 
 	public void writeTests(final ProcessorContext context, final Writer sb) throws IOException {
 		sb.append("experiment ").append(toJavaString("Tests for " + context.currentPlugin)).append(" type: test {");
-		for (final StringBuilder tests : opIndex.values()) {
-			sb.append(ln);
-			sb.append(tests);
+
+		if (opIndex1.keySet().size() < 20) {
+			for (final StringBuilder tests : opIndex1.values()) {
+				sb.append(ln);
+				sb.append(tests);
+			}
+		} else {
+			for (final StringBuilder tests : opIndex2.values()) {
+				sb.append(ln);
+				sb.append(tests);
+			};
 		}
 		sb.append(ln).append('}');
 		namesAlreadyUsed.clear();

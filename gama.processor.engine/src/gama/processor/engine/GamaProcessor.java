@@ -136,14 +136,19 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			if (p.outputToJava() && p.hasElements()) {
 				final String method = p.getInitializationMethodName();
 				if (method != null) {
-					sb.append(ln).append(tab).append(method).append("();");
+					if(method.equals("initializeOperator")) {
+						sb.append(ln).append(tab).append(method+"1").append("();");
+						sb.append(ln).append(tab).append(method+"2").append("();");
+						
+					}else {						
+						sb.append(ln).append(tab).append(method).append("();");
+					}
 				}
 			}
 		});
 
 		sb.append(ln).append('}');
-	}
-
+	} 
 	public StringBuilder writeJavaBody() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("package ").append(PACKAGE_NAME).append(".").append(context.shortcut).append(';');
@@ -153,7 +158,13 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			if (p.outputToJava() && p.hasElements()) {
 				final String method = p.getInitializationMethodName();
 				if (method != null) {
-					sb.append("public void ").append(method).append("() ").append(p.getExceptions()).append(" {");
+
+					if(method.equals("initializeOperator")) {
+							sb.append("public void ").append(method+"1").append("() ").append(p.getExceptions()).append(" {"); 
+					}else {
+						
+						sb.append("public void ").append(method).append("() ").append(p.getExceptions()).append(" {");
+					}
 					p.serialize(context, sb);
 					sb.append(ln).append("}");
 				}

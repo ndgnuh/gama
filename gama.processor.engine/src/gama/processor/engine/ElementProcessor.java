@@ -34,7 +34,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 	protected static final Map<String, String> NAME_CACHE = new HashMap<>();
 
-	protected final Map<String, StringBuilder> opIndex = new HashMap<>();
+	protected final Map<String, StringBuilder> opIndex1 = new HashMap<>();
+	protected final Map<String, StringBuilder> opIndex2 = new HashMap<>();
 	static final Pattern CLASS_PARAM = Pattern.compile("<.*?>");
 	static final Pattern SINGLE_QUOTE = Pattern.compile("\"");
 	static final String QUOTE_MATCHER = Matcher.quoteReplacement("\\\"");
@@ -51,7 +52,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 		typeIndicesToGamlTypes.put(-204, "new temporary variable");
 	}
 
-	public ElementProcessor() {}
+	public ElementProcessor() {
+	}
 
 	protected void clean(final ProcessorContext context, final Map<String, StringBuilder> map) {
 		for (final String k : context.getRoots()) {
@@ -61,13 +63,17 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 	@Override
 	public boolean hasElements() {
-		return opIndex.size() > 0;
+		return opIndex1.size() > 0 || opIndex2.size() > 0;
 	}
 
 	@Override
 	public void process(final ProcessorContext context) {
 		final Class<T> a = getAnnotationClass();
-		clean(context, opIndex);
+		if ((opIndex1.keySet().size()+1) < 20) {
+			clean(context, opIndex1);
+		} else {
+			clean(context, opIndex2);
+		}
 		for (final Map.Entry<String, List<Element>> entry : context.groupElements(a).entrySet()) {
 			final List<Element> elements = entry.getValue();
 			if (elements.size() == 0) {
@@ -85,7 +91,12 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 			}
 			if (sb.length() > 0) {
-				opIndex.put(entry.getKey(), sb);
+
+				if ((opIndex1.keySet().size() +1 )< 20) {
+					opIndex1.put(entry.getKey(), sb);
+				} else {
+					opIndex2.put(entry.getKey(), sb);
+				}
 			}
 		}
 	}
@@ -206,14 +217,22 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 		}
 
 	}
-
+	
 	@Override
-	public void serialize(final ProcessorContext context, final StringBuilder sb) {
-		opIndex.forEach((s, builder) -> {
-			if (builder != null) {
-				sb.append(builder);
+	public void serialize(final ProcessorContext context, final StringBuilder sb) { 
+			opIndex1.forEach((s, builder) -> {
+				if (builder != null) {
+					sb.append(builder);
+				}
+			}); 
+			if(getInitializationMethodName().equals("initializeOperator")) {
+				sb.append("} public void ").append("initializeOperator2").append("() ").append(getExceptions()).append(" {"); 
 			}
-		});
+			opIndex2.forEach((s, builder) -> {
+				if (builder != null) {
+					sb.append(builder);
+				}
+			}); 
 	}
 
 	public abstract void createElement(StringBuilder sb, ProcessorContext context, Element e, T annotation);
@@ -223,8 +242,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	@Override
 	public final String getInitializationMethodName() {
 		if (initializationMethodName == null) {
-			initializationMethodName =
-					"initialize" + Constants.capitalizeFirstLetter(getAnnotationClass().getSimpleName());
+			initializationMethodName = "initialize"
+					+ Constants.capitalizeFirstLetter(getAnnotationClass().getSimpleName());
 		}
 		return initializationMethodName;
 	}
@@ -270,20 +289,20 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	protected static void param(final StringBuilder sb, final String c, final String par) {
 		final String jc = checkPrim(c);
 		switch (jc) {
-			case DOUBLE:
-				sb.append("asFloat(s,").append(par).append(')');
-				break;
-			case INTEGER:
-				sb.append("asInt(s,").append(par).append(')');
-				break;
-			case BOOLEAN:
-				sb.append("asBool(s,").append(par).append(')');
-				break;
-			case OBJECT:
-				sb.append(par);
-				break;
-			default:
-				sb.append("((").append(jc).append(")").append(par).append(')');
+		case DOUBLE:
+			sb.append("asFloat(s,").append(par).append(')');
+			break;
+		case INTEGER:
+			sb.append("asInt(s,").append(par).append(')');
+			break;
+		case BOOLEAN:
+			sb.append("asBool(s,").append(par).append(')');
+			break;
+		case OBJECT:
+			sb.append(par);
+			break;
+		default:
+			sb.append("((").append(jc).append(")").append(par).append(')');
 
 		}
 	}
@@ -324,7 +343,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 				break;
 			}
 		}
-		// context.emit(Kind.NOTE, "Type to convert : " + key + " | Reduction: " + type, null);
+		// context.emit(Kind.NOTE, "Type to convert : " + key + " | Reduction: " + type,
+		// null);
 		NAME_CACHE.put(key, type);
 		return type;
 	}

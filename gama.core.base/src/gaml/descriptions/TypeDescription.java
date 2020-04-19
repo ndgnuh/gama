@@ -364,21 +364,21 @@ public abstract class TypeDescription extends SymbolDescription {
 			return true;
 		});
 
-		final CycleDetector cycleDetector = new CycleDetector<>(dependencies);
-		if (cycleDetector.detectCycles()) {
-			final Set<VariableDescription> inCycles = cycleDetector.findCycles();
-			for (final VariableDescription vd : inCycles) {
-				if (vd.isSyntheticSpeciesContainer() || vd.isBuiltIn()) {
-					continue;
-				}
-				final Collection<String> strings = new HashSet(Collections2.transform(inCycles, TO_NAME));
-				strings.remove(vd.getName());
-				vd.error("Cycle detected between " + vd.getName() + " and " + strings
-						+ ". These attributes or sub-species depend on each other for the computation of their value. Consider moving one of the initializations to the 'init' section of the "
-						+ getKeyword());
-			}
-			return false;
-		}
+//		final CycleDetector cycleDetector = new CycleDetector<>(dependencies);
+//		if (cycleDetector.detectCycles()) {
+//			final Set<VariableDescription> inCycles = cycleDetector.findCycles();
+//			for (final VariableDescription vd : inCycles) {
+//				if (vd.isSyntheticSpeciesContainer() || vd.isBuiltIn()) {
+//					continue;
+//				}
+//				final Collection<String> strings = new HashSet(Collections2.transform(inCycles, TO_NAME));
+//				strings.remove(vd.getName());
+//				vd.error("Cycle detected between " + vd.getName() + " and " + strings
+//						+ ". These attributes or sub-species depend on each other for the computation of their value. Consider moving one of the initializations to the 'init' section of the "
+//						+ getKeyword());
+//			}
+//			return false;
+//		}
 		final Graph<VariableDescription, Object> fDependencies = new DefaultDirectedGraph<>(Object.class);
 		attributes.forEachPair((aName, var) -> {
 			if (!var.hasFacet(FUNCTION))
@@ -394,20 +394,20 @@ public abstract class TypeDescription extends SymbolDescription {
 		});
 
 		if (!fDependencies.vertexSet().isEmpty()) {
-			final CycleDetector functionCycleDetector = new CycleDetector<>(fDependencies);
-			if (functionCycleDetector.detectCycles()) {
-				final Set<VariableDescription> inCycles = functionCycleDetector.findCycles();
-				for (final VariableDescription vd : inCycles) {
-					if (vd.isSyntheticSpeciesContainer() || vd.isBuiltIn()) {
-						continue;
-					}
-					final Collection<String> strings = new HashSet(Collections2.transform(inCycles, TO_NAME));
-					vd.error("Cycle detected between " + vd.getName() + " and " + strings
-							+ "; attributes declared as functions cannot contain references to themselves in their function");
-				}
-				return false;
-
-			}
+//			final CycleDetector functionCycleDetector = new CycleDetector<>(fDependencies);
+//			if (functionCycleDetector.detectCycles()) {
+//				final Set<VariableDescription> inCycles = functionCycleDetector.findCycles();
+//				for (final VariableDescription vd : inCycles) {
+//					if (vd.isSyntheticSpeciesContainer() || vd.isBuiltIn()) {
+//						continue;
+//					}
+//					final Collection<String> strings = new HashSet(Collections2.transform(inCycles, TO_NAME));
+//					vd.error("Cycle detected between " + vd.getName() + " and " + strings
+//							+ "; attributes declared as functions cannot contain references to themselves in their function");
+//				}
+//				return false;
+//
+//			}
 		}
 
 		return true;

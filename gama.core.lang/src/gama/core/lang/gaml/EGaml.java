@@ -32,6 +32,7 @@ import gama.core.lang.gaml.impl.ModelImpl;
 import gama.core.lang.gaml.impl.S_ActionImpl;
 import gama.core.lang.gaml.impl.S_EquationsImpl;
 import gama.core.lang.gaml.impl.S_IfImpl;
+import gama.core.lang.gaml.impl.StatementImpl;
 import gama.core.lang.gaml.util.GamlSwitch;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.interfaces.IGamlEcoreUtils;
