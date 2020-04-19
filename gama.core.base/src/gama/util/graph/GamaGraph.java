@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
@@ -1597,6 +1598,24 @@ public class GamaGraph<V, E> implements IGraph<V, E> {
 				((IAgent) obj).dispose();
 			}
 		}
+	}
+
+	@Override
+	public Supplier<V> getVertexSupplier() {
+		// TODO Check this
+		return null;
+	}
+
+	@Override
+	public Supplier<E> getEdgeSupplier() {
+		// TODO Check this
+		return null;
+	}
+
+	@Override
+	public V addVertex() {
+		// TODO Check this
+		return null;
 	}
 
 }
