@@ -32,7 +32,14 @@ import gama.processor.engine.tests.TestProcessor;
 @SupportedSourceVersion (SourceVersion.RELEASE_11)
 public class GamaProcessor extends AbstractProcessor implements Constants {
 
-	public final static String[] IMPORTS = new String[] { "java.util", "java.lang" };
+	public final static String[] IMPORTS = new String[] { "java.util", "java.lang", "gama.util.map", "gama.util.list",
+			"gama.util.file", "gama.util.matrix", "gama.util.path", "gama.util.graph", "gama.util.random",
+			"gama.util.tree", "gama.util", "gama.metamodel.agent", "gama.metamodel.population", "gama.metamodel.shape",
+			"gaml.types", "gaml.skills", "gama.common.interfaces.batch", "gama.common.interfaces.experiment",
+			"gama.common.interfaces.gui", "gama.common.interfaces.outputs", "gama.common.interfaces",
+			"gama.runtime.scope", "gaml.operators.noisegeneration", "gaml.operators", "gama.kernel.batch",
+			"gama.kernel.experiment", "gama.kernel.root", "gama.kernel.model", "gama.kernel.simulation", "gaml.species",
+			"gaml.expressions" };
 
 	private ProcessorContext context;
 	public static final String JAVA_HEADER;
@@ -133,13 +140,7 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			if (p.outputToJava() && p.hasElements()) {
 				final String method = p.getInitializationMethodName();
 				if (method != null) {
-					if (method.equals("initializeOperator")) {
-						sb.append(ln).append(tab).append(method + "1").append("();");
-						sb.append(ln).append(tab).append(method + "2").append("();");
-
-					} else {
-						sb.append(ln).append(tab).append(method).append("();");
-					}
+					sb.append(ln).append(tab).append(method).append("();");
 				}
 			}
 		});
@@ -154,19 +155,7 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		writeMutableHeader(sb);
 		processors.values().forEach(p -> {
 			if (p.outputToJava() && p.hasElements()) {
-				final String method = p.getInitializationMethodName();
-				if (method != null) {
-
-					if (method.equals("initializeOperator")) {
-						sb.append("public void ").append(method + "1").append("() ").append(p.getExceptions())
-								.append(" {");
-					} else {
-
-						sb.append("public void ").append(method).append("() ").append(p.getExceptions()).append(" {");
-					}
-					p.serialize(context, sb);
-					sb.append(ln).append("}");
-				}
+				p.writeJavaBody(sb, context);
 			}
 		});
 

@@ -1,9 +1,13 @@
 package gama.processor.engine;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,8 +38,7 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 	protected static final Map<String, String> NAME_CACHE = new HashMap<>();
 
-	protected final Map<String, StringBuilder> opIndex1 = new HashMap<>();
-	protected final Map<String, StringBuilder> opIndex2 = new HashMap<>();
+	protected final SortedMap<String, StringBuilder> serializedElements = new TreeMap<>();
 	static final Pattern CLASS_PARAM = Pattern.compile("<.*?>");
 	static final Pattern SINGLE_QUOTE = Pattern.compile("\"");
 	static final String QUOTE_MATCHER = Matcher.quoteReplacement("\\\"");
@@ -52,8 +55,7 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 		typeIndicesToGamlTypes.put(-204, "new temporary variable");
 	}
 
-	public ElementProcessor() {
-	}
+	public ElementProcessor() {}
 
 	protected void clean(final ProcessorContext context, final Map<String, StringBuilder> map) {
 		for (final String k : context.getRoots()) {
@@ -63,17 +65,13 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 	@Override
 	public boolean hasElements() {
-		return opIndex1.size() > 0 || opIndex2.size() > 0;
+		return serializedElements.size() > 0;
 	}
 
 	@Override
 	public void process(final ProcessorContext context) {
 		final Class<T> a = getAnnotationClass();
-		if ((opIndex1.keySet().size()+1) < 20) {
-			clean(context, opIndex1);
-		} else {
-			clean(context, opIndex2);
-		}
+		clean(context, serializedElements);
 		for (final Map.Entry<String, List<Element>> entry : context.groupElements(a).entrySet()) {
 			final List<Element> elements = entry.getValue();
 			if (elements.size() == 0) {
@@ -91,12 +89,7 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 
 			}
 			if (sb.length() > 0) {
-
-				if ((opIndex1.keySet().size() +1 )< 20) {
-					opIndex1.put(entry.getKey(), sb);
-				} else {
-					opIndex2.put(entry.getKey(), sb);
-				}
+				serializedElements.put(entry.getKey(), sb);
 			}
 		}
 	}
@@ -217,22 +210,50 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 		}
 
 	}
-	
+
 	@Override
-	public void serialize(final ProcessorContext context, final StringBuilder sb) { 
-			opIndex1.forEach((s, builder) -> {
-				if (builder != null) {
-					sb.append(builder);
-				}
-			}); 
-			if(getInitializationMethodName().equals("initializeOperator")) {
-				sb.append("} public void ").append("initializeOperator2").append("() ").append(getExceptions()).append(" {"); 
+	public void serialize(final ProcessorContext context, final Collection<StringBuilder> elements,
+			final StringBuilder sb) {
+		elements.forEach((builder) -> {
+			if (builder != null) {
+				sb.append(builder);
 			}
-			opIndex2.forEach((s, builder) -> {
-				if (builder != null) {
-					sb.append(builder);
-				}
-			}); 
+		});
+	}
+
+	private void writeMethod(final String method, final String followingMethod,
+			final Collection<StringBuilder> elements, final StringBuilder sb, final ProcessorContext context) {
+		sb.append("public void ").append(method).append("() ").append(getExceptions()).append(" {");
+		serialize(context, elements, sb);
+		if (followingMethod != null) {
+			sb.append(ln).append(followingMethod).append("(); ");
+		}
+		sb.append(ln).append("}");
+	}
+
+	@Override
+	public void writeJavaBody(final StringBuilder sb, final ProcessorContext context) {
+		String method = getInitializationMethodName();
+		if (method == null)
+			return;
+		int size = sizeOf(serializedElements);
+		if (size > 20000) {
+			writeMethod(method, method + "2", halfOf(serializedElements, true), sb, context);
+			writeMethod(method + "2", null, halfOf(serializedElements, false), sb, context);
+		} else {
+			writeMethod(method, null, serializedElements.values(), sb, context);
+		}
+	}
+
+	private int sizeOf(final Map<String, StringBuilder> elements) {
+		return elements.values().stream().filter(e -> e != null).mapToInt(e -> e.length()).sum();
+	}
+
+	private List<StringBuilder> halfOf(final Map<String, StringBuilder> elements, final boolean firstHalf) {
+		int size = elements.size();
+		List<StringBuilder> result = new ArrayList<>(elements.values());
+		return firstHalf ? result.subList(0, size / 2) : result.subList(size / 2, size);
+
 	}
 
 	public abstract void createElement(StringBuilder sb, ProcessorContext context, Element e, T annotation);
@@ -242,8 +263,8 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	@Override
 	public final String getInitializationMethodName() {
 		if (initializationMethodName == null) {
-			initializationMethodName = "initialize"
-					+ Constants.capitalizeFirstLetter(getAnnotationClass().getSimpleName());
+			initializationMethodName =
+					"initialize" + Constants.capitalizeFirstLetter(getAnnotationClass().getSimpleName());
 		}
 		return initializationMethodName;
 	}
@@ -277,32 +298,30 @@ public abstract class ElementProcessor<T extends Annotation> implements IProcess
 	}
 
 	protected static String checkPrim(final String c) {
-		final String result = CHECK_PRIM.get(c);
-		return result == null ? c : result;
+		return CHECK_PRIM.getOrDefault(c, c);
 	}
 
 	protected static String returnWhenNull(final String returnClass) {
-		final String result = RETURN_WHEN_NULL.get(returnClass);
-		return result == null ? " null" : result;
+		return RETURN_WHEN_NULL.getOrDefault(returnClass, " null");
 	}
 
 	protected static void param(final StringBuilder sb, final String c, final String par) {
 		final String jc = checkPrim(c);
 		switch (jc) {
-		case DOUBLE:
-			sb.append("asFloat(s,").append(par).append(')');
-			break;
-		case INTEGER:
-			sb.append("asInt(s,").append(par).append(')');
-			break;
-		case BOOLEAN:
-			sb.append("asBool(s,").append(par).append(')');
-			break;
-		case OBJECT:
-			sb.append(par);
-			break;
-		default:
-			sb.append("((").append(jc).append(")").append(par).append(')');
+			case DOUBLE:
+				sb.append("asFloat(s,").append(par).append(')');
+				break;
+			case INTEGER:
+				sb.append("asInt(s,").append(par).append(')');
+				break;
+			case BOOLEAN:
+				sb.append("asBool(s,").append(par).append(')');
+				break;
+			case OBJECT:
+				sb.append(par);
+				break;
+			default:
+				sb.append("((").append(jc).append(")").append(par).append(')');
 
 		}
 	}

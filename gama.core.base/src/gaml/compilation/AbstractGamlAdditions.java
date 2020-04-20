@@ -28,24 +28,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IPath;
+
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IContainer;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.ISkill;
 import gama.common.interfaces.experiment.IExperimentAgentCreator;
 import gama.common.interfaces.experiment.IExperimentAgentCreator.ExperimentAgentDescription;
 import gama.common.util.JavaUtils;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.vars;
 import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.ITypeProvider;
 import gama.runtime.scope.IScope;
+import gama.util.GamaColor;
+import gama.util.GamaDate;
+import gama.util.GamaFont;
+import gama.util.GamaPair;
 import gama.util.file.IGamaFile;
+import gama.util.graph.GamaGraph;
+import gama.util.graph.IGraph;
+import gama.util.list.IList;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
+import gama.util.matrix.GamaMatrix;
+import gama.util.matrix.IMatrix;
 import gaml.compilation.annotations.serializer;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.factories.DescriptionFactory;
@@ -70,6 +85,7 @@ import gaml.expressions.IExpressionCompiler;
 import gaml.prototypes.FacetProto;
 import gaml.prototypes.OperatorProto;
 import gaml.prototypes.SymbolProto;
+import gaml.species.ISpecies;
 import gaml.types.GamaFileType;
 import gaml.types.IType;
 import gaml.types.ParametricFileType;
@@ -119,6 +135,23 @@ public abstract class AbstractGamlAdditions {
 	protected Class<?> i = int.class;
 	protected Class<?> d = double.class;
 	protected Class<?> b = boolean.class;
+	protected Class<?> IP = IPath.class;
+	protected Class<?> LI = IList.class;
+	protected Class<?> IM = IMap.class;
+	protected Class<?> SH = IShape.class;
+	protected Class<?> PT = GamaPoint.class;
+	protected Class<?> MT = IMatrix.class;
+	protected Class<?> IC = IContainer.class;
+	protected Class<?> SP = ISpecies.class;
+	protected Class<?> IE = IExpression.class;
+	protected Class<?> IA = IAgent.class;
+	protected Class<?> GG = GamaGraph.class;
+	protected Class<?> IG = IGraph.class;
+	protected Class<?> GD = GamaDate.class;
+	protected Class<?> GC = GamaColor.class;
+	protected Class<?> GM = GamaMatrix.class;
+	protected Class<?> GP = GamaPair.class;
+	protected Class<?> FT = GamaFont.class;
 
 	public static IDescription[] D(final IDescription... input) {
 		return input;
@@ -138,6 +171,15 @@ public abstract class AbstractGamlAdditions {
 
 	protected static String[] S(final String... strings) {
 		return strings;
+	}
+
+	protected static Method M(final Class<?> c, final String name, final Class<?>... classes) {
+		try {
+			return c.getMethod(name, classes);
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	protected static int[] I(final int... integers) {
@@ -244,14 +286,14 @@ public abstract class AbstractGamlAdditions {
 		DescriptionFactory.addProto(md, keywords);
 	}
 
-	public void _iterator(final String[] keywords, final Method method, final Class[] classes,
+	public void _it(final String[] keywords, final Method method, final Class[] classes,
 			final int[] expectedContentTypes, final Class ret, final boolean c, final int t, final int content,
 			final int index, final int contentContentType, final GamaGetter.Binary helper) {
 		IExpressionCompiler.ITERATORS.addAll(Arrays.asList(keywords));
-		_binary(keywords, method, classes, expectedContentTypes, ret, c, t, content, index, contentContentType, helper);
+		_bi(keywords, method, classes, expectedContentTypes, ret, c, t, content, index, contentContentType, helper);
 	}
 
-	public void _binary(final String[] keywords, final AccessibleObject method, final Class[] classes,
+	public void _bi(final String[] keywords, final AccessibleObject method, final Class[] classes,
 			final int[] expectedContentTypes, final Object returnClassOrType, final boolean c, final int t,
 			final int content, final int index, final int contentContentType, final GamaGetter.Binary helper) {
 		final Signature signature = new Signature(classes);
@@ -287,7 +329,7 @@ public abstract class AbstractGamlAdditions {
 
 	}
 
-	public void _operator(final String[] keywords, final AccessibleObject method, final Class[] classes,
+	public void _op(final String[] keywords, final AccessibleObject method, final Class[] classes,
 			final int[] expectedContentTypes, final Object returnClassOrType, final boolean c, final int t,
 			final int content, final int index, final int contentContentType, final GamaGetter.NAry helper) {
 		final Signature signature = new Signature(classes);
@@ -331,7 +373,7 @@ public abstract class AbstractGamlAdditions {
 
 	}
 
-	public void _unary(final String[] keywords, final AccessibleObject method, final Class[] classes,
+	public void _un(final String[] keywords, final AccessibleObject method, final Class[] classes,
 			final int[] expectedContentTypes, final Object returnClassOrType, final boolean c, final int t,
 			final int content, final int index, final int contentContentType, final GamaGetter.Unary helper) {
 		final Signature signature = new Signature(classes);
@@ -360,7 +402,7 @@ public abstract class AbstractGamlAdditions {
 	}
 
 	// For files
-	public void _operator(final String[] keywords, final AccessibleObject method, final Class[] classes,
+	public void _op(final String[] keywords, final AccessibleObject method, final Class[] classes,
 			final int[] expectedContentTypes, final Class ret, final boolean c, final String typeAlias,
 			final GamaGetter.NAry helper) {
 		final ParametricFileType fileType = GamaFileType.getTypeFromAlias(typeAlias);
@@ -373,11 +415,11 @@ public abstract class AbstractGamlAdditions {
 		}
 		final int content =
 				indexOfIType == -1 ? ITypeProvider.NONE : ITypeProvider.DENOTED_TYPE_AT_INDEX + indexOfIType + 1;
-		this._operator(keywords, method, classes, expectedContentTypes, fileType, c, ITypeProvider.NONE, content,
+		this._op(keywords, method, classes, expectedContentTypes, fileType, c, ITypeProvider.NONE, content,
 				ITypeProvider.NONE, ITypeProvider.NONE, helper);
 	}
 
-	public void _binary(final String[] keywords, final AccessibleObject method, final Class[] classes,
+	public void _bi(final String[] keywords, final AccessibleObject method, final Class[] classes,
 			final int[] expectedContentTypes, final Class ret, final boolean c, final String typeAlias,
 			final GamaGetter.Binary helper) {
 		final ParametricFileType fileType = GamaFileType.getTypeFromAlias(typeAlias);
@@ -390,7 +432,7 @@ public abstract class AbstractGamlAdditions {
 		}
 		final int content =
 				indexOfIType == -1 ? ITypeProvider.NONE : ITypeProvider.DENOTED_TYPE_AT_INDEX + indexOfIType + 1;
-		this._binary(keywords, method, classes, expectedContentTypes, fileType, c, ITypeProvider.NONE, content,
+		this._bi(keywords, method, classes, expectedContentTypes, fileType, c, ITypeProvider.NONE, content,
 				ITypeProvider.NONE, ITypeProvider.NONE, helper);
 	}
 

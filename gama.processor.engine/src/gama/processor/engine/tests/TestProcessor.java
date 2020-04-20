@@ -3,6 +3,7 @@ package gama.processor.engine.tests;
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,8 @@ import gama.processor.engine.ProcessorContext;
 public class TestProcessor extends ElementProcessor<tests> {
 
 	@Override
-	public void serialize(final ProcessorContext context, final StringBuilder sb) {}
+	public void serialize(final ProcessorContext context, final Collection<StringBuilder> elements,
+			final StringBuilder sb) {}
 
 	@Override
 	public void process(final ProcessorContext context) {
@@ -36,30 +38,16 @@ public class TestProcessor extends ElementProcessor<tests> {
 		// Special case for lone test annotations
 		final Map<String, List<Element>> elements = context.groupElements(test.class);
 		for (final Map.Entry<String, List<Element>> entry : elements.entrySet()) {
-
-			if (opIndex1.keySet().size() < 20) {
-				final StringBuilder sb = opIndex1.getOrDefault(entry.getKey(), new StringBuilder());
-				for (final Element e : entry.getValue()) {
-					try {
-						createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
-					} catch (final Exception exception) {
-						context.emitError("Exception in processor: " + exception.getMessage(), e);
-					}
-
+			final StringBuilder sb = serializedElements.getOrDefault(entry.getKey(), new StringBuilder());
+			for (final Element e : entry.getValue()) {
+				try {
+					createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
+				} catch (final Exception exception) {
+					context.emitError("Exception in processor: " + exception.getMessage(), e);
 				}
-				opIndex1.put(entry.getKey(), sb);
-			} else {
-				final StringBuilder sb = opIndex2.getOrDefault(entry.getKey(), new StringBuilder());
-				for (final Element e : entry.getValue()) {
-					try {
-						createElement(sb, context, e, createFrom(e.getAnnotation(test.class)));
-					} catch (final Exception exception) {
-						context.emitError("Exception in processor: " + exception.getMessage(), e);
-					}
 
-				}
-				opIndex2.put(entry.getKey(), sb);
 			}
+			serializedElements.put(entry.getKey(), sb);
 		}
 	}
 
@@ -102,17 +90,9 @@ public class TestProcessor extends ElementProcessor<tests> {
 
 	public void writeTests(final ProcessorContext context, final Writer sb) throws IOException {
 		sb.append("experiment ").append(toJavaString("Tests for " + context.currentPlugin)).append(" type: test {");
-
-		if (opIndex1.keySet().size() < 20) {
-			for (final StringBuilder tests : opIndex1.values()) {
-				sb.append(ln);
-				sb.append(tests);
-			}
-		} else {
-			for (final StringBuilder tests : opIndex2.values()) {
-				sb.append(ln);
-				sb.append(tests);
-			};
+		for (final StringBuilder tests : serializedElements.values()) {
+			sb.append(ln);
+			sb.append(tests);
 		}
 		sb.append(ln).append('}');
 		namesAlreadyUsed.clear();
@@ -123,7 +103,8 @@ public class TestProcessor extends ElementProcessor<tests> {
 		final int lastSemiColon = text.lastIndexOf(';');
 		String lastAssert = text.substring(lastSemiColon + 1);
 		text = text.substring(0, lastSemiColon + 1);
-		if (lastAssert.isEmpty()) { return text; }
+		if (lastAssert.isEmpty())
+			return text;
 		if (test.warning()) {
 			lastAssert += " warning: true";
 		}

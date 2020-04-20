@@ -105,7 +105,7 @@ public class OperatorProcessor extends ElementProcessor<operator> {
 			return;
 		}
 		final String met = isStatic ? declClass + "." + method.getSimpleName() : method.getSimpleName().toString();
-		sb.append(in).append(isIterator ? "_iterator(" : isUnary ? "_unary(" : isBinary ? "_binary(" : "_operator(");
+		sb.append(in).append(isIterator ? "_it(" : isUnary ? "_un(" : isBinary ? "_bi(" : "_op(");
 		toArrayOfStrings(names, sb).append(',');
 		buildMethodCall(sb, classes, met, isStatic, hasScope).append(',');
 		toArrayOfClasses(sb, classes).append(',');
@@ -231,20 +231,22 @@ public class OperatorProcessor extends ElementProcessor<operator> {
 	}
 
 	protected static String extractMethod(final String s, final boolean stat) {
-		if (!stat) { return s; }
+		if (!stat)
+			return s;
 		return s.substring(s.lastIndexOf('.') + 1);
 	}
 
 	protected static String extractClass(final String name, final String string, final boolean stat) {
-		if (stat) { return name.substring(0, name.lastIndexOf('.')); }
+		if (stat)
+			return name.substring(0, name.lastIndexOf('.'));
 		return string;
 	}
 
 	protected static StringBuilder buildMethodCall(final StringBuilder sb, final String[] classes, final String name,
 			final boolean stat, final boolean scope) {
 		final int start = stat ? 0 : 1;
-		sb.append(toClassObject(extractClass(name, classes[0], stat)));
-		sb.append(".getMethod(").append(toJavaString(extractMethod(name, stat))).append(',');
+		sb.append("M(").append(toClassObject(extractClass(name, classes[0], stat)));
+		sb.append(',').append(toJavaString(extractMethod(name, stat))).append(',');
 		if (scope) {
 			sb.append(toClassObject(ISCOPE)).append(',');
 		}

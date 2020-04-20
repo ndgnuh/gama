@@ -1,14 +1,15 @@
 package gama.processor.engine;
 
 import java.lang.annotation.Annotation;
+import java.util.Collection;
 
 public interface IProcessor<T extends Annotation> {
 
 	default void process(final ProcessorContext context) {}
 
-	void serialize(final ProcessorContext context, final StringBuilder sb);
+	void serialize(final ProcessorContext context, Collection<StringBuilder> elements, final StringBuilder sb);
 
-	default public String getInitializationMethodName() {
+	default String getInitializationMethodName() {
 		return null;
 	}
 
@@ -21,5 +22,7 @@ public interface IProcessor<T extends Annotation> {
 	}
 
 	boolean hasElements();
+
+	void writeJavaBody(StringBuilder sb, ProcessorContext context);
 
 }

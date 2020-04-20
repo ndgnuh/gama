@@ -23,8 +23,7 @@ public class FileProcessor extends ElementProcessor<file> {
 		sb.append(",").append(f.buffer_type()).append(",").append(f.buffer_index()).append(",")
 				.append(f.buffer_content()).append(",");
 		toArrayOfStrings(f.extensions(), sb).append(");");
-		sb.append(in).append("_unary(S(").append(toJavaString("is_" + f.name()))
-				.append("),null,C(S),I(0),B,true,3,0,0,0,")
+		sb.append(in).append("_un(S(").append(toJavaString("is_" + f.name())).append("),null,C(S),I(0),B,true,3,0,0,0,")
 				.append("(s,o)-> { return gaml.types.GamaFileType.verifyExtension(").append(toJavaString(f.name()))
 				.append(",(String)o);});");
 		for (final Element m : e.getEnclosedElements()) {
@@ -57,7 +56,7 @@ public class FileProcessor extends ElementProcessor<file> {
 	private void writeCreateFileOperator(final ProcessorContext context, final StringBuilder sb, final String name,
 			final String clazz, final String[] names, final int contents, final int index) {
 		final boolean isBinary = names.length == 2;
-		sb.append(in).append(isBinary ? "_binary(S(" : "_operator(S(").append(toJavaString(name + "_file")).append("),")
+		sb.append(in).append(isBinary ? "_bi(S(" : "_op(S(").append(toJavaString(name + "_file")).append("),")
 				.append(toClassObject(clazz)).append(".getConstructor(").append(toClassObject(ISCOPE)).append(',');
 		for (final String classe : names) {
 			sb.append(toClassObject(classe)).append(',');
