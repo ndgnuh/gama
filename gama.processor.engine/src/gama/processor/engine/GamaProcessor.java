@@ -24,10 +24,7 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.FileObject;
 
-import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.tests;
-import gama.processor.engine.doc.DocProcessor;
-import gama.processor.engine.tests.ExamplesToTests;
 import gama.processor.engine.tests.TestProcessor;
 
 @SuppressWarnings ({ "unchecked", "rawtypes" })
@@ -97,8 +94,8 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			}
 		}
 		// We pass the current document of the documentation processor to avoir re-reading it
-		final DocProcessor dp = (DocProcessor) processors.get(doc.class);
-//		ExamplesToTests.createTests(context, dp.document);
+		// final DocProcessor dp = (DocProcessor) processors.get(doc.class);
+		// ExamplesToTests.createTests(context, dp.document);
 	}
 
 	public void generateJavaSource(final FileObject file) {
@@ -136,11 +133,11 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 			if (p.outputToJava() && p.hasElements()) {
 				final String method = p.getInitializationMethodName();
 				if (method != null) {
-					if(method.equals("initializeOperator")) {
-						sb.append(ln).append(tab).append(method+"1").append("();");
-						sb.append(ln).append(tab).append(method+"2").append("();");
-						
-					}else {						
+					if (method.equals("initializeOperator")) {
+						sb.append(ln).append(tab).append(method + "1").append("();");
+						sb.append(ln).append(tab).append(method + "2").append("();");
+
+					} else {
 						sb.append(ln).append(tab).append(method).append("();");
 					}
 				}
@@ -148,7 +145,8 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 		});
 
 		sb.append(ln).append('}');
-	} 
+	}
+
 	public StringBuilder writeJavaBody() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("package ").append(PACKAGE_NAME).append(".").append(context.shortcut).append(';');
@@ -159,10 +157,11 @@ public class GamaProcessor extends AbstractProcessor implements Constants {
 				final String method = p.getInitializationMethodName();
 				if (method != null) {
 
-					if(method.equals("initializeOperator")) {
-							sb.append("public void ").append(method+"1").append("() ").append(p.getExceptions()).append(" {"); 
-					}else {
-						
+					if (method.equals("initializeOperator")) {
+						sb.append("public void ").append(method + "1").append("() ").append(p.getExceptions())
+								.append(" {");
+					} else {
+
 						sb.append("public void ").append(method).append("() ").append(p.getExceptions()).append(" {");
 					}
 					p.serialize(context, sb);

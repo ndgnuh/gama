@@ -4,25 +4,17 @@
     <options buildIfNeeded="true" compress="true" descriptionLocation="/gama.processor.engine/processor/Generate GamaProcessor.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=gama.processor.annotations/src&lt;gama.dev.utils{DEBUG_TEST.java[DEBUG_TEST" manifestLocation="/msi.gama.processor/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+    <manifest generateManifest="false" manifestLocation="/gama.processor.engine/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <file path="/gama.processor.annotations/.project"/>
-        <folder path="/gama.processor.engine/META-INF"/>
-        <file path="/gama.processor.engine/build.properties"/>
-        <file path="/gama.processor.annotations/pom.xml"/>
         <javaElement handleIdentifier="=gama.processor.annotations/src"/>
-        <file path="/gama.processor.annotations/.classpath"/>
-        <file path="/gama.processor.annotations/build.properties"/>
-        <file path="/gama.processor.engine/.gitignore"/>
-        <file path="/gama.processor.engine/.project"/>
-        <file path="/gama.processor.engine/plugin.xml"/>
-        <file path="/gama.processor.engine/pom.xml"/>
+        <folder path="/gama.processor.engine/META-INF"/>
         <javaElement handleIdentifier="=gama.processor.engine/src"/>
-        <file path="/gama.processor.engine/.classpath"/>
+        <file path="/gama.processor.engine/.gitignore"/>
+        <file path="/gama.processor.engine/plugin.xml"/>
     </selectedElements>
 </jardesc>
