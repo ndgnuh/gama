@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IPath;
-
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -61,6 +59,7 @@ import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gama.util.matrix.GamaMatrix;
 import gama.util.matrix.IMatrix;
+import gama.util.path.IPath;
 import gaml.compilation.annotations.serializer;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.factories.DescriptionFactory;
