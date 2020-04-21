@@ -50,15 +50,15 @@ public class Application implements IApplication {
 		GAMA.initializeAtStartup("Initializing date management", () -> {
 			Dates.initialize();
 		});
+		// This is where a branch to headless should (or could) be made
+		GamaBundleLoader.loadUI();
+
 		GAMA.initializeAtStartup("Checking workspace", () -> {
 			result[0] = WorkspaceManager.checkWorkspace();
 		});
 
 		if ( EXIT_OK.equals(result[0]) )
 			return EXIT_OK;
-
-		// This is where a branch to headless should (or could) be made
-		GamaBundleLoader.loadUI();
 
 		try {
 			if ( GAMA.getGui().runUI() == 1 /* PlatformUI.RETURN_RESTART */ )
