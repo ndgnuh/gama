@@ -42,7 +42,7 @@ grid ant_grid width: gridsize height: gridsize neighbors: 8 use_regular_agents: 
 	int type <- int(types at {grid_x,grid_y}) ;
 	bool isNestLocation <- (self distance_to center) < 4 ; 
 	bool isFoodLocation <- type = 2 ; 
-	rgb color <- isNestLocation ? °violet:((food > 0)? °blue : ((road < 0.001)? rgb ([100,100,100]) : ((road > 2)? °white : ((road > 0.5)? (#grey) : ((road > 0.2)? (#lightgrey) : (#darkgray)))))) update: isNestLocation ? °violet:((food > 0)? °blue : ((road < 0.001)? rgb ([100,100,100]) : ((road > 2)? °white : ((road > 0.5)? (#grey) : ((road > 0.2)? (#lightgray) : (#darkgray)))))) ;
+	rgb color <- isNestLocation ? #violet : ((food > 0)? #blue : ((road < 0.001)? rgb ([100,100,100]) : ((road > 2)? #white : ((road > 0.5)? (#grey) : ((road > 0.2)? (#lightgrey) : (#darkgray)))))) update: isNestLocation ? #violet:((food > 0)? #blue : ((road < 0.001)? rgb ([100,100,100]) : ((road > 2)? #white : ((road > 0.5)? (#grey) : ((road > 0.2)? (#lightgray) : (#darkgray)))))) ;
 	int food <- isFoodLocation ? 5 : 0 ;
 	int nest const: true <- 300 - int(self distance_to center) ;
 	
@@ -158,8 +158,8 @@ experiment "Experiment" type: gui {
 		display ProportionCarryFood {
 			chart "Proportions carrying: Pie"  size: {0.5,0.5} position: {0, 0} type:pie
 			{
-				data "empty_ants" value:(list(ant) count (!each.hasFood)) color:°red;
-				data "carry_food_ants" value:(list(ant) count (each.hasFood)) color:°green;
+				data "empty_ants" value:(list(ant) count (!each.hasFood)) color:#red;
+				data "carry_food_ants" value:(list(ant) count (each.hasFood)) color:#green;
 				
 			}
 			
@@ -169,10 +169,10 @@ experiment "Experiment" type: gui {
 			{
 				data "empty" value:(list(ant) count (!each.hasFood)) 
 				accumulate_values:true
-				color:°red;				
+				color:#red;				
 				data "carry" value:(list(ant) count (each.hasFood)) 
 				accumulate_values:true
-				color:°blue;				
+				color:#blue;				
 			}
 			
 			chart "Proportion: serie"   size: {1.0,0.5} position: {0, 0.5} type:series 
@@ -181,7 +181,7 @@ experiment "Experiment" type: gui {
 			{
 				datalist ["empty","carry"] accumulate_values:true 
 				value:[(list(ant) count (!each.hasFood)),(list(ant) count (each.hasFood))] 
-				color:[°red,°green];				
+				color:[#red,#green];				
 			}
 		}
 
@@ -192,15 +192,15 @@ experiment "Experiment" type: gui {
 					mean((list(ant) where (!each.hasFood)) collect each.location)
 				]
 				marker_size: [length(list(ant) where (each.hasFood))/20,length(list(ant) where (!each.hasFood))/20]
-					 color:[°red,°green] 
+					 color:[#red,#green] 
 					 fill:false
 					 line_visible:true;				
-				data "empty_ants" value:((list(ant) where (!each.hasFood)) collect each.location) color:°red 
+				data "empty_ants" value:((list(ant) where (!each.hasFood)) collect each.location) color:#red 
 				accumulate_values:false
 				line_visible:false;
 				data "carry_food_ants" value:((list(ant) where (each.hasFood)) collect each.location) 
 				accumulate_values:false
-				color:°green line_visible:false;
+				color:#green line_visible:false;
 
 			}
 		}	

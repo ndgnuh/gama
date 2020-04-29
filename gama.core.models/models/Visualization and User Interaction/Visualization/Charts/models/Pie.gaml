@@ -45,7 +45,7 @@ experiment "Different Pies" type: gui
 		{
 			chart "datalist_pie_chart" type: pie style: exploded
 			{
-				datalist legend: ["A", "B", "C"] value: [[cycle, cycle + 1, 2], [cycle / 2, cycle * 2, 1], [cycle + 2, cycle - 2, cycle]] x_err_values: [3, 2, 10] y_err_values:
+				datalist  ["A", "B", "C"] value: [[cycle, cycle + 1, 2], [cycle / 2, cycle * 2, 1], [cycle + 2, cycle - 2, cycle]] x_err_values: [3, 2, 10] y_err_values:
 				[3, cycle, 2 * cycle]
 				//					categoriesnames:["C1","C2","C3"]
 				color: [# black, # blue, # red];

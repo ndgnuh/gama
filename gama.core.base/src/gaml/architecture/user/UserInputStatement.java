@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.architecture.user.UserInputStatement.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.architecture.user.UserInputStatement.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,8 +14,6 @@ import java.util.List;
 
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.experiment.IParameter;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -23,6 +21,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
@@ -60,7 +60,7 @@ import gaml.types.Types;
 				@facet (
 						name = IKeyword.INIT,
 						type = IType.NONE,
-						optional = true,
+						optional = false,
 						doc = @doc ("the init value")),
 				@facet (
 						name = IKeyword.MIN,
@@ -87,7 +87,7 @@ import gaml.types.Types;
 						type = IType.LIST,
 						of = IType.STRING,
 						optional = true,
-						doc = @doc ("the set of acceptable values for the variable")) },
+						doc = @doc ("the set of acceptable values")) },
 		omissible = IKeyword.NAME)
 @doc (
 		value = "It allows to let the user define the value of a variable.",
@@ -155,8 +155,9 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	@Override
 	public Object value(final IScope scope) throws GamaRuntimeException {
 		if (!isValued) {
-			if (init != null)
+			if (init != null) {
 				currentValue = initialValue = init.value(scope);
+			}
 			isValued = true;
 		}
 		return currentValue;
@@ -165,8 +166,10 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	@Override
 	public IType getType() {
 		final IType type = description.getGamlType();
-		if (type != Types.NO_TYPE) { return type; }
-		if (init == null) { return Types.NO_TYPE; }
+		if (type != Types.NO_TYPE)
+			return type;
+		if (init == null)
+			return Types.NO_TYPE;
 		return init.getGamlType();
 	}
 
@@ -244,7 +247,7 @@ public class UserInputStatement extends AbstractPlaceHolderStatement implements 
 	}
 
 	@Override
-	public List<GamaColor> getColor(IScope scope) {
+	public List<GamaColor> getColor(final IScope scope) {
 		return null;
 	}
 

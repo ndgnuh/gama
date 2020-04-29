@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.ui.displays.opengl.scene.layers.LayerObject.java, in plugin gama.ui.displays.opengl, is part of the
- * source code of the GAMA modeling and simulation platform (v. 1.8)
+ * gama.ui.displays.opengl.scene.layers.LayerObject.java, in plugin gama.ui.displays.opengl, is part of the source code
+ * of the GAMA modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -19,14 +19,6 @@ import org.locationtech.jts.geom.ShapeType;
 import com.google.common.collect.ImmutableList;
 import com.jogamp.opengl.GL2;
 
-import gama.core.outputs.layers.OverlayLayer;
-import gama.ui.displays.opengl.OpenGL;
-import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
-import gama.ui.displays.opengl.scene.AbstractObject;
-import gama.ui.displays.opengl.scene.FieldObject;
-import gama.ui.displays.opengl.scene.GeometryObject;
-import gama.ui.displays.opengl.scene.ResourceObject;
-import gama.ui.displays.opengl.scene.StringObject;
 import gama.common.geometry.Scaling3D;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.ICollector;
@@ -34,9 +26,17 @@ import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.outputs.ILayer;
 import gama.common.preferences.GamaPreferences;
 import gama.common.util.Collector;
+import gama.core.outputs.layers.OverlayLayer;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
 import gama.runtime.scope.IScope;
+import gama.ui.displays.opengl.OpenGL;
+import gama.ui.displays.opengl.renderer.IOpenGLRenderer;
+import gama.ui.displays.opengl.scene.AbstractObject;
+import gama.ui.displays.opengl.scene.FieldObject;
+import gama.ui.displays.opengl.scene.GeometryObject;
+import gama.ui.displays.opengl.scene.ResourceObject;
+import gama.ui.displays.opengl.scene.StringObject;
 import gama.util.GamaColor;
 import gama.util.file.IGamaFile;
 import gaml.constants.PixelUnitExpression;
@@ -228,7 +228,7 @@ public class LayerObject {
 		gl.translateBy(0, -size.y, 0);
 		gl.scaleBy(size.x, size.y, 1);
 		gl.setCurrentColor(((OverlayLayer) layer).getData().getBackgroundColor(scope));
-		gl.setCurrentObjectAlpha(((OverlayLayer) layer).getData().getTransparency(scope));
+		gl.setCurrentObjectAlpha(1 - layer.getData().getTransparency(scope));
 		gl.drawCachedGeometry(ShapeType.ROUNDED, true, null);
 		gl.popMatrix();
 	}

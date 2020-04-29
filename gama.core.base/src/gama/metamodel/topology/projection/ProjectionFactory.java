@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.projection.ProjectionFactory.java, in plugin gama.core, is part of the source code of
- * the GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.projection.ProjectionFactory.java, in plugin gama.core, is part of the source code of the
+ * GAMA modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -16,11 +16,11 @@ import javax.measure.Unit;
 import javax.measure.UnitConverter;
 
 import org.geotools.referencing.CRS;
+import org.geotools.referencing.crs.DefaultProjectedCRS;
 import org.locationtech.jts.geom.Envelope;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
-import org.opengis.referencing.crs.ProjectedCRS;
 import org.opengis.referencing.cs.CartesianCS;
 
 import gama.common.geometry.Envelope3D;
@@ -69,8 +69,9 @@ public class ProjectionFactory {
 			if (!GamaPreferences.External.LIB_TARGETED.getValue()) {
 				targetCRS = computeDefaultCRS(scope, GamaPreferences.External.LIB_TARGET_CRS.getValue(), true);
 			} else {
-				if (crs != null && crs instanceof ProjectedCRS) { // Temporary fix of issue 766... a better solution
-					final CartesianCS ccs = ((ProjectedCRS) crs).getCoordinateSystem();
+				if (crs != null && crs instanceof DefaultProjectedCRS) { // Temporary fix of issue 766... a better
+																			// solution
+					final CartesianCS ccs = ((DefaultProjectedCRS) crs).getCoordinateSystem();
 					final Unit unitX = ccs.getAxis(0).getUnit();
 					if (unitX != null && !unitX.equals(SI.METRE)) {
 						unitConverter = unitX.getConverterTo(SI.METRE);
@@ -248,7 +249,7 @@ public class ProjectionFactory {
 	}
 
 	public void testConsistency(final IScope scope, final CoordinateReferenceSystem crs, final Envelope env) {
-		if (!(crs instanceof ProjectedCRS)) {
+		if (!(crs instanceof DefaultProjectedCRS)) {
 			if (env.getHeight() > 180 || env.getWidth() > 180)
 				throw GamaRuntimeException.error(
 						"Inconsistency between the data and the CRS: The CRS " + crs

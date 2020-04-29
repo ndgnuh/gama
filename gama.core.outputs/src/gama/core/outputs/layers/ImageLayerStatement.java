@@ -10,9 +10,9 @@
  ********************************************************************************************************/
 package gama.core.outputs.layers;
 
+import gama.common.interfaces.IGamlIssue;
+import gama.common.interfaces.IKeyword;
 import gama.core.outputs.layers.ImageLayerStatement.ImageLayerValidator;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.example;
 import gama.processor.annotations.GamlAnnotations.facet;
@@ -20,8 +20,8 @@ import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
 import gama.processor.annotations.GamlAnnotations.usage;
-import gama.common.interfaces.IGamlIssue;
-import gama.common.interfaces.IKeyword;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.annotations.validator;
@@ -66,7 +66,7 @@ import gaml.types.IType;
 						name = IKeyword.TRANSPARENCY,
 						type = IType.FLOAT,
 						optional = true,
-						doc = @doc ("the transparency rate of the agents (between 0 and 1, 1 means no transparency)")),
+						doc = @doc ("the transparency level of the layer (between 0 -- opaque -- and 1 -- fully transparent)")),
 				@facet (
 						name = IKeyword.NAME,
 						type = { IType.STRING, IType.FILE },

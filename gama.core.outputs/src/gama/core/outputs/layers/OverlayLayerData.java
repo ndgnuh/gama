@@ -38,7 +38,7 @@ public class OverlayLayerData extends LayerData implements ILayerData.Overlay {
 	@Override
 	public Color getBackgroundColor(final IScope scope) {
 		return new Color(background.get().getRed(), background.get().getGreen(), background.get().getBlue(),
-				(int) (getTransparency(scope) * 255));
+				(int) ((1 - getTransparency(scope)) * 255));
 	}
 
 	@Override

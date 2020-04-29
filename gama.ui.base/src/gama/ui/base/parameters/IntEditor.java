@@ -12,11 +12,11 @@ package gama.ui.base.parameters;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import gama.ui.base.interfaces.EditorListener;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
+import gama.ui.base.interfaces.EditorListener;
 import gaml.operators.Cast;
 import gaml.types.IType;
 import gaml.types.Types;
@@ -45,7 +45,8 @@ public class IntEditor extends NumberEditor<Integer> {
 
 	@Override
 	protected Integer applyPlus() {
-		if (currentValue == null) { return 0; }
+		if (currentValue == null)
+			return 0;
 		final Integer i = currentValue;
 		final Integer newVal = i + stepValue.intValue();
 		return newVal;
@@ -53,21 +54,20 @@ public class IntEditor extends NumberEditor<Integer> {
 
 	@Override
 	protected Integer applyMinus() {
-		if (currentValue == null) { return 0; }
+		if (currentValue == null)
+			return 0;
 		final Integer i = currentValue;
 		final Integer newVal = i - stepValue.intValue();
 		return newVal;
 	}
 
 	@Override
-	protected void modifyValue(final Integer val) throws GamaRuntimeException {
+	protected void modifyValue(final Object val) throws GamaRuntimeException {
 		final Integer i = Cast.asInt(getScope(), val);
-		if (minValue != null && i < minValue.intValue()) {
+		if (minValue != null && i < minValue.intValue())
 			throw GamaRuntimeException.error("Value " + i + " should be greater than " + minValue, getScope());
-		}
-		if (maxValue != null && i > maxValue.intValue()) {
+		if (maxValue != null && i > maxValue.intValue())
 			throw GamaRuntimeException.error("Value " + i + " should be smaller than " + maxValue, getScope());
-		}
 		super.modifyValue(i);
 	}
 

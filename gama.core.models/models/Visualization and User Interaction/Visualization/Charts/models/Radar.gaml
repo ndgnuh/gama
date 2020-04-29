@@ -19,12 +19,12 @@ experiment "Different radars" type: gui
 		layout #split;
 		display "nice_radar_chart" synchronized: true
 		{
-			chart "Nice Cumulative Radar Chart" type: radar background: # darkblue color: # lightgreen axes: # lightgreen title_font: font('Serif', 32.0 #italic)
+			chart "Nice Cumulative Radar Chart" type: radar background: # darkblue color: #lightgreen axes: #lightgreen title_font: font('Serif', 32.0 #italic)
 			 tick_font: font('Monospaced',14 #bold) label_font: font('Arial', 18 #bold) legend_font: font('SanSerif', 14 ,#bold)
 			{
-				data "BCC" value: 10 * cos(100 * cycle) accumulate_values: true color: # yellow;
-				data "ABC" value: 10 * sin(100 * cycle) accumulate_values: true color: # lightgreen;
-				data "BCD" value: (cycle mod 10) accumulate_values: true color: # red;
+				data "BCC" value: 10 * cos(100 * cycle) accumulate_values: true color: #yellow;
+				data "ABC" value: 10 * sin(100 * cycle) accumulate_values: true color: #lightgreen;
+				data "BCD" value: (cycle mod 10) accumulate_values: true color: #red;
 			}
 
 		}
@@ -55,7 +55,7 @@ experiment "Different radars" type: gui
 		{
 			chart "datalist_bar" type: radar series_label_position: onchart
 			{
-				datalist legend: ["A", "B", "C"] accumulate_values: true value: [1 + sin(cycle), 1 + cos(100 * cycle), 1 + cos(100 * (cycle + 30))] color: [# green, # black, # purple];
+				datalist ["A", "B", "C"] accumulate_values: true value: [1 + sin(cycle), 1 + cos(100 * cycle), 1 + cos(100 * (cycle + 30))] color: [# green, # black, # purple];
 			}
 
 		}

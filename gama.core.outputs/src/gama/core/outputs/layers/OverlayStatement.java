@@ -76,7 +76,7 @@ import gaml.types.IType;
 						name = IKeyword.TRANSPARENCY,
 						type = IType.FLOAT,
 						optional = true,
-						doc = @doc ("the transparency rate of the overlay (between 0 and 1, 1 means no transparency) when it is displayed inside the view. The bottom overlay will remain at 0.75")),
+						doc = @doc ("the transparency level of the overlay (between 0 -- opaque and 1 -- fully transparent) when it is displayed inside the view. The bottom overlay will remain at 0.75")),
 				@facet (
 						name = IKeyword.LEFT,
 						type = IType.NONE,

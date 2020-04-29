@@ -144,7 +144,7 @@ species ant skills: [moving] control: fsm {
 
 	aspect info {
 		if(use_icons) {
-			draw ant_shape size: {7, 5} rotate: my heading + 1; 			
+			draw ant_shape size: {7, 5} rotate:  heading + 1; 			
 		}
 		draw circle(1) empty: !has_food color: #red;
 		if (destination != nil) {
@@ -152,9 +152,9 @@ species ant skills: [moving] control: fsm {
 		}
 		if (state != "wandering") {
 			draw circle(4) empty: true color: #white;
-			draw string(self as int) color: #white font: font("Helvetica", 14 , #bold) at: my location - {1, 1, -0.5};			
+			draw string(self as int) color: #white font: font("Helvetica", 14 , #bold) at:  location - {1, 1, -0.5};			
 			if(display_state) {
-				draw state color: #yellow font: font("Helvetica", 18, #bold) at: my location + {1, 1, 0.5} ;
+				draw state color: #yellow font: font("Helvetica", 18, #bold) at:  location + {1, 1, 0.5} ;
 			}
 		}
 	}
@@ -164,11 +164,11 @@ species ant skills: [moving] control: fsm {
 	}
 
 	aspect icon {
-		draw ant_shape size: {7, 5} rotate: my heading + 1 empty: true;
+		draw ant_shape size: {7, 5} rotate:  heading + 1 empty: true;
 	}
 	
 	aspect icon_svg {
-		draw ant_shape_svg size: {5, 7} rotate: my heading + 270 color: #black;
+		draw ant_shape_svg size: {5, 7} rotate:  heading + 270 color: #black;
 	}
  }
 
@@ -185,11 +185,11 @@ experiment "With Inspector" type: gui {
 			image terrain position: {0.05, 0.05} size: {0.9, 0.9};
 			agents "agents" transparency: 0.7 position: {0.05, 0.05} size: {0.9, 0.9} value: (ant_grid as list) where ((each.food > 0) or (each.road > 0) or (each.is_nest));
 			species ant position: {0.05, 0.05} size: {0.9, 0.9} aspect: icon_svg;
-			overlay transparency: 0.3 background: rgb(99, 85, 66, 255) position: {50 °px, 50 °px} size: {250 °px, 150 °px} border: rgb(99, 85, 66, 255) rounded: true {
-				draw ant_shape at: {60 °px, 70 °px} size: {140 °px, 100 °px} rotate: -60;
-				draw ('Food foraged: ' + (((food_placed = 0 ? 0 : food_gathered / food_placed) * 100) with_precision 2) + '%') at: {40 °px, 70 °px} font: font("Arial", 18, #bold) color:
+			overlay "O" transparency: 0.3 background: rgb(99, 85, 66, 255) position: {50 #px, 50 #px} size: {250 #px, 150 #px} border: rgb(99, 85, 66, 255) rounded: true {
+				draw ant_shape at: {60 #px, 70 #px} size: {140 #px, 100 #px} rotate: -60;
+				draw ('Food foraged: ' + (((food_placed = 0 ? 0 : food_gathered / food_placed) * 100) with_precision 2) + '%') at: {40 #px, 70 #px} font: font("Arial", 18, #bold) color:
 				#white;
-				draw ('Carrying ants: ' + (((100 * ant count (each.has_food or each.state = "followingRoad")) / length(ant)) with_precision 2) + '%') at: {40 °px, 100 °px} font:
+				draw ('Carrying ants: ' + (((100 * ant count (each.has_food or each.state = "followingRoad")) / length(ant)) with_precision 2) + '%') at: {40 #px, 100 #px} font:
 				font("Arial", 18, #bold) color: #white;
 			}
 

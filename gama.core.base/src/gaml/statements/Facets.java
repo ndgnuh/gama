@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.statements.FacetsArray.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.statements.FacetsArray.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -35,7 +35,7 @@ import gaml.types.Types;
  *
  */
 public class Facets implements IGamlable {
-	{
+	static {
 		DEBUG.ON();
 	}
 
@@ -125,9 +125,11 @@ public class Facets implements IGamlable {
 	}
 
 	public IExpressionDescription get(final String key) {
-		if (key == null) { return null; }
+		if (key == null)
+			return null;
 		for (final Facet f : facets) {
-			if (f.key.equals(key)) { return f.value; }
+			if (f.key.equals(key))
+				return f.value;
 		}
 		return null;
 	}
@@ -135,7 +137,8 @@ public class Facets implements IGamlable {
 	public IExpressionDescription getDescr(final String... keys) {
 		for (final String key : keys) {
 			final IExpressionDescription result = get(key);
-			if (result != null) { return result; }
+			if (result != null)
+				return result;
 		}
 		return null;
 
@@ -143,7 +146,8 @@ public class Facets implements IGamlable {
 
 	public String getLabel(final String key) {
 		final IExpressionDescription f = get(key);
-		if (f == null) { return null; }
+		if (f == null)
+			return null;
 		return StringUtils.toJavaString(f.toString());
 	}
 
@@ -154,14 +158,16 @@ public class Facets implements IGamlable {
 	public IExpression getExpr(final String... keys) {
 		for (final String s : keys) {
 			final IExpression expr = getExpr(s);
-			if (expr != null) { return expr; }
+			if (expr != null)
+				return expr;
 		}
 		return null;
 	}
 
 	public IExpression getExpr(final String key, final IExpression ifAbsent) {
 		final IExpressionDescription f = get(key);
-		if (f == null) { return ifAbsent; }
+		if (f == null)
+			return ifAbsent;
 		return f.getExpression();
 	}
 
@@ -236,17 +242,20 @@ public class Facets implements IGamlable {
 
 	public boolean forEachFacet(final BiConsumerWithPruning<String, IExpressionDescription> visitor) {
 		for (final Facet f : facets) {
-			if (!visitor.process(f.key, f.value)) { return false; }
+			if (!visitor.process(f.key, f.value))
+				return false;
 		}
 		return true;
 	}
 
 	public boolean forEachFacetIn(final Set<String> names,
 			final BiConsumerWithPruning<String, IExpressionDescription> visitor) {
-		if (names == null) { return forEachFacet(visitor); }
+		if (names == null)
+			return forEachFacet(visitor);
 		for (final Facet f : facets) {
 			if (names.contains(f.key)) {
-				if (!visitor.process(f.key, f.value)) { return false; }
+				if (!visitor.process(f.key, f.value))
+					return false;
 			}
 		}
 		return true;
@@ -271,13 +280,15 @@ public class Facets implements IGamlable {
 	}
 
 	public IExpression getExpr(final int index) {
-		if (index > facets.size() || index < 0) { return null; }
+		if (index > facets.size() || index < 0)
+			return null;
 		return facets.items().get(index).value.getExpression();
 	}
 
 	public String getFirstExistingAmong(final String... strings) {
 		for (final String s : strings) {
-			if (containsKey(s)) { return s; }
+			if (containsKey(s))
+				return s;
 		}
 		return null;
 	}
@@ -288,7 +299,8 @@ public class Facets implements IGamlable {
 
 	public IType<?> getTypeDenotedBy(final String key, final IDescription context, final IType<?> noType) {
 		final IExpressionDescription f = get(key);
-		if (f == null) { return noType; }
+		if (f == null)
+			return noType;
 		return f.getDenotedType(context);
 	}
 
@@ -298,7 +310,8 @@ public class Facets implements IGamlable {
 
 	protected Facet getFacet(final String key) {
 		for (final Facet f : facets) {
-			if (f.key.equals(key)) { return f; }
+			if (f.key.equals(key))
+				return f;
 		}
 		return null;
 	}

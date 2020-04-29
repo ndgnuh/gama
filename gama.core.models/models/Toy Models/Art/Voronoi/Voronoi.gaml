@@ -38,11 +38,11 @@ grid cell width: env_width height: env_height neighbors: num_neighbours use_neig
 // Note: since GAMA 1.7, the topology needs to be specified for this computation to use continuous distances
 	rgb color <- #white update: ((center closest_to location) using w).color;
 
-	reflex when: blur1 {
+	reflex first_blur when: blur1 {
 		color <- blend(color, one_of(neighbors).color, 0.7);
 	}
 
-	reflex when: blur2 {
+	reflex second_blur when: blur2 {
 		loop n over: neighbors {
 			color <- blend(color, n.color, 0.8);
 		}

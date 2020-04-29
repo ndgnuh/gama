@@ -82,7 +82,7 @@ experiment "Multiple displays" type: gui {
 			chart "datalist_bar" type:histogram 
 			series_label_position: onchart
 			{
-				datalist legend:["A","B","C"] 
+				datalist ["A","B","C"] 
 					style: bar
 					value:[cycle,cos(100*cycle),cos(100*(cycle+30))] 
 					color:[#green,#black,#purple];

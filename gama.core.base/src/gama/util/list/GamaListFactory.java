@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.util.GamaListFactory.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.util.GamaListFactory.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -57,7 +57,7 @@ public class GamaListFactory {
 			ImmutableSet.<Collector.Characteristics> of(Collector.Characteristics.IDENTITY_FINISH);
 
 	public static <T> Collector<T, IList<T>, IList<T>> toGamaList() {
-		return new Collector<T, IList<T>, IList<T>>() {
+		return new Collector<>() {
 
 			@Override
 			public Supplier<IList<T>> supplier() {
@@ -172,21 +172,21 @@ public class GamaListFactory {
 	}
 
 	public static IList create(final IScope scope, final IType contentType, final IContainer container) {
-		if (container == null) { return create(contentType); }
-		if (GamaType.requiresCasting(contentType, container.getGamlType().getContentType())) {
+		if (container == null)
+			return create(contentType);
+		if (GamaType.requiresCasting(contentType, container.getGamlType().getContentType()))
 			return create(scope, contentType, container.iterable(scope));
-		} else {
+		else
 			return createWithoutCasting(contentType, container.iterable(scope));
-		}
 	}
 
 	public static <T> IList<T> create(final IScope scope, final IType contentType, final IList<T> container) {
-		if (container == null) { return create(contentType); }
-		if (GamaType.requiresCasting(contentType, container.getGamlType().getContentType())) {
+		if (container == null)
+			return create(contentType);
+		if (GamaType.requiresCasting(contentType, container.getGamlType().getContentType()))
 			return create(scope, contentType, (Collection) container);
-		} else {
+		else
 			return createWithoutCasting(contentType, container);
-		}
 	}
 
 	public static <T> IList<T> create(final IScope scope, final IType contentType, final Iterable<T> iterable) {
@@ -269,7 +269,8 @@ public class GamaListFactory {
 	}
 
 	public static IList create(final IScope scope, final IExpression fillExpr, final Integer size) {
-		if (fillExpr == null) { return create(Types.NO_TYPE, size); }
+		if (fillExpr == null)
+			return create(Types.NO_TYPE, size);
 		final Object[] contents = new Object[size];
 		final IType contentType = fillExpr.getGamlType();
 		// 10/01/14. Cannot use Arrays.fill() everywhere: see Issue 778.
@@ -279,9 +280,10 @@ public class GamaListFactory {
 				contents[i] = o;
 			}));
 		} else {
-			GamaExecutorService.executeThreaded(() -> IntStream.range(0, contents.length).parallel().forEach(i -> {
-				contents[i] = fillExpr.value(scope);
-			}));
+			GamaExecutorService.executeThreaded(
+					() -> IntStream.range(0, contents.length)./* see #2974. parallel(). */forEach(i -> {
+						contents[i] = fillExpr.value(scope);
+					}));
 		}
 		return create(scope, contentType, contents);
 	}
@@ -371,7 +373,8 @@ public class GamaListFactory {
 		final Iterator<Object> it1 = one.iterator();
 		final Iterator<Object> it2 = two.iterator();
 		while (it1.hasNext() && it2.hasNext()) {
-			if (!Objects.equals(it1.next(), it2.next())) { return false; }
+			if (!Objects.equals(it1.next(), it2.next()))
+				return false;
 		}
 		return !(it1.hasNext() || it2.hasNext());
 	}

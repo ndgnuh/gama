@@ -24,6 +24,9 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import gama.GAMA;
+import gama.common.interfaces.IKeyword;
+import gama.common.interfaces.IModel;
 import gama.core.headless.common.DataType;
 import gama.core.headless.common.Display2D;
 import gama.core.headless.common.Globals;
@@ -35,9 +38,6 @@ import gama.core.headless.runtime.RuntimeContext;
 import gama.core.headless.xml.Writer;
 import gama.core.headless.xml.XmlTAG;
 import gama.dev.utils.DEBUG;
-import gama.GAMA;
-import gama.common.interfaces.IKeyword;
-import gama.common.interfaces.IModel;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.GAML;
@@ -236,9 +236,7 @@ public class ExperimentJob implements IExperimentJob {
 		this.load(rtx);
 		this.listenedVariables = new ListenedVariable[outputs.size()];
 
-		for (int i = 0; i < parameters.size(); i++) {
-			final Parameter temp = parameters.get(i);
-
+		for (final Parameter temp : parameters) {
 			if (temp.getName() == null || "".equals(temp.getName())) {
 				this.simulator.setParameter(temp.getVar(), temp.getValue());
 			} else {
@@ -259,10 +257,9 @@ public class ExperimentJob implements IExperimentJob {
 		} else {
 			endCondition = GAML.compileExpression(untilCond, simulator.getSimulation(), true);
 		}
-		if (endCondition.getGamlType() != Types.BOOL) {
+		if (endCondition.getGamlType() != Types.BOOL)
 			throw GamaRuntimeException.error("The until condition of the experiment should be a boolean",
 					simulator.getSimulation().getScope());
-		}
 	}
 
 	public void load(final RuntimeContext ctx) throws InstantiationException, IllegalAccessException,
@@ -348,7 +345,8 @@ public class ExperimentJob implements IExperimentJob {
 
 	private void exportVariables() {
 		final int size = this.listenedVariables.length;
-		if (size == 0) { return; }
+		if (size == 0)
+			return;
 		for (int i = 0; i < size; i++) {
 			final ListenedVariable v = this.listenedVariables[i];
 			if (this.step % v.frameRate == 0) {
@@ -504,7 +502,9 @@ public class ExperimentJob implements IExperimentJob {
 
 			final Iterable<IDescription> displays = d.getChildrenWithKeyword(IKeyword.DISPLAY);
 			for (final IDescription disp : displays) {
-				expJob.addOutput(Output.loadAndBuildOutput(disp));
+				if (disp.getFacetExpr(IKeyword.VIRTUAL) != IExpressionFactory.TRUE_EXPR) {
+					expJob.addOutput(Output.loadAndBuildOutput(disp));
+				}
 			}
 		}
 
@@ -524,7 +524,8 @@ public class ExperimentJob implements IExperimentJob {
 
 	private Parameter getParameter(final String name) {
 		for (final Parameter p : parameters) {
-			if (p.getName().equals(name)) { return p; }
+			if (p.getName().equals(name))
+				return p;
 		}
 		return null;
 	}
@@ -536,7 +537,8 @@ public class ExperimentJob implements IExperimentJob {
 
 	private Output getOutput(final String name) {
 		for (final Output p : outputs) {
-			if (p.getName().equals(name)) { return p; }
+			if (p.getName().equals(name))
+				return p;
 		}
 		return null;
 	}

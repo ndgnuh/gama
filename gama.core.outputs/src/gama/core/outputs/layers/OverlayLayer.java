@@ -73,7 +73,7 @@ public class OverlayLayer extends GraphicLayer implements ILayer.Overlay {
 			return;
 		getData().compute(scope, g);
 		g.beginDrawingLayer(this);
-		g.setOpacity(getData().getTransparency(scope));
+		g.setOpacity(1 - getData().getTransparency(scope));
 		g.beginOverlay(this);
 		privateDraw(scope, g);
 		g.endOverlay();

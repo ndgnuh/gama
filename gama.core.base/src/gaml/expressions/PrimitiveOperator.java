@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.PrimitiveOperator.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.expressions.PrimitiveOperator.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -57,9 +57,11 @@ public class PrimitiveOperator implements IExpression, IOperator {
 
 	@Override
 	public Object value(final IScope scope) throws GamaRuntimeException {
-		if (scope == null) { return null; }
+		if (scope == null)
+			return null;
 		final IAgent target = this.target == null ? scope.getAgent() : Cast.asAgent(scope, this.target.value(scope));
-		if (target == null) { return null; }
+		if (target == null)
+			return null;
 		// AD 13/05/13 The target should not be pushed so early to the scope, as
 		// the arguments will be (incorrectly)
 		// evaluated in its context, but how to prevent it ? See Issue 401.
@@ -70,12 +72,19 @@ public class PrimitiveOperator implements IExpression, IOperator {
 		// Then, (2) to set the caller to the actual agent on the scope (in the
 		// context of which the arguments need to
 		// be evaluated
-		if (executer != null) {
+		if (executer != null)
 			// And finally, (3) to execute the executer on the target (it will
 			// be pushed in the scope)
-			return scope.execute(executer, target, parameters).getValue();
-		}
+			return scope.execute(executer, target, getRuntimeArgs(scope)).getValue();
 		return null;
+	}
+
+	public Arguments getRuntimeArgs(final IScope scope) {
+		if (parameters == null)
+			return null;
+		// Dynamic arguments necessary (see #2943, #2922, plus issue with multiple parallel simulations)
+		// Copy-paste of DoStatement. Verify that this copy is necessary here.
+		return parameters.resolveAgainst(scope);
 	}
 
 	@Override
@@ -118,7 +127,8 @@ public class PrimitiveOperator implements IExpression, IOperator {
 	}
 
 	protected void argsToGaml(final TextBuilder sb, final boolean includingBuiltIn) {
-		if (parameters == null || parameters.isEmpty()) { return; }
+		if (parameters == null || parameters.isEmpty())
+			return;
 		parameters.forEachFacet((name, expr) -> {
 			if (Strings.isGamaNumber(name)) {
 				sb.append(expr.serialize(false));
@@ -132,25 +142,6 @@ public class PrimitiveOperator implements IExpression, IOperator {
 			sb.setLength(sb.length() - 2);
 		}
 	}
-
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// meta.put(GamlProperties.PLUGINS, action.getDefiningPlugin());
-	// if (action.isBuiltIn()) {
-	// meta.put(GamlProperties.ACTIONS, action.getName());
-	// }
-	// if (parameters != null) {
-	// parameters.forEachValue(exp -> {
-	// exp.collectMetaInformation(meta);
-	// return true;
-	// });
-	// }
-	// }
 
 	@Override
 	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
@@ -213,7 +204,8 @@ public class PrimitiveOperator implements IExpression, IOperator {
 	// TODO The arguments are not ordered...
 	@Override
 	public IExpression arg(final int i) {
-		if (i < 0 || i > parameters.size()) { return null; }
+		if (i < 0 || i > parameters.size())
+			return null;
 		return parameters.getExpr(i);
 		// return Iterables.get(parameters.values(), i).getExpression();
 	}

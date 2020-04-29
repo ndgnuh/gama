@@ -97,7 +97,7 @@ public class GamaPreferences {
 		 */
 		public static final String MENUS = "Menus";
 		public static final Pref<Integer> CORE_MENU_SIZE =
-				create("pref_menu_size", "Break down agents in menus every", 50, IType.INT, false).between(10, 100)
+				create("pref_menu_size", "Break down agents in menus every", 50, IType.INT, false).between(10, 1000)
 						.in(NAME, MENUS);
 		/**
 		 * Console
@@ -257,6 +257,9 @@ public class GamaPreferences {
 		// "Default step for the delay slider (in sec.)", 0.001, IType.FLOAT, true).in(NAME, EXECUTION).disabled();
 		public static final Pref<Boolean> CORE_SYNC =
 				create("pref_display_synchronized", "Synchronize outputs with the simulation", false, IType.BOOL, true)
+						.in(NAME, EXECUTION);
+		public static final Pref<Boolean> CORE_EXPAND_PARAMS =
+				create("pref_experiment_expand_params", "Auto expand Parameters categories", false, IType.BOOL, true)
 						.in(NAME, EXECUTION);
 		/**
 		 * Concurrency

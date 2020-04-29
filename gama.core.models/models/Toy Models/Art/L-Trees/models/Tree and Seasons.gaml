@@ -241,7 +241,7 @@ species branch parent: tree_part {
 	aspect default {
 		draw line([base, end], width) color: season.branch_color; // border: #green;
 		if (season.current_season = "winter") and (abs(beta) < 50) {
-			draw line([base + {0, 0, 1.2 * width}, end + {0, 0, 1.2 * width}], width * sin(180 * season.current_day / season.season_duration)) color: °white;
+			draw line([base + {0, 0, 1.2 * width}, end + {0, 0, 1.2 * width}], width * sin(180 * season.current_day / season.season_duration)) color: #white;
 		}
 
 	}
@@ -378,7 +378,7 @@ species fruit {
 	aspect default {
 		if (season.current_season = "spring") {
 			draw line([base, end], 0.1) color: season.leaf_color;
-			draw circle(1 * sin(180 * season.current_day / season.season_duration)) at: end color: °pink border: °pink;
+			draw circle(1 * sin(180 * season.current_day / season.season_duration)) at: end color: #pink border: #pink;
 		} else if (season.current_season = "summer") {
 			draw line([base, end], 0.1) color: season.leaf_color;
 			draw sphere(1 * sin(90 * season.current_day / season.season_duration)) at: end color: season.fruit_color border: season.fruit_color;

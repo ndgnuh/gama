@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'AbstractEditor.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'AbstractEditor.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -40,14 +40,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
-import gama.ui.base.interfaces.EditorListener;
-import gama.ui.base.interfaces.IParameterEditor;
-import gama.ui.base.resources.GamaColors;
-import gama.ui.base.resources.GamaFonts;
-import gama.ui.base.resources.GamaIcons;
-import gama.ui.base.resources.IGamaColors;
-import gama.ui.base.resources.IGamaIcons;
-import gama.ui.base.utils.WorkbenchHelper;
 import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IExperimentPlan;
@@ -56,6 +48,14 @@ import gama.common.util.StringUtils;
 import gama.kernel.experiment.ExperimentParameter;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
+import gama.ui.base.interfaces.EditorListener;
+import gama.ui.base.interfaces.IParameterEditor;
+import gama.ui.base.resources.GamaColors;
+import gama.ui.base.resources.GamaFonts;
+import gama.ui.base.resources.GamaIcons;
+import gama.ui.base.resources.IGamaColors;
+import gama.ui.base.resources.IGamaIcons;
+import gama.ui.base.utils.WorkbenchHelper;
 import gaml.types.GamaStringType;
 import gaml.types.IType;
 import gaml.types.Types;
@@ -94,7 +94,8 @@ public abstract class AbstractEditor<T>
 					applyBrowse();
 					break;
 				case CHANGE:
-					if (e.detail != SWT.ARROW) { return; }
+					if (e.detail != SWT.ARROW)
+						return;
 					applyChange();
 					break;
 				case DEFINE:
@@ -145,7 +146,8 @@ public abstract class AbstractEditor<T>
 
 		@Override
 		public void mouseExit(final MouseEvent e) {
-			if (isCombo && combo != null && combo.getListVisible()) { return; }
+			if (isCombo && combo != null && combo.getListVisible())
+				return;
 			if (GAMA.getExperiment() == null || !GAMA.getExperiment().isBatch()) {
 				hideToolbar();
 			}
@@ -171,9 +173,12 @@ public abstract class AbstractEditor<T>
 
 	@Override
 	public IScope getScope() {
-		if (dontUseScope) { return null; }
-		if (scope != null) { return scope; }
-		if (agent != null) { return agent.getScope(); }
+		if (dontUseScope)
+			return null;
+		if (scope != null)
+			return scope;
+		if (agent != null)
+			return agent.getScope();
 		return GAMA.getRuntimeScope();
 	}
 
@@ -383,9 +388,11 @@ public abstract class AbstractEditor<T>
 	}
 
 	protected void hideToolbar() {
-		if (toolbar == null || toolbar.isDisposed()) { return; }
+		if (toolbar == null || toolbar.isDisposed())
+			return;
 		final GridData d = (GridData) toolbar.getLayoutData();
-		if (d.exclude) { return; }
+		if (d.exclude)
+			return;
 		d.exclude = true;
 		toolbar.setVisible(false);
 		composite.setBackground(getNormalBackground());
@@ -394,9 +401,11 @@ public abstract class AbstractEditor<T>
 	}
 
 	protected void showToolbar() {
-		if (toolbar == null || toolbar.isDisposed()) { return; }
+		if (toolbar == null || toolbar.isDisposed())
+			return;
 		final GridData d = (GridData) toolbar.getLayoutData();
-		if (!d.exclude) { return; }
+		if (!d.exclude)
+			return;
 		d.exclude = false;
 		toolbar.setVisible(true);
 		composite.setBackground(HOVERED_BACKGROUND);
@@ -426,7 +435,8 @@ public abstract class AbstractEditor<T>
 	}
 
 	protected String typeToDisplay() {
-		if (!this.isEditable) { return ""; }
+		if (!this.isEditable)
+			return "";
 		return param.getType().serialize(false);
 	}
 
@@ -482,7 +492,7 @@ public abstract class AbstractEditor<T>
 					items[i] = item;
 					item.setBackground(HOVERED_BACKGROUND);
 					item.setLayoutData(GridDataFactory.copyData(gd));
-					;
+
 					item.addSelectionListener(new ItemSelectionListener(i));
 
 				}
@@ -531,9 +541,8 @@ public abstract class AbstractEditor<T>
 		} else {
 			result = scope.getAgentVarValue(getAgent(), param.getName());
 		}
-		if (getExpectedType() == Types.STRING) {
+		if (getExpectedType() == Types.STRING)
 			return (T) StringUtils.toJavaString(GamaStringType.staticCast(scope, result, false));
-		}
 		return (T) getExpectedType().cast(scope, result, null, false);
 
 	}
@@ -621,7 +630,8 @@ public abstract class AbstractEditor<T>
 
 	protected void checkButtons() {
 		final Button revert = items[REVERT];
-		if (revert == null || revert.isDisposed()) { return; }
+		if (revert == null || revert.isDisposed())
+			return;
 		revert.setEnabled(currentValue == null ? originalValue != null : !currentValue.equals(originalValue));
 	}
 
@@ -644,9 +654,11 @@ public abstract class AbstractEditor<T>
 		return param;
 	}
 
-	protected void modifyValue(final T val) throws GamaRuntimeException {
-		if (!isValueDifferent(val)) { return; }
-		currentValue = val;
+	@SuppressWarnings ("unchecked")
+	protected void modifyValue(final Object val) throws GamaRuntimeException {
+		if (!isValueDifferent(val))
+			return;
+		currentValue = (T) val;
 		WorkbenchHelper.asyncRun(() -> {
 			if (CORE_EDITORS_HIGHLIGHT.getValue()) {
 				if (titleLabel != null && !titleLabel.isDisposed()) {
@@ -657,7 +669,7 @@ public abstract class AbstractEditor<T>
 		});
 
 		if (!internalModification) {
-			setParameterValue(val);
+			setParameterValue((T) val);
 		}
 	}
 
@@ -665,7 +677,8 @@ public abstract class AbstractEditor<T>
 	public void updateValue(final boolean force) {
 		try {
 			final T newVal = getParameterValue();
-			if (!force && !isValueDifferent(newVal)) { return; }
+			if (!force && !isValueDifferent(newVal))
+				return;
 			internalModification = true;
 			if (titleLabel != null && !titleLabel.isDisposed()) {
 				modifyAndDisplayValue(newVal);
@@ -736,8 +749,10 @@ public abstract class AbstractEditor<T>
 	}
 
 	protected IAgent getAgent() {
-		if (agent != null) { return agent; }
-		if (scope == null) { return null; }
+		if (agent != null)
+			return agent;
+		if (scope == null)
+			return null;
 		return scope.getSimulation();
 
 	}

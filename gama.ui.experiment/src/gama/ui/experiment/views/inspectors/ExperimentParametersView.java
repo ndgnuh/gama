@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'ExperimentParametersView.java, in plugin gama.ui.experiment.experiment, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'ExperimentParametersView.java, in plugin gama.ui.experiment.experiment, is part of the source code of the GAMA
+ * modeling and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -21,6 +21,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import gama.GAMA;
+import gama.common.interfaces.experiment.IExperimentDisplayable;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.gui.IGui;
+import gama.common.preferences.GamaPreferences;
+import gama.kernel.experiment.ParametersSet;
+import gama.kernel.simulation.SimulationAgent;
+import gama.ui.base.controls.ParameterExpandItem;
 import gama.ui.base.resources.GamaIcons;
 import gama.ui.base.resources.IGamaIcons;
 import gama.ui.base.utils.WorkbenchHelper;
@@ -29,13 +38,6 @@ import gama.ui.experiment.commands.ArrangeDisplayViews;
 import gama.ui.experiment.experiment.parameters.EditorsList;
 import gama.ui.experiment.experiment.parameters.ExperimentsParametersList;
 import gaml.constants.IUnits;
-import gama.GAMA;
-import gama.common.interfaces.experiment.IExperimentDisplayable;
-import gama.common.interfaces.experiment.IExperimentPlan;
-import gama.common.interfaces.gui.IGamaView;
-import gama.common.interfaces.gui.IGui;
-import gama.kernel.experiment.ParametersSet;
-import gama.kernel.simulation.SimulationAgent;
 
 public class ExperimentParametersView extends AttributesEditorsView<String> implements IGamaView.Parameters {
 
@@ -61,7 +63,8 @@ public class ExperimentParametersView extends AttributesEditorsView<String> impl
 	public void addItem(final IExperimentPlan exp) {
 		if (exp != null) {
 			experiment = exp;
-			if (!exp.hasParametersOrUserCommands()) { return; }
+			if (!exp.hasParametersOrUserCommands())
+				return;
 			reset();
 			final List<IExperimentDisplayable> params = new ArrayList<>(exp.getParameters().values());
 			params.addAll(exp.getExplorableParameters().values());
@@ -112,6 +115,16 @@ public class ExperimentParametersView extends AttributesEditorsView<String> impl
 	@Override
 	public void createToolItems(final GamaToolbar2 tb) {
 		super.createToolItems(tb);
+		tb.button(GamaIcons.create(IGamaIcons.SMALL_EXPAND).getCode(), "Collapse All", "Collapse All", e -> {
+			for (ParameterExpandItem p : getViewer().getItems()) {
+				p.setExpanded(false);
+			}
+		}, SWT.RIGHT);
+		tb.button(GamaIcons.create(IGamaIcons.SMALL_COLLAPSE).getCode(), "Expand All", "Expand All", e -> {
+			for (ParameterExpandItem p : getViewer().getItems()) {
+				p.setExpanded(true);
+			}
+		}, SWT.RIGHT);
 		tb.button(GamaIcons.create(IGamaIcons.ACTION_REVERT).getCode(), "Revert parameter values",
 				"Revert parameters to their initial values", e -> {
 					final EditorsList<?> eds = editors;
@@ -123,7 +136,8 @@ public class ExperimentParametersView extends AttributesEditorsView<String> impl
 				"Add a new simulation (with the current parameters) to this experiment", e -> {
 					final SimulationAgent sim =
 							GAMA.getExperiment().getAgent().createSimulation(new ParametersSet(), true);
-					if (sim == null) { return; }
+					if (sim == null)
+						return;
 					WorkbenchHelper.runInUI("", 0, (m) -> {
 						if (CORE_DISPLAY_LAYOUT.getValue().equals("None")) {
 							ArrangeDisplayViews.execute(IUnits.split);
@@ -137,7 +151,7 @@ public class ExperimentParametersView extends AttributesEditorsView<String> impl
 
 	@Override
 	public boolean addItem(final String object) {
-		createItem(getParentComposite(), object, true, null);
+		createItem(getParentComposite(), object, GamaPreferences.Runtime.CORE_EXPAND_PARAMS.getValue(), null);
 		return true;
 	}
 

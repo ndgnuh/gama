@@ -12,11 +12,11 @@ package gama.ui.base.parameters;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import gama.ui.base.interfaces.EditorListener;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
+import gama.ui.base.interfaces.EditorListener;
 import gaml.operators.Cast;
 import gaml.types.IType;
 import gaml.types.Types;
@@ -47,17 +47,15 @@ public class FloatEditor extends NumberEditor<Double> {
 	}
 
 	@Override
-	protected void modifyValue(final Double val) throws GamaRuntimeException {
+	protected void modifyValue(final Object val) throws GamaRuntimeException {
 		Double i = Cast.asFloat(getScope(), val);
 		if (acceptNull && val == null) {
 			i = null;
 		} else {
-			if (minValue != null && i < minValue.doubleValue()) {
+			if (minValue != null && i < minValue.doubleValue())
 				throw GamaRuntimeException.error("Value " + i + " should be greater than " + minValue, getScope());
-			}
-			if (maxValue != null && i > maxValue.doubleValue()) {
+			if (maxValue != null && i > maxValue.doubleValue())
 				throw GamaRuntimeException.error("Value " + i + " should be smaller than " + maxValue, getScope());
-			}
 		}
 		super.modifyValue(i);
 	}
@@ -86,7 +84,8 @@ public class FloatEditor extends NumberEditor<Double> {
 
 	@Override
 	protected Double applyPlus() {
-		if (currentValue == null) { return 0.0; }
+		if (currentValue == null)
+			return 0.0;
 		final Double i = currentValue;
 		final Double newVal = i + stepValue.doubleValue();
 		return newVal;
@@ -94,7 +93,8 @@ public class FloatEditor extends NumberEditor<Double> {
 
 	@Override
 	protected Double applyMinus() {
-		if (currentValue == null) { return 0.0; }
+		if (currentValue == null)
+			return 0.0;
 		final Double i = currentValue;
 		final Double newVal = i - stepValue.doubleValue();
 		return newVal;

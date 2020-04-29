@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.projection.Projection.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.projection.Projection.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,6 +14,8 @@ import org.geotools.geometry.jts.DefaultCoordinateSequenceTransformer;
 import org.geotools.geometry.jts.GeometryCoordinateSequenceTransformer;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
@@ -23,9 +25,6 @@ import org.opengis.referencing.operation.TransformException;
 import gama.common.geometry.Envelope3D;
 import gama.common.geometry.GeometryUtils;
 import gama.runtime.scope.IScope;
-
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.GeometryCollection;
 
 public class Projection implements IProjection {
 
@@ -46,7 +45,7 @@ public class Projection implements IProjection {
 		this.referenceProjection = world;
 		initialCRS = crs;
 		if (env != null) {
-			if (CRS.getProjectedCRS(initialCRS) == null) {
+			if (initialCRS != null && !initialCRS.equals(getTargetCRS(scope))) {
 				createTransformation(computeProjection(scope));
 			}
 			// We project the envelope and we use it for initializing the translations
@@ -75,7 +74,8 @@ public class Projection implements IProjection {
 	@Override
 	public Geometry transform(final Geometry g) {
 		// Remove uselessly complicated multigeometries
-		if (g instanceof GeometryCollection && g.getNumGeometries() == 1) { return transform(g.getGeometryN(0)); }
+		if (g instanceof GeometryCollection && g.getNumGeometries() == 1)
+			return transform(g.getGeometryN(0));
 		Geometry geom = GeometryUtils.GEOMETRY_FACTORY.createGeometry(g);
 		if (transformer != null) {
 			try {
@@ -106,7 +106,8 @@ public class Projection implements IProjection {
 	}
 
 	Envelope3D transform(final Envelope3D g) {
-		if (transformer == null) { return g; }
+		if (transformer == null)
+			return g;
 		return Envelope3D.of(transform(JTS.toGeometry(g)).getEnvelopeInternal());
 	}
 
@@ -127,7 +128,8 @@ public class Projection implements IProjection {
 
 	MathTransform computeProjection(final IScope scope) {
 		MathTransform crsTransformation = null;
-		if (initialCRS == null) { return null; }
+		if (initialCRS == null)
+			return null;
 		try {
 			crsTransformation = CRS.findMathTransform(initialCRS, getTargetCRS(scope), true);
 		} catch (final FactoryException e) {
@@ -154,7 +156,8 @@ public class Projection implements IProjection {
 	 */
 	@Override
 	public CoordinateReferenceSystem getTargetCRS(final IScope scope) {
-		if (referenceProjection != null) { return referenceProjection.getTargetCRS(scope); }
+		if (referenceProjection != null)
+			return referenceProjection.getTargetCRS(scope);
 		return factory.getTargetCRS(scope);
 	}
 

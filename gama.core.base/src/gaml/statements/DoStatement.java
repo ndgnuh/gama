@@ -215,16 +215,11 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 			}
 			if (sd == null)
 				return;
-			// TODO What about actions defined in a macro species (not the
-			// global one, which is filtered before) ?
 			if (!sd.hasAction(action, false)) {
 				desc.error("Action " + action + " does not exist in " + sd.getName(), IGamlIssue.UNKNOWN_ACTION, ACTION,
 						action, sd.getName());
 			}
 			ActionDescription ad = sd.getAction(action);
-			// if (ad.getName().equals("halt")) {
-			// DEBUG.OUT("");
-			// }
 			if (ad instanceof PrimitiveDescription) {
 				PrimitiveDescription pd = (PrimitiveDescription) ad;
 				String dep = pd.getDeprecated();
@@ -236,9 +231,11 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 
 	}
 
-	Arguments args, runtime;
+	Arguments args;
 	String returnString;
 	final IExpression function;
+	final boolean isSuperInvocation;
+
 	public static final Set<String> DO_FACETS = DescriptionFactory.getAllowedFacetsFor(IKeyword.DO, IKeyword.INVOKE);
 
 	public DoStatement(final IDescription desc) {
@@ -246,6 +243,8 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 		returnString = getLiteral(IKeyword.RETURNS);
 		function = getFacet(IKeyword.INTERNAL_FUNCTION);
 		setName(getLiteral(IKeyword.ACTION));
+		isSuperInvocation = ((StatementDescription) desc).isSuperInvocation();
+
 	}
 
 	@Override
@@ -259,23 +258,17 @@ public class DoStatement extends AbstractStatementSequence implements IStatement
 	@Override
 	public void setFormalArgs(final Arguments args) {
 		this.args = args;
-		runtime = args == null ? null : args.cleanCopy();
-
 	}
 
 	public Arguments getRuntimeArgs(final IScope scope) {
 		if (args == null)
 			return null;
-		args.forEachFacet((name, facet) -> {
-			runtime.put(name, facet.getExpression().resolveAgainst(scope));
-			return true;
-		});
-		return runtime;
+		// Dynamic arguments necessary (see #2943, #2922, plus issue with multiple parallel simulations)
+		return args.resolveAgainst(scope);
 	}
 
 	@Override
 	public Object privateExecuteIn(final IScope scope) throws GamaRuntimeException {
-		final boolean isSuperInvocation = getDescription().isSuperInvocation();
 		ISpecies context = scope.getAgent().getSpecies();
 		if (isSuperInvocation) {
 			context = context.getParentSpecies();

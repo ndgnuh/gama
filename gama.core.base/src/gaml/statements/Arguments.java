@@ -11,6 +11,8 @@
 package gaml.statements;
 
 import gama.common.interfaces.IAgent;
+import gama.runtime.scope.IScope;
+import gaml.expressions.IExpression;
 
 /**
  * @author drogoul
@@ -24,15 +26,23 @@ public class Arguments extends Facets {
 
 	public Arguments() {}
 
-	public Arguments(final IAgent caller) {
-		setCaller(caller);
-	}
-
 	public Arguments(final Arguments args) {
 		super(args);
 		if (args != null) {
 			setCaller(args.caller.get());
 		}
+	}
+
+	public Arguments resolveAgainst(final IScope scope) {
+		final Arguments result = new Arguments();
+		result.setCaller(caller.get());
+		for (final Facet f : facets) {
+			final IExpression exp = getExpr(f.key);
+			if (exp != null) {
+				result.put(f.key, exp.resolveAgainst(scope));
+			}
+		}
+		return result;
 	}
 
 	@Override
