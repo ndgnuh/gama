@@ -23,6 +23,7 @@ import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.IGamaColors;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
+import gama.kernel.experiment.InputParameter;
 import gama.runtime.scope.IScope;
 import gama.util.GamaDate;
 import gaml.types.IType;

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.ui.base.utils.SwtGui.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gama.ui.base.utils.SwtGui.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -44,9 +44,35 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.util.PrefUtil;
 import org.eclipse.ui.services.ISourceProviderService;
 
+import gama.GAMA;
+import gama.common.interfaces.IAgent;
+import gama.common.interfaces.IModel;
+import gama.common.interfaces.experiment.IExperimentController;
+import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.experiment.IParameter;
+import gama.common.interfaces.gui.IConsoleDisplayer;
+import gama.common.interfaces.gui.IGamaView;
+import gama.common.interfaces.gui.IGamaView.Error;
+import gama.common.interfaces.gui.IGamaView.Parameters;
+import gama.common.interfaces.gui.IGamaView.Test;
+import gama.common.interfaces.gui.IGamaView.User;
+import gama.common.interfaces.gui.IGui;
+import gama.common.interfaces.gui.IStatusDisplayer;
+import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
+import gama.common.interfaces.outputs.IDisplayOutput;
+import gama.common.interfaces.outputs.IDisplaySurface;
+import gama.common.interfaces.outputs.IOutputManager;
+import gama.common.preferences.GamaPreferences;
 import gama.core.application.bundles.GamaBundleLoader;
 import gama.core.outputs.InspectDisplayOutput;
 import gama.dev.utils.DEBUG;
+import gama.kernel.experiment.ExperimentAgent;
+import gama.kernel.simulation.SimulationAgent;
+import gama.metamodel.shape.GamaPoint;
+import gama.metamodel.shape.IShape;
+import gama.runtime.ISimulationStateProvider;
+import gama.runtime.exceptions.GamaRuntimeException;
+import gama.runtime.scope.IScope;
 import gama.ui.base.ApplicationWorkbenchAdvisor;
 import gama.ui.base.GamaUIPreferences;
 import gama.ui.base.PickWorkspaceDialog;
@@ -59,37 +85,11 @@ import gama.ui.base.interfaces.IRuntimeExceptionHandler;
 import gama.ui.base.interfaces.ISpeedDisplayer;
 import gama.ui.base.interfaces.IUserDialogFactory;
 import gama.ui.base.parameters.EditorsDialog;
-import gama.GAMA;
-import gama.common.interfaces.IAgent;
-import gama.common.interfaces.experiment.IExperimentController;
-import gama.common.interfaces.experiment.IExperimentPlan;
-import gama.common.interfaces.gui.IConsoleDisplayer;
-import gama.common.interfaces.gui.IGamaView;
-import gama.common.interfaces.gui.IGui;
-import gama.common.interfaces.gui.IStatusDisplayer;
-import gama.common.interfaces.gui.IGamaView.Error;
-import gama.common.interfaces.gui.IGamaView.Parameters;
-import gama.common.interfaces.gui.IGamaView.Test;
-import gama.common.interfaces.gui.IGamaView.User;
-import gama.common.interfaces.outputs.IDisplayOutput;
-import gama.common.interfaces.outputs.IDisplaySurface;
-import gama.common.interfaces.outputs.IOutputManager;
-import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
-import gama.common.interfaces.IModel;
-import gama.common.preferences.GamaPreferences;
-import gama.kernel.experiment.ExperimentAgent;
-import gama.kernel.simulation.SimulationAgent;
-import gama.metamodel.shape.GamaPoint;
-import gama.metamodel.shape.IShape;
-import gama.runtime.ISimulationStateProvider;
-import gama.runtime.exceptions.GamaRuntimeException;
-import gama.runtime.scope.IScope;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.architecture.user.UserPanelStatement;
 import gaml.compilation.interfaces.ISymbol;
 import gaml.statements.test.CompoundSummary;
-import gaml.types.IType;
 
 /**
  * Written by drogoul Modified on 6 mai 2011
@@ -280,12 +280,16 @@ public class SwtGui implements IGui {
 
 	@Override
 	public Map<String, Object> openUserInputDialog(final IScope scope, final String title,
-			final Map<String, Object> initialValues, final Map<String, IType<?>> types) {
-		final IMap<String, Object> result = GamaMapFactory.createUnordered(initialValues.size());
+			final List<IParameter> parameters) {
+		final IMap<String, Object> result = GamaMapFactory.createUnordered();
+		for (final IParameter p : parameters) {
+			result.put(p.getName(), p.getInitialValue(scope));
+		}
 		WorkbenchHelper.run(() -> {
-			final EditorsDialog dialog =
-					new EditorsDialog(scope, WorkbenchHelper.getShell(), initialValues, types, title);
-			result.putAll(dialog.open() == Window.OK ? dialog.getValues() : initialValues);
+			final EditorsDialog dialog = new EditorsDialog(scope, WorkbenchHelper.getShell(), parameters, title);
+			if (dialog.open() == Window.OK) {
+				result.putAll(dialog.getValues());
+			}
 		});
 		return result;
 	}
@@ -577,8 +581,8 @@ public class SwtGui implements IGui {
 	public void updateExperimentState(final IScope scope, final String forcedState) {
 		// DEBUG.OUT("STATE: " + forcedState);
 		final ISourceProviderService service = getUIService(ISourceProviderService.class);
-		final ISimulationStateProvider stateProvider = (ISimulationStateProvider) service
-				.getSourceProvider("gama.ui.base.experiment.SimulationRunningState");
+		final ISimulationStateProvider stateProvider =
+				(ISimulationStateProvider) service.getSourceProvider("gama.ui.base.experiment.SimulationRunningState");
 		if (stateProvider != null) {
 			WorkbenchHelper.run(() -> stateProvider.updateStateTo(forcedState));
 		}

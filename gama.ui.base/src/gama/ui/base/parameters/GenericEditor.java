@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Composite;
 import gama.ui.base.interfaces.EditorListener;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
+import gama.kernel.experiment.InputParameter;
 import gama.runtime.scope.IScope;
 import gaml.types.GamaType;
 import gaml.types.IType;

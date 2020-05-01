@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.experiment.IParameter;
 import gama.common.interfaces.outputs.IDisplayCreator.DisplayDescription;
 import gama.common.interfaces.outputs.IDisplayOutput;
 import gama.common.interfaces.outputs.IDisplaySurface;
@@ -31,7 +32,6 @@ import gama.runtime.scope.IScope;
 import gama.util.map.GamaMapFactory;
 import gaml.architecture.user.UserPanelStatement;
 import gaml.statements.test.CompoundSummary;
-import gaml.types.IType;
 
 /**
  * The interface IGui. Represents objects that act on behalf of a concrete GUI implementation (RCP, Headless, etc.)
@@ -107,8 +107,7 @@ public interface IGui {
 
 	IDisplaySurface getDisplaySurfaceFor(final IDisplayOutput.Layered output);
 
-	Map<String, Object> openUserInputDialog(IScope scope, String title, Map<String, Object> initialValues,
-			Map<String, IType<?>> types);
+	Map<String, Object> openUserInputDialog(IScope scope, String title, List<IParameter> parameters);
 
 	void openUserControlPanel(IScope scope, UserPanelStatement panel);
 

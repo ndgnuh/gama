@@ -18,6 +18,7 @@ import gama.ui.base.interfaces.IParameterEditor;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
 import gama.kernel.experiment.ExperimentParameter;
+import gama.kernel.experiment.InputParameter;
 import gama.metamodel.shape.GamaPoint;
 import gama.runtime.scope.IScope;
 import gaml.expressions.IExpression;

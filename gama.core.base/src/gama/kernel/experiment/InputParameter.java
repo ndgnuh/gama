@@ -1,17 +1,16 @@
 /*********************************************************************************************
  *
- * 'InputParameter.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'InputParameter.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
  *
  **********************************************************************************************/
-package gama.ui.base.parameters;
+package gama.kernel.experiment;
 
 import java.util.List;
 
-import gama.kernel.experiment.ParameterAdapter;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gaml.types.IType;
@@ -24,7 +23,7 @@ public class InputParameter extends ParameterAdapter {
 	private final List among;
 	private Number min, max, step;
 
-	InputParameter(final String name, final Object value) {
+	public InputParameter(final String name, final Object value) {
 		this(name, value, Types.get(value == null ? Object.class : (Class<Object>) value.getClass()));
 	}
 
@@ -38,20 +37,21 @@ public class InputParameter extends ParameterAdapter {
 		this.among = among;
 	}
 
-	InputParameter(final String name, final Object value, final Number min, final Number max) {
+	public InputParameter(final String name, final Object value, final Number min, final Number max) {
 		this(name, value);
 		this.min = min;
 		this.max = max;
 	}
 
-	InputParameter(final String name, final Object value, final Number min, final Number max, final Number step) {
+	public InputParameter(final String name, final Object value, final Number min, final Number max,
+			final Number step) {
 		this(name, value);
 		this.min = min;
 		this.max = max;
 		this.step = step;
 	}
 
-	InputParameter(final String name, final String unit, final Object value, final Number min, final Number max,
+	public InputParameter(final String name, final String unit, final Object value, final Number min, final Number max,
 			final Number step) {
 		this(name, value, min, max);
 		unitLabel = unit;
@@ -66,6 +66,11 @@ public class InputParameter extends ParameterAdapter {
 	@Override
 	public void setValue(final IScope scope, final Object value) {
 		this.value = value;
+	}
+
+	@Override
+	public boolean acceptsSlider(final IScope scope) {
+		return true;
 	}
 
 	@Override

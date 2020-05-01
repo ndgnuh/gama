@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Text;
 import gama.ui.base.interfaces.EditorListener;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
+import gama.kernel.experiment.InputParameter;
 import gama.runtime.scope.IScope;
 
 public class LabelEditor extends AbstractEditor<String> {

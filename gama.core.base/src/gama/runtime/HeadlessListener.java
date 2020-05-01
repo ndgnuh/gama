@@ -27,6 +27,7 @@ import gama.GAMA;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.IModel;
 import gama.common.interfaces.experiment.IExperimentPlan;
+import gama.common.interfaces.experiment.IParameter;
 import gama.common.interfaces.experiment.ITopLevelAgent;
 import gama.common.interfaces.gui.IConsoleDisplayer;
 import gama.common.interfaces.gui.IGamaView;
@@ -42,10 +43,10 @@ import gama.metamodel.shape.IShape;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
+import gama.util.map.GamaMapFactory;
 import gaml.architecture.user.UserPanelStatement;
 import gaml.operators.Strings;
 import gaml.statements.test.CompoundSummary;
-import gaml.types.IType;
 
 public class HeadlessListener implements IGui {
 
@@ -71,7 +72,11 @@ public class HeadlessListener implements IGui {
 
 	@Override
 	public Map<String, Object> openUserInputDialog(final IScope scope, final String title,
-			final Map<String, Object> initialValues, final Map<String, IType<?>> types) {
+			final List<IParameter> parameters) {
+		final Map<String, Object> initialValues = GamaMapFactory.create();
+		parameters.forEach(p -> {
+			initialValues.put(p.getName(), p.getInitialValue(scope));
+		});
 		return initialValues;
 	}
 

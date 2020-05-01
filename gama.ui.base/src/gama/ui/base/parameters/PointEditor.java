@@ -25,6 +25,7 @@ import gama.ui.base.resources.IGamaColors;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
 import gama.common.util.StringUtils;
+import gama.kernel.experiment.InputParameter;
 import gama.metamodel.shape.GamaPoint;
 import gama.runtime.scope.IScope;
 import gama.metamodel.shape.GamaPoint;

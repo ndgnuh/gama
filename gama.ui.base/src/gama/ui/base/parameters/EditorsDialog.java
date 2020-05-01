@@ -1,16 +1,15 @@
 /*********************************************************************************************
  *
- * 'EditorsDialog.java, in plugin gama.ui.base.shared, is part of the source code of the
- * GAMA modeling and simulation platform.
- * (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'EditorsDialog.java, in plugin gama.ui.base.shared, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
- * 
+ *
  *
  **********************************************************************************************/
 package gama.ui.base.parameters;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -24,11 +23,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
+import gama.common.interfaces.experiment.IParameter;
+import gama.runtime.scope.IScope;
 import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaColors;
 import gama.ui.base.resources.IGamaColors;
-import gama.runtime.scope.IScope;
-import gaml.types.IType;
+import gama.util.map.GamaMapFactory;
+import gama.util.map.IMap;
 
 /**
  * The class EditorsDialog.
@@ -39,19 +40,21 @@ import gaml.types.IType;
  */
 public class EditorsDialog extends Dialog {
 
-	private final Map<String, Object> values;
-	private final Map<String, IType<?>> types;
+	private final IMap<String, Object> values = GamaMapFactory.createUnordered();
+	private final List<IParameter> parameters;
 	private final String title;
 	private final IScope scope;
 
-	public EditorsDialog(final IScope scope, final Shell parentShell, final Map<String, Object> values,
-			final Map<String, IType<?>> types, final String title) {
+	public EditorsDialog(final IScope scope, final Shell parentShell, final List<IParameter> parameters,
+			final String title) {
 		super(parentShell);
 		this.scope = scope;
 		this.title = title;
 		setShellStyle(SWT.RESIZE | SWT.BORDER);
-		this.values = new LinkedHashMap<>(values);
-		this.types = types;
+		this.parameters = parameters;
+		parameters.forEach((p) -> {
+			values.put(p.getName(), p.getInitialValue(scope));
+		});
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class EditorsDialog extends Dialog {
 
 	/**
 	 * Method createContents()
-	 * 
+	 *
 	 * @see org.eclipse.jface.dialogs.Dialog#createContents(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
@@ -95,16 +98,13 @@ public class EditorsDialog extends Dialog {
 		data = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		data.heightHint = 20;
 		sep.setLayoutData(data);
-		for (final Map.Entry<String, Object> entry : values.entrySet()) {
-			final InputParameter param = new InputParameter(entry.getKey(), entry.getValue(),
-					types.get(entry.getKey()));
+		parameters.forEach(param -> {
 			final EditorListener<?> listener = newValue -> {
 				param.setValue(scope, newValue);
-				values.put(entry.getKey(), newValue);
+				values.put(param.getName(), newValue);
 			};
 			EditorFactory.create(scope, composite, param, listener, false, false);
-		}
-		// composite.setSize(composite.computeSize(300, SWT.DEFAULT));
+		});
 		composite.layout();
 
 		// composite.pack();

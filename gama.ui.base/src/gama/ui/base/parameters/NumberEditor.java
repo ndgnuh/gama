@@ -21,6 +21,7 @@ import gama.ui.base.interfaces.EditorListener;
 import gama.ui.base.resources.GamaIcons;
 import gama.common.interfaces.IAgent;
 import gama.common.interfaces.experiment.IParameter;
+import gama.kernel.experiment.InputParameter;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 
