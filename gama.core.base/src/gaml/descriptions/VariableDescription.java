@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.VariableDescription.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.descriptions.VariableDescription.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -217,7 +217,8 @@ public class VariableDescription extends SymbolDescription {
 	public Collection<VariableDescription> getDependencies(final Set<String> facetsToVisit, final boolean includingThis,
 			final boolean includingSpecies) {
 
-		try (final ICollector<VariableDescription> result = Collector.newSet()) {
+		try (final ICollector<IVarDescriptionUser> alreadyProcessed = Collector.newSet();
+				final ICollector<VariableDescription> result = Collector.newSet()) {
 			final Collection<String> deps = dependencies.get(getName());
 			if (deps != null) {
 				for (final String s : deps) {
@@ -231,14 +232,14 @@ public class VariableDescription extends SymbolDescription {
 			this.visitFacets(facetsToVisit, (fName, exp) -> {
 				final IExpression expression = exp.getExpression();
 				if (expression != null) {
-					expression.collectUsedVarsOf(getSpeciesContext(), result);
+					expression.collectUsedVarsOf(getSpeciesContext(), alreadyProcessed, result);
 				}
 				return true;
 			});
 			if (isSyntheticSpeciesContainer()) {
 				final SpeciesDescription mySpecies = (SpeciesDescription) getEnclosingDescription();
 				final SpeciesDescription sd = mySpecies.getMicroSpecies(getName());
-				sd.collectUsedVarsOf(mySpecies, result);
+				sd.collectUsedVarsOf(mySpecies, alreadyProcessed, result);
 			}
 			if (!includingThis) {
 				result.remove(this);

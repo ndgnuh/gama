@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gaml.constants;
 
-import java.util.Collection;
-
 import gama.common.interfaces.IAgent;
+import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IModel;
 import gama.metamodel.population.IPopulation;
 import gama.runtime.scope.IScope;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.ModelDescription;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
@@ -87,7 +87,11 @@ public class SpeciesConstantExpression extends ConstantExpression<ISpecies> {
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		if (species.hasAttribute(getName())) {
 			result.add(species.getAttribute(getName()));
 		}

@@ -11,7 +11,6 @@
 package gama.kernel.root;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,8 +45,6 @@ import gama.runtime.scope.IScope;
 import gama.util.GamaColor;
 import gama.util.list.IList;
 import gaml.compilation.kernel.GamaMetaModel;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
 import gaml.expressions.IExpression;
 import gaml.operators.Containers;
 import gaml.species.ISpecies;
@@ -319,9 +316,6 @@ public class PlatformAgent extends GamlAgent implements ITopLevelAgent, IExpress
 	public String getDefiningPlugin() {
 		return "gama.core";
 	}
-	//
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {}
 
 	@Override
 	public Object value(final IScope scope) throws GamaRuntimeException {
@@ -347,9 +341,6 @@ public class PlatformAgent extends GamlAgent implements ITopLevelAgent, IExpress
 	public boolean shouldBeParenthesized() {
 		return false;
 	}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 	@Override
 	public IType<?> getGamlType() {

@@ -19,9 +19,9 @@ import static gama.processor.annotations.ITypeProvider.KEY_TYPE_AT_INDEX;
 import static gama.processor.annotations.ITypeProvider.TYPE_AT_INDEX;
 import static gama.processor.annotations.ITypeProvider.WRAPPED;
 
-import java.util.Collection;
 import java.util.function.Predicate;
 
+import gama.common.interfaces.ICollector;
 import gama.common.preferences.GamaPreferences;
 import gama.common.util.TextBuilder;
 import gama.runtime.exceptions.GamaRuntimeException;
@@ -29,6 +29,7 @@ import gama.runtime.scope.IScope;
 import gaml.GAML;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.prototypes.OperatorProto;
@@ -176,7 +177,8 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 							? child.getGamlType().getKeyType()
 							: t >= 0 ? Types.get(t) : t == DENOTED_TYPE_AT_INDEX + 1 ? child.getDenotedType() : def;
 		}
-		if (returnFloatsInsteadOfInts && result == Types.INT) { return Types.FLOAT; }
+		if (returnFloatsInsteadOfInts && result == Types.INT)
+			return Types.FLOAT;
 		return result;
 	}
 
@@ -218,16 +220,13 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 		return i == 0 ? child : null;
 	}
 
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// prototype.collectMetaInformation(meta);
-	// child.collectMetaInformation(meta);
-	// }
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
-		prototype.collectImplicitVarsOf(species, result);
-		child.collectUsedVarsOf(species, result);
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
+		prototype.collectUsedVarsOf(species, alreadyProcessed, result);
+		child.collectUsedVarsOf(species, alreadyProcessed, result);
 	}
 
 	@Override
@@ -250,7 +249,8 @@ public class UnaryOperator extends AbstractExpression implements IOperator {
 
 	@Override
 	public boolean findAny(final Predicate<IExpression> predicate) {
-		if (predicate.test(this)) { return true; }
+		if (predicate.test(this))
+			return true;
 		return child != null && child.findAny(predicate);
 	}
 

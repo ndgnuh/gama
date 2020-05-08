@@ -10,14 +10,14 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
 import gama.common.interfaces.IAgent;
+import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IStatement;
 import gama.common.util.TextBuilder;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.StatementDescription;
 import gaml.descriptions.VariableDescription;
@@ -144,17 +144,24 @@ public class PrimitiveOperator implements IExpression, IOperator {
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		if (parameters != null) {
 			parameters.forEachFacet((name, exp) -> {
 				final IExpression expression = exp.getExpression();
 				if (expression != null) {
-					expression.collectUsedVarsOf(species, result);
+					expression.collectUsedVarsOf(species, alreadyProcessed, result);
 				}
 				return true;
 
 			});
 		}
+		// See https://github.com/COMOKIT/COMOKIT-Model/issues/21 . An action used in the initialization section may not
+		// be correctly analyzed for dependencies.
+		action.collectUsedVarsOf(species, alreadyProcessed, result);
 	}
 
 	@Override

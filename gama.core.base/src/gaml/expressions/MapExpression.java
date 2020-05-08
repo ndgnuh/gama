@@ -10,12 +10,12 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 
+import gama.common.interfaces.ICollector;
 import gama.common.util.TextBuilder;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -24,6 +24,7 @@ import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.GAML;
 import gaml.constants.ConstantExpression;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.prototypes.OperatorProto;
@@ -118,10 +119,9 @@ public class MapExpression extends AbstractExpression implements IOperator {
 		// if ( isConst && computed ) { return (GamaMap) values.clone(); }
 		final IMap values = GamaMapFactory.create(type.getKeyType(), type.getContentType());
 		for (int i = 0; i < keys.length; i++) {
-			if (keys[i] == null || vals[i] == null) {
+			if (keys[i] == null || vals[i] == null)
 				// computed = false;
 				return GamaMapFactory.create();
-			}
 			values.put(keys[i].value(scope), vals[i].value(scope));
 		}
 		// computed = true;
@@ -227,28 +227,34 @@ public class MapExpression extends AbstractExpression implements IOperator {
 	public boolean isContextIndependant() {
 		for (final IExpression e : keys) {
 			if (e != null) {
-				if (!e.isContextIndependant()) { return false; }
+				if (!e.isContextIndependant())
+					return false;
 			}
 		}
 		for (final IExpression e : vals) {
 			if (e != null) {
-				if (!e.isContextIndependant()) { return false; }
+				if (!e.isContextIndependant())
+					return false;
 			}
 		}
 		return true;
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		for (final IExpression e : keys) {
 			if (e != null) {
-				e.collectUsedVarsOf(species, result);
+				e.collectUsedVarsOf(species, alreadyProcessed, result);
 			}
 		}
 
 		for (final IExpression e : vals) {
 			if (e != null) {
-				e.collectUsedVarsOf(species, result);
+				e.collectUsedVarsOf(species, alreadyProcessed, result);
 			}
 		}
 
@@ -272,7 +278,8 @@ public class MapExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public IExpression arg(final int i) {
-		if (i < 0 || i > vals.length) { return null; }
+		if (i < 0 || i > vals.length)
+			return null;
 		return vals[i];
 	}
 
@@ -287,15 +294,18 @@ public class MapExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public boolean findAny(final Predicate<IExpression> predicate) {
-		if (predicate.test(this)) { return true; }
+		if (predicate.test(this))
+			return true;
 		if (keys != null) {
 			for (final IExpression e : keys) {
-				if (e.findAny(predicate)) { return true; }
+				if (e.findAny(predicate))
+					return true;
 			}
 		}
 		if (vals != null) {
 			for (final IExpression e : vals) {
-				if (e.findAny(predicate)) { return true; }
+				if (e.findAny(predicate))
+					return true;
 			}
 		}
 		return false;

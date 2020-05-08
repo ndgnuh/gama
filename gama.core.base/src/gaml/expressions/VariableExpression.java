@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.VariableExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.VariableExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -59,7 +59,8 @@ public abstract class VariableExpression extends AbstractExpression implements I
 
 	@Override
 	public boolean isConst() {
-		if (type.isContainer()) { return false; }
+		if (type.isContainer())
+			return false;
 		return isNotModifiable;
 	}
 
@@ -82,21 +83,6 @@ public abstract class VariableExpression extends AbstractExpression implements I
 	public boolean shouldBeParenthesized() {
 		return false;
 	}
-
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// if (definitionDescription != null) {
-	// final IDescription var = definitionDescription.getSpeciesContext().getAttribute(getName());
-	// if (var != null) {
-	// meta.put(GamlProperties.PLUGINS, var.getDefiningPlugin());
-	// }
-	// }
-	// }
 
 	@Override
 	public boolean isContextIndependant() {

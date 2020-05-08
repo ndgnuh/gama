@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.AbstractNAryOperator.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.AbstractNAryOperator.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -23,14 +23,15 @@ import static gama.processor.annotations.ITypeProvider.TYPE_AT_INDEX;
 import static gama.processor.annotations.ITypeProvider.WRAPPED;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.function.Predicate;
 
+import gama.common.interfaces.ICollector;
 import gama.common.util.TextBuilder;
 import gama.processor.annotations.ITypeProvider;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.compilation.interfaces.GamaGetter;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.prototypes.OperatorProto;
@@ -67,7 +68,8 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 	}
 
 	protected IType computeType() {
-		if (prototype == null) { return Types.NO_TYPE; }
+		if (prototype == null)
+			return Types.NO_TYPE;
 		IType result = computeType(prototype.typeProvider, 0, prototype.returnType, GamaType.TYPE);
 		if (result.isContainer()) {
 			final IType contentType = computeType(prototype.contentTypeProvider,
@@ -161,7 +163,8 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 				result = ((IContainerType<?>) result).of(c);
 			}
 		}
-		if (returnFloatsInsteadOfInts && result == Types.INT) { return Types.FLOAT; }
+		if (returnFloatsInsteadOfInts && result == Types.INT)
+			return Types.FLOAT;
 		return result;
 	}
 
@@ -180,10 +183,12 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 
 	@Override
 	public boolean isConst() {
-		if (!prototype.canBeConst) { return false; }
+		if (!prototype.canBeConst)
+			return false;
 		if (exprs != null) {
 			for (final IExpression expr : exprs) {
-				if (!expr.isConst()) { return false; }
+				if (!expr.isConst())
+					return false;
 			}
 		}
 		return true;
@@ -221,8 +226,10 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 
 	@Override
 	public IExpression arg(final int i) {
-		if (exprs == null) { return null; }
-		if (i >= exprs.length) { return null; }
+		if (exprs == null)
+			return null;
+		if (i >= exprs.length)
+			return null;
 		return exprs[i];
 	}
 
@@ -255,31 +262,17 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 		return prototype.getDefiningPlugin();
 	}
 
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// prototype.collectMetaInformation(meta);
-	// meta.put(GamlProperties.OPERATORS, prototype.getName());
-	// if (exprs != null) {
-	// for (final IExpression e : exprs) {
-	// if (e != null) {
-	// e.collectMetaInformation(meta);
-	// }
-	// }
-	// }
-	// }
-
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
-		prototype.collectImplicitVarsOf(species, result);
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
+		prototype.collectUsedVarsOf(species, alreadyProcessed, result);
 		if (exprs != null) {
 			for (final IExpression e : exprs) {
 				if (e != null) {
-					e.collectUsedVarsOf(species, result);
+					e.collectUsedVarsOf(species, alreadyProcessed, result);
 				}
 			}
 		}
@@ -290,7 +283,8 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 		if (exprs != null) {
 			for (final IExpression e : exprs) {
 				if (e != null) {
-					if (!e.isContextIndependant()) { return false; }
+					if (!e.isContextIndependant())
+						return false;
 				}
 			}
 		}
@@ -329,10 +323,12 @@ public abstract class AbstractNAryOperator extends AbstractExpression implements
 
 	@Override
 	public boolean findAny(final Predicate<IExpression> predicate) {
-		if (predicate.test(this)) { return true; }
+		if (predicate.test(this))
+			return true;
 		if (exprs != null) {
 			for (final IExpression e : exprs) {
-				if (e.findAny(predicate)) { return true; }
+				if (e.findAny(predicate))
+					return true;
 			}
 		}
 		return false;

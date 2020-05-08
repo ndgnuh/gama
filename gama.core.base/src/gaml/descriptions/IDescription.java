@@ -42,8 +42,8 @@ import gaml.types.IType;
  * @todo Description
  */
 @SuppressWarnings ({ "rawtypes" })
-public interface IDescription
-		extends IGamlDescription, IKeyword, ITyped, IDisposable, IVarDescriptionProvider, IBenchmarkable {
+public interface IDescription extends IGamlDescription, IKeyword, ITyped, IDisposable, IVarDescriptionProvider,
+		IVarDescriptionUser, IBenchmarkable {
 
 	/**
 	 * The Constant SYMBOL_SERIALIZER.
@@ -561,16 +561,21 @@ public interface IDescription
 	 * @param result
 	 *            the result
 	 */
-	default void collectUsedVarsOf(final SpeciesDescription species, final ICollector<VariableDescription> result) {
+	@Override
+	default void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		this.visitFacets((name, exp) -> {
 			final IExpression expression = exp.getExpression();
 			if (expression != null) {
-				expression.collectUsedVarsOf(species, result);
+				expression.collectUsedVarsOf(species, alreadyProcessed, result);
 			}
 			return true;
 		});
 		this.visitOwnChildren(desc -> {
-			desc.collectUsedVarsOf(species, result);
+			desc.collectUsedVarsOf(species, alreadyProcessed, result);
 			return true;
 		});
 	}

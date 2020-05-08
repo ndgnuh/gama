@@ -10,7 +10,14 @@
 package gama.ui.navigator.wizards;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -18,10 +25,11 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import gaml.operators.Strings;
+import com.google.common.collect.Maps;
 
 /**
  * The "New" wizard page allows setting the container for the new file as well as the file name. The page will only
@@ -32,7 +40,8 @@ public class NewFileWizardPage extends AbstractNewModelWizardPage {
 
 	Text descriptionText;
 	Button yesButton;
-	String typeOfModel = AbstractNewModelWizard.EMPTY;
+	String templateName;
+	Combo combo;
 
 	public NewFileWizardPage(final ISelection selection) {
 		super(selection);
@@ -51,27 +60,33 @@ public class NewFileWizardPage extends AbstractNewModelWizardPage {
 		applyGridData(middleComposite, 2);
 		final FillLayout fillLayout = new FillLayout();
 		middleComposite.setLayout(fillLayout);
-		Arrays.asList(AbstractNewModelWizard.EMPTY, AbstractNewModelWizard.SKELETON, AbstractNewModelWizard.TEST)
-				.forEach(s -> {
-					final Button b = new Button(middleComposite, SWT.RADIO);
-					b.setText(s);
-					if (s.equals(AbstractNewModelWizard.EMPTY)) {
-						b.setSelection(true);
-					}
-					b.addSelectionListener(new SelectionAdapter() {
+		final HashMap<String, String> templates =
+				new HashMap<>(Maps.filterEntries(AbstractNewModelWizard.TEMPLATES, e -> {
+					return e.getValue().contains(".model.template");
+				}));
+		addProjectTemplates(templates);
+		combo = new Combo(middleComposite, SWT.READ_ONLY | SWT.DROP_DOWN);
+		final String[] choices = templates.keySet().toArray(new String[0]);
+		Arrays.sort(choices);
+		combo.setItems(choices);
 
-						@Override
-						public void widgetSelected(final SelectionEvent e) {
-							typeOfModel = Strings.toLowerCase(((Button) e.widget).getText());
-							updateStatus(null);
-							dialogChanged();
-							descriptionText.setText(typeOfModel.equals(AbstractNewModelWizard.TEST)
-									? "A model dedicated to run unit tests" : "");
-						}
+		combo.addSelectionListener(new SelectionAdapter() {
 
-					});
-				});
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				templateName = choices[combo.getSelectionIndex()];
+				templatePath = templates.get(templateName);
+				updateStatus(null);
+				dialogChanged();
+				descriptionText.setText(
+						templatePath.endsWith("resource") ? "Based on the internal " + templateName + " template."
+								: "Based on the template at '" + templatePath + "'");
+			}
 
+		});
+		combo.select(0);
+		templateName = choices[0];
+		templatePath = templates.get(templateName);
 		createFileNameSection(container);
 		createAuthorSection(container);
 		createNameSection(container);
@@ -79,6 +94,9 @@ public class NewFileWizardPage extends AbstractNewModelWizardPage {
 		createLabel(container, "&Model description:");
 		descriptionText = new Text(container, SWT.WRAP | SWT.MULTI | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		descriptionText.setBounds(0, 0, 250, 100);
+		descriptionText
+				.setText(templatePath.endsWith("resource") ? "Based on the internal " + templateName + " template."
+						: "Based on the template at '" + templatePath + "'");
 		final GridData gd = new GridData(SWT.FILL, SWT.FILL, true, false);
 		gd.heightHint = 100;
 		gd.verticalSpan = 4;
@@ -97,6 +115,30 @@ public class NewFileWizardPage extends AbstractNewModelWizardPage {
 		initialize();
 		dialogChanged();
 		setControl(container);
+
+	}
+
+	private void addProjectTemplates(final Map<String, String> templates) {
+		final IContainer container = findContainer();
+		if (container == null)
+			return;
+		final IProject project = container.getProject();
+		if (project == null)
+			return;
+		final IFolder folder = project.getFolder("templates");
+		if (!folder.exists())
+			return;
+		try {
+			for (final IResource resource : folder.members()) {
+				final String name = resource.getName();
+				if (name.contains(".template")) {
+					templates.put(name.replaceAll(".template", ""), resource.getProjectRelativePath().toString());
+				}
+			}
+		} catch (final CoreException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private void createDocSection(final Composite container) {
@@ -136,7 +178,7 @@ public class NewFileWizardPage extends AbstractNewModelWizardPage {
 	/** Return the type of model (empty, skeleton or test) */
 	@Override
 	public String getTemplateType() {
-		return typeOfModel;
+		return templateName;
 
 	}
 

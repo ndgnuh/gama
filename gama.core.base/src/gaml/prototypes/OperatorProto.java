@@ -13,13 +13,13 @@ package gaml.prototypes;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 
 import com.google.common.collect.ImmutableSet;
 
+import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.dev.utils.DEBUG;
@@ -37,6 +37,7 @@ import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.GamaGetter;
 import gaml.compilation.interfaces.IValidator;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.expressions.BinaryOperator;
@@ -58,7 +59,7 @@ import gaml.types.Types;
  *
  */
 @SuppressWarnings ({ "rawtypes" })
-public class OperatorProto extends AbstractProto {
+public class OperatorProto extends AbstractProto implements IVarDescriptionUser {
 
 	public static OperatorProto AS;
 	public static Set<String> noMandatoryParenthesis = ImmutableSet.copyOf(Arrays.<String> asList("-", "!"));
@@ -295,7 +296,12 @@ public class OperatorProto extends AbstractProto {
 		return new OperatorProto(this, gamaType);
 	}
 
-	public void collectImplicitVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	@Override
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		if (depends_on == null)
 			return;
 		for (final String s : depends_on) {

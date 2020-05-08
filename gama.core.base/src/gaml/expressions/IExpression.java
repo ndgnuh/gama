@@ -10,7 +10,6 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
 import java.util.function.Predicate;
 
 import gama.common.interfaces.IDisposable;
@@ -19,8 +18,7 @@ import gama.common.interfaces.ITyped;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IExpressionDescription;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.types.IType;
 
 /**
@@ -33,7 +31,7 @@ import gaml.types.IType;
  *
  */
 @FunctionalInterface
-public interface IExpression extends IGamlDescription, ITyped, IDisposable {
+public interface IExpression extends IGamlDescription, ITyped, IDisposable, IVarDescriptionUser {
 
 	/**
 	 * Convenience method for obtaining the constant value without passing a scope. Should be invoked after testing the
@@ -98,19 +96,6 @@ public interface IExpression extends IGamlDescription, ITyped, IDisposable {
 
 	default boolean shouldBeParenthesized() {
 		return true;
-	}
-
-	/**
-	 * Collects the attributes defined in species that are being used in this expression
-	 *
-	 * @param species
-	 *            the description of a species
-	 * @param result
-	 *            a collector which can be fed with the description of the attributes defined in the species if they
-	 *            happend to be used by this expression or one of its sub-expression
-	 */
-	default void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
-		// Nothing by default
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.ConstantExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.ConstantExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,14 +10,9 @@
  ********************************************************************************************************/
 package gaml.constants;
 
-import java.util.Collection;
-
 import gama.common.util.StringUtils;
 import gama.runtime.scope.IScope;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
 import gaml.expressions.AbstractExpression;
-import gaml.expressions.IExpression;
 import gaml.types.GamaType;
 import gaml.types.IType;
 
@@ -82,8 +77,5 @@ public class ConstantExpression<T> extends AbstractExpression {
 	public boolean shouldBeParenthesized() {
 		return false;
 	}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 }

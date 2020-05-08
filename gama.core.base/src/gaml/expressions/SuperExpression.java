@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.SuperExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.expressions.SuperExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,12 +10,8 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
 import gama.common.interfaces.IKeyword;
 import gama.runtime.scope.IScope;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
 import gaml.types.IType;
 
 public class SuperExpression extends VariableExpression {
@@ -47,16 +43,5 @@ public class SuperExpression extends VariableExpression {
 	public boolean isConst() {
 		return false;
 	}
-
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 }

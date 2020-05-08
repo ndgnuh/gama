@@ -10,15 +10,11 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
 import gama.common.interfaces.IKeyword;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.GAML;
 import gaml.descriptions.IDescription;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
 import gaml.types.IType;
 
 public class TempVariableExpression extends VariableExpression {
@@ -61,17 +57,6 @@ public class TempVariableExpression extends VariableExpression {
 	public IExpression resolveAgainst(final IScope scope) {
 		return GAML.getExpressionFactory().createConst(value(scope), type, name);
 	}
-
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 	public static class MyselfExpression extends TempVariableExpression {
 

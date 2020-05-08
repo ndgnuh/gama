@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.GlobalVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gaml.expressions.GlobalVariableExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,9 +10,8 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
 import gama.common.interfaces.IAgent;
+import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.experiment.ITopLevelAgent;
 import gama.common.preferences.GamaPreferences;
@@ -20,6 +19,7 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.GAML;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.types.IType;
@@ -32,9 +32,8 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 		final IExpression exp = v.getFacetExpr(IKeyword.INIT);
 		if (exp != null) {
 			final boolean isConst = notModifiable && exp.isConst();
-			if (isConst && GamaPreferences.External.CONSTANT_OPTIMIZATION.getValue()) {
+			if (isConst && GamaPreferences.External.CONSTANT_OPTIMIZATION.getValue())
 				return GAML.getExpressionFactory().createConst(exp.getConstValue(), type, n);
-			}
 		}
 		return new GlobalVariableExpression(n, type, notModifiable, world);
 	}
@@ -54,9 +53,9 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 		final String name = getName();
 		// We first try in the 'normal' scope (so that regular global vars are still accessed by agents of micro-models,
 		// see #2238)
-		if (scope.hasAccessToGlobalVar(name)) {
+		if (scope.hasAccessToGlobalVar(name))
 			return scope.getGlobalVarValue(name);
-		} else {
+		else {
 			final IAgent microAgent = scope.getAgent();
 			if (microAgent != null) {
 				final IScope agentScope = microAgent.getScope();
@@ -64,7 +63,8 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 					final ITopLevelAgent root = agentScope.getRoot();
 					if (root != null) {
 						final IScope globalScope = root.getScope();
-						if (globalScope != null) { return globalScope.getGlobalVarValue(getName()); }
+						if (globalScope != null)
+							return globalScope.getGlobalVarValue(getName());
 					}
 				}
 			}
@@ -75,7 +75,8 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 
 	@Override
 	public void setVal(final IScope scope, final Object v, final boolean create) throws GamaRuntimeException {
-		if (isNotModifiable) { return; }
+		if (isNotModifiable)
+			return;
 		if (scope.hasAccessToGlobalVar(name)) {
 			scope.setGlobalVarValue(name, v);
 		} else {
@@ -105,9 +106,8 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 			if (var != null) {
 				doc = var.getBuiltInDoc();
 			}
-		} else {
+		} else
 			return s;
-		}
 		if (doc != null) {
 			s += "<br>" + doc;
 		}
@@ -119,7 +119,11 @@ public class GlobalVariableExpression extends VariableExpression implements IVar
 	}
 
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		final SpeciesDescription sd = this.getDefinitionDescription().getSpeciesContext();
 		if (species.equals(sd)) {
 			result.add(sd.getAttribute(getName()));

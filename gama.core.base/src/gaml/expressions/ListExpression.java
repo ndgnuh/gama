@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.ListExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.expressions.ListExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -11,16 +11,17 @@
 package gaml.expressions;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 
+import gama.common.interfaces.ICollector;
 import gama.common.util.TextBuilder;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.prototypes.OperatorProto;
@@ -74,14 +75,17 @@ public class ListExpression extends AbstractExpression implements IOperator {
 	}
 
 	public boolean containsValue(final Object o) {
-		if (o == null) { return false; }
+		if (o == null)
+			return false;
 		for (final IExpression exp : elements) {
 			if (exp == null) {
 				continue;
 			}
-			if (!exp.isConst()) { return false; }
+			if (!exp.isConst())
+				return false;
 			final Object e = exp.getConstValue();
-			if (o.equals(e)) { return true; }
+			if (o.equals(e))
+				return true;
 		}
 		return false;
 	}
@@ -166,25 +170,15 @@ public class ListExpression extends AbstractExpression implements IOperator {
 		return elements.length == 0;
 	}
 
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// for (final IExpression e : elements) {
-	// if (e != null) {
-	// e.collectMetaInformation(meta);
-	// }
-	// }
-	// }
-
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		for (final IExpression e : elements) {
 			if (e != null) {
-				e.collectUsedVarsOf(species, result);
+				e.collectUsedVarsOf(species, alreadyProcessed, result);
 			}
 		}
 
@@ -194,7 +188,8 @@ public class ListExpression extends AbstractExpression implements IOperator {
 	public boolean isContextIndependant() {
 		for (final IExpression e : elements) {
 			if (e != null) {
-				if (!e.isContextIndependant()) { return false; }
+				if (!e.isContextIndependant())
+					return false;
 			}
 		}
 		return true;
@@ -212,7 +207,8 @@ public class ListExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public IExpression arg(final int i) {
-		if (i < 0 || i > elements.length) { return null; }
+		if (i < 0 || i > elements.length)
+			return null;
 		return elements[i];
 	}
 
@@ -223,10 +219,12 @@ public class ListExpression extends AbstractExpression implements IOperator {
 
 	@Override
 	public boolean findAny(final Predicate<IExpression> predicate) {
-		if (predicate.test(this)) { return true; }
+		if (predicate.test(this))
+			return true;
 		if (elements != null) {
 			for (final IExpression e : elements) {
-				if (e.findAny(predicate)) { return true; }
+				if (e.findAny(predicate))
+					return true;
 			}
 		}
 		return false;

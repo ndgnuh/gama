@@ -10,11 +10,11 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
+import gama.common.interfaces.ICollector;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gaml.descriptions.IDescription;
+import gaml.descriptions.IVarDescriptionUser;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.VariableDescription;
 import gaml.types.IType;
@@ -64,20 +64,12 @@ public class AgentVariableExpression extends VariableExpression implements IVarE
 		return s + quality;
 	}
 
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// if (getDefinitionDescription().isBuiltIn()) {
-	// meta.put(GamlProperties.ATTRIBUTES, getName());
-	// }
-	// }
-
 	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {
+	public void collectUsedVarsOf(final SpeciesDescription species,
+			final ICollector<IVarDescriptionUser> alreadyProcessed, final ICollector<VariableDescription> result) {
+		if (alreadyProcessed.contains(this))
+			return;
+		alreadyProcessed.add(this);
 		final SpeciesDescription sd = this.getDefinitionDescription().getSpeciesContext();
 		if (species.equals(sd) || species.hasParent(sd)) {
 			result.add(sd.getAttribute(getName()));

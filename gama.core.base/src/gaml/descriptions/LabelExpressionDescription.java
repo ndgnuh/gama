@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.descriptions.LabelExpressionDescription.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gaml.descriptions.LabelExpressionDescription.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,7 +10,6 @@
  ********************************************************************************************************/
 package gaml.descriptions;
 
-import java.util.Collection;
 import java.util.Set;
 
 import gama.common.util.Collector;
@@ -169,11 +168,5 @@ public class LabelExpressionDescription extends BasicExpressionDescription imple
 	public boolean shouldBeParenthesized() {
 		return false;
 	}
-
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 }

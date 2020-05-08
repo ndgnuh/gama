@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.expressions.TypeExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling
- * and simulation platform (v. 1.8)
+ * gaml.expressions.TypeExpression.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -10,12 +10,8 @@
  ********************************************************************************************************/
 package gaml.expressions;
 
-import java.util.Collection;
-
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
-import gaml.descriptions.SpeciesDescription;
-import gaml.descriptions.VariableDescription;
 import gaml.types.IType;
 import gaml.types.Types;
 
@@ -89,22 +85,9 @@ public class TypeExpression extends AbstractExpression {
 		return type.serialize(false);
 	}
 
-	/**
-	 * Method collectPlugins()
-	 *
-	 * @see gama.common.interfaces.IGamlDescription#collectPlugins(java.util.Set)
-	 */
-	// @Override
-	// public void collectMetaInformation(final GamlProperties meta) {
-	// type.collectMetaInformation(meta);
-	// }
-
 	@Override
 	public boolean isContextIndependant() {
 		return false;
 	}
-
-	@Override
-	public void collectUsedVarsOf(final SpeciesDescription species, final Collection<VariableDescription> result) {}
 
 }

@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'NewFileWizard.java, in plugin gama.ui.base.navigator, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'NewFileWizard.java, in plugin gama.ui.base.navigator, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -16,6 +16,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +34,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -38,10 +43,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.osgi.framework.Bundle;
 
 import gama.GAMA;
 import gama.ui.navigator.contents.ResourceManager;
-import gaml.operators.Strings;
 
 /**
  * The role of this wizard is to create a new file resource in the provided container. If the container resource (a
@@ -51,26 +56,38 @@ import gaml.operators.Strings;
 
 public abstract class AbstractNewModelWizard extends Wizard implements INewWizard {
 
-	public static final String EMPTY = "empty";
-	public static final String SKELETON = "skeleton";
-	public static final String TEST = "test";
-	public static final String GUI = "GUI";
-	public static final String HEADLESS = "Headless";
-	public static final String EXPERIMENT = "experiment";
-	public static final String TEST_EXP = "test_experiment";
-	private static final Map<String, String> TEMPLATES = new HashMap<String, String>() {
+	static final Map<String, String> TEMPLATES = new HashMap<>() {
 		{
-			put(EMPTY, "/templates/empty-file-template.resource");
-			put(SKELETON, "/templates/skeleton-file-template.resource");
-			put(TEST, "/templates/test-file-template.resource");
 			put(EXPERIMENT, "/templates/experiment.template.resource");
 			put(TEST_EXP, "/templates/test.experiment.template.resource");
 		}
 	};
+	static {
+		final Bundle bundle = Platform.getBundle("ummisco.gama.ui.navigator");
+		final Enumeration<URL> urls = bundle.findEntries("templates", "*.model.template.resource", false);
+		while (urls.hasMoreElements()) {
+			try {
+				final URI uri = urls.nextElement().toURI();
+				final String name =
+						uri.getPath().replaceAll(".model.template.resource", "").replaceAll("/templates/", "");
+				TEMPLATES.put(name, uri.getPath());
+
+			} catch (final URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	public static final String GUI = "GUI";
+	public static final String HEADLESS = "Headless";
+	public static final String EXPERIMENT = "experiment";
+	public static final String TEST_EXP = "test_experiment";
 
 	protected AbstractNewModelWizardPage page;
 	protected ISelection selection;
-	protected String fileHeader;
+	// protected String fileHeader;
 
 	public AbstractNewModelWizard() {
 		super();
@@ -140,7 +157,8 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 		monitor.beginTask("Creating " + fileName, 2);
 		final IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		final IResource container = findContainer(monitor, containerName, root);
-		if (container == null) { return; }
+		if (container == null)
+			return;
 		IContainer folder = (IContainer) container;
 		final IProject project = folder.getProject();
 
@@ -163,20 +181,18 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 
 		final IFile file = folder.getFile(new Path(fileName));
 
-		fileHeader = "/***\n" + "* Name: " + title + "\n" + "* Author: " + author + "\n" + "* Description: " + desc
-				+ "\n" + "* Tags: Tag1, Tag2, TagN\n***/" + Strings.LN + Strings.LN;
+		final String template = getPage().getTemplatePath();
 
-		try (InputStream streamModel = addFileHeader(folder,
-				getClass().getResourceAsStream(TEMPLATES.get(getPage().getTemplateType())), title, desc);) {
-			try (InputStream resourceStream = openContentStreamHtmlFile(title, desc, author);) {
-				ResourceManager.getInstance().reveal(file);
-				file.create(streamModel, true, monitor);
-				if (createDoc) {
+		try (InputStream streamModel = getInputStream(folder, template, title, author, desc)) {
+			ResourceManager.getInstance().reveal(file);
+			file.create(streamModel, true, monitor);
+			if (createDoc) {
+				try (InputStream resourceStream = openContentStreamHtmlFile(title, desc, author);) {
 					final IFile htmlFile = project.getFile(new Path("doc/" + title + ".html"));
 					htmlFile.create(resourceStream, true, monitor);
-					resourceStream.close();
 				}
 			}
+
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
@@ -184,6 +200,23 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 		monitor.setTaskName("Opening file for editing...");
 		GAMA.getGui().editModel(file);
 		monitor.worked(1);
+	}
+
+	@SuppressWarnings ("resource")
+	private InputStream getInputStream(final IContainer folder, final String template, final String title,
+			final String author, final String desc) {
+		InputStream result;
+		final IFile file = folder.getProject().getFile(new Path(template));
+		if (file.exists()) {
+			try {
+				result = file.getContents();
+			} catch (final CoreException e) {
+				return null;
+			}
+		} else {
+			result = getClass().getResourceAsStream(template);
+		}
+		return replacePlaceHolders(folder, result, title, author, desc);
 	}
 
 	public IResource findContainer(final IProgressMonitor monitor, final String containerName,
@@ -196,9 +229,8 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 				final IFolder folder = root.getFolder(new Path(containerName));
 				folder.create(true, true, monitor);
 				container = folder;
-			} else {
+			} else
 				return null;
-			}
 		} else if (!(container instanceof IContainer)) {
 			MessageDialog.openError(getShell(), "Not a folder", containerName + " is not a folder. Cannot proceed");
 			return null;
@@ -213,8 +245,8 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 	 *
 	 * @param folder
 	 */
-	protected InputStream addFileHeader(final IContainer folder, final InputStream streamModel, final String title,
-			final String desc) throws CoreException {
+	protected InputStream replacePlaceHolders(final IContainer folder, final InputStream streamModel,
+			final String title, final String author, final String desc) {
 
 		String line = "";
 		final StringWriter writer = new StringWriter();
@@ -225,18 +257,17 @@ public abstract class AbstractNewModelWizard extends Wizard implements INewWizar
 			}
 		} catch (final IOException ioe) {
 			ioe.printStackTrace();
-			final IStatus status =
-					new Status(IStatus.ERROR, "ExampleWizard", IStatus.OK, ioe.getLocalizedMessage(), null);
-			throw new CoreException(status);
 		}
 		/* Final output in the String */
 		final String str = writer.toString();
-		final String output = getHeader(folder, str, title);
+		final String output = getHeader(folder, str, title, author, desc);
 		return new ByteArrayInputStream(output.getBytes());
 	}
 
-	protected String getHeader(final IContainer folder, final String str, final String title) {
-		return fileHeader + str.replaceAll("\\$TITLE\\$", title);
+	protected String getHeader(final IContainer folder, final String str, final String title, final String author,
+			final String desc) {
+		return /* fileHeader + */str.replaceAll("\\$TITLE\\$", title).replaceAll("\\$AUTHOR\\$", author)
+				.replaceAll("\\$DESC\\$", desc);
 	}
 
 	/** Initialize the file contents to contents of the given resource. */
