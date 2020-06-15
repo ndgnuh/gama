@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.kernel.experiment.ExperimentAgent.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.kernel.experiment.ExperimentAgent.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -34,13 +34,12 @@ import gama.dev.utils.DEBUG;
 import gama.kernel.root.PlatformAgent;
 import gama.kernel.simulation.SimulationAgent;
 import gama.kernel.simulation.SimulationClock;
-import gama.kernel.simulation.SimulationPopulation;
 import gama.kernel.simulation.SimulationClock.ExperimentClock;
+import gama.kernel.simulation.SimulationPopulation;
 import gama.metamodel.agent.GamlAgent;
 import gama.metamodel.population.IPopulation;
 import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
-import gama.processor.annotations.ITypeProvider;
 import gama.processor.annotations.GamlAnnotations.action;
 import gama.processor.annotations.GamlAnnotations.arg;
 import gama.processor.annotations.GamlAnnotations.doc;
@@ -50,6 +49,7 @@ import gama.processor.annotations.GamlAnnotations.setter;
 import gama.processor.annotations.GamlAnnotations.species;
 import gama.processor.annotations.GamlAnnotations.variable;
 import gama.processor.annotations.GamlAnnotations.vars;
+import gama.processor.annotations.ITypeProvider;
 import gama.runtime.ExperimentScheduler;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.ExecutionScope;
@@ -63,6 +63,7 @@ import gaml.species.ISpecies;
 import gaml.types.GamaGeometryType;
 import gaml.types.IType;
 import gaml.types.Types;
+import gaml.variables.IVariable;
 
 /**
  *
@@ -732,10 +733,12 @@ public class ExperimentAgent extends GamlAgent implements IExperimentAgent {
 			// However, if the experiment is defined with keep_simulations: false, we should not give access to the
 			// value, as no simulations can be made available (see #2727)
 			if (this.getModel().getSpecies().hasVar(varName)) {
-				if (!getExperiment().getSpecies().keepsSimulations())
+				final IVariable var = getModel().getSpecies().getVar(varName);
+				if (!var.isNotModifiable() && !getExperiment().getSpecies().keepsSimulations())
+
 					throw GamaRuntimeException.error("This experiment does not keep its simulations. " + varName
 							+ " cannot be retrieved in this context", this);
-				return getModel().getSpecies().getVar(varName).getInitialValue(this);
+				return var.getInitialValue(this);
 			}
 			// Fourth case: this is a parameter, so we get it from the species
 			if (getSpecies().hasParameter(varName))

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.GamaQuadTree.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.GamaQuadTree.java, in plugin gama.core, is part of the source code of the GAMA modeling and
+ * simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -14,7 +14,6 @@ package gama.metamodel.topology;
 import static com.google.common.collect.Iterables.limit;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 
 import gama.common.geometry.Envelope3D;
@@ -25,6 +24,7 @@ import gama.metamodel.shape.GamaPoint;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.filter.IAgentFilter;
 import gama.runtime.scope.IScope;
+import gama.util.list.GamaListFactory;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.operators.Maths;
@@ -115,9 +115,9 @@ public class GamaQuadTree implements ISpatialIndex {
 		try (final ICollector<IAgent> list = Collector.newOrderedSet()) {
 			root.findIntersects(r, list);
 			if (list.isEmpty())
-				return Collections.EMPTY_LIST;
+				return GamaListFactory.create();
 			filter.filter(scope, source, list);
-			scope.getRandom().shuffle2(list);
+			list.shuffleInPlaceWith(scope.getRandom());
 			return list.items();
 		}
 	}
@@ -132,7 +132,7 @@ public class GamaQuadTree implements ISpatialIndex {
 		try {
 			final Collection<IAgent> result = findIntersects(scope, source, env, f);
 			if (result.isEmpty())
-				return Collections.EMPTY_LIST;
+				return GamaListFactory.create();
 			result.removeIf(each -> source.euclidianDistanceTo(each) > dist);
 			return result;
 		} finally {

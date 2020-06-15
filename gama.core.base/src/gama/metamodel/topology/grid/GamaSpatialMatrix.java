@@ -830,7 +830,8 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 		agents.remove(source);
 		if (agents.isEmpty())
 			return null;
-		return (IAgent) scope.getRandom().shuffle(agents).get(0);
+		scope.getRandom().shuffleInPlace(agents);
+		return agents.get(0);
 	}
 
 	public IAgent getAgentClosestTo(final IScope scope, final IShape source, final IAgentFilter filter)
@@ -847,8 +848,8 @@ public class GamaSpatialMatrix extends GamaMatrix<IShape> implements IGrid {
 		int cpt = 0;
 		cells.add(startAg.getIndex());
 		// final int max = this.numCols * this.numRows;
-		List<IAgent> neighb =
-				scope.getRandom().shuffle(getNeighborhoods(scope, startAg, cells, new ArrayList<IAgent>()));
+		List<IAgent> neighb = getNeighborhoods(scope, startAg, cells, new ArrayList<IAgent>());
+		scope.getRandom().shuffleInPlace(neighb);
 		while (cpt < this.numCols * this.numRows) {
 			cpt++;
 			try (ICollector<IAgent> neighb2 = Collector.newSet()) {

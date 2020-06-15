@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.grid.NoCacheNeighborhood.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.grid.NoCacheNeighborhood.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -52,7 +52,7 @@ public class NoCacheNeighborhood implements INeighborhood {
 				}
 			}
 			// Addresses Issue 1071 by explicitly shuffling the result
-			scope.getRandom().shuffle2(result);
+			result.shuffleInPlaceWith(scope.getRandom());
 			return result.items();
 		}
 	}

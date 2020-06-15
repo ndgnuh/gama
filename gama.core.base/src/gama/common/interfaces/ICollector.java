@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.util.ICollector.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.util.ICollector.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -25,6 +25,7 @@ public interface ICollector<E> extends Collection<E>, Closeable {
 		Collector.release(this);
 	}
 
-	void shuffleInPlaceWith(RandomUtils random);
-
+	default void shuffleInPlaceWith(final RandomUtils random) {
+		random.shuffleInPlace(items());
+	}
 }

@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gaml.variables.Variable.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gaml.variables.Variable.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -21,13 +21,13 @@ import gama.common.interfaces.IExecutable;
 import gama.common.interfaces.IGamlIssue;
 import gama.common.interfaces.IKeyword;
 import gama.common.interfaces.ISkill;
-import gama.processor.annotations.IConcept;
-import gama.processor.annotations.ISymbolKind;
 import gama.processor.annotations.GamlAnnotations.doc;
 import gama.processor.annotations.GamlAnnotations.facet;
 import gama.processor.annotations.GamlAnnotations.facets;
 import gama.processor.annotations.GamlAnnotations.inside;
 import gama.processor.annotations.GamlAnnotations.symbol;
+import gama.processor.annotations.IConcept;
+import gama.processor.annotations.ISymbolKind;
 import gama.runtime.benchmark.StopWatch;
 import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
@@ -241,8 +241,10 @@ public class Variable extends Symbol implements IVariable {
 			// return;
 			final IExpression amongExpression = vd.getFacetExpr(AMONG);
 			final IExpression initExpression = vd.getFacetExpr(INIT);
-			if (amongExpression == null || initExpression == null) { return; }
-			if (!(amongExpression instanceof ListExpression) || !initExpression.isConst()) { return; }
+			if (amongExpression == null || initExpression == null)
+				return;
+			if (!(amongExpression instanceof ListExpression) || !initExpression.isConst())
+				return;
 			final ListExpression list = (ListExpression) amongExpression;
 			final Object init = initExpression.getConstValue();
 			if (!list.containsValue(init)) {
@@ -354,19 +356,20 @@ public class Variable extends Symbol implements IVariable {
 
 	}
 
-	protected IExpression updateExpression, initExpression, amongExpression, functionExpression, onChangeExpression;
-	protected IType type/* , contentType */;
-	protected boolean isNotModifiable /* , doUpdate */;
-	// private final int definitionOrder;
+	protected IExpression initExpression;
+	protected final IExpression updateExpression, amongExpression, functionExpression, onChangeExpression;
+	protected IType type;
+	protected final boolean isNotModifiable;
+	// protected boolean isSpeciesConst;
 	public IGamaHelper getter, initer, setter;
 	private IExecutable on_changer;
-	protected String /* gName, sName, iName, */ pName, cName;
-	protected ISkill gSkill/* , iSkill */, sSkill;
+	protected String pName, cName;
+	protected ISkill gSkill, sSkill;
+	// private Object speciesWideValue;
 
 	public Variable(final IDescription sd) {
 		super(sd);
 		final VariableDescription desc = (VariableDescription) sd;
-		// doUpdate = true;
 		setName(sd.getName());
 		pName = desc.getParameterName();
 		cName = getLiteral(IKeyword.CATEGORY, null);
@@ -377,8 +380,17 @@ public class Variable extends Symbol implements IVariable {
 		onChangeExpression = getFacet(IKeyword.ON_CHANGE);
 		isNotModifiable = desc.isNotModifiable();
 		type = desc.getGamlType();
-		// contentType = desc.getContentType();
-		// definitionOrder = desc.getDefinitionOrder();
+		// computeSpeciesConst();
+	}
+
+	// private void computeSpeciesConst() {
+	// isSpeciesConst = isNotModifiable && updateExpression == null && functionExpression == null && getter == null
+	// && setter == null && (initExpression == null || initExpression.isConst());
+	// }
+
+	@Override
+	public boolean isNotModifiable() {
+		return isNotModifiable;
 	}
 
 	private void buildHelpers(final AbstractSpecies species) {
@@ -398,31 +410,9 @@ public class Variable extends Symbol implements IVariable {
 		return type.cast(scope, v, null, false);
 	}
 
-	// private void computeSpeciesConst(final IScope scope) {
-	// if ( !isNotModifiable ) { return; }
-	// if ( initExpression != null && !initExpression.isConst() ) { return; }
-	// if ( updateExpression != null && !updateExpression.isConst() ) { return;
-	// }
-	// if ( getter != null || setter != null ) { return; }
-	// for ( final IVariable v : dependsOn ) {
-	// if ( !v.isConst() ) { return; }
-	// }
-	// isSpeciesConst = true;
-	// computeStaticValue(scope);
-	// }
-	//
-	// public void computeStaticValue(final IScope scope) {
-	// staticValue = coerce(null, getAnyExpression(scope).value(scope));
-	// }
-
-	// @Override
-	// public String toGaml() {
-	// return getName();
-	// }
-
 	@Override
 	public String toString() {
-		String result = isConst() ? IKeyword.CONST : IKeyword.VAR;
+		String result = isNotModifiable() ? IKeyword.CONST : IKeyword.VAR;
 		result += " " + type.toString() + "[" + getName() + "]";
 		return result;
 	}
@@ -432,11 +422,7 @@ public class Variable extends Symbol implements IVariable {
 		final IExpressionDescription desc = ConstantExpressionDescription.create(initial);
 		initExpression = desc.getExpression();
 		setFacet(IKeyword.INIT, desc);
-	}
-
-	@Override
-	public boolean isConst() {
-		return false /* isSpeciesConst */;
+		// computeSpeciesConst();
 	}
 
 	@Override
@@ -504,11 +490,6 @@ public class Variable extends Symbol implements IVariable {
 		return cName;
 	}
 
-	// @Override
-	// public Integer getDefinitionOrder() {
-	// return definitionOrder;
-	// }
-
 	@Override
 	public void setChildren(final Iterable<? extends ISymbol> children) {}
 
@@ -524,7 +505,8 @@ public class Variable extends Symbol implements IVariable {
 
 	@Override
 	public final void setVal(final IScope scope, final IAgent agent, final Object v) throws GamaRuntimeException {
-		if (isNotModifiable) { return; }
+		if (isNotModifiable)
+			return;
 		final Object oldValue = onChangeExpression == null ? null : value(scope, agent);
 		_setVal(agent, scope, v);
 		if (onChangeExpression != null && !Objects.equal(oldValue, v)) {
@@ -544,14 +526,21 @@ public class Variable extends Symbol implements IVariable {
 		} else {
 			agent.setAttribute(name, val);
 		}
+		// if (isSpeciesConst) {
+		// speciesWideValue = val;
+		// }
 	}
 
 	protected Object checkAmong(final IAgent agent, final IScope scope, final Object val) throws GamaRuntimeException {
-		if (amongExpression == null) { return val; }
+		if (amongExpression == null)
+			return val;
 		final List among = Cast.asList(scope, scope.evaluate(amongExpression, agent).getValue());
-		if (among == null) { return val; }
-		if (among.contains(val)) { return val; }
-		if (among.isEmpty()) { return null; }
+		if (among == null)
+			return val;
+		if (among.contains(val))
+			return val;
+		if (among.isEmpty())
+			return null;
 		throw GamaRuntimeException.error("Value " + val + " is not included in the possible values of variable " + name,
 				scope);
 	}
@@ -563,12 +552,16 @@ public class Variable extends Symbol implements IVariable {
 
 	@Override
 	public Object value(final IScope scope, final IAgent agent) throws GamaRuntimeException {
-		if (getter != null) { return getter.run(scope, agent, gSkill == null ? agent : gSkill); }
-		if (functionExpression != null) { return scope.evaluate(functionExpression, agent).getValue(); }
+		// if (isSpeciesConst) { return speciesWideValue; }
+		if (getter != null)
+			return getter.run(scope, agent, gSkill == null ? agent : gSkill);
+		if (functionExpression != null)
+			return scope.evaluate(functionExpression, agent).getValue();
 		if (!agent.hasAttribute(name)) {
 			// Var not yet initialized. May happen when asking for its value while initializing an editor
 			// See Issue #2781
-			if (isNotModifiable) { return getInitialValue(scope); }
+			if (isNotModifiable)
+				return getInitialValue(scope);
 		}
 		return agent.getAttribute(name);
 	}
@@ -595,7 +588,8 @@ public class Variable extends Symbol implements IVariable {
 
 	@Override
 	public List getAmongValue(final IScope scope) {
-		if (amongExpression == null) { return null; }
+		if (amongExpression == null)
+			return null;
 		// if (!amongExpression.isConst()) {
 		// return null;
 		// }
@@ -669,7 +663,8 @@ public class Variable extends Symbol implements IVariable {
 	@Override
 	public boolean isMicroPopulation() {
 		final VariableDescription desc = getDescription();
-		if (desc == null) { return false; }
+		if (desc == null)
+			return false;
 		return desc.isSyntheticSpeciesContainer();
 	}
 

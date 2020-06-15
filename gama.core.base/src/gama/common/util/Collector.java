@@ -75,25 +75,29 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	@Override
 	public boolean removeIf(final Predicate<? super E> filter) {
-		if (collect != null) { return collect.removeIf(filter); }
+		if (collect != null)
+			return collect.removeIf(filter);
 		return ICollector.super.removeIf(filter);
 	}
 
 	@Override
 	public Spliterator<E> spliterator() {
-		if (collect != null) { return collect.spliterator(); }
+		if (collect != null)
+			return collect.spliterator();
 		return ICollector.super.spliterator();
 	}
 
 	@Override
 	public Stream<E> stream() {
-		if (collect != null) { return collect.stream(); }
+		if (collect != null)
+			return collect.stream();
 		return ICollector.super.stream();
 	}
 
 	@Override
 	public Stream<E> parallelStream() {
-		if (collect != null) { return collect.parallelStream(); }
+		if (collect != null)
+			return collect.parallelStream();
 		return ICollector.super.parallelStream();
 	}
 
@@ -111,13 +115,15 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 			@Override
 			public boolean remove(final Object o) {
-				if (o == null) { return false; }
+				if (o == null)
+					return false;
 				return super.remove(o);
 			}
 
 			@Override
 			public boolean removeAll(final Collection<?> o) {
-				if (o == null) { return false; }
+				if (o == null)
+					return false;
 				return super.removeAll(o);
 			}
 		}
@@ -136,7 +142,7 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 		@Override
 		public void shuffleInPlaceWith(final RandomUtils random) {
-			random.shuffle2(items());
+			random.shuffleInPlace(items());
 
 		}
 	}
@@ -164,11 +170,6 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 		}
 
-		@Override
-		public void shuffleInPlaceWith(final RandomUtils random) {
-			random.shuffle(items());
-
-		}
 	}
 
 	public static class AsOrderedSet<E> extends AsSet<E> {
@@ -186,31 +187,36 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	@Override
 	public int size() {
-		if (collect == null) { return 0; }
+		if (collect == null)
+			return 0;
 		return collect.size();
 	}
 
 	@Override
 	public boolean contains(final Object o) {
-		if (collect == null) { return false; }
+		if (collect == null)
+			return false;
 		return collect.contains(o);
 	}
 
 	@Override
 	public Object[] toArray() {
-		if (collect == null) { return new Object[0]; }
+		if (collect == null)
+			return new Object[0];
 		return collect.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(final T[] a) {
-		if (collect == null) { return a; }
+		if (collect == null)
+			return a;
 		return collect.toArray(a);
 	}
 
 	@Override
 	public boolean containsAll(final Collection<?> c) {
-		if (collect == null) { return false; }
+		if (collect == null)
+			return false;
 		return collect.containsAll(c);
 	}
 
@@ -222,13 +228,15 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	@Override
 	public boolean removeAll(final Collection<?> c) {
-		if (collect == null) { return false; }
+		if (collect == null)
+			return false;
 		return collect.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(final Collection<?> c) {
-		if (collect == null) { return false; }
+		if (collect == null)
+			return false;
 		return collect.retainAll(c);
 	}
 
@@ -252,7 +260,8 @@ public abstract class Collector<E, C extends Collection<E>> implements ICollecto
 
 	@Override
 	public boolean remove(final Object e) {
-		if (collect == null) { return false; }
+		if (collect == null)
+			return false;
 		return collect.remove(e);
 	}
 

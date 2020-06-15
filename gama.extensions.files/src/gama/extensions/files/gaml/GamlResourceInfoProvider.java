@@ -26,9 +26,11 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
+import gama.common.interfaces.IKeyword;
+import gama.core.lang.gaml.Pragma;
+import gama.core.lang.gaml.StringLiteral;
 import gama.core.lang.gaml.indexer.GamlResourceIndexer;
 import gama.core.lang.gaml.resource.GamlResource;
 import gama.dev.utils.DEBUG;
@@ -44,7 +46,7 @@ public class GamlResourceInfoProvider {
 
 	private ResourceSet resourceSet;
 
-	public GamlFileInfo getInfo(final URI originalURI, final Resource r, final long stamp) {
+	public GamlFileInfo getInfo(final URI originalURI, final GamlResource r, final long stamp) {
 
 		Set<String> imports = null;
 		final Set<URI> uris = GamlResourceIndexer.INSTANCE.directImportsOf(originalURI);
@@ -74,10 +76,16 @@ public class GamlResourceInfoProvider {
 		Set<String> exps = null;
 
 		final TreeIterator<EObject> tree = GAML.getEcoreUtils().getAllContents(r, true);
+		boolean processExperiments = true;
 
 		while (tree.hasNext()) {
 			final EObject e = tree.next();
-			if (GAML.getEcoreUtils().isStringLiteral(e)) {
+			if (e instanceof Pragma) {
+				final String s = ((Pragma) e).getName();
+				if (IKeyword.NO_EXPERIMENT.equals(s)) {
+					processExperiments = false;
+				}
+			} else if (e instanceof StringLiteral) {
 				final String s = GAML.getEcoreUtils().getKeyOf(e);
 				if (s.length() > 4) {
 					final URI u = URI.createFileURI(s);
@@ -89,7 +97,7 @@ public class GamlResourceInfoProvider {
 						uses.add(s);
 					}
 				}
-			} else if (GAML.getEcoreUtils().isExperiment(e)) {
+			} else if (processExperiments && GAML.getEcoreUtils().isExperiment(e)) {
 				String s = GAML.getEcoreUtils().getNameOf(e);
 				if (s == null) {
 					DEBUG.ERR("EXPERIMENT NULL");
@@ -102,7 +110,7 @@ public class GamlResourceInfoProvider {
 					exps = new LinkedHashSet();
 				}
 				exps.add(s);
-			} else if (GAML.getEcoreUtils().isHeadlessExperiment(e)) {
+			} else if (processExperiments && GAML.getEcoreUtils().isHeadlessExperiment(e)) {
 				String s = GAML.getEcoreUtils().getNameOf(e);
 
 				if (GAML.getEcoreUtils().isBatch(e)) {
@@ -123,7 +131,7 @@ public class GamlResourceInfoProvider {
 	public GamlFileInfo getInfo(final URI uri, final long stamp) {
 		try {
 
-			final Resource r = getResourceSet().getResource(uri, true);
+			final GamlResource r = (GamlResource) getResourceSet().getResource(uri, true);
 			return getInfo(uri, r, stamp);
 		} finally {
 			clearResourceSet(getResourceSet());

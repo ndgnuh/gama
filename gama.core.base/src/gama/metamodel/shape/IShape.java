@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.shape.IShape.java, in plugin gama.core, is part of the source code of the GAMA modeling and
- * simulation platform (v. 1.8)
+ * gama.metamodel.shape.IShape.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -55,6 +55,7 @@ import gaml.types.IType;
 		@variable (
 				name = "attributes",
 				type = IType.MAP,
+				index = IType.STRING,
 				doc = { @doc ("Returns the attributes kept by this geometry (the ones shared with the agent)") }),
 		@variable (
 				name = "depth",

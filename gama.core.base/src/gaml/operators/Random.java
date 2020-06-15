@@ -32,6 +32,7 @@ import gama.runtime.exceptions.GamaRuntimeException;
 import gama.runtime.scope.IScope;
 import gama.util.list.GamaListFactory;
 import gama.util.list.IList;
+import gama.util.map.IMap;
 import gama.util.matrix.IMatrix;
 import gaml.operators.noisegeneration.OpenSimplexNoise;
 import gaml.operators.noisegeneration.SimplexNoise;
@@ -72,6 +73,116 @@ public class Random {
 	@test ("seed <- 1.0; TGauss({0,0.3}) = 0.10073201959421514")
 	public static Double opTGauss(final IScope scope, final GamaPoint p) {
 		return opTGauss(scope, GamaListFactory.wrap(Types.FLOAT, p.x, p.y));
+	}
+
+	@operator (
+			value = "weibull_density",
+			can_be_const = false,
+			category = { IOperatorCategory.RANDOM },
+			concept = { IConcept.RANDOM })
+	@doc (
+			value = "weibull_density(x,shape,scale) returns the probability density function (PDF) at the specified point x "
+					+ "of the Weibull distribution with the given shape and scale.",
+			examples = { @example (
+					value = "weibull_rnd(1,2,3) ",
+					equals = "0.731",
+					test = false) },
+			see = { "binomial", "gamma_rnd", "gauss_rnd", "lognormal_rnd", "poisson", "rnd", "skew_gauss",
+					"lognormal_density", "gamma_density" })
+	@no_test (Reason.IMPOSSIBLE_TO_TEST)
+	public static Double OpWeibullDistDensity(final IScope scope, final Double x, final Double shape,
+			final Double scale) throws GamaRuntimeException {
+		final WeibullDistribution dist = new WeibullDistribution(scope.getRandom().getGenerator(), shape, scale);
+
+		return dist.density(x);
+	}
+
+	@operator (
+			value = "lognormal_density",
+			can_be_const = false,
+			category = { IOperatorCategory.RANDOM },
+			concept = { IConcept.RANDOM })
+	@doc (
+			value = "lognormal_density(x,shape,scale) returns the probability density function (PDF) at the specified point x "
+					+ "of the logNormal distribution with the given shape and scale.",
+			examples = { @example (
+					value = "lognormal_density(1,2,3) ",
+					equals = "0.731",
+					test = false) },
+			see = { "binomial", "gamma_rnd", "gauss_rnd", "poisson", "rnd", "skew_gauss", "truncated_gauss",
+					"weibull_rnd", "weibull_density", "gamma_density" })
+	@no_test (Reason.IMPOSSIBLE_TO_TEST)
+	public static Double OpLogNormalDist(final IScope scope, final Double x, final Double shape, final Double scale)
+			throws GamaRuntimeException {
+		final LogNormalDistribution dist = new LogNormalDistribution(scope.getRandom().getGenerator(), shape, scale);
+		return dist.density(x);
+	}
+
+	@operator (
+			value = "gamma_density",
+			can_be_const = false,
+			category = { IOperatorCategory.RANDOM },
+			concept = { IConcept.RANDOM })
+	@doc (
+			value = "gamma_density(x,shape,scale) returns the probability density function (PDF) at the specified point x "
+					+ "of the Gamma distribution with the given shape and scale.",
+			examples = { @example (
+					value = "gamma_density(1,9,0.5)",
+					equals = "0.731",
+					test = false) },
+			see = { "binomial", "gauss_rnd", "lognormal_rnd", "poisson", "rnd", "skew_gauss", "truncated_gauss",
+					"weibull_rnd", "weibull_density", "lognormal_density" })
+	@no_test (Reason.IMPOSSIBLE_TO_TEST)
+	public static Double OpGammaDist(final IScope scope, final Double x, final Double shape, final Double scale)
+			throws GamaRuntimeException {
+		final GammaDistribution dist = new GammaDistribution(scope.getRandom().getGenerator(), shape, scale,
+				GammaDistribution.DEFAULT_INVERSE_ABSOLUTE_ACCURACY);
+		return dist.density(x);
+	}
+
+	@operator (
+			value = "rnd_choice",
+			concept = { IConcept.RANDOM },
+			type = ITypeProvider.KEY_TYPE_AT_INDEX + 1)
+	@doc (
+			value = "returns a key from the map with a probability following the (normalized) distribution described in map values (a form of lottery)",
+			examples = { @example (
+					value = "rnd_choice([\"toto\"::0.2,\\\"tata\\\"::0.5,\\\"tonton\\\"::0.3])",
+					equals = "2/10 chances to return \"toto\", 5/10 chances to return \"tata\", 3/10 chances to return \"tonton\"",
+					test = false) },
+			see = { "rnd" })
+	@test ("seed <- 1.0; rnd_choice([\"first\"::0.2,\"second\"::0.5,\"last\"::0.3]) = \"last\"")
+	public static <T> T opRndCoice(final IScope scope, final IMap<T, ?> distribution) {
+		final IList<T> key = distribution.getKeys();
+		final IList<Double> normalizedDistribution = GamaListFactory.create(Types.FLOAT);
+		Double sumElt = 0.0;
+
+		for (final T k : key) {
+			Object eltDistrib = distribution.get(k);
+			final Double elt = Cast.asFloat(scope, eltDistrib);
+			if (elt < 0.0)
+				throw GamaRuntimeException.create(new RuntimeException("Distribution elements should be positive."),
+						scope);
+			normalizedDistribution.add(elt);
+			sumElt = sumElt + elt;
+		}
+		if (sumElt == 0.0)
+			throw GamaRuntimeException
+					.create(new RuntimeException("Distribution elements should not be all equal to 0"), scope);
+
+		for (int i = 0; i < normalizedDistribution.size(); i++) {
+			normalizedDistribution.set(i, normalizedDistribution.get(i) / sumElt);
+		}
+
+		double randomValue = RANDOM(scope).between(0., 1.);
+
+		for (int i = 0; i < distribution.size(); i++) {
+			randomValue = randomValue - normalizedDistribution.get(i);
+			if (randomValue <= 0)
+				return key.get(i);
+		}
+
+		throw GamaRuntimeException.create(new RuntimeException("Malformed distribution"), scope);
 	}
 
 	@operator (
@@ -232,7 +343,7 @@ public class Random {
 		if (target == null || target.isEmpty(scope))
 			return GamaListFactory.create(target == null ? Types.NO_TYPE : target.getGamlType().getContentType());
 		final IList list = target.listValue(scope, target.getGamlType().getContentType(), false).copy(scope);
-		RANDOM(scope).shuffle(list);
+		RANDOM(scope).shuffleInPlace(list);
 		return list;
 	}
 
@@ -273,7 +384,8 @@ public class Random {
 					value = "shuffle ('abc')",
 					equals = "'bac' (for example)",
 					test = false) })
-	@test ("seed <- 1.0; shuffle ('abc') = 'abc'")
+	@no_test (Reason.IMPOSSIBLE_TO_TEST)
+	// @test ("seed <- 1.0; shuffle ('abc') = 'abc'")
 	public static String opShuffle(final IScope scope, final String target) {
 		return RANDOM(scope).shuffle(target);
 	}

@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlResourceServices.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
- * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlResourceServices.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and simulation
+ * platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -32,13 +32,13 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Iterables;
 
-import gama.core.lang.gaml.documentation.GamlResourceDocumenter;
-import gama.core.lang.gaml.indexer.GamlResourceIndexer;
-import gama.core.lang.validation.IGamlBuilderListener;
 import gama.GAMA;
 import gama.common.interfaces.IDocManager;
 import gama.common.interfaces.IGamlDescription;
 import gama.common.interfaces.IKeyword;
+import gama.core.lang.gaml.documentation.GamlResourceDocumenter;
+import gama.core.lang.gaml.indexer.GamlResourceIndexer;
+import gama.core.lang.validation.IGamlBuilderListener;
 import gama.util.map.GamaMapFactory;
 import gama.util.map.IMap;
 import gaml.descriptions.IDescription;
@@ -192,6 +192,7 @@ public class GamlResourceServices {
 	}
 
 	public static String getModelPathOf(final Resource r) {
+		// Likely in a headless scenario (w/o workspace)
 		if (r.getURI().isFile())
 			return new Path(r.getURI().toFileString()).toOSString();
 		else {
@@ -202,12 +203,32 @@ public class GamlResourceServices {
 		}
 	}
 
+	private static boolean isProject(final File f) {
+		final String[] files = f.list();
+		if (files != null) {
+			for (final String s : files) {
+				if (".project".equals(s))
+					return true;
+			}
+		}
+		return false;
+	}
+
 	public static String getProjectPathOf(final Resource r) {
-		final IPath path = getPathOf(r);
-		// final String modelPath, projectPath;
-		if (r.getURI().isFile())
-			return path.toOSString();
-		else {
+		if (r == null)
+			return "";
+		final URI uri = r.getURI();
+		if (uri == null)
+			return "";
+		// Cf. #2983 -- we are likely in a headless scenario
+		if (uri.isFile()) {
+			File project = new File(uri.toFileString());
+			while (project != null && !isProject(project)) {
+				project = project.getParentFile();
+			}
+			return project == null ? "" : project.getAbsolutePath();
+		} else {
+			final IPath path = getPathOf(r);
 			final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 			final IPath fullPath = file.getProject().getLocation();
 			return fullPath == null ? "" : fullPath.toOSString();

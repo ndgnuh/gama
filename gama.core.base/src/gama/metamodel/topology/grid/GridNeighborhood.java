@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.grid.GridNeighborhood.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.grid.GridNeighborhood.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -88,9 +88,11 @@ public abstract class GridNeighborhood implements INeighborhood {
 
 	@Override
 	public int neighborsIndexOf(final IScope scope, final int placeIndex, final int n) {
-		if (n == 1) { return 0; }
+		if (n == 1)
+			return 0;
 		final int size = neighborsIndexes[placeIndex].length;
-		if (n > size) { return neighbors[placeIndex].length - 1; }
+		if (n > size)
+			return neighbors[placeIndex].length - 1;
 		return neighborsIndexes[placeIndex][n - 2];
 	}
 
@@ -111,7 +113,7 @@ public abstract class GridNeighborhood implements INeighborhood {
 			for (int i = 0; i < nnSize; i++) {
 				result.add(matrix.matrix[nn[i]].getAgent());
 			}
-			scope.getRandom().shuffle2(result);
+			result.shuffleInPlaceWith(scope.getRandom());
 			return result.items();
 		}
 	}

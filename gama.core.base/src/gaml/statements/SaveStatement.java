@@ -101,10 +101,12 @@ import gama.util.list.IList;
 import gama.util.map.GamaMapFactory;
 import gaml.compilation.annotations.validator;
 import gaml.compilation.interfaces.IDescriptionValidator;
+import gaml.constants.ConstantExpression;
 import gaml.descriptions.IDescription;
 import gaml.descriptions.SpeciesDescription;
 import gaml.descriptions.StatementDescription;
 import gaml.expressions.IExpression;
+import gaml.expressions.IExpressionFactory;
 import gaml.expressions.MapExpression;
 import gaml.operators.Cast;
 import gaml.operators.Comparison;
@@ -160,11 +162,11 @@ import gaml.types.Types;
 						doc = @doc ("the name of the projection, e.g. crs:\"EPSG:4326\" or its EPSG id, e.g. crs:4326. Here a list of the CRS codes (and EPSG id): http://spatialreference.org")),
 				@facet (
 						name = IKeyword.ATTRIBUTES,
-						type = { IType.MAP },
+						type = { IType.MAP, IType.LIST },
 						optional = true,
 						remote_context = true,
 						doc = @doc (
-								value = "Allows to specify the attributes of a shape file where agents are saved. Must be expressed as a literal map. The keys of the map are the names of the attributes that will be present in the file, the values are whatever expressions neeeded to define their value")),
+								value = "Allows to specify the attributes of a shape file or GeoJson file where agents are saved. Can be expressed as a list of string or as a literal map. When expressed as a list, each value should represent the name of an attribute of the shape or agent. The keys of the map are the names of the attributes that will be present in the file, the values are whatever expressions neeeded to define their value. ")),
 				@facet (
 						name = IKeyword.WITH,
 						type = { IType.MAP },
@@ -195,7 +197,7 @@ import gaml.types.Types;
 				@usage (
 						value = "To save the geometries of all the agents of a species into a shapefile (with optional attributes):",
 						examples = { @example (
-								value = "save species_of(self) to: \"save_shapefile.shp\" type: \"shp\" with: [name::\"nameAgent\", location::\"locationAgent\"] crs: \"EPSG:4326\";") }),
+								value = "save species_of(self) to: \"save_shapefile.shp\" type: \"shp\" attributes: ['nameAgent'::name, 'locationAgent'::location] crs: \"EPSG:4326\";") }),
 				@usage (
 						value = "To save the grid_value attributes of all the cells of a grid into an ESRI ASCII Raster file:",
 						examples = { @example (
@@ -225,24 +227,26 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 		public void validate(final StatementDescription description) {
 
 			final StatementDescription desc = description;
-			final Facets args = desc.getPassedArgs();
+			final Facets with = desc.getPassedArgs();
 			final IExpression att = desc.getFacetExpr(ATTRIBUTES);
+			final boolean isMap = att instanceof MapExpression;
 			if (att != null) {
-				if (!(att instanceof MapExpression)) {
-					desc.error("attributes must be expressed as a map<string, unknown>", IGamlIssue.WRONG_TYPE,
-							ATTRIBUTES);
-					return;
-				}
-
-				final MapExpression map = (MapExpression) att;
-				if (map.getGamlType().getKeyType() != Types.STRING) {
-					desc.error(
-							"The type of the keys of the attributes map must be string. These will be used for naming the attributes in the file",
+				if (!isMap && !att.getGamlType().isTranslatableInto(Types.LIST.of(Types.STRING))) {
+					desc.error("attributes must be expressed as a map<string, unknown> or as a list<string>",
 							IGamlIssue.WRONG_TYPE, ATTRIBUTES);
 					return;
 				}
+				if (isMap) {
+					final MapExpression map = (MapExpression) att;
+					if (map.getGamlType().getKeyType() != Types.STRING) {
+						desc.error(
+								"The type of the keys of the attributes map must be string. These will be used for naming the attributes in the file",
+								IGamlIssue.WRONG_TYPE, ATTRIBUTES);
+						return;
+					}
+				}
 
-				if (args != null && !args.isEmpty()) {
+				if (with.exists()) {
 					desc.warning(
 							"'with' and 'attributes' are mutually exclusive. Only the first one will be considered",
 							IGamlIssue.CONFLICTING_FACETS, ATTRIBUTES, WITH);
@@ -261,23 +265,25 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 			final IType<?> t = data.getGamlType().getContentType();
 			final SpeciesDescription species = t.getSpecies();
 
-			if (att == null && (args == null || args.isEmpty()))
+			if (att == null && !with.exists())
 				return;
 			if (species == null) {
-				desc.error("Attributes can only be saved for agents", IGamlIssue.UNKNOWN_FACET,
-						att == null ? WITH : ATTRIBUTES);
-			} else {
-				if (args != null) {
-					args.forEachFacet((name, exp) -> {
-						if (!species.hasAttribute(name)) {
-							desc.error(
-									"Attribute " + name + " is not defined for the agents of " + data.serialize(false),
-									IGamlIssue.UNKNOWN_VAR, WITH);
-							return false;
-						}
-						return true;
-					});
+				if (with.exists() || isMap) {
+					desc.error("Attributes of geometries can only be specified with a list of attribute names",
+							IGamlIssue.UNKNOWN_FACET, att == null ? WITH : ATTRIBUTES);
 				}
+				// Error deactivated for fixing #2982.
+				// desc.error("Attributes can only be saved for agents", IGamlIssue.UNKNOWN_FACET,
+				// att == null ? WITH : ATTRIBUTES);
+			} else {
+				with.forEachFacet((name, exp) -> {
+					if (!species.hasAttribute(name)) {
+						desc.error("Attribute " + name + " is not defined for the agents of " + data.serialize(false),
+								IGamlIssue.UNKNOWN_VAR, WITH);
+						return false;
+					}
+					return true;
+				});
 			}
 		}
 
@@ -627,33 +633,33 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 
 	public void saveShape(final IList<? extends IShape> agents, final File f, final IScope scope, final boolean geoJson)
 			throws GamaRuntimeException {
-		final StringBuilder sb = new StringBuilder(agents.size() * 20);
+		final StringBuilder specs = new StringBuilder(agents.size() * 20);
 		final String geomType = getGeometryType(agents);
-		sb.append("geometry:" + geomType);
+		specs.append("geometry:" + geomType);
 		try {
 			final SpeciesDescription species =
 					agents instanceof IPopulation ? ((IPopulation) agents).getSpecies().getDescription()
 							: agents.getGamlType().getContentType().getSpecies();
 			final Map<String, IExpression> attributes = GamaMapFactory.create();
-			if (species != null) {
-				if (withFacet != null) {
-					computeInitsFromWithFacet(scope, withFacet, attributes, species);
-				} else if (attributesFacet != null) {
-					computeInitsFromAttributesFacet(scope, attributes, species);
-				}
-				for (final String e : attributes.keySet()) {
-					final IExpression var = attributes.get(e);
-					String name = e.replaceAll("\"", "");
-					name = name.replaceAll("'", "");
-					final String type = type(var);
-					sb.append(',').append(name).append(':').append(type);
-				}
+			// if (species != null) {
+			if (withFacet != null) {
+				computeInitsFromWithFacet(scope, withFacet, attributes, species);
+			} else if (attributesFacet != null) {
+				computeInitsFromAttributesFacet(scope, attributes, species);
 			}
+			for (final String e : attributes.keySet()) {
+				final IExpression var = attributes.get(e);
+				String name = e.replaceAll("\"", "");
+				name = name.replaceAll("'", "");
+				final String type = type(var);
+				specs.append(',').append(name).append(':').append(type);
+			}
+			// }
 			final IProjection proj = defineProjection(scope, f);
 			if (!geoJson) {
-				saveShapeFile(scope, f, agents, sb.toString(), attributes, proj);
+				saveShapeFile(scope, f, agents, specs.toString(), attributes, proj);
 			} else {
-				saveGeoJSonFile(scope, f, agents, sb.toString(), attributes, proj);
+				saveGeoJSonFile(scope, f, agents, specs.toString(), attributes, proj);
 			}
 		} catch (final GamaRuntimeException e) {
 			throw e;
@@ -711,7 +717,7 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					return null;
 				String[] cs = code.split("::");
 				if (cs.length == 2) {
-					Double val = Double.parseDouble(cs[1]);
+					final Double val = Double.parseDouble(cs[1]);
 					if (val == null)
 						return null;
 					else
@@ -853,7 +859,9 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 
 	private void computeInitsFromWithFacet(final IScope scope, final Arguments withFacet,
 			final Map<String, IExpression> values, final SpeciesDescription species) throws GamaRuntimeException {
-		if (withFacet.isEmpty() && species != null) {
+		if (species == null)
+			return;
+		if (withFacet.isEmpty()) {
 			for (final String var : species.getAttributeNames()) {
 				if (!NON_SAVEABLE_ATTRIBUTE_NAMES.contains(var)) {
 					values.put(var, species.getVarExpr(var, false));
@@ -867,6 +875,7 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 		}
 	}
 
+	@SuppressWarnings ("unchecked")
 	private void computeInitsFromAttributesFacet(final IScope scope, final Map<String, IExpression> values,
 			final SpeciesDescription species) throws GamaRuntimeException {
 		if (attributesFacet instanceof MapExpression) {
@@ -875,6 +884,16 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 				final String name = Cast.asString(scope, key.value(scope));
 				values.put(name, value);
 			});
+		} else {
+			final List<String> names =
+					GamaListFactory.create(scope, Types.STRING, Cast.asList(scope, attributesFacet.value(scope)));
+			if (species != null) {
+				names.forEach(n -> values.put(n,
+						species.hasAttribute(n) ? species.getVarExpr(n, false) : IExpressionFactory.NIL_EXPR));
+			} else {
+				// see #2982
+				names.forEach(n -> values.put(n, new ConstantExpression(n)));
+			}
 		}
 	}
 
@@ -950,6 +969,16 @@ public class SaveStatement extends AbstractStatementSequence implements IStateme
 					}
 				}
 				values.add(val);
+			}
+		} else {
+			// see #2982. Assume it is an attribute of the shape
+			for (final IExpression variable : attributeValues) {
+				final Object val = variable.value(scope);
+				if (val instanceof String) {
+					values.add(ag.getAttribute((String) val));
+				} else {
+					values.add("");
+				}
 			}
 		}
 		// AD Assumes that the type is ok.

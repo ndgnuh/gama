@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import gama.common.interfaces.ICollector;
 import gama.common.interfaces.IKeyword;
 import gama.common.preferences.GamaPreferences;
 import gama.dev.utils.DEBUG;
@@ -240,26 +239,30 @@ public class RandomUtils {
 		}
 	}
 
-	public void shuffle2(final Collection list) {
+	// public void shuffleInPlace(final Collection list) {
+	// final int size = list.size();
+	// if (size < 2) { return; }
+	// final Object[] a = list.toArray(new Object[size]);
+	// list.clear();
+	// for (int i = 0; i < size; i++) {
+	// final int change = between(i, size - 1);
+	// final Object helper = a[i];
+	// a[i] = a[change];
+	// a[change] = helper;
+	// list.add(a[i]);
+	// }
+	// }
+
+	public void shuffleInPlace(final Collection list) {
 		final int size = list.size();
-		if (size < 2) { return; }
+		if (size < 2)
+			return;
 		final Object[] a = list.toArray(new Object[size]);
 		list.clear();
-		for (int i = 0; i < size; i++) {
-			final int change = between(i, size - 1);
-			final Object helper = a[i];
-			a[i] = a[change];
-			a[change] = helper;
-			list.add(a[i]);
+		shuffleInPlace(a);
+		for (final Object o : a) {
+			list.add(o);
 		}
-	}
-
-	public void shuffle2(final Collector.AsList list) {
-		shuffle(list.items());
-	}
-
-	public void shuffle2(final ICollector list) {
-		shuffle2(list.items());
 	}
 
 	public <T> void shuffleInPlace(final T[] a) {
@@ -289,7 +292,16 @@ public class RandomUtils {
 		}
 	}
 
-	public List shuffle(final List list) {
+	public void shuffleInPlace(final char[] a) {
+		for (int i = 0; i < a.length; i++) {
+			final int change = between(i, a.length - 1);
+			final char helper = a[i];
+			a[i] = a[change];
+			a[change] = helper;
+		}
+	}
+
+	public void shuffleInPlace(final List list) {
 		for (int i = list.size(); i > 1; i--) {
 			final int i1 = i - 1;
 			final int j = between(0, i - 1);
@@ -297,12 +309,11 @@ public class RandomUtils {
 			list.set(i1, list.get(j));
 			list.set(j, tmp);
 		}
-		return list;
 	}
 
 	public String shuffle(final String string) {
 		final char[] c = string.toCharArray();
-		shuffle(c);
+		shuffleInPlace(c);
 		return String.copyValueOf(c);
 	}
 
@@ -342,28 +353,6 @@ public class RandomUtils {
 
 	public double next() {
 		return generator.nextDouble();
-	}
-
-	public int[] shuffle(final int[] array) {
-		for (int i = array.length; i > 1; i--) {
-			final int i1 = i - 1;
-			final int j = between(0, i - 1);
-			final int tmp = array[i1];
-			array[i1] = array[j];
-			array[j] = tmp;
-		}
-		return array;
-	}
-
-	public char[] shuffle(final char[] array) {
-		for (int i = array.length; i > 1; i--) {
-			final int i1 = i - 1;
-			final int j = between(0, i - 1);
-			final char tmp = array[i1];
-			array[i1] = array[j];
-			array[j] = tmp;
-		}
-		return array;
 	}
 
 	/**
@@ -422,7 +411,8 @@ public class RandomUtils {
 		 *            The number of bits.
 		 */
 		public BitString(final int length) {
-			if (length < 0) { throw new IllegalArgumentException("Length must be non-negative."); }
+			if (length < 0)
+				throw new IllegalArgumentException("Length must be non-negative.");
 			this.length = length;
 			this.data = new int[(length + WORD_LENGTH - 1) / WORD_LENGTH];
 		}
@@ -468,9 +458,8 @@ public class RandomUtils {
 			for (int i = 0; i < value.length(); i++) {
 				if (value.charAt(i) == '1') {
 					setBit(value.length() - (i + 1), true);
-				} else if (value.charAt(i) != '0') {
+				} else if (value.charAt(i) != '0')
 					throw new IllegalArgumentException("Illegal character at position " + i);
-				}
 			}
 		}
 
@@ -528,9 +517,8 @@ public class RandomUtils {
 		 *             If the index is not valid.
 		 */
 		private void assertValidIndex(final int index) {
-			if (index >= length || index < 0) {
+			if (index >= length || index < 0)
 				throw new IndexOutOfBoundsException("Invalid index: " + index + " (length: " + length + ")");
-			}
 		}
 
 		/**
@@ -555,33 +543,39 @@ public class RandomUtils {
 	}
 
 	public <K> K oneOf(final Collection<K> c) {
-		if (c == null || c.isEmpty()) { return null; }
+		if (c == null || c.isEmpty())
+			return null;
 		return (K) oneOf(c.toArray());
 	}
 
 	public <K> K oneOf(final List<K> c) {
-		if (c == null || c.isEmpty()) { return null; }
+		if (c == null || c.isEmpty())
+			return null;
 		return c.get(between(0, c.size() - 1));
 	}
 
 	public <K> K oneOf(final K[] c) {
-		if (c == null || c.length == 0) { return null; }
+		if (c == null || c.length == 0)
+			return null;
 		return c[between(0, c.length - 1)];
 
 	}
 
 	public int oneOf(final int[] c) {
-		if (c == null || c.length == 0) { return -1; }
+		if (c == null || c.length == 0)
+			return -1;
 		return c[between(0, c.length - 1)];
 	}
 
 	public double oneOf(final double[] c) {
-		if (c == null || c.length == 0) { return -1; }
+		if (c == null || c.length == 0)
+			return -1;
 		return c[between(0, c.length - 1)];
 	}
 
 	public boolean oneOf(final boolean[] c) {
-		if (c == null || c.length == 0) { return false; }
+		if (c == null || c.length == 0)
+			return false;
 		return c[between(0, c.length - 1)];
 	}
 

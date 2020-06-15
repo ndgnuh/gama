@@ -1,7 +1,7 @@
 /*********************************************************************************************
  *
- * 'GamlSyntaxErrorMessageProvider.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling
- * and simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
+ * 'GamlSyntaxErrorMessageProvider.java, in plugin gama.core.lang, is part of the source code of the GAMA modeling and
+ * simulation platform. (c) 2007-2016 UMI 209 UMMISCO IRD/UPMC & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and developers contact.
  *
@@ -18,8 +18,8 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 
-import gama.core.lang.gaml.EGaml;
 import gama.common.interfaces.IKeyword;
+import gama.core.lang.gaml.EGaml;
 
 /**
  * The class GamlSyntaxErrorMessageProvider.
@@ -38,7 +38,8 @@ public class GamlSyntaxErrorMessageProvider extends SyntaxErrorMessageProvider {
 		// }
 		// if (contextobj != null) {
 		// if (DEBUG.IS_ON()) {
-		// DEBUG.OUT("Current EObject: " + contextobj.eClass().getName() + " " + EGaml.getInstance().getKeyOf(contextobj));
+		// DEBUG.OUT("Current EObject: " + contextobj.eClass().getName() + " " +
+		// EGaml.getInstance().getKeyOf(contextobj));
 		// }
 		// }
 		final RecognitionException ex = context.getRecognitionException();
@@ -60,7 +61,7 @@ public class GamlSyntaxErrorMessageProvider extends SyntaxErrorMessageProvider {
 		// final String[] tokens = context.getTokenNames();
 		if (ex == null) {
 			if (msg.startsWith("mismatched ch")) {
-				final String ch = msg.substring(msg.length() - 3, msg.length());
+				final String ch = msg.substring(msg.lastIndexOf(' '), msg.length());
 				msg = "Character expected " + ch;
 			} else {
 

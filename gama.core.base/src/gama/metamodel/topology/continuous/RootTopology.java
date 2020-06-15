@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.continuous.RootTopology.java, in plugin gama.core, is part of the source code of the
- * GAMA modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.continuous.RootTopology.java, in plugin gama.core, is part of the source code of the GAMA
+ * modeling and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -52,7 +52,8 @@ public class RootTopology extends ContinuousTopology {
 	public void setRoot(final IScope scope, final RootTopology root) {}
 
 	public void turnSpatialIndexToCompound() {
-		if (spatialIndex instanceof ISpatialIndex.Compound) { return; }
+		if (spatialIndex instanceof ISpatialIndex.Compound)
+			return;
 		final ISpatialIndex quad = spatialIndex;
 		spatialIndex = new CompoundSpatialIndex(quad.getBounds(), quad.isParallel(), quad);
 	}

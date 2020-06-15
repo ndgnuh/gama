@@ -40,26 +40,52 @@ public class StringUtils {
 	public final static String literals = "\\w+\\$\\w+|\\#\\w+|\\d+\\.\\d+|\\w+\\.\\w+|\\w+";
 	final static String regex = strings + "|" + literals + "|" + operators + "|" + ponctuation;
 
+	// static public String toGamlStringOld(final String s) {
+	// if (s == null) { return null; }
+	// final StringBuilder sb = new StringBuilder(s.length());
+	// sb.append('\'');
+	// sb.append(s.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("/", "\\/"));
+	// sb.append('\'');
+	// return sb.toString();
+	// }
 	static public String toGamlString(final String s) {
-		if (s == null) { return null; }
-		try (final TextBuilder sb = TextBuilder.create()) {
-			sb.append('\'');
-			sb.append(s.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"").replace("/", "\\/"));
-			sb.append('\'');
-			return sb.toString();
+		if (s == null)
+			return null;
+		final int length = s.length();
+		final StringBuilder sb = new StringBuilder(length);
+		sb.append('\'');
+		for (int i = 0; i < s.length(); i++) {
+			final char c = s.charAt(i);
+			switch (c) {
+				case '"':
+				case '\'':
+				case '\\':
+					// Commented on purpose. See issue #2988
+					// case '/':
+					sb.append('\\');
+					// $FALL-THROUGH$
+				default:
+					sb.append(c);
+			}
 		}
+		sb.append('\'');
+		return sb.toString();
 	}
 
 	static public String toJavaString(final String s) {
-		if (s == null) { return null; }
+		if (s == null)
+			return null;
 		final String t = s.trim();
-		if (!isGamaString(t)) { return s; }
-		if (t.length() >= 2) { return t.substring(1, t.length() - 1); }
+		if (!isGamaString(t))
+			return s;
+		if (t.length() >= 2)
+			return t.substring(1, t.length() - 1);
 		return s;
 	}
 
 	public static List<String> tokenize(final String expression) {
-		if (expression == null) { return Collections.EMPTY_LIST; }
+		if (expression == null)
+			return Collections.EMPTY_LIST;
 		final Pattern p = Pattern.compile(regex);
 		final List<String> tokens = new ArrayList<>();
 		final Matcher m = p.matcher(expression);
@@ -70,7 +96,8 @@ public class StringUtils {
 	}
 
 	public static String unescapeJava(final String st) {
-		if (st == null) { return null; }
+		if (st == null)
+			return null;
 		try (TextBuilder sb = TextBuilder.create()) {
 
 			for (int i = 0; i < st.length(); i++) {
@@ -105,6 +132,9 @@ public class StringUtils {
 						case 'n':
 							ch = '\n';
 							break;
+						case '/':
+							ch = '/';
+							break;
 						case 'r':
 							ch = '\r';
 							break;
@@ -138,10 +168,13 @@ public class StringUtils {
 	}
 
 	static public boolean isGamaString(final String s) {
-		if (s == null) { return false; }
+		if (s == null)
+			return false;
 		final int n = s.length();
-		if (n == 0 || n == 1) { return false; }
-		if (s.charAt(0) != '\'') { return false; }
+		if (n == 0 || n == 1)
+			return false;
+		if (s.charAt(0) != '\'')
+			return false;
 		return s.charAt(n - 1) == '\'';
 	}
 
@@ -157,10 +190,14 @@ public class StringUtils {
 	}
 
 	public static String toGaml(final Object val, final boolean includingBuiltIn) {
-		if (val == null) { return "nil"; }
-		if (val instanceof IGamlable) { return ((IGamlable) val).serialize(includingBuiltIn); }
-		if (val instanceof String) { return toGamlString((String) val); }
-		if (val instanceof Double) { return DEFAULT_DECIMAL_FORMAT.format(val); }
+		if (val == null)
+			return "nil";
+		if (val instanceof IGamlable)
+			return ((IGamlable) val).serialize(includingBuiltIn);
+		if (val instanceof String)
+			return toGamlString((String) val);
+		if (val instanceof Double)
+			return DEFAULT_DECIMAL_FORMAT.format(val);
 		if (val instanceof Collection) {
 			final IList l = GamaListFactory.create(Types.STRING);
 			l.addAll((Collection) val);

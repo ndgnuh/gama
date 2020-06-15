@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  *
- * gama.metamodel.topology.AbstractTopology.java, in plugin gama.core, is part of the source code of the GAMA
- * modeling and simulation platform (v. 1.8)
+ * gama.metamodel.topology.AbstractTopology.java, in plugin gama.core, is part of the source code of the GAMA modeling
+ * and simulation platform (v. 1.8)
  *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
@@ -15,6 +15,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.prep.PreparedGeometry;
+import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
+import org.locationtech.jts.geom.util.AffineTransformation;
 
 import com.google.common.collect.Ordering;
 
@@ -42,13 +49,6 @@ import gaml.operators.Maths;
 import gaml.species.ISpecies;
 import gaml.types.IType;
 import gaml.types.Types;
-
-import org.locationtech.jts.geom.Envelope;
-import org.locationtech.jts.geom.Geometry;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.prep.PreparedGeometry;
-import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
-import org.locationtech.jts.geom.util.AffineTransformation;
 
 public abstract class AbstractTopology implements ITopology {
 
@@ -105,7 +105,8 @@ public abstract class AbstractTopology implements ITopology {
 	}
 
 	public Geometry returnToroidalGeom(final IShape shape) {
-		if (shape.isPoint()) { return returnToroidalGeom(shape.getLocation()); }
+		if (shape.isPoint())
+			return returnToroidalGeom(shape.getLocation());
 		return GeometryUtils.GEOMETRY_FACTORY.buildGeometry(listToroidalGeometries(shape.getInnerGeometry()));
 	}
 
@@ -172,7 +173,8 @@ public abstract class AbstractTopology implements ITopology {
 	@Override
 	public void initialize(final IScope scope, final IPopulation<? extends IAgent> pop) throws GamaRuntimeException {
 		// Create the population from the places of the topology
-		if (!canCreateAgents()) { return; }
+		if (!canCreateAgents())
+			return;
 		pop.createAgents(scope, places);
 
 	}
@@ -246,7 +248,8 @@ public abstract class AbstractTopology implements ITopology {
 
 		// TODO Take into account the fact that some topologies may consider
 		// invalid locations.
-		if (environment.getGeometry().covers(point)) { return point; }
+		if (environment.getGeometry().covers(point))
+			return point;
 
 		if (isTorus()) {
 			final Point pt = GeometryUtils.GEOMETRY_FACTORY.createPoint(point);
@@ -255,7 +258,8 @@ public abstract class AbstractTopology implements ITopology {
 				final AffineTransformation at = new AffineTransformation();
 				at.translate(getAdjustedXYVector()[cnt][0], getAdjustedXYVector()[cnt][1]);
 				final GamaPoint newPt = new GamaPoint(at.transform(pt).getCoordinate());
-				if (environment.getGeometry().covers(newPt)) { return newPt; }
+				if (environment.getGeometry().covers(newPt))
+					return newPt;
 			}
 		}
 		// See if rounding errors of double do not interfere with the
@@ -309,11 +313,14 @@ public abstract class AbstractTopology implements ITopology {
 
 	public GamaPoint normalizeLocation3D(final GamaPoint point, final boolean nullIfOutside) {
 		final GamaPoint p = normalizeLocation(point, nullIfOutside);
-		if (p == null) { return null; }
+		if (p == null)
+			return null;
 		final double z = p.getZ();
-		if (z < 0) { return null; }
+		if (z < 0)
+			return null;
 		if (((GamaShape) environment.getGeometry()).getDepth() != null) {
-			if (z > ((GamaShape) environment.getGeometry()).getDepth()) { return null; }
+			if (z > ((GamaShape) environment.getGeometry()).getDepth())
+				return null;
 			return point;
 		}
 		throw GamaRuntimeException.error("The environment must be a 3D environment (e.g shape <- cube(100).", null);
@@ -385,7 +392,7 @@ public abstract class AbstractTopology implements ITopology {
 						break;
 					}
 				}
-				scope.getRandom().shuffle2(result.items());
+				scope.getRandom().shuffleInPlace(result.items());
 				final Ordering<IShape> ordering =
 						Ordering.natural().onResultOf(input -> source.euclidianDistanceTo(input));
 				return ordering.leastOf(result, number);
@@ -394,9 +401,10 @@ public abstract class AbstractTopology implements ITopology {
 		final Geometry g0 = returnToroidalGeom(source.getGeometry());
 		final Map<Geometry, IAgent> agents = getTororoidalAgents(source, scope, filter);
 		agents.remove(g0);
-		if (agents.size() <= number) { return agents.values(); }
+		if (agents.size() <= number)
+			return agents.values();
 		final List<Geometry> ggs = new ArrayList<>(agents.keySet());
-		scope.getRandom().shuffle(ggs);
+		scope.getRandom().shuffleInPlace(ggs);
 		final Ordering<Geometry> ordering = Ordering.natural().onResultOf(input -> g0.distance(input));
 		final IList<IAgent> shapes = GamaListFactory.create(Types.AGENT);
 		for (final Geometry g : ordering.leastOf(ggs, number)) {
@@ -411,7 +419,8 @@ public abstract class AbstractTopology implements ITopology {
 		if (!isTorus()) {
 			for (final double step : steps) {
 				final IAgent first = getSpatialIndex().firstAtDistance(scope, source, step, filter);
-				if (first != null) { return first; }
+				if (first != null)
+					return first;
 			}
 			return null;
 		}
@@ -496,7 +505,8 @@ public abstract class AbstractTopology implements ITopology {
 			final IAgentFilter filter) throws GamaRuntimeException {
 		insertAgents(scope, filter);
 
-		if (!isTorus()) { return getSpatialIndex().allAtDistance(scope, source, distance, filter); }
+		if (!isTorus())
+			return getSpatialIndex().allAtDistance(scope, source, distance, filter);
 
 		// FOR TORUS ENVIRONMENTS ONLY
 
@@ -540,7 +550,8 @@ public abstract class AbstractTopology implements ITopology {
 	@Override
 	public Collection<IAgent> getAgentsIn(final IScope scope, final IShape source, final IAgentFilter f,
 			final boolean covered) {
-		if (source == null) { return Collections.EMPTY_SET; }
+		if (source == null)
+			return Collections.EMPTY_SET;
 		insertAgents(scope, f);
 		if (!isTorus()) {
 			final Envelope3D envelope = source.getEnvelope().intersection(environment.getEnvelope());
@@ -548,7 +559,8 @@ public abstract class AbstractTopology implements ITopology {
 				final Collection<IAgent> shapes = getSpatialIndex().allInEnvelope(scope, source, envelope, f, covered);
 				final PreparedGeometry pg = pgFact.create(source.getInnerGeometry());
 				shapes.removeIf(each -> {
-					if (each.dead()) { return true; }
+					if (each.dead())
+						return true;
 					final Geometry geom = each.getInnerGeometry();
 					return !(covered ? pg.covers(geom) : pg.intersects(geom));
 				});

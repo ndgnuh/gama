@@ -1,12 +1,12 @@
 /*******************************************************************************************************
  *
- * gaml.variables.IVariable.java, in plugin gama.core,
- * is part of the source code of the GAMA modeling and simulation platform (v. 1.8)
- * 
+ * gaml.variables.IVariable.java, in plugin gama.core, is part of the source code of the GAMA modeling and simulation
+ * platform (v. 1.8)
+ *
  * (c) 2007-2018 UMI 209 UMMISCO IRD/SU & Partners
  *
  * Visit https://github.com/gama-platform/gama for license information and contacts.
- * 
+ *
  ********************************************************************************************************/
 package gaml.variables;
 
@@ -21,21 +21,22 @@ import gaml.compilation.interfaces.ISymbol;
  */
 public interface IVariable extends ISymbol, IParameter {
 
-	public abstract boolean isUpdatable();
+	boolean isUpdatable();
 
-	public abstract boolean isParameter();
+	boolean isNotModifiable();
 
-	public abstract boolean isFunction();
+	boolean isParameter();
 
-	public abstract boolean isMicroPopulation();
+	boolean isFunction();
 
-	public abstract boolean isConst();
+	boolean isMicroPopulation();
 
-	public abstract void initializeWith(IScope scope, IAgent gamaObject, Object object) throws GamaRuntimeException;
+	void initializeWith(IScope scope, IAgent gamaObject, Object object) throws GamaRuntimeException;
 
-	public abstract void setVal(IScope scope, IAgent agent, Object v) throws GamaRuntimeException;
+	void setVal(IScope scope, IAgent agent, Object v) throws GamaRuntimeException;
 
-	public abstract Object value(IScope scope, IAgent agent) throws GamaRuntimeException;
+	Object value(IScope scope, IAgent agent) throws GamaRuntimeException;
 
-	public abstract Object getUpdatedValue(final IScope scope);
+	Object getUpdatedValue(final IScope scope);
+
 }

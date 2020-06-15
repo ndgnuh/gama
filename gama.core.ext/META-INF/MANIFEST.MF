@@ -375,6 +375,7 @@ Export-Package: com.google.protobuf,
    org.kabeja.dxf.objects,
    org.kabeja.math",
  org.kabeja.dxf.helpers;uses:="org.kabeja.dxf,org.kabeja.math",
+ org.kabeja.math,
  org.kabeja.parser;
   uses:="org.kabeja.dxf,
    org.xml.sax,

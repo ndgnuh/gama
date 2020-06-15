@@ -712,7 +712,8 @@ public class Containers {
 			see = { "index_of", "last_index_of" })
 	public static IList all_indexes_of2(final IScope scope, final IList c, final Object o) {
 		IList results = GamaListFactory.create(Types.INT);
-		for (int i = 0; i < notNull(scope, c).size(); i++) {
+		int size = notNull(scope, c).size();
+		for (int i = 0; i < size; i++) {
 			if (o == c.get(scope, i)) {
 				results.add(i);
 			}
@@ -1523,7 +1524,7 @@ public class Containers {
 		for (int i = 0; i < indexes.length; i++) {
 			indexes[i] = i;
 		}
-		scope.getRandom().shuffle(indexes);
+		scope.getRandom().shuffleInPlace(indexes);
 		final IList result = listLike(c).get();
 		for (int i = 0; i < number; i++) {
 			result.add(l.get(indexes[i]));

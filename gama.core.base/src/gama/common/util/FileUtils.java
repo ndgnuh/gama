@@ -164,8 +164,11 @@ public class FileUtils {
 			if (mustExist)
 				return null;
 		}
-		return file.getLocation().toString();
-		// getLocation() works for regular and linked files
+		final IPath loc = file.getLocation();
+		// cf. #2997
+		if (loc == null)
+			return fp;
+		return loc.toString(); // getLocation() works for regular and linked files
 	}
 
 	private static String findOutsideWorkspace(final String fp, final URI modelBase, final boolean mustExist) {

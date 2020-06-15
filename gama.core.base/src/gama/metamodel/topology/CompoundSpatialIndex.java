@@ -14,9 +14,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import com.google.common.collect.Sets;
 
 import gama.common.geometry.Envelope3D;
 import gama.common.interfaces.IAgent;
@@ -26,35 +23,46 @@ import gama.metamodel.population.IPopulation;
 import gama.metamodel.shape.IShape;
 import gama.metamodel.topology.filter.IAgentFilter;
 import gama.runtime.scope.IScope;
+import gama.util.map.GamaMapFactory;
 
 public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compound {
 
-	boolean disposed = false;
-	private final Map<IPopulation<? extends IAgent>, ISpatialIndex> spatialIndexes;
-	private final Set<ISpatialIndex> uniqueIndexes;
+	boolean disposed = false, unique = true;
+	private Map<IPopulation<? extends IAgent>, ISpatialIndex> spatialIndexes;
+	private final ICollector<ISpatialIndex> uniqueIndexes;
 	private ISpatialIndex rootIndex;
+
+	public CompoundSpatialIndex(final Envelope3D bounds, final boolean parallel) {
+		this(bounds, parallel, GamaQuadTree.create(bounds, parallel));
+
+	}
 
 	public CompoundSpatialIndex(final Envelope3D bounds, final boolean parallel, final ISpatialIndex root) {
 		spatialIndexes = new HashMap<>();
 		rootIndex = root;
-		uniqueIndexes = Sets.newHashSet(rootIndex);
-	}
-
-	public CompoundSpatialIndex(final Envelope3D bounds, final boolean parallel) {
-		this(bounds, parallel, GamaQuadTree.create(bounds, parallel));
+		uniqueIndexes = Collector.newOrderedSet();
+		uniqueIndexes.add(rootIndex);
 	}
 
 	private ISpatialIndex findSpatialIndex(final IPopulation<? extends IAgent> s) {
 		if (disposed)
 			return null;
-		final ISpatialIndex index = spatialIndexes.get(s);
+		if (unique)
+			return rootIndex;
+		final ISpatialIndex index = spatialIndexes == null ? null : spatialIndexes.get(s);
 		return index == null ? rootIndex : index;
 	}
 
 	@Override
 	public void insert(final IAgent a) {
+		if (disposed)
+			return;
 		if (a == null)
 			return;
+		if (unique) {
+			rootIndex.insert(a);
+			return;
+		}
 		final ISpatialIndex si = findSpatialIndex(a.getPopulation());
 		if (si != null) {
 			si.insert(a);
@@ -62,13 +70,18 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 	}
 
 	@Override
-	public void remove(final Envelope3D previous, final IAgent o) {
-		final IAgent a = o.getAgent();
-		if (a == null)
+	public void remove(final Envelope3D previous, final IAgent agent) {
+		if (disposed)
 			return;
-		final ISpatialIndex si = findSpatialIndex(a.getPopulation());
+		if (agent == null)
+			return;
+		if (unique) {
+			rootIndex.remove(previous, agent);
+			return;
+		}
+		final ISpatialIndex si = findSpatialIndex(agent.getPopulation());
 		if (si != null) {
-			si.remove(previous, o);
+			si.remove(previous, agent);
 		}
 	}
 
@@ -109,9 +122,6 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 					}
 				}
 			}
-			// Adresses Issue 722 by shuffling the returned list using GAMA random
-			// procedure. Not done anymore ?
-			// shapes.shuffleInPlaceWith(scope.getRandom());
 			return min_agent;
 		}
 
@@ -122,9 +132,12 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 			final IAgentFilter f) {
 		if (disposed)
 			return Collections.EMPTY_LIST;
+		if (unique)
+			return rootIndex.allAtDistance(scope, source, dist, f);
+
 		final ISpatialIndex id = findSpatialIndex(f.getPopulation(scope));
 		if (id == rootIndex) {
-			try (final ICollector<IAgent> agents = Collector.newSet()) {
+			try (final ICollector<IAgent> agents = Collector.newOrderedSet()) {
 				for (final ISpatialIndex si : getAllSpatialIndexes()) {
 					agents.addAll(si.allAtDistance(scope, source, dist, f));
 				}
@@ -139,6 +152,9 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 			final IAgentFilter f, final boolean contained) {
 		if (disposed)
 			return Collections.EMPTY_LIST;
+		if (unique)
+			return rootIndex.allInEnvelope(scope, source, envelope, f, contained);
+
 		final ISpatialIndex id = findSpatialIndex(f.getPopulation(scope));
 		if (id == rootIndex) {
 			try (final ICollector<IAgent> agents = Collector.newOrderedSet()) {
@@ -158,15 +174,20 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 			return;
 		if (index == null)
 			return;
+		if (spatialIndexes == null) {
+			spatialIndexes = GamaMapFactory.create();
+		}
 		spatialIndexes.put(species, index);
 		uniqueIndexes.add(index);
+		unique = false;
+
 	}
 
 	@Override
 	public void remove(final IPopulation<? extends IAgent> species) {
 		if (disposed)
 			return;
-		final ISpatialIndex index = spatialIndexes.remove(species);
+		final ISpatialIndex index = spatialIndexes != null ? spatialIndexes.remove(species) : null;
 		if (index != null) {
 			uniqueIndexes.remove(index);
 		}
@@ -174,7 +195,9 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 
 	@Override
 	public void dispose() {
-		spatialIndexes.clear();
+		if (spatialIndexes != null) {
+			spatialIndexes.clear();
+		}
 		uniqueIndexes.clear();
 		rootIndex = null;
 		disposed = true;
@@ -187,6 +210,8 @@ public class CompoundSpatialIndex extends Object implements ISpatialIndex.Compou
 
 	@Override
 	public Collection<IAgent> allAgents() {
+		if (unique)
+			return rootIndex.allAgents();
 		try (final ICollector<IAgent> set = Collector.newOrderedSet()) {
 			for (final ISpatialIndex i : getAllSpatialIndexes()) {
 				set.addAll(i.allAgents());
