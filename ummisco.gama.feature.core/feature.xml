@@ -2,7 +2,7 @@
 <feature
       id="ummisco.gama.feature.core"
       label="Core plugins of GAMA"
-      version="1.7.0.qualifier"
+      version="1.8.1.qualifier"
       provider-name="UMMISCO">
 
    <description url="http://gama-platform.org">
@@ -18,48 +18,48 @@
    </license>
 
    <url>
-      <update label="Gama 1.7.x Update Site" url="http://updates.gama-platform.org"/>
+      <update label="Gama 1.8.x Update Site" url="http://updates.gama-platform.org"/>
    </url>
 
    <plugin
          id="msi.gama.core"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="1.8.0"/>
 
    <plugin
          id="msi.gama.headless"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.0"
          unpack="false"/>
 
    <plugin
          id="msi.gama.lang.gaml"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.0"
          unpack="false"/>
 
    <plugin
          id="ummisco.gama.annotations"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.0"
          unpack="false"/>
 
    <plugin
          id="msi.gama.processor"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.0"
          unpack="false"/>
 
    <plugin
          id="ummisco.gaml.extensions.stats"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.8.0"
          unpack="false"/>
 
 </feature>
