@@ -25,27 +25,27 @@
          id="msi.gama.core"
          download-size="0"
          install-size="0"
-         version="1.8.1"/>
+         version="1.8.1.qualifier"/>
 
    <plugin
          id="msi.gama.headless"
          download-size="0"
          install-size="0"
-         version="1.8.1"
+         version="1.8.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="msi.gama.lang.gaml"
          download-size="0"
          install-size="0"
-         version="1.8.1"
+         version="1.8.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="ummisco.gama.annotations"
          download-size="0"
          install-size="0"
-         version="1.8.1"
+         version="1.8.1.qualifier"
          unpack="false"/>
 
    <plugin
@@ -59,7 +59,7 @@
          id="ummisco.gaml.extensions.stats"
          download-size="0"
          install-size="0"
-         version="1.8.1"
+         version="1.8.1.qualifier"
          unpack="false"/>
 
 </feature>
