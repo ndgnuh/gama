@@ -52,7 +52,55 @@ import msi.gama.headless.xml.XMLWriter;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.dev.utils.DEBUG;
 
+import org.apache.commons.daemon.Daemon;
+import org.apache.commons.daemon.DaemonContext;
+import org.apache.commons.daemon.DaemonInitException;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Application implements IApplication {
+	class GamaDaemon implements Daemon {
+		private ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+		@Override
+		public void destroy() {
+			// TODO Auto-generated method stub
+			System.out.println("Destroy daemon");
+		}
+
+		@Override
+		public void init(DaemonContext context) throws DaemonInitException, Exception {
+			// TODO Auto-generated method stub
+			System.out.println("Daemon initialization: " + context.getArguments());
+		}
+
+		@Override
+		public void start() throws Exception {
+			// TODO Auto-generated method stub
+			this.executorService.execute(new Runnable() {
+
+				CountDownLatch latch = new CountDownLatch(1);
+
+				public void run() {
+					try {
+						latch.await();
+					} catch (InterruptedException e) {
+						System.out.println("Thread interrupted, probably means we're shutting down now.");
+					}
+				}
+			});
+		}
+
+		@Override
+		public void stop() throws Exception {
+			// TODO Auto-generated method stub
+			System.out.println("Shutting down");
+			this.executorService.shutdown();
+		}
+
+	}
 
 	final public static String CONSOLE_PARAMETER = "-c";
 	final public static String GAMA_VERSION = "-version";
@@ -97,7 +145,8 @@ public class Application implements IApplication {
 		return res;
 	}
 
-	// private static boolean containParameter(final String[] args, final String param) {
+	// private static boolean containParameter(final String[] args, final String
+	// param) {
 	// for (final String p : args) {
 	// if (p.equals(param))
 	// return true;
@@ -205,9 +254,13 @@ public class Application implements IApplication {
 	}
 
 	public String after(final List<String> args, final String arg) {
-		if (args == null || args.size() < 2) { return null; }
+		if (args == null || args.size() < 2) {
+			return null;
+		}
 		for (int i = 0; i < args.size() - 1; i++) {
-			if (args.get(i).equals(arg)) { return args.get(i + 1); }
+			if (args.get(i).equals(arg)) {
+				return args.get(i + 1);
+			}
 		}
 		return null;
 	}
@@ -357,6 +410,7 @@ public class Application implements IApplication {
 	}
 
 	@Override
-	public void stop() {}
+	public void stop() {
+	}
 
 }
