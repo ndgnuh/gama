@@ -43,6 +43,7 @@ import msi.gama.headless.common.Globals;
 import msi.gama.headless.common.HeadLessErrors;
 import msi.gama.headless.core.GamaHeadlessException;
 import msi.gama.headless.core.HeadlessSimulationLoader;
+import msi.gama.headless.daemon.GamaDaemon;
 import msi.gama.headless.job.ExperimentJob;
 import msi.gama.headless.job.IExperimentJob;
 import msi.gama.headless.script.ExperimentationPlanFactory;
@@ -114,6 +115,7 @@ public class Application implements IApplication {
 	final public static String VALIDATE_LIBRARY_PARAMETER = "-validate";
 	final public static String RUN_LIBRARY_PARAMETER = "-runLibrary";
 	final public static String TEST_LIBRARY_PARAMETER = "-test";
+	final public static String RUN_GAMA_DAEMON = "-daemon";
 
 	public static boolean headLessSimulation = false;
 	public int numberOfThread = -1;
@@ -138,6 +140,7 @@ public class Application implements IApplication {
 				+ "\n      -validate [directory]    	-- invokes GAMA to validate the models present in the directory passed as argument"
 				+ "\n      -test [directory]		   	-- invokes GAMA to execute the tests present in the directory and display their results"
 				+ "\n      -failed		   				-- only display the failed and aborted test results"
+				+ "\n" + " -daemon 						-- run Gama Daemon"
 				+ "\n      -xml	[experimentName] [modelFile.gaml] [xmlOutputFile.xml]	-- only display the failed and aborted test results"
 				+ "\n" + " sh ./gama-headless.sh -xml experimentName gamlFile xmlOutputFile\n"
 				+ "\n      build an xml parameter file from a model" + "\n" + "\n";
@@ -180,6 +183,10 @@ public class Application implements IApplication {
 		}
 		if (args.contains(VERBOSE_PARAMETER)) {
 			size = size - 1;
+		}
+		if (args.contains(RUN_GAMA_DAEMON)) {
+			mustContainInFile = false;
+			mustContainOutFile = false;
 		}
 		if (mustContainInFile && mustContainOutFile && size < 2) {
 			showError(HeadLessErrors.INPUT_NOT_DEFINED, null);
@@ -237,6 +244,8 @@ public class Application implements IApplication {
 			DEBUG.LOG(showHelp());
 			DEBUG.OFF();
 
+		} else if (args.contains(RUN_GAMA_DAEMON)) {
+			return GamaDaemon.run();
 		} else if (args.contains(RUN_LIBRARY_PARAMETER)) {
 			return ModelLibraryRunner.getInstance().start(args);
 		} else if (args.contains(VALIDATE_LIBRARY_PARAMETER)) {
