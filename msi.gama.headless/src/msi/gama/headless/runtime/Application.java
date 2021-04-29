@@ -53,55 +53,11 @@ import msi.gama.headless.xml.XMLWriter;
 import msi.gama.runtime.GAMA;
 import ummisco.gama.dev.utils.DEBUG;
 
-import org.apache.commons.daemon.Daemon;
-import org.apache.commons.daemon.DaemonContext;
-import org.apache.commons.daemon.DaemonInitException;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Application implements IApplication {
-	class GamaDaemon implements Daemon {
-		private ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-		@Override
-		public void destroy() {
-			// TODO Auto-generated method stub
-			System.out.println("Destroy daemon");
-		}
-
-		@Override
-		public void init(DaemonContext context) throws DaemonInitException, Exception {
-			// TODO Auto-generated method stub
-			System.out.println("Daemon initialization: " + context.getArguments());
-		}
-
-		@Override
-		public void start() throws Exception {
-			// TODO Auto-generated method stub
-			this.executorService.execute(new Runnable() {
-
-				CountDownLatch latch = new CountDownLatch(1);
-
-				public void run() {
-					try {
-						latch.await();
-					} catch (InterruptedException e) {
-						System.out.println("Thread interrupted, probably means we're shutting down now.");
-					}
-				}
-			});
-		}
-
-		@Override
-		public void stop() throws Exception {
-			// TODO Auto-generated method stub
-			System.out.println("Shutting down");
-			this.executorService.shutdown();
-		}
-
-	}
 
 	final public static String CONSOLE_PARAMETER = "-c";
 	final public static String GAMA_VERSION = "-version";
@@ -158,7 +114,7 @@ public class Application implements IApplication {
 	// }
 
 	private boolean checkParameters(final List<String> args) {
-
+		System.out.println(args);
 		int size = args.size();
 		boolean mustContainInFile = true;
 		boolean mustContainOutFile = true;
@@ -245,7 +201,7 @@ public class Application implements IApplication {
 			DEBUG.OFF();
 
 		} else if (args.contains(RUN_GAMA_DAEMON)) {
-			return GamaDaemon.run();
+			return null;
 		} else if (args.contains(RUN_LIBRARY_PARAMETER)) {
 			return ModelLibraryRunner.getInstance().start(args);
 		} else if (args.contains(VALIDATE_LIBRARY_PARAMETER)) {

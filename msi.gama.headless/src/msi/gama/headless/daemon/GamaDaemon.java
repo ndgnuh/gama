@@ -1,14 +1,49 @@
 package msi.gama.headless.daemon;
 
-public class GamaDaemon {
-	public static void start() {
-		System.out.print("Daemon start");
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.java_websocket.WebSocket;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
+
+public class GamaDaemon extends WebSocketServer{
+	
+	//public static final HashMap<String, Runnable> actions = new HashMap<> () {};
+	
+	public GamaDaemon(int port) {
+		super(new InetSocketAddress(port));
 	}
 
-	public static Object run() {
+	@Override
+	public void onClose(WebSocket socket, int code, String reason, boolean remote) {
 		// TODO Auto-generated method stub
-		System.out.print("Daemon start");
-		return null;
+	}
+
+	@Override
+	public void onError(WebSocket socket, Exception ex) {
+		ex.printStackTrace();
+		if (socket != null) {
+			socket.close();
+		}
+	}
+
+	@Override
+	public void onMessage(WebSocket conn, String msg) {
+		// dispatch action based on message here
+	}
+
+	@Override
+	public void onOpen(WebSocket arg0, ClientHandshake arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
