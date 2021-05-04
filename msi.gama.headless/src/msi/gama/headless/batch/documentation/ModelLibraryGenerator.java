@@ -27,7 +27,7 @@ import org.w3c.dom.NodeList;
 
 import msi.gama.headless.common.Globals;
 import msi.gama.headless.core.GamaHeadlessException;
-import msi.gama.headless.runtime.Application;
+import msi.gama.headless.runtime.HeadlessCore;
 
 public class ModelLibraryGenerator {
 	// inputs / outputs
@@ -122,7 +122,7 @@ public class ModelLibraryGenerator {
 		headlessBatPath = wikiFolder + "/headless.bat";
 	}
 
-	public static void start(final Application headlessApplication, final List<String> args)
+	public static void start(final HeadlessCore headlessApplication, final List<String> args)
 			throws IOException, TransformerException {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -213,7 +213,7 @@ public class ModelLibraryGenerator {
 	}
 
 	public static void prepareInputFileForHeadless(final ArrayList<File> gamlFiles,
-			final Application headlessApplication) {
+			final HeadlessCore headlessApplication) {
 		// set the output (which will not be used, we just need to specify one.
 		// We will destroy it as soon as the headless execution is finish)
 		// Globals.OUTPUT_PATH = "/F:/outputHeadless";
