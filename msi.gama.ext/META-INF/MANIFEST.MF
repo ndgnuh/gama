@@ -725,6 +725,9 @@ Bundle-ClassPath: .,
  jts 1.18.1/jts-core-1.18.1.jar,
  jts 1.18.1/jts-io-common-1.18.1.jar,
  streamex/streamex-0.7.3.jar,
- jfreechart/jfreechart-1.5.3.jar
+ jfreechart/jfreechart-1.5.3.jar,
+ Java-WebSocket-1.5.2.jar,
+ org.apache.commons.cli-1.4.jar,
+ slf4j-api-2.0.0-alpha1.jar
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: msi.gama.ext
