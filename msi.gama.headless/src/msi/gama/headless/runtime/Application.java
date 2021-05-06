@@ -26,6 +26,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+
 public class Application {
 	/*
 	 * 3 phase: 1. Define options 2. Parsing 3. Process
@@ -36,7 +37,8 @@ public class Application {
 	public static boolean needInput = true;
 	public static boolean needOutput = true;
 
-	public static void main(String args[]) {
+	public static void main(String args[])
+			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
 		/*
 		 * A bunch of options TODO: split into group for make help message easier to
 		 * read
@@ -46,6 +48,7 @@ public class Application {
 		options.addOption("h", "help", false, "Show help");
 		options.addOption("v", "version", false, "Show version and exit");
 		options.addOption("x", "xml", false, "Generate xml experiment file");
+		options.addOption("e", "experiment", true, "Experiment name");
 		options.addOption("i", "input", true, "Input file/folder");
 		options.addOption("o", "output", true, "Output file/folder");
 		options.addOption("verbose", "verbose", false, "Verbose logging");
@@ -76,7 +79,13 @@ public class Application {
 		if (commands.hasOption("verbose")) {
 			DEBUG.ON();
 		}
-
+		if (commands.hasOption("xml")) {
+			String inputFile = commands.getOptionValue("i");
+			String outputFile = commands.getOptionValue("o");
+			String experimentName = commands.getOptionValue("experiment");
+			buildXML(experimentName, inputFile, outputFile);
+			exit(0);
+		}
 		exit();
 	}
 
@@ -102,8 +111,13 @@ public class Application {
 	public static void exit() {
 		exit(0);
 	}
-	
-	public static void buildXML(String experimentName, String inputFile, String outputFile)throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException  {
+
+	public static void buildXML(String experimentName, String inputFile, String outputFile)
+			throws ParserConfigurationException, TransformerException, IOException, GamaHeadlessException {
+		// https://wiki.eclipse.org/EMF/FAQ#How_do_I_use_EMF_in_standalone_applications_.28such_as_an_ordinary_main.29.3F
+		// and
+		// https://stackoverflow.com/questions/6571638/registered-factory-needed-exception-when-loading-resource
+		// ??
 		HeadlessSimulationLoader.preloadGAMA();
 		final List<IExperimentJob> jb = ExperimentationPlanFactory.buildExperiment(inputFile);
 		final ArrayList<IExperimentJob> selectedJob = new ArrayList<>();
